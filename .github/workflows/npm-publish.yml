@@ -13,12 +13,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@master
-#
-#      - name: Init
-#        run: |
-#          echo $NPM_TOKEN ~/.profile && source ~/.profile
-#          npm init --yes
-#          npm version 0.1.2
-#          npm publish
-#        env:
-#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Init
+        run: |
+          echo $NPM_TOKEN ~/.profile && source ~/.profile
+          npm init --yes
+          npm version 0.1.2
+          npm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
