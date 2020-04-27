@@ -15,11 +15,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@master
 
-      - name: Init
-        run: |
-          echo $NPM_TOKEN ~/.profile && source ~/.profile
-          npm init --yes
-          npm version 0.1.5
-#          npm publish
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - run: yarn install
+      - run: npm version 0.1.5
+      - run: npm publish --access public
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+#      - name: Init
+#        run: |
+#          echo $NPM_TOKEN ~/.profile && source ~/.profile
+#          npm init --yes
+#          npm version 0.1.5
+##          npm publish
+#        env:
+#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
