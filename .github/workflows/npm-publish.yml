@@ -16,10 +16,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@master
 
-#      - uses: actions/setup-node@v1
-#        with:
-#          node-version: 12
-#          registry-url: https://registry.npmjs.org/
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
 
       - name: Update npm version
         run: npm version 0.0.2 --no-git-tag-version
