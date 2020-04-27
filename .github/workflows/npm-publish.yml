@@ -32,5 +32,3 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  sed  -i '/version/s/[^.]*$/'"0.0.2\"/" package.json
