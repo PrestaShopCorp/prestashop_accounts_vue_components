@@ -6,7 +6,8 @@ on: [push]
 #    branches:
 #      - master
 
-
+env:
+  BUILD_NUMBER: 0.0.2
 jobs:
   npm-publish:
     name: NPM Publish
@@ -19,7 +20,12 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-#      - run: yarn install
+
+      - name: Update npm version
+        run: sed  -i '/version/s/[^.]*$/'"${BUILD_NUMBER}\"/" package.json
+        with:
+          - BUILD_NUMBER: ${{ env.BUILD_NUMBER }}
+
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
