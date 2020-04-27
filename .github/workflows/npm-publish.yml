@@ -22,12 +22,9 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Update npm version
-        run: sed  -i '/version/s/[^.]*$/'"${BUILD_NUMBER}\"/" package.json
+        run: npm version 0.0.2
         env:
-          BUILD_NUMBER: ${{ env.BUILD_NUMBER }}
-
-
-      - run: cat package.json
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - run: npm publish
         env:
