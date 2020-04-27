@@ -13,6 +13,11 @@ jobs:
     name: NPM Publish
     runs-on: ubuntu-latest
     steps:
+
+      - name: Get tag
+        id: get_tag
+        run: echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
+
       - name: Checkout repository
         uses: actions/checkout@master
 
@@ -22,9 +27,11 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Update npm version
-        run: npm version 0.0.3 --no-git-tag-version
+        run: npm version $VERSION --no-git-tag-version
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          VERSION: 0.0.4
+#          VERSION: ${{ steps.get_tag.outputs.TAG }}
 
       - name: Publish
         run: npm publish
