@@ -18,7 +18,7 @@ jobs:
       - name: Init
         run: |
           echo $NPM_TOKEN ~/.profile && source ~/.profile
-#          npm init --yes
+          npm init --yes
 #          npm version 0.1.3
 #          npm publish
         env:
