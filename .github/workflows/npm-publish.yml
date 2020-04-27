@@ -1,13 +1,10 @@
 name: NPM Publish
 
-on: [push]
-#on:
-#  push:
-#    tags:
-#      - '*'
+on:
+  push:
+    tags:
+      - '*'
 
-env:
-  BUILD_NUMBER: 0.0.2
 jobs:
   npm-publish:
     name: NPM Publish
@@ -30,8 +27,7 @@ jobs:
         run: npm version $VERSION --no-git-tag-version
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          VERSION: 0.0.4
-#          VERSION: ${{ steps.get_tag.outputs.TAG }}
+          VERSION: ${{ steps.get_tag.outputs.TAG }}
 
       - name: Publish
         run: npm publish
