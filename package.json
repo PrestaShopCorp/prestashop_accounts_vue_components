@@ -1,5 +1,5 @@
 {
-  "name": "prestashop_accounts_vue_components",
+  "name": "test_accounts_vue_components",
   "version": "0.0.1",
   "main": "./dist/dummy.common.js",
   "scripts": {
