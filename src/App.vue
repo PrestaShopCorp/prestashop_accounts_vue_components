@@ -1,31 +1,32 @@
 <template>
   <div id="app">
-    <img
-      alt="Vue logo"
-      src="./assets/logo.png"
-    >
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Account class="mb-2" />
+    <AccountNotInstalled />
+    <AccountNotEnabled />
+    <MultiStoreSelector />
   </div>
 </template>
 
 <script>
-  import HelloWorld from './components/HelloWorld.vue';
+  import AccountNotInstalled from './components/alert/AccountNotInstalled';
+  import AccountNotEnabled from './components/alert/AccountNotEnabled';
+  import MultiStoreSelector from './components/alert/MultiStoreSelector';
+  import Account from './components/panel/Account';
 
   export default {
     name: 'App',
     components: {
-      HelloWorld,
+      Account,
+      AccountNotInstalled,
+      AccountNotEnabled,
+      MultiStoreSelector,
     },
   };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+  #app {
+    @import '~bootstrap-vue/dist/bootstrap-vue';
+    @import '~prestakit/dist/css/bootstrap-prestashop-ui-kit';
+  }
 </style>
