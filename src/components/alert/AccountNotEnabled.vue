@@ -1,5 +1,6 @@
 <template>
   <b-alert
+    v-if="!accountIsEnabled"
     variant="warning"
     show
   >
@@ -21,9 +22,15 @@
 <script>
   export default {
     name: 'AlertAccountNotEnabled',
+    props: {
+      accountIsEnabled: {
+        type: Boolean,
+        default: false,
+      },
+    },
     methods: {
       enableEvent() {
-        this.$emit('enable');
+        this.$emit('enable', true);
       },
     },
   };

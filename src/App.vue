@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Account class="mb-2" />
-    <AccountNotInstalled />
-    <AccountNotEnabled />
+    <AccountNotInstalled :accountIsInstalled="false" />
+    <AccountNotEnabled :accountIsEnabled="false" />
     <MultiStoreSelector />
   </div>
 </template>

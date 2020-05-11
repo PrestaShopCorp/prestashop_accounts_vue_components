@@ -1,5 +1,6 @@
 <template>
   <b-alert
+    v-if="!accountIsInstalled"
     variant="warning"
     show
   >
@@ -21,9 +22,15 @@
 <script>
   export default {
     name: 'AlertAccountNotInstalled',
+    props: {
+      accountIsInstalled: {
+        type: Boolean,
+        default: false,
+      },
+    },
     methods: {
       installEvent() {
-        this.$emit('install');
+        this.$emit('install', true);
       },
     },
   };

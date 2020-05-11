@@ -40,7 +40,7 @@
       },
       shops: {
         type: Object,
-        required: false,
+        required: true,
       },
     },
   };
