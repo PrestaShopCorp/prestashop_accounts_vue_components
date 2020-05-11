@@ -12,8 +12,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib --name dummy src/main.js",
-    "lint": "vue-cli-service lint"
+    "build-lib": "vue-cli-service build --target lib --name dummy src/full.js",
+    "lint": "vue-cli-service lint",
+    "storybook": "start-storybook"
   },
   "dependencies": {
     "bootstrap-vue": "^2.11.0",
@@ -23,10 +24,15 @@
     "vue-i18n": "^8.17.4"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-docs": "^5.3.18",
+    "@storybook/addon-knobs": "^5.3.18",
+    "@storybook/vue": "^5.3.18",
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
     "babel-eslint": "^10.1.0",
+    "babel-preset-vue": "^2.0.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prestashop": "0.0.2",
