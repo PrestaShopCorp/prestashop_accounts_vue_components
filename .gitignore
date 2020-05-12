@@ -2,6 +2,9 @@
 node_modules
 /dist
 
+# storybook build
+storybook-static/
+
 # local env files
 .env.local
 .env.*.local
