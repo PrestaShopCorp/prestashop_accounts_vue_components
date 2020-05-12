@@ -19,7 +19,7 @@ export const Disabled = () => ({
     },
   },
   methods: {
-    action: action('intall'),
+    action: action('enable'),
   },
   template: '<AccountNotEnabled :accountIsEnabled="accountIsEnabled" @enable="action" />',
   i18n,
