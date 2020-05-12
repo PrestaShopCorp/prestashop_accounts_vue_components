@@ -16,7 +16,7 @@
         "tips": "After you are done with the first shop, you can configure the others, by selecting them one by one in the shop selector, in the horizontal menu"
     },
     "account": {
-        "title": "You PrestaShop account",
+        "title": "Your PrestaShop account",
         "authorize": "Authorize your account to manage your shop's services",
         "authorized": "You authorize this account to manage shop's services",
         "connectButton": "Connect",
