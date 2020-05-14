@@ -30,6 +30,11 @@
     },
     methods: {
       enableEvent() {
+        /**
+         * Emitted when enable button is clicked.
+         * @event enable
+         * @type {Boolean}
+         */
         this.$emit('enable', true);
       },
     },

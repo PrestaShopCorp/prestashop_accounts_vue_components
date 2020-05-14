@@ -13,7 +13,9 @@
         "title": "Multi-store mode activated",
         "subtitle": "You must configure your stores one by one for this service, but your will be able to use the same accounts",
         "selectStore": "Please select the first store to configure from the list below",
-        "tips": "After you are done with the first shop, you can configure the others, by selecting them one by one in the shop selector, in the horizontal menu"
+        "tips": "After you are done with the first shop, you can configure the others, by selecting them one by one in the shop selector, in the horizontal menu",
+        "configure": "Configure",
+        "group": "Group"
     },
     "account": {
         "title": "Your PrestaShop account",

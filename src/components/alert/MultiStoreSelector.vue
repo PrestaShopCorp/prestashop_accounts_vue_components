@@ -1,33 +1,32 @@
 <template>
-  <div
-    v-if="!isShopContext"
+  <b-alert
+    v-if="isMultiShop"
+    variant="warning"
+    show
   >
-    <b-alert
-      variant="warning"
-      show
+    <h2>{{ $t('multiShopSelector.title') }}</h2>
+    <p>{{ $t('multiShopSelector.subtitle') }}.</p>
+    <p>{{ $t('multiShopSelector.selectStore') }}:</p>
+    <b-list-group
+      v-for="group in shopsTree"
+      :key="group.id"
+      class="my-3"
     >
-      <h2>{{ $t('multiShopSelector.title') }}</h2>
-      <p>{{ $t('multiShopSelector.subtitle') }}</p>
-      <p>{{ $t('multiShopSelector.selectStore') }}</p>
-      <b-list-group
-        v-for="group in shopsTree"
-        :key="group.id"
-        class="mt-3 mb-3 col-4"
+      <p>
+        <label class="text-muted">{{ $t('multiShopSelector.group') }}:</label> {{ group.name }}
+      </p>
+      <b-list-group-item
+        v-for="shop in group.shops"
+        :key="shop.id"
+        href="#"
+        @click="event(shop)"
+        class="list-group-item"
       >
-        <p class="text-muted">
-          {{ $t('general.multiShop.group') }} {{ group.name }}
-        </p>
-        <b-list-group-item
-          v-for="shop in group.shops"
-          :key="shop.id"
-          :href="shop.url"
-        >
-          {{ $t('general.multiShop.configure') }} <b>{{ shop.name }}</b>
-        </b-list-group-item>
-      </b-list-group>
-      <p>{{ $t('multiShopSelector.tips') }}</p>
-    </b-alert>
-  </div>
+        {{ $t('multiShopSelector.configure') }} <b>{{ shop.name }}</b>
+      </b-list-group-item>
+    </b-list-group>
+    <p>{{ $t('multiShopSelector.tips') }}.</p>
+  </b-alert>
 </template>
 
 <script>
@@ -36,12 +35,29 @@
     props: {
       isMultiShop: {
         type: Boolean,
+        required: false,
         default: false,
       },
-      shops: {
-        type: Object,
+      shopsTree: {
+        type: Array,
         required: true,
+      },
+    },
+    methods: {
+      event(selectedShop) {
+        /**
+         * Emitted when a shop is selected.
+         * @event selected-shop
+         * @type {Object}
+         */
+        this.$emit('selected-shop', selectedShop);
       },
     },
   };
 </script>
+
+<style scoped>
+.list-group-item {
+  max-width: 400px;
+}
+</style>
