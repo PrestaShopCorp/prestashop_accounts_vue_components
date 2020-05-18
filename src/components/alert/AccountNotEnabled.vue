@@ -33,7 +33,7 @@
         /**
          * Emitted when enable button is clicked.
          * @event enable
-         * @type {Boolean}
+         * @type {Event}
          */
         this.$emit('enable', true);
       },

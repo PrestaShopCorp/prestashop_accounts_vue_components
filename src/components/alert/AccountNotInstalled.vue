@@ -33,7 +33,7 @@
         /**
          * Emitted when install button is clicked.
          * @event install
-         * @type {Boolean}
+         * @type {Event}
          */
         this.$emit('install', true);
       },

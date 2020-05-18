@@ -40,7 +40,8 @@
       },
       shopsTree: {
         type: Array,
-        required: true,
+        required: false,
+        default: null,
       },
     },
     methods: {
@@ -48,7 +49,7 @@
         /**
          * Emitted when a shop is selected.
          * @event selected-shop
-         * @type {Object}
+         * @type {Event}
          */
         this.$emit('selected-shop', selectedShop);
       },
