@@ -8,7 +8,7 @@
     <p>{{ $t('multiShopSelector.subtitle') }}.</p>
     <p>{{ $t('multiShopSelector.selectStore') }}:</p>
     <b-list-group
-      v-for="group in shopsTree"
+      v-for="group in shops"
       :key="group.id"
       class="my-3"
     >
@@ -33,12 +33,7 @@
   export default {
     name: 'MultiStoreSelector',
     props: {
-      isMultiShop: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      shopsTree: {
+      shops: {
         type: Array,
         required: false,
         default: null,
@@ -55,8 +50,11 @@
       },
     },
     computed: {
+      isMultiShop() {
+        return this.isMultiGroup || this.shops[0].length > 1;
+      },
       isMultiGroup() {
-        return Boolean(this.shopsTree.length > 1);
+        return Boolean(this.shops.length > 1);
       },
     },
   };
