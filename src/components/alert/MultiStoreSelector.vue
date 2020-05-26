@@ -51,7 +51,7 @@
          * @event selected-shop
          * @type {Event}
          */
-        this.$emit('selected-shop', selectedShop);
+        this.$emit('shop-selected', selectedShop);
       },
     },
     computed: {

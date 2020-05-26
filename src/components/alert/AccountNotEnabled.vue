@@ -35,7 +35,7 @@
          * @event enable
          * @type {Event}
          */
-        this.$emit('enable', true);
+        this.$emit('enabled', true);
       },
     },
   };
