@@ -2,7 +2,7 @@
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {action} from '@storybook/addon-actions';
-import i18n from '../../i18n/i18n';
+import i18n from '@/i18n/i18n';
 import AccountNotInstalled from './AccountNotInstalled';
 
 export default {
@@ -19,8 +19,8 @@ export const notInstalled = () => ({
     },
   },
   methods: {
-    action: action('install'),
+    event: action('install'),
   },
-  template: '<AccountNotInstalled :accountIsInstalled="accountIsInstalled" @install="action" />',
+  template: '<AccountNotInstalled class="m-4" :accountIsInstalled="accountIsInstalled" @install="event" />',
   i18n,
 });

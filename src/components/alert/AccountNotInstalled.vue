@@ -30,6 +30,11 @@
     },
     methods: {
       installEvent() {
+        /**
+         * Emitted when install button is clicked.
+         * @event install
+         * @type {Event}
+         */
         this.$emit('install', true);
       },
     },
