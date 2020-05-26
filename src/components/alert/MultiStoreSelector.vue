@@ -12,7 +12,7 @@
       :key="group.id"
       class="my-3"
     >
-      <p>
+      <p v-if="isMultiGroup">
         <label class="text-muted">{{ $t('multiShopSelector.group') }}:</label> {{ group.name }}
       </p>
       <b-list-group-item
@@ -52,6 +52,11 @@
          * @type {Event}
          */
         this.$emit('selected-shop', selectedShop);
+      },
+    },
+    computed: {
+      isMultiGroup() {
+        return Boolean(this.shopsTree.length > 1);
       },
     },
   };
