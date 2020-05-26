@@ -24,6 +24,13 @@ module.exports = {
         exclude: [/node_modules/],
         enforce: 'pre',
       },
+      {
+        test: /\.(gif|svg|jpg|png)$/,
+        loader: 'file-loader',
+        options: {
+          esModule: false,
+        },
+      },
     ]
   }
 };
