@@ -54,6 +54,7 @@
             class="float-right"
             :class="{disabled: !isAdmin && !userIsConnected}"
             variant="primary"
+            @click="signIn()"
           >
             {{ $t('account.connectButton') }}
           </b-button>
@@ -126,8 +127,15 @@
           emailIsValidated: false,
         }),
       },
+      onboardingLink: {
+        type: String,
+        required: true,
+      },
     },
     methods: {
+      signIn() {
+        window.location.href = this.onboardingLink;
+      },
       signOut() {
         this.$emit('sign-out', this.user);
         this.user.email = '';
@@ -146,9 +154,6 @@
       userIsConnectedAndValidated() {
         return this.userIsConnected && this.userEmailIsValidated;
       },
-    },
-    created() {
-      console.log(this.userIsConnectedAndValidated);
     },
   };
 </script>
