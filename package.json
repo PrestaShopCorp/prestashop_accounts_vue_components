@@ -10,8 +10,6 @@
     "*.js"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "build-lib": "vue-cli-service build --target lib --name psaccountsVue src/full.js",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook",
