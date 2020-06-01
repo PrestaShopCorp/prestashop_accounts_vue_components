@@ -1,0 +1,17 @@
+name: Accounts CI/CD
+
+on: [push]
+
+jobs:
+  cd_inte_stable:
+    name: Inte Stable - Accounts vue components
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v1
+
+      - name: Build and push final image
+        run: docker build -f . --build-arg ENVIRONMENT=production
+
