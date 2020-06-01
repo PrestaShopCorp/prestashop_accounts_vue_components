@@ -12,6 +12,20 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v1
 
+      - name: Gcloud auth and write env file
+        run: |
+          echo $GOOGLE_APPLICATION_CREDENTIALS > token.json
+          gcloud auth activate-service-account --key-file=token.json
+          gcloud container clusters get-credentials $GCLOUD_CLUSTER \
+          --zone europe-west1-c --project $GCLOUD_NAMESPACE
+          gcloud auth configure-docker
+          rm token.json
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_INTEGRATION }}
+          GCLOUD_CLUSTER: ${{ secret.GCLOUD_CLUSTER }}
+          GCLOUD_NAMESPACE: ${{ secret.GCLOUD_NAMESPACE }}
+          ENVIRONMENT: production
+
       - name: Build and push final image
         run: docker build . --build-arg ENVIRONMENT=production
 
