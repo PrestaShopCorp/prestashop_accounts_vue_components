@@ -22,8 +22,8 @@ jobs:
           rm token.json
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_INTEGRATION }}
-          GCLOUD_CLUSTER: ${{ secret.GCLOUD_CLUSTER }}
-          GCLOUD_NAMESPACE: ${{ secret.GCLOUD_NAMESPACE }}
+          GCLOUD_CLUSTER: ${{ secrets.GCLOUD_CLUSTER }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
           ENVIRONMENT: production
 
       - name: Build and push final image
