@@ -28,8 +28,7 @@ jobs:
 
       - name: Build and push final image
         run: |
-          docker build . --build-arg ENVIRONMENT=production \
-          --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest" .
+          docker build . --build-arg ENVIRONMENT=production --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
           docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
         env:
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
