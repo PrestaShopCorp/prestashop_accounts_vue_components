@@ -50,10 +50,7 @@ jobs:
             --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" .
           docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
         env:
-          APP_PATH: ${{ env.APP_PATH }}
-          GCLOUD_REGISTRY: ${{ env.GCLOUD_REGISTRY }}
-          GCLOUD_NAMESPACE: ${{ env.GCLOUD_NAMESPACE }}
-          GCLOUD_PROJECT: ${{ env.GCLOUD_PROJECT }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
 
       - name: Build and push finale image
         run: |
