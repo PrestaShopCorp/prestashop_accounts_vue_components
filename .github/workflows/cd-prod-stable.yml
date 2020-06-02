@@ -76,6 +76,6 @@ jobs:
         env:
           TAG: ${{ steps.get_tag.outputs.TAG }}
           SHA: ${{ github.sha }}
-          MANAGED_ZONE: ${{ secrets.MANAGED_ZONE }}
+          MANAGED_ZONE: ${{ secrets.GCLOUD_MANAGED_ZONE }}
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}
