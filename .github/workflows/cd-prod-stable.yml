@@ -26,7 +26,27 @@ jobs:
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
           ENVIRONMENT: production
 
-      - name: Build and push final image
+      - name: Terraform init
+        working-directory: cloud
+        run: |
+          terraform init -backend-config="bucket=$GCLOUD_NAMESPACE"
+          terraform workspace select production
+          terraform fmt
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+
+      - name: Build and push image
+        run: |
+          docker build . --build-arg ENVIRONMENT=production --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
+          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
+        env:
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+          GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
+          TAG: ${{ steps.get_tag.outputs.TAG }}
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
+
+      - name: Terraform apply
         run: |
           docker build . --build-arg ENVIRONMENT=production --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
           docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
