@@ -10,11 +10,9 @@ RUN yarn --only=prod
 ## Build vuejs
 FROM package as builder
 
-ARG ENVIRONMENT
-
 WORKDIR /app
 ADD . .
-RUN yarn run build-storybook --mode $ENVIRONMENT
+RUN yarn run build-storybook
 
 
 ### Build clean docker image with only needed files
