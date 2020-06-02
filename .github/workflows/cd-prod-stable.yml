@@ -1,10 +1,9 @@
 name: Accounts CI/CD
 
-on: [push]
-#on:
-#  push:
-#    branches:
-#      - master
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   cd_inte_stable:
