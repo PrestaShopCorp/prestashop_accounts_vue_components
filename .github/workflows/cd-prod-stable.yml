@@ -68,8 +68,10 @@ jobs:
         run: |
           terraform apply -auto-approve \
           --var managed_zone=$MANAGED_ZONE \
-          --var hash_id=$SHA
+          --var hash_id=$SHA \
+          --var gcloud_namespace=$GCLOUD_NAMESPACE
         env:
           TAG: ${{ steps.get_tag.outputs.TAG }}
           SHA: ${{ github.sha }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}
