@@ -40,32 +40,32 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
 
-#      - name: Docker pull
-#        continue-on-error: true
-#        run: docker pull "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
-#        env:
-#          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
-#
-#      - name: Build package
-#        run: |
-#          docker build \
-#            --target=package \
-#            --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" \
-#            --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" .
-#          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
-#        env:
-#          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
-#
-#      - name: Build and push finale image
-#        run: |
-#          docker build . \
-#            --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest" \
-#            --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
-#          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
-#        env:
-#          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
-#          GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
-#          TAG: ${{ steps.get_tag.outputs.TAG }}
+      - name: Docker pull
+        continue-on-error: true
+        run: docker pull "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
+        env:
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+
+      - name: Build package
+        run: |
+          docker build \
+            --target=package \
+            --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" \
+            --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" .
+          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
+        env:
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+
+      - name: Build and push finale image
+        run: |
+          docker build . \
+            --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest" \
+            --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
+          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
+        env:
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+          GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
+          TAG: ${{ steps.get_tag.outputs.TAG }}
 
       - name: Terraform apply
         working-directory: cloud
