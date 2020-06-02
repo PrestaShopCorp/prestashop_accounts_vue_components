@@ -36,22 +36,43 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
 
-      - name: Build and push image
+      - name: Docker pull
+        continue-on-error: true
+        run: docker pull "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
+        env:
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+
+      - name: Build package
         run: |
-          docker build . --build-arg ENVIRONMENT=production --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
+          docker build \
+            --target=package \
+            --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" \
+            --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" .
+          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
+        env:
+          APP_PATH: ${{ env.APP_PATH }}
+          GCLOUD_REGISTRY: ${{ env.GCLOUD_REGISTRY }}
+          GCLOUD_NAMESPACE: ${{ env.GCLOUD_NAMESPACE }}
+          GCLOUD_PROJECT: ${{ env.GCLOUD_PROJECT }}
+
+      - name: Build and push finale image
+        run: |
+          docker build . \
+            --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest" \
+            --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
           docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
         env:
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
           GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
           TAG: ${{ steps.get_tag.outputs.TAG }}
-          ENVIRONMENT: ${{ env.ENVIRONMENT }}
 
       - name: Terraform apply
+        working-directory: ${{ env.APP_CLOUD_PATH }}
         run: |
-          docker build . --build-arg ENVIRONMENT=production --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
-          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
+          terraform apply -auto-approve \
+          --var managed_zone=$MANAGED_ZONE \
+          --var hash_id=$SHA
         env:
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
-          GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
           TAG: ${{ steps.get_tag.outputs.TAG }}
-          ENVIRONMENT: ${{ env.ENVIRONMENT }}
+          SHA: ${{ github.sha }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}
