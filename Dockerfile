@@ -14,13 +14,13 @@ ARG ENVIRONMENT
 
 WORKDIR /app
 ADD . .
-RUN yarn run build --mode $ENVIRONMENT
+RUN yarn run build-storybook --mode $ENVIRONMENT
 
 
 ### Build clean docker image with only needed files
 FROM nginx:stable-alpine as production
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/storybook-static /usr/share/nginx/html
 ADD ./.docker/default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
