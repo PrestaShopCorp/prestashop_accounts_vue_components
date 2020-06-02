@@ -64,7 +64,7 @@ jobs:
           TAG: ${{ steps.get_tag.outputs.TAG }}
 
       - name: Terraform apply
-        working-directory: ${{ env.APP_CLOUD_PATH }}
+        working-directory: cloud
         run: |
           terraform apply -auto-approve \
           --var managed_zone=$MANAGED_ZONE \
