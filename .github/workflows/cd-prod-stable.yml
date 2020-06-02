@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   cd_inte_stable:
-    name: Inte Stable - Accounts vue components
+    name: Prod Stable - Accounts vue components
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -21,7 +21,7 @@ jobs:
           gcloud auth configure-docker
           rm token.json
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_INTEGRATION }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}
           GCLOUD_CLUSTER: ${{ secrets.GCLOUD_CLUSTER }}
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
           ENVIRONMENT: production
