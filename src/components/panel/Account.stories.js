@@ -2,7 +2,6 @@
 import {withKnobs, boolean, object} from '@storybook/addon-knobs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {action} from '@storybook/addon-actions';
-import i18n from '@/i18n/i18n';
 import Account from './Account';
 
 export default {
@@ -19,13 +18,11 @@ export const NeedToBeAdmin = () => ({
     },
   },
   template: '<Account :isAdmin="isAdmin" class="m-4" />',
-  i18n,
 });
 
 export const NotConnected = () => ({
   components: {Account},
   template: '<Account class="m-4" />',
-  i18n,
 });
 
 export const Connected = () => ({
@@ -42,7 +39,6 @@ export const Connected = () => ({
     event: action('sign-out'),
   },
   template: '<Account :user="user" @sign-out="event" class="m-4" />',
-  i18n,
 });
 
 export const EmailValidationNeeded = () => ({
@@ -60,5 +56,4 @@ export const EmailValidationNeeded = () => ({
     sendEmail: action('send-email'),
   },
   template: '<Account :user="user" @sign-out="event" @send-email="sendEmail" class="m-4" />',
-  i18n,
 });

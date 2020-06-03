@@ -2,7 +2,6 @@
 import {withKnobs, object, boolean} from '@storybook/addon-knobs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {action} from '@storybook/addon-actions';
-import i18n from '@/i18n/i18n';
 import MultiStoreSelector from './MultiStoreSelector';
 
 const shopsTree = [
@@ -82,10 +81,9 @@ export const OneGroup = () => ({
     },
   },
   methods: {
-    event: action('selected-shop'),
+    event: action('shop-selected'),
   },
-  template: '<MultiStoreSelector class="m-4" :isMultiShop="isMultiShop" :shopsTree="shops" @selected-shop="event" />',
-  i18n,
+  template: '<MultiStoreSelector class="m-4" :isMultiShop="isMultiShop" :shops="shops" @shop-selected="event" />',
 });
 
 export const multiGroup = () => ({
@@ -99,8 +97,7 @@ export const multiGroup = () => ({
     },
   },
   methods: {
-    event: action('selected-shop'),
+    event: action('shop-selected'),
   },
-  template: '<MultiStoreSelector class="m-4" :isMultiShop="isMultiShop" :shopsTree="shops" @selected-shop="event" />',
-  i18n,
+  template: '<MultiStoreSelector class="m-4" :isMultiShop="isMultiShop" :shops="shops" @shop-selected="event" />',
 });
