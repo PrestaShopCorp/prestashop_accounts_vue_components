@@ -2,7 +2,6 @@
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {action} from '@storybook/addon-actions';
-import i18n from '@/i18n/i18n';
 import AccountNotEnabled from './AccountNotEnabled';
 
 export default {
@@ -19,8 +18,7 @@ export const Disabled = () => ({
     },
   },
   methods: {
-    event: action('enable'),
+    event: action('enabled'),
   },
-  template: '<AccountNotEnabled class="m-4" :accountIsEnabled="accountIsEnabled" @enable="event" />',
-  i18n,
+  template: '<AccountNotEnabled class="m-4" :accountIsEnabled="accountIsEnabled" @enabled="event" />',
 });
