@@ -34,10 +34,16 @@
 
 <script>
   import Locale from '@/mixins/locale';
+  import {BAlert, BListGroup, BListGroupItem} from 'bootstrap-vue';
 
   export default {
     name: 'MultiStoreSelector',
     mixins: [Locale],
+    components: {
+      BAlert,
+      BListGroup,
+      BListGroupItem,
+    },
     props: {
       shops: {
         type: Array,

@@ -21,9 +21,14 @@
 
 <script>
   import Locale from '@/mixins/locale';
+  import {BAlert, BButton} from 'bootstrap-vue';
 
   export default {
     name: 'AlertAccountNotEnabled',
+    components: {
+      BAlert,
+      BButton,
+    },
     mixins: [Locale],
     props: {
       accountIsEnabled: {

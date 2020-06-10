@@ -1,13 +1,9 @@
 import Vue from 'vue';
-import {BootstrapVue, IconsPlugin} from 'bootstrap-vue';
 import PsAccounts from '@/components/PsAccounts';
 import Account from '@/components/panel/Account';
 import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
 import AccountNotEnabled from '@/components/alert/AccountNotEnabled';
 import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
-
-Vue.use(BootstrapVue);
-Vue.use(IconsPlugin);
 
 const Components = {
   PsAccounts,

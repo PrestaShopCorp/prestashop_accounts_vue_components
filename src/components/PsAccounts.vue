@@ -21,7 +21,15 @@
         />
       </template>
     </template>
-    <slot v-if="context.user.email !== ''" />
+    <b-overlay
+      :show="!userIsConnectedAndEmailIsValidated"
+      variant="white"
+      :opacity="0.70"
+      blur="0px"
+    >
+      <slot name="body" />
+    </b-overlay>
+    <slot name="customBody" />
   </div>
 </template>
 
@@ -31,6 +39,7 @@
   import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
   import Account from '@/components/panel/Account';
   import context from '@/lib/ContextWrapper';
+  import {BOverlay} from 'bootstrap-vue';
 
   export default {
     name: 'PsAccount',
@@ -39,12 +48,18 @@
       AccountNotEnabled,
       MultiStoreSelector,
       Account,
+      BOverlay,
     },
     props: {
       context: {
         type: Object,
         required: false,
         default: () => context,
+      },
+    },
+    computed: {
+      userIsConnectedAndEmailIsValidated() {
+        return context.user.email !== '' && context.user.emailIsValidated;
       },
     },
   };

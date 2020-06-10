@@ -8,14 +8,12 @@
         font-scale="1.5"
         class="mr-2 align-bottom"
       >
-        <b-icon
+        <b-icon-circle-fill
           stacked
-          icon="circle-fill"
           variant="success"
         />
-        <b-icon
+        <b-icon-check
           stacked
-          icon="check"
           variant="white"
         />
       </b-iconstack>
@@ -36,7 +34,7 @@
         <div class="d-flex flex-grow-1">
           <img
             class="mr-2 align-self-center"
-            src="@/assets/puffin_logo.png"
+            src="~@/assets/img/puffin_logo.png"
             width="46"
           >
           <div class="align-self-center">
@@ -61,10 +59,9 @@
             {{ t('psaccounts.account.connectButton') }}
           </b-button>
           <b-link
-            v-else
+            v-else-if="userIsConnected && !userEmailIsValidated"
             @click="signOut()"
             class="float-right"
-            :class="{disabled: !isAdmin && !userIsConnected}"
           >
             {{ t('psaccounts.account.disconnectButton') }}
           </b-link>
@@ -114,10 +111,32 @@
 
 <script>
   import Locale from '@/mixins/locale';
+  import {
+    BAlert,
+    BButton,
+    BLink,
+    BBadge,
+    BCard,
+    BCardBody,
+    BIconstack,
+    BIconCircleFill,
+    BIconCheck,
+  } from 'bootstrap-vue';
 
   export default {
     name: 'Account',
     mixins: [Locale],
+    components: {
+      BAlert,
+      BButton,
+      BLink,
+      BBadge,
+      BCard,
+      BCardBody,
+      BIconstack,
+      BIconCircleFill,
+      BIconCheck,
+    },
     props: {
       isAdmin: {
         type: Boolean,

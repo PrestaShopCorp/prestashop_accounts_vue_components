@@ -5,7 +5,7 @@ import {action} from '@storybook/addon-actions';
 import Account from './Account';
 
 export default {
-  title: 'Panel account',
+  title: 'Components|Panels/Panel account',
   component: Account,
   decorators: [withKnobs],
 };
