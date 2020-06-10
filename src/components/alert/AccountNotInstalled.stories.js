@@ -5,7 +5,7 @@ import {action} from '@storybook/addon-actions';
 import AccountNotInstalled from './AccountNotInstalled';
 
 export default {
-  title: 'Alert account not installed',
+  title: 'Components|Alerts/Alert account not installed',
   component: AccountNotInstalled,
   decorators: [withKnobs],
 };

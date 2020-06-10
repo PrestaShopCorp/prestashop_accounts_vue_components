@@ -65,7 +65,7 @@ const shopsTreeMultiGroup = [
 ];
 
 export default {
-  title: 'Alert multi store selector',
+  title: 'Components|Alerts/Alert multi store selector',
   component: MultiStoreSelector,
   decorators: [withKnobs],
 };
