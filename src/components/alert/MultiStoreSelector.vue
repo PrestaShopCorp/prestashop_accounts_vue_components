@@ -4,16 +4,19 @@
     variant="warning"
     show
   >
-    <h2>{{ $t('multiShopSelector.title') }}</h2>
-    <p>{{ $t('multiShopSelector.subtitle') }}.</p>
-    <p>{{ $t('multiShopSelector.selectStore') }}:</p>
+    <h2>{{ t('psaccounts.multiShopSelector.title') }}</h2>
+    <p>{{ t('psaccounts.multiShopSelector.subtitle') }}.</p>
+    <p>{{ t('psaccounts.multiShopSelector.selectStore') }}:</p>
     <b-list-group
       v-for="group in shops"
       :key="group.id"
       class="my-3"
     >
       <p v-if="isMultiGroup">
-        <label class="text-muted">{{ $t('multiShopSelector.group') }}:</label> {{ group.name }}
+        <label class="text-muted">
+          {{ t('psaccounts.multiShopSelector.group') }}:
+        </label>
+        {{ group.name }}
       </p>
       <b-list-group-item
         v-for="shop in group.shops"
@@ -22,21 +25,29 @@
         @click="event(shop)"
         class="list-group-item"
       >
-        {{ $t('multiShopSelector.configure') }} <b>{{ shop.name }}</b>
+        {{ t('psaccounts.multiShopSelector.configure') }} <b>{{ shop.name }}</b>
       </b-list-group-item>
     </b-list-group>
-    <p>{{ $t('multiShopSelector.tips') }}.</p>
+    <p>{{ t('psaccounts.multiShopSelector.tips') }}.</p>
   </b-alert>
 </template>
 
 <script>
+  import Locale from '@/mixins/locale';
+  import {BAlert, BListGroup, BListGroupItem} from 'bootstrap-vue';
+
   export default {
     name: 'MultiStoreSelector',
+    mixins: [Locale],
+    components: {
+      BAlert,
+      BListGroup,
+      BListGroupItem,
+    },
     props: {
       shops: {
         type: Array,
-        required: false,
-        default: null,
+        required: true,
       },
     },
     methods: {
@@ -51,7 +62,7 @@
     },
     computed: {
       isMultiShop() {
-        return this.isMultiGroup || this.shops[0].length > 1;
+        return Boolean(this.shops.length >= 1);
       },
       isMultiGroup() {
         return Boolean(this.shops.length > 1);

@@ -8,25 +8,25 @@
         font-scale="1.5"
         class="mr-2 align-bottom"
       >
-        <b-icon
+        <b-icon-circle-fill
           stacked
-          icon="circle-fill"
           variant="success"
         />
-        <b-icon
+        <b-icon-check
           stacked
-          icon="check"
           variant="white"
         />
       </b-iconstack>
       <h3 class="d-inline">
-        {{ $t('account.title') }}
+        {{ t('psaccounts.account.title') }}
       </h3>
       <span
         v-if="!userEmailIsValidated && userIsConnected"
         class="float-right"
       >
-        <b-badge variant="warning">{{ $t('account.emailValidationWarningLabel') }}</b-badge>
+        <b-badge variant="warning">
+          {{ t('psaccounts.account.emailValidationWarningLabel') }}
+        </b-badge>
       </span>
     </template>
     <b-card-body>
@@ -34,16 +34,16 @@
         <div class="d-flex flex-grow-1">
           <img
             class="mr-2 align-self-center"
-            src="@/assets/puffin_logo.png"
+            src="~@/assets/img/puffin_logo.png"
             width="46"
           >
           <div class="align-self-center">
             <span
               v-if="!userIsConnected"
               class="align-middle"
-            >{{ $t('account.authorize') }}.</span>
+            >{{ t('psaccounts.account.authorize') }}.</span>
             <template v-else>
-              <span class="align-middle">{{ $t('account.authorized') }}.</span><br>
+              <span class="align-middle">{{ t('psaccounts.account.authorized') }}.</span><br>
               <span class="text-muted">{{ user.email }}</span>
             </template>
           </div>
@@ -56,15 +56,14 @@
             variant="primary"
             @click="signIn()"
           >
-            {{ $t('account.connectButton') }}
+            {{ t('psaccounts.account.connectButton') }}
           </b-button>
           <b-link
-            v-else
+            v-else-if="userIsConnected && !userEmailIsValidated"
             @click="signOut()"
             class="float-right"
-            :class="{disabled: !isAdmin && !userIsConnected}"
           >
-            {{ $t('account.disconnectButton') }}
+            {{ t('psaccounts.account.disconnectButton') }}
           </b-link>
         </div>
       </div>
@@ -75,17 +74,17 @@
         show
       >
         <p>
-          {{ $t('account.emailConfirmationAlert') }}.
+          {{ t('psaccounts.account.emailConfirmationAlert') }}.
         </p>
         <p class="mt-2 text-muted">
-          {{ $t('account.noEmailReceived') }}?
+          {{ t('psaccounts.account.noEmailReceived') }}?
         </p>
         <p class="mt-2">
           <b-button
             variant="primary"
             @click="sendEmailConfirmation()"
           >
-            {{ $t('account.sendEmail') }}
+            {{ t('psaccounts.account.sendEmail') }}
           </b-button>
         </p>
       </b-alert>
@@ -95,9 +94,9 @@
         class="mt-4"
         show
       >
-        <p>{{ $t('account.needToBeAdmin') }}.</p>
+        <p>{{ t('psaccounts.account.needToBeAdmin') }}.</p>
         <p>
-          {{ $t('account.pleaseContact') }}
+          {{ t('psaccounts.account.pleaseContact') }}
           <b-link
             @click="sendEmailConfirmation()"
             href="mailto:support@prestashop.com"
@@ -111,8 +110,33 @@
 </template>
 
 <script>
+  import Locale from '@/mixins/locale';
+  import {
+    BAlert,
+    BButton,
+    BLink,
+    BBadge,
+    BCard,
+    BCardBody,
+    BIconstack,
+    BIconCircleFill,
+    BIconCheck,
+  } from 'bootstrap-vue';
+
   export default {
     name: 'Account',
+    mixins: [Locale],
+    components: {
+      BAlert,
+      BButton,
+      BLink,
+      BBadge,
+      BCard,
+      BCardBody,
+      BIconstack,
+      BIconCircleFill,
+      BIconCheck,
+    },
     props: {
       isAdmin: {
         type: Boolean,

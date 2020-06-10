@@ -4,24 +4,32 @@
     variant="warning"
     show
   >
-    <h3>{{ $t('alertAccountNotEnabled.title') }}</h3>
+    <h3>{{ t('psaccounts.alertAccountNotEnabled.title') }}</h3>
     <p>
-      {{ $t('alertAccountNotEnabled.message') }}.
+      {{ t('psaccounts.alertAccountNotEnabled.message') }}.
     </p>
     <p class="mt-2">
       <b-button
         variant="primary"
         @click="enableEvent()"
       >
-        {{ $t('alertAccountNotEnabled.enableButton') }}
+        {{ t('psaccounts.alertAccountNotEnabled.enableButton') }}
       </b-button>
     </p>
   </b-alert>
 </template>
 
 <script>
+  import Locale from '@/mixins/locale';
+  import {BAlert, BButton} from 'bootstrap-vue';
+
   export default {
     name: 'AlertAccountNotEnabled',
+    components: {
+      BAlert,
+      BButton,
+    },
+    mixins: [Locale],
     props: {
       accountIsEnabled: {
         type: Boolean,
