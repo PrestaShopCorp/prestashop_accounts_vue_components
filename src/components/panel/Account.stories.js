@@ -22,7 +22,7 @@ export const NeedToBeAdmin = () => ({
 
 export const NotConnected = () => ({
   components: {Account},
-  template: '<Account class="m-4" />',
+  template: '<Account class="m-4" />', // TODO !0: onboardingLink is mandatory, where it is ?
 });
 
 export const Connected = () => ({
