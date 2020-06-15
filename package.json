@@ -16,10 +16,13 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "babel-loader": "^8.1.0",
     "bootstrap-vue": "^2.11.0",
     "core-js": "^3.6.4",
     "deepmerge": "^4.2.2",
     "prestakit": "^1.1.0",
+    "react": "^16.13.1",
+    "react-is": "^16.13.1",
     "vue": "^2.6.11"
   },
   "devDependencies": {
