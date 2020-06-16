@@ -20,13 +20,13 @@ For a given shop that is not yet linked to PrestaShop Account, when the merchant
 to install / activate a module that uses PrestaShop Billing services, **the module configuration page
 should show a connection box** before letting the module settings available, as this:
 
-<Story id="components-connection-panels-account--not-connected" height='220px' />
+<Story id="sub-components-connection-panels-account--not-connected" height='220px' />
 
 This linking process **has to be done by the merchant only once for all modules**.
 If the merchant already linked his shop from another module, then the component will look
 like this:
 
-<Story id="components-connection-panels-account--connected" height='230px' />
+<Story id="sub-components-connection-panels-account--connected" height='230px' />
 
 Once the merchant successfully linked his shop, the module should display its configuration
 panel below this section, and you will be able to call PrestaShop Billing features.
@@ -41,8 +41,8 @@ sufficient for most of the cases: a unique component will manage display of diff
 
 ## The easy way
 
-Please see the [PsAccounts component documentation, to integrate to your module page](?path=/docs/integration-ps-accounts-panel--connected#psaccounts-component-behavior).
-This component will call every sub component that is needed, and will display your own component
+Please see the [PsAccounts component documentation, to integrate to your module page](?path=/docs/integration-psaccounts-panel--connected#psaccounts-component-behavior).
+This component will call every sub-components that is needed, and will display your own component
 (in a VueJS slot) once the linking process is done.
 
 
@@ -50,10 +50,10 @@ This component will call every sub component that is needed, and will display yo
 
 If the base case does not match your needs, you can instantiate each sub-component separately.
 In this way, you will have to deal with missing pre-requisites cases, like:
-- if the [PsAccounts module is not installed](?path=/docs/components-alerts-alert-account-not-installed--not-installed),
-- if the [PsAccounts module is not activated](?path=/docs/components-alerts-alert-account-not-enabled--disabled),
-- if the [multi-shop is activated and the merchant must select a shop first](?path=/docs/components-alerts-alert-multi-store-selector--multi-group),
-- if the [merchant has no admin rights](?path=/docs/components-connection-panels-account--need-to-be-admin)
+- if the [PsAccounts module is not installed](?path=/docs/sub-components-alerts-alert-account-not-installed--not-installed),
+- if the [PsAccounts module is not activated](?path=/docs/sub-components-alerts-alert-account-not-enabled--disabled),
+- if the [multi-shop is activated and the merchant must select a shop first](?path=/docs/sub-components-alerts-alert-multi-store-selector--multi-group),
+- if the [merchant has no admin rights](?path=/docs/sub-components-connection-panels-account--need-to-be-admin)
 
-And then you can instantiate the [Account component](?path=/docs/components-connection-panels-account--not-connected)
+And then you can instantiate the [Account sub-component](?path=/docs/sub-components-connection-panels-account--not-connected)
 when these previous cases are managed.
