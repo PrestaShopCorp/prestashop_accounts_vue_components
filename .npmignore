@@ -1,8 +1,0 @@
-.gitignore
-Dockerfile
-yarn.lock
-*.log
-cloud
-.docker
-.github
-.storybook
