@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import {withKnobs, object, boolean} from '@storybook/addon-knobs';
+import {withKnobs, object} from '@storybook/addon-knobs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {action} from '@storybook/addon-actions';
 import MultiStoreSelector from './MultiStoreSelector';
