@@ -23,6 +23,9 @@
   import Locale from '@/mixins/locale';
   import {BAlert, BButton} from 'bootstrap-vue';
 
+  /**
+   * TODO
+   */
   export default {
     name: 'AlertAccountNotEnabled',
     components: {
@@ -31,6 +34,9 @@
     },
     mixins: [Locale],
     props: {
+      /**
+       * TODO
+       */
       accountIsEnabled: {
         type: Boolean,
         default: false,
@@ -40,7 +46,6 @@
       enableEvent() {
         /**
          * Emitted when enable button is clicked.
-         * @event enable
          * @type {Event}
          */
         this.$emit('enabled', true);

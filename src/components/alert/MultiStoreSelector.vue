@@ -36,6 +36,9 @@
   import Locale from '@/mixins/locale';
   import {BAlert, BListGroup, BListGroupItem} from 'bootstrap-vue';
 
+  /**
+   * TODO
+   */
   export default {
     name: 'MultiStoreSelector',
     mixins: [Locale],
@@ -45,6 +48,9 @@
       BListGroupItem,
     },
     props: {
+      /**
+       * TODO
+       */
       shops: {
         type: Array,
         required: true,
@@ -54,7 +60,6 @@
       event(selectedShop) {
         /**
          * Emitted when a shop is selected.
-         * @event selected-shop
          * @type {Event}
          */
         this.$emit('shop-selected', selectedShop);

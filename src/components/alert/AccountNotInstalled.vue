@@ -23,6 +23,9 @@
   import Locale from '@/mixins/locale';
   import {BAlert, BButton} from 'bootstrap-vue';
 
+  /**
+   * TODO
+   */
   export default {
     name: 'AlertAccountNotInstalled',
     mixins: [Locale],
@@ -31,6 +34,9 @@
       BButton,
     },
     props: {
+      /**
+       * TODO
+       */
       accountIsInstalled: {
         type: Boolean,
         default: false,
@@ -40,7 +46,6 @@
       installEvent() {
         /**
          * Emitted when install button is clicked.
-         * @event install
          * @type {Event}
          */
         this.$emit('install', true);
