@@ -73,8 +73,10 @@
     },
     props: {
       /**
-       * The whole context object given [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
-       * If left empty (by default), the context will be retrieved from JS global vars automatically.
+       * The whole context object given
+       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       * If left empty (by default), the context will be retrieved from JS global
+       * vars automatically.
        */
       context: {
         type: Object,

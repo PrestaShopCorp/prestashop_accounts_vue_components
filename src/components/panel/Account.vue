@@ -124,8 +124,9 @@
   } from 'bootstrap-vue';
 
   /**
-   * This sub-component can be used in a custom integration when the `PsAccounts` component does not
-   * meets special needs. This part will display a block to let the user link his account through a button.
+   * This sub-component can be used in a custom integration when the `PsAccounts`
+   * component does not meets special needs. This part will display a block to
+   * let the user link his account through a button.
    */
   export default {
     name: 'Account',
@@ -151,7 +152,8 @@
         default: true,
       },
       /**
-       * The user object, generated [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       * The user object, generated
+       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
        */
       user: {
         type: Object,
@@ -162,7 +164,8 @@
         }),
       },
       /**
-       * The onboarding link, generated [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       * The onboarding link, generated
+       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
        */
       onboardingLink: {
         type: String,
@@ -175,7 +178,8 @@
       },
       signOut() {
         /**
-         * Logout the current user to let another user account to be linked (user is given in parameter).
+         * Logout the current user to let another user account to be linked
+         * (user is given in parameter).
          * @type {Event}
          */
         this.$emit('sign-out', this.user);
