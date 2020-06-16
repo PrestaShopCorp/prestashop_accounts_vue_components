@@ -1,8 +1,13 @@
 <template>
   <div>
     <template v-if="validationErrors && validationErrors.length">
-      <b-alert variant="danger" show>
-        <p>&lt;PsAccounts&gt; integration: Given context is invalid: {{validationErrors.join(';')}}</p>
+      <b-alert
+        variant="danger"
+        show
+      >
+        <p>
+          &lt;PsAccounts&gt; integration: Given context is invalid: {{ validationErrors.join(';') }}
+        </p>
       </b-alert>
     </template>
     <template v-else>
@@ -46,8 +51,8 @@
   import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
   import Account from '@/components/panel/Account';
   import context from '@/lib/ContextWrapper';
-  import { BAlert, BOverlay } from 'bootstrap-vue';
-  import { contextSchema } from '../lib/ContextValidator';
+  import {BAlert, BOverlay} from 'bootstrap-vue';
+  import {contextSchema} from '../lib/ContextValidator';
 
   /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
@@ -74,7 +79,7 @@
       context: {
         type: Object,
         required: false,
-        default: () => context
+        default: () => context,
       },
     },
     computed: {
@@ -85,17 +90,18 @@
     data() {
       return {
         validationErrors: [],
-        validatedContext : this.context,
+        validatedContext: this.context,
       };
     },
     methods: {
       validateContext() {
-        const { value, error } = contextSchema.validate(this.context); // validates but also fix when possible.
+        // validates but also fix when possible.
+        const {value, error} = contextSchema.validate(this.context);
         this.validationErrors = [];
         this.validatedContext = value;
 
         if (error) {
-          this.validationErrors = error.details.map(e => e.message);
+          this.validationErrors = error.details.map((e) => e.message);
         }
       },
     },
@@ -106,6 +112,6 @@
       context() {
         this.validateContext();
       },
-    }
+    },
   };
 </script>

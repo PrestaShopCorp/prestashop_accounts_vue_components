@@ -5,9 +5,6 @@ import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
 import AccountNotEnabled from '@/components/alert/AccountNotEnabled';
 import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
 
-Vue.use(BootstrapVue);
-Vue.use(IconsPlugin);
-
 const Components = {
   PsAccounts,
   Account,

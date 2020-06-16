@@ -1,13 +1,10 @@
 {
   "name": "prestashop_accounts_vue_components",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "main": "./dist/psaccountsVue.common.js",
   "files": [
     "dist/*",
-    "src/*",
-    "public/*",
-    "*.json",
-    "*.js"
+    "*.json"
   ],
   "scripts": {
     "build-lib": "vue-cli-service build --target lib --name psaccountsVue src/full.js",
