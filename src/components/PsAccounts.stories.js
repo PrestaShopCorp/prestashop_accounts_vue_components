@@ -1,4 +1,5 @@
-import { withKnobs, object } from '@storybook/addon-knobs';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import {withKnobs, object} from '@storybook/addon-knobs';
 import PsAccounts from './PsAccounts';
 
 export default {
@@ -8,7 +9,7 @@ export default {
 };
 
 export const Connected = () => ({
-  components: { PsAccounts },
+  components: {PsAccounts},
   props: {
     context: {
       default: object('context', {
@@ -41,18 +42,18 @@ export const Connected = () => ({
           email: 'support@prestashop.com',
           emailIsValidated: true,
         },
-        onboardingLink: 'http://perdu.com'
-      })
+        onboardingLink: 'http://perdu.com',
+      }),
     },
   },
-  template: '<PsAccounts :context="context">' +
-    '<template v-slot:body>- I am connected -</template>' +
-    '<template v-slot:customBody>- Custom body, always present -</template>' +
-  '</PsAccounts>',
+  template: '<PsAccounts :context="context">'
+    + '<template v-slot:body>- I am connected -</template>'
+    + '<template v-slot:customBody>- Custom body, always present -</template>'
+  + '</PsAccounts>',
 });
 
 export const InvalidContext = () => ({
-  components: { PsAccounts },
+  components: {PsAccounts},
   props: {
     context: {
       default: object('context', {
@@ -68,7 +69,7 @@ export const InvalidContext = () => ({
                 id: 1,
                 name: 'PrestaShop',
                 url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-              }
+              },
             ],
           },
         ],
@@ -76,12 +77,12 @@ export const InvalidContext = () => ({
           email: 'this-is-not-a-valid-email',
           emailIsValidated: 42,
         },
-        onboardingLink: '42*'
-      })
+        onboardingLink: '42*',
+      }),
     },
   },
-  template: '<PsAccounts :context="context">' +
-      '<template v-slot:body>- I am connected -</template>' +
-      '<template v-slot:customBody>- Custom body, always present -</template>' +
-      '</PsAccounts>',
+  template: '<PsAccounts :context="context">'
+      + '<template v-slot:body>- I am connected -</template>'
+      + '<template v-slot:customBody>- Custom body, always present -</template>'
+      + '</PsAccounts>',
 });
