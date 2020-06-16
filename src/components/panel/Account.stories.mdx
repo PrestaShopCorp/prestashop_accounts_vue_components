@@ -25,7 +25,7 @@ you in the integration section)._
 </Story>
 
 The button will bring the user to PrestaShop servers to link the shop to a user account (the owner / merchant)
-then go back to the module page that displayedthe component.
+then go back to the module page that displayed the component.
 
 The connection is made once (for all PrestaShop services) so maybe it won't be displayed as this
 if the shop was already linked to PrestaShop services from another service module before.
@@ -39,7 +39,7 @@ if the shop was already linked to PrestaShop services from another service modul
     props: {
       user: {
         default: object('user', {
-          email: 'support@prestashop.com',
+          email: 'merchant@my-shop.com',
           emailIsValidated: true,
         }),
       },
@@ -52,6 +52,7 @@ if the shop was already linked to PrestaShop services from another service modul
 </Story>
 
 
+---
 # Specific behaviors
 
 ## If the user is not admin:
@@ -84,7 +85,7 @@ link received in is email box):
     props: {
       user: {
         default: object('user', {
-          email: 'support@prestashop.com',
+          email: 'merchant@my-shop.com',
           emailIsValidated: false,
         }),
       },
@@ -98,15 +99,19 @@ link received in is email box):
 </Story>
 
 
+---
 # Integration
 
 _Notice: If you need to integrate the standard behavior of PS Accounts, please see the `PsAccounts` component
 in the integration section._
 
-If you need a custom integration of PS Accounts components, here is the Account panel:
+If you need a custom integration of PS Accounts sub-components, here is the Account panel:
 
 ```html
 <Account :isAdmin="isAdmin" :user="user" @sign-out="signOutFn" @send-email="sendEmailFn" class="m-4" />
 ```
 
+# Technical details
+
+<Description of={Account} />
 <Props of={Account} />

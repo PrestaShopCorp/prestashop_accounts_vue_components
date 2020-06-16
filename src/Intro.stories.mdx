@@ -31,6 +31,7 @@ like this:
 Once the merchant successfully linked his shop, the module should display its configuration
 panel below this section, and you will be able to call PrestaShop Billing features.
 
+
 ---
 # Integration
 
@@ -40,7 +41,7 @@ sufficient for most of the cases: a unique component will manage display of diff
 
 ## The easy way
 
-Please see the [PsAccounts component documentation, to integrate to your module page](?path=/docs/integration-ps-accounts-panel).
+Please see the [PsAccounts component documentation, to integrate to your module page](?path=/docs/integration-ps-accounts-panel--connected#psaccounts-component-behavior).
 This component will call every sub component that is needed, and will display your own component
 (in a VueJS slot) once the linking process is done.
 
@@ -49,16 +50,10 @@ This component will call every sub component that is needed, and will display yo
 
 If the base case does not match your needs, you can instantiate each sub-component separately.
 In this way, you will have to deal with missing pre-requisites cases, like:
-- if the [PsAccounts module is not installed](?path=/docs/components-alerts-alert-account-not-installed),
-- if the [PsAccounts module is not activated](?path=/docs/components-alerts-alert-account-not-enabled),
-- if the [multi-shop is activated and the merchant must select a shop first](?path=/docs/components-alerts-alert-multi-store-selector),
+- if the [PsAccounts module is not installed](?path=/docs/components-alerts-alert-account-not-installed--not-installed),
+- if the [PsAccounts module is not activated](?path=/docs/components-alerts-alert-account-not-enabled--disabled),
+- if the [multi-shop is activated and the merchant must select a shop first](?path=/docs/components-alerts-alert-multi-store-selector--multi-group),
 - if the [merchant has no admin rights](?path=/docs/components-connection-panels-account--need-to-be-admin)
 
-And then you can instantiate the [Account component](?path=/docs/components-connection-panels-account) when these cases
-are managed.
-
-
----
-# Style guides
-
-TODO : comment intégrer les styles, et autres choses en plus des composants ?
+And then you can instantiate the [Account component](?path=/docs/components-connection-panels-account--not-connected)
+when these previous cases are managed.
