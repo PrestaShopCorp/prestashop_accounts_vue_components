@@ -7,6 +7,7 @@ import { Meta, Story } from '@storybook/addon-docs/blocks';
 _(For full PsAccounts integration documentation (Global purposes and PHP part),
 please go [here (TODO)](http://perdu.com))._
 
+
 ---
 # What for?
 
@@ -36,14 +37,28 @@ panel below this section, and you will be able to call PrestaShop Billing featur
 There is two ways to integrate the needed components. The first is the easier, and should be
 sufficient for most of the cases: a unique component will manage display of different use cases.
 
+
 ## The easy way
 
-Please see the PsAccount component, to integrate to your module page.
+Please see the [PsAccounts component documentation, to integrate to your module page](?path=/docs/integration-ps-accounts-panel).
+This component will call every sub component that is needed, and will display your own component
+(in a VueJS slot) once the linking process is done.
+
 
 ## Need a custom way?
 
+If the base case does not match your needs, you can instantiate each sub-component separately.
+In this way, you will have to deal with missing pre-requisites cases, like:
+- if the [PsAccounts module is not installed](?path=/docs/components-alerts-alert-account-not-installed),
+- if the [PsAccounts module is not activated](?path=/docs/components-alerts-alert-account-not-enabled),
+- if the [multi-shop is activated and the merchant must select a shop first](?path=/docs/components-alerts-alert-multi-store-selector),
+- if the [merchant has no admin rights](?path=/docs/components-connection-panels-account--need-to-be-admin)
+
+And then you can instantiate the [Account component](?path=/docs/components-connection-panels-account) when these cases
+are managed.
+
+
 ---
 # Style guides
-zer
 
-[link example to pageand anchor](?path=/docs/components-connection-panels-account--not-connected#integration)
+TODO : comment intégrer les styles, et autres choses en plus des composants ?
