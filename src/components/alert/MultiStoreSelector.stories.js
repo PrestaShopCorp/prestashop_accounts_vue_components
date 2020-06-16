@@ -73,9 +73,6 @@ export default {
 export const OneGroup = () => ({
   components: {MultiStoreSelector},
   props: {
-    isMultiShop: {
-      default: boolean('isMultiShop', true),
-    },
     shops: {
       default: object('shops', shopsTree),
     },
@@ -83,15 +80,12 @@ export const OneGroup = () => ({
   methods: {
     event: action('shop-selected'),
   },
-  template: '<MultiStoreSelector class="m-4" :isMultiShop="isMultiShop" :shops="shops" @shop-selected="event" />',
+  template: '<MultiStoreSelector class="m-4" :shops="shops" @shop-selected="event" />',
 });
 
 export const multiGroup = () => ({
   components: {MultiStoreSelector},
   props: {
-    isMultiShop: {
-      default: boolean('isMultiShop', true),
-    },
     shops: {
       default: object('shops', shopsTreeMultiGroup),
     },
@@ -99,5 +93,5 @@ export const multiGroup = () => ({
   methods: {
     event: action('shop-selected'),
   },
-  template: '<MultiStoreSelector class="m-4" :isMultiShop="isMultiShop" :shops="shops" @shop-selected="event" />',
+  template: '<MultiStoreSelector class="m-4" :shops="shops" @shop-selected="event" />',
 });

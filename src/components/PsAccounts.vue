@@ -1,35 +1,42 @@
 <template>
   <div>
-    <AccountNotInstalled
-      v-if="!context.psAccountsIsInstalled"
-      :account-is-installed="context.psAccountsIsInstalled"
-    />
+    <template v-if="validationErrors && validationErrors.length">
+      <b-alert variant="danger" show>
+        <p>&lt;PsAccounts&gt; integration: Given context is invalid: {{validationErrors.join(';')}}</p>
+      </b-alert>
+    </template>
     <template v-else>
-      <AccountNotEnabled
-        v-if="!context.psAccountIsEnabled"
-        :account-is-enabled="context.psAccountIsEnabled"
+      <AccountNotInstalled
+        v-if="!validatedContext.psAccountsIsInstalled"
+        :account-is-installed="validatedContext.psAccountsIsInstalled"
       />
       <template v-else>
-        <MultiStoreSelector
-          v-if="!context.currentShop"
-          :shops="context.shops"
+        <AccountNotEnabled
+          v-if="!validatedContext.psAccountIsEnabled"
+          :account-is-enabled="validatedContext.psAccountIsEnabled"
         />
-        <Account
-          :user="context.user"
-          :onboarding-link="context.onboardingLink"
-          class="mb-2"
-        />
+        <template v-else>
+          <MultiStoreSelector
+            v-if="!validatedContext.currentShop"
+            :shops="validatedContext.shops"
+          />
+          <Account
+            :user="validatedContext.user"
+            :onboarding-link="validatedContext.onboardingLink"
+            class="mb-2"
+          />
+        </template>
       </template>
+      <b-overlay
+        :show="!userIsConnectedAndEmailIsValidated"
+        variant="white"
+        :opacity="0.70"
+        blur="0px"
+      >
+        <slot name="body" />
+      </b-overlay>
+      <slot name="customBody" />
     </template>
-    <b-overlay
-      :show="!userIsConnectedAndEmailIsValidated"
-      variant="white"
-      :opacity="0.70"
-      blur="0px"
-    >
-      <slot name="body" />
-    </b-overlay>
-    <slot name="customBody" />
   </div>
 </template>
 
@@ -39,7 +46,8 @@
   import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
   import Account from '@/components/panel/Account';
   import context from '@/lib/ContextWrapper';
-  import {BOverlay} from 'bootstrap-vue';
+  import { BAlert, BOverlay } from 'bootstrap-vue';
+  import { contextSchema } from '../lib/ContextValidator';
 
   export default {
     name: 'PsAccount',
@@ -49,18 +57,44 @@
       MultiStoreSelector,
       Account,
       BOverlay,
+      BAlert,
     },
     props: {
       context: {
         type: Object,
         required: false,
-        default: () => context,
+        default: () => context
       },
     },
     computed: {
       userIsConnectedAndEmailIsValidated() {
-        return context.user.email !== '' && context.user.emailIsValidated;
+        return this.validatedContext.user.email !== '' && this.validatedContext.user.emailIsValidated;
       },
     },
+    data() {
+      return {
+        validationErrors: [],
+        validatedContext : this.context,
+      };
+    },
+    methods: {
+      validateContext() {
+        const { value, error } = contextSchema.validate(this.context); // validates but also fix when possible.
+        this.validationErrors = [];
+        this.validatedContext = value;
+
+        if (error) {
+          this.validationErrors = error.details.map(e => e.message);
+        }
+      },
+    },
+    created() {
+      this.validateContext();
+    },
+    watch: {
+      context() {
+        this.validateContext();
+      },
+    }
   };
 </script>

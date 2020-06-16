@@ -16,6 +16,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "bootstrap-vue": "^2.11.0",
     "core-js": "^3.6.4",
     "deepmerge": "^4.2.2",
