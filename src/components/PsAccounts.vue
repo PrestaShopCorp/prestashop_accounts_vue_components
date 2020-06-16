@@ -7,31 +7,31 @@
     </template>
     <template v-else>
       <AccountNotInstalled
-              v-if="!validatedContext.psAccountsIsInstalled"
-              :account-is-installed="validatedContext.psAccountsIsInstalled"
+        v-if="!validatedContext.psAccountsIsInstalled"
+        :account-is-installed="validatedContext.psAccountsIsInstalled"
       />
       <template v-else>
         <AccountNotEnabled
-                v-if="!validatedContext.psAccountIsEnabled"
-                :account-is-enabled="validatedContext.psAccountIsEnabled"
+          v-if="!validatedContext.psAccountIsEnabled"
+          :account-is-enabled="validatedContext.psAccountIsEnabled"
         />
         <template v-else>
           <MultiStoreSelector
-                  v-if="!validatedContext.currentShop"
-                  :shops="validatedContext.shops"
+            v-if="!validatedContext.currentShop"
+            :shops="validatedContext.shops"
           />
           <Account
-                  :user="validatedContext.user"
-                  :onboarding-link="validatedContext.onboardingLink"
-                  class="mb-2"
+            :user="validatedContext.user"
+            :onboarding-link="validatedContext.onboardingLink"
+            class="mb-2"
           />
         </template>
       </template>
       <b-overlay
-              :show="!userIsConnectedAndEmailIsValidated"
-              variant="white"
-              :opacity="0.70"
-              blur="0px"
+        :show="!userIsConnectedAndEmailIsValidated"
+        variant="white"
+        :opacity="0.70"
+        blur="0px"
       >
         <slot name="body" />
       </b-overlay>
