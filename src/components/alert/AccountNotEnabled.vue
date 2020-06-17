@@ -24,7 +24,9 @@
   import {BAlert, BButton} from 'bootstrap-vue';
 
   /**
-   * TODO
+   * This sub-component can be used in a custom integration when the `PsAccounts`
+   * component does not meets special needs. This part will display a warning message
+   * telling the PS Accounts module is not enabled on the shop (and a button to enable it).
    */
   export default {
     name: 'AlertAccountNotEnabled',
@@ -35,7 +37,7 @@
     mixins: [Locale],
     props: {
       /**
-       * TODO
+       * This is the display condition (do not use v-if="...", use this prop instead).
        */
       accountIsEnabled: {
         type: Boolean,

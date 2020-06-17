@@ -37,7 +37,11 @@
   import {BAlert, BListGroup, BListGroupItem} from 'bootstrap-vue';
 
   /**
-   * TODO
+   * This sub-component can be used in a custom integration when the `PsAccounts`
+   * component does not meets special needs. This part will display a selector
+   * to let the user choose which shop to choose before linking process (each shop
+   * in a multi-shop context has to be linked separately, possibly with a different
+   * user account).
    */
   export default {
     name: 'MultiStoreSelector',
@@ -49,7 +53,8 @@
     },
     props: {
       /**
-       * TODO
+       * The shops object, generated
+       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
        */
       shops: {
         type: Array,
