@@ -54,6 +54,13 @@
   import {BAlert, BOverlay} from 'bootstrap-vue';
   import {contextSchema} from '../lib/ContextValidator';
 
+  /**
+   * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
+   * to ensure each functional case is covered for you. You can use 2 slots : `v-slot:body`,
+   * that will be displayed only if the user account is well linked (you should put your
+   * module configuration panel here), and a special `v-slot:customBody` that will always be
+   * displayed (you have to manage display condition by yourself).
+   */
   export default {
     name: 'PsAccount',
     components: {
@@ -65,6 +72,12 @@
       BAlert,
     },
     props: {
+      /**
+       * The whole context object given
+       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       * If left empty (by default), the context will be retrieved from JS global
+       * vars automatically.
+       */
       context: {
         type: Object,
         required: false,

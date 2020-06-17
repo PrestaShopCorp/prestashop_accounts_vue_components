@@ -23,6 +23,11 @@
   import Locale from '@/mixins/locale';
   import {BAlert, BButton} from 'bootstrap-vue';
 
+  /**
+   * This sub-component can be used in a custom integration when the `PsAccounts`
+   * component does not meets special needs. This part will display a warning message
+   * telling the PS Accounts module is not installed on the shop (and a button to install it).
+   */
   export default {
     name: 'AlertAccountNotInstalled',
     mixins: [Locale],
@@ -31,6 +36,9 @@
       BButton,
     },
     props: {
+      /**
+       * This is the display condition (do not use v-if="...", use this prop instead).
+       */
       accountIsInstalled: {
         type: Boolean,
         default: false,
@@ -40,7 +48,6 @@
       installEvent() {
         /**
          * Emitted when install button is clicked.
-         * @event install
          * @type {Event}
          */
         this.$emit('install', true);

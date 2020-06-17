@@ -22,7 +22,7 @@ export const contextSchema = Joi.object().keys({
   psAccountsIsInstalled: Joi.boolean().required(),
   psAccountIsEnabled: Joi.boolean().required(),
   currentShop: shopSchema.optional().allow(null).default(null),
-  shops: Joi.array().items(shopGroupSchema).required().min(1)
+  shops: Joi.array().items(shopGroupSchema).required().min(0)
     .max(128),
   user: userSchema.optional().allow({}).default({email: null, emailIsValidated: false}),
   onboardingLink: Joi.string().uri().optional().allow(null)

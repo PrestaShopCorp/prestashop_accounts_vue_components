@@ -36,6 +36,13 @@
   import Locale from '@/mixins/locale';
   import {BAlert, BListGroup, BListGroupItem} from 'bootstrap-vue';
 
+  /**
+   * This sub-component can be used in a custom integration when the `PsAccounts`
+   * component does not meets special needs. This part will display a selector
+   * to let the user choose which shop to choose before linking process (each shop
+   * in a multi-shop context has to be linked separately, possibly with a different
+   * user account).
+   */
   export default {
     name: 'MultiStoreSelector',
     mixins: [Locale],
@@ -45,6 +52,10 @@
       BListGroupItem,
     },
     props: {
+      /**
+       * The shops object, generated
+       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       */
       shops: {
         type: Array,
         required: true,
@@ -54,7 +65,6 @@
       event(selectedShop) {
         /**
          * Emitted when a shop is selected.
-         * @event selected-shop
          * @type {Event}
          */
         this.$emit('shop-selected', selectedShop);

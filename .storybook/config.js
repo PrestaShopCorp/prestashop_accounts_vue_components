@@ -1,5 +1,4 @@
 import { configure } from '@storybook/vue';
-import Vue from 'vue';
 
 // import css style
 import 'bootstrap-vue/dist/bootstrap-vue';
