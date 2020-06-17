@@ -9,7 +9,7 @@ import PsAccounts from './PsAccounts';
 
 TODO
 
-<Story name='Connected' height='220px'>
+<Story name='Connected' height='260px'>
   {{
     components: { PsAccounts },
     props: {
@@ -48,7 +48,7 @@ TODO
         })
       },
     },
-    template: '<PsAccounts :context="context">' +
+    template: '<PsAccounts :context="context" class="m-4">' +
       '<template v-slot:body>- I am connected -</template>' +
       '<template v-slot:customBody>- Custom body, always present -</template>' +
     '</PsAccounts>',
@@ -61,7 +61,7 @@ TODO
 
 TODO
 
-<Story name='Invalid context' height='80px'>
+<Story name='Invalid context' height='120px'>
   {{
     components: { PsAccounts },
     props: {
@@ -91,7 +91,7 @@ TODO
         })
       },
     },
-    template: '<PsAccounts :context="context">' +
+    template: '<PsAccounts :context="context" class="m-4">' +
       '<template v-slot:body>- I am connected -</template>' +
       '<template v-slot:customBody>- Custom body, always present -</template>' +
     '</PsAccounts>',
@@ -105,7 +105,7 @@ TODO
 Let's integrate the component itself:
 
 ```html
-<PsAccounts :context="context">
+<PsAccounts :context="context" class="m-4">
   <template v-slot:body> <div>Slot shown when account is linked</div> </template>
   <template v-slot:customBody> <div>Custom body, always shown (for custom display condition)</div> </template>
 </PsAccounts>
