@@ -195,7 +195,7 @@
     },
     computed: {
       userIsConnected() {
-        return Boolean(this.user.email !== '');
+        return Boolean(this.user.email !== '' && this.user.email !== null);
       },
       userEmailIsValidated() {
         return this.user.emailIsValidated;
