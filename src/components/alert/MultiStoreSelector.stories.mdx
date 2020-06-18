@@ -8,7 +8,11 @@ import MultiStoreSelector from './MultiStoreSelector';
 
 # Multi store selector tool
 
-TODO
+When the shop has multistore activated with 1 or many store groups, the linking process must be
+donne for each store separately. So this component will display a selector (by group then by store)
+to let the user select a store.
+
+Example of the component for 1 group and many stores inside:
 
 <Story name='One group' height='320px'>
   {{
@@ -41,6 +45,8 @@ TODO
     template: '<MultiStoreSelector class="m-4" :shops="shops" @shop-selected="event" />',
   }}
 </Story>
+
+Example of the component for many groups:
 
 <Story name='Multiple groups' height='500px'>
   {{
