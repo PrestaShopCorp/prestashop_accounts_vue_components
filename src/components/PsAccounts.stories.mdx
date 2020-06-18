@@ -64,7 +64,7 @@ Once integrated, the component can show different cases:
           user: {
             email: null,
             emailIsValidated: false,
-            isAdmin: true,
+            isSuperAdmin: true,
           },
           onboardingLink: 'http://perdu.com'
         })
@@ -111,7 +111,7 @@ If the shop is in a multi-store context, the user will have a selector like this
           user: {
             email: null,
             emailIsValidated: false,
-            isAdmin: true,
+            isSuperAdmin: true,
           },
           onboardingLink: 'http://perdu.com'
         })
@@ -166,7 +166,7 @@ If the shop is in a multi-store context, the user will have a selector like this
           user: {
             email: 'merchant@my-shop.com',
             emailIsValidated: false,
-            isAdmin: true,
+            isSuperAdmin: true,
           },
           onboardingLink: 'http://perdu.com'
         })
@@ -224,7 +224,7 @@ his address from the link received in his mailbox.
           user: {
             email: 'merchant@my-shop.com',
             emailIsValidated: true,
-            isAdmin: true,
+            isSuperAdmin: true,
           },
           onboardingLink: 'http://perdu.com'
         })
@@ -282,7 +282,7 @@ You can have these different cases when the shop prerequisites are not fully val
           user: {
             email: 'merchant@my-shop.com',
             emailIsValidated: true,
-            isAdmin: true,
+            isSuperAdmin: true,
           },
           onboardingLink: 'http://perdu.com'
         })
@@ -334,7 +334,7 @@ You can have these different cases when the shop prerequisites are not fully val
           user: {
             email: 'merchant@my-shop.com',
             emailIsValidated: true,
-            isAdmin: true,
+            isSuperAdmin: true,
           },
           onboardingLink: 'http://perdu.com'
         })
@@ -386,7 +386,7 @@ You can have these different cases when the shop prerequisites are not fully val
           user: {
             email: null,
             emailIsValidated: false,
-            isAdmin: false,
+            isSuperAdmin: false,
           },
           onboardingLink: 'http://perdu.com'
         })
@@ -432,7 +432,7 @@ component and the standard behavior won't let the user do anything:
           user: {
             email: 'this-is-not-a-valid-email',
             emailIsValidated: 42,
-            isAdmin: 0.07,
+            isSuperAdmin: 0.07,
           },
           onboardingLink: '42*'
         })

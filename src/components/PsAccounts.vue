@@ -27,7 +27,7 @@
           />
           <Account v-else
             :user="validatedContext.user"
-            :is-admin="validatedContext.user.isAdmin"
+            :is-admin="validatedContext.user.isSuperAdmin"
             :onboarding-link="validatedContext.onboardingLink"
             class="mb-2"
           />

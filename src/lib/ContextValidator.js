@@ -18,7 +18,7 @@ export const shopGroupSchema = Joi.object().keys({
 export const userSchema = Joi.object().keys({
   email: Joi.string().email({tlds: false}).allow(null).default(null),
   emailIsValidated: Joi.boolean().default(false),
-  isAdmin: Joi.boolean().required().default(true),
+  isSuperAdmin: Joi.boolean().required().default(true),
 }).unknown(true);
 
 export const contextSchema = Joi.object().keys({
