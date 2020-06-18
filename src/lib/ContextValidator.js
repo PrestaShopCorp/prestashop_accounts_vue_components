@@ -5,7 +5,7 @@ export const shopSchema = Joi.object().keys({
   name: Joi.string().required().min(1).max(128),
   url: Joi.string().uri().required(),
   domain: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domain').required(),
-  domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').required()
+  domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').required(),
 });
 
 export const shopGroupSchema = Joi.object().keys({
