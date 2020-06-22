@@ -24,6 +24,7 @@ export const userSchema = Joi.object().keys({
 export const contextSchema = Joi.object().keys({
   psAccountsIsInstalled: Joi.boolean().required(),
   psAccountIsEnabled: Joi.boolean().required(),
+  isSuperAdmin: Joi.boolean().required(),
   currentShop: shopSchema.optional().allow(null).default(null),
   shops: Joi.array().items(shopGroupSchema).required().min(0)
     .max(128),
