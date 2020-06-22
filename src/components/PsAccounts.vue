@@ -87,7 +87,8 @@
     },
     computed: {
       userIsConnectedAndEmailIsValidated() {
-        return this.validatedContext.user.email !== '' && this.validatedContext.user.emailIsValidated;
+        return this.validatedContext.user.email !== null
+          && this.validatedContext.user.emailIsValidated;
       },
     },
     data() {
