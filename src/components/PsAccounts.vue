@@ -165,7 +165,7 @@
 
         this.enableLoading = true;
 
-        fetch(this.validateContext.psAccountsEnableLink, {
+        fetch(this.validatedContext.psAccountsEnableLink, {
           method: 'POST',
         }).then((response) => response.json(),
         ).then((data) => {
