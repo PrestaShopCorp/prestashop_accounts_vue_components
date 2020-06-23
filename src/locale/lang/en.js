@@ -1,14 +1,19 @@
 export default {
   psaccounts: {
+    accountManager: {
+      errorInstallEnable: 'Something went wrong. Please try again.',
+    },
     alertAccountNotInstalled: {
-      title: 'PrestaShop Account module needed',
-      message: 'To enable this module you need to install the PrestaShop Account module on your shop',
+      title: 'PrestaShop Accounts module needed',
+      message: 'To enable this module you need to install the PrestaShop Accounts module on your shop',
       installButton: 'Install',
+      loading: 'Installing PrestaShop Accounts ...',
     },
     alertAccountNotEnabled: {
-      title: 'PrestaShop Account module needed',
-      message: 'To enable this module you need to activate the PrestaShop Account module on your shop',
+      title: 'PrestaShop Accounts module needed',
+      message: 'To enable this module you need to activate the PrestaShop Accounts module on your shop',
       enableButton: 'Activate',
+      loading: 'Enabling PrestaShop Accounts ...',
     },
     multiShopSelector: {
       title: 'Multi-store mode activated',
