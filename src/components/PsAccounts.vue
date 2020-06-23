@@ -130,13 +130,12 @@
       installPsAccounts() {
         // clean errors before retry
         this.hasError = false;
+        this.installLoading = true;
 
         // if on ps before 1.7.3 just reload the page
         if (!this.validatedContext.psIs17) {
           window.location.href = this.validatedContext.psAccountsInstallLink;
         }
-
-        this.installLoading = true;
 
         fetch(this.validatedContext.psAccountsInstallLink, {
           method: 'POST',
@@ -146,9 +145,7 @@
             throw new Error('Cannot install ps_accounts module.');
           }
 
-          this.validatedContext.psAccountsIsInstalled = true;
-          this.validatedContext.psAccountsIsEnabled = true;
-          this.installLoading = false;
+          window.location.reload();
         }).catch(() => {
           this.installLoading = false;
           this.hasError = true;
@@ -157,13 +154,12 @@
       enablePsAccounts() {
         // clean errors before retry
         this.hasError = false;
+        this.enableLoading = true;
 
         // if on ps before 1.7.3 just reload the page
         if (!this.validatedContext.psIs17) {
           window.location.href = this.validatedContext.psAccountsInstallLink;
         }
-
-        this.enableLoading = true;
 
         fetch(this.validatedContext.psAccountsEnableLink, {
           method: 'POST',
