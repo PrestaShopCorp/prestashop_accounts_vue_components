@@ -18,13 +18,15 @@ export const shopGroupSchema = Joi.object().keys({
 export const userSchema = Joi.object().keys({
   email: Joi.string().email({tlds: false}).allow(null).default(null),
   emailIsValidated: Joi.boolean().default(false),
-  isSuperAdmin: Joi.boolean().required().default(true),
-}).unknown(true);
+  isSuperAdmin: Joi.boolean().required(),
+});
 
 export const contextSchema = Joi.object().keys({
+  psIs17: Joi.boolean().required(),
+  psAccountsInstallLink: Joi.string().uri().allow(null).default(null),
+  psAccountsEnableLink: Joi.string().uri().allow(null).default(null),
   psAccountsIsInstalled: Joi.boolean().required(),
   psAccountIsEnabled: Joi.boolean().required(),
-  isSuperAdmin: Joi.boolean().required(),
   currentShop: shopSchema.optional().allow(null).default(null),
   shops: Joi.array().items(shopGroupSchema).required().min(0)
     .max(128),

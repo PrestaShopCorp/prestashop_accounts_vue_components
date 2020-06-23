@@ -19,6 +19,7 @@
         <AccountNotEnabled
           v-if="!validatedContext.psAccountIsEnabled"
           :account-is-enabled="validatedContext.psAccountIsEnabled"
+          @enabled="enablePsAccounts()"
         />
         <template v-else>
           <MultiStoreSelector
@@ -107,6 +108,21 @@
         if (error) {
           this.validationErrors = error.details.map((e) => e.message);
         }
+      },
+      enablePsAccounts() {
+        if (!this.validatedContext.isPs17) {
+          window.location.href = this.validateContext.psAccountsEnableLink;
+        }
+
+        fetch(this.validateContext.psAccountsEnableLink, {
+          method: 'POST',
+        })
+          .then((data) => {
+            const res = data.json();
+            if (res.status === true) {
+              this.validatedContext.psAccountIsEnabled = true;
+            }
+          });
       },
     },
     created() {
