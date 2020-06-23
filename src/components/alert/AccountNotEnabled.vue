@@ -10,18 +10,26 @@
     </p>
     <p class="mt-2">
       <b-button
+        v-if="!isLoading"
         variant="primary"
         @click="enableEvent()"
       >
         {{ t('psaccounts.alertAccountNotEnabled.enableButton') }}
       </b-button>
+      <b-link
+        href="#"
+        disabled
+        v-else
+      >
+        {{ t('psaccounts.alertAccountNotEnabled.loading') }}
+      </b-link>
     </p>
   </b-alert>
 </template>
 
 <script>
   import Locale from '@/mixins/locale';
-  import {BAlert, BButton} from 'bootstrap-vue';
+  import {BAlert, BButton, BLink} from 'bootstrap-vue';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -33,6 +41,7 @@
     components: {
       BAlert,
       BButton,
+      BLink,
     },
     mixins: [Locale],
     props: {
@@ -40,6 +49,13 @@
        * This is the display condition (do not use v-if="...", use this prop instead).
        */
       accountIsEnabled: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+      * Useful in order to display a loader if you perform some ajax.
+      */
+      isLoading: {
         type: Boolean,
         default: false,
       },
