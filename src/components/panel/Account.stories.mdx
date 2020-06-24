@@ -1,5 +1,5 @@
 import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/blocks';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
+import { withKnobs, boolean, object, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import Account from './Account';
@@ -20,7 +20,21 @@ you in the integration section)._
 <Story name='Not connected' height='220px'>
   {{
     components: {Account},
-    template: '<Account class="m-4" />',
+    props: {
+      user: {
+        default: object('user', {
+          email: null,
+          emailIsValidated: false,
+        }),
+      },
+      isAdmin: {
+        default: boolean('isAdmin', true),
+      },
+      onboardingLink: {
+        default: text('onboardingLink', 'https://perdu.com'),
+      }
+    },
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" class="m-4" />',
   }}
 </Story>
 
@@ -43,11 +57,17 @@ if the shop was already linked to PrestaShop services from another service modul
           emailIsValidated: true,
         }),
       },
+      isAdmin: {
+        default: boolean('isAdmin', true),
+      },
+      onboardingLink: {
+        default: text('onboardingLink', 'https://perdu.com'),
+      },
     },
     methods: {
       event: action('sign-out'),
     },
-    template: '<Account :user="user" @sign-out="event" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" @sign-out="event" class="m-4" />',
   }}
 </Story>
 
@@ -64,11 +84,20 @@ If the right is missing, the button will be disabled and **a warning will be sho
   {{
     components: {Account},
     props: {
+      user: {
+        default: object('user', {
+          email: null,
+          emailIsValidated: false,
+        }),
+      },
       isAdmin: {
         default: boolean('isAdmin', false),
       },
+      onboardingLink: {
+        default: text('onboardingLink', 'https://perdu.com'),
+      },
     },
-    template: '<Account :isAdmin="isAdmin" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" class="m-4" />',
   }}
 </Story>
 
@@ -89,12 +118,18 @@ link received in is email box):
           emailIsValidated: false,
         }),
       },
+      isAdmin: {
+        default: boolean('isAdmin', true),
+      },
+      onboardingLink: {
+        default: text('onboardingLink', 'https://perdu.com'),
+      },
     },
     methods: {
       event: action('sign-out'),
       sendEmail: action('send-email'),
     },
-    template: '<Account :user="user" @sign-out="event" @send-email="sendEmail" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" @sign-out="event" @send-email="sendEmail" class="m-4" />',
   }}
 </Story>
 

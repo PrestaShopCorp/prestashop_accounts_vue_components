@@ -183,7 +183,8 @@
          * @type {Event}
          */
         this.$emit('sign-out', this.user);
-        this.user.email = '';
+        this.user.email = null;
+        this.signIn();
       },
       sendEmailConfirmation() {
         /**
@@ -202,6 +203,11 @@
       },
       userIsConnectedAndValidated() {
         return this.userIsConnected && this.userEmailIsValidated;
+      },
+    },
+    watch: {
+      'user.email': function () {
+        this.$forceUpdate();
       },
     },
   };
