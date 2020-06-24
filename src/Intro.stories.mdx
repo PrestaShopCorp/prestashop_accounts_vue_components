@@ -57,3 +57,15 @@ In this way, you will have to deal with missing pre-requisites cases, like:
 
 And then you can instantiate the [Account sub-component](?path=/docs/sub-components-connection-panels-account--not-connected)
 when these previous cases are managed.
+
+
+## Javascript Helpers
+
+In your frontend development, component integration is a first step, but your own components will need
+some javscript helpers from PrestaShop Accounts.
+
+```javascript
+import { isOnboardingCompleted } from prestashop_accounts_vue_components;
+
+const test = isOnboardingCompleted();
+```
