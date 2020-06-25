@@ -37,8 +37,9 @@ Once integrated, the component can show different cases:
     props: {
       context: {
         default: object('context', {
+          psIs17: true,
           psAccountsIsInstalled: true,
-          psAccountIsEnabled: true,
+          psAccountsIsEnabled: true,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -66,7 +67,9 @@ Once integrated, the component can show different cases:
             emailIsValidated: false,
             isSuperAdmin: true,
           },
-          onboardingLink: 'http://perdu.com'
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com'
         })
       },
     },
@@ -90,8 +93,9 @@ If the shop is in a multi-store context, the user will have a selector like this
     props: {
       context: {
         default: object('context', {
+          psIs17: true,
           psAccountsIsInstalled: true,
-          psAccountIsEnabled: true,
+          psAccountsIsEnabled: true,
           currentShop: null,
           shops: [
             {
@@ -113,7 +117,9 @@ If the shop is in a multi-store context, the user will have a selector like this
             emailIsValidated: false,
             isSuperAdmin: true,
           },
-          onboardingLink: 'http://perdu.com'
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com'
         })
       },
     },
@@ -132,8 +138,9 @@ If the shop is in a multi-store context, the user will have a selector like this
     props: {
       context: {
         default: object('context', {
+          psIs17: true,
           psAccountsIsInstalled: true,
-          psAccountIsEnabled: true,
+          psAccountsIsEnabled: true,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -168,7 +175,9 @@ If the shop is in a multi-store context, the user will have a selector like this
             emailIsValidated: false,
             isSuperAdmin: true,
           },
-          onboardingLink: 'http://perdu.com'
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com'
         })
       },
     },
@@ -190,8 +199,9 @@ his address from the link received in his mailbox.
     props: {
       context: {
         default: object('context', {
+          psIs17: true,
           psAccountsIsInstalled: true,
-          psAccountIsEnabled: true,
+          psAccountsIsEnabled: true,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -226,7 +236,9 @@ his address from the link received in his mailbox.
             emailIsValidated: true,
             isSuperAdmin: true,
           },
-          onboardingLink: 'http://perdu.com'
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com'
         })
       },
     },
@@ -248,8 +260,9 @@ You can have these different cases when the shop prerequisites are not fully val
     props: {
       context: {
         default: object('context', {
+          psIs17: true,
           psAccountsIsInstalled: false,
-          psAccountIsEnabled: true,
+          psAccountsIsEnabled: true,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -284,7 +297,9 @@ You can have these different cases when the shop prerequisites are not fully val
             emailIsValidated: true,
             isSuperAdmin: true,
           },
-          onboardingLink: 'http://perdu.com'
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com'
         })
       },
     },
@@ -300,8 +315,9 @@ You can have these different cases when the shop prerequisites are not fully val
     props: {
       context: {
         default: object('context', {
+          psIs17: true,
           psAccountsIsInstalled: true,
-          psAccountIsEnabled: false,
+          psAccountsIsEnabled: false,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -336,7 +352,9 @@ You can have these different cases when the shop prerequisites are not fully val
             emailIsValidated: true,
             isSuperAdmin: true,
           },
-          onboardingLink: 'http://perdu.com'
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com'
         })
       },
     },
@@ -346,14 +364,15 @@ You can have these different cases when the shop prerequisites are not fully val
   }}
 </Story>
 
-<Story name='No admin rights' height='340px'>
+<Story name='No admin rights' height='350px'>
   {{
     components: { PsAccounts },
     props: {
       context: {
         default: object('context', {
+          psIs17: true,
           psAccountsIsInstalled: true,
-          psAccountIsEnabled: true,
+          psAccountsIsEnabled: true,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -388,7 +407,9 @@ You can have these different cases when the shop prerequisites are not fully val
             emailIsValidated: false,
             isSuperAdmin: false,
           },
-          onboardingLink: 'http://perdu.com'
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com'
         })
       },
     },
@@ -411,8 +432,9 @@ component and the standard behavior won't let the user do anything:
     props: {
       context: {
         default: object('context', {
+          psIs17: true,
           psAccountsIsInstalled: 'true', // will pass: can be casted to boolean by Joi
-          psAccountIsEnabled: 'ptet-ben-k-non',
+          psAccountsIsEnabled: 'ptet-ben-k-non',
           currentShop: 42,
           shops: [
             {
@@ -434,7 +456,9 @@ component and the standard behavior won't let the user do anything:
             emailIsValidated: 42,
             isSuperAdmin: 0.07,
           },
-          onboardingLink: '42*'
+          onboardingLink: '42*',
+          superAdminEmail: '56',
+          ssoResendVerificationEmail: true
         })
       },
     },

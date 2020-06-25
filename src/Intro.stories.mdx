@@ -12,13 +12,16 @@ please go [here (TODO)](http://perdu.com))._
 # What for?
 
 This library provides VueJS components to integrate to the configuration page of
-your module (in the PrestaShop backoffice) if you need to have a module linked to
-PrestaShop Account). In this way, **the merchant will be able to link its PrestaShop
-account to its shop** and then as a developer you will be able to access PrestaShop Billing services.
+your module (in the PrestaShop backoffice). These components are needed if your
+module uses PrestaShop Account authentication system.
+With PrestaShop Account, we authenticate a shop with certainty and security.
+From a merchant level, PrestaShop Account enables linking a user account to a shop,
+thus authorizing a specific user account to manage the services for this shop.
 
-For a given shop that is not yet linked to PrestaShop Account, when the merchant want
-to install / activate a module that uses PrestaShop Billing services, **the module configuration page
-should show a connection box** before letting the module settings available, as this:
+For a given shop that is not yet linked to PrestaShop Account, when the merchant wants
+to install / activate a module that uses PrestaShop account authentication system, **the
+module configuration page should display a connection box** before letting the module
+settings available, as this:
 
 <Story id="sub-components-connection-panels-account--not-connected" height='220px' />
 
@@ -59,7 +62,8 @@ And then you can instantiate the [Account sub-component](?path=/docs/sub-compone
 when these previous cases are managed.
 
 
-## Javascript Helpers
+---
+# Javascript Helpers
 
 In your frontend development, component integration is a first step, but your own components will need
 some javscript helpers from PrestaShop Accounts.
