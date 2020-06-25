@@ -1,2 +1,35 @@
 # prestashop_accounts_vue_components
-Reusable vueJS components (to be published in a npm)
+
+## Community Service & PrestaShop X modules
+
+To work as a Community Service or as PrestaShop X, a module needs three parts:
+
+### [module ps_accounts](http://github.com/PrestaShopCorp/ps_accounts)
+
+* Contains all the controllers
+
+### [librairie npm](http://github.com/PrestaShopCorp/prestashop_accounts_vue_components)
+
+* Contains all the vuejs components to manage onboarding
+
+### [librairie composer](http://github.com/PrestaShopCorp/prestashop_accounts_auth)
+
+* Wraps all the calls to ps_accounts
+* Contains all the Firebase logic
+
+## Installation
+
+```bash
+yarn
+```
+
+## Usage
+
+For view storybook run
+
+```bash
+yarn start-storybook
+```
+
+and go on [local storybook](http://localhost:33199/?path=/story/introduction--page)
+or [integration storybook](https://storybook-accounts.psessentials.net/)
