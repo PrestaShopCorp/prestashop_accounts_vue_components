@@ -52,7 +52,7 @@
           <b-button
             v-if="!userIsConnected"
             class="float-right"
-            :class="{disabled: !isAdmin && !userIsConnected}"
+            :disabled="!isAdmin && !userIsConnected"
             variant="primary"
             @click="signIn()"
           >
@@ -95,13 +95,13 @@
         show
       >
         <p>{{ t('psaccounts.account.needToBeAdmin') }}.</p>
-        <p>
+        <p v-if="adminEmail">
           {{ t('psaccounts.account.pleaseContact') }}
           <b-link
             @click="sendEmailConfirmation()"
-            href="mailto:support@prestashop.com"
+            :href="'mailto:' + adminEmail"
           >
-            support@prestashop.com
+            {{ adminEmail }}
           </b-link>
         </p>
       </b-alert>
@@ -171,6 +171,24 @@
         type: String,
         required: true,
       },
+      /**
+       * The super admin email used in the wording
+       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       */
+      adminEmail: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      /**
+       * The link to sso to trigger a new verification email
+       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       */
+      resendEmailLink: {
+        type: String,
+        required: false,
+        default: null,
+      },
     },
     methods: {
       signIn() {
@@ -192,6 +210,9 @@
          * @type {Event}
          */
         this.$emit('send-email', this.user.email);
+        if (this.resendEmailLink) {
+          window.open(this.resendEmailLink, '_blank');
+        }
       },
     },
     computed: {

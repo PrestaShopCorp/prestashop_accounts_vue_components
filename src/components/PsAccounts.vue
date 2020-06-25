@@ -43,6 +43,8 @@
             :user="validatedContext.user"
             :is-admin="validatedContext.user.isSuperAdmin"
             :onboarding-link="validatedContext.onboardingLink"
+            :admin-email="validatedContext.superAdminEmail"
+            :resend-email-link="validatedContext.ssoResendVerificationEmail"
             class="mb-2"
           />
         </template>

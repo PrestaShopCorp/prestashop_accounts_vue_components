@@ -4,7 +4,7 @@ import Account from '@/components/panel/Account';
 import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
 import AccountNotEnabled from '@/components/alert/AccountNotEnabled';
 import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
-import { isOnboardingCompleted } from '@/lib/Helpers';
+import {isOnboardingCompleted} from '@/lib/Helpers';
 
 const Components = {
   PsAccounts,
