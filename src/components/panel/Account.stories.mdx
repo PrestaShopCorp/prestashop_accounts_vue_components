@@ -32,9 +32,15 @@ you in the integration section)._
       },
       onboardingLink: {
         default: text('onboardingLink', 'https://perdu.com'),
+      },
+      adminEmail: {
+        default: text('adminEmail', 'big.biss@my-shop.com'),
+      },
+      resendEmailLink: {
+        default: text('resendEmailLink', 'http://perdu.com'),
       }
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" class="m-4" />',
   }}
 </Story>
 
@@ -63,11 +69,17 @@ if the shop was already linked to PrestaShop services from another service modul
       onboardingLink: {
         default: text('onboardingLink', 'https://perdu.com'),
       },
+      adminEmail: {
+        default: text('adminEmail', 'big.biss@my-shop.com'),
+      },
+      resendEmailLink: {
+        default: text('resendEmailLink', 'http://perdu.com'),
+      }
     },
     methods: {
       event: action('sign-out'),
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" @sign-out="event" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" @sign-out="event" class="m-4" />',
   }}
 </Story>
 
@@ -96,8 +108,14 @@ If the right is missing, the button will be disabled and **a warning will be sho
       onboardingLink: {
         default: text('onboardingLink', 'https://perdu.com'),
       },
+      adminEmail: {
+        default: text('adminEmail', 'big.biss@my-shop.com'),
+      },
+      resendEmailLink: {
+        default: text('resendEmailLink', 'http://perdu.com'),
+      }
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" class="m-4" />',
   }}
 </Story>
 
@@ -124,12 +142,18 @@ link received in is email box):
       onboardingLink: {
         default: text('onboardingLink', 'https://perdu.com'),
       },
+      adminEmail: {
+        default: text('adminEmail', 'big.biss@my-shop.com'),
+      },
+      resendEmailLink: {
+        default: text('resendEmailLink', 'http://perdu.com'),
+      }
     },
     methods: {
       event: action('sign-out'),
       sendEmail: action('send-email'),
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" @sign-out="event" @send-email="sendEmail" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" @sign-out="event" @send-email="sendEmail" class="m-4" />',
   }}
 </Story>
 
@@ -143,7 +167,8 @@ _Notice: If you need to integrate the standard behavior of PS Accounts, please s
 If you need a custom integration of PS Accounts sub-components, here is the Account panel:
 
 ```html
-<Account :isAdmin="isAdmin" :user="user" @sign-out="signOutFn" @send-email="sendEmailFn" class="m-4" />
+<Account :isAdmin="isAdmin" :user="user" :onboardingLink="onboardingLink" :adminEmail="adminEmail"
+  :resendEmailLink="resendEmailLink"@sign-out="signOutFn" @send-email="sendEmailFn" class="m-4" />
 ```
 
 # Technical details
