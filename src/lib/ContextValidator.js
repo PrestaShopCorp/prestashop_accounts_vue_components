@@ -34,4 +34,8 @@ export const contextSchema = Joi.object().keys({
   onboardingLink: Joi.string().uri().optional().allow(null)
     .allow('')
     .default(null),
+  superAdminEmail: Joi.string().email({tlds: false}).allow(null).default(null),
+  ssoResendVerificationEmail: Joi.string().uri().optional().allow(null)
+    .allow('')
+    .default(null),
 }).unknown(true);
