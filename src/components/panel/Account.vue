@@ -105,6 +105,7 @@
           </b-link>
         </p>
       </b-alert>
+      <slot />
     </b-card-body>
   </b-card>
 </template>
@@ -237,5 +238,8 @@
 <style scoped>
 .flex-grow-1 {
   flex-grow: 1;
+}
+.slot-margin {
+  margin-top: 1rem;
 }
 </style>

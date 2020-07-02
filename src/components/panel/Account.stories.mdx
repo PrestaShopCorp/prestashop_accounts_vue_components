@@ -158,6 +158,43 @@ link received in is email box):
 </Story>
 
 
+## A slot inside the card
+
+If you need to integrate a slot inside the card, below the merchant account section:
+
+<Story name='Case with a slot' height='260px'>
+  {{
+    components: {Account},
+    props: {
+      user: {
+        default: object('user', {
+          email: 'merchant@my-shop.com',
+          emailIsValidated: true,
+        }),
+      },
+      isAdmin: {
+        default: boolean('isAdmin', true),
+      },
+      onboardingLink: {
+        default: text('onboardingLink', 'https://perdu.com'),
+      },
+      adminEmail: {
+        default: text('adminEmail', 'big.biss@my-shop.com'),
+      },
+      resendEmailLink: {
+        default: text('resendEmailLink', 'http://perdu.com'),
+      }
+    },
+    methods: {
+      event: action('sign-out'),
+    },
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" @sign-out="event" class="m-4"><div style="background:gray;margin-top:1.2rem;padding:0.5rem;">Put here a slot</div></Account>',
+  }}
+</Story>
+
+You still need to manage the spacing of your slot with CSS.
+
+
 ---
 # Integration
 
@@ -168,7 +205,9 @@ If you need a custom integration of PS Accounts sub-components, here is the Acco
 
 ```html
 <Account :isAdmin="isAdmin" :user="user" :onboardingLink="onboardingLink" :adminEmail="adminEmail"
-  :resendEmailLink="resendEmailLink"@sign-out="signOutFn" @send-email="sendEmailFn" class="m-4" />
+  :resendEmailLink="resendEmailLink"@sign-out="signOutFn" @send-email="sendEmailFn" class="m-4">
+  <div style="background:gray;margin-top:1.2rem;padding:0.5rem;">optional slot goes here</div>
+</Account>
 ```
 
 # Technical details

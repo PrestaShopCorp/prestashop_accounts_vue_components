@@ -46,7 +46,9 @@
             :admin-email="validatedContext.superAdminEmail"
             :resend-email-link="validatedContext.ssoResendVerificationEmail"
             class="mb-2"
-          />
+          >
+            <Billing v-if="showBilling" :billing="validatedContext.billing" />
+          </Account>
         </template>
       </template>
       <b-overlay
@@ -67,10 +69,11 @@
   import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
   import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
   import Account from '@/components/panel/Account';
+  import Billing from '@/components/panel/Billing';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
-  import {BAlert, BOverlay} from 'bootstrap-vue';
-  import {contextSchema} from '../lib/ContextValidator';
+  import { BAlert, BOverlay } from 'bootstrap-vue';
+  import { contextSchema } from '../lib/ContextValidator';
 
   /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
@@ -80,12 +83,13 @@
    * displayed (you have to manage display condition by yourself).
    */
   export default {
-    name: 'PsAccount',
+    name: 'PsAccounts',
     components: {
       AccountNotInstalled,
       AccountNotEnabled,
       MultiStoreSelector,
       Account,
+      Billing,
       BOverlay,
       BAlert,
     },
@@ -108,6 +112,13 @@
         return this.validatedContext.user.email !== null
           && this.validatedContext.user.emailIsValidated;
       },
+      showBilling() {
+        const b = this.validatedContext.billing;
+        const u = this.validatedContext.user;
+        return this.validatedContext.currentShop
+          && u && (u.email !== null) && u.emailIsValidated
+          && b && ((b.currentPlan && b.currentPlan !== null) || (b.plans && b.plans.length > 0));
+      }
     },
     data() {
       return {

@@ -36,5 +36,23 @@ export default {
       needToBeAdmin: 'In order to proceed, you have to be administrator of the shop',
       pleaseContact: 'Please contact',
     },
+    billing: {
+      upgradePlanButton: 'Upgrade plan',
+      upgradePlanLink: 'See plans',
+      currentPlan: 'Current plan',
+      paymentMethod: 'Payment method',
+      address: 'Billing address',
+      priceFree: 'FREE',
+      nextInvoicingDate: 'Next invoicing date:',
+      periodicity: {
+        monthly: 'month',
+        yearly: 'year',
+      },
+      editPaymentMethod: 'Edit',
+      editAddress: 'Edit',
+      noAddress: 'Unknown',
+      noPaymentMethod: 'Unknown',
+      expires: 'Expires',
+    }
   },
 };
