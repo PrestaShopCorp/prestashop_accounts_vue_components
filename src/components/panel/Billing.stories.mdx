@@ -1,0 +1,29 @@
+import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/blocks';
+import { withKnobs, boolean, object, text } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
+
+import Billing from './Billing';
+
+<Meta title="Sub-Components|Panels/Billing" component={Billing} decorators={[withKnobs]} />
+
+# Billing panel behavior
+
+TODO
+
+---
+# Integration
+
+_Notice: If you need to integrate the standard behavior of PS Accounts, please see the
+[`PsAccounts` component in the integration section](?path=/docs/integration-psaccounts-panel--connected)._
+
+If you need a custom integration of PS Accounts sub-components, here is the Billing panel:
+
+```html
+<Billing v-if="showBilling" :billing="context.billing" @upgrade-plan="upgradePlanClicked()"
+  @edit-payment-method="editClicked()" @edit-address="editClicked()" />
+```
+
+# Technical details
+
+<Description of={Billing} />
+<Props of={Billing} />

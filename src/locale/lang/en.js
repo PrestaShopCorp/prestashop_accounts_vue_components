@@ -36,6 +36,8 @@ export default {
       needToBeAdmin: 'In order to proceed, you have to be administrator of the shop',
       pleaseContact: 'Please contact',
     },
+  },
+  billing: {
     billing: {
       upgradePlanButton: 'Upgrade plan',
       upgradePlanLink: 'See plans',
@@ -53,6 +55,7 @@ export default {
       noAddress: 'Unknown',
       noPaymentMethod: 'Unknown',
       expires: 'Expires',
-    }
+    },
+    priceFormat: '{currency} {amount}'
   },
 };

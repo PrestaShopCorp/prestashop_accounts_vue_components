@@ -47,7 +47,7 @@
             :resend-email-link="validatedContext.ssoResendVerificationEmail"
             class="mb-2"
           >
-            <Billing v-if="showBilling" :billing="validatedContext.billing" />
+            <Billing v-if="showBilling" :billing="validatedContext.billing" @upgrade-plan="goToPlans()" />
           </Account>
         </template>
       </template>
@@ -188,6 +188,9 @@
           this.enableLoading = false;
           this.hasError = true;
         });
+      },
+      goToPlans() {
+        alert('pouet'); // TODO : open Plans component
       },
     },
     created() {

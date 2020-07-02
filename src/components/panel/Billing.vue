@@ -7,7 +7,7 @@
         variant="primary"
         @click="upgradePlan()"
       >
-        {{ t('psaccounts.billing.upgradePlanButton') }}
+        {{ t('billing.billing.upgradePlanButton') }}
       </b-button>
       <b-link
         v-if="showUpgradeLink"
@@ -15,21 +15,21 @@
         variant="primary"
         @click="upgradePlan()"
       >
-        {{ t('psaccounts.billing.upgradePlanLink') }}
+        {{ t('billing.billing.upgradePlanLink') }}
       </b-link>
-      <h4 class="gray-title">{{ t('psaccounts.billing.currentPlan') }}</h4>
+      <h4 class="gray-title">{{ t('billing.billing.currentPlan') }}</h4>
       <span class="plan-name">{{ billing.currentPlan.name }}</span>{{ currentPlanPriceFormatted }}
       <div v-if="nextInvoicingDate" class="next-invoice-date">
-        {{ t('psaccounts.billing.nextInvoicingDate') }} &nbsp;{{ nextInvoicingDate }}
+        {{ t('billing.billing.nextInvoicingDate') }} &nbsp;{{ nextInvoicingDate }}
       </div>
     </div>
 
     <div v-if="showPaymentMethod" class="mt-2 p-2 pr-3 section">
       <b-link class="float-right edit-link" @click="editPaymentMethod()">
         <b-icon-pencil/>
-        &nbsp;{{ t('psaccounts.billing.editPaymentMethod') }}
+        &nbsp;{{ t('billing.billing.editPaymentMethod') }}
       </b-link>
-      <h4 class="gray-title">{{ t('psaccounts.billing.paymentMethod') }}</h4>
+      <h4 class="gray-title">{{ t('billing.billing.paymentMethod') }}</h4>
 
       <template v-if="billing.paymentMethod">
         <span class="card-type">
@@ -55,13 +55,13 @@
           •••• {{ billing.paymentMethod.lastFourNumbers }}
         </span>
         <span class="card-expiry">
-          {{ t('psaccounts.billing.expires') }}
+          {{ t('billing.billing.expires') }}
           {{ billing.paymentMethod.expiry }}
         </span>
       </template>
 
       <template v-else>
-        {{ t('psaccounts.billing.noPaymentMethod') }}
+        {{ t('billing.billing.noPaymentMethod') }}
       </template>
 
     </div>
@@ -69,9 +69,9 @@
     <div v-if="showAddress" class="mt-2 p-2 pr-3 section">
       <b-link class="float-right edit-link" @click="editPaymentMethod()">
         <b-icon-pencil/>
-        &nbsp;{{ t('psaccounts.billing.editAddress') }}
+        &nbsp;{{ t('billing.billing.editAddress') }}
       </b-link>
-      <h4 class="gray-title">{{ t('psaccounts.billing.address') }}</h4>
+      <h4 class="gray-title">{{ t('billing.billing.address') }}</h4>
       <span v-html="(billing && billing.address) || t('psaccounts.billing.noAddress')" />
     </div>
   </div>
@@ -87,13 +87,14 @@
   } from 'bootstrap-vue';
 
   const formatDate = (ts) => {
-    return new Date(ts).toDateString(); // TODO
+    return new Date(ts).toDateString(); // TODO: no VueI18n available ! need to dep another lib to do it!
   };
 
   const formatPrice = (price, periodicity, t) => {
     const amount = Number(price.taxIncluded / 100);
-    const period = t(`psaccounts.billing.periodicity.${periodicity}`);
-    return `${price.currency} ${amount.toFixed(2)} / ${period}`; // TODO
+    const period = t(`billing.billing.periodicity.${periodicity}`);
+    const fullPrice = t('billing.priceFormat', { currency: price.currency, amount: amount.toFixed(2) });
+    return `${fullPrice} / ${period}`;
   };
 
   /**
@@ -121,13 +122,25 @@
     },
     methods: {
       upgradePlan() {
-        alert('pouet'); // TODO
+        /**
+         * TODO
+         * @type {Event}
+         */
+        this.$emit('upgrade-plan');
       },
       editPaymentMethod() {
-        alert('pif'); // TODO
+        /**
+         * TODO
+         * @type {Event}
+         */
+        this.$emit('edit-payment-method');
       },
       editAddress() {
-        alert('poum'); // TODO
+        /**
+         * TODO
+         * @type {Event}
+         */
+        this.$emit('edit-address');
       },
     },
     computed: {
@@ -175,7 +188,7 @@
       currentPlanPriceFormatted() {
         const cp = this.billing.currentPlan;
         if (!cp || !cp.price || !cp.price.taxIncluded || cp.price.taxIncluded === 0) {
-          return this.t('psaccounts.billing.priceFree');
+          return this.t('billing.billing.priceFree');
         }
         return formatPrice(cp.price, cp.periodicity, this.t);
       }
