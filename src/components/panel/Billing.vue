@@ -10,7 +10,7 @@
         {{ t('billing.billing.upgradePlanButton') }}
       </b-button>
       <b-link
-        v-if="showUpgradeLink"
+        v-else
         class="float-right see-plans-link"
         variant="primary"
         @click="upgradePlan()"
@@ -113,7 +113,8 @@
     },
     props: {
       /**
-       * TODO
+       * The billing object, generated
+       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
        */
       billing: {
         type: Object,
@@ -123,21 +124,21 @@
     methods: {
       upgradePlan() {
         /**
-         * TODO
+         * Emitted when the user click to display available plans.
          * @type {Event}
          */
         this.$emit('upgrade-plan');
       },
       editPaymentMethod() {
         /**
-         * TODO
+         * Emitted when the user want to edit its payment method (credit card).
          * @type {Event}
          */
         this.$emit('edit-payment-method');
       },
       editAddress() {
         /**
-         * TODO
+         * Emitted when the user want to edit its Billing address.
          * @type {Event}
          */
         this.$emit('edit-address');
@@ -166,16 +167,7 @@
           return false;
         }
         const cp = this.billing.currentPlan;
-        const existsUpperPlan = !!(this.billing.plans.find(p => (p.level > cp.level && p.price && p.price.taxIncluded > 0)));
-        return existsUpperPlan && (!cp.price || !(cp.price.taxIncluded > 0));
-      },
-      showUpgradeLink() {
-        if (!this.showActivePlan || !this.billing.plans || !(this.billing.plans.length > 0)) {
-          return false;
-        }
-        const cp = this.billing.currentPlan;
-        const existsUpperPlan = !!(this.billing.plans.find(p => (p.level > cp.level && p.price && p.price.taxIncluded > 0)));
-        return existsUpperPlan && cp.price && cp.price.taxIncluded > 0;
+        return !!(this.billing.plans.find(p => (p.level > cp.level && p.price && p.price.taxIncluded > 0)));
       },
       nextInvoicingDate() {
         if (!this.billing || !this.billing.currentPlan) {
