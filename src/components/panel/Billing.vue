@@ -67,7 +67,7 @@
     </div>
 
     <div v-if="showAddress" class="mt-2 p-2 pr-3 section">
-      <b-link class="float-right edit-link" @click="editPaymentMethod()">
+      <b-link class="float-right edit-link" @click="editAddress()">
         <b-icon-pencil/>
         &nbsp;{{ t('billing.billing.editAddress') }}
       </b-link>
