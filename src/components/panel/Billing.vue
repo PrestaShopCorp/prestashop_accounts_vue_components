@@ -175,7 +175,7 @@
         }
         const cp = this.billing.currentPlan;
 
-        return cp && cp.nextPeriodStartDate && formatDate(cp.nextPeriodStartDate);
+        return cp && cp.nextPeriodStartDate && formatDate(cp.nextPeriodStartDate * 1000);
       },
       currentPlanPriceFormatted() {
         const cp = this.billing.currentPlan;
