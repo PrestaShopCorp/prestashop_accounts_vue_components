@@ -1,4 +1,4 @@
-import defaultLang from '@/locale/lang/en';
+import defaultLang from '@/locale/lang/en.json';
 import Vue from 'vue';
 import deepmerge from 'deepmerge';
 import Format from './format';

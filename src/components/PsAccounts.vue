@@ -49,7 +49,9 @@
             :resend-email-link="validatedContext.ssoResendVerificationEmail"
             class="mb-2"
           >
-            <Billing v-if="showBilling" :billing="validatedContext.billing"
+            <Billing
+              v-if="showBilling"
+              :billing="validatedContext.billing"
               @upgrade-plan="goToPlans()"
               @edit-payment-method="alert('Not yet implemented!')"
               @edit-address="alert('Not yet implemented!')"
@@ -68,7 +70,12 @@
       <slot name="customBody" />
     </template>
 
-    <Plans v-else :billing="validatedContext.billing" @back="goToHome()" @next="(plan) => goToTunnel(plan)" />
+    <Plans
+      v-else
+      :billing="validatedContext.billing"
+      @back="goToHome()"
+      @next="(plan) => goToTunnel(plan)"
+    />
   </div>
 </template>
 
@@ -81,8 +88,8 @@
   import Plans from '@/components/panel/Plans';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
-  import { BAlert, BOverlay } from 'bootstrap-vue';
-  import { contextSchema } from '../lib/ContextValidator';
+  import {BAlert, BOverlay} from 'bootstrap-vue';
+  import {contextSchema} from '../lib/ContextValidator';
 
   /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
@@ -124,7 +131,7 @@
         type: Boolean,
         required: false,
         default: false,
-      }
+      },
     },
     computed: {
       userIsConnectedAndEmailIsValidated() {
@@ -141,7 +148,7 @@
       canShowPlans() {
         const b = this.validatedContext.billing;
         return b.plans && (b.plans.length > 0);
-      }
+      },
     },
     data() {
       return {
@@ -222,11 +229,11 @@
       goToTunnel(plan) {
         this.showPlans = false;
         // TODO: modal display, with a new PlanTunnel component inside, for given plan
-        setTimeout(() => alert('Not yet implemented: ' + plan), 400);
+        setTimeout(() => alert(`Not yet implemented: ${plan}`), 400);
       },
       alert(t) {
         alert(t);
-      }
+      },
     },
     created() {
       this.validateContext();
@@ -237,7 +244,7 @@
       },
       forceShowPlans(newValue) {
         this.showPlans = newValue;
-      }
+      },
     },
   };
 </script>

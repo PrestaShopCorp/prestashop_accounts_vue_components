@@ -1,8 +1,15 @@
 <template>
   <div style="background-color:yellow;padding:2rem;">
-    PLANS ! Page TODO<br/><br/>
-    <b-button @click="back()">BACK !</b-button>
-    <b-button class="float-right" @click="next(42)">PAY for plan 42!</b-button>
+    PLANS ! Page TODO<br><br>
+    <b-button @click="back()">
+      BACK !
+    </b-button>
+    <b-button
+      class="float-right"
+      @click="next(42)"
+    >
+      PAY for plan 42!
+    </b-button>
   </div>
 </template>
 
@@ -47,7 +54,7 @@
          * @type {Event}
          */
         this.$emit('next', plan);
-      }
+      },
     },
     computed: {
     },
