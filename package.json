@@ -11,7 +11,8 @@
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook",
-    "export-translations": "node ./exporter.js"
+    "export-translations": "node ./exporter.js",
+    "import-translations": "node ./importer.js"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
@@ -36,6 +37,7 @@
     "@vue/cli-service": "~4.3.0",
     "babel-eslint": "^10.1.0",
     "babel-preset-vue": "^2.0.2",
+    "csv-parse": "^4.10.1",
     "csv-stringify": "^5.5.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
@@ -45,6 +47,8 @@
     "file-loader": "^6.0.0",
     "flat": "^5.0.0",
     "node-sass": "^4.14.0",
+    "prompt-confirm": "^2.0.4",
+    "recursive-diff": "^1.0.7",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   },

@@ -1,7 +1,8 @@
 const flatten = require('flat');
 const stringify = require('csv-stringify');
+const fs = require('fs');
 
-const exportAll = (defaultLang, otherLanguages) => {
+const exportAll = (defaultLang, otherLanguages, destination) => {
     // Flatten default language, and take keys
     defaultLang = flatten(defaultLang);
     const keys = Object.keys(defaultLang);
@@ -18,7 +19,7 @@ const exportAll = (defaultLang, otherLanguages) => {
     });
 
     // Add headers
-    let headers = ['keys (do not modify them)', 'default'];
+    let headers = ['keys', 'default'];
     otherLanguagesLabels.forEach((l) => headers = headers.concat(l));
     all = [headers].concat(all);
 
@@ -31,7 +32,7 @@ const exportAll = (defaultLang, otherLanguages) => {
         console.error(err);
         process.exit(1);
       }
-      console.log(output);
+      fs.writeFileSync(destination, output, { encoding: 'utf8' });
     });
 };
 
@@ -39,4 +40,4 @@ exportAll(require('./src/locale/lang/en.json'), {
   // fr: require('./src/locale/lang/fr.json'),
   // it: require('./src/locale/lang/it.json'),
   // es: require('./src/locale/lang/es.json')
-});
+}, process.argv[process.argv.length - 1] || 'translations.csv');
