@@ -65,7 +65,7 @@ const importAll = (source) => {
     }, {}));
 
     // Ask to continue or abort
-    const confirm = new Confirm({
+    new Confirm({
       name: 'continue',
       message: 'Continue and apply these changes?',
       default: false
