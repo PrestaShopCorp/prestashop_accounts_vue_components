@@ -115,8 +115,7 @@
     BIconCreditCard,
   } from 'bootstrap-vue';
 
-  const formatDate = (ts) => new Date(ts).toDateString();
-  // TODO: no VueI18n available ! need to dep another lib to do it!
+  const formatDate = (ts) => new Date(ts).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 
   const formatPrice = (price, periodicity, t) => {
     const amount = Number(price.taxIncluded / 100);
