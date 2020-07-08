@@ -105,6 +105,7 @@
           </b-link>
         </p>
       </b-alert>
+      <slot />
     </b-card-body>
   </b-card>
 </template>
@@ -153,7 +154,7 @@
       },
       /**
        * The user object, generated
-       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
        */
       user: {
         type: Object,
@@ -165,7 +166,7 @@
       },
       /**
        * The onboarding link, generated
-       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
        */
       onboardingLink: {
         type: String,
@@ -173,7 +174,7 @@
       },
       /**
        * The super admin email used in the wording
-       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
        */
       adminEmail: {
         type: String,
@@ -182,7 +183,7 @@
       },
       /**
        * The link to sso to trigger a new verification email
-       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
        */
       resendEmailLink: {
         type: String,
@@ -237,5 +238,8 @@
 <style scoped>
 .flex-grow-1 {
   flex-grow: 1;
+}
+.slot-margin {
+  margin-top: 1rem;
 }
 </style>

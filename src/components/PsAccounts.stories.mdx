@@ -243,10 +243,15 @@ his address from the link received in his mailbox.
       },
     },
     template: '<PsAccounts :context="context" class="m-4">' +
-      '<template v-slot:body>- I am connected -</template>' +
+      '<template v-slot:body>- Module configuration slot -</template>' +
     '</PsAccounts>',
   }}
 </Story>
+
+Once the merchant has successfully linked his shop, the module should give
+access to the merchant to its configuration (onboarding panel under PrestaShop
+Account panel, configuration tabs...). These features don't have to be
+accessible until the merchant is done with PrestaShop account onboarding.
 
 
 ---
@@ -489,3 +494,352 @@ Let's integrate the component itself:
 
 <Description of={PsAccounts} />
 <Props of={PsAccounts} />
+
+
+---
+# Integration with plans
+
+If the module offers different plans to subscribe, then the current plan will be shown
+with possibilities to upgrade plan.
+
+Case with a free plan, with possibility to upgrade to paying plans:
+
+<Story name='Connected with a free plan' height='340px'>
+  {{
+    components: { PsAccounts },
+    props: {
+      context: {
+        default: object('context', {
+          psIs17: true,
+          psAccountsIsInstalled: true,
+          psAccountsIsEnabled: true,
+          currentShop: {
+            id: 1,
+            name: 'PrestaShop',
+            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+            domain: 'my-domain.com',
+            domainSsl: 'my-secure-domain.com',
+          },
+          shops: [
+            {
+              id: 1,
+              name: 'Default',
+              shops: [
+                {
+                  id: 1,
+                  name: 'PrestaShop',
+                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+                  domain: 'my-domain.com',
+                  domainSsl: 'my-secure-domain.com',
+                },
+              ],
+            },
+          ],
+          user: {
+            email: 'merchant@my-shop.com',
+            emailIsValidated: true,
+            isSuperAdmin: true,
+          },
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com',
+          billing: {
+            currentPlan: {
+              id: '1234567',
+              level: 42,
+              name: 'Base plan',
+              price: null,
+              periodicity: 'monthly',
+              recommended: false,
+            },
+            plans: [
+              {
+                id: '1234567',
+                level: 42,
+                name: 'Base plan',
+                price: null,
+                periodicity: 'monthly',
+                recommended: false
+              },
+              {
+                id: '1234568',
+                level: 45,
+                name: 'Upper plan',
+                price: { taxIncluded: 1699, currency: '€' },
+                periodicity: 'monthly',
+                recommended: false
+              }
+            ],
+            address: '12 Rue d\'Amsterdam, 75019 Paris',
+            paymentMethod: {
+              cardType: 'mastercard',
+              lastFourNumbers: '4567',
+              expiry: '12/2026',
+            },
+          }
+        })
+      },
+    },
+    template: '<PsAccounts :context="context" class="m-4">' +
+      '<template v-slot:body>- Module configuration slot -</template>' +
+    '</PsAccounts>',
+  }}
+</Story>
+
+
+Case with paying plan, with possibility to upgrade to more expensive plans:
+
+<Story name='Connected with a paying plan' height='470px'>
+  {{
+    components: { PsAccounts },
+    props: {
+      context: {
+        default: object('context', {
+          psIs17: true,
+          psAccountsIsInstalled: true,
+          psAccountsIsEnabled: true,
+          currentShop: {
+            id: 1,
+            name: 'PrestaShop',
+            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+            domain: 'my-domain.com',
+            domainSsl: 'my-secure-domain.com',
+          },
+          shops: [
+            {
+              id: 1,
+              name: 'Default',
+              shops: [
+                {
+                  id: 1,
+                  name: 'PrestaShop',
+                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+                  domain: 'my-domain.com',
+                  domainSsl: 'my-secure-domain.com',
+                },
+              ],
+            },
+          ],
+          user: {
+            email: 'merchant@my-shop.com',
+            emailIsValidated: true,
+            isSuperAdmin: true,
+          },
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com',
+          billing: {
+            currentPlan: {
+              id: '1234567',
+              level: 42,
+              name: 'Base plan',
+              price: { taxIncluded: 1299, currency: '€' },
+              periodicity: 'monthly',
+              recommended: false,
+              nextPeriodStartDate: '1614680101'
+            },
+            plans: [
+              {
+                id: '1234567',
+                level: 42,
+                name: 'Base plan',
+                price: { taxIncluded: 1299, currency: '€' },
+                periodicity: 'monthly',
+                recommended: false
+              },
+              {
+                id: '1234568',
+                level: 45,
+                name: 'Upper plan',
+                price: { taxIncluded: 1699, currency: '€' },
+                periodicity: 'monthly',
+                recommended: false
+              }
+            ],
+            address: '12 Rue d\'Amsterdam, 75019 Paris',
+            paymentMethod: {
+              cardType: 'mastercard',
+              lastFourNumbers: '4567',
+              expiry: '12/2026',
+            },
+          }
+        })
+      },
+    },
+    template: '<PsAccounts :context="context" class="m-4">' +
+      '<template v-slot:body>- Module configuration slot -</template>' +
+    '</PsAccounts>',
+  }}
+</Story>
+
+
+Case with paying plan, without possibility to upgrade to more expensive plan:
+
+<Story name='Connected with highest paying plan' height='470px'>
+  {{
+    components: { PsAccounts },
+    props: {
+      context: {
+        default: object('context', {
+          psIs17: true,
+          psAccountsIsInstalled: true,
+          psAccountsIsEnabled: true,
+          currentShop: {
+            id: 1,
+            name: 'PrestaShop',
+            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+            domain: 'my-domain.com',
+            domainSsl: 'my-secure-domain.com',
+          },
+          shops: [
+            {
+              id: 1,
+              name: 'Default',
+              shops: [
+                {
+                  id: 1,
+                  name: 'PrestaShop',
+                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+                  domain: 'my-domain.com',
+                  domainSsl: 'my-secure-domain.com',
+                },
+              ],
+            },
+          ],
+          user: {
+            email: 'merchant@my-shop.com',
+            emailIsValidated: true,
+            isSuperAdmin: true,
+          },
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com',
+          billing: {
+            currentPlan: {
+              id: '1234568',
+              level: 45,
+              name: 'Upper plan',
+              price: { taxIncluded: 1699, currency: '€' },
+              periodicity: 'monthly',
+              recommended: false,
+              nextPeriodStartDate: '1614680101'
+            },
+            plans: [
+              {
+                id: '1234567',
+                level: 42,
+                name: 'Base plan',
+                price: { taxIncluded: 1299, currency: '€' },
+                periodicity: 'monthly',
+                recommended: false
+              },
+              {
+                id: '1234568',
+                level: 45,
+                name: 'Upper plan',
+                price: { taxIncluded: 1699, currency: '€' },
+                periodicity: 'monthly',
+                recommended: false
+              }
+            ],
+            address: '12 Rue d\'Amsterdam, 75019 Paris',
+            paymentMethod: {
+              cardType: 'mastercard',
+              lastFourNumbers: '4567',
+              expiry: '12/2026',
+            },
+          }
+        })
+      },
+    },
+    template: '<PsAccounts :context="context" class="m-4">' +
+      '<template v-slot:body>- Module configuration slot -</template>' +
+    '</PsAccounts>',
+  }}
+</Story>
+
+
+Display when texts are too long:
+
+<Story name='Connected with long names plans' height='520px'>
+  {{
+    components: { PsAccounts },
+    props: {
+      context: {
+        default: object('context', {
+          psIs17: true,
+          psAccountsIsInstalled: true,
+          psAccountsIsEnabled: true,
+          currentShop: {
+            id: 1,
+            name: 'PrestaShop',
+            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+            domain: 'my-domain.com',
+            domainSsl: 'my-secure-domain.com',
+          },
+          shops: [
+            {
+              id: 1,
+              name: 'Default',
+              shops: [
+                {
+                  id: 1,
+                  name: 'PrestaShop',
+                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+                  domain: 'my-domain.com',
+                  domainSsl: 'my-secure-domain.com',
+                },
+              ],
+            },
+          ],
+          user: {
+            email: 'merchant@my-shop.com',
+            emailIsValidated: true,
+            isSuperAdmin: true,
+          },
+          onboardingLink: 'http://perdu.com',
+          superAdminEmail: 'big.boss@my-shop.com',
+          ssoResendVerificationEmail: 'http://perdu.com',
+          billing: {
+            currentPlan: {
+              id: '1234567',
+              level: 42,
+              name: 'Standard medium offer with standard features that fit basic needs but not the premium features anyway',
+              price: { taxIncluded: 678999, currency: 'USD' },
+              periodicity: 'monthly',
+              recommended: false,
+              nextPeriodStartDate: '1614680101'
+            },
+            plans: [
+              {
+                id: '1234567',
+                level: 42,
+                name: 'Standard medium offer with standard features that fit basic needs but not the premium features anyway',
+                price: { taxIncluded: 678999, currency: 'USD' },
+                periodicity: 'monthly',
+                recommended: false
+              },
+              {
+                id: '1234568',
+                level: 45,
+                name: 'Upper plan with golden premium features that you will never see elsewhere',
+                price: { taxIncluded: 999999, currency: '€' },
+                periodicity: 'monthly',
+                recommended: false
+              }
+            ],
+            address: '12 bis Rue d\'Amsterdam, 2nd floor, first door on the left, near the little restaurant that serves yummy sushis, 75019 Paris - Cedex 45678 - France',
+            paymentMethod: {
+              cardType: 'mastercard',
+              lastFourNumbers: '4567',
+              expiry: '12/2026',
+            },
+          }
+        })
+      },
+    },
+    template: '<PsAccounts :context="context" class="m-4">' +
+      '<template v-slot:body>- Module configuration slot -</template>' +
+    '</PsAccounts>',
+  }}
+</Story>

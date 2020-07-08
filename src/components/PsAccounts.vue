@@ -10,6 +10,7 @@
         {{ t('psaccounts.accountManager.errorInstallEnable') }}
       </p>
     </b-alert>
+
     <b-alert
       v-if="validationErrors && validationErrors.length"
       variant="danger"
@@ -19,7 +20,8 @@
         &lt;PsAccounts&gt; integration: Given context is invalid: {{ validationErrors.join(';') }}
       </p>
     </b-alert>
-    <template v-else>
+
+    <template v-else-if="!showPlans || !canShowPlans">
       <AccountNotInstalled
         v-if="!validatedContext.psAccountsIsInstalled"
         :account-is-installed="validatedContext.psAccountsIsInstalled"
@@ -46,7 +48,15 @@
             :admin-email="validatedContext.superAdminEmail"
             :resend-email-link="validatedContext.ssoResendVerificationEmail"
             class="mb-2"
-          />
+          >
+            <Billing
+              v-if="showBilling"
+              :billing="validatedContext.billing"
+              @upgrade-plan="goToPlans()"
+              @edit-payment-method="alert('Not yet implemented!')"
+              @edit-address="alert('Not yet implemented!')"
+            />
+          </Account>
         </template>
       </template>
       <b-overlay
@@ -59,6 +69,13 @@
       </b-overlay>
       <slot name="customBody" />
     </template>
+
+    <Plans
+      v-else
+      :billing="validatedContext.billing"
+      @back="goToHome()"
+      @next="(plan) => goToTunnel(plan)"
+    />
   </div>
 </template>
 
@@ -67,6 +84,8 @@
   import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
   import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
   import Account from '@/components/panel/Account';
+  import Billing from '@/components/panel/Billing';
+  import Plans from '@/components/panel/Plans';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
   import {BAlert, BOverlay} from 'bootstrap-vue';
@@ -80,12 +99,14 @@
    * displayed (you have to manage display condition by yourself).
    */
   export default {
-    name: 'PsAccount',
+    name: 'PsAccounts',
     components: {
       AccountNotInstalled,
       AccountNotEnabled,
       MultiStoreSelector,
       Account,
+      Billing,
+      Plans,
       BOverlay,
       BAlert,
     },
@@ -93,7 +114,7 @@
     props: {
       /**
        * The whole context object given
-       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
        * If left empty (by default), the context will be retrieved from JS global
        * vars automatically.
        */
@@ -102,11 +123,31 @@
         required: false,
         default: () => context,
       },
+      /**
+       * A way to force plans page display (if any plan is available) directly at component boot.
+       * By default, false to let normal workflow to be displayed.
+       */
+      forceShowPlans: {
+        type: Boolean,
+        required: false,
+        default: false,
+      },
     },
     computed: {
       userIsConnectedAndEmailIsValidated() {
         return this.validatedContext.user.email !== null
           && this.validatedContext.user.emailIsValidated;
+      },
+      showBilling() {
+        const b = this.validatedContext.billing;
+        const u = this.validatedContext.user;
+        return this.validatedContext.currentShop
+          && u && (u.email !== null) && u.emailIsValidated
+          && b && ((b.currentPlan && b.currentPlan !== null) || (b.plans && b.plans.length > 0));
+      },
+      canShowPlans() {
+        const b = this.validatedContext.billing;
+        return b.plans && (b.plans.length > 0);
       },
     },
     data() {
@@ -116,6 +157,7 @@
         installLoading: false,
         enableLoading: false,
         hasError: false,
+        showPlans: this.forceShowPlans || false,
       };
     },
     methods: {
@@ -178,6 +220,20 @@
           this.hasError = true;
         });
       },
+      goToPlans() {
+        this.showPlans = true;
+      },
+      goToHome() {
+        this.showPlans = false;
+      },
+      goToTunnel(plan) {
+        this.showPlans = false;
+        // TODO: modal display, with a new PlanTunnel component inside, for given plan
+        setTimeout(() => alert(`Not yet implemented: ${plan}`), 400);
+      },
+      alert(t) {
+        alert(t);
+      },
     },
     created() {
       this.validateContext();
@@ -185,6 +241,9 @@
     watch: {
       context() {
         this.validateContext();
+      },
+      forceShowPlans(newValue) {
+        this.showPlans = newValue;
       },
     },
   };

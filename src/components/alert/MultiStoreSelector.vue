@@ -54,7 +54,7 @@
     props: {
       /**
        * The shops object, generated
-       * [by prestashop\_accounts\_auth library presenter function](http://perdu.com).
+       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
        */
       shops: {
         type: Array,

@@ -1,0 +1,205 @@
+import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/blocks';
+import { withKnobs, boolean, object, text } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
+
+import Billing from './Billing';
+
+<Meta title="Sub-Components|Panels/Billing" component={Billing} decorators={[withKnobs]} />
+
+# Billing panel behavior
+
+The `Billing` component is here to show the **actual module plan** (free or paying) the shop subscribed,
+and to **allow the user to upgrade to an upper plan** (paying). If the actual plan is a paying one, the user
+has already gave its payment method to our partner, so **the payment method used and the billing address are shown**.
+
+_Notice: If context conditions or pre-requisites are not filled, alert messages should be shown (please
+see in the Alerts components section, or use the main component `PsAccounts` that does these checks for
+you in the integration section)._
+
+
+This component should not be displayed when there is no plans available, NOR when the module is not fully
+set (the current plan free or not, is not subscribed yet). At the end of the module setting, the base plan
+should be subscribed by the module (through the helper function of prestashop\_accounts\_auth library).
+
+
+---
+## The shop subscribed to a free plan (the Base one)
+
+<Story name='Free plan' height='120px'>
+  {{
+    components: {Billing},
+    props: {
+      billing: {
+        default: object('billing', {
+          currentPlan: {
+            id: '1234567',
+            level: 42,
+            name: 'My Base plan',
+            price: null,
+            periodicity: 'monthly',
+            recommended: false
+          },
+          plans: [
+            {
+              id: '1234567',
+              level: 42,
+              name: 'My Base plan',
+              price: null,
+              periodicity: 'monthly',
+              recommended: false
+            },
+            {
+              id: '1234568',
+              level: 45,
+              name: 'My Upper plan',
+              price: { taxIncluded: 1699, currency: '€' },
+              periodicity: 'monthly',
+              recommended: true
+            }
+          ],
+          address: '12 Rue d\'Amsterdam, 75019 Paris',
+          paymentMethod: {
+            cardType: 'mastercard',
+            lastFourNumbers: '4567',
+            expiry: '12/2026',
+          },
+        }),
+      },
+    },
+    methods: {
+      upgradePlanClicked: action('upgrade-plan'),
+      editPaymentMethodClicked: action('edit-payment-method'),
+      editAddressClicked: action('edit-address')
+    },
+    template: '<Billing :billing="billing" @upgrade-plan="upgradePlanClicked" @edit-payment-method="editPaymentMethodClicked" @edit-address="editAddressClicked" class="m-4" />',
+  }}
+</Story>
+
+
+---
+## The shop subscribed to a paying plan
+
+<Story name='Paying plan' height='300px'>
+  {{
+    components: {Billing},
+    props: {
+      billing: {
+        default: object('billing', {
+          currentPlan: {
+            id: '1234567',
+            level: 42,
+            name: 'My Base plan',
+            price: { taxIncluded: 999, currency: '€' },
+            periodicity: 'monthly',
+            recommended: false,
+            nextPeriodStartDate: '1614680101',
+          },
+          plans: [
+            {
+              id: '1234567',
+              level: 42,
+              name: 'My Base plan',
+              price: { taxIncluded: 999, currency: '€' },
+              periodicity: 'monthly',
+              recommended: false
+            },
+            {
+              id: '1234568',
+              level: 45,
+              name: 'My Upper plan',
+              price: { taxIncluded: 1699, currency: '€' },
+              periodicity: 'monthly',
+              recommended: true
+            }
+          ],
+          address: '12 Rue d\'Amsterdam, 75019 Paris',
+          paymentMethod: {
+            cardType: 'mastercard',
+            lastFourNumbers: '4567',
+            expiry: '12/2026',
+          },
+        }),
+      },
+    },
+    methods: {
+      upgradePlanClicked: action('upgrade-plan'),
+      editPaymentMethodClicked: action('edit-payment-method'),
+      editAddressClicked: action('edit-address')
+    },
+    template: '<Billing :billing="billing" @upgrade-plan="upgradePlanClicked" @edit-payment-method="editPaymentMethodClicked" @edit-address="editAddressClicked" class="m-4" />',
+  }}
+</Story>
+
+
+---
+## The shop subscribed to the highest plan
+
+<Story name='Highest plan' height='300px'>
+ {{
+   components: {Billing},
+   props: {
+     billing: {
+       default: object('billing', {
+         currentPlan: {
+           id: '1234567',
+           level: 45,
+           name: 'My Upper plan',
+           price: { taxIncluded: 1699, currency: '€' },
+           periodicity: 'monthly',
+           recommended: true,
+           nextPeriodStartDate: '1614680101',
+         },
+         plans: [
+           {
+             id: '1234567',
+             level: 42,
+             name: 'My Base plan',
+             price: { taxIncluded: 999, currency: '€' },
+             periodicity: 'monthly',
+             recommended: false
+           },
+           {
+             id: '1234568',
+             level: 45,
+             name: 'My Upper plan',
+             price: { taxIncluded: 1699, currency: '€' },
+             periodicity: 'monthly',
+             recommended: true
+           }
+         ],
+         address: '12 Rue d\'Amsterdam, 75019 Paris',
+         paymentMethod: {
+           cardType: 'mastercard',
+           lastFourNumbers: '4567',
+           expiry: '12/2026',
+         },
+       }),
+     },
+   },
+   methods: {
+     upgradePlanClicked: action('upgrade-plan'),
+     editPaymentMethodClicked: action('edit-payment-method'),
+     editAddressClicked: action('edit-address')
+   },
+   template: '<Billing :billing="billing" @upgrade-plan="upgradePlanClicked" @edit-payment-method="editPaymentMethodClicked" @edit-address="editAddressClicked" class="m-4" />',
+ }}
+</Story>
+
+
+---
+# Integration
+
+_Notice: If you need to integrate the standard behavior of PS Accounts, please see the
+[`PsAccounts` component in the integration section](?path=/docs/integration-psaccounts-panel--connected)._
+
+If you need a custom integration of PS Accounts sub-components, here is the Billing panel:
+
+```html
+<Billing v-if="showBilling" :billing="context.billing" @upgrade-plan="upgradePlanClicked()"
+  @edit-payment-method="editClicked()" @edit-address="editClicked()" />
+```
+
+# Technical details
+
+<Description of={Billing} />
+<Props of={Billing} />
