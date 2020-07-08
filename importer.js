@@ -1,8 +1,8 @@
-const unflatten = require('flat').unflatten;
-const parse = require('csv-parse');
+const {unflatten} = require('flat'); // eslint-disable-line
+const parse = require('csv-parse'); // eslint-disable-line
 const fs = require('fs');
-const rdiff = require('recursive-diff');
-const Confirm = require('prompt-confirm');
+const rdiff = require('recursive-diff'); // eslint-disable-line
+const Confirm = require('prompt-confirm'); // eslint-disable-line
 
 const importAll = (source) => {
   const data = fs.readFileSync(source).toString('utf8');
@@ -19,12 +19,12 @@ const importAll = (source) => {
     }
 
     // Get keys and split by language, unflatten keys
-    const keys = output.map(r => r[0]);
-    headers = headers.map((lang) => (lang === 'default') ? 'en' : lang);
+    const keys = output.map((r) => r[0]);
+    headers = headers.map((lang) => ((lang === 'default') ? 'en' : lang));
     const languages = headers.reduce((acc, lang, index) => {
-      acc[lang] = output.map(r => r[index + 1]); // +1 because of previous shift
-      acc[lang] = keys.reduce((a, key, index) => {
-        a[key] = acc[lang][index];
+      acc[lang] = output.map((r) => r[index + 1]); // +1 because of previous shift
+      acc[lang] = keys.reduce((a, key, i) => {
+        a[key] = acc[lang][i];
         return a;
       }, {});
       acc[lang] = unflatten(acc[lang]);
@@ -35,7 +35,7 @@ const importAll = (source) => {
     console.log('Following languages will be overwritten from the file:', headers);
     const unknownLanguages = [];
     let existingLanguages = headers.reduce((acc, lang) => {
-      acc[lang] = require(`./src/locale/lang/${lang}.json`);
+      acc[lang] = require(`./src/locale/lang/${lang}.json`); // eslint-disable-line
       if (!acc[lang]) {
         unknownLanguages.push(lang);
       }
@@ -68,21 +68,21 @@ const importAll = (source) => {
     new Confirm({
       name: 'continue',
       message: 'Continue and apply these changes?',
-      default: false
+      default: false,
     }).run()
-    .then(function(answer) {
-      if (!answer) {
-        console.log('CANCELLED.');
-        process.exit(0);
-      }
+      .then((answer) => {
+        if (!answer) {
+          console.log('CANCELLED.');
+          process.exit(0);
+        }
 
-      // Overwrite each language json file
-      existingLanguages = rdiff.applyDiff(existingLanguages, changedKeys);
-      Object.keys(existingLanguages).forEach((lang) => {
-        const path = `./src/locale/lang/${lang}.json`;
-        fs.writeFileSync(path, JSON.stringify(existingLanguages[lang], null, 2));
+        // Overwrite each language json file
+        existingLanguages = rdiff.applyDiff(existingLanguages, changedKeys);
+        Object.keys(existingLanguages).forEach((lang) => {
+          const path = `./src/locale/lang/${lang}.json`;
+          fs.writeFileSync(path, JSON.stringify(existingLanguages[lang], null, 2));
+        });
       });
-    });
   });
 };
 
