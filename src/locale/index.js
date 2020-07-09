@@ -1,10 +1,14 @@
-import defaultLang from '@/locale/lang/en.json';
+import en from '@/locale/lang/en.json';
+import fr from '@/locale/lang/fr.json';
+import it from '@/locale/lang/it.json';
+import es from '@/locale/lang/es.json';
+
 import Vue from 'vue';
 import deepmerge from 'deepmerge';
 import Format from './format';
 
 const format = Format(Vue);
-let lang = defaultLang;
+let lang = en;
 let merged = false;
 
 // eslint-disable-next-line consistent-return
@@ -42,7 +46,24 @@ export const t = function t(path, options, ...args) {
 };
 
 export const use = function use(l) {
-  lang = l || lang;
+  if (typeof l !== 'string') {
+    lang = l || lang;
+    return;
+  }
+  switch (l.substr(0, 2)) {
+    case 'fr':
+      lang = fr;
+      break;
+    case 'it':
+      lang = it;
+      break;
+    case 'es':
+      lang = es;
+      break;
+    case 'en':
+    default:
+      lang = en;
+  }
 };
 
 export const i18n = function i18n(fn) {
