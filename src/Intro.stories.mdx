@@ -41,6 +41,19 @@ panel below this section, and you will be able to call PrestaShop Billing featur
 There are two ways to integrate the needed components. The first is the easiest one, and should be
 sufficient for most cases: a unique component will manage the different status according to the context.
 
+In both cases, you need to install the library as a Vue plugin in your VueJS bootstrap script:
+
+```javascript
+import VueI18n from 'vue-i18n';
+import psAccountsVueComponents from 'prestashop_accounts_vue_components';
+
+Vue.use(VueI18n);
+const i18n = new VueI18n({ ... });
+Vue.use(psAccountsVueComponents);
+psAccountsVueComponents.locale(i18n.locale); // you can also pass 'en', 'fr', 'it', ... directly!
+```
+
+
 ## The easy way
 
 Please see the [PsAccounts component documentation, to integrate to your module page](?path=/docs/integration-psaccounts-panel--connected#psaccounts-component-behavior).

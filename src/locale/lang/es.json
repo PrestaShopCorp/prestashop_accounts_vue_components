@@ -24,7 +24,7 @@
       "group": "Group"
     },
     "account": {
-      "title": "Votre compte PrestaShop",
+      "title": "Your PrestaShop account",
       "authorize": "Authorize your account to manage your shop's services",
       "authorized": "You authorize this account to manage shop's services",
       "connectButton": "Connect",

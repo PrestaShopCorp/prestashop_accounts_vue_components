@@ -40,5 +40,4 @@ export const contextSchema = Joi.object().keys({
     .allow('')
     .default(null),
   billing: billingSchema.optional().allow(null).default({currentPlan: null, plans: []}),
-  language: Joi.any() // TODO !0
 }).unknown(true);
