@@ -37,7 +37,7 @@ const exportAll = (defaultLang, otherLanguages, destination) => {
 };
 
 exportAll(require('./src/locale/lang/en.json'), {
-  // fr: require('./src/locale/lang/fr.json'),
-  // it: require('./src/locale/lang/it.json'),
-  // es: require('./src/locale/lang/es.json')
+  fr: require('./src/locale/lang/fr.json'),
+  it: require('./src/locale/lang/it.json'),
+  es: require('./src/locale/lang/es.json')
 }, process.argv[process.argv.length - 1] || 'translations.csv');
