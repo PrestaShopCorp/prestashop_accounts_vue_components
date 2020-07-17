@@ -11,6 +11,7 @@
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook",
+
     "export-translations": "node ./exporter.js",
     "import-translations": "node ./importer.js"
   },
