@@ -483,6 +483,20 @@ given by the PHP presenter of prestashop_accounts_auth library.
 
 Let's integrate the component itself:
 
+In your own VueJS component:
+```javascript
+import {PsAccounts} from 'prestashop_accounts_vue_components';
+export default {
+  name: 'MyComponent',
+  components: {
+    PsAccounts,
+    ...
+  },
+  ...
+}
+```
+
+And in the template part:
 ```html
 <PsAccounts :context="context" class="m-4">
   <template v-slot:body> <div>Slot shown when account is linked</div> </template>

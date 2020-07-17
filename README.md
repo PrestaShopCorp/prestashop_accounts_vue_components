@@ -31,5 +31,5 @@ For view storybook run
 yarn start-storybook
 ```
 
-and go on [local storybook](http://localhost:33199/?path=/story/introduction--page)
-or [integration storybook](https://storybook-accounts.psessentials.net/)
+and go on [local storybook](http://localhost:33199/?path=/docs/introduction--page)
+or use online [integration storybook](https://storybook-accounts.psessentials.net/?path=/docs/introduction--page)
