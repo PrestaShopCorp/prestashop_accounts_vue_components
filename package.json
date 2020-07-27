@@ -1,6 +1,6 @@
 {
   "name": "prestashop_accounts_vue_components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/psaccountsVue.common.js",
   "files": [
     "dist/*",
@@ -11,7 +11,6 @@
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook",
-
     "export-translations": "node ./exporter.js",
     "import-translations": "node ./importer.js"
   },

@@ -1,0 +1,61 @@
+{
+  "psaccounts": {
+    "accountManager": {
+      "errorInstallEnable": "Er is een fout opgetreden. Probeer het nog eens."
+    },
+    "alertAccountNotInstalled": {
+      "title": "De PrestaShop Account module is nodig",
+      "message": "Om deze module te activeren, moet u de PrestaShop Account module op uw winkel installeren.",
+      "installButton": "Installeer",
+      "loading": "PrestaShop Account installatie in uitvoering..."
+    },
+    "alertAccountNotEnabled": {
+      "title": "De PrestaShop Account module is nodig",
+      "message": "Om deze module te activeren, moet u de PrestaShop Account module op uw winkel activeren.",
+      "enableButton": "Activeren",
+      "loading": "PrestaShop-accountactivering in uitvoering"
+    },
+    "multiShopSelector": {
+      "title": "Multi-shop modus geactiveerd",
+      "subtitle": "Voor deze dienst moet u uw winkels één voor één configureren, maar u kunt wel hetzelfde account gebruiken.",
+      "selectStore": "Selecteer alstublieft een eerste winkel uit onderstaande lijst",
+      "tips": "Zodra de eerste winkel is geconfigureerd, kunt u verder gaan met de andere winkels door ze één voor één te selecteren in de winkelselector van het horizontale menu.",
+      "configure": "Configureren",
+      "group": ""
+    },
+    "account": {
+      "title": "Uw PrestaShop-account",
+      "authorize": "Machtig uw account om de diensten van uw winkel te beheren",
+      "authorized": "U machtigt uw account om de diensten van uw winkel te beheren",
+      "connectButton": "Inloggen",
+      "disconnectButton": "Een ander account gebruiken",
+      "emailValidationWarningLabel": "E-mail validatie ",
+      "emailConfirmationAlert": "Er werd een bevestigingsmail verstuurd. Controleer uw inbox en klik op de link om uw account te activeren.",
+      "noEmailReceived": "Geen bevestigingsmail?",
+      "sendEmail": "Doorsturen",
+      "needToBeAdmin": "Om verder te gaan, moet u een administrator van de winkel zijn.",
+      "pleaseContact": "Neem alstublieft contact op met"
+    }
+  },
+  "billing": {
+    "billing": {
+      "upgradePlanButton": "Upgrade plan",
+      "upgradePlanLink": "See plans",
+      "currentPlan": "Current plan",
+      "paymentMethod": "Payment method",
+      "address": "Billing address",
+      "priceFree": "FREE",
+      "nextInvoicingDate": "Next invoicing date:",
+      "periodicity": {
+        "monthly": "month",
+        "yearly": "year"
+      },
+      "editPaymentMethod": "Edit",
+      "editAddress": "Edit",
+      "noAddress": "Unknown",
+      "noPaymentMethod": "Unknown",
+      "expires": "Expires"
+    },
+    "priceFormat": "{currency} {amount}"
+  }
+}

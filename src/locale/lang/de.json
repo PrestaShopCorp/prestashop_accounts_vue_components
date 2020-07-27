@@ -1,0 +1,61 @@
+{
+  "psaccounts": {
+    "accountManager": {
+      "errorInstallEnable": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    },
+    "alertAccountNotInstalled": {
+      "title": "Das Modul PrestaShop-Konto ist notwendig",
+      "message": "Um dieses Modul zu aktivieren, müssen Sie das PrestaShop-Kontomodul in Ihrem Geschäft installieren",
+      "installButton": "Installationsprogramm",
+      "loading": "Installation des PrestaShop-Kontos läuft ..."
+    },
+    "alertAccountNotEnabled": {
+      "title": "Das Modul PrestaShop-Konto ist notwendig",
+      "message": "Um dieses Modul zu aktivieren, müssen Sie das PrestaShop-Kontomodul in Ihrem Geschäft aktivieren",
+      "enableButton": "Aktivator",
+      "loading": "Implementierung von PrestaShop-Kontos in Bearbeitung"
+    },
+    "multiShopSelector": {
+      "title": "Modus Multi-Boutiquen aktiviert",
+      "subtitle": "Für diesen Dienst müssen Sie Ihre Filialen einzeln konfigurieren, können jedoch dasselbe Konto verwenden.",
+      "selectStore": "Bitte wählen Sie eine Premierenboutique zum Anspruch an der unten stehenden Liste",
+      "tips": "In der ersten konfigurierten Boutique können Sie sich bei der Auswahl der weiteren Boutiquen ebenso wie bei der Auswahl der Boutiquen mit horizontaler Menüführung an die weiteren Boutiquen wenden.",
+      "configure": "Konfigurator",
+      "group": ""
+    },
+    "account": {
+      "title": "Ihr PrestaShop-Konto",
+      "authorize": "Autorisieren Sie Ihr Konto zur Verwaltung der Dienste Ihres Geschäfts",
+      "authorized": "Sie sind autorisiert, die Dienstleistungen einer Boutique zu übernehmen",
+      "connectButton": "Einloggen",
+      "disconnectButton": "Benutze ein anderes Konto",
+      "emailValidationWarningLabel": "E-Mail-Validierung",
+      "emailConfirmationAlert": "Eine Bestätigungs-E-Mail wurde gesendet. Überprüfen Sie Ihren Posteingang und klicken Sie auf den Link, um Ihr Konto zu aktivieren.",
+      "noEmailReceived": "Keine Bestätigungs-E-Mail?",
+      "sendEmail": "Erneut senden",
+      "needToBeAdmin": "Um fortzufahren, müssen Sie Administrator des Geschäfts sein",
+      "pleaseContact": "Vielen Dank für den Kontakt"
+    }
+  },
+  "billing": {
+    "billing": {
+      "upgradePlanButton": "Upgrade plan",
+      "upgradePlanLink": "See plans",
+      "currentPlan": "Current plan",
+      "paymentMethod": "Payment method",
+      "address": "Billing address",
+      "priceFree": "FREE",
+      "nextInvoicingDate": "Next invoicing date:",
+      "periodicity": {
+        "monthly": "month",
+        "yearly": "year"
+      },
+      "editPaymentMethod": "Edit",
+      "editAddress": "Edit",
+      "noAddress": "Unknown",
+      "noPaymentMethod": "Unknown",
+      "expires": "Expires"
+    },
+    "priceFormat": "{currency} {amount}"
+  }
+}

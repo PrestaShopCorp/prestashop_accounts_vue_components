@@ -2,6 +2,11 @@ import en from '@/locale/lang/en.json';
 import fr from '@/locale/lang/fr.json';
 import it from '@/locale/lang/it.json';
 import es from '@/locale/lang/es.json';
+import pl from '@/locale/lang/pl.json';
+import nl from '@/locale/lang/nl.json';
+import pt from '@/locale/lang/pt.json';
+import de from '@/locale/lang/de.json';
+
 
 import Vue from 'vue';
 import deepmerge from 'deepmerge';
@@ -59,6 +64,18 @@ export const use = function use(l) {
       break;
     case 'es':
       lang = es;
+      break;
+    case 'pl':
+      lang = pl;
+      break;
+    case 'nl':
+      lang = nl;
+      break;
+    case 'pt':
+      lang = pt;
+      break;
+    case 'de':
+      lang = de;
       break;
     case 'en':
     default:
