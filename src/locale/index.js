@@ -7,7 +7,6 @@ import nl from '@/locale/lang/nl.json';
 import pt from '@/locale/lang/pt.json';
 import de from '@/locale/lang/de.json';
 
-
 import Vue from 'vue';
 import deepmerge from 'deepmerge';
 import Format from './format';
