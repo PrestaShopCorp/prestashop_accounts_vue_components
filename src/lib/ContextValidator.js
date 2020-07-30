@@ -26,8 +26,6 @@ export const contextSchema = Joi.object().keys({
   psIs17: Joi.boolean().required(),
   psAccountsInstallLink: Joi.string().uri().allow(null).default(null),
   psAccountsEnableLink: Joi.string().uri().allow(null).default(null),
-  psAccountsIsInstalled: Joi.boolean().required(),
-  psAccountsIsEnabled: Joi.boolean().required(),
   currentShop: shopSchema.optional().allow(null).default(null),
   shops: Joi.array().items(shopGroupSchema).required().min(0)
     .max(128),

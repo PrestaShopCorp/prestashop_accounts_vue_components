@@ -23,15 +23,15 @@
 
     <template v-else-if="!showPlans || !canShowPlans">
       <AccountNotInstalled
-        v-if="!validatedContext.psAccountsIsInstalled"
-        :account-is-installed="validatedContext.psAccountsIsInstalled"
+        v-if="!psAccountsIsInstalled"
+        :account-is-installed="psAccountsIsInstalled"
         :is-loading="installLoading"
         @install="installPsAccounts()"
       />
       <template v-else>
         <AccountNotEnabled
-          v-if="!validatedContext.psAccountsIsEnabled"
-          :account-is-enabled="validatedContext.psAccountsIsEnabled"
+          v-if="!psAccountsIsEnabled"
+          :account-is-enabled="psAccountsIsEnabled"
           :is-loading="enableLoading"
           @enabled="enablePsAccounts()"
         />
@@ -138,6 +138,12 @@
         return this.validatedContext.user.email !== null
           && this.validatedContext.user.emailIsValidated;
       },
+      psAccountsIsInstalled() {
+        return this.validatedContext.psAccountsInstallLink === null;
+      },
+      psAccountsIsEnabled() {
+        return this.validatedContext.psAccountsEnableLink === null;
+      },
       showBilling() {
         const b = this.validatedContext.billing;
         const u = this.validatedContext.user;
@@ -213,7 +219,7 @@
             throw new Error('Cannot enable ps_accounts module.');
           }
 
-          this.validatedContext.psAccountsIsEnabled = true;
+          this.validatedContext.psAccountsEnableLink = null;
           this.enableLoading = false;
         }).catch(() => {
           this.enableLoading = false;
