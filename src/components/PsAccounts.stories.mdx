@@ -38,8 +38,8 @@ Once integrated, the component can show different cases:
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
+          psAccountsInstallLink: null,
+          psAccountsEnableLink: null,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -94,8 +94,8 @@ If the shop is in a multi-store context, the user will have a selector like this
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
+          psAccountsInstallLink: null,
+          psAccountsEnableLink: null,
           currentShop: null,
           shops: [
             {
@@ -139,8 +139,8 @@ If the shop is in a multi-store context, the user will have a selector like this
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
+          psAccountsInstallLink: null,
+          psAccountsEnableLink: null,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -200,8 +200,8 @@ his address from the link received in his mailbox.
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
+          psAccountsInstallLink: null,
+          psAccountsEnableLink: null,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -266,8 +266,8 @@ You can have these different cases when the shop prerequisites are not fully val
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: false,
-          psAccountsIsEnabled: true,
+          psAccountsInstallLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
+          psAccountsEnableLink: null,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -321,8 +321,8 @@ You can have these different cases when the shop prerequisites are not fully val
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: false,
+          psAccountsInstallLink: null,
+          psAccountsEnableLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/enable/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -376,8 +376,8 @@ You can have these different cases when the shop prerequisites are not fully val
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
+          psAccountsInstallLink: null,
+          psAccountsEnableLink: null,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -438,8 +438,8 @@ component and the standard behavior won't let the user do anything:
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: 'true', // will pass: can be casted to boolean by Joi
-          psAccountsIsEnabled: 'ptet-ben-k-non',
+          psAccountsInstallLink: 'true', // will pass: can be casted to uri by Joi
+          psAccountsEnableLink: 'ptet-ben-k-non', // will pass: can be casted to uri by Joi
           currentShop: 42,
           shops: [
             {
@@ -525,8 +525,8 @@ Case with a free plan, with possibility to upgrade to paying plans:
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
+          psAccountsInstallLink: null,
+          psAccountsEnableLink: null,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -610,8 +610,8 @@ Case with paying plan, with possibility to upgrade to more expensive plans:
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
+          psAccountsInstallLink: null,
+          psAccountsEnableLink: null,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -696,8 +696,8 @@ Case with paying plan, without possibility to upgrade to more expensive plan:
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
+          psAccountsInstallLink: null,
+          psAccountsEnableLink: null,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -782,8 +782,8 @@ Display when texts are too long:
       context: {
         default: object('context', {
           psIs17: true,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
+          psAccountsInstallLink: null,
+          psAccountsEnableLink: null,
           currentShop: {
             id: 1,
             name: 'PrestaShop',
