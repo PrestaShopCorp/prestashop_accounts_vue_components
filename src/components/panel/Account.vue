@@ -6,7 +6,9 @@
       <b-iconstack
         v-if="userIsConnectedAndValidated"
         font-scale="1.5"
-        class="mr-2 align-bottom"
+        class="mr-2 align-bottom fixed-size"
+        width="20"
+        height="20"
       >
         <b-icon-circle-fill
           stacked
@@ -241,5 +243,11 @@
 }
 .slot-margin {
   margin-top: 1rem;
+}
+.fixed-size {
+  /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
+  height: 20px;
+  width: 20px;
+  display: inline;
 }
 </style>
