@@ -3,6 +3,19 @@
     no-body
   >
     <template v-slot:header>
+      <a :href="manageAccountLink" target="_blank"
+         v-if="!!manageAccountLink && userIsConnectedAndValidated"
+         class="float-right tooltip-link"
+         id="tooltip-target-1234567"
+      >
+        <i class="material-icons fixed-size-small float-right"
+           >settings</i>
+      </a>
+      <b-tooltip target="tooltip-target-1234567" triggers="hover" placement="top"
+      >
+        {{ t('psaccounts.account.manageAccountTooltip') }}
+      </b-tooltip>
+
       <b-iconstack
         v-if="userIsConnectedAndValidated"
         font-scale="1.5"
@@ -124,6 +137,7 @@
     BIconstack,
     BIconCircleFill,
     BIconCheck,
+    BTooltip,
   } from 'bootstrap-vue';
 
   /**
@@ -144,6 +158,7 @@
       BIconstack,
       BIconCircleFill,
       BIconCheck,
+      BTooltip,
     },
     props: {
       /**
@@ -192,6 +207,15 @@
         required: false,
         default: null,
       },
+      /**
+       * The link to sso account management page
+       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
+       */
+      manageAccountLink: {
+        type: String,
+        required: false,
+        default: null,
+      }
     },
     methods: {
       signIn() {
@@ -249,5 +273,18 @@
   height: 20px;
   width: 20px;
   display: inline;
+}
+.fixed-size-small {
+  /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
+  height: 20px;
+  width: 20px;
+  display: inline;
+  font-size: 20px;
+}
+.settings-btn {
+  color: #6c868e;
+}
+.settings-btn:hover {
+  color: #25b9d7;
 }
 </style>

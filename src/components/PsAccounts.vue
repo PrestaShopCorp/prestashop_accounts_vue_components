@@ -47,6 +47,7 @@
             :onboarding-link="validatedContext.onboardingLink"
             :admin-email="validatedContext.superAdminEmail"
             :resend-email-link="validatedContext.ssoResendVerificationEmail"
+            :manage-account-link="validatedContext.manageAccountLink"
             class="mb-2"
           >
             <Billing

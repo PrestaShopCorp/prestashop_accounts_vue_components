@@ -37,5 +37,8 @@ export const contextSchema = Joi.object().keys({
   ssoResendVerificationEmail: Joi.string().uri().optional().allow(null)
     .allow('')
     .default(null),
+  manageAccountLink: Joi.string().uri().optional().allow(null)
+    .allow('')
+    .default(null),
   billing: billingSchema.optional().allow(null).default({currentPlan: null, plans: []}),
 }).unknown(true);

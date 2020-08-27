@@ -38,9 +38,12 @@ you in the integration section)._
       },
       resendEmailLink: {
         default: text('resendEmailLink', 'http://perdu.com'),
+      },
+      manageAccountLink: {
+        default: text('manageAccountLink', 'http://perdu.com'),
       }
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" :manageAccountLink="manageAccountLink" class="m-4" />',
   }}
 </Story>
 
@@ -74,12 +77,15 @@ if the shop was already linked to PrestaShop services from another service modul
       },
       resendEmailLink: {
         default: text('resendEmailLink', 'http://perdu.com'),
+      },
+      manageAccountLink: {
+        default: text('manageAccountLink', 'http://perdu.com'),
       }
     },
     methods: {
       event: action('sign-out'),
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" @sign-out="event" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" :manageAccountLink="manageAccountLink" @sign-out="event" class="m-4" />',
   }}
 </Story>
 
@@ -113,9 +119,12 @@ If the right is missing, the button will be disabled and **a warning will be sho
       },
       resendEmailLink: {
         default: text('resendEmailLink', 'http://perdu.com'),
+      },
+      manageAccountLink: {
+        default: text('manageAccountLink', 'http://perdu.com'),
       }
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" :manageAccountLink="manageAccountLink" class="m-4" />',
   }}
 </Story>
 
@@ -147,13 +156,16 @@ link received in is email box):
       },
       resendEmailLink: {
         default: text('resendEmailLink', 'http://perdu.com'),
+      },
+      manageAccountLink: {
+        default: text('manageAccountLink', 'http://perdu.com'),
       }
     },
     methods: {
       event: action('sign-out'),
       sendEmail: action('send-email'),
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" @sign-out="event" @send-email="sendEmail" class="m-4" />',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" :manageAccountLink="manageAccountLink" @sign-out="event" @send-email="sendEmail" class="m-4" />',
   }}
 </Story>
 
@@ -183,12 +195,15 @@ If you need to integrate a slot inside the card, below the merchant account sect
       },
       resendEmailLink: {
         default: text('resendEmailLink', 'http://perdu.com'),
+      },
+      manageAccountLink: {
+        default: text('manageAccountLink', 'http://perdu.com'),
       }
     },
     methods: {
       event: action('sign-out'),
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" @sign-out="event" class="m-4"><div style="background:gray;margin-top:1.2rem;padding:0.5rem;">Put here a slot</div></Account>',
+    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" :manageAccountLink="manageAccountLink" @sign-out="event" class="m-4"><div style="background:gray;margin-top:1.2rem;padding:0.5rem;">Put here a slot</div></Account>',
   }}
 </Story>
 
@@ -205,7 +220,8 @@ If you need a custom integration of PS Accounts sub-components, here is the Acco
 
 ```html
 <Account :isAdmin="isAdmin" :user="user" :onboardingLink="onboardingLink" :adminEmail="adminEmail"
-  :resendEmailLink="resendEmailLink"@sign-out="signOutFn" @send-email="sendEmailFn" class="m-4">
+  :resendEmailLink="resendEmailLink" @sign-out="signOutFn" @send-email="sendEmailFn"
+  :manageAccountLink="manageAccountLink" class="m-4">
   <div style="background:gray;margin-top:1.2rem;padding:0.5rem;">optional slot goes here</div>
 </Account>
 ```
