@@ -3,16 +3,16 @@
     no-body
   >
     <template v-slot:header>
-      <a :href="manageAccountLink" target="_blank"
+      <a
+         :href="manageAccountLink"
+         target="_blank"
          v-if="!!manageAccountLink && userIsConnectedAndValidated"
          class="float-right tooltip-link"
          id="tooltip-target-1234567"
       >
-        <i class="material-icons fixed-size-small float-right"
-           >settings</i>
+        <i class="material-icons fixed-size-small float-right">settings</i>
       </a>
-      <b-tooltip target="tooltip-target-1234567" triggers="hover" placement="top"
-      >
+      <b-tooltip target="tooltip-target-1234567" triggers="hover" placement="top">
         {{ t('psaccounts.account.manageAccountTooltip') }}
       </b-tooltip>
 
@@ -215,7 +215,7 @@
         type: String,
         required: false,
         default: null,
-      }
+      },
     },
     methods: {
       signIn() {
