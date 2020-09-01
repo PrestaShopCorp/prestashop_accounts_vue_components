@@ -1,5 +1,6 @@
 import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/blocks';
 import { withKnobs, object } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 
 import PsAccounts from './PsAccounts';
 
@@ -74,7 +75,11 @@ Once integrated, the component can show different cases:
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- Module settings part, disabled -</template>' +
     '</PsAccounts>',
   }}
@@ -125,7 +130,11 @@ If the shop is in a multi-store context, the user will have a selector like this
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- Module settings part, disabled -</template>' +
     '</PsAccounts>',
   }}
@@ -184,7 +193,11 @@ If the shop is in a multi-store context, the user will have a selector like this
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- I am connected, but the email is not validated -</template>' +
     '</PsAccounts>',
   }}
@@ -246,7 +259,11 @@ his address from the link received in his mailbox.
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- Module configuration slot -</template>' +
     '</PsAccounts>',
   }}
@@ -313,7 +330,11 @@ You can have these different cases when the shop prerequisites are not fully val
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- Module settings part, disabled -</template>' +
     '</PsAccounts>',
   }}
@@ -369,7 +390,11 @@ You can have these different cases when the shop prerequisites are not fully val
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- Module settings part, disabled -</template>' +
     '</PsAccounts>',
   }}
@@ -425,7 +450,11 @@ You can have these different cases when the shop prerequisites are not fully val
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- Module settings part, disabled -</template>' +
     '</PsAccounts>',
   }}
@@ -475,7 +504,11 @@ component and the standard behavior won't let the user do anything:
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- I am connected -</template>' +
       '<template v-slot:customBody>- Custom body, always present -</template>' +
     '</PsAccounts>',
@@ -506,7 +539,7 @@ export default {
 
 And in the template part:
 ```html
-<PsAccounts :context="context" class="m-4">
+<PsAccounts :context="context" class="m-4" @actioned="actionEventCallback" @viewed="viewEventCallback">
   <template v-slot:body> <div>Slot shown when account is linked</div> </template>
   <template v-slot:customBody> <div>Custom body, always shown (for custom display condition)</div> </template>
 </PsAccounts>
@@ -603,7 +636,11 @@ Case with a free plan, with possibility to upgrade to paying plans:
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- Module configuration slot -</template>' +
     '</PsAccounts>',
   }}
@@ -690,7 +727,11 @@ Case with paying plan, with possibility to upgrade to more expensive plans:
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- Module configuration slot -</template>' +
     '</PsAccounts>',
   }}
@@ -777,7 +818,11 @@ Case with paying plan, without possibility to upgrade to more expensive plan:
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- Module configuration slot -</template>' +
     '</PsAccounts>',
   }}
@@ -864,7 +909,11 @@ Display when texts are too long:
         })
       },
     },
-    template: '<PsAccounts :context="context" class="m-4">' +
+    methods: {
+      actionEvent: action('actioned'),
+      viewEvent: action('viewed'),
+    },
+    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
       '<template v-slot:body>- Module configuration slot -</template>' +
     '</PsAccounts>',
   }}
