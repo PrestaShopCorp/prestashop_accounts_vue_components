@@ -4,16 +4,20 @@
   >
     <template v-slot:header>
       <a
-         :href="manageAccountLink"
          @click="actionEventCallback('manage_account_link')"
-         target="_blank"
-         v-if="!!manageAccountLink && userIsConnectedAndValidated"
-         class="float-right tooltip-link"
-         id="tooltip-target-1234567"
+        :href="manageAccountLink"
+        target="_blank"
+        v-if="!!manageAccountLink && userIsConnectedAndValidated"
+        class="float-right tooltip-link"
+        id="tooltip-target-3bd46b2a34b6628a1a73a31c91afd7ef"
       >
         <i class="material-icons fixed-size-small float-right">settings</i>
       </a>
-      <b-tooltip target="tooltip-target-1234567" triggers="hover" placement="top">
+      <b-tooltip
+        target="tooltip-target-3bd46b2a34b6628a1a73a31c91afd7ef"
+        triggers="hover"
+        placement="top"
+      >
         {{ t('psaccounts.account.manageAccountTooltip') }}
       </b-tooltip>
 
@@ -310,15 +314,18 @@
 .flex-grow-1 {
   flex-grow: 1;
 }
+
 .slot-margin {
   margin-top: 1rem;
 }
+
 .fixed-size {
   /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
   height: 20px;
   width: 20px;
   display: inline;
 }
+
 .fixed-size-small {
   /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
   height: 20px;
@@ -326,9 +333,11 @@
   display: inline;
   font-size: 20px;
 }
+
 .settings-btn {
   color: #6c868e;
 }
+
 .settings-btn:hover {
   color: #25b9d7;
 }
