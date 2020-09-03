@@ -91,6 +91,7 @@
   import Locale from '@/mixins/locale';
   import {BAlert, BOverlay} from 'bootstrap-vue';
   import {contextSchema} from '../lib/ContextValidator';
+  import 'bootstrap-vue/dist/bootstrap-vue.css';
 
   /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
