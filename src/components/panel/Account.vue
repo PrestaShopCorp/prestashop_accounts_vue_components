@@ -4,6 +4,7 @@
   >
     <template v-slot:header>
       <a
+         @click="actionEventCallback('manage_account_link')"
         :href="manageAccountLink"
         target="_blank"
         v-if="!!manageAccountLink && userIsConnectedAndValidated"
@@ -221,11 +222,18 @@
         default: null,
       },
     },
+    data() {
+      return {
+        panelShown: null,
+      };
+    },
     methods: {
       signIn() {
+        this.actionEventCallback('sign_in');
         window.location.href = this.onboardingLink;
       },
       signOut() {
+        this.actionEventCallback('sign_out', this.user);
         /**
          * Logout the current user to let another user account to be linked
          * (user is given in parameter).
@@ -245,6 +253,37 @@
           window.open(this.resendEmailLink, '_blank');
         }
       },
+      viewingPanel() {
+        const previousPanel = this.panelShown;
+
+        if (!this.isAdmin) {
+          this.panelShown = 'user_not_admin';
+        } else if (!this.userIsConnected) {
+          this.panelShown = 'user_not_connected';
+        } else if (!this.userEmailIsValidated) {
+          this.panelShown = 'user_connected_not_validated';
+        } else {
+          this.panelShown = 'user_connected';
+        }
+
+        if (this.panelShown && (previousPanel !== this.panelShown)) {
+          // Need to make call async in order to let callbacks ready.
+          setTimeout(() => {
+            /**
+             * Emitted when user action occurred on a panel.
+             * @type {Event}
+             */
+            this.$emit('viewed', this.panelShown);
+          }, 100);
+        }
+      },
+      actionEventCallback(eventType, event) {
+        /**
+         * Emitted when user action occurred on a panel.
+         * @type {Event}
+         */
+        this.$emit('actioned', eventType, event);
+      },
     },
     computed: {
       userIsConnected() {
@@ -256,6 +295,12 @@
       userIsConnectedAndValidated() {
         return this.userIsConnected && this.userEmailIsValidated;
       },
+    },
+    mounted() {
+      this.viewingPanel();
+    },
+    updated() {
+      this.viewingPanel();
     },
     watch: {
       'user.email': function () {

@@ -39,6 +39,7 @@
           <MultiStoreSelector
             v-if="!validatedContext.currentShop"
             :shops="validatedContext.shops"
+            @shop-selected="eventCallback('multi_shop_selected', $event)"
           />
           <Account
             v-else
@@ -48,6 +49,8 @@
             :admin-email="validatedContext.superAdminEmail"
             :resend-email-link="validatedContext.ssoResendVerificationEmail"
             :manage-account-link="validatedContext.manageAccountLink"
+            @viewed="eventCallback"
+            @actioned="eventCallback"
             class="mb-2"
           >
             <Billing
@@ -74,7 +77,7 @@
     <Plans
       v-else
       :billing="validatedContext.billing"
-      @back="goToHome()"
+      @back="backFromPlans()"
       @next="(plan) => goToTunnel(plan)"
     />
   </div>
@@ -166,6 +169,7 @@
         enableLoading: false,
         hasError: false,
         showPlans: this.forceShowPlans || false,
+        panelShown: null,
       };
     },
     methods: {
@@ -180,6 +184,8 @@
         }
       },
       installPsAccounts() {
+        this.eventCallback('install_ps_accounts');
+
         // clean errors before retry
         this.hasError = false;
         this.installLoading = true;
@@ -204,6 +210,8 @@
         });
       },
       enablePsAccounts() {
+        this.eventCallback('enable_ps_accounts');
+
         // clean errors before retry
         this.hasError = false;
         this.enableLoading = true;
@@ -230,14 +238,67 @@
       },
       goToPlans() {
         this.showPlans = true;
+        this.eventCallback('enter_plans');
       },
-      goToHome() {
+      backFromPlans() {
         this.showPlans = false;
+        this.eventCallback('cancel_plans');
       },
       goToTunnel(plan) {
         this.showPlans = false;
+        this.eventCallback('plan_selected', plan);
+
         // TODO: modal display, with a new PlanTunnel component inside, for given plan
         setTimeout(() => alert(`Not yet implemented: ${plan}`), 400);
+      },
+      viewingPanel() {
+        const previousPanel = this.panelShown;
+
+        if (!this.psAccountsIsInstalled) {
+          this.panelShown = 'ps_accounts_not_installed';
+        } else if (!this.psAccountsIsEnabled) {
+          this.panelShown = 'ps_accounts_not_enabled';
+        } else if (this.validatedContext && !this.validatedContext.currentShop) {
+          this.panelShown = 'multistore_selector';
+        } else {
+          this.panelShown = 'account';
+        }
+
+        if (this.panelShown && (previousPanel !== this.panelShown)) {
+          // Need to make call async in order to let callbacks ready.
+          setTimeout(this.$emit.bind(this, 'viewed', this.panelShown), 100);
+        }
+      },
+      eventCallback(eventType, event) {
+        switch (eventType) {
+          case 'install_ps_accounts':
+          case 'enable_ps_accounts':
+          case 'multi_shop_selected':
+          case 'manage_account_link':
+          case 'sign_in':
+          case 'sign_out':
+          case 'plan_selected':
+            /**
+             * Emitted when user action occurred on a panel.
+             * @type {Event}
+             */
+            this.$emit('actioned', eventType, event);
+            break;
+          case 'enter_plans':
+          case 'cancel_plans':
+          case 'user_not_admin':
+          case 'user_not_connected':
+          case 'user_connected_not_validated':
+          case 'user_connected':
+            /**
+             * Emitted when a specific panel is shown.
+             * @type {Event}
+             */
+            this.$emit('viewed', eventType, event);
+            break;
+          default:
+            console.error('Unknown callback event type.');
+        }
       },
       alert(t) {
         alert(t);
@@ -245,6 +306,12 @@
     },
     created() {
       this.validateContext();
+    },
+    mounted() {
+      this.viewingPanel();
+    },
+    updated() {
+      this.viewingPanel();
     },
     watch: {
       context() {
