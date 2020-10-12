@@ -68,6 +68,9 @@
          * @type {Event}
          */
         this.$emit('shop-selected', selectedShop);
+        this.$segment.track('ACC Click BO Select a shop', {
+          Category: 'Accounts',
+        });
       },
     },
     computed: {
@@ -77,6 +80,11 @@
       isMultiGroup() {
         return Boolean(this.shops.length > 1);
       },
+    },
+    mounted() {
+      this.$segment.track('ACC View multishop component', {
+        Category: 'Account',
+      });
     },
   };
 </script>

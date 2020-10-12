@@ -7,6 +7,7 @@ import AccountNotEnabled from '@/components/alert/AccountNotEnabled';
 import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {use, i18n} from '@/locale';
+import Segment from "@prestashopcorp/segment-vue";
 
 const install = function(vue, opts = {}) {
   if (opts.locale) {
@@ -19,6 +20,11 @@ const install = function(vue, opts = {}) {
     vue.component(name, Components[name]);
   });
 };
+
+Vue.use(Segment, {
+  id: process.env.VUE_APP_SEGMENT,
+  pageCategory: "ps_accounts-ui"
+})
 
 const Components = {
   PsAccounts,
