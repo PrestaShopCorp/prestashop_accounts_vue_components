@@ -4,7 +4,7 @@
   >
     <template v-slot:header>
       <a
-         @click="actionEventCallback('manage_account_link')"
+        @click="actionEventCallback('manage_account_link')"
         :href="manageAccountLink"
         target="_blank"
         v-if="!!manageAccountLink && userIsConnectedAndValidated"
@@ -230,6 +230,9 @@
     methods: {
       signIn() {
         this.actionEventCallback('sign_in');
+        this.$segment.track('ACC Click BO Connect button', {
+          Category: 'Accounts',
+        });
         window.location.href = this.onboardingLink;
       },
       signOut() {
@@ -249,6 +252,9 @@
          * @type {Event}
          */
         this.$emit('send-email', this.user.email);
+        this.$segment.track('ACC Click BO Admin address', {
+          Category: 'Accounts',
+        });
         if (this.resendEmailLink) {
           window.open(this.resendEmailLink, '_blank');
         }
@@ -297,6 +303,25 @@
       },
     },
     mounted() {
+      if (this.isAdmin) {
+        if (!this.userIsConnected) {
+          this.$segment.track('ACC View onboarding component - not connected state', {
+            Category: 'Account',
+          });
+        } else if (!this.userIsConnectedAndValidated) {
+          this.$segment.track('ACC View onboarding component - connected not validated state', {
+            Category: 'Account',
+          });
+        } else {
+          this.$segment.track('ACC View onboarding component - connected validated state', {
+            Category: 'Account',
+          });
+        }
+      } else {
+        this.$segment.track('ACC View admin component', {
+          Category: 'Account',
+        });
+      }
       this.viewingPanel();
     },
     updated() {

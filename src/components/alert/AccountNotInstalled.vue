@@ -67,7 +67,15 @@
          * @type {Event}
          */
         this.$emit('install', true);
+        this.$segment.track('ACC Click BO Install button', {
+          Category: 'Accounts',
+        });
       },
+    },
+    mounted() {
+      this.$segment.track('ACC View Install component - install state', {
+        Category: 'Account',
+      });
     },
   };
 </script>

@@ -67,7 +67,15 @@
          * @type {Event}
          */
         this.$emit('enabled', true);
+        this.$segment.track('ACC Click BO Activate Button', {
+          Category: 'Accounts',
+        });
       },
+    },
+    mounted() {
+      this.$segment.track('ACC View Install component - activate state', {
+        Category: 'Account',
+      });
     },
   };
 </script>
