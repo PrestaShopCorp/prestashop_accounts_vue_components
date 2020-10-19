@@ -297,11 +297,11 @@
             this.$emit('viewed', eventType, event);
             break;
           default:
-            console.error('Unknown callback event type.');
+            console.error('Unknown callback event type.');  // eslint-disable-line
         }
       },
       alert(t) {
-        alert(t);
+        alert(t);  // eslint-disable-line
       },
     },
     created() {
