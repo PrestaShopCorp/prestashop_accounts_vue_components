@@ -259,6 +259,31 @@
           window.open(this.resendEmailLink, '_blank');
         }
       },
+      tracking(status) {
+        const trackByUserStatus = {
+          user_not_connected: () => {
+            this.$segment.track('ACC View onboarding component - not connected state', {
+              Category: 'Account',
+            });
+          },
+          user_connected_not_validated: () => {
+            this.$segment.track('ACC View onboarding component - connected not validated state', {
+              Category: 'Account',
+            });
+          },
+          user_connected: () => {
+            this.$segment.track('ACC View onboarding component - connected validated state', {
+              Category: 'Account',
+            });
+          },
+          user_not_admin: () => {
+            this.$segment.track('ACC View admin component', {
+              Category: 'Account',
+            });
+          },
+        };
+        return trackByUserStatus[status].call();
+      },
       viewingPanel() {
         const previousPanel = this.panelShown;
 
@@ -271,7 +296,7 @@
         } else {
           this.panelShown = 'user_connected';
         }
-
+        this.tracking(this.panelShown);
         if (this.panelShown && (previousPanel !== this.panelShown)) {
           // Need to make call async in order to let callbacks ready.
           setTimeout(() => {
@@ -303,25 +328,6 @@
       },
     },
     mounted() {
-      if (this.isAdmin) {
-        if (!this.userIsConnected) {
-          this.$segment.track('ACC View onboarding component - not connected state', {
-            Category: 'Account',
-          });
-        } else if (!this.userIsConnectedAndValidated) {
-          this.$segment.track('ACC View onboarding component - connected not validated state', {
-            Category: 'Account',
-          });
-        } else {
-          this.$segment.track('ACC View onboarding component - connected validated state', {
-            Category: 'Account',
-          });
-        }
-      } else {
-        this.$segment.track('ACC View admin component', {
-          Category: 'Account',
-        });
-      }
       this.viewingPanel();
     },
     updated() {
