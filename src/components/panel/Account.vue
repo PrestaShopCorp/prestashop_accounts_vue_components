@@ -231,7 +231,7 @@
       signIn() {
         this.actionEventCallback('sign_in');
         this.$segment.track('ACC Click BO Connect button', {
-          Category: 'Accounts',
+          category: 'Accounts',
         });
         window.location.href = this.onboardingLink;
       },
@@ -253,7 +253,7 @@
          */
         this.$emit('send-email', this.user.email);
         this.$segment.track('ACC Click BO Admin address', {
-          Category: 'Accounts',
+          category: 'Accounts',
         });
         if (this.resendEmailLink) {
           window.open(this.resendEmailLink, '_blank');
@@ -263,22 +263,22 @@
         const trackByUserStatus = {
           user_not_connected: () => {
             this.$segment.track('ACC View onboarding component - not connected state', {
-              Category: 'Account',
+              category: 'Account',
             });
           },
           user_connected_not_validated: () => {
             this.$segment.track('ACC View onboarding component - connected not validated state', {
-              Category: 'Account',
+              category: 'Account',
             });
           },
           user_connected: () => {
             this.$segment.track('ACC View onboarding component - connected validated state', {
-              Category: 'Account',
+              category: 'Account',
             });
           },
           user_not_admin: () => {
             this.$segment.track('ACC View admin component', {
-              Category: 'Account',
+              category: 'Account',
             });
           },
         };
