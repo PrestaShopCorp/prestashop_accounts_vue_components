@@ -69,7 +69,7 @@
          */
         this.$emit('shop-selected', selectedShop);
         this.$segment.track('ACC Click BO Select a shop', {
-          Category: 'Accounts',
+          category: 'Accounts',
         });
       },
     },
@@ -83,7 +83,7 @@
     },
     mounted() {
       this.$segment.track('ACC View multishop component', {
-        Category: 'Account',
+        category: 'Account',
       });
     },
   };
