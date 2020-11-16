@@ -85,6 +85,14 @@
           >
             {{ t('psaccounts.account.disconnectButton') }}
           </b-link>
+          <b-button
+            v-else
+            class="float-right"
+            variant="outline-secondary"
+            @click="unlinkShop"
+          >
+            {{ t('psaccounts.account.unlinkShop') }}
+          </b-button>
         </div>
       </div>
       <b-alert
@@ -123,6 +131,16 @@
           >
             {{ adminEmail }}
           </b-link>
+        </p>
+      </b-alert>
+      <b-alert
+        v-if="shopIsUnlinked"
+        variant="success"
+        class="mt-3"
+        show
+      >
+        <p>
+          {{ t('psaccounts.account.unlinkShopAlert') }}.
         </p>
       </b-alert>
       <slot />
@@ -225,6 +243,7 @@
     data() {
       return {
         panelShown: null,
+        shopIsUnlinked: false,
       };
     },
     methods: {
@@ -314,6 +333,12 @@
          * @type {Event}
          */
         this.$emit('actioned', eventType, event);
+      },
+      /*
+       * Unlink the shop and the current user
+       * */
+      unlinkShop() {
+        this.shopIsUnlinked = !this.shopIsUnlinked;
       },
     },
     computed: {

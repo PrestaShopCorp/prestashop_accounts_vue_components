@@ -35,7 +35,9 @@
       "sendEmail": "Send it again",
       "needToBeAdmin": "In order to proceed you need to be administrator of the shop",
       "pleaseContact": "Please contact",
-      "manageAccountTooltip": "Manage account"
+      "manageAccountTooltip": "Manage account",
+      "unlinkShop": "Unlink my shop",
+      "unlinkShopAlert": "Your store has been successfully unlinked"
     }
   },
   "billing": {
