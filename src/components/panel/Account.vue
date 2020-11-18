@@ -148,55 +148,27 @@
         <slot />
       </b-card-body>
     </b-card>
-    <div
+    <Modal
       id="unlinkShop-modal"
-      ref="unlinkShop-modal"
-      aria-hidden="true"
-      class="modal"
+      :header-title="t('psaccounts.account.unlinkShopModalTitle')"
+      :body-text="t('psaccounts.account.unlinkShopModalContent')"
     >
-      <div
-        class="modal-dialog"
-        role="document"
-      >
-        <div class="modal-content rounded-0">
-          <div class="modal-header">
-            <h2>
-              {{ t('psaccounts.account.unlinkShopModalTitle') }}
-            </h2>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div>
-              {{ t('psaccounts.account.unlinkShopModalContent') }}
-            </div>
-            <div class="modal-footer">
-              <slot name="footer">
-                <b-button
-                  data-dismiss="modal"
-                  variant="outline-secondary"
-                >
-                  Cancel
-                </b-button>
-                <b-button
-                  variant="primary"
-                  data-dismiss="modal"
-                  @click="unlinkShop"
-                >
-                  Yes, I Confirm
-                </b-button>
-              </slot>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <template #modal-footer>
+        <b-button
+          data-dismiss="modal"
+          variant="outline-secondary"
+        >
+          Cancel
+        </b-button>
+        <b-button
+          variant="primary"
+          data-dismiss="modal"
+          @click="unlinkShop"
+        >
+          Yes, I Confirm
+        </b-button>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -214,6 +186,7 @@
     BIconCheck,
     BTooltip,
   } from 'bootstrap-vue';
+  import Modal from '@/components/modal/Modal';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -234,6 +207,7 @@
       BIconCircleFill,
       BIconCheck,
       BTooltip,
+      Modal,
     },
     props: {
       /**
@@ -419,9 +393,6 @@
 </script>
 
 <style scoped>
-#unlinkShop-modal .close {
-  margin-top: -42px !important;
-}
 .flex-grow-1 {
   flex-grow: 1;
 }
