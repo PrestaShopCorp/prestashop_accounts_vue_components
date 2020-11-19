@@ -90,8 +90,7 @@
               v-else
               class="float-right"
               variant="outline-secondary"
-              data-toggle="modal"
-              data-target="#unlinkShop-modal"
+              @click.stop="openModal"
             >
               {{ t('psaccounts.account.unlinkShop') }}
             </b-button>
@@ -150,19 +149,20 @@
     </b-card>
     <Modal
       id="unlinkShop-modal"
+      :displayed="modalDisplayed"
+      @closed="closeModal"
       :header-title="t('psaccounts.account.unlinkShopModalTitle')"
       :body-text="t('psaccounts.account.unlinkShopModalContent')"
     >
       <template #modal-footer>
         <b-button
-          data-dismiss="modal"
+          @click="closeModal"
           variant="outline-secondary"
         >
           Cancel
         </b-button>
         <b-button
           variant="primary"
-          data-dismiss="modal"
           @click="unlinkShop"
         >
           Yes, I Confirm
@@ -270,6 +270,7 @@
       return {
         panelShown: null,
         shopIsUnlinked: false,
+        modalDisplayed: false,
       };
     },
     methods: {
@@ -360,11 +361,22 @@
          */
         this.$emit('actioned', eventType, event);
       },
+      openModal() {
+        this.modalDisplayed = true;
+      },
+      closeModal() {
+        this.modalDisplayed = false;
+      },
       /*
        * Unlink the shop and the current user
        * */
       unlinkShop() {
-        this.shopIsUnlinked = !this.shopIsUnlinked;
+        this.closeModal();
+        this.$emit('unlinkShop');
+        this.shopIsUnlinked = true;
+        setTimeout(() => {
+          this.shopIsUnlinked = false;
+        }, 3000);
       },
     },
     computed: {

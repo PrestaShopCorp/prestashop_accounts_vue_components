@@ -1,11 +1,12 @@
 <template>
   <div
-    aria-hidden="true"
     class="modal accounts-modal"
+    :class="{'d-block': displayed}"
   >
     <div
       class="modal-dialog"
       role="document"
+      v-click-outside="closeModal"
     >
       <div class="modal-content rounded-0">
         <div class="modal-header">
@@ -16,10 +17,9 @@
           <button
             type="button"
             class="close"
-            data-dismiss="modal"
-            aria-label="Close"
+            @click="closeModal()"
           >
-            <span aria-hidden="true">×</span>
+            <span>×</span>
           </button>
         </div>
         <div class="modal-body">
@@ -37,8 +37,13 @@
 </template>
 
 <script>
+  import vClickOutside from 'v-click-outside';
+
   export default {
     name: 'Modal',
+    directives: {
+      clickOutside: vClickOutside.directive,
+    },
     props: {
       headerTitle: {
         type: String,
@@ -48,12 +53,25 @@
         type: String,
         required: false,
       },
+      displayed: {
+        type: Boolean,
+        required: true,
+        default: false,
+      },
+    },
+    methods: {
+      closeModal() {
+        this.$emit('closed');
+      },
     },
   };
 </script>
 
-<style scoped>
-.accounts-modal .close {
-  margin-top: -42px !important;
+<style lang="scss" scoped>
+.accounts-modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  .close {
+    margin-top: -42px !important;
+  }
 }
 </style>
