@@ -370,13 +370,17 @@
       /*
        * Unlink the shop and the current user
        * */
-      unlinkShop() {
-        this.closeModal();
-        this.$emit('unlinkShop');
-        this.shopIsUnlinked = true;
-        setTimeout(() => {
-          this.shopIsUnlinked = false;
-        }, 3000);
+      async unlinkShop() {
+        await fetch(`${window.location.href.split('?')[0]}?ajax=1&controller=AdminAjaxPsAccounts&action=unlinkShop&token=${window.token}`).then((response) => {
+          // eslint-disable-next-line no-console
+          console.log(response);
+          this.closeModal();
+          this.$emit('unlinkShop');
+          this.shopIsUnlinked = true;
+          setTimeout(() => {
+            this.shopIsUnlinked = false;
+          }, 3000);
+        });
       },
     },
     computed: {
