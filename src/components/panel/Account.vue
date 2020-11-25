@@ -371,15 +371,17 @@
        * Unlink the shop and the current user
        * */
       async unlinkShop() {
-        await fetch(`${window.location.href.split('?')[0]}?ajax=1&controller=AdminAjaxPsAccounts&action=unlinkShop&token=${window.token}`).then((response) => {
+        await fetch(`${window.contextPsAccounts.adminAjaxLink}&action=unlinkShop`).then((response) => {
           // eslint-disable-next-line no-console
           console.log(response);
           this.closeModal();
-          this.$emit('unlinkShop');
-          this.shopIsUnlinked = true;
-          setTimeout(() => {
-            this.shopIsUnlinked = false;
-          }, 3000);
+          if (response.ok) {
+            this.$emit('unlinkShop');
+            this.shopIsUnlinked = true;
+            setTimeout(() => {
+              this.shopIsUnlinked = false;
+            }, 3000);
+          }
         });
       },
     },
