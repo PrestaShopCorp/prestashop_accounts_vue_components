@@ -144,6 +144,16 @@
             {{ t('psaccounts.account.unlinkShopAlert') }}.
           </p>
         </b-alert>
+        <b-alert
+                v-if="shopUnlinkError"
+                variant="danger"
+                class="mt-3"
+                show
+        >
+          <p>
+            {{ t('psaccounts.account.unlinkShopError') }}.
+          </p>
+        </b-alert>
         <slot />
       </b-card-body>
     </b-card>
@@ -270,6 +280,7 @@
       return {
         panelShown: null,
         shopIsUnlinked: false,
+        shopUnlinkError: false,
         modalDisplayed: false,
       };
     },
@@ -380,6 +391,11 @@
             this.shopIsUnlinked = true;
             setTimeout(() => {
               this.shopIsUnlinked = false;
+            }, 3000);
+          } else {
+            this.shopUnlinkError = true;
+            setTimeout(() => {
+              this.shopUnlinkError = false;
             }, 3000);
           }
         });

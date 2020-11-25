@@ -39,7 +39,8 @@
       "unlinkShop": "Unlink my shop",
       "unlinkShopModalTitle": "Are you sure you want to unlink your store from your account ?",
       "unlinkShopModalContent": "By clicking on Yes, I confirm, you authorize your PrestaShop account to be unlink from the store.",
-      "unlinkShopAlert": "Your store has been successfully unlinked"
+      "unlinkShopAlert": "Your store has been successfully unlinked",
+      "unlinkShopError": "Error while trying to unlink shop"
     }
   },
   "billing": {
