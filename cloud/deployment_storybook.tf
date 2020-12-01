@@ -55,7 +55,7 @@ resource "kubernetes_deployment" "storybook" {
 }
 
 # https://www.terraform.io/docs/providers/kubernetes/r/service.html
-resource "kubernetes_service" "accounts_ui" {
+resource "kubernetes_service" "storybook" {
   metadata {
     name      = "storybook"
     namespace = "accounts"
