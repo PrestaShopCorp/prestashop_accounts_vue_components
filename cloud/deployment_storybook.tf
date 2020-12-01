@@ -109,7 +109,7 @@ resource "kubernetes_ingress" "storybook" {
         path {
           backend {
             service_name = "storybook"
-            service_port = kubernetes_service.accounts_ui.spec[0].port[0].port
+            service_port = kubernetes_service.storybook.spec[0].port[0].port
           }
           path = "/*"
         }
