@@ -11,7 +11,7 @@ jobs:
     name: Production - Storybook
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    if: startsWith(github.ref, 'refs/heads/feature/storybook')
+    if: startsWith(github.ref, 'refs/heads/feature/toto')
 
     steps:
       - name: Checkout the repository
