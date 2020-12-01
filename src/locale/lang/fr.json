@@ -36,26 +36,5 @@
       "needToBeAdmin": "Pour continuer, vous devez être administrateur de la boutique",
       "pleaseContact": "Merci de contacter"
     }
-  },
-  "billing": {
-    "billing": {
-      "upgradePlanButton": "Upgrade plan",
-      "upgradePlanLink": "See plans",
-      "currentPlan": "Current plan",
-      "paymentMethod": "Payment method",
-      "address": "Billing address",
-      "priceFree": "FREE",
-      "nextInvoicingDate": "Next invoicing date:",
-      "periodicity": {
-        "monthly": "month",
-        "yearly": "year"
-      },
-      "editPaymentMethod": "Edit",
-      "editAddress": "Edit",
-      "noAddress": "Unknown",
-      "noPaymentMethod": "Unknown",
-      "expires": "Expires"
-    },
-    "priceFormat": "{currency} {amount}"
   }
 }

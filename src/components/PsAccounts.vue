@@ -53,7 +53,10 @@
             @actioned="eventCallback"
             class="mb-2"
           >
-            <slot name="account-footer" />
+            <slot
+              v-if="userIsConnectedAndEmailIsValidated"
+              name="account-footer"
+            />
           </Account>
         </template>
       </template>
@@ -226,13 +229,6 @@
           case 'manage_account_link':
           case 'sign_in':
           case 'sign_out':
-          case 'plan_selected':
-            /**
-             * Emitted when user action occurred on a panel.
-             * @type {Event}
-             */
-            this.$emit('actioned', eventType, event);
-            break;
           case 'user_not_admin':
           case 'user_not_connected':
           case 'user_connected_not_validated':

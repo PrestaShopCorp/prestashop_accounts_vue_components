@@ -598,40 +598,6 @@ If you want to pass something to the component footer like another component you
           superAdminEmail: 'big.boss@my-shop.com',
           ssoResendVerificationEmail: 'http://perdu.com',
           manageAccountLink: 'http://perdu.com',
-          billing: {
-            currentPlan: {
-              id: '1234567',
-              level: 42,
-              name: 'Base plan',
-              price: null,
-              periodicity: 'monthly',
-              recommended: false,
-            },
-            plans: [
-              {
-                id: '1234567',
-                level: 42,
-                name: 'Base plan',
-                price: null,
-                periodicity: 'monthly',
-                recommended: false
-              },
-              {
-                id: '1234568',
-                level: 45,
-                name: 'Upper plan',
-                price: { taxIncluded: 1699, currency: '€' },
-                periodicity: 'monthly',
-                recommended: false
-              }
-            ],
-            address: '12 Rue d\'Amsterdam, 75019 Paris',
-            paymentMethod: {
-              cardType: 'mastercard',
-              lastFourNumbers: '4567',
-              expiry: '12/2026',
-            },
-          }
         })
       },
     },

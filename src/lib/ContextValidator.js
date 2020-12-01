@@ -1,5 +1,4 @@
 import Joi from '@hapi/joi';
-import {billingSchema} from './BillingValidator';
 
 export const shopSchema = Joi.object().keys({
   id: Joi.number().integer().positive().required(),
@@ -40,5 +39,4 @@ export const contextSchema = Joi.object().keys({
   manageAccountLink: Joi.string().uri().optional().allow(null)
     .allow('')
     .default(null),
-  billing: billingSchema.optional().allow(null).default({currentPlan: null, plans: []}),
 }).unknown(true);
