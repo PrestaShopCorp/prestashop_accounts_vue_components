@@ -110,8 +110,10 @@ jobs:
         working-directory: cloud
         run: |
           terraform init -backend-config="bucket=$GCLOUD_NAMESPACE"
+          terraform workspace new integration
           terraform workspace select integration
           terraform fmt
+
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_INTEGRATION }}
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
