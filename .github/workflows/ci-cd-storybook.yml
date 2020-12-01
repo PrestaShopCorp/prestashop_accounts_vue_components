@@ -34,7 +34,7 @@ jobs:
       - name: Terraform init
         working-directory: cloud
         run: |
-          terraform init -backend-config="bucket=$GCLOUD_NAMESPACE"
+          terraform init -backend-config="bucket=$GCLOUD_NAMESPACE" --backend-prefix="terraform/accounts-vue-components/stable"
           terraform workspace select production
           terraform fmt
         env:
@@ -101,7 +101,7 @@ jobs:
           gcloud auth configure-docker
           rm token.json
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_INTEGRATION }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}
           GCLOUD_CLUSTER: ${{ secrets.GCLOUD_CLUSTER }}
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
           ENVIRONMENT: production
@@ -109,13 +109,12 @@ jobs:
       - name: Terraform init
         working-directory: cloud
         run: |
-          terraform init -backend-config="bucket=$GCLOUD_NAMESPACE"
-          terraform workspace new integration
+          terraform init -backend-config="bucket=$GCLOUD_NAMESPACE" --backend-prefix="terraform/accounts-vue-components/alpha"
           terraform workspace select integration
           terraform fmt
 
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_INTEGRATION }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
 
       - name: Docker pull
@@ -157,4 +156,4 @@ jobs:
           SHA: ${{ github.sha }}
           MANAGED_ZONE: ${{ secrets.GCLOUD_MANAGED_ZONE }}
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_INTEGRATION }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}
