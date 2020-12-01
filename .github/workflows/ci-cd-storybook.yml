@@ -103,7 +103,7 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_INTEGRATION }}
           GCLOUD_CLUSTER: ${{ secrets.GCLOUD_CLUSTER }}
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
           ENVIRONMENT: production
 
       - name: Terraform init
@@ -114,13 +114,13 @@ jobs:
           terraform fmt
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_INTEGRATION }}
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
 
       - name: Docker pull
         continue-on-error: true
         run: docker pull "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
         env:
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
 
       - name: Build package
         run: |
@@ -130,7 +130,7 @@ jobs:
             --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" .
           docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
         env:
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
 
       - name: Build and push finale image
         run: |
@@ -139,7 +139,7 @@ jobs:
             --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
           docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
         env:
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
           GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
           TAG: ${{ steps.get_tag.outputs.TAG }}
 
@@ -154,5 +154,5 @@ jobs:
           TAG: ${{ steps.get_tag.outputs.TAG }}
           SHA: ${{ github.sha }}
           MANAGED_ZONE: ${{ secrets.GCLOUD_MANAGED_ZONE }}
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_INTEGRATION }}
