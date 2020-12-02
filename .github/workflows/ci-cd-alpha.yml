@@ -75,6 +75,6 @@ jobs:
           --var app_version=$VERSION \
           --var hash_id=$SHA
         env:
-          VERSION: ${{ steps.get_tag.outputs.VERSION }}
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
           SHA: ${{ github.sha }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
