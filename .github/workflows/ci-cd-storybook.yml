@@ -1,9 +1,6 @@
 name: Accounts CI/CD
 
 on:
-  push:
-#    branches:
-#      - master
   pull_request:
     types: [opened,edited,reopened,synchronize,labeled]
 jobs:
@@ -110,7 +107,7 @@ jobs:
         working-directory: cloud
         run: |
           terraform init -backend-config="bucket=$GCLOUD_NAMESPACE" --backend-prefix="terraform/accounts-vue-components/alpha"
-          terraform workspace select integration
+          terraform workspace select alpha
           terraform fmt
 
         env:
@@ -154,6 +151,6 @@ jobs:
         env:
           TAG: ${{ steps.get_tag.outputs.TAG }}
           SHA: ${{ github.sha }}
-          MANAGED_ZONE: ${{ secrets.GCLOUD_MANAGED_ZONE }}
+          MANAGED_ZONE: ${{ secrets.GCLOUD_MANAGED_ZONE_INTEGRATION }}
           GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PRODUCTION }}

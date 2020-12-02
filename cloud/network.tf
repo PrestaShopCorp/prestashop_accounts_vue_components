@@ -3,7 +3,7 @@ resource "google_compute_global_address" "storybook" {
   name = "accounts-storybook"
   ip_version = "IPV4"
 
-  description = "storybook-accounts.psessentials.net"
+  description = local.url
 }
 
 # https://www.terraform.io/docs/providers/google/r/dns_record_set.html
@@ -15,7 +15,7 @@ resource "google_dns_record_set" "storybook" {
   type = "A"
   ttl = 60
 
-  managed_zone = var.managed_zone
+  managed_zone = local.managed_zone
 
   rrdatas = [
     google_compute_global_address.storybook.address

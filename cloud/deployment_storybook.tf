@@ -1,12 +1,12 @@
 # https://www.terraform.io/docs/providers/kubernetes/r/deployment.html
 resource "kubernetes_deployment" "storybook" {
   metadata {
-    name = "storybook"
+    name = "${terraform.workspace}-storybook"
     namespace = "accounts"
 
     # kubernetes labels
     labels = {
-      "name" = "storybook"
+      "name" = "${terraform.workspace}-storybook"
       "version" = var.app_version
       "managed-by" = "terraform"
     }
@@ -22,7 +22,7 @@ resource "kubernetes_deployment" "storybook" {
 
     selector {
       match_labels = {
-        "name" = "storybook"
+        "name" = "${terraform.workspace}-storybook"
       }
     }
 
@@ -30,7 +30,7 @@ resource "kubernetes_deployment" "storybook" {
       # container metadata
       metadata {
         labels = {
-          "name" = "storybook"
+          "name" = "${terraform.workspace}-storybook"
           # Use commit to force tf detection
           "version" = var.hash_id
           "managed-by" = "terraform"
@@ -41,12 +41,12 @@ resource "kubernetes_deployment" "storybook" {
         # select node pool
         node_selector = {
           type = "accounts"
-          env = terraform.workspace
+          env = local.environment
         }
 
         container {
           name = "ui"
-          image = "eu.gcr.io/${var.gcloud_namespace}/accounts-vue-components:${var.app_version}"
+          image = "eu.gcr.io/${local.project}/accounts-vue-components:${var.app_version}"
           image_pull_policy = "Always"
         }
       }
@@ -57,10 +57,10 @@ resource "kubernetes_deployment" "storybook" {
 # https://www.terraform.io/docs/providers/kubernetes/r/service.html
 resource "kubernetes_service" "storybook" {
   metadata {
-    name      = "storybook"
+    name      = "${terraform.workspace}-storybook"
     namespace = "accounts"
     labels = {
-      "name"       = "storybook"
+      "name"       = "${terraform.workspace}-storybook"
       "part-of"    = "accounts"
       "version"    = var.app_version
       "managed-by" = "terraform"
@@ -76,7 +76,7 @@ resource "kubernetes_service" "storybook" {
     external_traffic_policy = "Cluster"
 
     selector = {
-      name    = "storybook"
+      name    = "${terraform.workspace}-storybook"
     }
 
     port {
@@ -90,7 +90,7 @@ resource "kubernetes_service" "storybook" {
 # https://www.terraform.io/docs/providers/kubernetes/r/ingress.html
 resource "kubernetes_ingress" "storybook" {
   metadata {
-    name = "storybook"
+    name = "${terraform.workspace}-storybook"
     namespace = "accounts"
     annotations = {
       # Link with created IP address's name
@@ -108,7 +108,7 @@ resource "kubernetes_ingress" "storybook" {
       http {
         path {
           backend {
-            service_name = "storybook"
+            service_name = "${terraform.workspace}-storybook"
             service_port = kubernetes_service.storybook.spec[0].port[0].port
           }
           path = "/*"

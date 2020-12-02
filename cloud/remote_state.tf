@@ -8,6 +8,6 @@ data "terraform_remote_state" "services" {
   # see https://www.terraform.io/docs/backends/types/gcs.html
   config = {
     prefix = "terraform/services"
-    bucket = var.gcloud_namespace
+    bucket = local.project
   }
 }

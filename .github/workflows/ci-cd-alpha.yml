@@ -1,0 +1,78 @@
+name: Accounts CI/CD
+
+on: [push]
+#on:
+#  pull_request:
+#    types: [opened,edited,reopened,synchronize,labeled]
+
+jobs:
+  alpha:
+    name: Alpha - Storybook
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v1
+
+      - name: Gcloud auth and write env file
+        run: |
+          echo $GOOGLE_APPLICATION_CREDENTIALS > token.json
+          gcloud auth activate-service-account --key-file=token.json
+          gcloud container clusters get-credentials $GCLOUD_CLUSTER \
+          --zone europe-west1-c --project $GCLOUD_NAMESPACE
+          gcloud auth configure-docker
+          rm token.json
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          GCLOUD_CLUSTER: ${{ secrets.GCLOUD_CLUSTER }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
+
+      - name: Terraform init
+        working-directory: cloud
+        run: |
+          terraform init -backend-config="bucket=$GCLOUD_NAMESPACE" -backend-prefix="terraform/accounts-vue-components/alpha"
+          terraform workspace select alpha
+          terraform fmt
+
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
+
+      - name: Docker pull
+        continue-on-error: true
+        run: docker pull "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
+        env:
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
+
+      - name: Build package
+        run: |
+          docker build \
+            --target=package \
+            --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" \
+            --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" .
+          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
+        env:
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
+
+      - name: Build and push finale image
+        run: |
+          docker build . \
+            --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest" \
+            --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
+          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
+        env:
+          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
+          GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
+          TAG: ${{ steps.get_tag.outputs.TAG }}
+
+      - name: Terraform apply
+        working-directory: cloud
+        run: |
+          terraform apply -auto-approve \
+          --var app_version=$TAG \
+          --var hash_id=$SHA
+        env:
+          TAG: ${{ steps.get_tag.outputs.TAG }}
+          SHA: ${{ github.sha }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
