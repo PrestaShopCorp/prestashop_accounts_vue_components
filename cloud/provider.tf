@@ -2,7 +2,7 @@
 provider "google" {
   version = "3.19.0"
   //"2.7.0"
-  project = "psessentials-${terraform.workspace}"
+  project = local.project
   region  = data.terraform_remote_state.services.outputs.region
   zone    = data.terraform_remote_state.services.outputs.default_zone
 }

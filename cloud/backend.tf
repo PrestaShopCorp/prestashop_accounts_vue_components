@@ -4,6 +4,6 @@
 */
 terraform {
   backend "gcs" {
-    prefix = "terraform/accounts-vue-components/stable"
+    prefix = "terraform/accounts-vue-components"
   }
 }
