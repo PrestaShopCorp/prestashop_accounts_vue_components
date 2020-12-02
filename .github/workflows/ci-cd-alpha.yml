@@ -1,9 +1,8 @@
 name: Accounts CI/CD
 
-on: [push]
-#on:
-#  pull_request:
-#    types: [opened,edited,reopened,synchronize,labeled]
+on:
+  pull_request:
+    types: [opened,edited,reopened,synchronize,labeled]
 
 jobs:
   alpha:
