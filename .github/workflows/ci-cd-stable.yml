@@ -3,7 +3,8 @@ name: Accounts CI/CD
 on:
   push:
     branches:
-      - feature/storybook
+      - master
+      - main
 
 jobs:
   stable:
