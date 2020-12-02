@@ -15,6 +15,11 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v1
 
+      - name: Get tag
+        shell: bash
+        id: get_tag
+        run: echo ::set-output name=TAG::pr-(echo $GITHUB_REF | cut -d / -f 3)
+
       - name: Gcloud auth and write env file
         run: |
           echo $GOOGLE_APPLICATION_CREDENTIALS > token.json
