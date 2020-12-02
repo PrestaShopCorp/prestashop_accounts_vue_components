@@ -70,11 +70,7 @@ jobs:
 
       - name: Terraform apply
         working-directory: cloud
-        run: |
-          terraform apply -auto-approve \
-          --var app_version=$VERSION \
-          --var hash_id=$SHA
+        run: terraform apply -auto-approve
         env:
-          VERSION: ${{ steps.get_version.outputs.VERSION }}
           SHA: ${{ github.sha }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
