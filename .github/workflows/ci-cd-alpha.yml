@@ -1,8 +1,9 @@
 name: Accounts CI/CD
 
-on:
-  pull_request:
-    types: [opened,edited,reopened,synchronize,labeled]
+on: [push]
+#on:
+#  pull_request:
+#    types: [opened,edited,reopened,synchronize,labeled]
 
 jobs:
   alpha:
@@ -23,13 +24,12 @@ jobs:
           echo $GOOGLE_APPLICATION_CREDENTIALS > token.json
           gcloud auth activate-service-account --key-file=token.json
           gcloud container clusters get-credentials $GCLOUD_CLUSTER \
-          --zone europe-west1-c --project $GCLOUD_NAMESPACE
+          --zone europe-west1-c --project psessentials-integration
           gcloud auth configure-docker
           rm token.json
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           GCLOUD_CLUSTER: ${{ secrets.GCLOUD_CLUSTER }}
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
 
       - name: Terraform init
         working-directory: cloud
@@ -42,28 +42,23 @@ jobs:
 
       - name: Docker pull
         continue-on-error: true
-        run: docker pull "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
-        env:
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
+        run: docker pull "eu.gcr.io/psessentials-integration/accounts-vue-components-package:latest"
 
       - name: Build package
         run: |
           docker build \
             --target=package \
-            --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" \
-            --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest" .
-          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
-        env:
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
+            --cache-from="eu.gcr.io/psessentials-integration/accounts-vue-components-package:latest" \
+            --tag="eu.gcr.io/psessentials-integration/accounts-vue-components-package:latest" .
+          docker push "eu.gcr.io/psessentials-integration/accounts-vue-components-package:latest"
 
       - name: Build and push finale image
         run: |
           docker build . \
-            --tag="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest" \
-            --cache-from="eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components-package:latest"
-          docker push "eu.gcr.io/${GCLOUD_NAMESPACE}/accounts-vue-components:latest"
+            --tag="eu.gcr.io/psessentials-integration/accounts-vue-components:latest" \
+            --cache-from="eu.gcr.io/psessentials-integration/accounts-vue-components-package:latest"
+          docker push "eu.gcr.io/psessentials-integration/accounts-vue-components:latest"
         env:
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
           GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
           TAG: ${{ steps.get_tag.outputs.TAG }}
 
