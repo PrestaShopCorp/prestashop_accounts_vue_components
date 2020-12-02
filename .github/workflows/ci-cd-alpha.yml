@@ -15,10 +15,9 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v1
 
-      - name: Get tag
-        shell: bash
-        id: get_tag
-        run: echo ::set-output name=TAG::pr-(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
 
       - name: Gcloud auth and write env file
         run: |
@@ -73,9 +72,9 @@ jobs:
         working-directory: cloud
         run: |
           terraform apply -auto-approve \
-          --var app_version=$TAG \
+          --var app_version=$VERSION \
           --var hash_id=$SHA
         env:
-          TAG: ${{ steps.get_tag.outputs.TAG }}
+          VERSION: ${{ steps.get_tag.outputs.VERSION }}
           SHA: ${{ github.sha }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
