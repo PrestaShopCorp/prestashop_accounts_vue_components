@@ -6,7 +6,7 @@ on: [push]
 #    types: [opened,edited,reopened,synchronize,labeled]
 
 jobs:
-  alpha:
+  stable:
     name: Stable - Storybook
     runs-on: ubuntu-latest
     timeout-minutes: 10
