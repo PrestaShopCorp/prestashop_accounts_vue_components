@@ -31,13 +31,11 @@ jobs:
       - name: Terraform init
         working-directory: cloud
         run: |
-          terraform init -backend-config="bucket=$GCLOUD_NAMESPACE" -backend-prefix="terraform/accounts-vue-components/alpha"
+          terraform init -backend-config="bucket=psessentials-production" -backend-config="prefix=terraform/accounts-vue-components/alpha"
           terraform workspace select alpha
           terraform fmt
-
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-          GCLOUD_NAMESPACE: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
 
       - name: Docker pull
         continue-on-error: true
