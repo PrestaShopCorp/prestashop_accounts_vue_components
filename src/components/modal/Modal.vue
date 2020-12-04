@@ -1,39 +1,41 @@
 <template>
-  <div
-    class="modal accounts-modal"
-    :class="{'d-block': displayed}"
-  >
+  <transition name="fade">
     <div
-      class="modal-dialog"
-      role="document"
-      v-click-outside="closeModal"
+      class="modal accounts-modal d-block"
+      v-if="displayed"
     >
-      <div class="modal-content rounded-0">
-        <div class="modal-header">
-          <h2 v-if="headerTitle">
-            {{ headerTitle }}
-          </h2>
-          <slot name="modal-header" />
-          <button
-            type="button"
-            class="close"
-            @click="closeModal()"
-          >
-            <span>×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p v-if="bodyText">
-            {{ bodyText }}
-          </p>
-          <slot name="modal-body" />
-          <div class="modal-footer">
-            <slot name="modal-footer" />
+      <div
+        class="modal-dialog"
+        role="document"
+        v-click-outside="closeModal"
+      >
+        <div class="modal-content rounded-0">
+          <div class="modal-header">
+            <h2 v-if="headerTitle">
+              {{ headerTitle }}
+            </h2>
+            <slot name="modal-header" />
+            <button
+              type="button"
+              class="close"
+              @click="closeModal()"
+            >
+              <span>×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p v-if="bodyText">
+              {{ bodyText }}
+            </p>
+            <slot name="modal-body" />
+            <div class="modal-footer">
+              <slot name="modal-footer" />
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -73,5 +75,11 @@
   .close {
     margin-top: -42px !important;
   }
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .25s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -145,10 +145,10 @@
           </p>
         </b-alert>
         <b-alert
-                v-if="shopUnlinkError"
-                variant="danger"
-                class="mt-3"
-                show
+          v-if="shopUnlinkError"
+          variant="danger"
+          class="mt-3"
+          show
         >
           <p>
             {{ t('psaccounts.account.unlinkShopError') }}.
@@ -383,8 +383,6 @@
        * */
       async unlinkShop() {
         await fetch(`${window.contextPsAccounts.adminAjaxLink}&action=unlinkShop`).then((response) => {
-          // eslint-disable-next-line no-console
-          console.log(response);
           this.closeModal();
           if (response.ok) {
             this.$emit('unlinkShop');
