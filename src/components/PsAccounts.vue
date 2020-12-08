@@ -51,6 +51,7 @@
             :manage-account-link="validatedContext.manageAccountLink"
             @viewed="eventCallback"
             @actioned="eventCallback"
+            @unlinkShop="validatedContext.user.email = null"
             class="mb-2"
           >
             <Billing

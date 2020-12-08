@@ -1,133 +1,185 @@
 <template>
-  <b-card
-    no-body
-  >
-    <template v-slot:header>
-      <a
-        @click="actionEventCallback('manage_account_link')"
-        :href="manageAccountLink"
-        target="_blank"
-        v-if="!!manageAccountLink && userIsConnectedAndValidated"
-        class="float-right tooltip-link"
-        id="tooltip-target-3bd46b2a34b6628a1a73a31c91afd7ef"
-      >
-        <i class="material-icons fixed-size-small float-right">settings</i>
-      </a>
-      <b-tooltip
-        target="tooltip-target-3bd46b2a34b6628a1a73a31c91afd7ef"
-        triggers="hover"
-        placement="top"
-      >
-        {{ t('psaccounts.account.manageAccountTooltip') }}
-      </b-tooltip>
+  <div>
+    <b-card
+      no-body
+    >
+      <template v-slot:header>
+        <a
+          @click="actionEventCallback('manage_account_link')"
+          :href="manageAccountLink"
+          target="_blank"
+          v-if="!!manageAccountLink && userIsConnectedAndValidated"
+          class="float-right tooltip-link"
+          id="tooltip-target-3bd46b2a34b6628a1a73a31c91afd7ef"
+        >
+          <i class="material-icons fixed-size-small float-right">settings</i>
+        </a>
+        <b-tooltip
+          target="tooltip-target-3bd46b2a34b6628a1a73a31c91afd7ef"
+          triggers="hover"
+          placement="top"
+        >
+          {{ t('psaccounts.account.manageAccountTooltip') }}
+        </b-tooltip>
 
-      <b-iconstack
-        v-if="userIsConnectedAndValidated"
-        font-scale="1.5"
-        class="mr-2 align-bottom fixed-size"
-        width="20"
-        height="20"
-      >
-        <b-icon-circle-fill
-          stacked
-          variant="success"
-        />
-        <b-icon-check
-          stacked
-          variant="white"
-        />
-      </b-iconstack>
-      <h3 class="d-inline">
-        {{ t('psaccounts.account.title') }}
-      </h3>
-      <span
-        v-if="!userEmailIsValidated && userIsConnected"
-        class="float-right"
-      >
-        <b-badge variant="warning">
-          {{ t('psaccounts.account.emailValidationWarningLabel') }}
-        </b-badge>
-      </span>
-    </template>
-    <b-card-body>
-      <div class="d-flex">
-        <div class="d-flex flex-grow-1">
-          <img
-            class="mr-2 align-self-center"
-            src="~@/assets/img/puffin_logo.png"
-            width="46"
-          >
+        <b-iconstack
+          v-if="userIsConnectedAndValidated"
+          font-scale="1.5"
+          class="mr-2 align-bottom fixed-size"
+          width="20"
+          height="20"
+        >
+          <b-icon-circle-fill
+            stacked
+            variant="success"
+          />
+          <b-icon-check
+            stacked
+            variant="white"
+          />
+        </b-iconstack>
+        <h3 class="d-inline">
+          {{ t('psaccounts.account.title') }}
+        </h3>
+        <span
+          v-if="!userEmailIsValidated && userIsConnected"
+          class="float-right"
+        >
+          <b-badge variant="warning">
+            {{ t('psaccounts.account.emailValidationWarningLabel') }}
+          </b-badge>
+        </span>
+      </template>
+      <b-card-body>
+        <div class="d-flex">
+          <div class="d-flex flex-grow-1">
+            <img
+              class="mr-2 align-self-center"
+              src="~@/assets/img/puffin_logo.png"
+              width="46"
+            >
+            <div class="align-self-center">
+              <span
+                v-if="!userIsConnected"
+                class="align-middle"
+              >{{ t('psaccounts.account.authorize') }}.</span>
+              <template v-else>
+                <span class="align-middle">{{ t('psaccounts.account.authorized') }}.</span><br>
+                <span class="text-muted">{{ user.email }}</span>
+              </template>
+            </div>
+          </div>
           <div class="align-self-center">
-            <span
+            <b-button
               v-if="!userIsConnected"
-              class="align-middle"
-            >{{ t('psaccounts.account.authorize') }}.</span>
-            <template v-else>
-              <span class="align-middle">{{ t('psaccounts.account.authorized') }}.</span><br>
-              <span class="text-muted">{{ user.email }}</span>
-            </template>
+              class="float-right"
+              :disabled="!isAdmin && !userIsConnected"
+              variant="primary"
+              @click="signIn()"
+            >
+              {{ t('psaccounts.account.connectButton') }}
+            </b-button>
+            <b-link
+              v-else-if="userIsConnected && !userEmailIsValidated"
+              @click="signOut()"
+              class="float-right"
+            >
+              {{ t('psaccounts.account.disconnectButton') }}
+            </b-link>
+            <b-button
+              v-else
+              class="float-right"
+              variant="outline-secondary"
+              @click.stop="openModal"
+            >
+              {{ t('psaccounts.account.unlinkShop') }}
+            </b-button>
           </div>
         </div>
-        <div class="align-self-center">
-          <b-button
-            v-if="!userIsConnected"
-            class="float-right"
-            :disabled="!isAdmin && !userIsConnected"
-            variant="primary"
-            @click="signIn()"
-          >
-            {{ t('psaccounts.account.connectButton') }}
-          </b-button>
-          <b-link
-            v-else-if="userIsConnected && !userEmailIsValidated"
-            @click="signOut()"
-            class="float-right"
-          >
-            {{ t('psaccounts.account.disconnectButton') }}
-          </b-link>
-        </div>
-      </div>
-      <b-alert
-        v-if="!userEmailIsValidated && userIsConnected"
-        variant="warning"
-        class="mt-4"
-        show
-      >
-        <p>
-          {{ t('psaccounts.account.emailConfirmationAlert') }}.
-        </p>
-        <p class="mt-2 text-muted">
-          {{ t('psaccounts.account.noEmailReceived') }}?
-        </p>
-        <p class="mt-2">
-          <b-button
-            variant="primary"
-            @click="sendEmailConfirmation()"
-          >
-            {{ t('psaccounts.account.sendEmail') }}
-          </b-button>
-        </p>
-      </b-alert>
-      <b-alert
-        v-if="!isAdmin && !userIsConnected"
-        variant="warning"
-        class="mt-4"
-        show
-      >
-        <p>{{ t('psaccounts.account.needToBeAdmin') }}.</p>
-        <p v-if="adminEmail">
-          {{ t('psaccounts.account.pleaseContact') }}
-          <b-link
-            @click="sendEmailConfirmation()"
-            :href="'mailto:' + adminEmail"
-          >
-            {{ adminEmail }}
-          </b-link>
-        </p>
-      </b-alert>
-      <slot />
-    </b-card-body>
-  </b-card>
+        <b-alert
+          v-if="!userEmailIsValidated && userIsConnected"
+          variant="warning"
+          class="mt-4"
+          show
+        >
+          <p>
+            {{ t('psaccounts.account.emailConfirmationAlert') }}.
+          </p>
+          <p class="mt-2 text-muted">
+            {{ t('psaccounts.account.noEmailReceived') }}?
+          </p>
+          <p class="mt-2">
+            <b-button
+              variant="primary"
+              @click="sendEmailConfirmation()"
+            >
+              {{ t('psaccounts.account.sendEmail') }}
+            </b-button>
+          </p>
+        </b-alert>
+        <b-alert
+          v-if="!isAdmin && !userIsConnected"
+          variant="warning"
+          class="mt-4"
+          show
+        >
+          <p>{{ t('psaccounts.account.needToBeAdmin') }}.</p>
+          <p v-if="adminEmail">
+            {{ t('psaccounts.account.pleaseContact') }}
+            <b-link
+              @click="sendEmailConfirmation()"
+              :href="'mailto:' + adminEmail"
+            >
+              {{ adminEmail }}
+            </b-link>
+          </p>
+        </b-alert>
+        <b-alert
+          v-if="shopIsUnlinked"
+          variant="success"
+          class="mt-3"
+          show
+        >
+          <p>
+            {{ t('psaccounts.account.unlinkShopAlert') }}.
+          </p>
+        </b-alert>
+        <b-alert
+          v-if="shopUnlinkError"
+          variant="danger"
+          class="mt-3"
+          show
+        >
+          <p>
+            {{ t('psaccounts.account.unlinkShopError') }}.
+          </p>
+        </b-alert>
+        <slot />
+      </b-card-body>
+    </b-card>
+    <Modal
+      id="unlinkShop-modal"
+      :displayed="modalDisplayed"
+      @closed="closeModal"
+      :header-title="t('psaccounts.account.unlinkShopModalTitle')"
+      :body-text="t('psaccounts.account.unlinkShopModalContent')"
+    >
+      <template #modal-footer>
+        <b-button
+          @click="closeModal"
+          variant="outline-secondary"
+        >
+          Cancel
+        </b-button>
+        <b-button
+          variant="primary"
+          @click="unlinkShop"
+        >
+          Yes, I Confirm
+        </b-button>
+      </template>
+    </Modal>
+  </div>
 </template>
 
 <script>
@@ -144,6 +196,7 @@
     BIconCheck,
     BTooltip,
   } from 'bootstrap-vue';
+  import Modal from '@/components/modal/Modal';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -164,6 +217,7 @@
       BIconCircleFill,
       BIconCheck,
       BTooltip,
+      Modal,
     },
     props: {
       /**
@@ -225,6 +279,9 @@
     data() {
       return {
         panelShown: null,
+        shopIsUnlinked: false,
+        shopUnlinkError: false,
+        modalDisplayed: false,
       };
     },
     methods: {
@@ -314,6 +371,32 @@
          * @type {Event}
          */
         this.$emit('actioned', eventType, event);
+      },
+      openModal() {
+        this.modalDisplayed = true;
+      },
+      closeModal() {
+        this.modalDisplayed = false;
+      },
+      /*
+       * Unlink the shop and the current user
+       * */
+      async unlinkShop() {
+        await fetch(`${window.contextPsAccounts.adminAjaxLink}&action=unlinkShop`).then((response) => {
+          this.closeModal();
+          if (response.ok) {
+            this.$emit('unlinkShop');
+            this.shopIsUnlinked = true;
+            setTimeout(() => {
+              this.shopIsUnlinked = false;
+            }, 3000);
+          } else {
+            this.shopUnlinkError = true;
+            setTimeout(() => {
+              this.shopUnlinkError = false;
+            }, 3000);
+          }
+        });
       },
     },
     computed: {
