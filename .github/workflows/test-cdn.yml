@@ -36,13 +36,9 @@ jobs:
       - id: get_tag
         run : |
           echo ::set-output name=TAG::0.0.1
-          echo ::set-output name=MAJOR::$(echo 1.2.3 | cut -d '.' -f 1)
-          echo ::set-output name=MINOR::$(echo 1.2.3 | cut -d '.' -f 2)
-          echo ::set-output name=PATCH::$(echo 1.2.3 | cut -d '.' -f 3)
-
-      - run: echo $MAJOR
-        env:
-          MAJOR: ${{ steps.test.outputs.MAJOR }}
+          echo ::set-output name=MAJOR::$(echo 0.0.1 | cut -d '.' -f 1)
+          echo ::set-output name=MINOR::$(echo 0.0.1 | cut -d '.' -f 2)
+          echo ::set-output name=PATCH::$(echo 0.0.1 | cut -d '.' -f 3)
 
       - name: Checkout repository
         uses: actions/checkout@master
@@ -66,7 +62,7 @@ jobs:
           gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-$MAJOR.$MINOR.$PATCH.js
           gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-x.$MINOR.$PATCH.js
           gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-x.x.$PATCH.js
-        with:
+        env:
           MAJOR: ${{ steps.get_tag.outputs.MAJOR }}
           MINOR: ${{ steps.get_tag.outputs.MINOR }}
           PATCH: ${{ steps.get_tag.outputs.PATCH }}
