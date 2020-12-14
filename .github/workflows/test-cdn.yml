@@ -29,17 +29,16 @@ jobs:
 #        run: |
 #          echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
 #          echo ::set-output name=MAJOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 1)
+#          echo ::set-output name=MINOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 2)
+#          echo ::set-output name=PATCH::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 3)
+
 
       - id: get_tag
-        run : echo ::set-output name=TAG::1.2.3
-
-      - run: |
-          echo ::set-output name=MAJOR::$(echo $TAG | cut -d '.' -f 1)
-          echo ::set-output name=MINOR::$(echo $TAG | cut -d '.' -f 2)
-          echo ::set-output name=PATCH::$(echo $TAG | cut -d '.' -f 3)
-        id: test
-        env:
-          TAG: ${{ steps.get_tag.outputs.TAG }}
+        run : |
+          echo ::set-output name=TAG::0.0.1
+          echo ::set-output name=MAJOR::$(echo 1.2.3 | cut -d '.' -f 1)
+          echo ::set-output name=MINOR::$(echo 1.2.3 | cut -d '.' -f 2)
+          echo ::set-output name=PATCH::$(echo 1.2.3 | cut -d '.' -f 3)
 
       - run: echo $MAJOR
         env:
@@ -63,4 +62,11 @@ jobs:
         with:
           cmd: build-lib
 
-      - run: gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-0.0.5.js
+      - run: |
+          gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-$MAJOR.$MINOR.$PATCH.js
+          gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-x.$MINOR.$PATCH.js
+          gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-x.x.$PATCH.js
+        with:
+          MAJOR: ${{ steps.get_tag.outputs.MAJOR }}
+          MINOR: ${{ steps.get_tag.outputs.MINOR }}
+          PATCH: ${{ steps.get_tag.outputs.PATCH }}
