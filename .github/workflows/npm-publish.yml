@@ -12,8 +12,24 @@ jobs:
     steps:
 
       - name: Get tag
-        id: get_tag
-        run: echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
+          id: get_tag
+          run: |
+            echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
+            echo ::set-output name=MAJOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 1)
+            echo ::set-output name=MINOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 2)
+            echo ::set-output name=PATCH::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 3)
+
+      - name: Gcloud auth and write env file
+        run: |
+          echo $GOOGLE_APPLICATION_CREDENTIALS > token.json
+          gcloud auth activate-service-account --key-file=token.json
+          gcloud container clusters get-credentials $GCLOUD_CLUSTER \
+          --zone europe-west1-c --project psessentials-integration
+          gcloud auth configure-docker
+          rm token.json
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          GCLOUD_CLUSTER: ${{ secrets.GCLOUD_CLUSTER }}
 
       - name: Checkout repository
         uses: actions/checkout@master
@@ -43,3 +59,12 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - run: |
+          gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-$MAJOR.$MINOR.$PATCH.js
+          gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-x.$MINOR.$PATCH.js
+          gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-x.x.$PATCH.js
+        env:
+          MAJOR: ${{ steps.get_tag.outputs.MAJOR }}
+          MINOR: ${{ steps.get_tag.outputs.MINOR }}
+          PATCH: ${{ steps.get_tag.outputs.PATCH }}
