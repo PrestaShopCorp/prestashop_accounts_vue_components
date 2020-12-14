@@ -39,7 +39,7 @@ jobs:
           echo ::set-output name=PATCH::$(echo $TAG | cut -d '.' -f 3)
         id: test
         env:
-          TAG: ${{ steps.get_tag.outputs.MAJOR }}
+          TAG: ${{ steps.get_tag.outputs.TAG }}
 
       - run: echo $MAJOR
         env:
