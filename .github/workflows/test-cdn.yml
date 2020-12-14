@@ -26,7 +26,13 @@ jobs:
 
       - name: Get tag
         id: get_tag
-        run: echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
+        run: |
+          echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
+          echo ::set-output name=MAJOR::$($(echo $GITHUB_REF | cut -d / -f 3)| cut -d '.' -f 1)
+
+      - run: echo $MAJOR
+        with:
+          MAJOR: ${{ steps.get_tag.outputs.MAJOR }}
 
       - name: Checkout repository
         uses: actions/checkout@master
