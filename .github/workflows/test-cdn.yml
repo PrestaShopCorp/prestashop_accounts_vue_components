@@ -31,7 +31,7 @@ jobs:
           echo ::set-output name=MAJOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 1)
 
       - run: echo $MAJOR
-        with:
+        env:
           MAJOR: ${{ steps.get_tag.outputs.MAJOR }}
 
       - name: Checkout repository
