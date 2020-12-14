@@ -12,6 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Gcloud auth and write env file
+        run: |
+          echo $GOOGLE_APPLICATION_CREDENTIALS > token.json
+          gcloud auth activate-service-account --key-file=token.json
+          gcloud container clusters get-credentials $GCLOUD_CLUSTER \
+          --zone europe-west1-c --project psessentials-integration
+          gcloud auth configure-docker
+          rm token.json
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          GCLOUD_CLUSTER: ${{ secrets.GCLOUD_CLUSTER }}
+
       - name: Get tag
         id: get_tag
         run: echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
@@ -34,4 +46,4 @@ jobs:
         with:
           cmd: build-lib
 
-      - run: ls dist/
+      - run: gsutil cp dist/psaccountsVue.umd.min.js gs://accouts-test-cdn/accounts/accounts-0.0.5.js
