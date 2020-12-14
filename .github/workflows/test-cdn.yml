@@ -24,15 +24,26 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           GCLOUD_CLUSTER: ${{ secrets.GCLOUD_CLUSTER }}
 
-      - name: Get tag
-        id: get_tag
-        run: |
-          echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
-          echo ::set-output name=MAJOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 1)
+#      - name: Get tag
+#        id: get_tag
+#        run: |
+#          echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
+#          echo ::set-output name=MAJOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 1)
+
+      - id: get_tag
+        run : echo ::set-output name=TAG::1.2.3
+
+      - run: |
+          echo ::set-output name=MAJOR::$(echo $TAG | cut -d '.' -f 1)
+          echo ::set-output name=MINOR::$(echo $TAG | cut -d '.' -f 2)
+          echo ::set-output name=PATCH::$(echo $TAG | cut -d '.' -f 3)
+        id: test
+        env:
+          TAG: ${{ steps.get_tag.outputs.MAJOR }}
 
       - run: echo $MAJOR
         env:
-          MAJOR: ${{ steps.get_tag.outputs.MAJOR }}
+          MAJOR: ${{ steps.test.outputs.MAJOR }}
 
       - name: Checkout repository
         uses: actions/checkout@master
