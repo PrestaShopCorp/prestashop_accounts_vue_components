@@ -1,32 +1,24 @@
-name: NPM Publish
+name: NPM Publish / CDN Publish
 
-on: [push]
-#on:
-#  push:
-#    tags:
-#      - '*'
+on:
+  push:
+    tags:
+      - '*'
 
 jobs:
   npm-publish:
-    name: NPM Publish
+    name: NPM Publish and CDN publish
     runs-on: ubuntu-latest
     steps:
 
-#      - name: Get tag
-#          id: get_tag
-#          run: |
-#            echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
-#            echo ::set-output name=MAJOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 1)
-#            echo ::set-output name=MINOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 2)
-#            echo ::set-output name=PATCH::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 3)
-
       - name: Get tag
-        id: get_tag
-        run: |
-          echo ::set-output name=TAG::0.0.0
-          echo ::set-output name=MAJOR::0
-          echo ::set-output name=MINOR::0
-          echo ::set-output name=PATCH::0
+          id: get_tag
+          run: |
+            echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
+            echo ::set-output name=MAJOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 1)
+            echo ::set-output name=MINOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 2)
+            echo ::set-output name=PATCH::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 3)
+
 
       - name: Gcloud auth and write env file
         run: |
@@ -64,10 +56,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           VERSION: ${{ steps.get_tag.outputs.TAG }}
 
-#      - name: Publish
-#        run: npm publish
-#        env:
-#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - run: |
           gsutil cp dist/psaccountsVue.umd.min.js gs://prestashop-vuejs-cdn/accounts/$MAJOR.$MINOR.$PATCH/prestashop_accounts_vue_components.min.js
