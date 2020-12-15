@@ -62,8 +62,8 @@ jobs:
 
       - run: |
           gsutil cp dist/psaccountsVue.umd.min.js gs://prestashop-vuejs-cdn/accounts/$MAJOR.$MINOR.$PATCH/prestashop_accounts_vue_components.min.js
-          gsutil cp dist/psaccountsVue.umd.min.js gs://prestashop-vuejs-cdn/accounts/x.$MINOR.$PATCH/prestashop_accounts_vue_components.min.js
-          gsutil cp dist/psaccountsVue.umd.min.js gs://prestashop-vuejs-cdn/accounts/x.x.$PATCH/prestashop_accounts_vue_components.min.js
+          gsutil cp dist/psaccountsVue.umd.min.js gs://prestashop-vuejs-cdn/accounts/$MAJOR.$MINOR.x/prestashop_accounts_vue_components.min.js
+          gsutil cp dist/psaccountsVue.umd.min.js gs://prestashop-vuejs-cdn/accounts/$MAJOR.x.x/prestashop_accounts_vue_components.min.js
         env:
           MAJOR: ${{ steps.get_tag.outputs.MAJOR }}
           MINOR: ${{ steps.get_tag.outputs.MINOR }}
