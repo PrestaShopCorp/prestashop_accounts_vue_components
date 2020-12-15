@@ -19,7 +19,6 @@ jobs:
           echo ::set-output name=MINOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 2)
           echo ::set-output name=PATCH::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 3)
 
-
       - name: Gcloud auth and write env file
         run: |
           echo $GOOGLE_APPLICATION_CREDENTIALS > token.json
