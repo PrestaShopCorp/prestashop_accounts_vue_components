@@ -43,3 +43,18 @@ https://storybook-accounts.psessentials-integration.net/
 Storybook production (trigger on push master/main) : 
 
 https://storybook-accounts.psessentials.net/
+
+## CDN
+
+To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page. 
+
+```
+# To load version 1.4.2
+<script src="https://storage.googleapis.com/prestashop-vuejs-cdn/accounts/1.4.2/prestashop_accounts_vue_components.min.js"></script>
+
+# To load latest patched version 1.4 
+<script src="https://storage.googleapis.com/prestashop-vuejs-cdn/accounts/1.4.x/prestashop_accounts_vue_components.min.js"></script>
+
+# To load latest version
+<script src="https://storage.googleapis.com/prestashop-vuejs-cdn/accounts/1.x.x/prestashop_accounts_vue_components.min.js"></script>
+```
