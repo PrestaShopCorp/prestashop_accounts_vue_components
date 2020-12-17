@@ -390,7 +390,9 @@
             setTimeout(() => {
               this.shopIsUnlinked = false;
             }, 3000);
-            this.updateOnboardingLink();
+            this.getOnboardingLink().then((link) => {
+              this.onboardingLink = link;
+            });
           } else {
             this.shopUnlinkError = true;
             setTimeout(() => {
@@ -402,15 +404,11 @@
       /*
        * FIXME : quick and dirty fix
        */
-      async updateOnboardingLink() {
+      getOnboardingLink() {
         const {psxName, adminAjaxLink} = window.contextPsAccounts;
-        await fetch(`${adminAjaxLink}&action=getContext&psx_name=${psxName}`).then((response) => {
-          if (response.ok) {
-            response.json().then((context) => {
-              this.onboardingLink = context.onboardingLink;
-            });
-          }
-        });
+        return fetch(`${adminAjaxLink}&action=getContext&psx_name=${psxName}`)
+                .then((response) => response.json())
+                .then((context) => context.onboardingLink);
       },
     },
     computed: {
