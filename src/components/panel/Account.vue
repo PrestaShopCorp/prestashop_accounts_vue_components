@@ -390,11 +390,25 @@
             setTimeout(() => {
               this.shopIsUnlinked = false;
             }, 3000);
+            this.updateOnboardingLink();
           } else {
             this.shopUnlinkError = true;
             setTimeout(() => {
               this.shopUnlinkError = false;
             }, 3000);
+          }
+        });
+      },
+      /*
+       * FIXME : quick and dirty fix
+       */
+      async updateOnboardingLink() {
+        const {psxName, adminAjaxLink} = window.contextPsAccounts;
+        await fetch(`${adminAjaxLink}&action=getContext&psx_name=${psxName}`).then((response) => {
+          if (response.ok) {
+            response.json().then((context) => {
+              this.onboardingLink = context.onboardingLink;
+            });
           }
         });
       },
