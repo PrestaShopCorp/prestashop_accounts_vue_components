@@ -34,7 +34,8 @@
       "noEmailReceived": "Non hai ricevuto l'e-mail di conferma?",
       "sendEmail": "Invia di nuovo",
       "needToBeAdmin": "Per continuare, devi essere l'amministratore del negozio",
-      "pleaseContact": "Si prega di contattare"
+      "pleaseContact": "Si prega di contattare",
+      "manageAccountTooltip": "Manage account"
     }
   },
   "billing": {

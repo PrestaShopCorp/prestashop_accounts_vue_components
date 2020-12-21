@@ -34,7 +34,8 @@
       "noEmailReceived": "Keine Bestätigungs-E-Mail?",
       "sendEmail": "Erneut senden",
       "needToBeAdmin": "Um fortzufahren, müssen Sie Administrator des Geschäfts sein",
-      "pleaseContact": "Vielen Dank für den Kontakt"
+      "pleaseContact": "Vielen Dank für den Kontakt",
+      "manageAccountTooltip": "Manage account"
     }
   },
   "billing": {
