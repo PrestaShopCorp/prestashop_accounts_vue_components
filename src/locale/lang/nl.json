@@ -34,7 +34,8 @@
       "noEmailReceived": "Geen bevestigingsmail?",
       "sendEmail": "Doorsturen",
       "needToBeAdmin": "Om verder te gaan, moet u een administrator van de winkel zijn.",
-      "pleaseContact": "Neem alstublieft contact op met"
+      "pleaseContact": "Neem alstublieft contact op met",
+      "manageAccountTooltip": "Manage account"
     }
   },
   "billing": {

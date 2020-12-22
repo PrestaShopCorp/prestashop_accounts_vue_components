@@ -34,7 +34,8 @@
       "noEmailReceived": "¿No ha llegado el correo electrónico de confirmación?",
       "sendEmail": "Reenviar",
       "needToBeAdmin": "Para continuar, debes ser administrador de la tienda",
-      "pleaseContact": "Ponte en contacto con nosotros"
+      "pleaseContact": "Ponte en contacto con nosotros",
+      "manageAccountTooltip": "Manage account"
     }
   },
   "billing": {
