@@ -21,7 +21,7 @@
       </p>
     </b-alert>
 
-    <template v-else-if="!showPlans || !canShowPlans">
+    <template v-else>
       <AccountNotInstalled
         v-if="!psAccountsIsInstalled"
         :account-is-installed="psAccountsIsInstalled"
@@ -54,12 +54,9 @@
             @unlinkShop="validatedContext.user.email = null"
             class="mb-2"
           >
-            <Billing
-              v-if="showBilling"
-              :billing="validatedContext.billing"
-              @upgrade-plan="goToPlans()"
-              @edit-payment-method="alert('Not yet implemented!')"
-              @edit-address="alert('Not yet implemented!')"
+            <slot
+              v-if="userIsConnectedAndEmailIsValidated"
+              name="account-footer"
             />
           </Account>
         </template>
@@ -74,13 +71,6 @@
       </b-overlay>
       <slot name="customBody" />
     </template>
-
-    <Plans
-      v-else
-      :billing="validatedContext.billing"
-      @back="backFromPlans()"
-      @next="(plan) => goToTunnel(plan)"
-    />
   </div>
 </template>
 
@@ -89,8 +79,6 @@
   import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
   import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
   import Account from '@/components/panel/Account';
-  import Billing from '@/components/panel/Billing';
-  import Plans from '@/components/panel/Plans';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
   import {BAlert, BOverlay} from 'bootstrap-vue';
@@ -99,9 +87,11 @@
 
   /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
-   * to ensure each functional case is covered for you. You can use 2 slots: `v-slot:body`,
+   * to ensure each functional case is covered for you. You can use 3 slots: `v-slot:body`,
    * that will be disabled if the user account is not well linked (you should put your
-   * module configuration panel here), and a special `v-slot:customBody` that will always be
+   * module configuration panel here), `v-slot:account-footer` that will be displayed
+   * on the footer of the PsAccount component if the user is validated and logged,
+   * and a special `v-slot:customBody` that will always be
    * displayed (you have to manage display condition by yourself).
    */
   export default {
@@ -111,8 +101,6 @@
       AccountNotEnabled,
       MultiStoreSelector,
       Account,
-      Billing,
-      Plans,
       BOverlay,
       BAlert,
     },
@@ -129,15 +117,6 @@
         required: false,
         default: () => context,
       },
-      /**
-       * A way to force plans page display (if any plan is available) directly at component boot.
-       * By default, false to let normal workflow to be displayed.
-       */
-      forceShowPlans: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
     },
     computed: {
       userIsConnectedAndEmailIsValidated() {
@@ -150,17 +129,6 @@
       psAccountsIsEnabled() {
         return this.validatedContext.psAccountsEnableLink === null;
       },
-      showBilling() {
-        const b = this.validatedContext.billing;
-        const u = this.validatedContext.user;
-        return this.validatedContext.currentShop
-          && u && (u.email !== null) && u.emailIsValidated
-          && b && ((b.currentPlan && b.currentPlan !== null) || (b.plans && b.plans.length > 0));
-      },
-      canShowPlans() {
-        const b = this.validatedContext.billing;
-        return b.plans && (b.plans.length > 0);
-      },
     },
     data() {
       return {
@@ -169,7 +137,6 @@
         installLoading: false,
         enableLoading: false,
         hasError: false,
-        showPlans: this.forceShowPlans || false,
         panelShown: null,
       };
     },
@@ -237,21 +204,6 @@
           this.hasError = true;
         });
       },
-      goToPlans() {
-        this.showPlans = true;
-        this.eventCallback('enter_plans');
-      },
-      backFromPlans() {
-        this.showPlans = false;
-        this.eventCallback('cancel_plans');
-      },
-      goToTunnel(plan) {
-        this.showPlans = false;
-        this.eventCallback('plan_selected', plan);
-
-        // TODO: modal display, with a new PlanTunnel component inside, for given plan
-        setTimeout(() => alert(`Not yet implemented: ${plan}`), 400);
-      },
       viewingPanel() {
         const previousPanel = this.panelShown;
 
@@ -278,15 +230,6 @@
           case 'manage_account_link':
           case 'sign_in':
           case 'sign_out':
-          case 'plan_selected':
-            /**
-             * Emitted when user action occurred on a panel.
-             * @type {Event}
-             */
-            this.$emit('actioned', eventType, event);
-            break;
-          case 'enter_plans':
-          case 'cancel_plans':
           case 'user_not_admin':
           case 'user_not_connected':
           case 'user_connected_not_validated':
@@ -317,9 +260,6 @@
     watch: {
       context() {
         this.validateContext();
-      },
-      forceShowPlans(newValue) {
-        this.showPlans = newValue;
       },
     },
   };
