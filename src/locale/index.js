@@ -79,7 +79,11 @@ export const use = function use(l) {
     case 'en':
     default:
       lang = en;
+      // For the default case, stop here
+      return;
   }
+
+  lang = deepmerge(en, lang, {clone: true});
 };
 
 export const i18n = function i18n(fn) {
