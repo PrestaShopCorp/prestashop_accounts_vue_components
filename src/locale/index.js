@@ -46,6 +46,7 @@ export const use = function use(l) {
     return;
   }
   lang = AllLanguages[l.substr(0, 2).toLowerCase()] || AllLanguages.en;
+  if (lang === AllLanguages.en) return;
   lang = deepmerge(AllLanguages.en, lang, {clone: true});
 };
 
