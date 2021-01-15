@@ -1,18 +1,11 @@
-import en from '@/locale/lang/en.json';
-import fr from '@/locale/lang/fr.json';
-import it from '@/locale/lang/it.json';
-import es from '@/locale/lang/es.json';
-import pl from '@/locale/lang/pl.json';
-import nl from '@/locale/lang/nl.json';
-import pt from '@/locale/lang/pt.json';
-import de from '@/locale/lang/de.json';
+import AllLanguages from '@/locale/lang';
 
 import Vue from 'vue';
 import deepmerge from 'deepmerge';
 import Format from './format';
 
 const format = Format(Vue);
-let lang = en;
+let lang = AllLanguages.en;
 let merged = false;
 
 // eslint-disable-next-line consistent-return
@@ -36,17 +29,15 @@ export const t = function t(path, options, ...args) {
   if (value !== null && value !== undefined) return value;
 
   const array = path.split('.');
-  let current = lang;
+  value = lang;
 
   for (let i = 0, j = array.length; i < j; i += 1) {
     const property = array[i];
-    value = current[property];
-    if (i === j - 1) return format(value, options);
     if (!value) return '';
-    current = value;
+    value = value[property];
   }
 
-  return '';
+  return format(value || '', options);
 };
 
 export const use = function use(l) {
@@ -54,32 +45,9 @@ export const use = function use(l) {
     lang = l || lang;
     return;
   }
-  switch (l.substr(0, 2)) {
-    case 'fr':
-      lang = fr;
-      break;
-    case 'it':
-      lang = it;
-      break;
-    case 'es':
-      lang = es;
-      break;
-    case 'pl':
-      lang = pl;
-      break;
-    case 'nl':
-      lang = nl;
-      break;
-    case 'pt':
-      lang = pt;
-      break;
-    case 'de':
-      lang = de;
-      break;
-    case 'en':
-    default:
-      lang = en;
-  }
+  lang = AllLanguages[l.substr(0, 2).toLowerCase()] || AllLanguages.en;
+  if (lang === AllLanguages.en) return;
+  lang = deepmerge(AllLanguages.en, lang, {clone: true});
 };
 
 export const i18n = function i18n(fn) {
