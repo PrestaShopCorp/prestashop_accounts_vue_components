@@ -36,27 +36,35 @@
           @enabled="enablePsAccounts()"
         />
         <template v-else>
-          <b-alert
-            class="d-flex event-bus-not-installed"
-            :show="!validatedContext.dependencies.ps_eventbus.isInstalled"
-            variant="warning"
+          <b-overlay
+            :show="installLoading"
+            variant="white"
+            :opacity="0.70"
+            blur="0px"
           >
-            <div class="d-flex flex-grow-1">
-              <p class="align-self-center">
-                The PS Event bus module is required in order to use PrestaShop Accounts,
-                please install the module to proceed
-              </p>
-            </div>
-            <div class="align-self-center">
-              <b-button
-                variant="primary"
-                class="float-right"
-                @click="installEventBus"
-              >
-                Install
-              </b-button>
-            </div>
-          </b-alert>
+            <b-alert
+              class="d-flex event-bus-not-installed"
+              :show="!validatedContext.dependencies.ps_eventbus.isInstalled"
+              variant="warning"
+            >
+              <div class="d-flex flex-grow-1">
+                <p class="align-self-center">
+                  The PS Event bus module is required in order to use PrestaShop Accounts,
+                  please install the module to proceed
+                </p>
+              </div>
+              <div class="align-self-center">
+                <b-button
+                  variant="primary"
+                  class="float-right"
+                  @click="installEventBus"
+                >
+                  Install
+                </b-button>
+              </div>
+            </b-alert>
+          </b-overlay>
+
           <b-overlay
             :show="!validatedContext.dependencies.ps_eventbus.isInstalled"
             variant="white"
@@ -209,7 +217,22 @@
         });
       },
       installEventBus() {
-        // TODO: Install module call
+        this.hasError = false;
+        this.installLoading = true;
+
+        fetch(this.validatedContext.dependencies.ps_eventbus.installLink, {
+          method: 'POST',
+        }).then((response) => response.json(),
+        ).then((data) => {
+          if (data.ps_eventbus.status === false) {
+            throw new Error('Cannot install ps_eventbus module.');
+          }
+          window.location.reload();
+        }).catch(() => {
+          this.installLoading = false;
+          this.hasError = true;
+        });
+
         window.location.reload();
       },
       enablePsAccounts() {
