@@ -36,34 +36,64 @@
           @enabled="enablePsAccounts()"
         />
         <template v-else>
-          <MultiStoreSelector
-            v-if="!validatedContext.currentShop"
-            :shops="validatedContext.shops"
-            @shop-selected="eventCallback('multi_shop_selected', $event)"
-          />
-          <Account
-            v-else
-            :user="validatedContext.user"
-            :is-admin="validatedContext.user.isSuperAdmin"
-            :onboarding-link="validatedContext.onboardingLink"
-            :admin-email="validatedContext.superAdminEmail"
-            :resend-email-link="validatedContext.ssoResendVerificationEmail"
-            :manage-account-link="validatedContext.manageAccountLink"
-            @viewed="eventCallback"
-            @actioned="eventCallback"
-            @unlinkShop="validatedContext.user.email = null"
-            class="mb-2"
+          <b-alert
+            class="d-flex event-bus-not-installed"
+            :show="!validatedContext.dependencies.ps_eventbus.isInstalled"
+            variant="warning"
           >
-            <slot
-              v-if="userIsConnectedAndEmailIsValidated"
-              name="account-footer"
+            <div class="d-flex flex-grow-1">
+              <p class="align-self-center">
+                The PS Event bus module is required in order to use PrestaShop Accounts,
+                please install the module to proceed
+              </p>
+            </div>
+            <div class="align-self-center">
+              <b-button
+                variant="primary"
+                class="float-right"
+                @click="installEventBus"
+              >
+                Install
+              </b-button>
+            </div>
+          </b-alert>
+          <b-overlay
+            :show="!validatedContext.dependencies.ps_eventbus.isInstalled"
+            variant="white"
+            spinner-type="null"
+            :opacity="0.70"
+            blur="0px"
+          >
+            <MultiStoreSelector
+              v-if="!validatedContext.currentShop"
+              :shops="validatedContext.shops"
+              @shop-selected="eventCallback('multi_shop_selected', $event)"
             />
-          </Account>
+            <Account
+              v-else
+              :user="validatedContext.user"
+              :is-admin="validatedContext.user.isSuperAdmin"
+              :onboarding-link="validatedContext.onboardingLink"
+              :admin-email="validatedContext.superAdminEmail"
+              :resend-email-link="validatedContext.ssoResendVerificationEmail"
+              :manage-account-link="validatedContext.manageAccountLink"
+              @viewed="eventCallback"
+              @actioned="eventCallback"
+              @unlinkShop="validatedContext.user.email = null"
+              class="mb-2"
+            >
+              <slot
+                v-if="userIsConnectedAndEmailIsValidated"
+                name="account-footer"
+              />
+            </Account>
+          </b-overlay>
         </template>
       </template>
       <b-overlay
         :show="!userIsConnectedAndEmailIsValidated"
         variant="white"
+        spinner-type="null"
         :opacity="0.70"
         blur="0px"
       >
@@ -81,7 +111,7 @@
   import Account from '@/components/panel/Account';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
-  import {BAlert, BOverlay} from 'bootstrap-vue';
+  import {BAlert, BOverlay, BButton} from 'bootstrap-vue';
   import {contextSchema} from '../lib/ContextValidator';
   import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -103,6 +133,7 @@
       Account,
       BOverlay,
       BAlert,
+      BButton,
     },
     mixins: [Locale],
     props: {
@@ -176,6 +207,10 @@
           this.installLoading = false;
           this.hasError = true;
         });
+      },
+      installEventBus() {
+        // TODO: Install module call
+        window.location.reload();
       },
       enablePsAccounts() {
         this.eventCallback('enable_ps_accounts');
@@ -264,3 +299,8 @@
     },
   };
 </script>
+<style>
+.event-bus-not-installed.alert:before {
+  top: 24px !important;
+}
+</style>
