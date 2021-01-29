@@ -24,8 +24,13 @@
       "group": "Group"
     },
     "alertEventBusNotInstalled": {
-      "description":  "The PS Event bus module is required in order to use PrestaShop Accounts, please install the module to proceed",
+      "message":  "The PS Event bus module is required in order to use PrestaShop Accounts, please install the module to proceed",
       "installButton": "Install"
+    },
+    "alertAccountNeedsUpdate": {
+      "title": "Update PrestaShop Accounts module",
+      "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
+      "installButton": "Update"
     },
     "account": {
       "title": "Your PrestaShop account",

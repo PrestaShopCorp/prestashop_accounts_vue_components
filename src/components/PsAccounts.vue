@@ -38,11 +38,19 @@
         <template v-else>
           <event-bus-not-installed
             v-if="!validatedContext.dependencies.ps_eventbus.isInstalled"
+            :install-loading="installLoading"
             @installEventBus="installEventBus"
           />
 
+          <AccountNeedsUpdate
+            v-if="validatedContext.psAccountsNeedsUpgrade"
+            :install-loading="installLoading"
+            @updateAccounts="updatePsAccounts"
+          />
+
           <b-overlay
-            :show="!validatedContext.dependencies.ps_eventbus.isInstalled"
+            :show="!validatedContext.dependencies.ps_eventbus.isInstalled
+              || validatedContext.psAccountsNeedsUpgrade"
             variant="white"
             spinner-type="null"
             :opacity="0.70"
@@ -93,6 +101,7 @@
   import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
   import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
   import EventBusNotInstalled from '@/components/alert/EventBusNotInstalled';
+  import AccountNeedsUpdate from '@/components/alert/AccountNeedsUpdate';
   import Account from '@/components/panel/Account';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
@@ -119,6 +128,7 @@
       BOverlay,
       BAlert,
       EventBusNotInstalled,
+      AccountNeedsUpdate,
     },
     mixins: [Locale],
     props: {
@@ -203,6 +213,26 @@
         ).then((data) => {
           if (data.ps_eventbus.status === false) {
             throw new Error('Cannot install ps_eventbus module.');
+          }
+          window.location.reload();
+        }).catch(() => {
+          this.installLoading = false;
+          this.hasError = true;
+        });
+
+        window.location.reload();
+      },
+
+      updatePsAccounts() {
+        this.hasError = false;
+        this.installLoading = true;
+
+        fetch(this.validatedContext.psAccountsUpgradeLink, {
+          method: 'POST',
+        }).then((response) => response.json(),
+        ).then((data) => {
+          if (data.ps_accounts.status === false) {
+            throw new Error('Cannot update PS accounts module.');
           }
           window.location.reload();
         }).catch(() => {

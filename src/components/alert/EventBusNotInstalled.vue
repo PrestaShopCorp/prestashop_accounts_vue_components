@@ -12,7 +12,7 @@
     >
       <div class="d-flex flex-grow-1">
         <p class="align-self-center">
-          {{ t('psaccounts.alertEventBusNotInstalled.description') }}
+          {{ t('psaccounts.alertEventBusNotInstalled.message') }}
         </p>
       </div>
       <div class="align-self-center">
@@ -40,10 +40,11 @@
       BAlert,
       BButton,
     },
-    data() {
-      return {
-        installLoading: false,
-      };
+    props: {
+      installLoading: {
+        type: Boolean,
+        required: false,
+      },
     },
     methods: {
       installEventBus() {

@@ -321,6 +321,8 @@ You can have these different cases when the shop prerequisites are not fully val
           psIs17: true,
           psAccountsInstallLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           psAccountsEnableLink: null,
+          psAccountsNeedsUpgrade: false,
+          psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -389,6 +391,8 @@ You can have these different cases when the shop prerequisites are not fully val
           psIs17: true,
           psAccountsInstallLink: null,
           psAccountsEnableLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/enable/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
+          psAccountsNeedsUpgrade: false,
+          psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -457,6 +461,8 @@ You can have these different cases when the shop prerequisites are not fully val
               psIs17: true,
               psAccountsInstallLink: null,
               psAccountsEnableLink: null,
+              psAccountsNeedsUpgrade: false,
+              psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
               currentShop: {
                 id: 1,
                 name: 'PrestaShop',
@@ -509,6 +515,69 @@ You can have these different cases when the shop prerequisites are not fully val
   }}
 </Story>
 
+<Story name='Ps Accounts needs an update' height='350px'>
+  {{
+    components: { PsAccounts },
+        props: {
+          context: {
+            default: object('context', {
+              psIs17: true,
+              psAccountsInstallLink: null,
+              psAccountsEnableLink: null,
+              psAccountsNeedsUpgrade: true,
+              psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
+              currentShop: {
+                id: 1,
+                name: 'PrestaShop',
+                url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+                domain: 'my-domain.com',
+                domainSsl: 'my-secure-domain.com',
+              },
+              shops: [
+                {
+                  id: 1,
+                  name: 'Default',
+                  shops: [
+                    {
+                      id: 1,
+                      name: 'PrestaShop',
+                      url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+                      domain: 'my-domain.com',
+                      domainSsl: 'my-secure-domain.com',
+                    }
+                  ],
+                },
+              ],
+              user: {
+                email: null,
+                emailIsValidated: false,
+                isSuperAdmin: true,
+              },
+              onboardingLink: 'http://perdu.com',
+              superAdminEmail: 'big.boss@my-shop.com',
+              ssoResendVerificationEmail: 'http://perdu.com',
+              manageAccountLink: 'http://perdu.com',
+              dependencies: {
+                  "ps_eventbus": {
+                    "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
+                    "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
+                    "isEnabled": false,
+                    "isInstalled": true,
+                  },
+              },
+            })
+          },
+        },
+        methods: {
+          actionEvent: action('actioned'),
+          viewEvent: action('viewed'),
+        },
+        template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
+          '<template v-slot:body>- Module settings part, disabled -</template>' +
+        '</PsAccounts>',
+  }}
+</Story>
+
 <Story name='No admin rights' height='350px'>
   {{
     components: { PsAccounts },
@@ -518,6 +587,8 @@ You can have these different cases when the shop prerequisites are not fully val
           psIs17: true,
           psAccountsInstallLink: null,
           psAccountsEnableLink: null,
+          psAccountsNeedsUpgrade: false,
+          psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           currentShop: {
             id: 1,
             name: 'PrestaShop',
@@ -593,6 +664,8 @@ component and the standard behavior won't let the user do anything:
           psIs17: true,
           psAccountsInstallLink: 'true', // will pass: can be casted to uri by Joi
           psAccountsEnableLink: 'ptet-ben-k-non', // will pass: can be casted to uri by Joi
+          psAccountsNeedsUpgrade: false,
+          psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           currentShop: 42,
           shops: [
             {
@@ -684,6 +757,8 @@ If you want to pass something to the component footer like another component you
           psIs17: true,
           psAccountsInstallLink: null,
           psAccountsEnableLink: null,
+          psAccountsNeedsUpgrade: false,
+          psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           currentShop: {
             id: 1,
             name: 'PrestaShop',

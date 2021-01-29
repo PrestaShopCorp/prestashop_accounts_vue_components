@@ -2,25 +2,25 @@ import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/
 import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import EventBusNotInstalled from "./EventBusNotInstalled.vue"
+import AccountNeedsUpdate from "./AccountNeedsUpdate"
 
-<Meta title="Sub-Components|Alerts/Alert event bus is not installed" component={EventBusNotInstalled} />
+<Meta title="Sub-Components|Alerts/Alert ps accounts needs an update" component={AccountNeedsUpdate} />
 
-# Alert block: PS Event Bus module is not installed
+# Alert block: PS Accounts Module needs an update
 
-When the PS Event Bus module is not installed in the module manager of the backoffice, the
+When a new version of PrestaShop Accounts is available, the
 linking process cannot be done properly. So the user should be warned with that message
-and the process is blocked until the module is installed.
+and the process is blocked until the module is updated.
 
-<Story name='Not installed' height='220px'>
+<Story name='Not Updated' height='220px'>
   {{
-    components: {EventBusNotInstalled},
+    components: {AccountNeedsUpdate},
      props: {
           installLoading: {
             default: boolean('installLoading', false),
           },
         },
-    template: '<EventBusNotInstalled :installLoading="installLoading" @installEventBus="event" />',
+    template: '<AccountNeedsUpdate :installLoading="installLoading" @updateAccounts="event" />',
      methods: {
           event: action('install'),
      },
@@ -36,10 +36,10 @@ _Notice: If you need to integrate the standard behavior of PS Accounts, please s
 If you need a custom integration of PS Accounts sub-components, here is the EventBusNotInstalled block:
 
 ```html
-<EventBusNotInstalled :installLoading="installLoading" @installEventBus="installEventBus" />
+<AccountNeedsUpdate :installLoading="installLoading" @installEventBus="installEventBus" />
 ```
 
 # Technical details
 
-<Description of={EventBusNotInstalled} />
-<Props of={EventBusNotInstalled} />
+<Description of={AccountNeedsUpdate} />
+<Props of={AccountNeedsUpdate} />
