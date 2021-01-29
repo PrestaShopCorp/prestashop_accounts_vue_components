@@ -36,34 +36,10 @@
           @enabled="enablePsAccounts()"
         />
         <template v-else>
-          <b-overlay
-            :show="installLoading"
-            variant="white"
-            :opacity="0.70"
-            blur="0px"
-          >
-            <b-alert
-              class="d-flex event-bus-not-installed"
-              :show="!validatedContext.dependencies.ps_eventbus.isInstalled"
-              variant="warning"
-            >
-              <div class="d-flex flex-grow-1">
-                <p class="align-self-center">
-                  The PS Event bus module is required in order to use PrestaShop Accounts,
-                  please install the module to proceed
-                </p>
-              </div>
-              <div class="align-self-center">
-                <b-button
-                  variant="primary"
-                  class="float-right"
-                  @click="installEventBus"
-                >
-                  Install
-                </b-button>
-              </div>
-            </b-alert>
-          </b-overlay>
+          <event-bus-not-installed
+            v-if="!validatedContext.dependencies.ps_eventbus.isInstalled"
+            @installEventBus="installEventBus"
+          />
 
           <b-overlay
             :show="!validatedContext.dependencies.ps_eventbus.isInstalled"
@@ -116,10 +92,11 @@
   import AccountNotEnabled from '@/components/alert/AccountNotEnabled';
   import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
   import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
+  import EventBusNotInstalled from '@/components/alert/EventBusNotInstalled';
   import Account from '@/components/panel/Account';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
-  import {BAlert, BOverlay, BButton} from 'bootstrap-vue';
+  import {BAlert, BOverlay} from 'bootstrap-vue';
   import {contextSchema} from '../lib/ContextValidator';
   import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -141,7 +118,7 @@
       Account,
       BOverlay,
       BAlert,
-      BButton,
+      EventBusNotInstalled,
     },
     mixins: [Locale],
     props: {
@@ -323,7 +300,5 @@
   };
 </script>
 <style>
-.event-bus-not-installed.alert:before {
-  top: 24px !important;
-}
+
 </style>

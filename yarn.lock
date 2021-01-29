@@ -3517,6 +3517,11 @@ bootstrap-vue@^2.11.0:
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.5.0.tgz#97d9dbcb5a8972f8722c9962483543b907d9b9ec"
   integrity sha512-Z93QoXvodoVslA+PWNdk23Hze4RBYIkpb5h8I2HY2Tu2h7A0LpAgLcyrhrSUyo2/Oxm2l1fRZPs1e5hnxnliXA==
 
+bootstrap@^4.4.1:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.0.tgz#97b9f29ac98f98dfa43bf7468262d84392552fd7"
+  integrity sha512-Io55IuQY3kydzHtbGvQya3H+KorS/M9rSNyfCGCg9WZ4pyT/lCxIlpJgG1GXW/PswzC84Tr2fBYi+7+jFVQQBw==
+
 boxen@^4.1.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-4.2.0.tgz#e411b62357d6d6d36587c8ac3d5d974daa070e64"
@@ -7700,6 +7705,11 @@ jest-worker@^25.4.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
+jquery.growl@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/jquery.growl/-/jquery.growl-1.3.5.tgz#fa1c4d758e0d7686551e15896b1aaac2bb1af7f1"
+  integrity sha1-+hxNdY4NdoZVHhWJaxqqwrsa9/E=
+
 js-base64@^2.1.8:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.6.3.tgz#7afdb9b57aa7717e15d370b66e8f36a9cb835dc3"
@@ -8272,6 +8282,11 @@ material-colors@^1.2.1:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/material-colors/-/material-colors-1.2.6.tgz#6d1958871126992ceecc72f4bcc4d8f010865f46"
   integrity sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg==
+
+material-design-icons-iconfont@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/material-design-icons-iconfont/-/material-design-icons-iconfont-5.0.1.tgz#371875ed7fe9c8c520bc7123c3231feeab731c31"
+  integrity sha512-Xg6rIdGrfySTqiTZ6d+nQbcFepS6R4uKbJP0oAqyeZXJY/bX6mZDnOmmUJusqLXfhIwirs0c++a6JpqVa8RFvA==
 
 md5.js@^1.3.4:
   version "1.3.5"
@@ -9056,6 +9071,11 @@ onetime@^5.1.0:
   integrity sha512-5NcSkPHhwTVFIQN+TUqXoS5+dlElHXdpAWu9I0HP20YOtIi+aZ0Ct82jdlILDxjLEAWwvm+qj1m6aEtsDVmm6Q==
   dependencies:
     mimic-fn "^2.1.0"
+
+open-sans-fonts@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/open-sans-fonts/-/open-sans-fonts-1.6.2.tgz#71017c44a5d9ec415030ceac4560329c223cdab1"
+  integrity sha512-vsJ6/Mm0TdUKQJqxfkXJy+0K2X0QeRuTmxQq9YE1ycziw6CbDPolDsHhQ6+ImoV/7OTh8K8ZTGklY1Z5nUAwug==
 
 open@^6.3.0:
   version "6.4.0"
@@ -9921,10 +9941,17 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
-prestakit@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/prestakit/-/prestakit-1.1.0.tgz#0d17c93d02ad2db3c6e3bde27a1fe8a87171e81e"
-  integrity sha512-4EDcS5cF3YFeiXLh2GXIoS/wn0wdLtuc6THoazU1LuQAn8M2VlNyxvoC0G0qVDNM0wBBS+xjsHyZxluVV6ZJhA==
+prestakit@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/prestakit/-/prestakit-1.2.1.tgz#f7345396ef0f937fcf880caad6d08d4964f2dd89"
+  integrity sha512-lxVGZMEQ6U/sDgOmoDfWAa51u6pMCpACjA37ip48cSSqdxIA3hYR+0bJO/gIW1I0fgJ2rkjaAobplJc4wo7xag==
+  dependencies:
+    bootstrap "^4.4.1"
+    jquery.growl "^1.3.5"
+    material-design-icons-iconfont "^5.0.1"
+    open-sans-fonts "^1.6.2"
+    select2 "^4.0.5"
+    select2-bootstrap-theme "0.1.0-beta.10"
 
 prettier@^1.16.4, prettier@^1.18.2:
   version "1.19.1"
@@ -11245,6 +11272,16 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
+
+select2-bootstrap-theme@0.1.0-beta.10:
+  version "0.1.0-beta.10"
+  resolved "https://registry.yarnpkg.com/select2-bootstrap-theme/-/select2-bootstrap-theme-0.1.0-beta.10.tgz#b9426ecfc03bf4a235e76a132377574310469ac0"
+  integrity sha1-uUJuz8A79KI152oTI3dXQxBGmsA=
+
+select2@^4.0.5:
+  version "4.0.13"
+  resolved "https://registry.yarnpkg.com/select2/-/select2-4.0.13.tgz#0dbe377df3f96167c4c1626033e924372d8ef44d"
+  integrity sha512-1JeB87s6oN/TDxQQYCvS5EFoQyvV6eYMZZ0AeA4tdFDYWN3BAGZ8npr17UBFddU0lgAt3H0yjX3X6/ekOj1yjw==
 
 select@^1.1.2:
   version "1.1.2"

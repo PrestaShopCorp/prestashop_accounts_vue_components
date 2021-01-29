@@ -23,6 +23,10 @@
       "configure": "Configure",
       "group": "Group"
     },
+    "alertEventBusNotInstalled": {
+      "description":  "The PS Event bus module is required in order to use PrestaShop Accounts, please install the module to proceed",
+      "installButton": "Install"
+    },
     "account": {
       "title": "Your PrestaShop account",
       "authorize": "Authorize your account to manage your shop's services",
