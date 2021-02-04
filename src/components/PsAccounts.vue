@@ -49,8 +49,7 @@
           />
 
           <b-overlay
-            :show="!validatedContext.dependencies.ps_eventbus.isInstalled
-              || validatedContext.psAccountsNeedsUpgrade"
+            :show="validatedContext.psAccountsNeedsUpgrade"
             variant="white"
             spinner-type="null"
             :opacity="0.70"

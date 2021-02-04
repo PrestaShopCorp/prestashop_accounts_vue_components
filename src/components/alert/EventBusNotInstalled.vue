@@ -7,23 +7,20 @@
   >
     <b-alert
       show
-      class="d-flex event-bus-not-installed"
       variant="warning"
     >
-      <div class="d-flex flex-grow-1">
-        <p class="align-self-center">
-          {{ t('psaccounts.alertEventBusNotInstalled.message') }}
-        </p>
-      </div>
-      <div class="align-self-center">
+      <h3>{{ t('psaccounts.alertEventBusNotInstalled.title') }}</h3>
+      <p>
+        {{ t('psaccounts.alertEventBusNotInstalled.message') }}
+      </p>
+      <p class="mt-2">
         <b-button
           variant="primary"
-          class="float-right"
           @click="installEventBus"
         >
           {{ t('psaccounts.alertEventBusNotInstalled.installButton') }}
         </b-button>
-      </div>
+      </p>
     </b-alert>
   </b-overlay>
 </template>
@@ -41,12 +38,19 @@
       BButton,
     },
     props: {
+      /**
+       * Useful in order to display a loader if you perform some ajax.
+       */
       installLoading: {
         type: Boolean,
         required: false,
       },
     },
     methods: {
+      /**
+       * Emitted when install button is clicked.
+       * @type {Event}
+       */
       installEventBus() {
         this.$emit('installEventBus');
       },
@@ -54,8 +58,4 @@
   };
 </script>
 
-<style>
-.event-bus-not-installed.alert:before {
-  top: 24px !important;
-}
-</style>
+<style></style>

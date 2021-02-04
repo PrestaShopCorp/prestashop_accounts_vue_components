@@ -24,6 +24,7 @@
       "group": "Group"
     },
     "alertEventBusNotInstalled": {
+      "title": "PrestaShop Event Bus module needed" ,
       "message":  "The PS Event bus module is required in order to use PrestaShop Accounts, please install the module to proceed",
       "installButton": "Install"
     },

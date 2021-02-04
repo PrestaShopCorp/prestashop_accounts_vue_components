@@ -40,12 +40,19 @@
       BButton,
     },
     props: {
+      /**
+       * Useful in order to display a loader if you perform some ajax.
+       */
       installLoading: {
         type: Boolean,
         required: false,
       },
     },
     methods: {
+      /**
+       * Emitted when install button is clicked.
+       * @type {Event}
+       */
       updateAccounts() {
         this.$emit('updateAccounts');
       },
