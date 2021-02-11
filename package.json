@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build-lib": "vue-cli-service build --target lib --name psaccountsVue src/full.js",
+    "build-lib-watch": "vue-cli-service build --target lib --name psaccountsVue src/full.js --watch",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook",

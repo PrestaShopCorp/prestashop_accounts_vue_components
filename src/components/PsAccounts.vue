@@ -176,98 +176,119 @@
           this.validationErrors = error.details.map((e) => e.message);
         }
       },
-      installPsAccounts() {
-        this.eventCallback('install_ps_accounts');
 
-        // clean errors before retry
-        this.hasError = false;
-        this.installLoading = true;
+      manageModuleAction17(action) {
+        return fetch(action.actionLink, {
+          method: 'POST',
+        }).then((response) => response.json(),
+        ).then((json) => {
+          if (json[action.module].status === false) {
+            throw new Error(`Cannot ${action.action} ${action.module} module.`);
+          }
+          return json;
+        })
+      },
 
+      async manageModuleAction16(action) {
+        console.error('manageModuleAction16 : ' + action.actionLink);
+        window.location.href = action.actionLink;
+      },
+
+      manageModuleAction(action) {
         // if on ps before 1.7.3 just reload the page
         if (!this.validatedContext.psIs17) {
-          window.location.href = this.validatedContext.psAccountsInstallLink;
+          return this.manageModuleAction16(action);
         }
-
-        fetch(this.validatedContext.psAccountsInstallLink, {
-          method: 'POST',
-        }).then((response) => response.json(),
-        ).then((data) => {
-          if (data.ps_accounts.status === false) {
-            throw new Error('Cannot install ps_accounts module.');
-          }
-
-          window.location.reload();
-        }).catch(() => {
-          this.installLoading = false;
-          this.hasError = true;
-        });
+        return this.manageModuleAction17(action);
       },
-      installEventBus() {
+
+      installModule(moduleName, actionLink) {
         this.hasError = false;
         this.installLoading = true;
 
-        fetch(this.validatedContext.dependencies.ps_eventbus.installLink, {
-          method: 'POST',
-        }).then((response) => response.json(),
-        ).then((data) => {
-          if (data.ps_eventbus.status === false) {
-            throw new Error('Cannot install ps_eventbus module.');
-          }
+        this.manageModuleAction({
+          module: moduleName,
+          action: 'install',
+          actionLink: actionLink,
+        }).then((data) => {
           window.location.reload();
-        }).catch(() => {
+        }).catch((err) => {
+          console.log('installModule : ', err);
           this.installLoading = false;
           this.hasError = true;
         });
-
-        window.location.reload();
       },
 
-      updatePsAccounts() {
-        this.hasError = false;
-        this.installLoading = true;
-
-        fetch(this.validatedContext.psAccountsUpgradeLink, {
-          method: 'POST',
-        }).then((response) => response.json(),
-        ).then((data) => {
-          if (data.ps_accounts.status === false) {
-            throw new Error('Cannot update PS accounts module.');
-          }
-          window.location.reload();
-        }).catch(() => {
-          this.installLoading = false;
-          this.hasError = true;
-        });
-
-        window.location.reload();
-      },
-      enablePsAccounts() {
-        this.eventCallback('enable_ps_accounts');
-
-        // clean errors before retry
+      enableModule(moduleName, actionLink) {
         this.hasError = false;
         this.enableLoading = true;
 
-        // if on ps before 1.7.3 just reload the page
-        if (!this.validatedContext.psIs17) {
-          window.location.href = this.validatedContext.psAccountsInstallLink;
-        }
-
-        fetch(this.validatedContext.psAccountsEnableLink, {
-          method: 'POST',
-        }).then((response) => response.json(),
-        ).then((data) => {
-          if (data.ps_accounts.status === false) {
-            throw new Error('Cannot enable ps_accounts module.');
-          }
-
-          this.validatedContext.psAccountsEnableLink = null;
-          this.enableLoading = false;
+        this.manageModuleAction({
+          module: moduleName,
+          action: 'enable',
+          actionLink: actionLink,
+        }).then((data) => {
+          //this.validatedContext.psAccountsEnableLink = null;
+          //this.enableLoading = false;
+          window.location.reload();
         }).catch(() => {
           this.enableLoading = false;
           this.hasError = true;
         });
       },
+
+      updateModule(moduleName, actionLink) {
+        this.hasError = false;
+        this.installLoading = true;
+
+        return this.manageModuleAction({
+          module: moduleName,
+          action: 'update',
+          actionLink: actionLink,
+        }).then((data) => {
+          window.location.reload();
+        }).catch(() => {
+          this.installLoading = false;
+          this.hasError = true;
+        });
+      },
+
+      installPsAccounts() {
+        this.eventCallback('install_ps_accounts');
+
+        this.installModule(
+          'ps_accounts',
+          this.validatedContext.psAccountsInstallLink
+        );
+      },
+
+      installEventBus() {
+        this.installModule(
+          'ps_eventbus',
+          this.validatedContext.dependencies['ps_eventbus'].installLink
+        );
+        // FIXME : why ?
+        //window.location.reload();
+      },
+
+      updatePsAccounts() {
+        this.updateModule(
+          'ps_accounts',
+          this.validatedContext.psAccountsUpgradeLink
+        );
+        // FIXME : why ?
+        //window.location.reload();
+      },
+
+      enablePsAccounts() {
+        this.eventCallback('enable_ps_accounts');
+        // FIXME : PsAccountsPresenter responsibility ?
+        const actionLink = this.validatedContext.psIs17
+                ? this.validatedContext.psAccountsEnableLink
+                : this.validatedContext.psAccountsInstallLink;
+        this.enableModule('ps_accounts', actionLink);
+      },
+
       viewingPanel() {
         const previousPanel = this.panelShown;
 
