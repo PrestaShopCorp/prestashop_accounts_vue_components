@@ -29,32 +29,25 @@
         @install="installPsAccounts()"
       />
       <template v-else>
-        <AccountNotEnabled
-          v-if="!psAccountsIsEnabled"
-          :account-is-enabled="psAccountsIsEnabled"
-          :is-loading="enableLoading"
-          @enabled="enablePsAccounts()"
+        <AccountNotUpdated
+            v-if="!psAccountsIsUptodate"
+            :account-is-uptodate="psAccountsIsUptodate"
+            :is-loading="installLoading"
+            @install="updatePsAccounts()"
         />
         <template v-else>
-          <event-bus-not-installed
-            v-if="!validatedContext.dependencies.ps_eventbus.isInstalled"
-            :install-loading="installLoading"
-            @installEventBus="installEventBus"
+          <AccountNotEnabled
+            v-if="!psAccountsIsEnabled"
+            :account-is-enabled="psAccountsIsEnabled"
+            :is-loading="enableLoading"
+            @enabled="enablePsAccounts()"
           />
-
-          <AccountNeedsUpdate
-            v-if="validatedContext.psAccountsNeedsUpgrade"
-            :install-loading="installLoading"
-            @updateAccounts="updatePsAccounts"
-          />
-
-          <b-overlay
-            :show="validatedContext.psAccountsNeedsUpgrade"
-            variant="white"
-            spinner-type="null"
-            :opacity="0.70"
-            blur="0px"
-          >
+          <template v-else>
+            <event-bus-not-installed
+              v-if="!validatedContext.dependencies.ps_eventbus.isInstalled"
+              :install-loading="installLoading"
+              @installEventBus="installEventBus"
+            />
             <MultiStoreSelector
               v-if="!validatedContext.currentShop"
               :shops="validatedContext.shops"
@@ -78,7 +71,7 @@
                 name="account-footer"
               />
             </Account>
-          </b-overlay>
+          </template>
         </template>
       </template>
       <b-overlay
@@ -98,9 +91,9 @@
 <script>
   import AccountNotEnabled from '@/components/alert/AccountNotEnabled';
   import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
+  import AccountNotUpdated from '@/components/alert/AccountNotUpdated';
   import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
   import EventBusNotInstalled from '@/components/alert/EventBusNotInstalled';
-  import AccountNeedsUpdate from '@/components/alert/AccountNeedsUpdate';
   import Account from '@/components/panel/Account';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
@@ -121,13 +114,13 @@
     name: 'PsAccounts',
     components: {
       AccountNotInstalled,
+      AccountNotUpdated,
       AccountNotEnabled,
       MultiStoreSelector,
       Account,
       BOverlay,
       BAlert,
       EventBusNotInstalled,
-      AccountNeedsUpdate,
     },
     mixins: [Locale],
     props: {
@@ -150,6 +143,9 @@
       },
       psAccountsIsInstalled() {
         return this.validatedContext.psAccountsInstallLink === null;
+      },
+      psAccountsIsUptodate() {
+        return this.validatedContext.psAccountsIsUptodate;
       },
       psAccountsIsEnabled() {
         return this.validatedContext.psAccountsEnableLink === null;
@@ -190,7 +186,7 @@
       },
 
       async manageModuleAction16(action) {
-        console.error('manageModuleAction16 : ' + action.actionLink);
+        console.info('manageModuleAction16 : ' + action.actionLink);
         window.location.href = action.actionLink;
       },
 
@@ -228,8 +224,6 @@
           action: 'enable',
           actionLink: actionLink,
         }).then((data) => {
-          //this.validatedContext.psAccountsEnableLink = null;
-          //this.enableLoading = false;
           window.location.reload();
         }).catch(() => {
           this.enableLoading = false;
@@ -267,26 +261,22 @@
           'ps_eventbus',
           this.validatedContext.dependencies['ps_eventbus'].installLink
         );
-        // FIXME : why ?
-        //window.location.reload();
       },
 
       updatePsAccounts() {
         this.updateModule(
           'ps_accounts',
-          this.validatedContext.psAccountsUpgradeLink
+          this.validatedContext.psAccountsUpdateLink
         );
-        // FIXME : why ?
-        //window.location.reload();
       },
 
       enablePsAccounts() {
         this.eventCallback('enable_ps_accounts');
-        // FIXME : PsAccountsPresenter responsibility ?
-        const actionLink = this.validatedContext.psIs17
-                ? this.validatedContext.psAccountsEnableLink
-                : this.validatedContext.psAccountsInstallLink;
-        this.enableModule('ps_accounts', actionLink);
+
+        this.enableModule(
+          'ps_accounts',
+          this.validatedContext.psAccountsEnableLink
+        );
       },
 
       viewingPanel() {
