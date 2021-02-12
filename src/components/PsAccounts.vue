@@ -142,13 +142,13 @@
           && this.validatedContext.user.emailIsValidated;
       },
       psAccountsIsInstalled() {
-        return this.validatedContext.psAccountsInstallLink === null;
+        return this.validatedContext.psAccountsIsInstalled;
       },
       psAccountsIsUptodate() {
         return this.validatedContext.psAccountsIsUptodate;
       },
       psAccountsIsEnabled() {
-        return this.validatedContext.psAccountsEnableLink === null;
+        return this.validatedContext.psAccountsIsEnabled;
       },
     },
     data() {
