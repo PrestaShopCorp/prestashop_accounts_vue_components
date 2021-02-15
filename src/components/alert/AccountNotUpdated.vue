@@ -73,7 +73,7 @@
       },
     },
     mounted() {
-      this.$segment.track('ACC View Install component - install state', {
+      this.$segment.track('ACC View Update component - update state', {
         category: 'Account',
       });
     },
