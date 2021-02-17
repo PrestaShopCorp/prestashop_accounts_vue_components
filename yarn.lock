@@ -1302,10 +1302,10 @@
     consola "^2.15.0"
     node-fetch "^2.6.1"
 
-"@prestashopcorp/segment-vue@^1.1.3":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@prestashopcorp/segment-vue/-/segment-vue-1.2.4.tgz#f1f0a52efefead48eebbf4910ad3cd3e454d35c6"
-  integrity sha512-a02CWRRem5C3kzKID9VJKw2PUZ3yhUjxBchuG+qn/Aqk07pukf58mBOH1c5SGN5Ua1Jz8gyFzzymGxwg0s0r3Q==
+"@prestashopcorp/segment-vue@1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@prestashopcorp/segment-vue/-/segment-vue-1.1.3.tgz#0cb8893e52efc160513890326698152d939fae78"
+  integrity sha512-NVuHvYESc/BAv9U789x3JchKG0ZAe8Lw0CjyEOTdo/8i1U2JNjF/Eo6MBbelhRx3rEG2W7VFXPP6IiOOHV2orA==
   dependencies:
     load-script "^1.0.0"
 
@@ -4848,9 +4848,9 @@ csso@^4.0.2:
     css-tree "^1.1.2"
 
 csstype@^2.5.7:
-  version "2.6.14"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.14.tgz#004822a4050345b55ad4dcc00be1d9cf2f4296de"
-  integrity sha512-2mSc+VEpGPblzAxyeR+vZhJKgYg0Og0nnRi7pmRXFYYxSfnOnW8A5wwQb4n4cE2nIOzqKOAzLCaEX6aBmNEv8A==
+  version "2.6.15"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.15.tgz#655901663db1d652f10cb57ac6af5a05972aea1f"
+  integrity sha512-FNeiVKudquehtR3t9TRRnsHL+lJhuHF5Zn9dt01jpojlurLEPDhhEtUkWmAUJ7/fOLaLG4dCDEnUsR0N1rZSsg==
 
 csstype@^3.0.2:
   version "3.0.6"
@@ -4922,7 +4922,7 @@ decode-uri-component@^0.2.0:
   resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
   integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
 
-deep-equal@^1.0.1, deep-equal@^1.1.1:
+deep-equal@^1.0.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.1.1.tgz#b5c98c942ceffaf7cb051e24e1434a25a2e6076a"
   integrity sha512-yd9c5AdiqVcR+JjcwUQb9DkhJc8ngNr0MahEBGvDiJw8puWab2yZlh+nkasOnZP+EGTAP6rRp2JzJhJZzvNF8g==
@@ -5289,9 +5289,9 @@ ejs@^2.6.1, ejs@^2.7.4:
   integrity sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
 
 electron-to-chromium@^1.3.247, electron-to-chromium@^1.3.649:
-  version "1.3.664"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.664.tgz#8fb039e2fa8ef3ab2568308464a28425d4f6e2a3"
-  integrity sha512-yb8LrTQXQnh9yhnaIHLk6CYugF/An50T20+X0h++hjjhVfgSp1DGoMSYycF8/aD5eiqS4QwaNhiduFvK8rifRg==
+  version "1.3.666"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.666.tgz#59f3ce1e45b860a0ebe439b72664354efbb8bc62"
+  integrity sha512-/mP4HFQ0fKIX4sXltG6kfcoGrfNDZwCIyWbH2SIcVaa9u7Rm0HKjambiHNg5OEruicTl9s1EwbERLwxZwk19aw==
 
 element-resize-detector@^1.2.1:
   version "1.2.1"
@@ -9229,9 +9229,9 @@ open@^6.3.0:
     is-wsl "^1.1.0"
 
 open@^7.0.0:
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/open/-/open-7.4.1.tgz#4ccedc11ca348d398378ffb39c71357df55fe6f7"
-  integrity sha512-Pxv+fKRsd/Ozflgn2Gjev1HZveJJeKR6hKKmdaImJMuEZ6htAvCTbcMABJo+qevlAelTLCrEK3YTKZ9fVTcSPw==
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/open/-/open-7.4.2.tgz#b8147e26dcf3e426316c730089fd71edd29c2321"
+  integrity sha512-MVHddDVweXZF3awtlAS+6pgKLlm/JgxZ90+/NBurBoQctVOOB/zDdVjcyPzQ+0laDGbsWgrRkflI65sQeOgT9Q==
   dependencies:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
@@ -10709,13 +10709,12 @@ react-popper-tooltip@^2.8.3:
     react-popper "^1.3.7"
 
 react-popper@^1.3.7:
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-1.3.7.tgz#f6a3471362ef1f0d10a4963673789de1baca2324"
-  integrity sha512-nmqYTx7QVjCm3WUZLeuOomna138R1luC4EqkW3hxJUrAe+3eNz3oFCLYdnPwILfn0mX1Ew2c3wctrjlUMYYUww==
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-1.3.8.tgz#d4de26cb51bbbdd9aacd8436ddb8d5784b2d389d"
+  integrity sha512-v4urgRZHjruyxWiwebAQtfLrzzjebCgimPrNUJ/bM2a1udgn+5/4t207nWPpjl8CDFYM2T0vcCSy5DAEd7dUGQ==
   dependencies:
     "@babel/runtime" "^7.1.2"
     create-react-context "^0.3.0"
-    deep-equal "^1.1.1"
     popper.js "^1.14.4"
     prop-types "^15.6.1"
     typed-styles "^0.0.7"
