@@ -209,7 +209,6 @@
         }).then(() => {
           window.location.reload();
         }).catch((err) => {
-          console.log('installModule : ', err);
           this.installLoading = false;
           this.hasError = true;
         });
