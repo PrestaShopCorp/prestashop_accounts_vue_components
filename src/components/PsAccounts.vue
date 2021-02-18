@@ -30,10 +30,10 @@
       />
       <template v-else>
         <AccountNotUpdated
-            v-if="!psAccountsIsUptodate"
-            :account-is-uptodate="psAccountsIsUptodate"
-            :is-loading="installLoading"
-            @install="updatePsAccounts()"
+          v-if="!psAccountsIsUptodate"
+          :account-is-uptodate="psAccountsIsUptodate"
+          :is-loading="installLoading"
+          @install="updatePsAccounts()"
         />
         <template v-else>
           <AccountNotEnabled
@@ -44,7 +44,8 @@
           />
           <template v-else>
             <EventBusNotInstalled
-              v-if="undefined !== validatedContext.dependencies && !validatedContext.dependencies.ps_eventbus.isInstalled"
+              v-if="undefined !== validatedContext.dependencies
+                && !validatedContext.dependencies.ps_eventbus.isInstalled"
               :install-loading="installLoading"
               @installEventBus="installEventBus"
             />
@@ -182,11 +183,10 @@
             throw new Error(`Cannot ${action.action} ${action.module} module.`);
           }
           return json;
-        })
+        });
       },
 
       async manageModuleAction16(action) {
-        console.info('manageModuleAction16 : ' + action.actionLink);
         window.location.href = action.actionLink;
       },
 
@@ -205,8 +205,8 @@
         this.manageModuleAction({
           module: moduleName,
           action: 'install',
-          actionLink: actionLink,
-        }).then((data) => {
+          actionLink,
+        }).then(() => {
           window.location.reload();
         }).catch((err) => {
           console.log('installModule : ', err);
@@ -222,8 +222,8 @@
         this.manageModuleAction({
           module: moduleName,
           action: 'enable',
-          actionLink: actionLink,
-        }).then((data) => {
+          actionLink,
+        }).then(() => {
           window.location.reload();
         }).catch(() => {
           this.enableLoading = false;
@@ -238,8 +238,8 @@
         return this.manageModuleAction({
           module: moduleName,
           action: 'update',
-          actionLink: actionLink,
-        }).then((data) => {
+          actionLink,
+        }).then(() => {
           window.location.reload();
         }).catch(() => {
           this.installLoading = false;
@@ -252,21 +252,21 @@
 
         this.installModule(
           'ps_accounts',
-          this.validatedContext.psAccountsInstallLink
+          this.validatedContext.psAccountsInstallLink,
         );
       },
 
       installEventBus() {
         this.installModule(
           'ps_eventbus',
-          this.validatedContext.dependencies['ps_eventbus'].installLink
+          this.validatedContext.dependencies.ps_eventbus.installLink,
         );
       },
 
       updatePsAccounts() {
         this.updateModule(
           'ps_accounts',
-          this.validatedContext.psAccountsUpdateLink
+          this.validatedContext.psAccountsUpdateLink,
         );
       },
 
@@ -275,7 +275,7 @@
 
         this.enableModule(
           'ps_accounts',
-          this.validatedContext.psAccountsEnableLink
+          this.validatedContext.psAccountsEnableLink,
         );
       },
 
