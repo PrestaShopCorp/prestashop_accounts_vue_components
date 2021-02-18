@@ -86,14 +86,14 @@
             >
               {{ t('psaccounts.account.disconnectButton') }}
             </b-link>
-            <b-button
+            <!-- <b-button
               v-else
               class="float-right"
               variant="outline-secondary"
               @click.stop="openModal"
             >
               {{ t('psaccounts.account.unlinkShop') }}
-            </b-button>
+            </b-button> -->
           </div>
         </div>
         <b-alert
@@ -134,7 +134,7 @@
             </b-link>
           </p>
         </b-alert>
-        <b-alert
+        <!-- <b-alert
           v-if="shopIsUnlinked"
           variant="success"
           class="mt-3"
@@ -153,11 +153,11 @@
           <p>
             {{ t('psaccounts.account.unlinkShopError') }}.
           </p>
-        </b-alert>
+        </b-alert> -->
         <slot />
       </b-card-body>
     </b-card>
-    <Modal
+    <!-- <Modal
       id="unlinkShop-modal"
       :displayed="modalDisplayed"
       @closed="closeModal"
@@ -178,7 +178,7 @@
           Yes, I Confirm
         </b-button>
       </template>
-    </Modal>
+    </Modal> -->
   </div>
 </template>
 
@@ -196,7 +196,7 @@
     BIconCheck,
     BTooltip,
   } from 'bootstrap-vue';
-  import Modal from '@/components/modal/Modal';
+  // import Modal from '@/components/modal/Modal.vue';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -217,7 +217,7 @@
       BIconCircleFill,
       BIconCheck,
       BTooltip,
-      Modal,
+      // Modal,
     },
     props: {
       /**
@@ -281,7 +281,7 @@
         panelShown: null,
         shopIsUnlinked: false,
         shopUnlinkError: false,
-        modalDisplayed: false,
+        // modalDisplayed: false,
       };
     },
     methods: {
@@ -372,17 +372,18 @@
          */
         this.$emit('actioned', eventType, event);
       },
-      openModal() {
+      /* openModal() {
         this.modalDisplayed = true;
       },
       closeModal() {
         this.modalDisplayed = false;
-      },
-      /*
+      }, */
+      /**
        * Unlink the shop and the current user
-       * */
-      async unlinkShop() {
-        await fetch(`${window.contextPsAccounts.adminAjaxLink}&action=unlinkShop`).then((response) => {
+       */
+      /* async unlinkShop() {
+        await fetch(`${window.contextPsAccounts.adminAjaxLink}&action=unlinkShop`)
+        .then((response) => {
           this.closeModal();
           if (response.ok) {
             this.$emit('unlinkShop');
@@ -397,7 +398,7 @@
             }, 3000);
           }
         });
-      },
+      }, */
     },
     computed: {
       userIsConnected() {

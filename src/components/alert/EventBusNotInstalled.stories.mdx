@@ -1,0 +1,44 @@
+import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/blocks';
+import { withKnobs, boolean, object } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
+
+import EventBusNotInstalled from "./EventBusNotInstalled.vue"
+
+<Meta title="Sub-Components|Alerts/Alert event bus is not installed" component={EventBusNotInstalled} />
+
+# Alert block: PS Event Bus module is not installed
+
+When the PS Event Bus module is not installed in the module manager of the
+backoffice a message warns the user that the module needs to be installed.
+
+<Story name='Not installed' height='220px'>
+  {{
+    components: {EventBusNotInstalled},
+     props: {
+          installLoading: {
+            default: boolean('installLoading', false),
+          },
+        },
+    template: '<EventBusNotInstalled :installLoading="installLoading" @installEventBus="event" />',
+     methods: {
+          event: action('install'),
+     },
+  }}
+</Story>
+
+---
+# Integration
+
+_Notice: If you need to integrate the standard behavior of PS Accounts, please see the
+[`PsAccounts` component in the integration section](?path=/docs/integration-psaccounts-panel--connected)._
+
+If you need a custom integration of PS Accounts sub-components, here is the EventBusNotInstalled block:
+
+```html
+<EventBusNotInstalled :installLoading="installLoading" @installEventBus="installEventBus" />
+```
+
+# Technical details
+
+<Description of={EventBusNotInstalled} />
+<Props of={EventBusNotInstalled} />

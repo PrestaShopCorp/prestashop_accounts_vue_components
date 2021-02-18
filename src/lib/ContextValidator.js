@@ -23,8 +23,15 @@ export const userSchema = Joi.object().keys({
 
 export const contextSchema = Joi.object().keys({
   psIs17: Joi.boolean().required(),
+
+  psAccountsIsInstalled: Joi.boolean().default(true),
+  psAccountsIsUptodate: Joi.boolean().default(true),
+  psAccountsIsEnabled: Joi.boolean().default(true),
+
   psAccountsInstallLink: Joi.string().uri().allow(null).default(null),
   psAccountsEnableLink: Joi.string().uri().allow(null).default(null),
+  psAccountsUpdateLink: Joi.string().uri().allow(null).default(null),
+
   currentShop: shopSchema.optional().allow(null).default(null),
   shops: Joi.array().items(shopGroupSchema).required().min(0)
     .max(128),
