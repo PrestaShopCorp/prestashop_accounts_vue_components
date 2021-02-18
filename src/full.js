@@ -5,6 +5,7 @@ import Account from '@/components/panel/Account';
 import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
 import AccountNotEnabled from '@/components/alert/AccountNotEnabled';
 import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
+import EventBusNotInstalled from '@/components/alert/EventBusNotInstalled';
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {use, i18n} from '@/locale';
 import Segment from "@prestashopcorp/segment-vue";
@@ -32,6 +33,7 @@ const Components = {
   AccountNotInstalled,
   AccountNotEnabled,
   MultiStoreSelector,
+  EventBusNotInstalled
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -61,4 +63,5 @@ export {
   AccountNotInstalled,
   AccountNotEnabled,
   MultiStoreSelector,
+  EventBusNotInstalled
 };
