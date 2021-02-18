@@ -29,41 +29,55 @@
         @install="installPsAccounts()"
       />
       <template v-else>
-        <AccountNotEnabled
-          v-if="!psAccountsIsEnabled"
-          :account-is-enabled="psAccountsIsEnabled"
-          :is-loading="enableLoading"
-          @enabled="enablePsAccounts()"
+        <AccountNotUpdated
+            v-if="!psAccountsIsUptodate"
+            :account-is-uptodate="psAccountsIsUptodate"
+            :is-loading="installLoading"
+            @install="updatePsAccounts()"
         />
         <template v-else>
-          <MultiStoreSelector
-            v-if="!validatedContext.currentShop"
-            :shops="validatedContext.shops"
-            @shop-selected="eventCallback('multi_shop_selected', $event)"
+          <AccountNotEnabled
+            v-if="!psAccountsIsEnabled"
+            :account-is-enabled="psAccountsIsEnabled"
+            :is-loading="enableLoading"
+            @enabled="enablePsAccounts()"
           />
-          <Account
-            v-else
-            :user="validatedContext.user"
-            :is-admin="validatedContext.user.isSuperAdmin"
-            :onboarding-link="validatedContext.onboardingLink"
-            :admin-email="validatedContext.superAdminEmail"
-            :resend-email-link="validatedContext.ssoResendVerificationEmail"
-            :manage-account-link="validatedContext.manageAccountLink"
-            @viewed="eventCallback"
-            @actioned="eventCallback"
-            @unlinkShop="validatedContext.user.email = null"
-            class="mb-2"
-          >
-            <slot
-              v-if="userIsConnectedAndEmailIsValidated"
-              name="account-footer"
+          <template v-else>
+            <EventBusNotInstalled
+              v-if="undefined !== validatedContext.dependencies && !validatedContext.dependencies.ps_eventbus.isInstalled"
+              :install-loading="installLoading"
+              @installEventBus="installEventBus"
             />
-          </Account>
+            <MultiStoreSelector
+              v-if="!validatedContext.currentShop"
+              :shops="validatedContext.shops"
+              @shop-selected="eventCallback('multi_shop_selected', $event)"
+            />
+            <Account
+              v-else
+              :user="validatedContext.user"
+              :is-admin="validatedContext.user.isSuperAdmin"
+              :onboarding-link="validatedContext.onboardingLink"
+              :admin-email="validatedContext.superAdminEmail"
+              :resend-email-link="validatedContext.ssoResendVerificationEmail"
+              :manage-account-link="validatedContext.manageAccountLink"
+              @viewed="eventCallback"
+              @actioned="eventCallback"
+              @unlinkShop="validatedContext.user.email = null"
+              class="mb-2"
+            >
+              <slot
+                v-if="userIsConnectedAndEmailIsValidated"
+                name="account-footer"
+              />
+            </Account>
+          </template>
         </template>
       </template>
       <b-overlay
         :show="!userIsConnectedAndEmailIsValidated"
         variant="white"
+        spinner-type="null"
         :opacity="0.70"
         blur="0px"
       >
@@ -77,7 +91,9 @@
 <script>
   import AccountNotEnabled from '@/components/alert/AccountNotEnabled';
   import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
+  import AccountNotUpdated from '@/components/alert/AccountNotUpdated';
   import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
+  import EventBusNotInstalled from '@/components/alert/EventBusNotInstalled';
   import Account from '@/components/panel/Account';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
@@ -98,11 +114,13 @@
     name: 'PsAccounts',
     components: {
       AccountNotInstalled,
+      AccountNotUpdated,
       AccountNotEnabled,
       MultiStoreSelector,
       Account,
       BOverlay,
       BAlert,
+      EventBusNotInstalled,
     },
     mixins: [Locale],
     props: {
@@ -124,10 +142,13 @@
           && this.validatedContext.user.emailIsValidated;
       },
       psAccountsIsInstalled() {
-        return this.validatedContext.psAccountsInstallLink === null;
+        return this.validatedContext.psAccountsIsInstalled;
+      },
+      psAccountsIsUptodate() {
+        return this.validatedContext.psAccountsIsUptodate;
       },
       psAccountsIsEnabled() {
-        return this.validatedContext.psAccountsEnableLink === null;
+        return this.validatedContext.psAccountsIsEnabled;
       },
     },
     data() {
@@ -151,59 +172,113 @@
           this.validationErrors = error.details.map((e) => e.message);
         }
       },
-      installPsAccounts() {
-        this.eventCallback('install_ps_accounts');
 
-        // clean errors before retry
+      manageModuleAction17(action) {
+        return fetch(action.actionLink, {
+          method: 'POST',
+        }).then((response) => response.json(),
+        ).then((json) => {
+          if (json[action.module].status === false) {
+            throw new Error(`Cannot ${action.action} ${action.module} module.`);
+          }
+          return json;
+        })
+      },
+
+      async manageModuleAction16(action) {
+        console.info('manageModuleAction16 : ' + action.actionLink);
+        window.location.href = action.actionLink;
+      },
+
+      manageModuleAction(action) {
+        // if on ps before 1.7.3 just reload the page
+        if (!this.validatedContext.psIs17) {
+          return this.manageModuleAction16(action);
+        }
+        return this.manageModuleAction17(action);
+      },
+
+      installModule(moduleName, actionLink) {
         this.hasError = false;
         this.installLoading = true;
 
-        // if on ps before 1.7.3 just reload the page
-        if (!this.validatedContext.psIs17) {
-          window.location.href = this.validatedContext.psAccountsInstallLink;
-        }
+        this.manageModuleAction({
+          module: moduleName,
+          action: 'install',
+          actionLink: actionLink,
+        }).then((data) => {
+          window.location.reload();
+        }).catch((err) => {
+          console.log('installModule : ', err);
+          this.installLoading = false;
+          this.hasError = true;
+        });
+      },
 
-        fetch(this.validatedContext.psAccountsInstallLink, {
-          method: 'POST',
-        }).then((response) => response.json(),
-        ).then((data) => {
-          if (data.ps_accounts.status === false) {
-            throw new Error('Cannot install ps_accounts module.');
-          }
+      enableModule(moduleName, actionLink) {
+        this.hasError = false;
+        this.enableLoading = true;
 
+        this.manageModuleAction({
+          module: moduleName,
+          action: 'enable',
+          actionLink: actionLink,
+        }).then((data) => {
+          window.location.reload();
+        }).catch(() => {
+          this.enableLoading = false;
+          this.hasError = true;
+        });
+      },
+
+      updateModule(moduleName, actionLink) {
+        this.hasError = false;
+        this.installLoading = true;
+
+        return this.manageModuleAction({
+          module: moduleName,
+          action: 'update',
+          actionLink: actionLink,
+        }).then((data) => {
           window.location.reload();
         }).catch(() => {
           this.installLoading = false;
           this.hasError = true;
         });
       },
+
+      installPsAccounts() {
+        this.eventCallback('install_ps_accounts');
+
+        this.installModule(
+          'ps_accounts',
+          this.validatedContext.psAccountsInstallLink
+        );
+      },
+
+      installEventBus() {
+        this.installModule(
+          'ps_eventbus',
+          this.validatedContext.dependencies['ps_eventbus'].installLink
+        );
+      },
+
+      updatePsAccounts() {
+        this.updateModule(
+          'ps_accounts',
+          this.validatedContext.psAccountsUpdateLink
+        );
+      },
+
       enablePsAccounts() {
         this.eventCallback('enable_ps_accounts');
 
-        // clean errors before retry
-        this.hasError = false;
-        this.enableLoading = true;
-
-        // if on ps before 1.7.3 just reload the page
-        if (!this.validatedContext.psIs17) {
-          window.location.href = this.validatedContext.psAccountsInstallLink;
-        }
-
-        fetch(this.validatedContext.psAccountsEnableLink, {
-          method: 'POST',
-        }).then((response) => response.json(),
-        ).then((data) => {
-          if (data.ps_accounts.status === false) {
-            throw new Error('Cannot enable ps_accounts module.');
-          }
-
-          this.validatedContext.psAccountsEnableLink = null;
-          this.enableLoading = false;
-        }).catch(() => {
-          this.enableLoading = false;
-          this.hasError = true;
-        });
+        this.enableModule(
+          'ps_accounts',
+          this.validatedContext.psAccountsEnableLink
+        );
       },
+
       viewingPanel() {
         const previousPanel = this.panelShown;
 
@@ -264,3 +339,6 @@
     },
   };
 </script>
+<style>
+
+</style>

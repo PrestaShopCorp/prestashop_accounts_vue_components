@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build-lib": "vue-cli-service build --target lib --name psaccountsVue src/full.js",
+    "build-lib-watch": "vue-cli-service build --target lib --name psaccountsVue src/full.js --watch",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook",
@@ -16,12 +17,12 @@
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "@prestashopcorp/segment-vue": "^1.1.3",
+    "@prestashopcorp/segment-vue": "1.1.3",
     "babel-loader": "^8.1.0",
     "bootstrap-vue": "^2.11.0",
     "core-js": "^3.6.4",
     "deepmerge": "^4.2.2",
-    "prestakit": "^1.1.0",
+    "prestakit": "^1.2.1",
     "react": "^16.13.1",
     "react-is": "^16.13.1",
     "v-click-outside": "^3.1.2",
