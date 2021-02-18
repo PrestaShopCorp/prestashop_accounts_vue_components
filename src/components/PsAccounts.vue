@@ -43,8 +43,8 @@
             @enabled="enablePsAccounts()"
           />
           <template v-else>
-            <event-bus-not-installed
-              v-if="!validatedContext.dependencies.ps_eventbus.isInstalled"
+            <EventBusNotInstalled
+              v-if="undefined !== validatedContext.dependencies && !validatedContext.dependencies.ps_eventbus.isInstalled"
               :install-loading="installLoading"
               @installEventBus="installEventBus"
             />
