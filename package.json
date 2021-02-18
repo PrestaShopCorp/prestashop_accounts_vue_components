@@ -1,6 +1,6 @@
 {
   "name": "prestashop_accounts_vue_components",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "main": "./dist/psaccountsVue.common.js",
   "files": [
     "dist/*",

@@ -208,7 +208,7 @@
           actionLink,
         }).then(() => {
           window.location.reload();
-        }).catch((err) => {
+        }).catch(() => {
           this.installLoading = false;
           this.hasError = true;
         });
