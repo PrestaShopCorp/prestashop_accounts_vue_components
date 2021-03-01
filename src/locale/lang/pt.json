@@ -1,41 +1,46 @@
 {
-  "psaccounts": {
-    "accountManager": {
-      "errorInstallEnable": "Ocorreu um erro, por favor tente novamente."
-    },
-    "alertAccountNotInstalled": {
-      "title": "O módulo Conta PrestaShop é necessário",
-      "message": "Para ativar este módulo, é necessário instalar o módulo Conta PrestaShop na sua loja",
-      "installButton": "Instalar",
-      "loading": "Instalação da Conta PrestaShop em curso..."
-    },
-    "alertAccountNotEnabled": {
-      "title": "O módulo Conta PrestaShop é necessário",
-      "message": "Para ativar este módulo, é necessário ativar o módulo Conta PrestaShop na sua loja.",
-      "enableButton": "Ativar",
-      "loading": "Ativação da conta PrestaShop em curso"
-    },
-    "multiShopSelector": {
-      "title": "Modo multi-loja ativado",
-      "subtitle": "Para este serviço, é necessário configurar as suas lojas uma a uma, mas pode usar a mesma conta.",
-      "selectStore": "Selecione uma primeira loja da lista abaixo",
-      "tips": "Uma vez configurada a primeira loja, pode continuar com as outras selecionando-as uma a uma no seletor de lojas do menu horizontal.",
-      "configure": "Configurar",
-      "group": ""
-    },
-    "account": {
-      "title": "A sua conta PrestaShop",
-      "authorize": "Autorize a sua conta a gerir os serviços da sua loja",
-      "authorized": "Autoriza esta conta a gerir os serviços da sua loja",
-      "connectButton": "Fazer login",
-      "disconnectButton": "Usar outra conta",
-      "emailValidationWarningLabel": "Validação de e-mail",
-      "emailConfirmationAlert": "Um e-mail de confirmação foi enviado. Confira a sua caixa de entrada e clique no link para ativar a sua conta.",
-      "noEmailReceived": "Nenhum e-mail de confirmação?",
-      "sendEmail": "Reenviar",
-      "needToBeAdmin": "Para continuar, deverá ser um administrador da loja.",
-      "pleaseContact": "Por favor entre em contacto",
-      "manageAccountTooltip": "Manage account"
+    "psaccounts": {
+        "accountManager": {
+            "errorInstallEnable": "Ocorreu um erro, por favor tente novamente."
+        },
+        "alertAccountNotInstalled": {
+            "title": "Ativar o módulo PrestaShop Account",
+            "message": "O módulo PrestaShop Account é necessário para continuar a configuração deste módulo.",
+            "installButton": "Instalar",
+            "loading": "Instalação do módulo PrestaShop Account em curso..."
+        },
+        "alertAccountNotEnabled": {
+            "title": "Ativar o módulo PrestaShop Account",
+            "message": "O módulo PrestaShop Account é necessário para continuar a configuração deste módulo.",
+            "enableButton": "Ativar",
+            "loading": "Ativação do módulo PrestaShop Account em curso..."
+        },
+        "multiShopSelector": {
+            "title": "Modo multi-loja ativado",
+            "subtitle": "Para este serviço, é necessário configurar as suas lojas uma a uma, mas pode usar a mesma conta.",
+            "selectStore": "Selecione uma primeira loja da lista abaixo",
+            "tips": "Uma vez configurada a primeira loja, pode continuar com as outras selecionando-as uma a uma no seletor de lojas do menu horizontal.",
+            "configure": "Configurar",
+            "group": ""
+        },
+        "account": {
+            "title": "Associe a sua loja a uma conta PrestaShop",
+            "authorize": "Apenas pode associar a sua loja a uma conta. Escolha bem!",
+            "authorized": "A sua loja está associada à conta PrestaShop:",
+            "connectButton": "Associada",
+            "disconnectButton": "Usar outra conta",
+            "emailValidationWarningLabel": "Validação de e-mail",
+            "emailConfirmationAlert": "Um e-mail de confirmação foi enviado. Confira a sua caixa de entrada e clique no link para ativar a sua conta.",
+            "noEmailReceived": "Nenhum e-mail de confirmação?",
+            "sendEmail": "Reenviar",
+            "needToBeAdmin": "Para continuar, deverá ser um administrador da loja.",
+            "pleaseContact": "Por favor entre em contacto",
+            "manageAccountTooltip": "Manage account"
+        },
+        "alertEventBusNotInstalled": {
+            "title": "Ativar o módulo Prestashop Event Bus",
+            "message": "O módulo Prestashop Event Bus é necessário para continuar a configuração deste módulo.",
+            "loading": "Instalação do módulo Prestashop Event Bus em curso..."
+        }
     }
-  }
 }

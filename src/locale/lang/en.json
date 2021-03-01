@@ -1,56 +1,57 @@
 {
-  "psaccounts": {
-    "accountManager": {
-      "errorInstallEnable": "Something went wrong. Please try again."
-    },
-    "alertAccountNotInstalled": {
-      "title": "PrestaShop Account module needed",
-      "message": "To enable this module you need to install the PrestaShop Account module on your shop",
-      "installButton": "Install",
-      "loading": "Installing PrestaShop Account ..."
-    },
-    "alertAccountNotEnabled": {
-      "title": "PrestaShop Account module needed",
-      "message": "To enable this module you need to activate the PrestaShop Account module on your shop",
-      "enableButton": "Activate",
-      "loading": "Enabling PrestaShop Account ..."
-    },
-    "multiShopSelector": {
-      "title": "Multi-store mode activated",
-      "subtitle": "You must configure your stores one by one for this service but you will be able to use the same account.",
-      "selectStore": "Please select the first store to configure from the list below",
-      "tips": "After you are done with the first shop, you can configure the others by selecting them one by one in the shop selector, in the horizontal menu",
-      "configure": "Configure",
-      "group": "Group"
-    },
-    "alertEventBusNotInstalled": {
-      "title": "PrestaShop Event Bus module needed" ,
-      "message":  "The PS Event bus module is required in order to use PrestaShop Accounts, please install the module to proceed",
-      "installButton": "Install"
-    },
-    "alertAccountNeedsUpdate": {
-      "title": "Update PrestaShop Accounts module",
-      "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
-      "installButton": "Update"
-    },
-    "account": {
-      "title": "Your PrestaShop account",
-      "authorize": "Authorize your account to manage your shop's services",
-      "authorized": "You authorize this account to manage shop's services",
-      "connectButton": "Connect",
-      "disconnectButton": "Use another account",
-      "emailValidationWarningLabel": "Email validation needed",
-      "emailConfirmationAlert": "A confirmation email has been sent. Check your inbox and click on the link to activate your account",
-      "noEmailReceived": "No confirmation email.",
-      "sendEmail": "Send it again",
-      "needToBeAdmin": "In order to proceed you need to be administrator of the shop",
-      "pleaseContact": "Please contact",
-      "manageAccountTooltip": "Manage account",
-      "unlinkShop": "Unlink my shop",
-      "unlinkShopModalTitle": "Are you sure you want to unlink your store from your account ?",
-      "unlinkShopModalContent": "By clicking on Yes, I confirm, you authorize your PrestaShop account to be unlink from the store.",
-      "unlinkShopAlert": "Your store has been successfully unlinked",
-      "unlinkShopError": "Error while trying to unlink shop"
+    "psaccounts": {
+        "accountManager": {
+            "errorInstallEnable": "Something went wrong. Please try again."
+        },
+        "alertAccountNotInstalled": {
+            "title": "Install the PrestaShop Account module",
+            "message": "You need the PrestaShop account module to continue setting up this module.",
+            "installButton": "Install",
+            "loading": "The PrestaShop Account module is currently being installed..."
+        },
+        "alertAccountNotEnabled": {
+            "title": "Activate the PrestaShop Account module",
+            "message": "You need the PrestaShop account module to continue setting up this module.",
+            "enableButton": "Activate",
+            "loading": "The PrestaShop Account module is currently being activated..."
+        },
+        "multiShopSelector": {
+            "title": "Multi-store mode activated",
+            "subtitle": "You must configure your stores one by one for this service but you will be able to use the same account.",
+            "selectStore": "Please select the first store to configure from the list below",
+            "tips": "After you are done with the first shop, you can configure the others by selecting them one by one in the shop selector, in the horizontal menu",
+            "configure": "Configure",
+            "group": "Group"
+        },
+        "alertEventBusNotInstalled": {
+            "title": "Install the Prestashop Event Bus module",
+            "message": "You need the Prestashop Event Bus module to continue setting up this module.",
+            "installButton": "Install",
+            "loading": "The Prestashop Event Bus module is currently being installed..."
+        },
+        "alertAccountNeedsUpdate": {
+            "title": "Update PrestaShop Accounts module",
+            "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
+            "installButton": "Update"
+        },
+        "account": {
+            "title": "Associate your shop with a PrestaShop account",
+            "authorize": "You can only associate your shop with one account. So be sure to choose the right one!",
+            "authorized": "Your shop is associated with the PrestaShop account:",
+            "connectButton": "Associate",
+            "disconnectButton": "Use another account",
+            "emailValidationWarningLabel": "Email validation needed",
+            "emailConfirmationAlert": "A confirmation email has been sent. Check your inbox and click on the link to activate your account",
+            "noEmailReceived": "No confirmation email.",
+            "sendEmail": "Send it again",
+            "needToBeAdmin": "In order to proceed you need to be administrator of the shop",
+            "pleaseContact": "Please contact",
+            "manageAccountTooltip": "Manage account",
+            "unlinkShop": "Unlink my shop",
+            "unlinkShopModalTitle": "Are you sure you want to unlink your store from your account ?",
+            "unlinkShopModalContent": "By clicking on Yes, I confirm, you authorize your PrestaShop account to be unlink from the store.",
+            "unlinkShopAlert": "Your store has been successfully unlinked",
+            "unlinkShopError": "Error while trying to unlink shop"
+        }
     }
-  }
 }

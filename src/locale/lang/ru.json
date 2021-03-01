@@ -1,0 +1,25 @@
+{
+    "psaccounts": {
+        "alertAccountNotInstalled": {
+            "title": "",
+            "message": "",
+            "loading": ""
+        },
+        "alertAccountNotEnabled": {
+            "title": "",
+            "message": "",
+            "loading": ""
+        },
+        "account": {
+            "title": "",
+            "authorize": "",
+            "connectButton": "",
+            "authorized": ""
+        },
+        "alertEventBusNotInstalled": {
+            "title": "",
+            "message": "",
+            "loading": ""
+        }
+    }
+}
