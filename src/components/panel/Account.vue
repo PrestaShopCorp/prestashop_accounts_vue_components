@@ -62,9 +62,9 @@
               <span
                 v-if="!userIsConnected"
                 class="align-middle"
-              >{{ t('psaccounts.account.authorize') }}.</span>
+              >{{ t('psaccounts.account.authorize') }}</span>
               <template v-else>
-                <span class="align-middle">{{ t('psaccounts.account.authorized') }}.</span><br>
+                <span class="align-middle">{{ t('psaccounts.account.authorized') }}</span><br>
                 <span class="text-muted">{{ user.email }}</span>
               </template>
             </div>
@@ -103,10 +103,10 @@
           show
         >
           <p>
-            {{ t('psaccounts.account.emailConfirmationAlert') }}.
+            {{ t('psaccounts.account.emailConfirmationAlert') }}
           </p>
           <p class="mt-2 text-muted">
-            {{ t('psaccounts.account.noEmailReceived') }}?
+            {{ t('psaccounts.account.noEmailReceived') }}
           </p>
           <p class="mt-2">
             <b-button
@@ -123,7 +123,7 @@
           class="mt-4"
           show
         >
-          <p>{{ t('psaccounts.account.needToBeAdmin') }}.</p>
+          <p>{{ t('psaccounts.account.needToBeAdmin') }}</p>
           <p v-if="adminEmail">
             {{ t('psaccounts.account.pleaseContact') }}
             <b-link
