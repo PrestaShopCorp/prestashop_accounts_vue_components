@@ -65,6 +65,7 @@
               @viewed="eventCallback"
               @actioned="eventCallback"
               @unlinkShop="validatedContext.user.email = null"
+              @signIn="modalDisplayed = !modalDisplayed"
               class="mb-2"
             >
               <slot
@@ -72,6 +73,11 @@
                 name="account-footer"
               />
             </Account>
+            <link-shop-modal
+              @closed="modalDisplayed = false"
+              :displayed="modalDisplayed"
+              :shop="validatedContext.currentShop"
+            />
           </template>
         </template>
       </template>
@@ -99,6 +105,7 @@
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
   import {BAlert, BOverlay} from 'bootstrap-vue';
+  import LinkShopModal from '@/components/crossdomains/LinkShopModal';
   import {contextSchema} from '../lib/ContextValidator';
   import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -122,6 +129,7 @@
       BOverlay,
       BAlert,
       EventBusNotInstalled,
+      LinkShopModal,
     },
     mixins: [Locale],
     props: {
@@ -160,6 +168,7 @@
         enableLoading: false,
         hasError: false,
         panelShown: null,
+        modalDisplayed: false,
       };
     },
     methods: {
@@ -315,11 +324,11 @@
             this.$emit('viewed', eventType, event);
             break;
           default:
-            console.error('Unknown callback event type.');  // eslint-disable-line
+          console.error('Unknown callback event type.');  // eslint-disable-line
         }
       },
       alert(t) {
-        alert(t);  // eslint-disable-line
+      alert(t);  // eslint-disable-line
       },
     },
     created() {

@@ -217,7 +217,7 @@
       BIconCircleFill,
       BIconCheck,
       BTooltip,
-      // Modal,
+    // Modal,
     },
     props: {
       /**
@@ -281,7 +281,7 @@
         panelShown: null,
         shopIsUnlinked: false,
         shopUnlinkError: false,
-        // modalDisplayed: false,
+      // modalDisplayed: false,
       };
     },
     methods: {
@@ -290,7 +290,8 @@
         this.$segment.track('ACC Click BO Connect button', {
           category: 'Accounts',
         });
-        window.location.href = this.onboardingLink;
+        // window.location.href = this.onboardingLink;
+        this.$emit('signIn');
       },
       signOut() {
         this.actionEventCallback('sign_out', this.user);
@@ -372,33 +373,33 @@
          */
         this.$emit('actioned', eventType, event);
       },
-      /* openModal() {
-        this.modalDisplayed = true;
-      },
-      closeModal() {
-        this.modalDisplayed = false;
-      }, */
-      /**
-       * Unlink the shop and the current user
-       */
-      /* async unlinkShop() {
-        await fetch(`${window.contextPsAccounts.adminAjaxLink}&action=unlinkShop`)
-        .then((response) => {
-          this.closeModal();
-          if (response.ok) {
-            this.$emit('unlinkShop');
-            this.shopIsUnlinked = true;
-            setTimeout(() => {
-              this.shopIsUnlinked = false;
-            }, 3000);
-          } else {
-            this.shopUnlinkError = true;
-            setTimeout(() => {
-              this.shopUnlinkError = false;
-            }, 3000);
-          }
-        });
-      }, */
+    /* openModal() {
+      this.modalDisplayed = true;
+    },
+    closeModal() {
+      this.modalDisplayed = false;
+    }, */
+    /**
+     * Unlink the shop and the current user
+     */
+    /* async unlinkShop() {
+      await fetch(`${window.contextPsAccounts.adminAjaxLink}&action=unlinkShop`)
+      .then((response) => {
+        this.closeModal();
+        if (response.ok) {
+          this.$emit('unlinkShop');
+          this.shopIsUnlinked = true;
+          setTimeout(() => {
+            this.shopIsUnlinked = false;
+          }, 3000);
+        } else {
+          this.shopUnlinkError = true;
+          setTimeout(() => {
+            this.shopUnlinkError = false;
+          }, 3000);
+        }
+      });
+    }, */
     },
     computed: {
       userIsConnected() {
