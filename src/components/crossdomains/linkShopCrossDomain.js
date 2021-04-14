@@ -2,7 +2,7 @@ import * as zoid from 'zoid/dist/zoid.frameworks';
 
 export default zoid.create({
   tag: 'crossdomains-account-link-shop',
-  url: 'http://localhost:3000/en/',
+  url: 'https://localhost:3000/en/?cdc=true',
   context: 'iframe',
 
   // The size of the component on their page. Only px and % strings are supported
@@ -18,6 +18,11 @@ export default zoid.create({
     },
     isLinked: {
       type: 'boolean',
+      required: false,
+      queryParam: true,
+    },
+    onBoardingFinished: {
+      type: 'function',
       required: false,
     },
   },

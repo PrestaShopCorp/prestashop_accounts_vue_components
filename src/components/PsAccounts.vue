@@ -74,9 +74,10 @@
               />
             </Account>
             <link-shop-modal
-              @closed="modalDisplayed = false"
+              @closed="closeOnBoarding"
               :displayed="modalDisplayed"
               :shop="validatedContext.currentShop"
+              :is-linked="!!validatedContext.user.email"
             />
           </template>
         </template>
@@ -329,6 +330,10 @@
       },
       alert(t) {
       alert(t);  // eslint-disable-line
+      },
+      closeOnBoarding() {
+        this.modalDisplayed = false;
+        window.location.reload();
       },
     },
     created() {

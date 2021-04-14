@@ -12,7 +12,11 @@
           class="crossdomain"
           v-click-outside="closeModal"
         >
-          <link-shop-crossdomain :shop="shop" />
+          <link-shop-crossdomain
+            :isLinked="isLinked"
+            :shop="shop"
+            :onBoardingFinished="closeModal"
+          />
         </div>
       </div>
     </div>
@@ -40,6 +44,10 @@
       },
       shop: {
         type: Object,
+        required: true,
+      },
+      isLinked: {
+        type: Boolean,
         required: true,
       },
     },
