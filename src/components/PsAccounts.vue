@@ -69,21 +69,23 @@
               class="mb-2"
             >
               <slot
-                v-if="userIsConnectedAndEmailIsValidated"
+                v-if="userIsConnected"
                 name="account-footer"
               />
             </Account>
             <link-shop-modal
+              v-if="modalDisplayed"
               @closed="closeOnBoarding"
               :displayed="modalDisplayed"
               :shop="validatedContext.currentShop"
               :is-linked="!!validatedContext.user.email"
+              :on-boarding-link="validatedContext.onboardingLink"
             />
           </template>
         </template>
       </template>
       <b-overlay
-        :show="!userIsConnectedAndEmailIsValidated"
+        :show="!userIsConnected"
         variant="white"
         spinner-type="null"
         :opacity="0.70"
@@ -147,9 +149,8 @@
       },
     },
     computed: {
-      userIsConnectedAndEmailIsValidated() {
-        return this.validatedContext.user.email !== null
-          && this.validatedContext.user.emailIsValidated;
+      userIsConnected() {
+        return this.validatedContext.user.email !== null;
       },
       psAccountsIsInstalled() {
         return this.validatedContext.psAccountsIsInstalled;

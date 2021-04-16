@@ -2,7 +2,6 @@
   <transition name="fade">
     <div
       class="modal accounts-modal d-block"
-      v-if="displayed"
     >
       <div
         class="crossdomain-container"
@@ -37,11 +36,6 @@
       clickOutside: vClickOutside.directive,
     },
     props: {
-      displayed: {
-        type: Boolean,
-        required: true,
-        default: false,
-      },
       shop: {
         type: Object,
         required: true,
@@ -50,11 +44,23 @@
         type: Boolean,
         required: true,
       },
+      onBoardingLink: {
+        type: String,
+        required: true,
+      },
     },
     methods: {
       closeModal() {
         this.$emit('closed');
       },
+    },
+    mounted() {
+      // FallBack for crossdomain component
+      setTimeout(() => {
+        if (document.querySelector('.crossdomain .zoid-invisible')) {
+          window.location.assign(this.onBoardingLink);
+        }
+      }, 60000);
     },
   };
 </script>

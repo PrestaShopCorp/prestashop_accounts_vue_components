@@ -17,7 +17,6 @@ export const shopGroupSchema = Joi.object().keys({
 
 export const userSchema = Joi.object().keys({
   email: Joi.string().email({tlds: false}).allow(null).default(null),
-  emailIsValidated: Joi.boolean().default(false),
   isSuperAdmin: Joi.boolean().required(),
 }).unknown(true);
 
@@ -35,7 +34,7 @@ export const contextSchema = Joi.object().keys({
   currentShop: shopSchema.optional().allow(null).default(null),
   shops: Joi.array().items(shopGroupSchema).required().min(0)
     .max(128),
-  user: userSchema.optional().allow({}).default({email: null, emailIsValidated: false}),
+  user: userSchema.optional().allow({}).default({email: null}),
   onboardingLink: Joi.string().uri().optional().allow(null)
     .allow('')
     .default(null),

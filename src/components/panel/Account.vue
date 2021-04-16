@@ -8,7 +8,7 @@
           @click="actionEventCallback('manage_account_link')"
           :href="manageAccountLink"
           target="_blank"
-          v-if="!!manageAccountLink && userIsConnectedAndValidated"
+          v-if="!!manageAccountLink && userIsConnected"
           class="float-right tooltip-link"
           id="tooltip-target-3bd46b2a34b6628a1a73a31c91afd7ef"
         >
@@ -23,7 +23,7 @@
         </b-tooltip>
 
         <b-iconstack
-          v-if="userIsConnectedAndValidated"
+          v-if="userIsConnected"
           font-scale="1.5"
           class="mr-2 align-bottom fixed-size"
           width="20"
@@ -41,14 +41,6 @@
         <h3 class="d-inline">
           {{ t('psaccounts.account.title') }}
         </h3>
-        <span
-          v-if="!userEmailIsValidated && userIsConnected"
-          class="float-right"
-        >
-          <b-badge variant="warning">
-            {{ t('psaccounts.account.emailValidationWarningLabel') }}
-          </b-badge>
-        </span>
       </template>
       <b-card-body>
         <div class="d-flex">
@@ -79,13 +71,6 @@
             >
               {{ t('psaccounts.account.connectButton') }}
             </b-button>
-            <b-link
-              v-else-if="userIsConnected && !userEmailIsValidated"
-              @click="signOut()"
-              class="float-right"
-            >
-              {{ t('psaccounts.account.disconnectButton') }}
-            </b-link>
             <!-- <b-button
               v-else
               class="float-right"
@@ -96,27 +81,6 @@
             </b-button> -->
           </div>
         </div>
-        <b-alert
-          v-if="!userEmailIsValidated && userIsConnected"
-          variant="warning"
-          class="mt-4"
-          show
-        >
-          <p>
-            {{ t('psaccounts.account.emailConfirmationAlert') }}.
-          </p>
-          <p class="mt-2 text-muted">
-            {{ t('psaccounts.account.noEmailReceived') }}?
-          </p>
-          <p class="mt-2">
-            <b-button
-              variant="primary"
-              @click="sendEmailConfirmation()"
-            >
-              {{ t('psaccounts.account.sendEmail') }}
-            </b-button>
-          </p>
-        </b-alert>
         <b-alert
           v-if="!isAdmin && !userIsConnected"
           variant="warning"
@@ -188,7 +152,6 @@
     BAlert,
     BButton,
     BLink,
-    BBadge,
     BCard,
     BCardBody,
     BIconstack,
@@ -210,7 +173,6 @@
       BAlert,
       BButton,
       BLink,
-      BBadge,
       BCard,
       BCardBody,
       BIconstack,
@@ -237,7 +199,6 @@
         required: false,
         default: () => ({
           email: '',
-          emailIsValidated: false,
         }),
       },
       /**
@@ -324,11 +285,6 @@
               category: 'Account',
             });
           },
-          user_connected_not_validated: () => {
-            this.$segment.track('ACC View onboarding component - connected not validated state', {
-              category: 'Account',
-            });
-          },
           user_connected: () => {
             this.$segment.track('ACC View onboarding component - connected validated state', {
               category: 'Account',
@@ -349,8 +305,6 @@
           this.panelShown = 'user_not_admin';
         } else if (!this.userIsConnected) {
           this.panelShown = 'user_not_connected';
-        } else if (!this.userEmailIsValidated) {
-          this.panelShown = 'user_connected_not_validated';
         } else {
           this.panelShown = 'user_connected';
         }
@@ -404,12 +358,6 @@
     computed: {
       userIsConnected() {
         return Boolean(this.user.email !== null);
-      },
-      userEmailIsValidated() {
-        return this.user.emailIsValidated;
-      },
-      userIsConnectedAndValidated() {
-        return this.userIsConnected && this.userEmailIsValidated;
       },
     },
     mounted() {
