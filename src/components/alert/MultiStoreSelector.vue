@@ -24,11 +24,21 @@
         href="#"
         @click="event(shop)"
         class="list-group-item"
+        :class="{active: selectedShops.indexOf(shop.id) !== -1}"
       >
         {{ t('psaccounts.multiShopSelector.configure') }} <b>{{ shop.name }}</b>
       </b-list-group-item>
     </b-list-group>
     <p>{{ t('psaccounts.multiShopSelector.tips') }}.</p>
+    <div class="align-self-center">
+      <b-button
+          class="float-right"
+          variant="primary"
+          @click="$emit('signIn')"
+      >
+        {{ t('psaccounts.account.connectButton') }}
+      </b-button>
+    </div>
   </b-alert>
 </template>
 
@@ -60,17 +70,31 @@
         type: Array,
         required: true,
       },
+      selectedShops: {
+        type: Array,
+        default: () => [],
+      },
     },
     methods: {
       event(selectedShop) {
+        const idShopSelected = this.selectedShops.indexOf(selectedShop.id);
+        if (idShopSelected === -1) {
+          this.selectedShops.push(selectedShop.id);
+          this.$segment.track('ACC Click BO Select a shop', {
+            category: 'Accounts',
+          });
+        } else {
+          this.selectedShops.splice(idShopSelected, 1);
+          this.$segment.track('ACC Click BO Unselect a shop', {
+            category: 'Accounts',
+          });
+        }
+
         /**
          * Emitted when a shop is selected.
          * @type {Event}
          */
-        this.$emit('shop-selected', selectedShop);
-        this.$segment.track('ACC Click BO Select a shop', {
-          category: 'Accounts',
-        });
+        this.$emit('shop-selected', this.selectedShops);
       },
     },
     computed: {

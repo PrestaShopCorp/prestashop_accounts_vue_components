@@ -1,7 +1,7 @@
 import * as zoid from 'zoid/dist/zoid.frameworks';
 
 export default zoid.create({
-  tag: 'crossdomains-account-link-shop',
+  tag: 'crossdomains-account-link-shops',
   url: 'https://accounts.prestashop.localhost/en/?cdc=true',
   context: 'iframe',
 
@@ -12,17 +12,8 @@ export default zoid.create({
   },
 
   props: {
-    shop: {
-      type: 'object',
-      required: false,
-    },
-    isLinked: {
-      type: 'boolean',
-      required: false,
-      queryParam: true,
-    },
-    onBoardingFinished: {
-      type: 'function',
+    shops: {
+      type: 'array',
       required: false,
     },
   },
