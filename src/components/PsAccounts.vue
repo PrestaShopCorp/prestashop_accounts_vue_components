@@ -24,17 +24,11 @@
     <template v-else>
       <AlertDisplay
         :validated-context="validatedContext"
+        @hasError="hasError = true"
       />
 
       <template v-if="!hasBlockingAlert">
-        <MultiStoreSelector
-          v-if="psAccountsIsMultishopActive && !isShopContext"
-          :shops="validatedContext.shops"
-          @shop-selected="eventCallback('multi_shop_selected', $event)"
-          @signIn="multishopModalDisplayed = !multishopModalDisplayed"
-        />
         <Account
-          v-else
           :user="validatedContext.user"
           :is-admin="validatedContext.user.isSuperAdmin"
           :onboarding-link="validatedContext.onboardingLink"
@@ -48,8 +42,8 @@
           class="mb-2"
         >
           <slot
-              v-if="userIsConnected"
-              name="account-footer"
+            v-if="userIsConnected"
+            name="account-footer"
           />
         </Account>
         <link-shop-modal
@@ -83,7 +77,6 @@
 
 <script>
   import AlertDisplay from '@/components/alert/AlertDisplay';
-  import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
   import Account from '@/components/panel/Account';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
@@ -106,7 +99,6 @@
     name: 'PsAccounts',
     components: {
       AlertDisplay,
-      MultiStoreSelector,
       Account,
       BOverlay,
       BAlert,
@@ -154,6 +146,7 @@
         modalDisplayed: false,
         multishopModalDisplayed: false,
         multishopSelected: [],
+        hasError: false,
       };
     },
     methods: {
@@ -167,37 +160,11 @@
           this.validationErrors = error.details.map((e) => e.message);
         }
       },
-
       psAccountsIsMultishopActive() {
         return this.validatedContext.shops && this.validatedContext.shops.length;
       },
-
       eventCallback(eventType, event) {
-        switch (eventType) {
-          case 'install_ps_accounts':
-          case 'enable_ps_accounts':
-          case 'multi_shop_selected':
-            this.multishopSelected = event;
-            break;
-          case 'manage_account_link':
-          case 'sign_in':
-          case 'sign_out':
-          case 'user_not_admin':
-          case 'user_not_connected':
-          case 'user_connected_not_validated':
-          case 'user_connected':
-            /**
-             * Emitted when a specific panel is shown.
-             * @type {Event}
-             */
-            this.$emit('viewed', eventType, event);
-            break;
-          default:
-            console.error('Unknown callback event type.');  // eslint-disable-line
-        }
-      },
-      alert(t) {
-        alert(t);  // eslint-disable-line
+        this.$emit('accountsEvent', eventType, event);
       },
       closeOnBoarding() {
         this.modalDisplayed = false;

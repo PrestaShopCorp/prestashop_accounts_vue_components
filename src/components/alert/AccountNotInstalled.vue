@@ -1,6 +1,5 @@
 <template>
   <b-alert
-    v-if="!accountIsInstalled"
     variant="warning"
     show
   >
@@ -12,7 +11,7 @@
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="installEvent()"
+        @click="installPsAccounts()"
       >
         {{ t('psaccounts.alertAccountNotInstalled.installButton') }}
       </b-button>
@@ -30,6 +29,7 @@
 <script>
   import Locale from '@/mixins/locale';
   import {BAlert, BButton, BLink} from 'bootstrap-vue';
+  import installModule from '../../lib/moduleManager/InstallModule';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -45,30 +45,30 @@
       BLink,
     },
     props: {
-      /**
-       * This is the display condition (do not use v-if="...", use this prop instead).
-       */
-      accountIsInstalled: {
-        type: Boolean,
-        default: false,
-      },
-      /**
-      * Useful in order to display a loader if you perform some ajax.
-      */
-      isLoading: {
-        type: Boolean,
-        default: false,
+      validatedContext: {
+        type: Object,
+        required: true,
       },
     },
+    data() {
+      return {
+        isLoading: false,
+      };
+    },
     methods: {
-      installEvent() {
-        /**
-         * Emitted when install button is clicked.
-         * @type {Event}
-         */
-        this.$emit('install', true);
+      installPsAccounts() {
         this.$segment.track('ACC Click BO Install button', {
           category: 'Accounts',
+        });
+        this.isLoading = true;
+
+        installModule(
+          'ps_accounts',
+          this.validatedContext.psAccountsInstallLink,
+          this.validatedContext.psIs17,
+        ).catch(() => {
+          this.isLoading = false;
+          this.$emit('hasError');
         });
       },
     },
