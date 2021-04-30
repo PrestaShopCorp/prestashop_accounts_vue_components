@@ -22,23 +22,14 @@
     </b-alert>
 
     <template v-else>
-      <AlertDisplay
+      <PsAccountComponentAlertDisplay
         :validated-context="validatedContext"
         @hasError="hasError = true"
       />
 
       <template v-if="!hasBlockingAlert">
         <Account
-          :user="validatedContext.user"
-          :is-admin="validatedContext.user.isSuperAdmin"
-          :onboarding-link="validatedContext.onboardingLink"
-          :admin-email="validatedContext.superAdminEmail"
-          :resend-email-link="validatedContext.ssoResendVerificationEmail"
-          :manage-account-link="validatedContext.manageAccountLink"
-          @viewed="eventCallback"
-          @actioned="eventCallback"
-          @unlinkShop="validatedContext.user.email = null"
-          @signIn="modalDisplayed = !modalDisplayed"
+          :validated-context="validatedContext"
           class="mb-2"
         >
           <slot
@@ -46,20 +37,6 @@
             name="account-footer"
           />
         </Account>
-        <link-shop-modal
-          v-if="modalDisplayed"
-          @closed="closeOnBoarding"
-          :displayed="modalDisplayed"
-          :shop="validatedContext.currentShop"
-          :is-linked="!!validatedContext.user.email"
-          :on-boarding-link="validatedContext.onboardingLink"
-        />
-        <link-shops-modal
-          v-if="multishopModalDisplayed"
-          @closed="closeOnBoarding"
-          :displayed="multishopModalDisplayed"
-          shops="getSelectedShops"
-        />
         <b-overlay
           :show="!userIsConnected"
           variant="white"
@@ -76,13 +53,11 @@
 </template>
 
 <script>
-  import AlertDisplay from '@/components/alert/AlertDisplay';
+  import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
   import Account from '@/components/panel/Account';
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
   import {BAlert, BOverlay} from 'bootstrap-vue';
-  import LinkShopModal from '@/components/crossdomains/LinkShopModal';
-  import LinkShopsModal from '@/components/crossdomains/LinkShopsModal';
   import {contextSchema} from '../lib/ContextValidator';
   import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -98,12 +73,10 @@
   export default {
     name: 'PsAccounts',
     components: {
-      AlertDisplay,
+      PsAccountComponentAlertDisplay,
       Account,
       BOverlay,
       BAlert,
-      LinkShopModal,
-      LinkShopsModal,
     },
     mixins: [Locale],
     props: {
@@ -128,24 +101,11 @@
           || !this.validatedContext.psAccountsIsUptodate
           || !this.validatedContext.psAccountsIsEnabled;
       },
-      getSelectedShops() {
-        return [...this.validatedContext.shops.map(
-          (shopGroup) => shopGroup.shops.filter(
-            (shop) => this.multishopSelected.indexOf(shop.id) !== -1,
-          ),
-        )];
-      },
-      isShopContext() {
-        return this.validatedContext.isShopContext;
-      },
     },
     data() {
       return {
         validationErrors: [],
         validatedContext: this.context,
-        modalDisplayed: false,
-        multishopModalDisplayed: false,
-        multishopSelected: [],
         hasError: false,
       };
     },
@@ -160,28 +120,12 @@
           this.validationErrors = error.details.map((e) => e.message);
         }
       },
-      psAccountsIsMultishopActive() {
-        return this.validatedContext.shops && this.validatedContext.shops.length;
-      },
       eventCallback(eventType, event) {
         this.$emit('accountsEvent', eventType, event);
-      },
-      closeOnBoarding() {
-        this.modalDisplayed = false;
-        this.multishopModalDisplayed = false;
-        window.location.reload();
       },
     },
     created() {
       this.validateContext();
     },
-    watch: {
-      context() {
-        this.validateContext();
-      },
-    },
   };
 </script>
-<style>
-
-</style>

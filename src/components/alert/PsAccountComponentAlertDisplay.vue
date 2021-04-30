@@ -26,10 +26,10 @@
 
 <script>
   import Locale from '@/mixins/locale';
-  import AccountNotEnabled from '@/components/alert/AccountNotEnabled';
-  import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
-  import AccountNotUpdated from '@/components/alert/AccountNotUpdated';
-  import EventBusNotInstalled from '@/components/alert/EventBusNotInstalled';
+  import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
+  import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';
+  import AccountNotUpdated from '@/components/alert/subComponents/AccountNotUpdated';
+  import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotInstalled';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -37,7 +37,7 @@
    * telling the PS Accounts module is not enabled on the shop (and a button to enable it).
    */
   export default {
-    name: 'AlertDisplay',
+    name: 'PsAccountComponentAlertDisplay',
     components: {
       AccountNotEnabled,
       AccountNotInstalled,

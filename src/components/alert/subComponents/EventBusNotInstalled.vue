@@ -28,7 +28,7 @@
 <script>
   import {BOverlay, BAlert, BButton} from 'bootstrap-vue';
   import Locale from '@/mixins/locale';
-  import installModule from '../../lib/moduleManager/InstallModule';
+  import installModule from '../../../lib/moduleManager/InstallModule';
 
   export default {
     name: 'AlertEventBusNotInstalled',

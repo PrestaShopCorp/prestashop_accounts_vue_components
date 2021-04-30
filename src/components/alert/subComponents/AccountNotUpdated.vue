@@ -3,24 +3,24 @@
     variant="warning"
     show
   >
-    <h3>{{ t('psaccounts.alertAccountNotEnabled.title') }}</h3>
+    <h3>{{ t('psaccounts.alertAccountNeedsUpdate.title') }}</h3>
     <p>
-      {{ t('psaccounts.alertAccountNotEnabled.message') }}.
+      {{ t('psaccounts.alertAccountNeedsUpdate.message') }}.
     </p>
     <p class="mt-2">
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="enablePsAccounts()"
+        @click="updatePsAccounts()"
       >
-        {{ t('psaccounts.alertAccountNotEnabled.enableButton') }}
+        {{ t('psaccounts.alertAccountNeedsUpdate.installButton') }}
       </b-button>
       <b-link
         href="#"
         disabled
         v-else
       >
-        {{ t('psaccounts.alertAccountNotEnabled.loading') }}
+        {{ t('psaccounts.alertAccountNotInstalled.loading') }}
       </b-link>
     </p>
   </b-alert>
@@ -29,21 +29,21 @@
 <script>
   import Locale from '@/mixins/locale';
   import {BAlert, BButton, BLink} from 'bootstrap-vue';
-  import enableModule from '../../lib/moduleManager/EnableModule';
+  import updateModule from '../../../lib/moduleManager/UpdateModule';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
    * component does not meets special needs. This part will display a warning message
-   * telling the PS Accounts module is not enabled on the shop (and a button to enable it).
+   * telling the PS Accounts module is not installed on the shop (and a button to install it).
    */
   export default {
-    name: 'AlertAccountNotEnabled',
+    name: 'AlertAccountNotUpdated',
+    mixins: [Locale],
     components: {
       BAlert,
       BButton,
       BLink,
     },
-    mixins: [Locale],
     props: {
       validatedContext: {
         type: Object,
@@ -56,15 +56,14 @@
       };
     },
     methods: {
-      enablePsAccounts() {
-        this.$segment.track('ACC Click BO Activate Button', {
+      updatePsAccounts() {
+        this.isLoading = true;
+        this.$segment.track('ACC Click BO Update button', {
           category: 'Accounts',
         });
-        this.isLoading = true;
-
-        enableModule(
+        updateModule(
           'ps_accounts',
-          this.validatedContext.psAccountsEnableLink,
+          this.validatedContext.psAccountsUpdateLink,
           this.validatedContext.psIs17,
         ).catch(() => {
           this.isLoading = false;
@@ -73,7 +72,7 @@
       },
     },
     mounted() {
-      this.$segment.track('ACC View Install component - activate state', {
+      this.$segment.track('ACC View Update component - update state', {
         category: 'Account',
       });
     },

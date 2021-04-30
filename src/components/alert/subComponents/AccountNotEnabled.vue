@@ -3,24 +3,24 @@
     variant="warning"
     show
   >
-    <h3>{{ t('psaccounts.alertAccountNotInstalled.title') }}</h3>
+    <h3>{{ t('psaccounts.alertAccountNotEnabled.title') }}</h3>
     <p>
-      {{ t('psaccounts.alertAccountNotInstalled.message') }}.
+      {{ t('psaccounts.alertAccountNotEnabled.message') }}.
     </p>
     <p class="mt-2">
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="installPsAccounts()"
+        @click="enablePsAccounts()"
       >
-        {{ t('psaccounts.alertAccountNotInstalled.installButton') }}
+        {{ t('psaccounts.alertAccountNotEnabled.enableButton') }}
       </b-button>
       <b-link
         href="#"
         disabled
         v-else
       >
-        {{ t('psaccounts.alertAccountNotInstalled.loading') }}
+        {{ t('psaccounts.alertAccountNotEnabled.loading') }}
       </b-link>
     </p>
   </b-alert>
@@ -29,21 +29,21 @@
 <script>
   import Locale from '@/mixins/locale';
   import {BAlert, BButton, BLink} from 'bootstrap-vue';
-  import installModule from '../../lib/moduleManager/InstallModule';
+  import enableModule from '../../../lib/moduleManager/EnableModule';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
    * component does not meets special needs. This part will display a warning message
-   * telling the PS Accounts module is not installed on the shop (and a button to install it).
+   * telling the PS Accounts module is not enabled on the shop (and a button to enable it).
    */
   export default {
-    name: 'AlertAccountNotInstalled',
-    mixins: [Locale],
+    name: 'AlertAccountNotEnabled',
     components: {
       BAlert,
       BButton,
       BLink,
     },
+    mixins: [Locale],
     props: {
       validatedContext: {
         type: Object,
@@ -56,15 +56,15 @@
       };
     },
     methods: {
-      installPsAccounts() {
-        this.$segment.track('ACC Click BO Install button', {
+      enablePsAccounts() {
+        this.$segment.track('ACC Click BO Activate Button', {
           category: 'Accounts',
         });
         this.isLoading = true;
 
-        installModule(
+        enableModule(
           'ps_accounts',
-          this.validatedContext.psAccountsInstallLink,
+          this.validatedContext.psAccountsEnableLink,
           this.validatedContext.psIs17,
         ).catch(() => {
           this.isLoading = false;
@@ -73,7 +73,7 @@
       },
     },
     mounted() {
-      this.$segment.track('ACC View Install component - install state', {
+      this.$segment.track('ACC View Install component - activate state', {
         category: 'Account',
       });
     },

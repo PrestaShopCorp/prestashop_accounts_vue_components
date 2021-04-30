@@ -3,17 +3,17 @@
     variant="warning"
     show
   >
-    <h3>{{ t('psaccounts.alertAccountNeedsUpdate.title') }}</h3>
+    <h3>{{ t('psaccounts.alertAccountNotInstalled.title') }}</h3>
     <p>
-      {{ t('psaccounts.alertAccountNeedsUpdate.message') }}.
+      {{ t('psaccounts.alertAccountNotInstalled.message') }}.
     </p>
     <p class="mt-2">
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="updatePsAccounts()"
+        @click="installPsAccounts()"
       >
-        {{ t('psaccounts.alertAccountNeedsUpdate.installButton') }}
+        {{ t('psaccounts.alertAccountNotInstalled.installButton') }}
       </b-button>
       <b-link
         href="#"
@@ -29,7 +29,7 @@
 <script>
   import Locale from '@/mixins/locale';
   import {BAlert, BButton, BLink} from 'bootstrap-vue';
-  import updateModule from '../../lib/moduleManager/UpdateModule';
+  import installModule from '../../../lib/moduleManager/InstallModule';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -37,7 +37,7 @@
    * telling the PS Accounts module is not installed on the shop (and a button to install it).
    */
   export default {
-    name: 'AlertAccountNotUpdated',
+    name: 'AlertAccountNotInstalled',
     mixins: [Locale],
     components: {
       BAlert,
@@ -56,14 +56,15 @@
       };
     },
     methods: {
-      updatePsAccounts() {
-        this.isLoading = true;
-        this.$segment.track('ACC Click BO Update button', {
+      installPsAccounts() {
+        this.$segment.track('ACC Click BO Install button', {
           category: 'Accounts',
         });
-        updateModule(
+        this.isLoading = true;
+
+        installModule(
           'ps_accounts',
-          this.validatedContext.psAccountsUpdateLink,
+          this.validatedContext.psAccountsInstallLink,
           this.validatedContext.psIs17,
         ).catch(() => {
           this.isLoading = false;
@@ -72,7 +73,7 @@
       },
     },
     mounted() {
-      this.$segment.track('ACC View Update component - update state', {
+      this.$segment.track('ACC View Install component - install state', {
         category: 'Account',
       });
     },
