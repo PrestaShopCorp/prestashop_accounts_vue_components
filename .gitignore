@@ -23,6 +23,5 @@ yarn-error.log*
 *.sln
 *.sw?
 .nova
-.env
 
 .terraform
