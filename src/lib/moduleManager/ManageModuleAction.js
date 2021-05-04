@@ -2,12 +2,11 @@ function manageModuleAction17(action) {
   return fetch(action.actionLink, {
     method: 'POST',
   }).then((response) => response.json(),
-  ).then(() => {
-    throw new Error(`Cannot ${action.action} ${action.module} module.`);
-    // if (json[action.module].status === false) {
-    //   throw new Error(`Cannot ${action.action} ${action.module} module.`);
-    // }
-    // return json;
+  ).then((json) => {
+    if (json[action.module].status === false) {
+      throw new Error(`Cannot ${action.action} ${action.module} module.`);
+    }
+    return json;
   });
 }
 
