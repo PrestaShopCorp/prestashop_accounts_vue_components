@@ -2,10 +2,9 @@
 import Vue from 'vue';
 import PsAccounts from '@/components/PsAccounts';
 import Account from '@/components/panel/Account';
-import AccountNotInstalled from '@/components/alert/AccountNotInstalled';
-import AccountNotEnabled from '@/components/alert/AccountNotEnabled';
-import MultiStoreSelector from '@/components/alert/MultiStoreSelector';
-import EventBusNotInstalled from '@/components/alert/EventBusNotInstalled';
+import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';
+import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
+import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotInstalled';
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {use, i18n} from '@/locale';
 import Segment from "@prestashopcorp/segment-vue";
@@ -32,7 +31,6 @@ const Components = {
   Account,
   AccountNotInstalled,
   AccountNotEnabled,
-  MultiStoreSelector,
   EventBusNotInstalled
 };
 
@@ -62,6 +60,5 @@ export {
   Account,
   AccountNotInstalled,
   AccountNotEnabled,
-  MultiStoreSelector,
   EventBusNotInstalled
 };

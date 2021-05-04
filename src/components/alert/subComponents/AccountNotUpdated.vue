@@ -1,6 +1,5 @@
 <template>
   <b-alert
-    v-if="!accountIsUpToDate"
     variant="warning"
     show
   >
@@ -12,7 +11,7 @@
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="updateEvent()"
+        @click="updatePsAccounts()"
       >
         {{ t('psaccounts.alertAccountNeedsUpdate.installButton') }}
       </b-button>
@@ -30,6 +29,7 @@
 <script>
   import Locale from '@/mixins/locale';
   import {BAlert, BButton, BLink} from 'bootstrap-vue';
+  import updateModule from '../../../lib/moduleManager/UpdateModule';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -45,30 +45,29 @@
       BLink,
     },
     props: {
-      /**
-       * This is the display condition (do not use v-if="...", use this prop instead).
-       */
-      accountIsUptodate: {
-        type: Boolean,
-        default: false,
-      },
-      /**
-      * Useful in order to display a loader if you perform some ajax.
-      */
-      isLoading: {
-        type: Boolean,
-        default: false,
+      validatedContext: {
+        type: Object,
+        required: true,
       },
     },
+    data() {
+      return {
+        isLoading: false,
+      };
+    },
     methods: {
-      updateEvent() {
-        /**
-         * Emitted when update button is clicked.
-         * @type {Event}
-         */
-        this.$emit('update', true);
+      updatePsAccounts() {
+        this.isLoading = true;
         this.$segment.track('ACC Click BO Update button', {
           category: 'Accounts',
+        });
+        updateModule(
+          'ps_accounts',
+          this.validatedContext.psAccountsUpdateLink,
+          this.validatedContext.psIs17,
+        ).catch(() => {
+          this.isLoading = false;
+          this.$emit('hasError');
         });
       },
     },

@@ -4,372 +4,83 @@
       no-body
     >
       <template v-slot:header>
-        <a
-          @click="actionEventCallback('manage_account_link')"
-          :href="manageAccountLink"
-          target="_blank"
-          v-if="!!manageAccountLink && userIsConnected"
-          class="float-right tooltip-link"
-          id="tooltip-target-3bd46b2a34b6628a1a73a31c91afd7ef"
-        >
-          <i class="material-icons fixed-size-small float-right">settings</i>
-        </a>
-        <b-tooltip
-          target="tooltip-target-3bd46b2a34b6628a1a73a31c91afd7ef"
-          triggers="hover"
-          placement="top"
-        >
-          {{ t('psaccounts.account.manageAccountTooltip') }}
-        </b-tooltip>
-
-        <b-iconstack
-          v-if="userIsConnected"
-          font-scale="1.5"
-          class="mr-2 align-bottom fixed-size"
-          width="20"
-          height="20"
-        >
-          <b-icon-circle-fill
-            stacked
-            variant="success"
-          />
-          <b-icon-check
-            stacked
-            variant="white"
-          />
-        </b-iconstack>
-        <h3 class="d-inline">
-          {{ t('psaccounts.account.title') }}
-        </h3>
+        <AccountHeader
+          :manage-account-link="validatedContext.manageAccountLink"
+          :user-is-connected="userIsConnected"
+        />
       </template>
       <b-card-body>
         <div class="d-flex">
-          <div class="d-flex flex-grow-1">
-            <img
-              class="mr-2 align-self-center"
-              src="~@/assets/img/puffin_logo.png"
-              width="46"
-            >
-            <div class="align-self-center">
-              <span
-                v-if="!userIsConnected"
-                class="align-middle"
-              >{{ t('psaccounts.account.authorize') }}.</span>
-              <template v-else>
-                <span class="align-middle">{{ t('psaccounts.account.authorized') }}.</span><br>
-                <span class="text-muted">{{ user.email }}</span>
-              </template>
-            </div>
-          </div>
-          <div class="align-self-center">
-            <b-button
-              v-if="!userIsConnected"
-              class="float-right"
-              :disabled="!isAdmin && !userIsConnected"
-              variant="primary"
-              @click="signIn()"
-            >
-              {{ t('psaccounts.account.connectButton') }}
-            </b-button>
-            <!-- <b-button
-              v-else
-              class="float-right"
-              variant="outline-secondary"
-              @click.stop="openModal"
-            >
-              {{ t('psaccounts.account.unlinkShop') }}
-            </b-button> -->
-          </div>
+          <AccountShopLinkMessage
+            :user-is-connected="userIsConnected"
+            :validated-context="validatedContext"
+          />
+          <AccountLinkToUi
+            :user-is-connected="userIsConnected"
+            :validated-context="validatedContext"
+          />
         </div>
-        <b-alert
-          v-if="!isAdmin && !userIsConnected"
-          variant="warning"
-          class="mt-4"
-          show
-        >
-          <p>{{ t('psaccounts.account.needToBeAdmin') }}.</p>
-          <p v-if="adminEmail">
-            {{ t('psaccounts.account.pleaseContact') }}
-            <b-link
-              @click="sendEmailConfirmation()"
-              :href="'mailto:' + adminEmail"
-            >
-              {{ adminEmail }}
-            </b-link>
-          </p>
-        </b-alert>
-        <!-- <b-alert
-          v-if="shopIsUnlinked"
-          variant="success"
-          class="mt-3"
-          show
-        >
-          <p>
-            {{ t('psaccounts.account.unlinkShopAlert') }}.
-          </p>
-        </b-alert>
-        <b-alert
-          v-if="shopUnlinkError"
-          variant="danger"
-          class="mt-3"
-          show
-        >
-          <p>
-            {{ t('psaccounts.account.unlinkShopError') }}.
-          </p>
-        </b-alert> -->
+        <AccountUserNotSuperAdmin
+          v-if="!validatedContext.user.isSuperAdmin"
+          :admin-email="validatedContext.superAdminEmail"
+        />
         <slot />
       </b-card-body>
     </b-card>
-    <!-- <Modal
-      id="unlinkShop-modal"
-      :displayed="modalDisplayed"
-      @closed="closeModal"
-      :header-title="t('psaccounts.account.unlinkShopModalTitle')"
-      :body-text="t('psaccounts.account.unlinkShopModalContent')"
-    >
-      <template #modal-footer>
-        <b-button
-          @click="closeModal"
-          variant="outline-secondary"
-        >
-          Cancel
-        </b-button>
-        <b-button
-          variant="primary"
-          @click="unlinkShop"
-        >
-          Yes, I Confirm
-        </b-button>
-      </template>
-    </Modal> -->
   </div>
 </template>
 
 <script>
   import Locale from '@/mixins/locale';
   import {
-    BAlert,
-    BButton,
-    BLink,
     BCard,
     BCardBody,
-    BIconstack,
-    BIconCircleFill,
-    BIconCheck,
-    BTooltip,
   } from 'bootstrap-vue';
-  // import Modal from '@/components/modal/Modal.vue';
+  import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader';
+  import AccountLinkToUi from '@/components/panel/accountSubComponents/AccountLinkToUi';
+  import AccountUserNotSuperAdmin from '@/components/alert/subComponents/AccountUserNotSuperAdmin';
+  import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage';
 
-  /**
-   * This sub-component can be used in a custom integration when the `PsAccounts`
-   * component does not meets special needs. This part will display a block to
-   * let the user link his account through a button.
-   */
   export default {
     name: 'Account',
     mixins: [Locale],
     components: {
-      BAlert,
-      BButton,
-      BLink,
       BCard,
       BCardBody,
-      BIconstack,
-      BIconCircleFill,
-      BIconCheck,
-      BTooltip,
-    // Modal,
+      AccountHeader,
+      AccountLinkToUi,
+      AccountUserNotSuperAdmin,
+      AccountShopLinkMessage,
     },
     props: {
-      /**
-       * Whether or not the current user has admin rights.
-       */
-      isAdmin: {
-        type: Boolean,
-        required: false,
-        default: true,
-      },
-      /**
-       * The user object, generated
-       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
-       */
-      user: {
+      validatedContext: {
         type: Object,
-        required: false,
-        default: () => ({
-          email: '',
-        }),
-      },
-      /**
-       * The onboarding link, generated
-       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
-       */
-      onboardingLink: {
-        type: String,
         required: true,
       },
-      /**
-       * The super admin email used in the wording
-       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
-       */
-      adminEmail: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      /**
-       * The link to sso to trigger a new verification email
-       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
-       */
-      resendEmailLink: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      /**
-       * The link to sso account management page
-       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
-       */
-      manageAccountLink: {
-        type: String,
-        required: false,
-        default: null,
-      },
-    },
-    data() {
-      return {
-        panelShown: null,
-        shopIsUnlinked: false,
-        shopUnlinkError: false,
-      // modalDisplayed: false,
-      };
     },
     methods: {
-      signIn() {
-        this.actionEventCallback('sign_in');
-        this.$segment.track('ACC Click BO Connect button', {
-          category: 'Accounts',
-        });
-        // window.location.href = this.onboardingLink;
-        this.$emit('signIn');
-      },
-      signOut() {
-        this.actionEventCallback('sign_out', this.user);
-        /**
-         * Logout the current user to let another user account to be linked
-         * (user is given in parameter).
-         * @type {Event}
-         */
-        this.$emit('sign-out', this.user);
-        this.user.email = null;
-        this.signIn();
-      },
-      sendEmailConfirmation() {
-        /**
-         * Send the confirmation email again to the user (email address is given in parameter).
-         * @type {Event}
-         */
-        this.$emit('send-email', this.user.email);
-        this.$segment.track('ACC Click BO Admin address', {
-          category: 'Accounts',
-        });
-        if (this.resendEmailLink) {
-          window.open(this.resendEmailLink, '_blank');
-        }
-      },
-      tracking(status) {
-        const trackByUserStatus = {
-          user_not_connected: () => {
-            this.$segment.track('ACC View onboarding component - not connected state', {
-              category: 'Account',
-            });
-          },
-          user_connected: () => {
-            this.$segment.track('ACC View onboarding component - connected validated state', {
-              category: 'Account',
-            });
-          },
-          user_not_admin: () => {
-            this.$segment.track('ACC View admin component', {
-              category: 'Account',
-            });
-          },
-        };
-        return trackByUserStatus[status].call();
-      },
-      viewingPanel() {
-        const previousPanel = this.panelShown;
-
-        if (!this.isAdmin) {
-          this.panelShown = 'user_not_admin';
+      trackingComponent() {
+        let trackingEvent = '';
+        if (!this.validatedContext.user.isSuperAdmin) {
+          trackingEvent = 'ACC View admin component';
         } else if (!this.userIsConnected) {
-          this.panelShown = 'user_not_connected';
+          trackingEvent = 'ACC View onboarding component - not connected state';
         } else {
-          this.panelShown = 'user_connected';
+          trackingEvent = 'ACC View onboarding component - connected validated state';
         }
-        this.tracking(this.panelShown);
-        if (this.panelShown && (previousPanel !== this.panelShown)) {
-          // Need to make call async in order to let callbacks ready.
-          setTimeout(() => {
-            /**
-             * Emitted when user action occurred on a panel.
-             * @type {Event}
-             */
-            this.$emit('viewed', this.panelShown);
-          }, 100);
-        }
+
+        this.$segment.track(trackingEvent, {
+          category: 'Account',
+        });
       },
-      actionEventCallback(eventType, event) {
-        /**
-         * Emitted when user action occurred on a panel.
-         * @type {Event}
-         */
-        this.$emit('actioned', eventType, event);
-      },
-    /* openModal() {
-      this.modalDisplayed = true;
-    },
-    closeModal() {
-      this.modalDisplayed = false;
-    }, */
-    /**
-     * Unlink the shop and the current user
-     */
-    /* async unlinkShop() {
-      await fetch(`${window.contextPsAccounts.adminAjaxLink}&action=unlinkShop`)
-      .then((response) => {
-        this.closeModal();
-        if (response.ok) {
-          this.$emit('unlinkShop');
-          this.shopIsUnlinked = true;
-          setTimeout(() => {
-            this.shopIsUnlinked = false;
-          }, 3000);
-        } else {
-          this.shopUnlinkError = true;
-          setTimeout(() => {
-            this.shopUnlinkError = false;
-          }, 3000);
-        }
-      });
-    }, */
     },
     computed: {
       userIsConnected() {
-        return Boolean(this.user.email !== null);
+        return this.validatedContext.user.email !== null;
       },
     },
     mounted() {
-      this.viewingPanel();
-    },
-    updated() {
-      this.viewingPanel();
-    },
-    watch: {
-      'user.email': function () {
-        this.$forceUpdate();
-      },
+      this.trackingComponent();
     },
   };
 </script>
