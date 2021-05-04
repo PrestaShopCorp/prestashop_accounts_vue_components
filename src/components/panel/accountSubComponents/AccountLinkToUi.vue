@@ -5,7 +5,7 @@
       class="float-right"
       :disabled="!validatedContext.user.isSuperAdmin"
       variant="primary"
-      @click="connectToUi()"
+      @click="openLinkShopModal()"
     >
       {{ t('psaccounts.account.connectButton') }}
     </b-button>
@@ -49,7 +49,7 @@
       };
     },
     methods: {
-      connectToUi() {
+      openLinkShopModal() {
         this.$segment.track('ACC Click BO Connect button', {
           category: 'Accounts',
         });
