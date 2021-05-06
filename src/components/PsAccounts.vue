@@ -33,7 +33,7 @@
           v-if="!psAccountsIsUptodate"
           :account-is-uptodate="psAccountsIsUptodate"
           :is-loading="installLoading"
-          @install="updatePsAccounts()"
+          @update="updatePsAccounts()"
         />
         <template v-else>
           <AccountNotEnabled
