@@ -24,12 +24,12 @@ jobs:
           echo $GOOGLE_APPLICATION_CREDENTIALS > token.json
           gcloud auth activate-service-account --key-file=token.json
           gcloud container clusters get-credentials $GCLOUD_CLUSTER \
-          --zone europe-west1-c --project psessentials-integration
+          --zone europe-west1-c --project distribution-integration
           gcloud auth configure-docker
           rm token.json
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-          GCLOUD_CLUSTER: ${{ secrets.GCLOUD_CLUSTER }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.INTEGRATION_GOOGLE_APPLICATION_CREDENTIALS }}
+          GCLOUD_CLUSTER: ${{ secrets.INTEGRATION_GCLOUD_CLUSTER }}
 
       - name: Checkout repository
         uses: actions/checkout@master
