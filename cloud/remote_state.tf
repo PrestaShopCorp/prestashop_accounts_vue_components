@@ -7,7 +7,8 @@ data "terraform_remote_state" "services" {
 
   # see https://www.terraform.io/docs/backends/types/gcs.html
   config = {
+    #    prefix = "terraform/services/gcp"
     prefix = "terraform/services"
-    bucket = local.project
+    bucket = "integration-ditribution-terraform-state"
   }
 }
