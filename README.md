@@ -32,17 +32,17 @@ yarn start-storybook
 ```
 
 and go on [local storybook](http://localhost:33199/?path=/docs/introduction--page)
-or use online [integration storybook](https://storybook-accounts.psessentials.net/?path=/docs/introduction--page)
+or use online [integration storybook](https://storybook-accounts.distribution.prestashop.net/?path=/docs/introduction--page)
 
 ## Storybooks
 
 Storybook integration (trigger on PR labeled 'quality assurance needed'): 
 
-https://storybook-accounts.psessentials-integration.net/
+https://storybook-accounts.distribution-integration.prestashop.net/
 
 Storybook production (trigger on push master/main) : 
 
-https://storybook-accounts.psessentials.net/
+https://storybook-accounts.distribution.prestashop.net/
 
 ## CDN
 
