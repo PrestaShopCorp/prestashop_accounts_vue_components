@@ -1,13 +1,12 @@
 <template>
   <div class="align-self-center">
     <b-button
-      v-if="!userIsConnected"
       class="float-right"
       :disabled="!validatedContext.user.isSuperAdmin"
       variant="primary"
       @click="openLinkShopModal()"
     >
-      {{ t('psaccounts.account.connectButton') }}
+      {{ t(`psaccounts.account.${userIsConnected ? 'manageAccountTooltip' : 'connectButton'}`) }}
     </b-button>
     <link-shop-modal
       v-if="cdcUiDisplayed"
