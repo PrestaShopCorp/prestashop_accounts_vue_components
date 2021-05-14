@@ -1,8 +1,5 @@
 import * as zoid from 'zoid/dist/zoid.frameworks';
 
-// eslint-disable-next-line
-console.log('ok');
-
 export default zoid.create({
   tag: 'crossdomains-account-link-shop',
   // TODO Put accounts-ui prod url when there is no env
