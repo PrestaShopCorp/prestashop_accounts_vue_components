@@ -12,7 +12,7 @@
       v-if="cdcUiDisplayed"
       @closed="closeOnBoarding"
       :shop="validatedContext.currentShop"
-      :is-linked="!!validatedContext.user.email"
+      :specify-ui-url="getSpecificUiUrl"
       :on-boarding-link="validatedContext.onboardingLink"
     />
   </div>
@@ -57,6 +57,12 @@
       closeOnBoarding() {
         this.cdcUiDisplayed = false;
         window.location.reload();
+      },
+      getSpecificUiUrl() {
+        if (this.validatedContext.user.email) {
+          return '/shop';
+        }
+        return '';
       },
     },
   };
