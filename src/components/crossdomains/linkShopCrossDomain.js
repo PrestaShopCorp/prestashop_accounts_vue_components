@@ -20,7 +20,7 @@ export default zoid.create({
     },
     specificUrl: {
       type: 'string',
-      required: false,
+      required: true,
     },
     onBoardingFinished: {
       type: 'function',

@@ -12,7 +12,7 @@
       v-if="cdcUiDisplayed"
       @closed="closeOnBoarding"
       :shop="validatedContext.currentShop"
-      :specify-ui-url="getSpecificUiUrl"
+      :specific-ui-url="getSpecificUiUrl()"
       :on-boarding-link="validatedContext.onboardingLink"
     />
   </div>
