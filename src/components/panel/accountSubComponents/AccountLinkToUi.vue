@@ -12,7 +12,7 @@
       v-if="cdcUiDisplayed"
       @closed="closeOnBoarding"
       :shop="validatedContext.currentShop"
-      :specific-ui-url="getSpecificUiUrl()"
+      :specific-ui-url="getSpecificUiUrl"
       :on-boarding-link="validatedContext.onboardingLink"
     />
   </div>
@@ -42,6 +42,11 @@
         required: true,
       },
     },
+    computed: {
+      getSpecificUiUrl() {
+        return this.validatedContext.user.email ? '/shop' : '';
+      },
+    },
     data() {
       return {
         cdcUiDisplayed: false,
@@ -57,12 +62,6 @@
       closeOnBoarding() {
         this.cdcUiDisplayed = false;
         window.location.reload();
-      },
-      getSpecificUiUrl() {
-        if (this.validatedContext.user.email) {
-          return '/shop';
-        }
-        return '';
       },
     },
   };
