@@ -48,7 +48,7 @@
         return this.validatedContext.user.email ? '/shop' : '';
       },
       shopIsNotLinked() {
-        return this.validatedContext.currentShop.employeeId === '';
+        return !this.validatedContext.user.email;
       },
       shopIsLinkedAndUserIsTheSame() {
         return parseInt(this.validatedContext.currentShop.employeeId, 10)
