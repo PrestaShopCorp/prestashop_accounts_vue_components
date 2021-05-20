@@ -2,7 +2,8 @@
   <div class="align-self-center">
     <b-button
       class="float-right"
-      :disabled="!validatedContext.user.isSuperAdmin || !shopIsLinkedAndUserIsDifferent"
+      v-if="shopIsNotLinked || shopIsLinkedAndUserIsTheSame"
+      :disabled="!validatedContext.user.isSuperAdmin"
       variant="primary"
       @click="openLinkShopModal()"
     >
@@ -46,10 +47,10 @@
       getSpecificUiUrl() {
         return this.validatedContext.user.email ? '/shop' : '';
       },
-      shopIsLinkedAndUserIsDifferent() {
-        if (this.validatedContext.currentShop.employeeId === '') {
-          return true;
-        }
+      shopIsNotLinked() {
+        return this.validatedContext.currentShop.employeeId === '';
+      },
+      shopIsLinkedAndUserIsTheSame() {
         return parseInt(this.validatedContext.currentShop.employeeId, 10)
           === this.validatedContext.employeeId;
       },
