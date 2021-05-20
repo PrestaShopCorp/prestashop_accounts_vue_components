@@ -27,6 +27,8 @@ export const contextSchema = Joi.object().keys({
   psAccountsIsUptodate: Joi.boolean().default(true),
   psAccountsIsEnabled: Joi.boolean().default(true),
 
+  employeeId: Joi.number().required(),
+
   psAccountsInstallLink: Joi.string().uri().allow(null).default(null),
   psAccountsEnableLink: Joi.string().uri().allow(null).default(null),
   psAccountsUpdateLink: Joi.string().uri().allow(null).default(null),
