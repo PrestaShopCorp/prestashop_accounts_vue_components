@@ -2,7 +2,7 @@
   <div class="align-self-center">
     <b-button
       class="float-right"
-      :disabled="!validatedContext.user.isSuperAdmin"
+      :disabled="!validatedContext.user.isSuperAdmin || !shopIsLinkedAndUserIsDifferent"
       variant="primary"
       @click="openLinkShopModal()"
     >
@@ -11,7 +11,7 @@
     <link-shop-modal
       v-if="cdcUiDisplayed"
       @closed="closeOnBoarding"
-      :shop="validatedContext.currentShop"
+      :shop="shopToLinkPayload"
       :specific-ui-url="getSpecificUiUrl"
       :on-boarding-link="validatedContext.onboardingLink"
     />
@@ -45,6 +45,19 @@
     computed: {
       getSpecificUiUrl() {
         return this.validatedContext.user.email ? '/shop' : '';
+      },
+      shopIsLinkedAndUserIsDifferent() {
+        if (this.validatedContext.currentShop.employeeId === '') {
+          return true;
+        }
+        return parseInt(this.validatedContext.currentShop.employeeId, 10)
+          === this.validatedContext.employeeId;
+      },
+      shopToLinkPayload() {
+        return {
+          ...this.validatedContext.currentShop,
+          employeeId: this.validatedContext.employeeId.toString(),
+        };
       },
     },
     data() {
