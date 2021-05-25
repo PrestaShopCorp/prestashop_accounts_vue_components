@@ -11,7 +11,7 @@ locals {
     }
     managed_zone = {
       alpha = "distribution-integration-net"
-      stable = "distribution-integration-net"
+      stable = "distribution-production-net"
     }
     environment = {
       alpha = "integration"
