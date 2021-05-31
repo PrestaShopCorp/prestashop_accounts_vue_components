@@ -56,7 +56,7 @@
       },
       getLinkMessage() {
         if (this.validatedContext.isOnboardedV4 === true) {
-          return 'reonboardTooltip';
+          return 'reonboardButton';
         }
         if (this.userIsConnected) {
           return 'manageAccountTooltip';

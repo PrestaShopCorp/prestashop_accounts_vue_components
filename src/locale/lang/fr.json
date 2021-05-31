@@ -28,7 +28,7 @@
             "authorize": "Vous ne pouvez associer votre boutique qu'à un seul compte. Choisissez le bien !",
             "authorized": "Votre boutique est associée au compte PrestaShop :  ",
             "connectButton": "Associer",
-            "reonboardTooltip": "Réassocier votre boutique",
+            "reonboardButton": "Réassocier votre boutique",
             "disconnectButton": "Utiliser un autre compte",
             "emailValidationWarningLabel": "Validation d'email ",
             "emailConfirmationAlert": "Un email de confirmation a été envoyé. Vérifiez votre boîte de réception et cliquez sur le lien pour activer votre compte.",
