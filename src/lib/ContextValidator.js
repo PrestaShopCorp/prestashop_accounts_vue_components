@@ -6,6 +6,7 @@ export const shopSchema = Joi.object().keys({
   url: Joi.string().uri().required(),
   domain: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domain').required(),
   domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').required(),
+  uuid: Joi.string().allow(null).required(),
 }).unknown(true);
 
 export const shopGroupSchema = Joi.object().keys({
@@ -26,6 +27,9 @@ export const contextSchema = Joi.object().keys({
   psAccountsIsInstalled: Joi.boolean().default(true),
   psAccountsIsUptodate: Joi.boolean().default(true),
   psAccountsIsEnabled: Joi.boolean().default(true),
+
+  employeeId: Joi.number().required(),
+  isOnboardedV4: Joi.boolean().required(),
 
   psAccountsInstallLink: Joi.string().uri().allow(null).default(null),
   psAccountsEnableLink: Joi.string().uri().allow(null).default(null),

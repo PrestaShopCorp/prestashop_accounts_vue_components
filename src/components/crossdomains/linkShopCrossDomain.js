@@ -3,7 +3,8 @@ import * as zoid from 'zoid/dist/zoid.frameworks';
 export default zoid.create({
   tag: 'crossdomains-account-link-shop',
   // TODO Put accounts-ui prod url when there is no env
-  url: `${process.env.VUE_APP_ACCOUNTS_UI_URL}/?cdc=true` || 'https://accounts.prestashop.localhost/en/?cdc=true',
+  url: ({props}) => `${process.env.VUE_APP_ACCOUNTS_UI_URL}${props.specificUrl}/?cdc=true`,
+
   context: 'iframe',
 
   // The size of the component on their page. Only px and % strings are supported
@@ -17,10 +18,9 @@ export default zoid.create({
       type: 'object',
       required: false,
     },
-    isLinked: {
-      type: 'boolean',
-      required: false,
-      queryParam: true,
+    specificUrl: {
+      type: 'string',
+      required: true,
     },
     onBoardingFinished: {
       type: 'function',

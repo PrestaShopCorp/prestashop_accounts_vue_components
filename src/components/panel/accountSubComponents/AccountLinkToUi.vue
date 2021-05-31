@@ -1,19 +1,19 @@
 <template>
   <div class="align-self-center">
     <b-button
-      v-if="!userIsConnected"
       class="float-right"
+      v-if="shopIsNotLinked || shopIsLinkedAndUserIsTheSame"
       :disabled="!validatedContext.user.isSuperAdmin"
       variant="primary"
       @click="openLinkShopModal()"
     >
-      {{ t('psaccounts.account.connectButton') }}
+      {{ t(`psaccounts.account.${getLinkMessage}`) }}
     </b-button>
     <link-shop-modal
       v-if="cdcUiDisplayed"
       @closed="closeOnBoarding"
-      :shop="validatedContext.currentShop"
-      :is-linked="!!validatedContext.user.email"
+      :shop="shopToLinkPayload"
+      :specific-ui-url="getSpecificUiUrl"
       :on-boarding-link="validatedContext.onboardingLink"
     />
   </div>
@@ -41,6 +41,33 @@
       userIsConnected: {
         type: Boolean,
         required: true,
+      },
+    },
+    computed: {
+      getSpecificUiUrl() {
+        return this.validatedContext.user.email && !this.validatedContext.isOnboardedV4 ? '/shop' : '';
+      },
+      shopIsNotLinked() {
+        return this.validatedContext.currentShop.employeeId === null;
+      },
+      shopIsLinkedAndUserIsTheSame() {
+        return parseInt(this.validatedContext.currentShop.employeeId, 10)
+          === this.validatedContext.employeeId;
+      },
+      getLinkMessage() {
+        if (this.validatedContext.isOnboardedV4 === true) {
+          return 'reonboardButton';
+        }
+        if (this.userIsConnected) {
+          return 'manageAccountTooltip';
+        }
+        return 'connectButton';
+      },
+      shopToLinkPayload() {
+        return {
+          ...this.validatedContext.currentShop,
+          employeeId: this.validatedContext.employeeId.toString(),
+        };
       },
     },
     data() {

@@ -12,7 +12,7 @@
           v-click-outside="closeModal"
         >
           <link-shop-crossdomain
-            :isLinked="isLinked"
+            :specificUrl="specificUiUrl"
             :shop="shop"
             :onBoardingFinished="closeModal"
           />
@@ -40,8 +40,8 @@
         type: Object,
         required: true,
       },
-      isLinked: {
-        type: Boolean,
+      specificUiUrl: {
+        type: String,
         required: true,
       },
       onBoardingLink: {
