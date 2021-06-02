@@ -5,7 +5,6 @@
     >
       <template v-slot:header>
         <AccountHeader
-          :manage-account-link="validatedContext.manageAccountLink"
           :user-is-connected="userIsConnected"
         />
       </template>
