@@ -58,7 +58,9 @@
       // FallBack for crossdomain component
       setTimeout(() => {
         if (document.querySelector('.crossdomain .zoid-invisible')) {
-          window.location.assign(this.onBoardingLink);
+          const base64Shop = btoa(JSON.stringify(this.shop));
+          const fallbackUrl = `${process.env.VUE_APP_ACCOUNTS_UI_URL}${this.specificUiUrl}?shopPayload=${base64Shop}`;
+          window.location.assign(fallbackUrl);
         }
       }, 60000);
     },
