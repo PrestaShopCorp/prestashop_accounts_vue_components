@@ -7,7 +7,7 @@
       variant="primary"
       @click="openLinkShopModal()"
     >
-      {{ t(`psaccounts.account.${userIsConnected ? 'manageAccountTooltip' : 'connectButton'}`) }}
+      {{ t(`psaccounts.account.${getLinkMessage}`) }}
     </b-button>
     <link-shop-modal
       v-if="cdcUiDisplayed"
@@ -45,14 +45,23 @@
     },
     computed: {
       getSpecificUiUrl() {
-        return this.validatedContext.user.email ? '/shop' : '';
+        return this.validatedContext.user.email && !this.validatedContext.isOnboardedV4 ? '/shop' : '';
       },
       shopIsNotLinked() {
-        return !this.validatedContext.user.email;
+        return this.validatedContext.currentShop.employeeId === null;
       },
       shopIsLinkedAndUserIsTheSame() {
         return parseInt(this.validatedContext.currentShop.employeeId, 10)
           === this.validatedContext.employeeId;
+      },
+      getLinkMessage() {
+        if (this.validatedContext.isOnboardedV4 === true) {
+          return 'reonboardTooltip';
+        }
+        if (this.userIsConnected) {
+          return 'manageAccountTooltip';
+        }
+        return 'connectButton';
       },
       shopToLinkPayload() {
         return {
