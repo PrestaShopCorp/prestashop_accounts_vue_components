@@ -29,10 +29,8 @@
             "authorized": "Uw winkel is gekoppeld aan het PrestaShop account:",
             "connectButton": "Koppelen",
             "disconnectButton": "Een ander account gebruiken",
-            "emailValidationWarningLabel": "E-mail validatie ",
-            "emailConfirmationAlert": "Er werd een bevestigingsmail verstuurd. Controleer uw inbox en klik op de link om uw account te activeren.",
-            "noEmailReceived": "Geen bevestigingsmail?",
-            "sendEmail": "Doorsturen",
+            "emailNotVerified": "Uw e-mailadres is niet geverifieerd.<br> Gelieve <strong>uw adres te valideren via de bevestigingsmail</strong> in uw inbox.",
+            "sendEmail": "Link opnieuw verzenden",
             "needToBeAdmin": "Om verder te gaan, moet u een administrator van de winkel zijn.",
             "pleaseContact": "Neem alstublieft contact op met",
             "manageAccountTooltip": "Manage account"

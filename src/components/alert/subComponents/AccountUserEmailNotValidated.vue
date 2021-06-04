@@ -1,19 +1,18 @@
 <template>
   <b-alert
     variant="warning"
-    class="mt-4"
     show
   >
-    <p>{{ t('psaccounts.account.needToBeAdmin') }}</p>
-    <p v-if="adminEmail">
-      {{ t('psaccounts.account.pleaseContact') }}
-      <a
+    <div v-html="t('psaccounts.account.emailNotVerified')"></div>
+
+    <div class="d-flex justify-content-end mt-2">
+      <b-button
+        variant="primary"
         @click="sendEmailConfirmation()"
-        :href="'mailto:' + adminEmail"
       >
-        {{ adminEmail }}
-      </a>
-    </p>
+        {{ t('psaccounts.account.sendEmail') }}
+      </b-button>
+    </div>
   </b-alert>
 </template>
 
@@ -21,6 +20,7 @@
   import Locale from '@/mixins/locale';
   import {
     BAlert,
+    BButton,
   } from 'bootstrap-vue';
 
   /**
@@ -28,32 +28,29 @@
    * and tell him to contact one to continue the process
    */
   export default {
-    name: 'AccountUserNotSuperAdmin',
+    name: 'AccountUserEmailNotValidated',
     mixins: [Locale],
     components: {
       BAlert,
+      BButton,
     },
     props: {
-      adminEmail: {
+      resendEmailLink: {
         type: String,
-        required: false,
-        default: null,
+        required: true,
+        default: undefined,
       },
     },
     methods: {
       sendEmailConfirmation() {
-        this.$segment.track('ACC Click BO Admin address', {
+        this.$segment.track('ACC Click resend verification email', {
           category: 'Accounts',
         });
+
         if (this.resendEmailLink) {
           window.open(this.resendEmailLink, '_blank');
         }
       },
-    },
-    mounted() {
-      this.$segment.track('ACC View Error display component', {
-        category: 'Account',
-      });
     },
   };
 </script>

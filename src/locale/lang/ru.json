@@ -13,8 +13,10 @@
         "account": {
             "title": "",
             "authorize": "",
+            "authorized": "",
             "connectButton": "",
-            "authorized": ""
+            "emailNotVerified": "",
+            "sendEmail": ""
         },
         "alertEventBusNotInstalled": {
             "title": "",
