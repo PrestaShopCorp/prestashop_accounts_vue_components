@@ -20,7 +20,7 @@
     <b-iconstack
       v-if="userIsConnected"
       font-scale="1.5"
-      class="mr-2 align-bottom fixed-size"
+      class="mr-2 align-bottom fixed-size icon-check"
       width="20"
       height="20"
     >
@@ -74,3 +74,9 @@
     },
   };
 </script>
+
+<style scoped>
+.icon-check {
+  width: auto;
+}
+</style>
