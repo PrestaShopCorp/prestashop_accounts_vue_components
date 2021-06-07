@@ -29,10 +29,8 @@
             "authorized": "Twój sklep jest powiązany z kontem PrestaShop:",
             "connectButton": "Połącz",
             "disconnectButton": "Użyj innego konta",
-            "emailValidationWarningLabel": "Walidacja poczty elektronicznej",
-            "emailConfirmationAlert": "Wysłano e-mail z potwierdzeniem. Sprawdź pocztę i kliknij link, aby aktywować konto",
-            "noEmailReceived": "E-mail z potwierdzeniem nie dotarł?",
-            "sendEmail": "Wróć",
+            "emailNotVerified": "Twój adres e-mail nie został zweryfikowany.<br> Proszę<strong> potwierdź swój adres z wiadomości e-mail z potwierdzeniem</strong> w Twojej skrzynce odbiorczej.",
+            "sendEmail": "Wyślij ponownie link",
             "needToBeAdmin": "Aby kontynuować, musisz być administratorem sklepu.",
             "pleaseContact": "Prosimy o kontakt",
             "manageAccountTooltip": "Manage account"

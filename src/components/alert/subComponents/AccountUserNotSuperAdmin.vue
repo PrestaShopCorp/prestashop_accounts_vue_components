@@ -30,9 +30,9 @@
   export default {
     name: 'AccountUserNotSuperAdmin',
     mixins: [Locale],
-    components: [
+    components: {
       BAlert,
-    ],
+    },
     props: {
       adminEmail: {
         type: String,

@@ -29,10 +29,8 @@
             "authorized": "Il tuo negozio è associato all'account PrestaShop:",
             "connectButton": "Associa",
             "disconnectButton": "Usa un altro account",
-            "emailValidationWarningLabel": "Conferma indirizzo e-mail",
-            "emailConfirmationAlert": "Hai appena ricevuto un'e-mail di conferma. Controlla la posta in arrivo e clicca sul link ricevuto per attivare il tuo account.",
-            "noEmailReceived": "Non hai ricevuto l'e-mail di conferma?",
-            "sendEmail": "Invia di nuovo",
+            "emailNotVerified": "Il tuo indirizzo e-mail non è stato verificato.<br> Per favore <strong>convalida il tuo indirizzo dall'e-mail di conferma</strong> nella tua casella di posta.",
+            "sendEmail": "Invia di nuovo il link",
             "needToBeAdmin": "Per continuare, devi essere l'amministratore del negozio",
             "pleaseContact": "Si prega di contattare",
             "manageAccountTooltip": "Manage account"

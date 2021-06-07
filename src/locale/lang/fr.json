@@ -30,10 +30,8 @@
             "connectButton": "Associer",
             "reonboardButton": "Réassocier votre boutique",
             "disconnectButton": "Utiliser un autre compte",
-            "emailValidationWarningLabel": "Validation d'email ",
-            "emailConfirmationAlert": "Un email de confirmation a été envoyé. Vérifiez votre boîte de réception et cliquez sur le lien pour activer votre compte.",
-            "noEmailReceived": "Pas d'email de confirmation ?",
-            "sendEmail": "Renvoyer",
+            "emailNotVerified": "Votre adresse e-mail n'a pas été vérifiée.<br> Merci de <strong>valider votre adresse depuis l’e-mail de confirmation</strong> dans votre boîte de réception.",
+            "sendEmail": "Renvoyer le lien",
             "needToBeAdmin": "Pour continuer, vous devez être administrateur de la boutique",
             "pleaseContact": "Merci de contacter",
             "manageAccountTooltip": "Gérer mon compte"

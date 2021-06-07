@@ -29,10 +29,8 @@
             "authorized": "Su tienda está vinculada a la cuenta PrestaShop:",
             "connectButton": "Vincular",
             "disconnectButton": "Usar otra cuenta",
-            "emailValidationWarningLabel": "Validación del correo electrónico",
-            "emailConfirmationAlert": "Se ha enviado un correo electrónico de confirmación. Comprueba tu bandeja de entrada y haz clic en el enlace para activar tu cuenta.",
-            "noEmailReceived": "¿No ha llegado el correo electrónico de confirmación?",
-            "sendEmail": "Reenviar",
+            "emailNotVerified": "No se ha verificado su dirección de correo electrónico.<br> <strong>Valide su dirección del correo electrónico de confirmación</strong> en su bandeja de entrada.",
+            "sendEmail": "Reenviar enlace",
             "needToBeAdmin": "Para continuar, debes ser administrador de la tienda",
             "pleaseContact": "Ponte en contacto con nosotros",
             "manageAccountTooltip": "Manage account"

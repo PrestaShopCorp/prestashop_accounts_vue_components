@@ -5,7 +5,6 @@
     >
       <template v-slot:header>
         <AccountHeader
-          :manage-account-link="validatedContext.manageAccountLink"
           :user-is-connected="userIsConnected"
         />
       </template>
@@ -20,6 +19,13 @@
             :validated-context="validatedContext"
           />
         </div>
+
+        <AccountUserEmailNotValidated
+          v-if="userIsConnected && userIsSameAsCurrentShopuser && !userEmailIsValidated"
+          :resend-email-link="validatedContext.ssoResendVerificationEmail"
+          class="mt-3"
+        />
+
         <AccountUserNotSuperAdmin
           v-if="!validatedContext.user.isSuperAdmin"
           :admin-email="validatedContext.superAdminEmail"
@@ -38,6 +44,7 @@
   } from 'bootstrap-vue';
   import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader';
   import AccountLinkToUi from '@/components/panel/accountSubComponents/AccountLinkToUi';
+  import AccountUserEmailNotValidated from '@/components/alert/subComponents/AccountUserEmailNotValidated';
   import AccountUserNotSuperAdmin from '@/components/alert/subComponents/AccountUserNotSuperAdmin';
   import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage';
 
@@ -49,6 +56,7 @@
       BCardBody,
       AccountHeader,
       AccountLinkToUi,
+      AccountUserEmailNotValidated,
       AccountUserNotSuperAdmin,
       AccountShopLinkMessage,
     },
@@ -65,6 +73,8 @@
           trackingEvent = 'ACC View admin component';
         } else if (!this.userIsConnected) {
           trackingEvent = 'ACC View onboarding component - not connected state';
+        } else if (!this.userEmailIsValidated) {
+          trackingEvent = 'ACC View onboarding component - email not validated state';
         } else {
           trackingEvent = 'ACC View onboarding component - connected validated state';
         }
@@ -77,6 +87,15 @@
     computed: {
       userIsConnected() {
         return this.validatedContext.user.email !== null;
+      },
+      userIsSameAsCurrentShopuser() {
+        const userEmployeeId = this.validatedContext.user.employeeId;
+        const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
+
+        return userEmployeeId === currentShopEmployeeId;
+      },
+      userEmailIsValidated() {
+        return this.validatedContext.user.emailIsValidated;
       },
     },
     mounted() {
