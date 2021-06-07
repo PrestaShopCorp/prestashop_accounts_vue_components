@@ -21,7 +21,7 @@
         </div>
 
         <AccountUserEmailNotValidated
-          v-if="userIsConnected && !userEmailIsValidated"
+          v-if="userIsConnected && userIsSameAsCurrentShopuser && !userEmailIsValidated"
           :resend-email-link="validatedContext.ssoResendVerificationEmail"
           class="mt-3"
         />
@@ -87,6 +87,12 @@
     computed: {
       userIsConnected() {
         return this.validatedContext.user.email !== null;
+      },
+      userIsSameAsCurrentShopuser() {
+        const userEmployeeId = this.validatedContext.user.employeeId;
+        const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
+
+        return userEmployeeId === currentShopEmployeeId;
       },
       userEmailIsValidated() {
         return this.validatedContext.user.emailIsValidated;

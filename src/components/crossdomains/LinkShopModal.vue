@@ -12,7 +12,7 @@
           v-click-outside="closeModal"
         >
           <link-shop-crossdomain
-            :specificUrl="specificUiUrl"
+            :specificUiUrl="specificUiUrl"
             :shop="shop"
             :onBoardingFinished="closeModal"
           />
