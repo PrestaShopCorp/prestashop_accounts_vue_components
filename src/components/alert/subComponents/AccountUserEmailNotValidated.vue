@@ -3,7 +3,7 @@
     variant="warning"
     show
   >
-    <div v-html="t('psaccounts.account.emailNotVerified')"></div>
+    <div v-html="t('psaccounts.account.emailNotVerified')" />
 
     <div class="d-flex justify-content-end mt-2">
       <b-button
@@ -24,8 +24,8 @@
   } from 'bootstrap-vue';
 
   /**
-   * This sub-component shows a message is the user is not a super-admin
-   * and tell him to contact one to continue the process
+   * This alert shows a message is the user email is not validated
+   * and tell him to validate his account;
    */
   export default {
     name: 'AccountUserEmailNotValidated',
