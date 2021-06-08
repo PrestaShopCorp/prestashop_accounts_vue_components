@@ -89,7 +89,7 @@
         return this.validatedContext.user.email !== null;
       },
       userIsSameAsCurrentShopuser() {
-        const userEmployeeId = this.validatedContext.user.employeeId;
+        const userEmployeeId = this.validatedContext.employeeId;
         const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
 
         return userEmployeeId === currentShopEmployeeId;
