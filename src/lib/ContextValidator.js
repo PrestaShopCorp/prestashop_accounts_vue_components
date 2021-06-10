@@ -7,6 +7,7 @@ export const shopSchema = Joi.object().keys({
   domain: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domain').required(),
   domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').required(),
   uuid: Joi.string().allow(null).required(),
+  uri: Joi.string().required(),
 }).unknown(true);
 
 export const shopGroupSchema = Joi.object().keys({
