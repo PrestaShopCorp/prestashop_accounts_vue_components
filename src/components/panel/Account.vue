@@ -20,6 +20,11 @@
           />
         </div>
 
+        <ModuleUpdateInformation
+          v-if="validatedContext.isOnboardedV4"
+          class="mt-3"
+        />
+
         <AccountUserEmailNotValidated
           v-if="userIsConnected && userIsSameAsCurrentShopuser && !userEmailIsValidated"
           :resend-email-link="validatedContext.ssoResendVerificationEmail"
@@ -44,8 +49,9 @@
   } from 'bootstrap-vue';
   import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader';
   import AccountLinkToUi from '@/components/panel/accountSubComponents/AccountLinkToUi';
-  import AccountUserEmailNotValidated from '@/components/alert/subComponents/AccountUserEmailNotValidated';
-  import AccountUserNotSuperAdmin from '@/components/alert/subComponents/AccountUserNotSuperAdmin';
+  import ModuleUpdateInformation from '@/components/alert/ModuleUpdateInformation';
+  import AccountUserEmailNotValidated from '@/components/alert/AccountUserEmailNotValidated';
+  import AccountUserNotSuperAdmin from '@/components/alert/AccountUserNotSuperAdmin';
   import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage';
 
   export default {
@@ -56,6 +62,7 @@
       BCardBody,
       AccountHeader,
       AccountLinkToUi,
+      ModuleUpdateInformation,
       AccountUserEmailNotValidated,
       AccountUserNotSuperAdmin,
       AccountShopLinkMessage,

@@ -41,6 +41,7 @@
             "connectButton": "Associate",
             "reonboardButton": "Re-associate your shop",
             "disconnectButton": "Use another account",
+            "moduleUpdateInformation": "<strong>New update:</strong> you can manage your associated stores.<br /> Please re-associate using <strong>the same email address</strong> to take advantage of this update.<br /> Other module updates may be available in Modules Manager Updates tab.",
             "emailNotVerified": "Your email address has not been verified.<br> Please <strong>validate your address from the confirmation email</strong> in your inbox.",
             "sendEmail": "Resend link",
             "needToBeAdmin": "In order to proceed you need to be administrator of the shop",
