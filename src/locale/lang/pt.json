@@ -28,9 +28,11 @@
             "authorize": "Apenas pode associar a sua loja a uma conta. Escolha bem!",
             "authorized": "A sua loja está associada à conta PrestaShop:",
             "connectButton": "Associada",
+            "reonboardButton": "Reassociate",
             "disconnectButton": "Usar outra conta",
-            "emailNotVerified": "Seu endereço de e-mail não foi verificado.<br> Por favor, <strong>valide seu endereço do e-mail de confirmação</strong> em sua caixa de entrada.",
-            "sendEmail": "Reenviar link",
+            "moduleUpdateInformation": "<strong>Nova actualização:</strong> pode gerir as suas lojas associadas.<br /> Por favor, volte a participar usando o <strong>mesmo endereço de correio electrónico</strong> para tirar partido desta actualização.<br /> Outras actualizações de módulos podem estar disponíveis em Module Manager, separador Updates.",
+            "emailNotVerified": "Um e-mail de confirmação foi enviado. Confira a sua caixa de entrada e clique no link para ativar a sua conta.",
+            "sendEmail": "Reenviar",
             "needToBeAdmin": "Para continuar, deverá ser um administrador da loja.",
             "pleaseContact": "Por favor entre em contacto",
             "manageAccountTooltip": "Manage account"

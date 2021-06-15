@@ -28,9 +28,11 @@
             "authorize": "Puoi associare il tuo negozio a un solo account. Sceglilo con cura!",
             "authorized": "Il tuo negozio è associato all'account PrestaShop:",
             "connectButton": "Associa",
+            "reonboardButton": "Riassociare",
             "disconnectButton": "Usa un altro account",
-            "emailNotVerified": "Il tuo indirizzo e-mail non è stato verificato.<br> Per favore <strong>convalida il tuo indirizzo dall'e-mail di conferma</strong> nella tua casella di posta.",
-            "sendEmail": "Invia di nuovo il link",
+            "moduleUpdateInformation": "<strong>Nuovo aggiornamento:</strong> da oggi, puoi gestire i tuoi negozi associati.<br /> Ti preghiamo di riassociarli, <strong>mediante lo stesso indirizzo e-mail</strong> per usufruire di questo aggiornamento.<br /> Altri aggiornamenti del modulo sono disponibili nella sezione \"Module Manager\", alla scheda \"Aggiornamenti\".",
+            "emailNotVerified": "Hai appena ricevuto un'e-mail di conferma. Controlla la posta in arrivo e clicca sul link ricevuto per attivare il tuo account.",
+            "sendEmail": "Invia di nuovo",
             "needToBeAdmin": "Per continuare, devi essere l'amministratore del negozio",
             "pleaseContact": "Si prega di contattare",
             "manageAccountTooltip": "Manage account"

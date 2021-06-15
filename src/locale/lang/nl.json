@@ -28,9 +28,11 @@
             "authorize": "U kunt uw winkel maar aan één account koppelen. Kies het goed!",
             "authorized": "Uw winkel is gekoppeld aan het PrestaShop account:",
             "connectButton": "Koppelen",
+            "reonboardButton": "Opnieuw verbinden",
             "disconnectButton": "Een ander account gebruiken",
-            "emailNotVerified": "Uw e-mailadres is niet geverifieerd.<br> Gelieve <strong>uw adres te valideren via de bevestigingsmail</strong> in uw inbox.",
-            "sendEmail": "Link opnieuw verzenden",
+            "moduleUpdateInformation": "<strong>Nieuwe update:</strong> u kunt uw geassocieerde winkels beheren.<br /> Gelieve u opnieuw aan te melden <strong>met hetzelfde e-mailadres</strong> om van deze update te kunnen profiteren.<br /> Andere module-updates kunnen beschikbaar zijn in Module Manager, tabblad Updates.",
+            "emailNotVerified": "Er werd een bevestigingsmail verstuurd. Controleer uw inbox en klik op de link om uw account te activeren.",
+            "sendEmail": "Doorsturen",
             "needToBeAdmin": "Om verder te gaan, moet u een administrator van de winkel zijn.",
             "pleaseContact": "Neem alstublieft contact op met",
             "manageAccountTooltip": "Manage account"
