@@ -24,7 +24,7 @@
   } from 'bootstrap-vue';
 
   /**
-   * This alert shows a message is the user email is not validated
+   * This alert shows a message if the user email is not validated
    * and tell him to validate his account;
    */
   export default {

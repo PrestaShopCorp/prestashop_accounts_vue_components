@@ -28,9 +28,11 @@
             "authorize": "Możesz powiązać swój sklep tylko z jednym kontem. Dokonaj dobrego wyboru!",
             "authorized": "Twój sklep jest powiązany z kontem PrestaShop:",
             "connectButton": "Połącz",
+            "reonboardButton": "Ponownie skojarz",
             "disconnectButton": "Użyj innego konta",
-            "emailNotVerified": "Twój adres e-mail nie został zweryfikowany.<br> Proszę<strong> potwierdź swój adres z wiadomości e-mail z potwierdzeniem</strong> w Twojej skrzynce odbiorczej.",
-            "sendEmail": "Wyślij ponownie link",
+            "moduleUpdateInformation": "<strong>Nowa aktualizacja:</strong> możesz zarządzać swoimi powiązanymi sklepami.<br /> Prosimy o ponowne dołączenie przy użyciu <strong>tego samego adresu e-mail</strong> ,aby skorzystać z tej aktualizacji.<br /> Inne aktualizacje modułu mogą być dostępne w Managerze modułów, w zakładce Aktualizacje.",
+            "emailNotVerified": "Wysłano e-mail z potwierdzeniem. Sprawdź pocztę i kliknij link, aby aktywować konto.",
+            "sendEmail": "Wróć",
             "needToBeAdmin": "Aby kontynuować, musisz być administratorem sklepu.",
             "pleaseContact": "Prosimy o kontakt",
             "manageAccountTooltip": "Manage account"
