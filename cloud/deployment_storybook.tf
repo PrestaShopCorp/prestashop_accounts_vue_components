@@ -87,6 +87,16 @@ resource "kubernetes_service" "storybook" {
   }
 }
 
+resource "google_compute_managed_ssl_certificate" "accounts_storybook" {
+  depends_on = [google_dns_record_set.storybook]
+  provider = google-beta
+  name = "storybook-accounts-distribution"
+
+  managed {
+    domains = [ local.url ]
+  }
+}
+
 # https://www.terraform.io/docs/providers/kubernetes/r/ingress.html
 resource "kubernetes_ingress" "storybook" {
   metadata {
@@ -95,6 +105,7 @@ resource "kubernetes_ingress" "storybook" {
     annotations = {
       # Link with created IP address's name
       "kubernetes.io/ingress.global-static-ip-name" = google_compute_global_address.storybook.name
+      "ingress.gcp.kubernetes.io/pre-shared-cert"   = google_compute_managed_ssl_certificate.accounts_storybook.name
       # Make the endpoints receive /psx/xxx
       "nginx.ingress.kubernetes.io/rewrite-target" = "/"
       # Don't allow non ssl calls
@@ -114,12 +125,6 @@ resource "kubernetes_ingress" "storybook" {
           path = "/*"
         }
       }
-    }
-    tls {
-      secret_name = "certificate"
-      hosts = [
-        google_compute_global_address.storybook.description
-      ]
     }
   }
 }

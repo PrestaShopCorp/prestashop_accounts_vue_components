@@ -5,5 +5,7 @@
 terraform {
   backend "gcs" {
     prefix = "terraform/accounts-vue-components"
+    bucket = "integration-ditribution-terraform-state"
+
   }
 }
