@@ -11,7 +11,9 @@ function manageModuleAction17(action) {
 }
 
 function manageModuleAction16(action) {
-  window.location.href = action.actionLink;
+  return fetch(action.actionLink, {
+    method: 'POST',
+  });
 }
 
 export default function (action, isPs17) {
