@@ -7,13 +7,13 @@
       variant="primary"
       @click="openLinkShopModal()"
     >
-      {{ t(`psaccounts.account.${getLinkMessage}`) }}
+      {{ btnText }}
     </b-button>
     <link-shop-modal
       v-if="cdcUiDisplayed"
       @closed="closeOnBoarding"
       :shop="shopToLinkPayload"
-      :specific-ui-url="getSpecificUiUrl"
+      :specific-ui-url="specificUiUrl"
       :on-boarding-link="validatedContext.onboardingLink"
     />
   </div>
@@ -25,6 +25,12 @@
     BButton,
   } from 'bootstrap-vue';
   import LinkShopModal from '@/components/crossdomains/LinkShopModal';
+
+  const BUTTON_I18N_KEY = {
+    reonboard: 'reonboardButton',
+    associate: 'connectButton',
+    manageAccount: 'manageAccountTooltip',
+  };
 
   export default {
     name: 'AccountLinkToUi',
@@ -44,7 +50,18 @@
       },
     },
     computed: {
-      getSpecificUiUrl() {
+      action() {
+        if (this.validatedContext.isOnboardedV4 === true) {
+          return 'reonboard';
+        }
+
+        if (!this.userIsConnected) {
+          return 'associate';
+        }
+
+        return 'manageAccount';
+      },
+      specificUiUrl() {
         return this.validatedContext.user.email && !this.validatedContext.isOnboardedV4 ? '/shop' : '';
       },
       shopIsNotLinked() {
@@ -54,14 +71,8 @@
         return parseInt(this.validatedContext.currentShop.employeeId, 10)
           === this.validatedContext.employeeId;
       },
-      getLinkMessage() {
-        if (this.validatedContext.isOnboardedV4 === true) {
-          return 'reonboardButton';
-        }
-        if (this.userIsConnected) {
-          return 'manageAccountTooltip';
-        }
-        return 'connectButton';
+      btnText() {
+        return this.t(`psaccounts.account.${BUTTON_I18N_KEY[this.action]}`);
       },
       shopToLinkPayload() {
         return {
@@ -77,14 +88,25 @@
     },
     methods: {
       openLinkShopModal() {
-        this.$segment.track('ACC Click BO Connect button', {
-          category: 'Accounts',
-        });
+        this.track();
+
         this.cdcUiDisplayed = true;
       },
       closeOnBoarding() {
         this.cdcUiDisplayed = false;
         window.location.reload();
+      },
+      track() {
+        const eventName = ['reonboard', 'associate'].includes(this.action)
+          ? '[ACC] Associate Button Clicked'
+          : '[ACC] Manage Account Button Clicked';
+
+        this.$segment.track(eventName, {
+          shop_bo_id: this.validatedContext.currentShop.id,
+          ps_module_from: this.validatedContext.psxName,
+          v4_onboarded: this.validatedContext.isOnboardedV4,
+          multishop_numbers: this.validatedContext.shops.length || 1,
+        });
       },
     },
   };

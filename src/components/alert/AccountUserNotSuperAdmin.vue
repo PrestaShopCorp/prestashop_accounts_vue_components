@@ -8,10 +8,10 @@
     <p v-if="adminEmail">
       {{ t('psaccounts.account.pleaseContact') }}
       <a
-        @click="sendEmailConfirmation()"
-        :href="'mailto:' + adminEmail"
+        @click="trackClick"
+        :href="'mailto:' + validatedContext.superAdminEmail"
       >
-        {{ adminEmail }}
+        {{ validatedContext.superAdminEmail }}
       </a>
     </p>
   </b-alert>
@@ -34,26 +34,18 @@
       BAlert,
     },
     props: {
-      adminEmail: {
-        type: String,
-        required: false,
-        default: null,
+      validatedContext: {
+        type: Object,
+        required: true,
       },
     },
     methods: {
-      sendEmailConfirmation() {
-        this.$segment.track('ACC Click BO Admin address', {
-          category: 'Accounts',
+      trackClick() {
+        this.$segment.track('[ACC] Link Contact Admin Clicked', {
+          shop_bo_id: this.validatedContext.currentShop.id,
+          ps_module_from: this.validatedContext.psxName,
         });
-        if (this.resendEmailLink) {
-          window.open(this.resendEmailLink, '_blank');
-        }
       },
-    },
-    mounted() {
-      this.$segment.track('ACC View Error display component', {
-        category: 'Account',
-      });
     },
   };
 </script>

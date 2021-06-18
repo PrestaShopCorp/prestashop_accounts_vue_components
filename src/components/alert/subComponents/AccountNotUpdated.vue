@@ -58,9 +58,14 @@
     methods: {
       updatePsAccounts() {
         this.isLoading = true;
-        this.$segment.track('ACC Click BO Update button', {
-          category: 'Accounts',
+
+        this.$segment.track('[ACC] PSAccount Install Button Clicked', {
+          shop_bo_id: this.validatedContext.currentShop.id,
+          ps_module_from: this.validatedContext.psxName,
+          v4_onboarded: this.validatedContext.isOnboardedV4,
+          multishop_numbers: this.validatedContext.shops.length || 1,
         });
+        
         updateModule(
           'ps_accounts',
           this.validatedContext.psAccountsUpdateLink,
@@ -70,11 +75,6 @@
           this.$emit('hasError');
         });
       },
-    },
-    mounted() {
-      this.$segment.track('ACC View Update component - update state', {
-        category: 'Account',
-      });
     },
   };
 </script>

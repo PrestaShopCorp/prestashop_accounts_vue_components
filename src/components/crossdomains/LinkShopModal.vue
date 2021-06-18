@@ -15,6 +15,7 @@
             :specificUiUrl="specificUiUrl"
             :shop="shop"
             :onBoardingFinished="closeModal"
+            :onLogout="onLogout"
           />
         </div>
       </div>
@@ -55,6 +56,9 @@
       closeModal() {
         this.$emit('closed');
       },
+      onLogout() {
+        this.$segment.reset();
+      }
     },
     mounted() {
       // FallBack for crossdomain component

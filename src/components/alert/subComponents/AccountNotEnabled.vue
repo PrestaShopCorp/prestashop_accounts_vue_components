@@ -57,10 +57,14 @@
     },
     methods: {
       enablePsAccounts() {
-        this.$segment.track('ACC Click BO Activate Button', {
-          category: 'Accounts',
-        });
         this.isLoading = true;
+
+        this.$segment.track('[ACC] PSAccount Enable Button Clicked', {
+          shop_bo_id: this.validatedContext.currentShop.id,
+          ps_module_from: this.validatedContext.psxName,
+          v4_onboarded: this.validatedContext.isOnboardedV4,
+          multishop_numbers: this.validatedContext.shops.length || 1,
+        });
 
         enableModule(
           'ps_accounts',
@@ -71,11 +75,6 @@
           this.$emit('hasError');
         });
       },
-    },
-    mounted() {
-      this.$segment.track('ACC View Install component - activate state', {
-        category: 'Account',
-      });
     },
   };
 </script>
