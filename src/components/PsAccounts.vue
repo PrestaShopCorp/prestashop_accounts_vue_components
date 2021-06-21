@@ -97,10 +97,10 @@
         return this.validatedContext.user.email !== null;
       },
       userIsSameAsCurrentShopuser() {
-        const userEmployeeId = this.validatedContext.employeeId;
+        const backendUserEmployeeId = this.validatedContext.backendUser.employeeId;
         const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
 
-        return userEmployeeId === currentShopEmployeeId;
+        return backendUserEmployeeId === currentShopEmployeeId;
       },
       userEmailIsValidated() {
         return this.validatedContext.user.emailIsValidated;
@@ -115,8 +115,6 @@
           || this.validatedContext.dependencies.ps_eventbus.isInstalled;
       },
       psAccountModuleState() {
-        // installed / enabled / to_update/updated
-
         if (!this.validatedContext.psAccountsIsUptodate) {
           return 'to_update';
         }
@@ -178,6 +176,11 @@
         this.$segment.identify(...args);
       },
       trackComponent() {
+        let shopUrl = this.validatedContext.currentShop.domain_ssl
+          ? this.validatedContext.currentShop.domain_ssl
+          : this.validatedContext.currentShop.domain;
+        shopUrl += this.validatedContext.currentShop.physicalUri;
+
         this.$segment.track('[ACC] Account Component Viewed', {
           shop_bo_id: this.validatedContext.currentShop.id,
           ps_module_from: this.validatedContext.psxName,
@@ -189,7 +192,7 @@
           shops: this.validatedContext.shops,
           multishop_numbers: this.validatedContext.shops.length || 1,
           current_shop: this.validatedContext.currentShop,
-          shop_url: (this.validatedContext.currentShop.domain_ssl || this.validatedContext.currentShop.domain) + this.validatedContext.currentShop.physicalUri,
+          shop_url: shopUrl,
         });
       },
     },

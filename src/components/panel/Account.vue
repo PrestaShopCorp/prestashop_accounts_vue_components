@@ -78,7 +78,9 @@
         return this.validatedContext.user.email !== null;
       },
       userIsSameAsCurrentShopuser() {
-        return this.validatedContext.employeeId === this.validatedContext.currentShop.employeeId;
+        const backendUserEmployeeId = this.validatedContext.backendUser.employeeId;
+        const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
+        return backendUserEmployeeId === currentShopEmployeeId;
       },
       userEmailIsValidated() {
         return this.validatedContext.user.emailIsValidated;

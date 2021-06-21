@@ -69,7 +69,7 @@
       },
       shopIsLinkedAndUserIsTheSame() {
         return parseInt(this.validatedContext.currentShop.employeeId, 10)
-          === this.validatedContext.employeeId;
+          === this.validatedContext.backendUser.employeeId;
       },
       btnText() {
         return this.t(`psaccounts.account.${BUTTON_I18N_KEY[this.action]}`);
@@ -77,7 +77,7 @@
       shopToLinkPayload() {
         return {
           ...this.validatedContext.currentShop,
-          employeeId: this.validatedContext.employeeId.toString(),
+          employeeId: this.validatedContext.backendUser.employeeId.toString(),
         };
       },
     },

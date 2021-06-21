@@ -25,6 +25,7 @@ export const userSchema = Joi.object().keys({
 
 export const backendUserSchema = Joi.object().keys({
   email: Joi.string().email({tlds: false}).allow(null).default(null),
+  employeeId: Joi.number(),
   isSuperAdmin: Joi.boolean().required(),
 }).unknown(true);
 
@@ -35,7 +36,6 @@ export const contextSchema = Joi.object().keys({
   psAccountsIsUptodate: Joi.boolean().default(true),
   psAccountsIsEnabled: Joi.boolean().default(true),
 
-  employeeId: Joi.number(),
   isOnboardedV4: Joi.boolean(),
 
   psAccountsInstallLink: Joi.string().uri().allow(null).default(null),
