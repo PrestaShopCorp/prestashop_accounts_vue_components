@@ -26,5 +26,9 @@ export default zoid.create({
       type: 'function',
       required: false,
     },
+    onLogout: {
+      type: 'function',
+      required: false,
+    },
   },
 });

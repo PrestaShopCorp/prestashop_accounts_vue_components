@@ -56,9 +56,14 @@
        */
       installEventBus() {
         this.isLoading = true;
-        this.$segment.track('ACC Click BO Install button', {
-          category: 'Accounts',
+
+        this.$segment.track('[ACC] PSEventBus Install Button Clicked', {
+          shop_bo_id: this.validatedContext.currentShop.id,
+          ps_module_from: this.validatedContext.psxName,
+          v4_onboarded: this.validatedContext.isOnboardedV4,
+          multishop_numbers: this.validatedContext.shops.length || 1,
         });
+        
         installModule(
           'ps_eventbus',
           this.validatedContext.dependencies.ps_eventbus.installLink,

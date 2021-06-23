@@ -96,6 +96,39 @@
       userIsConnected() {
         return this.validatedContext.user.email !== null;
       },
+      userIsSameAsCurrentShopuser() {
+        const backendUserEmployeeId = this.validatedContext.backendUser.employeeId;
+        const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
+
+        return backendUserEmployeeId === currentShopEmployeeId;
+      },
+      userEmailIsValidated() {
+        return this.validatedContext.user.emailIsValidated;
+      },
+      userLoggedHasEmailVerified() {
+        return this.userIsConnected
+          && this.userIsSameAsCurrentShopuser
+          && this.userEmailIsValidated;
+      },
+      eventbusIsInstalled() {
+        return undefined === this.validatedContext.dependencies
+          || this.validatedContext.dependencies.ps_eventbus.isInstalled;
+      },
+      psAccountModuleState() {
+        if (!this.validatedContext.psAccountsIsUptodate) {
+          return 'to_update';
+        }
+
+        if (!this.validatedContext.psAccountsIsEnabled) {
+          return 'to_enable';
+        }
+
+        if (this.validatedContext.psAccountsIsInstalled) {
+          return 'to_install';
+        }
+
+        return 'installed';
+      },
       hasBlockingAlert() {
         return !this.validatedContext.psAccountsIsInstalled
           || !this.validatedContext.psAccountsIsUptodate
@@ -120,12 +153,53 @@
           this.validationErrors = error.details.map((e) => e.message);
         }
       },
-      eventCallback(eventType, event) {
-        this.$emit('accountsEvent', eventType, event);
+      track() {
+        this.trackUser();
+        this.trackComponent();
+      },
+      trackUser() {
+        const args = [];
+
+        if (this.userIsConnected && this.validatedContext.user.uuid) {
+          args.push(this.validatedContext.user.uuid);
+        }
+
+        args.push({
+          superadmin: this.validatedContext.user.isSuperAdmin,
+          email: this.validatedContext.user.email || this.validatedContext.backendUser.email,
+          email_verified: this.userLoggedHasEmailVerified,
+          v4_onboarded: this.validatedContext.isOnboardedV4,
+          shops: this.validatedContext.shops,
+          multishop_numbers: this.validatedContext.shops.length || 1,
+        });
+
+        this.$segment.identify(...args);
+      },
+      trackComponent() {
+        let shopUrl = this.validatedContext.currentShop.domain_ssl
+          ? this.validatedContext.currentShop.domain_ssl
+          : this.validatedContext.currentShop.domain;
+        shopUrl += this.validatedContext.currentShop.physicalUri;
+
+        this.$segment.track('[ACC] Account Component Viewed', {
+          shop_bo_id: this.validatedContext.currentShop.id,
+          ps_module_from: this.validatedContext.psxName,
+          shop_associated: this.validatedContext.currentShop.uuid !== null,
+          // isOnboardedV4 is for the user context, not a shop context ?
+          v4_onboarded: this.validatedContext.isOnboardedV4,
+          ps_eventbus_installed: this.eventbusIsInstalled,
+          ps_account_module_state: this.psAccountModuleState,
+          shops: this.validatedContext.shops,
+          multishop_numbers: this.validatedContext.shops.length || 1,
+          current_shop: this.validatedContext.currentShop,
+          shop_url: shopUrl,
+        });
       },
     },
     created() {
       this.validateContext();
+
+      this.track();
     },
   };
 </script>

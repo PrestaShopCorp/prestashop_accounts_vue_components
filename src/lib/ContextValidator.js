@@ -18,7 +18,14 @@ export const shopGroupSchema = Joi.object().keys({
 }).unknown(true);
 
 export const userSchema = Joi.object().keys({
+  uuid: Joi.string().allow(null).required(),
   email: Joi.string().email({tlds: false}).allow(null).default(null),
+  isSuperAdmin: Joi.boolean().required(),
+}).unknown(true);
+
+export const backendUserSchema = Joi.object().keys({
+  email: Joi.string().email({tlds: false}).allow(null).default(null),
+  employeeId: Joi.number(),
   isSuperAdmin: Joi.boolean().required(),
 }).unknown(true);
 
@@ -29,7 +36,6 @@ export const contextSchema = Joi.object().keys({
   psAccountsIsUptodate: Joi.boolean().default(true),
   psAccountsIsEnabled: Joi.boolean().default(true),
 
-  employeeId: Joi.number(),
   isOnboardedV4: Joi.boolean(),
 
   psAccountsInstallLink: Joi.string().uri().allow(null).default(null),
@@ -40,6 +46,7 @@ export const contextSchema = Joi.object().keys({
   shops: Joi.array().items(shopGroupSchema).required().min(0)
     .max(128),
   user: userSchema.optional().allow({}).default({email: null}),
+  backendUser: backendUserSchema.optional().allow({}).default({}),
   onboardingLink: Joi.string().uri().optional().allow(null)
     .allow('')
     .default(null),

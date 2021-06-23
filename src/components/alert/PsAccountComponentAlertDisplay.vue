@@ -64,10 +64,5 @@
         return this.validatedContext.psAccountsIsEnabled;
       },
     },
-    mounted() {
-      this.$segment.track('ACC View Error display component', {
-        category: 'Account',
-      });
-    },
   };
 </script>

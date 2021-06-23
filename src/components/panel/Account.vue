@@ -27,13 +27,13 @@
 
         <AccountUserEmailNotValidated
           v-if="userIsConnected && userIsSameAsCurrentShopuser && !userEmailIsValidated"
-          :resend-email-link="validatedContext.ssoResendVerificationEmail"
+          :validated-context="validatedContext"
           class="mt-3"
         />
 
         <AccountUserNotSuperAdmin
           v-if="!validatedContext.user.isSuperAdmin"
-          :admin-email="validatedContext.superAdminEmail"
+          :validated-context="validatedContext"
         />
         <slot />
       </b-card-body>
@@ -73,37 +73,18 @@
         required: true,
       },
     },
-    methods: {
-      trackingComponent() {
-        let trackingEvent = '';
-        if (!this.validatedContext.user.isSuperAdmin) {
-          trackingEvent = 'ACC View admin component';
-        } else if (!this.userIsConnected) {
-          trackingEvent = 'ACC View onboarding component - not connected state';
-        } else if (!this.userEmailIsValidated) {
-          trackingEvent = 'ACC View onboarding component - email not validated state';
-        } else {
-          trackingEvent = 'ACC View onboarding component - connected validated state';
-        }
-
-        this.$segment.track(trackingEvent, {
-          category: 'Account',
-        });
-      },
-    },
     computed: {
       userIsConnected() {
         return this.validatedContext.user.email !== null;
       },
       userIsSameAsCurrentShopuser() {
-        return this.validatedContext.employeeId === this.validatedContext.currentShop.employeeId;
+        const backendUserEmployeeId = this.validatedContext.backendUser.employeeId;
+        const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
+        return backendUserEmployeeId === currentShopEmployeeId;
       },
       userEmailIsValidated() {
         return this.validatedContext.user.emailIsValidated;
       },
-    },
-    mounted() {
-      this.trackingComponent();
     },
   };
 </script>
