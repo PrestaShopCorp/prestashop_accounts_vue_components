@@ -22,7 +22,7 @@ const install = function(vue, opts = {}) {
 };
 
 Vue.use(Segment, {
-  id: process.env.VUE_APP_SEGMENT,
+  id: contextPsAccounts.segmentApiKey,
   pageCategory: "ps_accounts-ui"
 })
 
