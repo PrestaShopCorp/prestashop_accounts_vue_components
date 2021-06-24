@@ -1,7 +1,7 @@
 <template>
   <b-overlay
-    :show="installLoading"
     variant="white"
+    :show="isLoading"
     :opacity="0.70"
     blur="0px"
   >
@@ -28,6 +28,7 @@
 <script>
   import {BOverlay, BAlert, BButton} from 'bootstrap-vue';
   import Locale from '@/mixins/locale';
+  import installModule from '../../../lib/moduleManager/InstallModule';
 
   export default {
     name: 'AlertEventBusNotInstalled',
@@ -38,13 +39,15 @@
       BButton,
     },
     props: {
-      /**
-       * Useful in order to display a loader if you perform some ajax.
-       */
-      installLoading: {
-        type: Boolean,
-        required: false,
+      validatedContext: {
+        type: Object,
+        required: true,
       },
+    },
+    data() {
+      return {
+        isLoading: false,
+      };
     },
     methods: {
       /**
@@ -52,7 +55,23 @@
        * @type {Event}
        */
       installEventBus() {
-        this.$emit('installEventBus');
+        this.isLoading = true;
+
+        this.$segment.track('[ACC] PSEventBus Install Button Clicked', {
+          shop_bo_id: this.validatedContext.currentShop.id,
+          ps_module_from: this.validatedContext.psxName,
+          v4_onboarded: this.validatedContext.isOnboardedV4,
+          multishop_numbers: this.validatedContext.shops.length || 1,
+        });
+        
+        installModule(
+          'ps_eventbus',
+          this.validatedContext.dependencies.ps_eventbus.installLink,
+          this.validatedContext.psIs17,
+        ).catch(() => {
+          this.isLoading = false;
+          this.$emit('hasError');
+        });
       },
     },
   };

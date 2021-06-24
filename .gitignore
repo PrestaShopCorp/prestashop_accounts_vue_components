@@ -6,6 +6,7 @@ node_modules
 storybook-static/
 
 # local env files
+.env
 .env.local
 .env.*.local
 
@@ -23,6 +24,8 @@ yarn-error.log*
 *.sln
 *.sw?
 .nova
+*.code-workspace
+
 
 #Terraform
 cloud/.terraform*
@@ -31,4 +34,3 @@ gcp-token.json
 cloud/.terraform.lock.hcl
 cloud/.terraform/environment
 .terraform
-

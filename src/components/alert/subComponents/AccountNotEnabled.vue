@@ -1,6 +1,5 @@
 <template>
   <b-alert
-    v-if="!accountIsEnabled"
     variant="warning"
     show
   >
@@ -12,7 +11,7 @@
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="enableEvent()"
+        @click="enablePsAccounts()"
       >
         {{ t('psaccounts.alertAccountNotEnabled.enableButton') }}
       </b-button>
@@ -30,6 +29,7 @@
 <script>
   import Locale from '@/mixins/locale';
   import {BAlert, BButton, BLink} from 'bootstrap-vue';
+  import enableModule from '../../../lib/moduleManager/EnableModule';
 
   /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -45,37 +45,36 @@
     },
     mixins: [Locale],
     props: {
-      /**
-       * This is the display condition (do not use v-if="...", use this prop instead).
-       */
-      accountIsEnabled: {
-        type: Boolean,
-        default: false,
+      validatedContext: {
+        type: Object,
+        required: true,
       },
-      /**
-      * Useful in order to display a loader if you perform some ajax.
-      */
-      isLoading: {
-        type: Boolean,
-        default: false,
-      },
+    },
+    data() {
+      return {
+        isLoading: false,
+      };
     },
     methods: {
-      enableEvent() {
-        /**
-         * Emitted when enable button is clicked.
-         * @type {Event}
-         */
-        this.$emit('enabled', true);
-        this.$segment.track('ACC Click BO Activate Button', {
-          category: 'Accounts',
+      enablePsAccounts() {
+        this.isLoading = true;
+
+        this.$segment.track('[ACC] PSAccount Enable Button Clicked', {
+          shop_bo_id: this.validatedContext.currentShop.id,
+          ps_module_from: this.validatedContext.psxName,
+          v4_onboarded: this.validatedContext.isOnboardedV4,
+          multishop_numbers: this.validatedContext.shops.length || 1,
+        });
+
+        enableModule(
+          'ps_accounts',
+          this.validatedContext.psAccountsEnableLink,
+          this.validatedContext.psIs17,
+        ).catch(() => {
+          this.isLoading = false;
+          this.$emit('hasError');
         });
       },
-    },
-    mounted() {
-      this.$segment.track('ACC View Install component - activate state', {
-        category: 'Account',
-      });
     },
   };
 </script>
