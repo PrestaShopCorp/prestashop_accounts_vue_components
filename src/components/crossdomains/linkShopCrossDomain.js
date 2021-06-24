@@ -3,7 +3,7 @@ import * as zoid from 'zoid/dist/zoid.frameworks';
 export default zoid.create({
   tag: 'crossdomains-account-link-shop',
   // TODO Put accounts-ui prod url when there is no env
-  url: ({props}) => `${process.env.VUE_APP_ACCOUNTS_UI_URL}${props.specificUiUrl}/?cdc=true`,
+  url: ({props}) => `${props.accountsUiUrl}${props.specificUiUrl}/?cdc=true`,
 
   context: 'iframe',
 
@@ -29,6 +29,10 @@ export default zoid.create({
     onLogout: {
       type: 'function',
       required: false,
+    },
+    accountsUiUrl: {
+      type: 'string',
+      required: true,
     },
   },
 });

@@ -57,4 +57,7 @@ export const contextSchema = Joi.object().keys({
   manageAccountLink: Joi.string().uri().optional().allow(null)
     .allow('')
     .default(null),
+
+  accountsUiUrl: Joi.string().allow(null).default(null),
+  segmentApiKey: Joi.string().allow(null).default(null),
 }).unknown(true);

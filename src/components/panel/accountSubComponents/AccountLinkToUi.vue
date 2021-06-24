@@ -15,6 +15,7 @@
       :shop="shopToLinkPayload"
       :specific-ui-url="specificUiUrl"
       :on-boarding-link="validatedContext.onboardingLink"
+      :accounts-ui-url="validatedContext.accountsUiUrl"
     />
   </div>
 </template>
