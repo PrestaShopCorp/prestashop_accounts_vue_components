@@ -2,23 +2,23 @@
   <div>
     <AccountNotInstalled
       v-if="!psAccountsIsInstalled"
-      :validatedContext="validatedContext"
+      :validated-context="validatedContext"
       @hasError="$emit('hasError')"
     />
     <AccountNotEnabled
       v-else-if="!psAccountsIsEnabled"
-      :validatedContext="validatedContext"
+      :validated-context="validatedContext"
       @hasError="$emit('hasError')"
     />
     <AccountNotUpdated
       v-else-if="!psAccountsIsUptodate"
-      :validatedContext="validatedContext"
+      :validated-context="validatedContext"
       @hasError="$emit('hasError')"
     />
     <EventBusNotInstalled
       v-if="undefined !== validatedContext.dependencies
-      && !validatedContext.dependencies.ps_eventbus.isInstalled"
-      :validatedContext="validatedContext"
+        && !validatedContext.dependencies.ps_eventbus.isInstalled"
+      :validated-context="validatedContext"
       @hasError="$emit('hasError')"
     />
   </div>

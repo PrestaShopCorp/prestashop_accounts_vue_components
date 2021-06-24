@@ -63,7 +63,7 @@
           v4_onboarded: this.validatedContext.isOnboardedV4,
           multishop_numbers: this.validatedContext.shops.length || 1,
         });
-        
+
         installModule(
           'ps_eventbus',
           this.validatedContext.dependencies.ps_eventbus.installLink,
