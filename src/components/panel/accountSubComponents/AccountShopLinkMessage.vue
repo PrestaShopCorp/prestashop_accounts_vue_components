@@ -4,7 +4,7 @@
       class="mr-2 align-self-center"
       src="~@/assets/img/puffin_logo.png"
       width="46"
-    />
+    >
     <div class="align-self-center">
       <span
         v-if="!userIsConnected"

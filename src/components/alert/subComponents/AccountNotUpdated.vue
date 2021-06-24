@@ -65,7 +65,7 @@
           v4_onboarded: this.validatedContext.isOnboardedV4,
           multishop_numbers: this.validatedContext.shops.length || 1,
         });
-        
+
         updateModule(
           'ps_accounts',
           this.validatedContext.psAccountsUpdateLink,
