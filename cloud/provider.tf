@@ -7,6 +7,13 @@ provider "google" {
   zone    = data.terraform_remote_state.services.outputs.default_zone
 }
 
+provider "google-beta" {
+  version = "3.40.0"
+  project = local.project
+  region  = data.terraform_remote_state.services.outputs.region
+  zone    = data.terraform_remote_state.services.outputs.default_zone
+}
+
 # https://www.terraform.io/docs/providers/kubernetes/index.html
 provider "kubernetes" {
   version = "1.10.0"

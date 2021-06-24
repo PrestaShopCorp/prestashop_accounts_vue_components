@@ -6,20 +6,20 @@ locals {
 
   config = {
     project = {
-      alpha = "psessentials-integration"
-      stable = "psessentials-production"
+      alpha = "distribution-integration"
+      stable  = "distribution-production-308520"
     }
     managed_zone = {
-      alpha   = "psessentials-integration-net"
-      stable  = "psessentials-net"
+      alpha = "distribution-integration-net"
+      stable = "distribution-production-net"
     }
     environment = {
       alpha = "integration"
       stable = "production"
     }
     url = {
-      alpha = "storybook-accounts.psessentials-integration.net"
-      stable = "storybook-accounts.psessentials.net"
+      alpha = "storybook-accounts.distribution-integration.prestashop.net"
+      stable = "storybook-accounts.distribution.prestashop.net"
     }
   }
 }
