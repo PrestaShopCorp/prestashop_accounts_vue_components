@@ -5,7 +5,7 @@
     show
   >
     <p>{{ t('psaccounts.account.needToBeAdmin') }}</p>
-    <p v-if="adminEmail">
+    <p v-if="validatedContext.superAdminEmail">
       {{ t('psaccounts.account.pleaseContact') }}
       <a
         @click="trackClick"
