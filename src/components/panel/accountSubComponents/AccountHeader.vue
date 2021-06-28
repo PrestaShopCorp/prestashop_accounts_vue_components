@@ -1,13 +1,5 @@
 <template>
   <div>
-    <b-tooltip
-      target="tooltip-target-3bd46b2a34b6628a1a73a31c91afd7ef"
-      triggers="hover"
-      placement="top"
-    >
-      {{ t('psaccounts.account.manageAccountTooltip') }}
-    </b-tooltip>
-
     <b-iconstack
       v-if="userIsConnected"
       font-scale="1.5"

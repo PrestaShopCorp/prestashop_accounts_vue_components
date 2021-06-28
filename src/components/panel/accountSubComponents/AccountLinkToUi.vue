@@ -30,7 +30,7 @@
   const BUTTON_I18N_KEY = {
     reonboard: 'reonboardButton',
     associate: 'connectButton',
-    manageAccount: 'manageAccountTooltip',
+    manageAccount: 'manageAccountButton',
   };
 
   export default {

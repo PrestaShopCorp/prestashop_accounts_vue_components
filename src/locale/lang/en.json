@@ -15,13 +15,10 @@
             "enableButton": "Activate",
             "loading": "The PrestaShop Account module is currently being activated..."
         },
-        "multiShopSelector": {
-            "title": "Multi-store mode activated",
-            "subtitle": "You must configure your stores one by one for this service but you will be able to use the same account.",
-            "selectStore": "Please select the first store to configure from the list below",
-            "tips": "After you are done with the first shop, you can configure the others by selecting them one by one in the shop selector, in the horizontal menu",
-            "configure": "Configure",
-            "group": "Group"
+        "alertAccountNeedsUpdate": {
+            "title": "Update PrestaShop Accounts module",
+            "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
+            "installButton": "Update"
         },
         "alertEventBusNotInstalled": {
             "title": "Install the Prestashop Event Bus module",
@@ -29,10 +26,12 @@
             "installButton": "Install",
             "loading": "The Prestashop Event Bus module is currently being installed..."
         },
-        "alertAccountNeedsUpdate": {
-            "title": "Update PrestaShop Accounts module",
-            "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
-            "installButton": "Update"
+        "multiShopSelector": {
+            "title": "Multi-store mode activated",
+            "subtitle": "You must configure your stores one by one for this service but you will be able to use the same account.",
+            "selectStore": "Please select the first store to configure from the list below",
+            "tips": "After you are done with the first shop, you can configure the others by selecting them one by one in the shop selector, in the horizontal menu",
+            "configure": "Configure"
         },
         "account": {
             "title": "Associate your shop with a PrestaShop account",
@@ -46,12 +45,7 @@
             "sendEmail": "Send it again",
             "needToBeAdmin": "In order to proceed you need to be administrator of the shop",
             "pleaseContact": "Please contact",
-            "manageAccountTooltip": "Manage account",
-            "unlinkShop": "Unlink my shop",
-            "unlinkShopModalTitle": "Are you sure you want to unlink your store from your account ?",
-            "unlinkShopModalContent": "By clicking on Yes, I confirm, you authorize your PrestaShop account to be unlink from the store.",
-            "unlinkShopAlert": "Your store has been successfully unlinked",
-            "unlinkShopError": "Error while trying to unlink shop"
+            "manageAccountButton": "View my associated shops"
         }
     }
 }
