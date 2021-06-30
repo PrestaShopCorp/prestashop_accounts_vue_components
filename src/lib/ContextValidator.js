@@ -6,8 +6,8 @@ export const shopSchema = Joi.object().keys({
   url: Joi.string().uri().required(),
   domain: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domain').required(),
   domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').required(),
-  uuid: Joi.string().allow(null).required(),
-  physicalUri: Joi.string().required(),
+  uuid: Joi.string().allow(null),
+  physicalUri: Joi.string(),
 }).unknown(true);
 
 export const shopGroupSchema = Joi.object().keys({
@@ -18,7 +18,7 @@ export const shopGroupSchema = Joi.object().keys({
 }).unknown(true);
 
 export const userSchema = Joi.object().keys({
-  uuid: Joi.string().allow(null).required(),
+  uuid: Joi.string().allow(null),
   email: Joi.string().email({tlds: false}).allow(null).default(null),
   isSuperAdmin: Joi.boolean().required(),
 }).unknown(true);
