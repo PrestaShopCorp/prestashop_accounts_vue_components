@@ -36,7 +36,7 @@ const Components = {
 
 if (typeof window !== 'undefined' && window.Vue) {
   const { storePsAccounts } = global;
-  const locale = storePsAccounts?.context?.i18n?.isoCode;
+  const locale = storePsAccounts?.context?.i18n?.isoCode || "en";
   install(window.Vue, { locale });
 } else {
   Object.keys(Components).forEach((name) => {
