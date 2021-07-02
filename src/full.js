@@ -35,8 +35,7 @@ const Components = {
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
-  const { iso_user } = global;
-  const locale = iso_user || "en";
+  const locale = global?.iso_user || "en";
   install(window.Vue, { locale });
 } else {
   Object.keys(Components).forEach((name) => {
