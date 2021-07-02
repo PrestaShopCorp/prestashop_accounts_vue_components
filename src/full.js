@@ -35,7 +35,9 @@ const Components = {
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue);
+  const { storePsAccounts } = global;
+  const locale = storePsAccounts?.context?.i18n?.isoCode;
+  install(window.Vue, { locale });
 } else {
   Object.keys(Components).forEach((name) => {
     Vue.component(name, Components[name]);
