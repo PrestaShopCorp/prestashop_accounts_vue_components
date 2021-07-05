@@ -1,0 +1,34 @@
+name: Crowdin Action
+
+on:
+  push:
+    branches: [ master, integration, test ]
+
+jobs:
+  synchronize-with-crowdin:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+
+    - name: Crowdin action
+      uses: crowdin/github-action@1.1.0
+      with:
+        download_translations: true
+        commit_message: 'New Crowdin translations by Github Action'
+        localization_branch_name: l10n/${{ steps.extract_branch.outputs.branch }}
+        #pull_request_title: 'Create pull request after pushing to branch'
+        pull_request_base_branch_name: ${{ steps.extract_branch.outputs.branch }}
+        crowdin_branch_name: ${{ steps.extract_branch.outputs.branch }}
+        config: crowdin.yml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CROWDIN_PROJECT_ID: 459732
+        CROWDIN_PERSONAL_TOKEN: '79c49a29a6494ec4704900eb6c51b5381bc2f9a9679e4e9b306c5560655cbc8ec8798428cfa06f76'
