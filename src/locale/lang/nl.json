@@ -1,51 +1,51 @@
 {
     "psaccounts": {
         "accountManager": {
-            "errorInstallEnable": "Er is een fout opgetreden. Probeer het nog eens."
+            "errorInstallEnable": "Une erreur est survenue, merci de réessayer."
         },
         "alertAccountNotInstalled": {
-            "title": "Installeer de module PrestaShop Account",
-            "message": "De module PrestaShop account is nodig om de configuratie van deze module voort te zetten.",
-            "installButton": "Installeer",
-            "loading": "Installatie van de module PrestaShop Account aan de gang..."
+            "title": "Installez le module PrestaShop Account",
+            "message": "Le module PrestaShop Account est nécessaire pour continuer la configuration de ce module.",
+            "installButton": "Installer",
+            "loading": "Installation du module PrestaShop Account en cours..."
         },
         "alertAccountNotEnabled": {
-            "title": "Activeer de module PrestaShop Account",
-            "message": "De module PrestaShop account is nodig om de configuratie van deze module voort te zetten.",
-            "enableButton": "Activeren",
-            "loading": "Activering van de module PrestaShop Account aan de gang..."
+            "title": "Activez le module PrestaShop Account",
+            "message": "Le module PrestaShop account est nécessaire pour continuer la configuration de ce module.",
+            "enableButton": "Activer",
+            "loading": "Activation du module PrestaShop Account en cours..."
         },
         "alertAccountNeedsUpdate": {
-            "title": "Update PrestaShop Accounts-module",
-            "message": "Er is een nieuwe versie van PrestaShop-accounts beschikbaar. Werk de module bij om de services te blijven gebruiken",
-            "installButton": "Bijwerken"
+            "title": "Mettez à jour le module PrestaShop Account",
+            "message": "Une nouvelle version de PrestaShop Account est disponible, merci de mettre à jour le module pour continuer d'utiliser les services",
+            "installButton": "Mettre à jour"
         },
         "alertEventBusNotInstalled": {
-            "title": "Installeer de module Prestashop Event Bus",
-            "message": "De module Prestashop Event Bus is nodig om de configuratie van deze module voort te zetten.",
-            "loading": "Installatie van de module Prestashop Event Bus aan de gang...",
-            "installButton": "Installeer"
+            "title": "Installez le module Prestashop Event Bus",
+            "message": "Le module Prestashop Event Bus est nécessaire pour continuer la configuration de ce module.",
+            "loading": "Installation du module Prestashop Event Bus en cours...",
+            "installButton": "Installer"
         },
         "multiShopSelector": {
-            "title": "Multi-shop modus geactiveerd",
-            "subtitle": "Voor deze dienst moet u uw winkels één voor één configureren, maar u kunt wel hetzelfde account gebruiken.",
-            "selectStore": "Selecteer alstublieft een eerste winkel uit onderstaande lijst",
-            "tips": "Zodra de eerste winkel is geconfigureerd, kunt u verder gaan met de andere winkels door ze één voor één te selecteren in de winkelselector van het horizontale menu.",
-            "configure": "Configureren"
+            "title": "Mode multi-boutiques activé",
+            "subtitle": "Pour ce service, vous devez configurer vos boutiques une par une, mais vous pourrez utiliser le même compte.",
+            "selectStore": "Merci de sélectionner une première boutique à partir de la liste ci-dessous",
+            "tips": "Une fois la première boutique configurée, vous pouvez poursuivre avec les autres en les sélectionnant une par une dans le sélecteur de boutiques du menu horizontal.",
+            "configure": "Configurer"
         },
         "account": {
-            "title": "Koppel uw winkel aan een PrestaShop account",
-            "authorize": "U kunt uw winkel maar aan één account koppelen. Kies het goed!",
-            "authorized": "Uw winkel is gekoppeld aan het PrestaShop account:",
-            "connectButton": "Koppelen",
-            "reonboardButton": "Opnieuw verbinden",
-            "disconnectButton": "Een ander account gebruiken",
-            "moduleUpdateInformation": "<strong>Nieuwe update:</strong> u kunt uw geassocieerde winkels beheren.<br /> Gelieve u opnieuw aan te melden <strong>met hetzelfde e-mailadres</strong> om van deze update te kunnen profiteren.<br /> Andere module-updates kunnen beschikbaar zijn in Module Manager, tabblad Updates.",
-            "emailNotVerified": "Er werd een bevestigingsmail verstuurd. Controleer uw inbox en klik op de link om uw account te activeren.",
-            "sendEmail": "Doorsturen",
-            "needToBeAdmin": "Om verder te gaan, moet u een administrator van de winkel zijn.",
-            "pleaseContact": "Neem alstublieft contact op met",
-            "manageAccountButton": "Bekijk mijn geassocieerde winkels"
+            "title": "Associez votre boutique à un compte PrestaShop",
+            "authorize": "Vous ne pouvez associer votre boutique qu'à un seul compte. Choisissez le bien !",
+            "authorized": "Votre boutique est associée au compte PrestaShop : ",
+            "connectButton": "Associer",
+            "reonboardButton": "Réassocier",
+            "disconnectButton": "Utiliser un autre compte",
+            "moduleUpdateInformation": "<strong>Nouvelle mise à jour :</strong> vous pouvez gérer vos boutiques associées.<br /> Merci de vous réassocier en utilisant <strong>la même adresse mail</strong> pour profiter de cette mise à jour.<br /> D'autres mises à jour de modules peuvent être disponibles dans Gestionnaire de modules onglet Mises à jour.",
+            "emailNotVerified": "Un email de confirmation a été envoyé. Vérifiez votre boîte de réception et cliquez sur le lien pour activer votre compte.",
+            "sendEmail": "Renvoyer",
+            "needToBeAdmin": "Pour continuer, vous devez être administrateur de la boutique",
+            "pleaseContact": "Merci de contacter",
+            "manageAccountButton": "Voir mes boutiques associées"
         }
     }
 }
