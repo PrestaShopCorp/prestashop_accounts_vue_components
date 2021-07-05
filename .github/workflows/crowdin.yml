@@ -1,0 +1,32 @@
+name: Crowdin Action
+
+on:
+  push:
+    branches: [ master, integration, test ]
+
+jobs:
+  synchronize-with-crowdin:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: crowdin action
+      uses: crowdin/github-action@1.1.0
+      with:
+        download_translations: true
+        commit_message: 'New Crowdin translations by Github Action'
+        localization_branch_name: 'l10n/test'
+        pull_request_title: 'Create pull request after pushing to branch'
+        pull_request_base_branch_name: test
+        crowdin_branch_name: test
+        project_id: 459732
+        token: '79c49a29a6494ec4704900eb6c51b5381bc2f9a9679e4e9b306c5560655cbc8ec8798428cfa06f76'
+        source: 'src/locale/lang/en.json'
+        translation: 'src/locale/lang/%two_letters_code%.json'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CROWDIN_PROJECT_ID: 459732
+        CROWDIN_PERSONAL_TOKEN: '79c49a29a6494ec4704900eb6c51b5381bc2f9a9679e4e9b306c5560655cbc8ec8798428cfa06f76'
