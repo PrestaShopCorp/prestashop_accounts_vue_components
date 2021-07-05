@@ -1,0 +1,15 @@
+project_id_env: CROWDIN_PROJECT_ID
+api_token_env: CROWDIN_PERSONAL_TOKEN
+
+commit_message: "[ci skip] Fix: New translations from Crowdin"
+append_commit_message: false
+
+preserve_hierarchy: true
+
+files:
+  - source: '/src/locale/lang/fr.json'
+    dest:   '/vue-components.json'
+    translation: '/src/locale/lang/%two_letters_code%.json'
+    type: 'json'
+    labels:
+      - "vue-components"
