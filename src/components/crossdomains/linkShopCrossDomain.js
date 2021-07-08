@@ -34,5 +34,9 @@ export default zoid.create({
       type: 'string',
       required: true,
     },
+    triggerFallback: {
+      type: 'function',
+      required: false,
+    },
   },
 });
