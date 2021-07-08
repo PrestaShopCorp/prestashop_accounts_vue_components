@@ -19,18 +19,6 @@ jobs:
           echo ::set-output name=MINOR::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 2)
           echo ::set-output name=PATCH::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d '.' -f 3)
 
-      - name: Gcloud auth and write env file
-        run: |
-          echo $GOOGLE_APPLICATION_CREDENTIALS > token.json
-          gcloud auth activate-service-account --key-file=token.json
-          gcloud container clusters get-credentials $GCLOUD_CLUSTER \
-          --zone europe-west1-c --project distribution-integration
-          gcloud auth configure-docker
-          rm token.json
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.INTEGRATION_GOOGLE_APPLICATION_CREDENTIALS }}
-          GCLOUD_CLUSTER: ${{ secrets.INTEGRATION_GCLOUD_CLUSTER }}
-
       - name: Checkout repository
         uses: actions/checkout@master
 
@@ -59,12 +47,3 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - run: |
-          gsutil cp dist/psaccountsVue.umd.min.js gs://prestashop-vuejs-cdn/accounts/$MAJOR.$MINOR.$PATCH/prestashop_accounts_vue_components.min.js
-          gsutil cp dist/psaccountsVue.umd.min.js gs://prestashop-vuejs-cdn/accounts/$MAJOR.$MINOR.x/prestashop_accounts_vue_components.min.js
-          gsutil cp dist/psaccountsVue.umd.min.js gs://prestashop-vuejs-cdn/accounts/$MAJOR.x.x/prestashop_accounts_vue_components.min.js
-        env:
-          MAJOR: ${{ steps.get_tag.outputs.MAJOR }}
-          MINOR: ${{ steps.get_tag.outputs.MINOR }}
-          PATCH: ${{ steps.get_tag.outputs.PATCH }}
