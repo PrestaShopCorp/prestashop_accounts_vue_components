@@ -25,7 +25,6 @@
 <script>
   import Locale from '@/mixins/locale';
   import {
-    BTooltip,
     BIconstack,
     BIconCircleFill,
     BIconCheck,
@@ -35,7 +34,6 @@
     name: 'AccountHeader',
     mixins: [Locale],
     components: {
-      BTooltip,
       BIconstack,
       BIconCircleFill,
       BIconCheck,
