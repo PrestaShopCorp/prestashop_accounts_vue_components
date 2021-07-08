@@ -15,13 +15,23 @@
             "enableButton": "Aktivator",
             "loading": "Aktivierung des Moduls PrestaShop Account in Arbeit..."
         },
+        "alertAccountNeedsUpdate": {
+            "title": "PrestaShop-Kontenmodul aktualisieren",
+            "message": "Eine neue Version von PrestaShop-Konten ist verfügbar. Bitte aktualisieren Sie das Modul, um die Dienste weiterhin nutzen zu können",
+            "installButton": "Aktualisieren"
+        },
+        "alertEventBusNotInstalled": {
+            "title": "Installieren Sie das Modul Prestashop Event Bus",
+            "message": "Das Modul Prestashop Event Bus ist notwendig, um die Konfiguration dieses Moduls fortzusetzen.",
+            "loading": "Installation des Moduls Prestashop Event Bus in Arbeit...",
+            "installButton": "Installationsprogramm"
+        },
         "multiShopSelector": {
             "title": "Modus Multi-Boutiquen aktiviert",
             "subtitle": "Für diesen Dienst müssen Sie Ihre Filialen einzeln konfigurieren, können jedoch dasselbe Konto verwenden.",
             "selectStore": "Bitte wählen Sie eine Premierenboutique zum Anspruch an der unten stehenden Liste",
             "tips": "In der ersten konfigurierten Boutique können Sie sich bei der Auswahl der weiteren Boutiquen ebenso wie bei der Auswahl der Boutiquen mit horizontaler Menüführung an die weiteren Boutiquen wenden.",
-            "configure": "Konfigurator",
-            "group": ""
+            "configure": "Konfigurator"
         },
         "account": {
             "title": "Verknüpfen Sie Ihren Shop mit einem PrestaShop-Konto",
@@ -35,12 +45,7 @@
             "sendEmail": "Erneut senden",
             "needToBeAdmin": "Um fortzufahren, müssen Sie Administrator des Geschäfts sein",
             "pleaseContact": "Vielen Dank für den Kontakt",
-            "manageAccountTooltip": "Manage account"
-        },
-        "alertEventBusNotInstalled": {
-            "title": "Installieren Sie das Modul Prestashop Event Bus",
-            "message": "Das Modul Prestashop Event Bus ist notwendig, um die Konfiguration dieses Moduls fortzusetzen.",
-            "loading": "Installation des Moduls Prestashop Event Bus in Arbeit..."
+            "manageAccountButton": "Meine zugehörigen Shops anzeigen"
         }
     }
 }

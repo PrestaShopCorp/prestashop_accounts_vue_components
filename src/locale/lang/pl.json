@@ -15,13 +15,23 @@
             "enableButton": "Aktywuj",
             "loading": "Aktywacja modułu PrestaShop Account w toku..."
         },
+        "alertAccountNeedsUpdate": {
+            "title": "Zaktualizuj moduł Konta PrestaShop",
+            "message": "Dostępna jest nowa wersja Kont PrestaShop, zaktualizuj moduł, aby móc dalej korzystać z usług",
+            "installButton": "Aktualizacja"
+        },
+        "alertEventBusNotInstalled": {
+            "title": "Zainstaluj moduł Prestashop Event Bus",
+            "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
+            "loading": "Aktywacja modułu Prestashop Event Bus w toku...",
+            "installButton": "Zainstaluj"
+        },
         "multiShopSelector": {
             "title": "Włączony tryb Multi-shop",
             "subtitle": "Choć dla tej usługi należy skonfigurować swoje sklepy jeden po drugim, będzie można korzystać z tego samego konta.",
             "selectStore": "Wybierz pierwszy sklep z poniższej listy",
             "tips": "Po skonfigurowaniu pierwszego sklepu można kontynuować pracę z pozostałymi, wybierając je jeden po drugim w selektorze sklepów w menu poziomym.",
-            "configure": "Konfiguruj",
-            "group": ""
+            "configure": "Konfiguruj"
         },
         "account": {
             "title": "Połącz swój sklep z kontem PrestaShop",
@@ -35,12 +45,7 @@
             "sendEmail": "Wróć",
             "needToBeAdmin": "Aby kontynuować, musisz być administratorem sklepu.",
             "pleaseContact": "Prosimy o kontakt",
-            "manageAccountTooltip": "Manage account"
-        },
-        "alertEventBusNotInstalled": {
-            "title": "Zainstaluj moduł Prestashop Event Bus",
-            "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
-            "loading": "Aktywacja modułu Prestashop Event Bus w toku..."
+            "manageAccountButton": "Zobacz moje powiązane sklepy"
         }
     }
 }

@@ -15,13 +15,23 @@
             "enableButton": "Activer",
             "loading": "Activation du module PrestaShop Account en cours..."
         },
+        "alertAccountNeedsUpdate": {
+            "title": "Mettez à jour le module PrestaShop Account",
+            "message": "Une nouvelle version de PrestaShop Account est disponible, merci de mettre à jour le module pour continuer d'utiliser les services",
+            "installButton": "Mettre à jour"
+        },
+        "alertEventBusNotInstalled": {
+            "title": "Installez le module Prestashop Event Bus",
+            "message": "Le module Prestashop Event Bus est nécessaire pour continuer la configuration de ce module.",
+            "loading": "Installation du module Prestashop Event Bus en cours...",
+            "installButton": "Installer"
+        },
         "multiShopSelector": {
             "title": "Mode multi-boutiques activé",
             "subtitle": "Pour ce service, vous devez configurer vos boutiques une par une, mais vous pourrez utiliser le même compte.",
             "selectStore": "Merci de sélectionner une première boutique à partir de la liste ci-dessous",
             "tips": "Une fois la première boutique configurée, vous pouvez poursuivre avec les autres en les sélectionnant une par une dans le sélecteur de boutiques du menu horizontal.",
-            "configure": "Configurer",
-            "group": ""
+            "configure": "Configurer"
         },
         "account": {
             "title": "Associez votre boutique à un compte PrestaShop",
@@ -35,12 +45,7 @@
             "sendEmail": "Renvoyer",
             "needToBeAdmin": "Pour continuer, vous devez être administrateur de la boutique",
             "pleaseContact": "Merci de contacter",
-            "manageAccountTooltip": "Gérer mon compte"
-        },
-        "alertEventBusNotInstalled": {
-            "title": "Installez le module Prestashop Event Bus",
-            "message": "Le module Prestashop Event Bus est nécessaire pour continuer la configuration de ce module.",
-            "loading": "Installation du module Prestashop Event Bus en cours..."
+            "manageAccountButton": "Voir mes boutiques associées"
         }
     }
 }

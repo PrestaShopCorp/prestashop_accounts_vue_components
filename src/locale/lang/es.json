@@ -15,32 +15,37 @@
             "enableButton": "Activar",
             "loading": "Activación del módulo PrestaShop Account en curso..."
         },
+        "alertAccountNeedsUpdate": {
+            "title": "Actualizar el módulo Cuentas PrestaShop",
+            "message": "Hay una nueva versión de Cuentas PrestaShop disponible, actualice el módulo para continuar usando los servicios",
+            "installButton": "Actualizar"
+        },
+        "alertEventBusNotInstalled": {
+            "title": "Instala el módulo Prestashop Event Bus",
+            "message": "El módulo Prestashop Event Bus es necesario para continuar con la configuración de este módulo.",
+            "loading": "Instalación del módulo Prestashop Event Bus en curso...",
+            "installButton": "Instalar"
+        },
         "multiShopSelector": {
             "title": "Modo multitienda activado",
             "subtitle": "Para este servicio, necesitas configurar tus tiendas una por una, pero podrás usar la misma cuenta.",
             "selectStore": "Selecciona una tienda de la siguiente lista",
             "tips": "Una vez configurada la primera tienda, puedes continuar con las demás seleccionándolas una a una en el selector de tiendas del menú horizontal.",
-            "configure": "Configurar",
-            "group": ""
+            "configure": "Configurar"
         },
         "account": {
             "title": "Vincula tu tienda a una cuenta PrestaShop",
             "authorize": "Solo puedes vincular tu tienda a una cuenta. ¡Elígela bien!",
-            "authorized": "Su tienda está vinculada a la cuenta PrestaShop:",
+            "authorized": "Tu tienda está vinculada a la cuenta PrestaShop:",
             "connectButton": "Vincular",
-            "reonboardButton": "Reasociar",
+            "reonboardButton": "Vincular de nuevo",
             "disconnectButton": "Usar otra cuenta",
-            "moduleUpdateInformation": "<strong>Nueva actualización:</strong> puede gestionar sus tiendas asociadas.<br /> Por favor, vuelva a asociarse utilizando <strong>la misma dirección de correo electrónico</strong> para beneficiarse de esta actualización.<br /> Otras actualizaciones del módulo pueden estar disponibles en la pestaña Actualizaciones del gestor de módulos.",
+            "moduleUpdateInformation": "<strong>Nueva actualización:</strong> puedes gestionar tus tiendas asociadas.<br /> Por favor, vuelve a asociarte utilizando <strong>la misma dirección de correo electrónico para beneficiar de esta actualización</strong> para beneficiarse de esta actualización.<br /> Otras actualizaciones del módulo pueden estar disponibles en la pestaña Actualizaciones del gestor de módulos.",
             "emailNotVerified": "Se ha enviado un correo electrónico de confirmación. Comprueba tu bandeja de entrada y haz clic en el enlace para activar tu cuenta.",
-            "sendEmail": "Reenviar",
-            "needToBeAdmin": "Para continuar, debes ser administrador de la tienda",
-            "pleaseContact": "Ponte en contacto con nosotros",
-            "manageAccountTooltip": "Manage account"
-        },
-        "alertEventBusNotInstalled": {
-            "title": "Instala el módulo Prestashop Event Bus",
-            "message": "El módulo Prestashop Event Bus es necesario para continuar con la configuración de este módulo.",
-            "loading": "Instalación del módulo Prestashop Event Bus en curso..."
+            "sendEmail": "Enviar de nuevo",
+            "needToBeAdmin": "Para continuar, debes ser un administrador de la tienda",
+            "pleaseContact": "Ponte en contacto con",
+            "manageAccountButton": "Ver mis tiendas vinculadas"
         }
     }
 }

@@ -15,13 +15,23 @@
             "enableButton": "Ativar",
             "loading": "Ativação do módulo PrestaShop Account em curso..."
         },
+        "alertAccountNeedsUpdate": {
+            "title": "Atualizar módulo de contas PrestaShop",
+            "message": "Uma nova versão das contas PrestaShop está disponível, atualize o módulo para continuar usando os serviços",
+            "installButton": "Atualizar"
+        },
+        "alertEventBusNotInstalled": {
+            "title": "Ativar o módulo Prestashop Event Bus",
+            "message": "O módulo Prestashop Event Bus é necessário para continuar a configuração deste módulo.",
+            "loading": "Instalação do módulo Prestashop Event Bus em curso...",
+            "installButton": "Instalar"
+        },
         "multiShopSelector": {
             "title": "Modo multi-loja ativado",
             "subtitle": "Para este serviço, é necessário configurar as suas lojas uma a uma, mas pode usar a mesma conta.",
             "selectStore": "Selecione uma primeira loja da lista abaixo",
             "tips": "Uma vez configurada a primeira loja, pode continuar com as outras selecionando-as uma a uma no seletor de lojas do menu horizontal.",
-            "configure": "Configurar",
-            "group": ""
+            "configure": "Configurar"
         },
         "account": {
             "title": "Associe a sua loja a uma conta PrestaShop",
@@ -35,12 +45,7 @@
             "sendEmail": "Reenviar",
             "needToBeAdmin": "Para continuar, deverá ser um administrador da loja.",
             "pleaseContact": "Por favor entre em contacto",
-            "manageAccountTooltip": "Manage account"
-        },
-        "alertEventBusNotInstalled": {
-            "title": "Ativar o módulo Prestashop Event Bus",
-            "message": "O módulo Prestashop Event Bus é necessário para continuar a configuração deste módulo.",
-            "loading": "Instalação do módulo Prestashop Event Bus em curso..."
+            "manageAccountButton": "Ver as minhas lojas associadas"
         }
     }
 }
