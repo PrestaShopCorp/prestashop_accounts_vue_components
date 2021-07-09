@@ -17,6 +17,7 @@
             :onBoardingFinished="closeModal"
             :onLogout="onLogout"
             :accountsUiUrl="accountsUiUrl"
+            :triggerFallback="triggerFallback"
           />
         </div>
       </div>
@@ -64,14 +65,17 @@
       onLogout() {
         this.$segment.reset();
       },
+      triggerFallback() {
+        const base64Shop = btoa(JSON.stringify(this.shop));
+        const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shopPayload=${base64Shop}`;
+        window.location.assign(fallbackUrl);
+      },
     },
     mounted() {
       // FallBack for crossdomain component
       setTimeout(() => {
         if (document.querySelector('.crossdomain .zoid-invisible')) {
-          const base64Shop = btoa(JSON.stringify(this.shop));
-          const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shopPayload=${base64Shop}`;
-          window.location.assign(fallbackUrl);
+          this.triggerFallback();
         }
       }, 60000);
     },
