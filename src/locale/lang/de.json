@@ -23,8 +23,8 @@
         "alertEventBusNotInstalled": {
             "title": "Installieren Sie das Modul Prestashop Event Bus",
             "message": "Das Modul Prestashop Event Bus ist notwendig, um die Konfiguration dieses Moduls fortzusetzen.",
-            "loading": "Installation des Moduls Prestashop Event Bus in Arbeit...",
-            "installButton": "Installationsprogramm"
+            "installButton": "Installationsprogramm",
+            "loading": "Installation des Moduls Prestashop Event Bus in Arbeit..."
         },
         "multiShopSelector": {
             "title": "Modus Multi-Boutiquen aktiviert",
