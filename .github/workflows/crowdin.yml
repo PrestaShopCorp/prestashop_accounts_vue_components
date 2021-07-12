@@ -2,7 +2,7 @@ name: Sync translations
 
 on:
   push:
-    branches: [ master, integration ]
+    branches: [ master, feat/**, feature/** ]
 
 jobs:
   synchronize-with-crowdin:
@@ -17,15 +17,16 @@ jobs:
       shell: bash
       run: |
         echo BRANCH=${GITHUB_REF#refs/heads/} >> $GITHUB_ENV
+        echo CROWDIN_BRANCH=$(echo "$GITHUB_REF" | sed -e 's/refs\/heads\///' -e 's/\//./g') >> $GITHUB_ENV
 
     - name: Crowdin action
-      uses: crowdin/github-action@1.1.0
+      uses: crowdin/github-action@1.1.2
       with:
-        download_translations: trueq
+        download_translations: true
         localization_branch_name: l10n/${{ env.BRANCH }}
         pull_request_title: New Crowdin translations for ${{ env.BRANCH }} branch
         pull_request_base_branch_name: ${{ env.BRANCH }}
-        crowdin_branch_name: ${{ env.BRANCH }}
+        crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
         config: crowdin.yml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
