@@ -2,6 +2,7 @@
     "psaccounts": {
         "accountManager": {
             "errorInstallEnable": "Something went wrong. Please try again.",
+            "crowdinTest": "Test String Crowdin"
         },
         "alertAccountNotInstalled": {
             "title": "Install the PrestaShop Account module",
