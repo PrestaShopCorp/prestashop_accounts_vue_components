@@ -35,7 +35,8 @@ const Components = {
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue);
+  const locale = global?.iso_user || "en";
+  install(window.Vue, { locale });
 } else {
   Object.keys(Components).forEach((name) => {
     Vue.component(name, Components[name]);
