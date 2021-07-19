@@ -110,5 +110,21 @@
         });
       },
     },
+    watch: {
+      cdcUiDisplayed: (cdcUiDisplayed) => {
+        if (cdcUiDisplayed) {
+          document.body.classList.add('ui-dislayed');
+          return;
+        }
+
+        document.body.classList.remove('ui-dislayed');
+      },
+    },
   };
 </script>
+
+<style>
+body.ui-dislayed {
+  overflow: hidden;
+}
+</style>

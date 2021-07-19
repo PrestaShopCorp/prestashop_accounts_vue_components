@@ -185,7 +185,6 @@
           shop_bo_id: this.validatedContext.currentShop.id,
           ps_module_from: this.validatedContext.psxName,
           shop_associated: this.validatedContext.currentShop.uuid !== null,
-          // isOnboardedV4 is for the user context, not a shop context ?
           v4_onboarded: this.validatedContext.isOnboardedV4,
           ps_eventbus_installed: this.eventbusIsInstalled,
           ps_account_module_state: this.psAccountModuleState,

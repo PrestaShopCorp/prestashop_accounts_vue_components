@@ -9,7 +9,7 @@
         />
       </template>
       <b-card-body>
-        <div class="d-flex">
+        <div class="d-flex flex-column overflow-hidden flex-md-row">
           <AccountShopLinkMessage
             :user-is-connected="userIsConnected"
             :validated-context="validatedContext"

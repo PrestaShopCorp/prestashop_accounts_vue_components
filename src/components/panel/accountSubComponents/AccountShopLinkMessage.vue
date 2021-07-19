@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-grow-1">
+  <div class="d-flex flex-column flex-grow-1 flex-md-row">
     <img
       class="mr-2 align-self-center"
       src="~@/assets/img/puffin_logo.png"
