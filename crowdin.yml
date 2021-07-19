@@ -5,7 +5,7 @@ pull_request_labels:
   - translations
 files:
   - source: /src/locale/lang/en.json
-    dest: /psaccounts/vue-components.json
+    dest: vue-components.json
     translation: /src/locale/lang/%two_letters_code%.json
     type: json
     labels:
