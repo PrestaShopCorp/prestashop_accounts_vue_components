@@ -113,18 +113,18 @@
     watch: {
       cdcUiDisplayed: (cdcUiDisplayed) => {
         if (cdcUiDisplayed) {
-          document.body.classList.add('ui-dislayed');
+          document.body.classList.add('ui-displayed');
           return;
         }
 
-        document.body.classList.remove('ui-dislayed');
+        document.body.classList.remove('ui-displayed');
       },
     },
   };
 </script>
 
 <style>
-body.ui-dislayed {
+body.ui-displayed {
   overflow: hidden;
 }
 </style>
