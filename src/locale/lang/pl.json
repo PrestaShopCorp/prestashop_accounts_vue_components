@@ -26,13 +26,6 @@
             "installButton": "Zainstaluj",
             "loading": "Aktywacja modułu Prestashop Event Bus w toku..."
         },
-        "multiShopSelector": {
-            "title": "Włączony tryb Multi-shop",
-            "subtitle": "Choć dla tej usługi należy skonfigurować swoje sklepy jeden po drugim, będzie można korzystać z tego samego konta.",
-            "selectStore": "Wybierz pierwszy sklep z poniższej listy",
-            "tips": "Po skonfigurowaniu pierwszego sklepu można kontynuować pracę z pozostałymi, wybierając je jeden po drugim w selektorze sklepów w menu poziomym.",
-            "configure": "Konfiguruj"
-        },
         "account": {
             "title": "Połącz swój sklep z kontem PrestaShop",
             "authorize": "Możesz powiązać swój sklep tylko z jednym kontem. Dokonaj dobrego wyboru!",
