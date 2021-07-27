@@ -169,7 +169,6 @@
           email: this.validatedContext.user.email || this.validatedContext.backendUser.email,
           email_verified: this.userLoggedHasEmailVerified,
           v4_onboarded: this.validatedContext.isOnboardedV4,
-          shops: this.validatedContext.shops,
           multishop_numbers: this.validatedContext.shops.length || 1,
         });
 
@@ -181,24 +180,28 @@
           : this.validatedContext.currentShop.domain;
         shopUrl += this.validatedContext.currentShop.physicalUri;
 
+        // Passing the shop tree to segment without remapping it doesn't work
+        const shops = this.validatedContext.shops
+          .map((shopGroup) => shopGroup.shops)
+          .flat()
+          .map((shop) => ({...shop}));
+
         this.$segment.track('[ACC] Account Component Viewed', {
           shop_bo_id: this.validatedContext.currentShop.id,
           ps_module_from: this.validatedContext.psxName,
           shop_associated: this.validatedContext.currentShop.uuid !== null,
-          // isOnboardedV4 is for the user context, not a shop context ?
           v4_onboarded: this.validatedContext.isOnboardedV4,
           ps_eventbus_installed: this.eventbusIsInstalled,
           ps_account_module_state: this.psAccountModuleState,
-          shops: this.validatedContext.shops,
+          shops,
           multishop_numbers: this.validatedContext.shops.length || 1,
-          current_shop: this.validatedContext.currentShop,
+          current_shop: {...this.validatedContext.currentShop},
           shop_url: shopUrl,
         });
       },
     },
     created() {
       this.validateContext();
-
       this.track();
     },
   };
