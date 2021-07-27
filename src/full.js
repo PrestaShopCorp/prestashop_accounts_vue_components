@@ -19,12 +19,13 @@ const install = function(vue, opts = {}) {
   Object.keys(Components).forEach((name) => {
     vue.component(name, Components[name]);
   });
+  if (!window?.analytics) {
+    vue.use(Segment, {
+      id: contextPsAccounts.segmentApiKey,
+      pageCategory: "ps_accounts-ui"
+    });
+  }
 };
-
-Vue.use(Segment, {
-  id: contextPsAccounts.segmentApiKey,
-  pageCategory: "ps_accounts-ui"
-})
 
 const Components = {
   PsAccounts,
@@ -35,11 +36,17 @@ const Components = {
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue);
+  install(window.Vue, { locale: window.iso_user || 'en' });
 } else {
   Object.keys(Components).forEach((name) => {
     Vue.component(name, Components[name]);
   });
+  if (!window?.analytics) {
+    Vue.use(Segment, {
+      id: contextPsAccounts.segmentApiKey,
+      pageCategory: "ps_accounts-ui"
+    });
+  }
 }
 
 export default {
