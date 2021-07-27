@@ -14,7 +14,8 @@
           <link-shop-crossdomain
             :specificUiUrl="specificUiUrl"
             :shop="shop"
-            :onBoardingFinished="closeModal"
+            :onClose="closeModal"
+            :onCompleted="onCompleted"
             :onLogout="onLogout"
             :accountsUiUrl="accountsUiUrl"
           />
@@ -60,6 +61,9 @@
     methods: {
       closeModal() {
         this.$emit('closed');
+      },
+      onCompleted() {
+        this.$hj('trigger', 'account_nps');
       },
       onLogout() {
         this.$segment.reset();

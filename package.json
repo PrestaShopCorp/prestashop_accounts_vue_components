@@ -27,6 +27,7 @@
     "react-is": "^16.13.1",
     "v-click-outside": "^3.1.2",
     "vue": "^2.6.11",
+    "vue-hotjar": "^1.4.0",
     "zoid": "^9.0.63"
   },
   "devDependencies": {

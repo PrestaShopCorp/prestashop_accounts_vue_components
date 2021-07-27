@@ -22,7 +22,11 @@ export default zoid.create({
       type: 'string',
       required: true,
     },
-    onBoardingFinished: {
+    onClose: {
+      type: 'function',
+      required: false,
+    },
+    onCompleted: {
       type: 'function',
       required: false,
     },

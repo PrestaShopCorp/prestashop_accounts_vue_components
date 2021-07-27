@@ -13151,6 +13151,11 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
 
+vue-hotjar@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/vue-hotjar/-/vue-hotjar-1.4.0.tgz#562f279f55b3ed1fdd54ba493f8077aaad2336ef"
+  integrity sha512-C/4lfjB1R3+eXiC+jSpNn3z0GWicpnADeRWpEHLdP2FSIi/AjupoIBikugHvGV334QYGUueXUyVZz6GHr+3eYQ==
+
 vue-inbrowser-compiler-utils@^4.33.6:
   version "4.33.6"
   resolved "https://registry.yarnpkg.com/vue-inbrowser-compiler-utils/-/vue-inbrowser-compiler-utils-4.33.6.tgz#022353b3a4dc202e05271277cef1ef4d091ca6f2"

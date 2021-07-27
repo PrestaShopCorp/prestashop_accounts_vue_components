@@ -8,6 +8,7 @@ import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotIn
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {use, i18n} from '@/locale';
 import Segment from "@prestashopcorp/segment-vue";
+import Hotjar from 'vue-hotjar';
 
 const install = function(vue, opts = {}) {
   if (opts.locale) {
@@ -24,6 +25,10 @@ const install = function(vue, opts = {}) {
 Vue.use(Segment, {
   id: contextPsAccounts.segmentApiKey,
   pageCategory: "ps_accounts-ui"
+})
+
+Vue.use(Hotjar, {
+  id: contextPsAccounts.hotjarId,
 })
 
 const Components = {
