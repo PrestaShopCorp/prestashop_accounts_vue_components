@@ -42,12 +42,7 @@
     },
     methods: {
       sendEmailConfirmation() {
-        this.$segment.track('[ACC] Link Resend Email Validation Clicked', {
-          shop_bo_id: this.validatedContext.currentShop.id,
-          ps_module_from: this.validatedContext.psxName,
-          v4_onboarded: this.validatedContext.isOnboardedV4,
-          multishop_numbers: this.validatedContext.shops.length || 1,
-        });
+        this.$tracking.track('[ACC] Link Resend Email Validation Clicked');
 
         window.open(this.validatedContext.ssoResendVerificationEmail, '_blank');
       },

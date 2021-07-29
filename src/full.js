@@ -8,6 +8,7 @@ import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotIn
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {use, i18n} from '@/locale';
 import Segment from "@prestashopcorp/segment-vue";
+import Tracking from './plugins/tracking';
 
 const install = function(vue, opts = {}) {
   if (opts.locale) {
@@ -26,6 +27,23 @@ const install = function(vue, opts = {}) {
     });
   }
 };
+
+Vue.use(Segment, {
+  id: contextPsAccounts.segmentApiKey,
+  pageCategory: "ps_accounts-ui"
+})
+
+Vue.use(Tracking, {
+  superProperties: [
+    'current_shop',
+    'multishop_numbers',
+    'ps_module_from',
+    'ps_version',
+    'shop_bo_id',
+    'superadmin',
+    'v4_onboarded'
+  ],
+});
 
 const Components = {
   PsAccounts,

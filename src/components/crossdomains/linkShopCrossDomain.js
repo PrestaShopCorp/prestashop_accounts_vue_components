@@ -26,6 +26,10 @@ export default zoid.create({
       type: 'function',
       required: false,
     },
+    tracking: {
+      type: 'object',
+      required: false,
+    },
     onLogout: {
       type: 'function',
       required: false,

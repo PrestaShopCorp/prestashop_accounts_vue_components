@@ -15,6 +15,7 @@
             :specificUiUrl="specificUiUrl"
             :shop="shop"
             :onBoardingFinished="closeModal"
+            :tracking="tracking"
             :onLogout="onLogout"
             :accountsUiUrl="accountsUiUrl"
             :triggerFallback="triggerFallback"
@@ -58,12 +59,17 @@
         required: true,
       },
     },
+    computed: {
+      tracking() {
+        return this.$tracking.properties;
+      },
+    },
     methods: {
       closeModal() {
         this.$emit('closed');
       },
       onLogout() {
-        this.$segment.reset();
+        this.$tracking.reset();
       },
       triggerFallback() {
         const base64Shop = btoa(JSON.stringify(this.shop));
