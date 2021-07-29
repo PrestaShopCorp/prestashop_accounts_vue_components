@@ -1,6 +1,7 @@
 <template>
   <div class="align-self-center">
     <b-button
+      id="associate-shop-button"
       class="float-right"
       v-if="shopIsNotLinked || shopIsLinkedAndUserIsTheSame"
       :disabled="!validatedContext.user.isSuperAdmin"
