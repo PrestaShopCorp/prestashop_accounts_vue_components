@@ -157,7 +157,6 @@
               isLinkedV4: shop.isLinkedV4,
               name: shop.name,
               physicalUri: shop.physicalUri,
-              url: shop.url,
               uuid: shop.uuid,
             },
           ],
