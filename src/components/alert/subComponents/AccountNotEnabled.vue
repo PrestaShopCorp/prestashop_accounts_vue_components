@@ -59,12 +59,7 @@
       enablePsAccounts() {
         this.isLoading = true;
 
-        this.$segment.track('[ACC] PSAccount Enable Button Clicked', {
-          shop_bo_id: this.validatedContext.currentShop.id,
-          ps_module_from: this.validatedContext.psxName,
-          v4_onboarded: this.validatedContext.isOnboardedV4,
-          multishop_numbers: this.validatedContext.shops.length || 1,
-        });
+        this.$tracking.track('[ACC] PSAccount Enable Button Clicked');
 
         enableModule(
           'ps_accounts',
