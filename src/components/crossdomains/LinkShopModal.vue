@@ -13,7 +13,7 @@
         >
           <link-shop-crossdomain
             :specificUiUrl="specificUiUrl"
-            :shop="shop"
+            :shops="shops"
             :onBoardingFinished="closeModal"
             :onLogout="onLogout"
             :accountsUiUrl="accountsUiUrl"
@@ -40,8 +40,8 @@
       clickOutside: vClickOutside.directive,
     },
     props: {
-      shop: {
-        type: Object,
+      shops: {
+        type: Array,
         required: true,
       },
       specificUiUrl: {
@@ -70,7 +70,7 @@
       setTimeout(() => {
         if (document.querySelector('.crossdomain .zoid-invisible')) {
           const base64Shop = btoa(JSON.stringify(this.shop));
-          const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shopPayload=${base64Shop}`;
+          const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shops=${base64Shop}`;
           window.location.assign(fallbackUrl);
         }
       }, 60000);
@@ -111,7 +111,7 @@
         width: 85%;
         height: 85%;
         max-width: 990px;
-        max-height: 705px;
+        max-height: 810px;
       }
     }
   }

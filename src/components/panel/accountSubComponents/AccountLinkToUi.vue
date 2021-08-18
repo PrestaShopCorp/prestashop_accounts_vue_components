@@ -2,8 +2,10 @@
   <div class="align-self-center">
     <b-button
       class="float-right"
-      v-if="shopIsNotLinked || shopIsLinkedAndUserIsTheSame"
-      :disabled="!validatedContext.user.isSuperAdmin"
+      :disabled="
+          !validatedContext.user.isSuperAdmin ||
+          (!hasNotLinkedShopInContext && !currentUserHasLinkedShops)
+      "
       variant="primary"
       @click="openLinkShopModal()"
     >
@@ -12,7 +14,7 @@
     <link-shop-modal
       v-if="cdcUiDisplayed"
       @closed="closeOnBoarding"
-      :shop="shopToLinkPayload"
+      :shops="currentNotLinkedShopsWithEmployeeId"
       :specific-ui-url="specificUiUrl"
       :on-boarding-link="validatedContext.onboardingLink"
       :accounts-ui-url="validatedContext.accountsUiUrl"
@@ -56,30 +58,62 @@
           return 'reonboard';
         }
 
-        if (!this.userIsConnected) {
+        if (this.hasNotLinkedShopInContext) {
           return 'associate';
         }
 
         return 'manageAccount';
       },
       specificUiUrl() {
-        return this.validatedContext.user.email && !this.validatedContext.isOnboardedV4 ? '/shop' : '';
+        return !this.hasNotLinkedShopInContext && !this.validatedContext.isOnboardedV4 ? '/shop' : '';
       },
-      shopIsNotLinked() {
-        return this.validatedContext.currentShop.employeeId === null;
-      },
-      shopIsLinkedAndUserIsTheSame() {
-        return parseInt(this.validatedContext.currentShop.employeeId, 10)
-          === this.validatedContext.backendUser.employeeId;
+      currentUserHasLinkedShops() {
+        return this.currentLinkedShops.some(
+          (shop) => parseInt(shop.employeeId, 10) === this.validatedContext.backendUser.employeeId,
+        );
       },
       btnText() {
         return this.t(`psaccounts.account.${BUTTON_I18N_KEY[this.action]}`);
       },
-      shopToLinkPayload() {
-        return {
-          ...this.validatedContext.currentShop,
+      currentShops() {
+        if (this.validatedContext.currentContext.type === 4) { // All
+          return this.validatedContext.shops.reduce(
+            (acc, shopGroup) => [...acc, ...shopGroup.shops], [],
+          );
+        }
+
+        if (this.validatedContext.currentContext.type === 2) { // Group
+          return [
+            ...this.validatedContext.shops.find(
+              (shopGroup) => parseInt(shopGroup.id, 10) === this.validatedContext.currentContext.id,
+            ).shops,
+          ];
+        }
+
+        // Shop
+        return [
+          this.validatedContext.shops.reduce(
+            (acc, shopGroup) => [...acc, ...shopGroup.shops], [],
+          )
+            .find(
+              (shop) => parseInt(shop.id, 10) === this.validatedContext.currentContext.id,
+            ),
+        ];
+      },
+      currentLinkedShops() {
+        return this.currentShops.filter((shop) => shop.uuid);
+      },
+      currentNotLinkedShops() {
+        return this.currentShops.filter((shop) => !shop.uuid);
+      },
+      hasNotLinkedShopInContext() {
+        return this.currentNotLinkedShops.length > 0;
+      },
+      currentNotLinkedShopsWithEmployeeId() {
+        return this.currentNotLinkedShops.map((shop) => ({
+          ...shop,
           employeeId: this.validatedContext.backendUser.employeeId.toString(),
-        };
+        }));
       },
     },
     data() {
