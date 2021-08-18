@@ -26,13 +26,6 @@
             "loading": "Installazione del modulo Prestashop Event Bus in corso...",
             "installButton": "Installare"
         },
-        "multiShopSelector": {
-            "title": "Modalità multi-negozio attiva",
-            "subtitle": "Per usufruirne, dovrai configurare i tuoi negozi uno alla volta, tuttavia, potrai farlo usando lo stesso account.",
-            "selectStore": "Seleziona il primo negozio nella lista qui sotto",
-            "tips": "Una volta configurato il primo negozio, potrai continuare con gli altri, selezionandoli uno per volta tramite il selettore del menu orizzontale.",
-            "configure": "Configura"
-        },
         "account": {
             "title": "Associa il tuo negozio a un account PrestaShop",
             "authorize": "Puoi associare il tuo negozio a un solo account. Sceglilo con cura!",

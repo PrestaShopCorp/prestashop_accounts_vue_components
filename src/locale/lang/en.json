@@ -26,13 +26,6 @@
             "installButton": "Install",
             "loading": "The Prestashop Event Bus module is currently being installed..."
         },
-        "multiShopSelector": {
-            "title": "Multi-store mode activated",
-            "subtitle": "You must configure your stores one by one for this service but you will be able to use the same account.",
-            "selectStore": "Please select the first store to configure from the list below",
-            "tips": "After you are done with the first shop, you can configure the others by selecting them one by one in the shop selector, in the horizontal menu",
-            "configure": "Configure"
-        },
         "account": {
             "title": "Associate your shop with a PrestaShop account",
             "authorize": "You can only associate your shop with one account. So be sure to choose the right one!",

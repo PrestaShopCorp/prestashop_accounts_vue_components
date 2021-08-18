@@ -15,8 +15,10 @@
             :specificUiUrl="specificUiUrl"
             :shops="shops"
             :onBoardingFinished="closeModal"
+            :tracking="tracking"
             :onLogout="onLogout"
             :accountsUiUrl="accountsUiUrl"
+            :triggerFallback="triggerFallback"
           />
         </div>
       </div>
@@ -57,21 +59,29 @@
         required: true,
       },
     },
+    computed: {
+      tracking() {
+        return this.$tracking.properties;
+      },
+    },
     methods: {
       closeModal() {
         this.$emit('closed');
       },
       onLogout() {
-        this.$segment.reset();
+        this.$tracking.reset();
+      },
+      triggerFallback() {
+        const base64Shops = btoa(JSON.stringify(this.shops));
+        const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shops=${base64Shops}`;
+        window.location.assign(fallbackUrl);
       },
     },
     mounted() {
       // FallBack for crossdomain component
       setTimeout(() => {
         if (document.querySelector('.crossdomain .zoid-invisible')) {
-          const base64Shop = btoa(JSON.stringify(this.shop));
-          const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shops=${base64Shop}`;
-          window.location.assign(fallbackUrl);
+          this.triggerFallback();
         }
       }, 60000);
     },

@@ -134,6 +134,35 @@
           || !this.validatedContext.psAccountsIsUptodate
           || !this.validatedContext.psAccountsIsEnabled;
       },
+      associatedShops() {
+        return this.validatedContext.shops.reduce(
+          (acc, shopGroups) => [...acc, ...shopGroups.shops.reduce((accShop, shop) => {
+            if (!shop.uuid) {
+              return accShop;
+            }
+
+            return [...accShop, shop];
+          }, [])],
+          []);
+      },
+      associatedShopsForTracking() {
+        return this.associatedShops.reduce(
+          (acc, shop) => [
+            ...acc,
+            {
+              domain: shop.domain,
+              domain_ssl: shop.domain_ssl,
+              employeeId: shop.employeeId,
+              id: shop.id,
+              isLinkedV4: shop.isLinkedV4,
+              name: shop.name,
+              physicalUri: shop.physicalUri,
+              uuid: shop.uuid,
+            },
+          ],
+          [],
+        );
+      },
     },
     data() {
       return {
@@ -165,15 +194,18 @@
         }
 
         args.push({
-          superadmin: this.validatedContext.user.isSuperAdmin,
           email: this.validatedContext.user.email || this.validatedContext.backendUser.email,
           email_verified: this.userLoggedHasEmailVerified,
+          multishop_numbers: this.validatedContext.shops.reduce(
+            (acc, shop) => acc + shop.shops.length,
+            0,
+          ),
+          shops: this.associatedShopsForTracking,
+          superadmin: this.validatedContext.user.isSuperAdmin,
           v4_onboarded: this.validatedContext.isOnboardedV4,
-          shops: this.validatedContext.shops,
-          multishop_numbers: this.validatedContext.shops.length || 1,
         });
 
-        this.$segment.identify(...args);
+        this.$tracking.identify(...args);
       },
       trackComponent() {
         let shopUrl = this.validatedContext.currentShop.domain_ssl
@@ -181,23 +213,21 @@
           : this.validatedContext.currentShop.domain;
         shopUrl += this.validatedContext.currentShop.physicalUri;
 
-        this.$segment.track('[ACC] Account Component Viewed', {
-          shop_bo_id: this.validatedContext.currentShop.id,
-          ps_module_from: this.validatedContext.psxName,
-          shop_associated: this.validatedContext.currentShop.uuid !== null,
-          v4_onboarded: this.validatedContext.isOnboardedV4,
-          ps_eventbus_installed: this.eventbusIsInstalled,
-          ps_account_module_state: this.psAccountModuleState,
-          shops: this.validatedContext.shops,
-          multishop_numbers: this.validatedContext.shops.length || 1,
+        this.$tracking.track('[ACC] Account Component Viewed', {
           current_shop: this.validatedContext.currentShop,
+          ps_account_module_state: this.psAccountModuleState,
+          ps_eventbus_installed: this.eventbusIsInstalled,
+          ps_module_from: this.validatedContext.psxName,
+          ps_version: this.validatedContext.currentShop.psVersion,
+          shop_associated: this.validatedContext.currentShop.uuid !== null,
+          shop_bo_id: this.validatedContext.currentShop.id,
           shop_url: shopUrl,
+          v4_onboarded: this.validatedContext.currentShop.isLinkedV4,
         });
       },
     },
     created() {
       this.validateContext();
-
       this.track();
     },
   };

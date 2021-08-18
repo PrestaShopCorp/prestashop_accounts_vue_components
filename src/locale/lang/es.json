@@ -26,13 +26,6 @@
             "loading": "Instalación del módulo Prestashop Event Bus en curso...",
             "installButton": "Instalar"
         },
-        "multiShopSelector": {
-            "title": "Modo multitienda activado",
-            "subtitle": "Para este servicio, necesitas configurar tus tiendas una por una, pero podrás usar la misma cuenta.",
-            "selectStore": "Selecciona una tienda de la siguiente lista",
-            "tips": "Una vez configurada la primera tienda, puedes continuar con las demás seleccionándolas una a una en el selector de tiendas del menú horizontal.",
-            "configure": "Configurar"
-        },
         "account": {
             "title": "Vincula tu tienda a una cuenta PrestaShop",
             "authorize": "Solo puedes vincular tu tienda a una cuenta. ¡Elígela bien!",
