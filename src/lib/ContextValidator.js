@@ -11,6 +11,11 @@ export const currentContextSchema = Joi.object().keys({
   id: Joi.number().allow(null).default(null),
 }).unknown(true);
 
+export const shopUserSchema = Joi.object().keys({
+  email: Joi.string().email({tlds: false}).allow(null).default(null),
+  uuid: Joi.string().allow(null),
+}).unknown(true);
+
 export const shopSchema = Joi.object().keys({
   domain: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domain').required(),
   domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').required(),
@@ -23,6 +28,7 @@ export const shopSchema = Joi.object().keys({
   psVersion: Joi.string(),
   publicKey: Joi.string(),
   url: Joi.string().uri().required(),
+  user: shopUserSchema.optional().allow({}).default({}),
   uuid: Joi.string().allow(null),
 }).unknown(true);
 

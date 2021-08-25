@@ -4,36 +4,35 @@
       no-body
     >
       <template v-slot:header>
-        <AccountHeader
-          :user-is-connected="userIsConnected"
-        />
+        <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
       </template>
       <b-card-body>
-        <div class="d-flex flex-column overflow-hidden flex-md-row">
-          <AccountShopLinkMessage
-            :user-is-connected="userIsConnected"
-            :validated-context="validatedContext"
-          />
+        <div class="d-flex flex-column flex-md-row">
+          <AccountShopLinkMessage :shops="shops" />
           <AccountLinkToUi
-            :user-is-connected="userIsConnected"
-            :validated-context="validatedContext"
+            :accounts-ui-url="accountsUiUrl"
+            :is-onboarded-v4="isOnboardedV4"
+            :is-super-admin="user.isSuperAdmin"
+            :onboarding-link="onboardingLink"
+            :shops="shops"
+            :user="user"
           />
         </div>
 
         <ModuleUpdateInformation
-          v-if="validatedContext.isOnboardedV4"
+          v-if="isOnboardedV4"
           class="mt-3"
         />
 
         <AccountUserEmailNotValidated
-          v-if="userIsConnected && userIsSameAsCurrentShopuser && !userEmailIsValidated"
-          :validated-context="validatedContext"
+          v-if="!user.emailIsValidated"
+          :sso-resend-verification-email="ssoResendVerificationEmail"
           class="mt-3"
         />
 
         <AccountUserNotSuperAdmin
-          v-if="!validatedContext.user.isSuperAdmin"
-          :validated-context="validatedContext"
+          v-if="!user.isSuperAdmin"
+          :super-admin-email="superAdminEmail"
         />
         <slot />
       </b-card-body>
@@ -68,22 +67,38 @@
       AccountShopLinkMessage,
     },
     props: {
-      validatedContext: {
+      accountsUiUrl: {
+        type: String,
+        required: true,
+      },
+      isOnboardedV4: {
+        type: Boolean,
+        default: false,
+      },
+      onboardingLink: {
+        type: String,
+        required: true,
+      },
+      shops: {
+        type: Array,
+        default: () => [],
+      },
+      ssoResendVerificationEmail: {
+        type: String,
+        required: true,
+      },
+      superAdminEmail: {
+        type: String,
+        required: true,
+      },
+      user: {
         type: Object,
         required: true,
       },
     },
     computed: {
-      userIsConnected() {
-        return this.validatedContext.user.email !== null;
-      },
-      userIsSameAsCurrentShopuser() {
-        const backendUserEmployeeId = this.validatedContext.backendUser.employeeId;
-        const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
-        return backendUserEmployeeId === currentShopEmployeeId;
-      },
-      userEmailIsValidated() {
-        return this.validatedContext.user.emailIsValidated;
+      hasAllShopsLinked() {
+        return this.shops.every((shop) => shop.uuid);
       },
     },
   };

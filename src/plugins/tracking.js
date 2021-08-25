@@ -47,7 +47,7 @@ Tracking.prototype.reset = function reset() {
 
 Tracking.prototype.setSuperProperties = function setSuperProperties(propertiesObject) {
   Object.keys(propertiesObject).forEach((key) => {
-    if (this.superProperties.includes(key)) {
+    if (this.superProperties.some((superProperty) => key.startsWith(superProperty))) {
       this.properties[key] = propertiesObject[key];
     }
   });

@@ -27,8 +27,7 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import {BAlert, BButton, BLink} from 'bootstrap-vue';
+  import Alert from './Alert';
   import enableModule from '../../../lib/moduleManager/EnableModule';
 
   /**
@@ -38,23 +37,7 @@
    */
   export default {
     name: 'AlertAccountNotEnabled',
-    components: {
-      BAlert,
-      BButton,
-      BLink,
-    },
-    mixins: [Locale],
-    props: {
-      validatedContext: {
-        type: Object,
-        required: true,
-      },
-    },
-    data() {
-      return {
-        isLoading: false,
-      };
-    },
+    mixins: [Alert],
     methods: {
       enablePsAccounts() {
         this.isLoading = true;
@@ -63,8 +46,8 @@
 
         enableModule(
           'ps_accounts',
-          this.validatedContext.psAccountsEnableLink,
-          this.validatedContext.psIs17,
+          this.link,
+          this.psIs17,
         ).catch(() => {
           this.isLoading = false;
           this.$emit('hasError');

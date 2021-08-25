@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-iconstack
-      v-if="userIsConnected"
+      v-if="hasAllShopsLinked"
       font-scale="1.5"
       class="mr-2 align-bottom fixed-size icon-check"
       width="20"
@@ -39,7 +39,7 @@
       BIconCheck,
     },
     props: {
-      userIsConnected: {
+      hasAllShopsLinked: {
         type: Boolean,
         required: true,
       },
