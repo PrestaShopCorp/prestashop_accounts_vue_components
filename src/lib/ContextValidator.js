@@ -8,6 +8,7 @@ export const shopSchema = Joi.object().keys({
   domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').required(),
   uuid: Joi.string().allow(null),
   physicalUri: Joi.string(),
+  virtualUri: Joi.string().optional(),
 }).unknown(true);
 
 export const shopGroupSchema = Joi.object().keys({
