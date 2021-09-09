@@ -23,8 +23,8 @@
         "alertEventBusNotInstalled": {
             "title": "Installeer de module Prestashop Event Bus",
             "message": "De module Prestashop Event Bus is nodig om de configuratie van deze module voort te zetten.",
-            "loading": "Installatie van de module Prestashop Event Bus aan de gang...",
-            "installButton": "Installeer"
+            "installButton": "Installeer",
+            "loading": "Installatie van de module Prestashop Event Bus aan de gang..."
         },
         "account": {
             "title": "Koppel uw winkel aan een PrestaShop account",
