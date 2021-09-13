@@ -46,11 +46,11 @@ export const shops = () => state.shops.reduce(
 );
 
 export const shopsInContext = () => {
-  if (state.currentContext.type === 4) { // All
+  if (state.currentContext.type === CONTEXT_ALL) { // All
     return shops();
   }
 
-  if (state.currentContext.type === 2) { // Group
+  if (state.currentContext.type === CONTEXT_GROUP) { // Group
     return [
       ...state.shops.find(
         (shopGroup) => parseInt(shopGroup.id, 10) === state.currentContext.id,
