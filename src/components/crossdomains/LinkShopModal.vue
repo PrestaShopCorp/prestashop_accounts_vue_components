@@ -118,8 +118,8 @@
   @media (min-width: 768px) {
     .crossdomain-container {
       .crossdomain {
-        width: 85%;
-        height: 85%;
+        width: 90%;
+        height: 90%;
         max-width: 990px;
         max-height: 810px;
       }
