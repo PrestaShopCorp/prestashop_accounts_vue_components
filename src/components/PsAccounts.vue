@@ -12,12 +12,13 @@
     </b-alert>
 
     <b-alert
-      v-if="context.errors && context.errors.length"
+      v-if="validContext.errors && validContext.errors.length"
       variant="danger"
       show
     >
       <p>
-        &lt;PsAccounts&gt; integration: Given context is invalid: {{ context.errors.join(';') }}
+        &lt;PsAccounts&gt; integration: Given context is invalid:
+        {{ validContext.errors.join(';') }}
       </p>
     </b-alert>
 
@@ -29,12 +30,12 @@
       <template v-if="!hasBlockingAlert">
         <Account
           class="mb-2"
-          :accounts-ui-url="context.accountsUiUrl"
-          :is-onboarded-v4="context.isOnboardedV4"
-          :onboarding-link="context.onboardingLink"
+          :accounts-ui-url="validContext.accountsUiUrl"
+          :is-onboarded-v4="validContext.isOnboardedV4"
+          :onboarding-link="validContext.onboardingLink"
           :shops="shops"
-          :sso-resend-verification-email="context.ssoResendVerificationEmail"
-          :super-admin-email="context.superAdminEmail"
+          :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
+          :super-admin-email="validContext.superAdminEmail"
           :user="user"
         >
           <slot
@@ -58,10 +59,11 @@
 </template>
 
 <script>
-  import context, {eventbusIsInstalled, psAccountModuleState, shopsInContext} from '@/lib/context';
+  import validContext, {
+    eventbusIsInstalled, psAccountModuleState, setContext, shopsInContext,
+  } from '@/lib/context';
   import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
   import Account from '@/components/panel/Account';
-  // import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
   import {BAlert, BOverlay} from 'bootstrap-vue';
   import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -84,13 +86,26 @@
       BAlert,
     },
     mixins: [Locale],
+    props: {
+      /**
+       * The whole context object given
+       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
+       * If left empty (by default), the context will be retrieved from JS global
+       * vars automatically.
+       */
+      context: {
+        type: Object,
+        required: false,
+        default: () => ({}),
+      },
+    },
     data() {
       return {
         hasError: false,
       };
     },
     computed: {
-      context,
+      validContext,
       eventbusIsInstalled,
       psAccountModuleState,
       shops: shopsInContext,
@@ -98,17 +113,17 @@
         return this.shops.every((shop) => shop.uuid);
       },
       hasBlockingAlert() {
-        return !this.context.psAccountsIsInstalled
-          || !this.context.psAccountsIsUptodate
-          || !this.context.psAccountsIsEnabled;
+        return !this.validContext.psAccountsIsInstalled
+          || !this.validContext.psAccountsIsUptodate
+          || !this.validContext.psAccountsIsEnabled;
       },
       shopsForTracking() {
         return this.shops.reduce(
           (acc, shop, idx) => {
-            let url = this.context.currentShop.domainSsl
-              ? this.context.currentShop.domainSsl
-              : this.context.currentShop.domain;
-            url += this.context.currentShop.physicalUri;
+            let url = this.validContext.currentShop.domainSsl
+              ? this.validContext.currentShop.domainSsl
+              : this.validContext.currentShop.domain;
+            url += this.validContext.currentShop.physicalUri;
 
             return {
               ...acc,
@@ -130,8 +145,8 @@
       },
       user() {
         return {
-          ...this.context.user,
-          ...this.context.backendUser,
+          ...this.validContext.user,
+          ...this.validContext.backendUser,
         };
       },
     },
@@ -139,10 +154,10 @@
       trackUser() {
         // We don't know the SSO identified user...
         this.$tracking.identify({
-          email: this.context.backendUser.email,
-          employeeId: this.context.backendUser.employeeId,
-          superadmin: this.context.backendUser.isSuperAdmin,
-          v4_onboarded: this.context.isOnboardedV4,
+          email: this.validContext.backendUser.email,
+          employeeId: this.validContext.backendUser.employeeId,
+          superadmin: this.validContext.backendUser.isSuperAdmin,
+          v4_onboarded: this.validContext.isOnboardedV4,
         });
       },
       trackComponent() {
@@ -150,14 +165,16 @@
           ...this.shopsForTracking,
           ps_account_module_state: this.psAccountModuleState,
           ps_eventbus_installed: this.eventbusIsInstalled,
-          ps_module_from: this.context.psxName,
+          ps_module_from: this.validContext.psxName,
           ps_version: this.shops[0].psVersion,
-          shop_context_id: this.context.currentContext.id,
-          shop_context_type: this.context.currentContext.type,
+          shop_context_id: this.validContext.currentContext.id,
+          shop_context_type: this.validContext.currentContext.type,
         });
       },
     },
     created() {
+      setContext(this.context);
+
       this.trackUser();
       this.trackComponent();
     },

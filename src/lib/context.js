@@ -5,17 +5,69 @@ export const CONTEXT_SHOP = 1;
 export const CONTEXT_GROUP = 2;
 export const CONTEXT_ALL = 4;
 
-const defaultState = () => {
-  // validates but also fix when possible.
-  const {value: context, error} = contextSchema.validate(global.contextPsAccounts);
-
-  return {
-    ...context,
-    errors: error ? error.details.map((e) => e.message) : [],
-  };
-};
+const defaultState = () => ({
+  accountsUiUrl: '',
+  adminAjaxLink: '',
+  backendUser: {},
+  currentContext: {},
+  currentShop: {},
+  dependencies: {},
+  errors: [],
+  isOnboardedV4: false,
+  isShopContext: true,
+  manageAccountLink: '',
+  onboardingLink: '',
+  psAccountsEnableLink: null,
+  psAccountsInstallLink: null,
+  psAccountsIsEnabled: true,
+  psAccountsIsInstalled: true,
+  psAccountsIsUptodate: true,
+  psAccountsUpdateLink: null,
+  psIs17: true,
+  psxName: 'ps_accounts',
+  segmentApiKey: null,
+  shops: [],
+  ssoResendVerificationEmail: '',
+  superAdminEmail: null,
+  user: {},
+});
 
 const state = Vue.observable(defaultState());
+
+export const setContext = (context) => {
+  const mergedContext = {
+    ...defaultState(),
+    ...(window.contextPsAccounts || {}),
+    ...context,
+  };
+
+  // validates but also fix when possible.
+  const {
+    value,
+    error,
+  } = contextSchema.validate(
+    mergedContext,
+  );
+
+  const validContext = {
+    ...value,
+    errors: error
+      ? error.details.map(
+        (e) => e.message,
+      )
+      : [],
+  };
+
+  Object.keys(validContext).forEach(
+    (key) => {
+      Vue.set(
+        state,
+        key,
+        validContext[key],
+      );
+    },
+  );
+};
 
 /**
  * Getters

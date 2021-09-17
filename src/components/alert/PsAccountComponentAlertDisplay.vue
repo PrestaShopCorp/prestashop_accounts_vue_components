@@ -1,19 +1,19 @@
 <template>
   <div>
     <AccountNotInstalled
-      v-if="!psAccountsIsInstalled"
+      v-if="!context.psAccountsIsInstalled"
       :link="context.psAccountsInstallLink"
       :psIs17="context.psIs17"
       @hasError="$emit('hasError')"
     />
     <AccountNotEnabled
-      v-else-if="!psAccountsIsEnabled"
+      v-else-if="!context.psAccountsIsEnabled"
       :link="context.psAccountsEnableLink"
       :psIs17="context.psIs17"
       @hasError="$emit('hasError')"
     />
     <AccountNotUpdated
-      v-else-if="!psAccountsIsUptodate"
+      v-else-if="!context.psAccountsIsUptodate"
       :link="context.psAccountsUpdateLink"
       :psIs17="context.psIs17"
       @hasError="$emit('hasError')"
@@ -52,17 +52,6 @@
     computed: {
       context,
       eventbusIsInstalled,
-      psAccountsIsInstalled() {
-        return this.context.psAccountsIsInstalled;
-      },
-
-      psAccountsIsUptodate() {
-        return this.context.psAccountsIsUptodate;
-      },
-
-      psAccountsIsEnabled() {
-        return this.context.psAccountsIsEnabled;
-      },
     },
   };
 </script>
