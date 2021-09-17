@@ -3,7 +3,8 @@
     <img
       class="mr-2 align-self-center"
       src="~@/assets/img/puffin_logo.png"
-      width="46" />
+      width="46"
+    >
     <div class="align-self-center">
       <template v-if="hasAllShopsLinked">
         <template v-if="hasShopsLinkedBySameUser">
@@ -12,13 +13,15 @@
         </template>
         <span
           v-else
-          class="align-middle">
-          Vos boutiques sont associées à plusieurs comptes PrestaShop
+          class="align-middle"
+        >
+          {{ t('psaccounts.account.authorizedSeveral') }}
         </span>
       </template>
       <span
         v-else
-        class="align-middle">
+        class="align-middle"
+      >
         {{ t('psaccounts.account.authorize') }}
       </span>
     </div>
