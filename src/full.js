@@ -35,11 +35,8 @@ Vue.use(Segment, {
 
 Vue.use(Tracking, {
   superProperties: [
-    // 'current_shop',
-    // 'multishop_numbers',
     'ps_module_from',
     'ps_version',
-    // 'shop_bo_id',
     'shop.',
     'shop_context_id',
     'shop_context_type',
