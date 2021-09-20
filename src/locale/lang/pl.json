@@ -23,8 +23,8 @@
         "alertEventBusNotInstalled": {
             "title": "Zainstaluj moduł Prestashop Event Bus",
             "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
-            "loading": "Aktywacja modułu Prestashop Event Bus w toku...",
-            "installButton": "Zainstaluj"
+            "installButton": "Zainstaluj",
+            "loading": "Aktywacja modułu Prestashop Event Bus w toku..."
         },
         "account": {
             "title": "Połącz swój sklep z kontem PrestaShop",
