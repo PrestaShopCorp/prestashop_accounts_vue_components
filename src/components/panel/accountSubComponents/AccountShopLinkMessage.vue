@@ -1,11 +1,11 @@
 <template>
   <div class="d-flex flex-column flex-grow-1 flex-md-row">
     <img
-      class="mr-2 align-self-center"
+      class="mr-md-2 align-self-center"
       src="~@/assets/img/puffin_logo.png"
       width="46"
     >
-    <div class="align-self-center">
+    <div class="my-2 text-center my-md-0 align-self-center text-md-left">
       <span
         v-if="!userIsConnected"
         class="align-middle"
