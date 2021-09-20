@@ -26,13 +26,6 @@
             "loading": "Instalação do módulo Prestashop Event Bus em curso...",
             "installButton": "Instalar"
         },
-        "multiShopSelector": {
-            "title": "Modo multi-loja ativado",
-            "subtitle": "Para este serviço, é necessário configurar as suas lojas uma a uma, mas pode usar a mesma conta.",
-            "selectStore": "Selecione uma primeira loja da lista abaixo",
-            "tips": "Uma vez configurada a primeira loja, pode continuar com as outras selecionando-as uma a uma no seletor de lojas do menu horizontal.",
-            "configure": "Configurar"
-        },
         "account": {
             "title": "Associe a sua loja a uma conta PrestaShop",
             "authorize": "Apenas pode associar a sua loja a uma conta. Escolha bem!",

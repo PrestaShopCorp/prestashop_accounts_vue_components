@@ -26,13 +26,6 @@
             "loading": "Installation des Moduls Prestashop Event Bus in Arbeit...",
             "installButton": "Installationsprogramm"
         },
-        "multiShopSelector": {
-            "title": "Modus Multi-Boutiquen aktiviert",
-            "subtitle": "Für diesen Dienst müssen Sie Ihre Filialen einzeln konfigurieren, können jedoch dasselbe Konto verwenden.",
-            "selectStore": "Bitte wählen Sie eine Premierenboutique zum Anspruch an der unten stehenden Liste",
-            "tips": "In der ersten konfigurierten Boutique können Sie sich bei der Auswahl der weiteren Boutiquen ebenso wie bei der Auswahl der Boutiquen mit horizontaler Menüführung an die weiteren Boutiquen wenden.",
-            "configure": "Konfigurator"
-        },
         "account": {
             "title": "Verknüpfen Sie Ihren Shop mit einem PrestaShop-Konto",
             "authorize": "Sie können Ihren Shop nur mit einem Konto verknüpfen. Wählen Sie das richtige Konto!",

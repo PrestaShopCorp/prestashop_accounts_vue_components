@@ -41,10 +41,7 @@
     },
     methods: {
       trackClick() {
-        this.$segment.track('[ACC] Link Contact Admin Clicked', {
-          shop_bo_id: this.validatedContext.currentShop.id,
-          ps_module_from: this.validatedContext.psxName,
-        });
+        this.$tracking.track('[ACC] Link Contact Admin Clicked');
       },
     },
   };
