@@ -58,6 +58,7 @@
   import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
   import {BAlert, BOverlay} from 'bootstrap-vue';
+  import useSegmentTracking from '@/composables/useSegmentTracking';
   import {contextSchema} from '../lib/ContextValidator';
   import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -92,6 +93,14 @@
         default: () => context,
       },
     },
+    setup(props) {
+      const {identify, trackAccountComponentViewed} = useSegmentTracking(props.context);
+
+      return {
+        identify,
+        trackAccountComponentViewed,
+      };
+    },
     computed: {
       userIsConnected() {
         return this.validatedContext.user.email !== null;
@@ -113,21 +122,6 @@
       eventbusIsInstalled() {
         return undefined === this.validatedContext.dependencies
           || this.validatedContext.dependencies.ps_eventbus.isInstalled;
-      },
-      psAccountModuleState() {
-        if (!this.validatedContext.psAccountsIsUptodate) {
-          return 'to_update';
-        }
-
-        if (!this.validatedContext.psAccountsIsEnabled) {
-          return 'to_enable';
-        }
-
-        if (this.validatedContext.psAccountsIsInstalled) {
-          return 'to_install';
-        }
-
-        return 'installed';
       },
       hasBlockingAlert() {
         return !this.validatedContext.psAccountsIsInstalled
@@ -182,53 +176,12 @@
           this.validationErrors = error.details.map((e) => e.message);
         }
       },
-      track() {
-        this.trackUser();
-        this.trackComponent();
-      },
-      trackUser() {
-        const args = [];
-
-        if (this.userIsConnected && this.validatedContext.user.uuid) {
-          args.push(this.validatedContext.user.uuid);
-        }
-
-        args.push({
-          email: this.validatedContext.user.email || this.validatedContext.backendUser.email,
-          email_verified: this.userLoggedHasEmailVerified,
-          multishop_numbers: this.validatedContext.shops.reduce(
-            (acc, shop) => acc + shop.shops.length,
-            0,
-          ),
-          shops: this.associatedShopsForTracking,
-          superadmin: this.validatedContext.user.isSuperAdmin,
-          v4_onboarded: this.validatedContext.isOnboardedV4,
-        });
-
-        this.$tracking.identify(...args);
-      },
-      trackComponent() {
-        let shopUrl = this.validatedContext.currentShop.domain_ssl
-          ? this.validatedContext.currentShop.domain_ssl
-          : this.validatedContext.currentShop.domain;
-        shopUrl += this.validatedContext.currentShop.physicalUri;
-
-        this.$tracking.track('[ACC] Account Component Viewed', {
-          current_shop: this.validatedContext.currentShop,
-          ps_account_module_state: this.psAccountModuleState,
-          ps_eventbus_installed: this.eventbusIsInstalled,
-          ps_module_from: this.validatedContext.psxName,
-          ps_version: this.validatedContext.currentShop.psVersion,
-          shop_associated: this.validatedContext.currentShop.uuid !== null,
-          shop_bo_id: this.validatedContext.currentShop.id,
-          shop_url: shopUrl,
-          v4_onboarded: this.validatedContext.currentShop.isLinkedV4,
-        });
-      },
     },
     created() {
       this.validateContext();
-      this.track();
+
+      this.identify();
+      this.trackAccountComponentViewed();
     },
   };
 </script>

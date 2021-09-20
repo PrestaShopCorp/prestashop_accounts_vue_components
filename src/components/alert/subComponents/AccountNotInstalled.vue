@@ -28,6 +28,7 @@
 
 <script>
   import Locale from '@/mixins/locale';
+  import useSegmentTracking from '@/composables/useSegmentTracking';
   import {BAlert, BButton, BLink} from 'bootstrap-vue';
   import installModule from '../../../lib/moduleManager/InstallModule';
 
@@ -50,6 +51,11 @@
         required: true,
       },
     },
+    setup() {
+      const {trackPsAccountInstallButton} = useSegmentTracking();
+
+      return {trackPsAccountInstallButton};
+    },
     data() {
       return {
         isLoading: false,
@@ -59,7 +65,7 @@
       installPsAccounts() {
         this.isLoading = true;
 
-        this.$tracking.track('[ACC] PSAccount Install Button Clicked');
+        this.trackPsAccountInstallButton();
 
         installModule(
           'ps_accounts',

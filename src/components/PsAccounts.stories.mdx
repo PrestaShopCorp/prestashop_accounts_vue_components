@@ -42,7 +42,7 @@ Once integrated, the component can show different cases:
           psAccountsInstallLink: null,
           psAccountsEnableLink: null,
           currentShop: {
-            id: 1,
+            id: '1',
             name: 'PrestaShop',
             url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
             domain: 'my-domain.com',
@@ -50,11 +50,11 @@ Once integrated, the component can show different cases:
           },
           shops: [
             {
-              id: 1,
+              id: '1',
               name: 'Default',
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'PrestaShop',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain.com',
@@ -63,6 +63,10 @@ Once integrated, the component can show different cases:
               ],
             },
           ],
+          backendUser: {
+            email: 'email@bo.com',
+            isSuperAdmin: true,
+          },
           user: {
             email: null,
             emailIsValidated: false,
@@ -110,14 +114,20 @@ If the shop is in a multi-store context, the user will have a selector like this
           psIs17: true,
           psAccountsInstallLink: null,
           psAccountsEnableLink: null,
-          currentShop: null,
+          currentShop: {
+            id: '1',
+            name: 'PrestaShop',
+            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+            domain: 'my-domain.com',
+            domainSsl: 'my-secure-domain.com',
+          },
           shops: [
             {
-              id: 1,
+              id: '1',
               name: 'Default',
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'PrestaShop',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain.com',
@@ -126,6 +136,10 @@ If the shop is in a multi-store context, the user will have a selector like this
               ],
             },
           ],
+          backendUser: {
+            email: 'email@bo.com',
+            isSuperAdmin: true,
+          },
           user: {
             email: null,
             emailIsValidated: false,
@@ -169,7 +183,7 @@ If the shop is in a multi-store context, the user will have a selector like this
           psAccountsInstallLink: null,
           psAccountsEnableLink: null,
           currentShop: {
-            id: 1,
+            id: '1',
             name: 'PrestaShop',
             url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
             domain: 'my-domain.com',
@@ -177,18 +191,18 @@ If the shop is in a multi-store context, the user will have a selector like this
           },
           shops: [
             {
-              id: 1,
+              id: '1',
               name: 'Default',
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'PrestaShop',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain.com',
                   domainSsl: 'my-secure-domain.com',
                 },
                 {
-                  id: 2,
+                  id: '2',
                   name: 'shop2',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain2.com',
@@ -243,7 +257,7 @@ his address from the link received in his mailbox.
           psAccountsInstallLink: null,
           psAccountsEnableLink: null,
           currentShop: {
-            id: 1,
+            id: '1',
             name: 'PrestaShop',
             url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
             domain: 'my-domain.com',
@@ -251,18 +265,18 @@ his address from the link received in his mailbox.
           },
           shops: [
             {
-              id: 1,
+              id: '1',
               name: 'Default',
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'PrestaShop',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain.com',
                   domainSsl: 'my-secure-domain.com',
                 },
                 {
-                  id: 2,
+                  id: '2',
                   name: 'shop2',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain2.com',
@@ -324,7 +338,7 @@ You can have these different cases when the shop prerequisites are not fully val
           psAccountsNeedsUpgrade: false,
           psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           currentShop: {
-            id: 1,
+            id: '1',
             name: 'PrestaShop',
             url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
             domain: 'my-domain.com',
@@ -332,18 +346,18 @@ You can have these different cases when the shop prerequisites are not fully val
           },
           shops: [
             {
-              id: 1,
+              id: '1',
               name: 'Default',
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'PrestaShop',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain.com',
                   domainSsl: 'my-secure-domain.com',
                 },
                 {
-                  id: 2,
+                  id: '2',
                   name: 'shop2',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain2.com',
@@ -394,7 +408,7 @@ You can have these different cases when the shop prerequisites are not fully val
           psAccountsNeedsUpgrade: false,
           psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           currentShop: {
-            id: 1,
+            id: '1',
             name: 'PrestaShop',
             url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
             domain: 'my-domain.com',
@@ -402,18 +416,18 @@ You can have these different cases when the shop prerequisites are not fully val
           },
           shops: [
             {
-              id: 1,
+              id: '1',
               name: 'Default',
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'PrestaShop',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain.com',
                   domainSsl: 'my-secure-domain.com',
                 },
                 {
-                  id: 2,
+                  id: '2',
                   name: 'shop2',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain2.com',
@@ -464,7 +478,7 @@ You can have these different cases when the shop prerequisites are not fully val
               psAccountsNeedsUpgrade: false,
               psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
               currentShop: {
-                id: 1,
+                id: '1',
                 name: 'PrestaShop',
                 url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                 domain: 'my-domain.com',
@@ -472,11 +486,11 @@ You can have these different cases when the shop prerequisites are not fully val
               },
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'Default',
                   shops: [
                     {
-                      id: 1,
+                      id: '1',
                       name: 'PrestaShop',
                       url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                       domain: 'my-domain.com',
@@ -527,7 +541,7 @@ You can have these different cases when the shop prerequisites are not fully val
               psAccountsNeedsUpgrade: true,
               psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
               currentShop: {
-                id: 1,
+                id: '1',
                 name: 'PrestaShop',
                 url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                 domain: 'my-domain.com',
@@ -535,11 +549,11 @@ You can have these different cases when the shop prerequisites are not fully val
               },
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'Default',
                   shops: [
                     {
-                      id: 1,
+                      id: '1',
                       name: 'PrestaShop',
                       url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                       domain: 'my-domain.com',
@@ -590,7 +604,7 @@ You can have these different cases when the shop prerequisites are not fully val
           psAccountsNeedsUpgrade: false,
           psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           currentShop: {
-            id: 1,
+            id: '1',
             name: 'PrestaShop',
             url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
             domain: 'my-domain.com',
@@ -598,18 +612,18 @@ You can have these different cases when the shop prerequisites are not fully val
           },
           shops: [
             {
-              id: 1,
+              id: '1',
               name: 'Default',
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'PrestaShop',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain.com',
                   domainSsl: 'my-secure-domain.com',
                 },
                 {
-                  id: 2,
+                  id: '2',
                   name: 'shop2',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain2.com',
@@ -669,11 +683,11 @@ component and the standard behavior won't let the user do anything:
           currentShop: 42,
           shops: [
             {
-              id: 1,
+              id: '1',
               name: 'Default',
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'PrestaShop',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain.com',
@@ -682,6 +696,9 @@ component and the standard behavior won't let the user do anything:
               ],
             },
           ],
+          backendUser: {
+            employeeId: 2,
+          },
           user: {
             email: 'this-is-not-a-valid-email',
             emailIsValidated: 42,
@@ -760,7 +777,7 @@ If you want to pass something to the component footer like another component you
           psAccountsNeedsUpgrade: false,
           psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
           currentShop: {
-            id: 1,
+            id: '1',
             name: 'PrestaShop',
             url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
             domain: 'my-domain.com',
@@ -768,11 +785,11 @@ If you want to pass something to the component footer like another component you
           },
           shops: [
             {
-              id: 1,
+              id: '1',
               name: 'Default',
               shops: [
                 {
-                  id: 1,
+                  id: '1',
                   name: 'PrestaShop',
                   url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                   domain: 'my-domain.com',
@@ -781,6 +798,10 @@ If you want to pass something to the component footer like another component you
               ],
             },
           ],
+          backendUser: {
+            employeeId: 2,
+            isSuperAdmin: true,
+          },
           user: {
             email: 'merchant@my-shop.com',
             emailIsValidated: true,

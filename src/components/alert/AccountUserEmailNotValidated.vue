@@ -5,7 +5,7 @@
   >
     <div v-html="t('psaccounts.account.emailNotVerified')" />
 
-    <div class="d-flex justify-content-end mt-2">
+    <div class="mt-2 d-flex justify-content-end">
       <b-button
         variant="primary"
         @click="sendEmailConfirmation()"
@@ -18,6 +18,7 @@
 
 <script>
   import Locale from '@/mixins/locale';
+  import useSegmentTracking from '@/composables/useSegmentTracking';
   import {
     BAlert,
     BButton,
@@ -40,9 +41,14 @@
         required: true,
       },
     },
+    setup() {
+      const {trackLinkResendEmailValidation} = useSegmentTracking();
+
+      return {trackLinkResendEmailValidation};
+    },
     methods: {
       sendEmailConfirmation() {
-        this.$tracking.track('[ACC] Link Resend Email Validation Clicked');
+        this.trackLinkResendEmailValidation();
 
         window.open(this.validatedContext.ssoResendVerificationEmail, '_blank');
       },

@@ -31,6 +31,7 @@
   /* eslint vue/attribute-hyphenation: "off" */
   import Vue from 'vue';
   import vClickOutside from 'v-click-outside';
+  import useSegmentTracking from '@/composables/useSegmentTracking';
   import LinkShopCrossDomain from './linkShopCrossDomain';
 
   export default {
@@ -59,17 +60,17 @@
         required: true,
       },
     },
-    computed: {
-      tracking() {
-        return this.$tracking.properties;
-      },
+    setup() {
+      const {properties: tracking, reset} = useSegmentTracking();
+
+      return {tracking, reset};
     },
     methods: {
       closeModal() {
         this.$emit('closed');
       },
       onLogout() {
-        this.$tracking.reset();
+        this.reset();
       },
       triggerFallback() {
         const base64Shop = btoa(JSON.stringify(this.shop));

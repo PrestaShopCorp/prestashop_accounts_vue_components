@@ -28,6 +28,7 @@
 <script>
   import {BOverlay, BAlert, BButton} from 'bootstrap-vue';
   import Locale from '@/mixins/locale';
+  import useSegmentTracking from '@/composables/useSegmentTracking';
   import installModule from '../../../lib/moduleManager/InstallModule';
 
   export default {
@@ -44,6 +45,11 @@
         required: true,
       },
     },
+    setup() {
+      const {trackPsEventBusInstallButton} = useSegmentTracking();
+
+      return {trackPsEventBusInstallButton};
+    },
     data() {
       return {
         isLoading: false,
@@ -57,7 +63,7 @@
       installEventBus() {
         this.isLoading = true;
 
-        this.$tracking.track('[ACC] PSEventBus Install Button Clicked');
+        this.trackPsEventBusInstallButton();
 
         installModule(
           'ps_eventbus',

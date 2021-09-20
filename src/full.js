@@ -8,7 +8,10 @@ import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotIn
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {use, i18n} from '@/locale';
 import Segment from "@prestashopcorp/segment-vue";
-import Tracking from './plugins/tracking';
+import Tracking from "./plugins/tracking";
+import VueCompositionAPI from "@vue/composition-api";
+
+Vue.use(VueCompositionAPI);
 
 const install = function(vue, opts = {}) {
   if (opts.locale) {

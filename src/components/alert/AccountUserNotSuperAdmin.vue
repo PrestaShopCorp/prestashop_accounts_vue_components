@@ -19,6 +19,7 @@
 
 <script>
   import Locale from '@/mixins/locale';
+  import useSegmentTracking from '@/composables/useSegmentTracking';
   import {
     BAlert,
   } from 'bootstrap-vue';
@@ -39,9 +40,14 @@
         required: true,
       },
     },
+    setup() {
+      const {trackLinkContactAdmin} = useSegmentTracking();
+
+      return {trackLinkContactAdmin};
+    },
     methods: {
       trackClick() {
-        this.$tracking.track('[ACC] Link Contact Admin Clicked');
+        this.trackLinkContactAdmin();
       },
     },
   };

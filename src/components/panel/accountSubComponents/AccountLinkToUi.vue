@@ -23,6 +23,7 @@
 
 <script>
   import Locale from '@/mixins/locale';
+  import useSegmentTracking from '@/composables/useSegmentTracking';
   import {
     BButton,
   } from 'bootstrap-vue';
@@ -50,6 +51,11 @@
         type: Boolean,
         required: true,
       },
+    },
+    setup() {
+      const {trackAssociateOrManageAccountButton} = useSegmentTracking();
+
+      return {trackAssociateOrManageAccountButton};
     },
     computed: {
       action() {
@@ -90,20 +96,13 @@
     },
     methods: {
       openLinkShopModal() {
-        this.track();
+        this.trackAssociateOrManageAccountButton();
 
         this.cdcUiDisplayed = true;
       },
       closeOnBoarding() {
         this.cdcUiDisplayed = false;
         window.location.reload();
-      },
-      track() {
-        const eventName = ['reonboard', 'associate'].includes(this.action)
-          ? '[ACC] Associate Button Clicked'
-          : '[ACC] Manage Account Button Clicked';
-
-        this.$tracking.track(eventName);
       },
     },
   };
