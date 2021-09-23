@@ -123,7 +123,7 @@
           return 'to_enable';
         }
 
-        if (this.validatedContext.psAccountsIsInstalled) {
+        if (!this.validatedContext.psAccountsIsInstalled) {
           return 'to_install';
         }
 
@@ -228,7 +228,9 @@
     },
     created() {
       this.validateContext();
-      this.track();
+      if (this.validatedContext.psAccountsIsInstalled) {
+        this.track();
+      }
     },
   };
 </script>
