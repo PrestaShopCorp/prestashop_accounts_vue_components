@@ -31,12 +31,12 @@
         <Account
           class="mb-2"
           :accounts-ui-url="validContext.accountsUiUrl"
+          :backend-user="validContext.backendUser"
           :is-onboarded-v4="validContext.isOnboardedV4"
           :onboarding-link="validContext.onboardingLink"
           :shops="shops"
           :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
           :super-admin-email="validContext.superAdminEmail"
-          :user="user"
         >
           <slot
             v-if="hasAllShopsLinked"
@@ -142,12 +142,6 @@
           },
           {},
         );
-      },
-      user() {
-        return {
-          ...this.validContext.user,
-          ...this.validContext.backendUser,
-        };
       },
     },
     methods: {

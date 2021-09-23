@@ -9,7 +9,7 @@
       split-variant="outline-primary"
       variant="primary"
       :text="t(`psaccounts.account.${isOnboardedV4 ? 'reonboard' : 'connect'}Button`)"
-      :disabled="!user.isSuperAdmin"
+      :disabled="!backendUser.isSuperAdmin"
       @click="openLinkShopModal(isOnboardedV4 ? 'reonboard' : 'associate')"
     >
       <b-dropdown-item-button
@@ -23,11 +23,11 @@
       </template>
     </component>
     <b-button
-      v-else-if="hasShopsLinkedByUser"
+      v-else-if="hasShopsLinkedByUserInBackoffice"
       id="manage-shops-button"
       class="float-right"
       variant="primary"
-      :disabled="!user.isSuperAdmin"
+      :disabled="!backendUser.isSuperAdmin"
       @click="openLinkShopModal('manage')"
     >
       {{ t(`psaccounts.account.manageAccountButton`) }}
@@ -73,6 +73,10 @@
         type: String,
         required: true,
       },
+      backendUser: {
+        type: Object,
+        required: true,
+      },
       isOnboardedV4: {
         type: Boolean,
         default: false,
@@ -85,10 +89,6 @@
         type: Array,
         default: () => [],
       },
-      user: {
-        type: Object,
-        required: true,
-      },
     },
     computed: {
       hasAllShopsLinked() {
@@ -96,12 +96,7 @@
       },
       hasShopsLinkedByUserInBackoffice() {
         return this.shops.some(
-          (shop) => parseInt(shop.employeeId, 10) === this.user.employeeId,
-        );
-      },
-      hasShopsLinkedByUser() {
-        return this.shops.some(
-          (shop) => parseInt(shop.employeeId, 10) === this.user.employeeId,
+          (shop) => parseInt(shop.employeeId, 10) === this.backendUser.employeeId,
         );
       },
       specificUiUrl() {
@@ -115,7 +110,7 @@
       unlinkedShopsWithEmployeeId() {
         return this.unlinkedShops.map((shop) => ({
           ...shop,
-          employeeId: this.user.employeeId.toString(),
+          employeeId: this.backendUser.employeeId.toString(),
         }));
       },
     },

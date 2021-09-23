@@ -11,11 +11,11 @@
           <AccountShopLinkMessage :shops="shops" />
           <AccountLinkToUi
             :accounts-ui-url="accountsUiUrl"
+            :backend-user="backendUser"
             :is-onboarded-v4="isOnboardedV4"
-            :is-super-admin="user.isSuperAdmin"
+            :is-super-admin="backendUser.isSuperAdmin"
             :onboarding-link="onboardingLink"
             :shops="shops"
-            :user="user"
           />
         </div>
 
@@ -25,13 +25,13 @@
         />
 
         <AccountUserEmailNotValidated
-          v-if="!user.emailIsValidated"
+          v-if="userHasEmailNotVerified"
           :sso-resend-verification-email="ssoResendVerificationEmail"
           class="mt-3"
         />
 
         <AccountUserNotSuperAdmin
-          v-if="!user.isSuperAdmin"
+          v-if="!backendUser.isSuperAdmin"
           :super-admin-email="superAdminEmail"
         />
         <slot />
@@ -71,6 +71,10 @@
         type: String,
         required: true,
       },
+      backendUser: {
+        type: Object,
+        required: true,
+      },
       isOnboardedV4: {
         type: Boolean,
         default: false,
@@ -91,14 +95,18 @@
         type: String,
         required: true,
       },
-      user: {
-        type: Object,
-        required: true,
-      },
     },
     computed: {
       hasAllShopsLinked() {
         return this.shops.every((shop) => shop.uuid);
+      },
+      userHasEmailNotVerified() {
+        return this.shops.some((shop) => {
+          const isUser = parseInt(shop.employeeId, 10) === this.backendUser.employeeId;
+          const hasEmailVerified = shop.user.emailIsValidated;
+
+          return isUser && !hasEmailVerified;
+        });
       },
     },
   };
@@ -109,30 +117,10 @@
   flex-grow: 1;
 }
 
-.slot-margin {
-  margin-top: 1rem;
-}
-
 .fixed-size {
   /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
   height: 20px;
   width: 20px;
   display: inline;
-}
-
-.fixed-size-small {
-  /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
-  height: 20px;
-  width: 20px;
-  display: inline;
-  font-size: 20px;
-}
-
-.settings-btn {
-  color: #6c868e;
-}
-
-.settings-btn:hover {
-  color: #25b9d7;
 }
 </style>

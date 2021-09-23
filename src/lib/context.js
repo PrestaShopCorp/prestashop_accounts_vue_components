@@ -75,8 +75,6 @@ export const setContext = (context) => {
 
 export const eventbusIsInstalled = () => state.dependencies?.ps_eventbus?.isInstalled || false;
 
-export const isLogged = () => state.user.email !== null;
-
 export const psAccountModuleState = () => {
   if (!state.psAccountsIsUptodate) {
     return 'to_update';
