@@ -24,14 +24,14 @@ const install = function(vue, opts = {}) {
   });
   if (!window?.analytics) {
     vue.use(Segment, {
-      id: contextPsAccounts.segmentApiKey,
+      id: window?.contextPsAccounts?.segmentApiKey,
       pageCategory: "ps_accounts-ui"
     });
   }
 };
 
 Vue.use(Segment, {
-  id: contextPsAccounts.segmentApiKey,
+  id: window?.contextPsAccounts?.segmentApiKey,
   pageCategory: "ps_accounts-ui"
 })
 
@@ -51,7 +51,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   });
   if (!window?.analytics) {
     Vue.use(Segment, {
-      id: contextPsAccounts.segmentApiKey,
+      id: window?.contextPsAccounts?.segmentApiKey,
       pageCategory: "ps_accounts-ui"
     });
   }
