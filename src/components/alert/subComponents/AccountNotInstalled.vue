@@ -59,7 +59,7 @@
       installPsAccounts() {
         this.isLoading = true;
 
-        // this.$tracking.track('[ACC] PSAccount Install Button Clicked');
+        this.$tracking.track('[ACC] PSAccount Install Button Clicked');
 
         installModule(
           'ps_accounts',

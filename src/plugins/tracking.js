@@ -18,8 +18,8 @@ Tracking.prototype.identify = function identify(...args) {
     args[1] = JSON.parse(JSON.stringify(args[1]));
     traits = args[1];
   }
-
-  this.Vue.prototype.$segment.identify(...args);
+  // eslint-disable-next-line no-unused-expressions
+  this.Vue.prototype.$segment?.identify(...args);
 
   this.setSuperProperties(traits);
 };
@@ -30,8 +30,8 @@ Tracking.prototype.identify = function identify(...args) {
  */
 Tracking.prototype.track = function track(event, properties = {}) {
   const propertiesObject = JSON.parse(JSON.stringify(properties));
-
-  this.Vue.prototype.$segment.track(event, {...this.properties, ...propertiesObject});
+  // eslint-disable-next-line no-unused-expressions
+  this.Vue.prototype.$segment?.track(event, {...this.properties, ...propertiesObject});
 
   this.setSuperProperties(propertiesObject);
 };
@@ -39,7 +39,8 @@ Tracking.prototype.track = function track(event, properties = {}) {
 /**
  */
 Tracking.prototype.reset = function reset() {
-  this.Vue.prototype.$segment.reset();
+  // eslint-disable-next-line no-unused-expressions
+  this.Vue.prototype.$segment?.reset();
 
   // this.properties = {};
   // localStorage.setItem('tracking', JSON.stringify({}));
