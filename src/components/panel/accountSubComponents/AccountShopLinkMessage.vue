@@ -6,7 +6,7 @@
       width="46"
     >
     <div class="my-2 text-center my-md-0 align-self-center text-md-left">
-      <template v-if="hasAllShopsLinked">
+      <template v-if="hasSomeShopsLinked">
         <template v-if="hasShopsLinkedBySameUser">
           <span class="align-middle">{{ t('psaccounts.account.authorized') }}</span><br>
           <span class="text-muted">{{ linkedUserEmail }}</span>
@@ -18,6 +18,12 @@
           {{ t('psaccounts.account.authorizedSeveral') }}
         </span>
       </template>
+      <span
+        v-else
+        class="align-middle"
+      >
+        {{ t('psaccounts.account.authorize') }}
+      </span>
     </div>
   </div>
 </template>
@@ -35,11 +41,11 @@
       },
     },
     computed: {
-      hasAllShopsLinked() {
-        return this.shops.every((shop) => shop.uuid);
+      hasSomeShopsLinked() {
+        return this.shops.some((shop) => shop.uuid);
       },
       hasShopsLinkedBySameUser() {
-        return this.shops.every((shop) => shop.user.uuid === this.shops[0].user.uuid);
+        return this.shops.every((shop) => shop.employeeId === this.shops[0].employeeId);
       },
       linkedShops() {
         return this.shops.filter((shop) => shop.uuid);
