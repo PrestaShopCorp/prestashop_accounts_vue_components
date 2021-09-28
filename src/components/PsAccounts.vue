@@ -169,8 +169,10 @@
     created() {
       setContext(this.context);
 
-      this.trackUser();
-      this.trackComponent();
+      if (this.validContext.psAccountsIsInstalled) {
+        this.trackUser();
+        this.trackComponent();
+      }
     },
   };
 </script>
