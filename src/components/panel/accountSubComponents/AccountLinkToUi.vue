@@ -22,16 +22,29 @@
         {{ t(`psaccounts.account.${isOnboardedV4 ? 'reonboard' : 'connect'}Button`) }}
       </template>
     </component>
-    <b-button
+
+    <component
+      :is="isShopContext ? 'b-dropdown' : 'b-button'"
       v-else-if="hasShopsLinkedByUserInBackoffice"
-      id="manage-shops-button"
-      class="float-right"
+      :id="`manage-shops-${ isShopContext ? 'dropdown' : 'button'}`"
+      right
+      split
+      split-variant="outline-primary"
       variant="primary"
+      :text="t(`psaccounts.account.manageAccountButton`)"
       :disabled="!backendUser.isSuperAdmin"
       @click="openLinkShopModal('manage')"
     >
-      {{ t(`psaccounts.account.manageAccountButton`) }}
-    </b-button>
+      <b-dropdown-item-button
+        v-if="isShopContext"
+        @click="openLinkShopModal('unlink')"
+      >
+        {{ t(`psaccounts.account.unlinkButton`) }}
+      </b-dropdown-item-button>
+      <template v-else>
+        {{ t(`psaccounts.account.manageAccountButton`) }}
+      </template>
+    </component>
 
     <link-shop-modal
       v-if="cdcUiDisplayed"
@@ -45,6 +58,7 @@
 </template>
 
 <script>
+  import {CONTEXT_SHOP} from '@/lib/context';
   import Locale from '@/mixins/locale';
   import {
     BButton,
@@ -89,6 +103,10 @@
         type: Array,
         default: () => [],
       },
+      shopContext: {
+        type: Number,
+        required: true,
+      },
     },
     computed: {
       hasAllShopsLinked() {
@@ -99,10 +117,30 @@
           (shop) => parseInt(shop.employeeId, 10) === this.backendUser.employeeId,
         );
       },
+      isShopContext() {
+        return this.shopContext === CONTEXT_SHOP;
+      },
       specificUiUrl() {
-        return ['reonboard', 'associate'].includes(this.action)
-          ? ''
-          : '/shop';
+        if (['reonboard', 'associate'].includes(this.action)) {
+          return '';
+        }
+
+        if (['unlink'].includes(this.action)) {
+          return `/shop/${this.shops[0].uuid}`;
+        }
+
+        return '/shop';
+      },
+      trackEventName() {
+        if (['reonboard', 'associate'].includes(this.action)) {
+          return '[ACC] Associate Button Clicked';
+        }
+
+        if (['unlink'].includes(this.action)) {
+          return '[ACC] Unlink Shop Button Clicked';
+        }
+
+        return '[ACC] Manage Account Button Clicked';
       },
       unlinkedShops() {
         return this.shops.filter((shop) => !shop.uuid);
@@ -117,20 +155,13 @@
     methods: {
       openLinkShopModal(action = 'associate') {
         this.action = action;
-        this.track();
+        this.$tracking.track(this.trackEventName);
 
         this.cdcUiDisplayed = true;
       },
       closeOnBoarding() {
         this.cdcUiDisplayed = false;
         window.location.reload();
-      },
-      track() {
-        const eventName = ['reonboard', 'associate'].includes(this.action)
-          ? '[ACC] Associate Button Clicked'
-          : '[ACC] Manage Account Button Clicked';
-
-        this.$tracking.track(eventName);
       },
     },
     watch: {

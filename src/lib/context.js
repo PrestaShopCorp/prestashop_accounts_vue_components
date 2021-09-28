@@ -9,7 +9,10 @@ const defaultState = () => ({
   accountsUiUrl: '',
   adminAjaxLink: '',
   backendUser: {},
-  currentContext: {},
+  currentContext: {
+    type: CONTEXT_ALL,
+    id: null,
+  },
   currentShop: {},
   dependencies: {},
   errors: [],

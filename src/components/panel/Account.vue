@@ -16,6 +16,7 @@
             :is-super-admin="backendUser.isSuperAdmin"
             :onboarding-link="onboardingLink"
             :shops="shops"
+            :shop-context="shopContext"
           />
         </div>
 
@@ -86,6 +87,10 @@
       shops: {
         type: Array,
         default: () => [],
+      },
+      shopContext: {
+        type: Number,
+        required: true,
       },
       ssoResendVerificationEmail: {
         type: String,

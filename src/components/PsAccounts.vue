@@ -35,6 +35,7 @@
           :is-onboarded-v4="validContext.isOnboardedV4"
           :onboarding-link="validContext.onboardingLink"
           :shops="shops"
+          :shop-context="validContext.currentContext.type"
           :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
           :super-admin-email="validContext.superAdminEmail"
         >

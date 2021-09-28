@@ -39,7 +39,8 @@
             "sendEmail": "Send it again",
             "needToBeAdmin": "In order to proceed you need to be administrator of the shop",
             "pleaseContact": "Please contact",
-            "manageAccountButton": "View my associated shops"
+            "manageAccountButton": "View my associated shops",
+            "unlinkButton": "Dissociate"
         }
     }
 }
