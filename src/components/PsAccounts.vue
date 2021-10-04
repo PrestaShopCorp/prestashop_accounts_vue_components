@@ -117,32 +117,6 @@
           || !this.validContext.psAccountsIsUptodate
           || !this.validContext.psAccountsIsEnabled;
       },
-      shopsForTracking() {
-        return this.shops.reduce(
-          (acc, shop, idx) => {
-            let url = this.validContext.currentShop.domainSsl
-              ? this.validContext.currentShop.domainSsl
-              : this.validContext.currentShop.domain;
-            url += this.validContext.currentShop.physicalUri;
-
-            return {
-              ...acc,
-              [`shop.${idx}.associated`]: shop.uuid !== null,
-              [`shop.${idx}.bo_id`]: shop.id,
-              [`shop.${idx}.domain`]: shop.domain,
-              [`shop.${idx}.domain_ssl`]: shop.domainSsl,
-              [`shop.${idx}.employee_id`]: shop.employeeId,
-              [`shop.${idx}.name`]: shop.name,
-              [`shop.${idx}.physical_uri`]: shop.physicalUri,
-              [`shop.${idx}.ps_version`]: shop.psVersion,
-              [`shop.${idx}.url`]: url,
-              [`shop.${idx}.uuid`]: shop.uuid,
-              [`shop.${idx}.v4_onboarded`]: shop.isLinkedV4,
-            };
-          },
-          {},
-        );
-      },
     },
     methods: {
       trackUser() {
@@ -156,13 +130,23 @@
       },
       trackComponent() {
         this.$tracking.track('[ACC] Account Component Viewed', {
-          ...this.shopsForTracking,
           ps_account_module_state: this.psAccountModuleState,
           ps_eventbus_installed: this.eventbusIsInstalled,
           ps_module_from: this.validContext.psxName,
           ps_version: this.shops[0].psVersion,
           shop_context_id: this.validContext.currentContext.id,
           shop_context_type: this.validContext.currentContext.type,
+          shop_associated: this.shops.map(
+            (shop) => shop.uuid !== null && !shop.isLinkedV4,
+          ),
+          shop_bo_ids: this.shops.map((shop) => shop.id),
+          shop_employee_ids: this.shops.map((shop) => shop.employeeId),
+          shop_names: this.shops.map((shop) => shop.name),
+          shop_uuids: this.shops.map((shop) => shop.uuid),
+          shop_v4_onboarded: this.shops.map((shop) => shop.isLinkedV4),
+          shop_urls: this.shops.map(
+            (shop) => (shop.domain || shop.domainSsl) + shop.physicalUri,
+          ),
         });
       },
     },
