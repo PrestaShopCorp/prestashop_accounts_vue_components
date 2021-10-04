@@ -8,9 +8,9 @@
       split
       split-variant="outline-primary"
       variant="primary"
-      :text="t(`psaccounts.account.${isOnboardedV4 ? 'reonboard' : 'connect'}Button`)"
+      :text="t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`)"
       :disabled="!backendUser.isSuperAdmin"
-      @click="openLinkShopModal(isOnboardedV4 ? 'reonboard' : 'associate')"
+      @click="openLinkShopModal(isLinkedV4 ? 'reonboard' : 'associate')"
     >
       <b-dropdown-item-button
         v-if="hasShopsLinkedByUserInBackoffice"
@@ -19,7 +19,7 @@
         {{ t(`psaccounts.account.manageAccountButton`) }}
       </b-dropdown-item-button>
       <template v-else>
-        {{ t(`psaccounts.account.${isOnboardedV4 ? 'reonboard' : 'connect'}Button`) }}
+        {{ t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`) }}
       </template>
     </component>
 
@@ -91,10 +91,6 @@
         type: Object,
         required: true,
       },
-      isOnboardedV4: {
-        type: Boolean,
-        default: false,
-      },
       onboardingLink: {
         type: String,
         required: true,
@@ -116,6 +112,9 @@
         return this.shops.some(
           (shop) => parseInt(shop.employeeId, 10) === this.backendUser.employeeId,
         );
+      },
+      isLinkedV4() {
+        return this.shops.every((shop) => shop.isLinkedV4);
       },
       isShopContext() {
         return this.shopContext === CONTEXT_SHOP;
@@ -143,7 +142,7 @@
         return '[ACC] Manage Account Button Clicked';
       },
       unlinkedShops() {
-        return this.shops.filter((shop) => !shop.uuid);
+        return this.shops.filter((shop) => !shop.uuid || (shop.uuid && shop.isLinkedV4));
       },
       unlinkedShopsWithEmployeeId() {
         return this.unlinkedShops.map((shop) => ({

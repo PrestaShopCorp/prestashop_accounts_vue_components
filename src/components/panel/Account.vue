@@ -12,7 +12,6 @@
           <AccountLinkToUi
             :accounts-ui-url="accountsUiUrl"
             :backend-user="backendUser"
-            :is-onboarded-v4="isOnboardedV4"
             :is-super-admin="backendUser.isSuperAdmin"
             :onboarding-link="onboardingLink"
             :shops="shops"
@@ -21,7 +20,7 @@
         </div>
 
         <ModuleUpdateInformation
-          v-if="isOnboardedV4"
+          v-if="isLinkedV4"
           class="mt-3"
         />
 
@@ -76,10 +75,6 @@
         type: Object,
         required: true,
       },
-      isOnboardedV4: {
-        type: Boolean,
-        default: false,
-      },
       onboardingLink: {
         type: String,
         required: true,
@@ -105,12 +100,15 @@
       hasAllShopsLinked() {
         return this.shops.every((shop) => shop.uuid);
       },
+      isLinkedV4() {
+        return this.shops.every((shop) => shop.isLinkedV4);
+      },
       userHasEmailNotVerified() {
         return this.shops.some((shop) => {
           const isUser = parseInt(shop.employeeId, 10) === this.backendUser.employeeId;
           const hasEmailVerified = shop.user.emailIsValidated;
 
-          return isUser && !hasEmailVerified;
+          return isUser && !hasEmailVerified && !shop.isLinkedV4;
         });
       },
     },
