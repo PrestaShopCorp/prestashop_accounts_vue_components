@@ -180,8 +180,10 @@
     created() {
       this.validateContext();
 
-      this.identify();
-      this.trackAccountComponentViewed();
+      if (this.validatedContext.psAccountsIsInstalled) {
+        this.identify();
+        this.trackAccountComponentViewed();
+      }
     },
   };
 </script>

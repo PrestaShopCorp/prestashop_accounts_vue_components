@@ -28,12 +28,8 @@ const install = function(vue, opts = {}) {
       pageCategory: "ps_accounts-ui"
     });
   }
+  vue.us
 };
-
-Vue.use(Segment, {
-  id: window?.contextPsAccounts?.segmentApiKey,
-  pageCategory: "ps_accounts-ui"
-})
 
 const Components = {
   PsAccounts,
