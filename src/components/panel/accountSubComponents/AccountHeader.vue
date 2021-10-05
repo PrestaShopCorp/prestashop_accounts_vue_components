@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="d-flex align-items-center">
     <b-iconstack
       v-if="hasAllShopsLinked"
       font-scale="1.5"
-      class="mr-2 align-bottom fixed-size icon-check"
-      width="20"
-      height="20"
+      class="w-auto mr-3 align-bottom fixed-size"
+      width="24"
+      height="24"
     >
       <b-icon-circle-fill
         stacked
@@ -16,7 +16,9 @@
         variant="white"
       />
     </b-iconstack>
-    <h3 class="d-inline">
+    <h3
+      class="m-0 d-inline h3 title"
+    >
       {{ t('psaccounts.account.title') }}
     </h3>
   </div>
@@ -48,7 +50,9 @@
 </script>
 
 <style scoped>
-.icon-check {
-  width: auto;
+.title {
+  color: #363a41;
+  font-family: 'Open Sans', helvetica, arial, sans-serif;
+  font-weight: 600;
 }
 </style>

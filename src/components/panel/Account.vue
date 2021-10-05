@@ -122,8 +122,8 @@
 
 .fixed-size {
   /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
   display: inline;
 }
 </style>

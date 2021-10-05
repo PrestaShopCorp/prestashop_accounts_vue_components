@@ -1,26 +1,28 @@
 <template>
-  <div class="d-flex flex-column flex-grow-1 flex-md-row">
+  <div class="d-flex flex-column flex-grow-1 flex-md-row mr-md-3">
     <img
       class="mr-md-2 align-self-center"
       src="~@/assets/img/puffin_logo.png"
-      width="46"
+      width="44"
+      height="44"
     >
-    <div class="my-2 text-center my-md-0 align-self-center text-md-left">
+    <div class="my-3 text-center align-middle align-self-center my-md-0 text-md-left">
       <template v-if="hasSomeShopsLinked">
-        <template v-if="hasShopsLinkedBySameUser">
-          <span class="align-middle">{{ t('psaccounts.account.authorized') }}</span><br>
-          <span class="text-muted">{{ linkedUserEmail }}</span>
-        </template>
+        <div
+          v-if="hasShopsLinkedBySameUser"
+          class="text-left text-sm-center text-md-left"
+        >
+          <p class="m-0 align-middle">{{ t('psaccounts.account.authorized') }}</p>
+          <p class="m-0 align-middle text-break text-muted d-md-block">{{ linkedUserEmail }}</p>
+        </div>
         <span
           v-else
-          class="align-middle"
         >
           {{ t('psaccounts.account.authorizedSeveral') }}
         </span>
       </template>
       <span
         v-else
-        class="align-middle"
       >
         {{ t('psaccounts.account.authorize') }}
       </span>
