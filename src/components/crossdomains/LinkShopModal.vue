@@ -90,6 +90,8 @@
 
 <style lang="scss" scoped>
 .accounts-modal {
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   .close {
     margin-top: -42px !important;
@@ -101,14 +103,25 @@
     justify-content: center;
     height: 100%;
     .crossdomain {
-      width: 80%;
-      height: 80%;
+      width: 100vw;
+      height: 100vh;
       background: #FFFFFF;
       box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       border-radius: 6px;
       & > div {
         height: 100%;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .crossdomain-container {
+      .crossdomain {
+        width: 85%;
+        height: 85%;
+        max-width: 990px;
+        max-height: 705px;
       }
     }
   }

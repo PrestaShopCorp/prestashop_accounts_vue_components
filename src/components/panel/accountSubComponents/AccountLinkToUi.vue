@@ -106,5 +106,21 @@
         this.$tracking.track(eventName);
       },
     },
+    watch: {
+      cdcUiDisplayed: (cdcUiDisplayed) => {
+        if (cdcUiDisplayed) {
+          document.body.classList.add('ui-displayed');
+          return;
+        }
+
+        document.body.classList.remove('ui-displayed');
+      },
+    },
   };
 </script>
+
+<style>
+body.ui-displayed {
+  overflow: hidden;
+}
+</style>
