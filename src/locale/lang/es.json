@@ -23,13 +23,14 @@
         "alertEventBusNotInstalled": {
             "title": "Instala el módulo Prestashop Event Bus",
             "message": "El módulo Prestashop Event Bus es necesario para continuar con la configuración de este módulo.",
-            "loading": "Instalación del módulo Prestashop Event Bus en curso...",
-            "installButton": "Instalar"
+            "installButton": "Instalar",
+            "loading": "Instalación del módulo Prestashop Event Bus en curso..."
         },
         "account": {
             "title": "Vincula tu tienda a una cuenta PrestaShop",
             "authorize": "Solo puedes vincular tu tienda a una cuenta. ¡Elígela bien!",
             "authorized": "Tu tienda está vinculada a la cuenta PrestaShop:",
+            "authorizedSeveral": "Your shops are associated with several PrestaShop account",
             "connectButton": "Vincular",
             "reonboardButton": "Vincular de nuevo",
             "disconnectButton": "Usar otra cuenta",
@@ -38,7 +39,8 @@
             "sendEmail": "Enviar de nuevo",
             "needToBeAdmin": "Para continuar, debes ser un administrador de la tienda",
             "pleaseContact": "Ponte en contacto con",
-            "manageAccountButton": "Ver mis tiendas vinculadas"
+            "manageAccountButton": "Ver mis tiendas vinculadas",
+            "unlinkButton": "Dissociate"
         }
     }
 }
