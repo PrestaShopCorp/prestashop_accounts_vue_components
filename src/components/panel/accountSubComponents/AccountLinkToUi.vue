@@ -1,9 +1,9 @@
 <template>
   <div class="align-self-center">
     <component
-      :is="hasShopsLinkedByUserInBackoffice ? 'b-dropdown' : 'b-button'"
+      :is="hasShopsLinked ? 'b-dropdown' : 'b-button'"
       v-if="!hasAllShopsLinked"
-      :id="`associate-shop-${hasShopsLinkedByUserInBackoffice ? 'dropdown' : 'button'}`"
+      :id="`associate-shop-${hasShopsLinked ? 'dropdown' : 'button'}`"
       right
       split
       split-variant="outline-primary"
@@ -13,7 +13,7 @@
       @click="openLinkShopModal(isLinkedV4 ? 'reonboard' : 'associate')"
     >
       <b-dropdown-item-button
-        v-if="hasShopsLinkedByUserInBackoffice"
+        v-if="hasShopsLinked"
         @click="openLinkShopModal('manage')"
       >
         {{ t(`psaccounts.account.manageAccountButton`) }}
@@ -24,8 +24,8 @@
     </component>
 
     <component
-      :is="isShopContext ? 'b-dropdown' : 'b-button'"
-      v-else-if="hasShopsLinkedByUserInBackoffice"
+      :is="isShopContext && hasShopsLinkedByUserInBackoffice ? 'b-dropdown' : 'b-button'"
+      v-else-if="hasShopsLinked"
       :id="`manage-shops-${ isShopContext ? 'dropdown' : 'button'}`"
       right
       split
@@ -36,7 +36,7 @@
       @click="openLinkShopModal('manage')"
     >
       <b-dropdown-item-button
-        v-if="isShopContext"
+        v-if="isShopContext && hasShopsLinkedByUserInBackoffice"
         @click="openLinkShopModal('unlink')"
       >
         {{ t(`psaccounts.account.unlinkButton`) }}
@@ -108,9 +108,17 @@
       hasAllShopsLinked() {
         return this.unlinkedShops.length === 0;
       },
+      hasShopsLinked() {
+        return this.hasShopsLinkedByUserInBackoffice || this.hasShopsLinkedWithoutEmployeeId;
+      },
       hasShopsLinkedByUserInBackoffice() {
         return this.shops.some(
           (shop) => parseInt(shop.employeeId, 10) === this.backendUser.employeeId,
+        );
+      },
+      hasShopsLinkedWithoutEmployeeId() {
+        return this.shops.some(
+          (shop) => shop.uuid !== null && !shop.isLinkedV4 && shop.employeeId === null,
         );
       },
       isLinkedV4() {
