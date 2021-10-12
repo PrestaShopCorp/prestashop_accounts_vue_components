@@ -130,6 +130,10 @@
       },
       trackComponent() {
         this.$tracking.track('[ACC] Account Component Viewed', {
+          multishop_numbers: this.validContext.shops.reduce(
+            (acc, shop) => acc + shop.shops.length,
+            0,
+          ),
           ps_account_module_state: this.psAccountModuleState,
           ps_eventbus_installed: this.eventbusIsInstalled,
           ps_module_from: this.validContext.psxName,
