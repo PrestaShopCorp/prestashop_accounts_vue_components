@@ -30,12 +30,14 @@ export default function useSegmentTracking(context) {
       props = args[1];
     }
 
+    // eslint-disable-next-line no-unused-expressions
     Vue.prototype.$segment?.identify(...args);
 
     setSuperProperties(props);
   }
 
   function track(name, props = {}) {
+    // eslint-disable-next-line no-unused-expressions
     Vue.prototype.$segment?.track(name, {...state.properties, ...props});
 
     setSuperProperties(props);
@@ -94,6 +96,7 @@ export default function useSegmentTracking(context) {
   }
 
   function reset() {
+    // eslint-disable-next-line no-unused-expressions
     Vue.prototype.$segment?.reset();
 
     // state.properties = {};
