@@ -7,14 +7,25 @@
         <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
       </template>
       <b-card-body>
+        <b-alert
+          :show="hasShopsWithoutUrl"
+          :variant="hasAllShopsWithoutUrl ? 'danger' : 'warning'"
+        >
+          <p>
+            Uniquement les boutiques ayant une URL attribuée
+             peuvent être associées à un compte PrestaShop.<br>
+            Ces boutiques n'ont pas d'URL : {{ shopNamesWithoutUrl.join(', ') }}
+          </p>
+        </b-alert>
+
         <div class="d-flex flex-column flex-md-row">
-          <AccountShopLinkMessage :shops="shops" />
+          <AccountShopLinkMessage :shops="shopsWithUrl" />
           <AccountLinkToUi
             :accounts-ui-url="accountsUiUrl"
             :backend-user="backendUser"
             :is-super-admin="backendUser.isSuperAdmin"
             :onboarding-link="onboardingLink"
-            :shops="shops"
+            :shops="shopsWithUrl"
             :shop-context="shopContext"
           />
         </div>
@@ -100,8 +111,21 @@
       hasAllShopsLinked() {
         return this.shops.every((shop) => shop.uuid);
       },
+      hasAllShopsWithoutUrl() {
+        return this.shops.every((shop) => shop.domain === null);
+      },
+      hasShopsWithoutUrl() {
+        return this.shops.some((shop) => shop.domain === null);
+      },
       isLinkedV4() {
         return this.shops.every((shop) => shop.isLinkedV4);
+      },
+      shopsWithUrl() {
+        return this.shops.filter((shop) => shop.domain);
+      },
+      shopNamesWithoutUrl() {
+        return this.shops.filter((shop) => shop.domain === null)
+          .map((shop) => `${shop.name} (ID: ${shop.id})`);
       },
       userHasEmailNotVerified() {
         return this.shops.some((shop) => {
