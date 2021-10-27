@@ -30,8 +30,8 @@
             "title": "Połącz swój sklep z kontem PrestaShop",
             "authorize": "Możesz powiązać swój sklep tylko z jednym kontem. Dokonaj dobrego wyboru!",
             "authorized": "Twój sklep jest powiązany z kontem PrestaShop:",
-            "authorizedPartially": "Your shops are partially associated with a PrestaShop Account",
-            "authorizedSeveral": "Your shops are associated with several PrestaShop account",
+            "authorizedPartially": "Twoje sklepy są częściowo powiązane z kontem PrestaShop",
+            "authorizedSeveral": "Twoje sklepy są powiązane z kilkoma kontami PrestaShop",
             "connectButton": "Połącz",
             "reonboardButton": "Ponownie skojarz",
             "disconnectButton": "Użyj innego konta",
@@ -41,7 +41,7 @@
             "needToBeAdmin": "Aby kontynuować, musisz być administratorem sklepu.",
             "pleaseContact": "Prosimy o kontakt",
             "manageAccountButton": "Zobacz moje powiązane sklepy",
-            "unlinkButton": "Dissociate"
+            "unlinkButton": "Zdysocjuj"
         }
     }
 }
