@@ -30,8 +30,8 @@
             "title": "Koppel uw winkel aan een PrestaShop account",
             "authorize": "U kunt uw winkel maar aan één account koppelen. Kies het goed!",
             "authorized": "Uw winkel is gekoppeld aan het PrestaShop account:",
-            "authorizedPartially": "Your shops are partially associated with a PrestaShop Account",
-            "authorizedSeveral": "Your shops are associated with several PrestaShop account",
+            "authorizedPartially": "Uw winkels zijn gedeeltelijk gekoppeld aan een PrestaShop account",
+            "authorizedSeveral": "Uw winkels zijn gekoppeld aan meerdere PrestaShop accounts",
             "connectButton": "Koppelen",
             "reonboardButton": "Opnieuw verbinden",
             "disconnectButton": "Een ander account gebruiken",
@@ -41,7 +41,7 @@
             "needToBeAdmin": "Om verder te gaan, moet u een administrator van de winkel zijn.",
             "pleaseContact": "Neem alstublieft contact op met",
             "manageAccountButton": "Bekijk mijn geassocieerde winkels",
-            "unlinkButton": "Dissociate"
+            "unlinkButton": "Loskoppelen"
         }
     }
 }
