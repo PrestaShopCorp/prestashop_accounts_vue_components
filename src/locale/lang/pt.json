@@ -30,6 +30,8 @@
             "title": "Associe a sua loja a uma conta PrestaShop",
             "authorize": "Apenas pode associar a sua loja a uma conta. Escolha bem!",
             "authorized": "A sua loja está associada à conta PrestaShop:",
+            "authorizedPartially": "Your shops are partially associated with a PrestaShop Account",
+            "authorizedSeveral": "Your shops are associated with several PrestaShop account",
             "connectButton": "Associada",
             "reonboardButton": "Reassociate",
             "disconnectButton": "Usar outra conta",
@@ -38,7 +40,8 @@
             "sendEmail": "Reenviar",
             "needToBeAdmin": "Para continuar, deverá ser um administrador da loja.",
             "pleaseContact": "Por favor entre em contacto",
-            "manageAccountButton": "Ver as minhas lojas associadas"
+            "manageAccountButton": "Ver as minhas lojas associadas",
+            "unlinkButton": "Dissociate"
         }
     }
 }
