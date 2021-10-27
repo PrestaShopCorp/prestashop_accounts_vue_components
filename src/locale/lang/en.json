@@ -30,6 +30,8 @@
             "title": "Associate your shop with a PrestaShop account",
             "authorize": "You can only associate your shop with one account. So be sure to choose the right one!",
             "authorized": "Your shop is associated with the PrestaShop account:",
+            "authorizedPartially": "Your shops are partially associated with a PrestaShop Account",
+            "authorizedSeveral": "Your shops are associated with several PrestaShop account",
             "connectButton": "Associate",
             "reonboardButton": "Re-associate",
             "disconnectButton": "Use another account",
@@ -38,7 +40,8 @@
             "sendEmail": "Send it again",
             "needToBeAdmin": "In order to proceed you need to be administrator of the shop",
             "pleaseContact": "Please contact",
-            "manageAccountButton": "View my associated shops"
+            "manageAccountButton": "View my associated shops",
+            "unlinkButton": "Dissociate"
         }
     }
 }

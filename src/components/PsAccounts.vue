@@ -2,7 +2,7 @@
   <div>
     <b-alert
       :show="hasError"
-      @dismissed="hasError=false"
+      @dismissed="hasError = false"
       variant="danger"
       dismissible
     >
@@ -12,33 +12,39 @@
     </b-alert>
 
     <b-alert
-      v-if="validationErrors && validationErrors.length"
+      v-if="validContext.errors && validContext.errors.length"
       variant="danger"
       show
     >
       <p>
-        &lt;PsAccounts&gt; integration: Given context is invalid: {{ validationErrors.join(';') }}
+        &lt;PsAccounts&gt; integration: Given context is invalid:
+        {{ validContext.errors.join(';') }}
       </p>
     </b-alert>
 
     <template v-else>
       <PsAccountComponentAlertDisplay
-        :validated-context="validatedContext"
         @hasError="hasError = true"
       />
 
       <template v-if="!hasBlockingAlert">
         <Account
-          :validated-context="validatedContext"
           class="mb-2"
+          :accounts-ui-url="validContext.accountsUiUrl"
+          :backend-user="validContext.backendUser"
+          :onboarding-link="validContext.onboardingLink"
+          :shops="shops"
+          :shop-context="validContext.currentContext.type"
+          :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
+          :super-admin-email="validContext.superAdminEmail"
         >
           <slot
-            v-if="userIsConnected"
+            v-if="hasAllShopsLinked"
             name="account-footer"
           />
         </Account>
         <b-overlay
-          :show="!userIsConnected"
+          :show="!hasAllShopsLinked"
           variant="white"
           spinner-type="null"
           :opacity="0.70"
@@ -53,12 +59,13 @@
 </template>
 
 <script>
+  import validContext, {
+    eventbusIsInstalled, psAccountModuleState, setContext, shopsInContext,
+  } from '@/lib/context';
   import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
   import Account from '@/components/panel/Account';
-  import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
   import {BAlert, BOverlay} from 'bootstrap-vue';
-  import {contextSchema} from '../lib/ContextValidator';
   import 'bootstrap-vue/dist/bootstrap-vue.css';
 
   /**
@@ -89,147 +96,70 @@
       context: {
         type: Object,
         required: false,
-        default: () => context,
-      },
-    },
-    computed: {
-      userIsConnected() {
-        return this.validatedContext.user.email !== null;
-      },
-      userIsSameAsCurrentShopuser() {
-        const backendUserEmployeeId = this.validatedContext.backendUser.employeeId;
-        const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
-
-        return backendUserEmployeeId === currentShopEmployeeId;
-      },
-      userEmailIsValidated() {
-        return this.validatedContext.user.emailIsValidated;
-      },
-      userLoggedHasEmailVerified() {
-        return this.userIsConnected
-          && this.userIsSameAsCurrentShopuser
-          && this.userEmailIsValidated;
-      },
-      eventbusIsInstalled() {
-        return undefined === this.validatedContext.dependencies
-          || this.validatedContext.dependencies.ps_eventbus.isInstalled;
-      },
-      psAccountModuleState() {
-        if (!this.validatedContext.psAccountsIsUptodate) {
-          return 'to_update';
-        }
-
-        if (!this.validatedContext.psAccountsIsEnabled) {
-          return 'to_enable';
-        }
-
-        if (!this.validatedContext.psAccountsIsInstalled) {
-          return 'to_install';
-        }
-
-        return 'installed';
-      },
-      hasBlockingAlert() {
-        return !this.validatedContext.psAccountsIsInstalled
-          || !this.validatedContext.psAccountsIsUptodate
-          || !this.validatedContext.psAccountsIsEnabled;
-      },
-      associatedShops() {
-        return this.validatedContext.shops.reduce(
-          (acc, shopGroups) => [...acc, ...shopGroups.shops.reduce((accShop, shop) => {
-            if (!shop.uuid) {
-              return accShop;
-            }
-
-            return [...accShop, shop];
-          }, [])],
-          []);
-      },
-      associatedShopsForTracking() {
-        return this.associatedShops.reduce(
-          (acc, shop) => [
-            ...acc,
-            {
-              domain: shop.domain,
-              domain_ssl: shop.domain_ssl,
-              employeeId: shop.employeeId,
-              id: shop.id,
-              isLinkedV4: shop.isLinkedV4,
-              name: shop.name,
-              physicalUri: shop.physicalUri,
-              uuid: shop.uuid,
-            },
-          ],
-          [],
-        );
+        default: () => ({}),
       },
     },
     data() {
       return {
-        validationErrors: [],
-        validatedContext: this.context,
         hasError: false,
       };
     },
+    computed: {
+      validContext,
+      eventbusIsInstalled,
+      psAccountModuleState,
+      shops: shopsInContext,
+      hasAllShopsLinked() {
+        return this.shops.every((shop) => shop.uuid);
+      },
+      hasBlockingAlert() {
+        return !this.validContext.psAccountsIsInstalled
+          || !this.validContext.psAccountsIsUptodate
+          || !this.validContext.psAccountsIsEnabled;
+      },
+    },
     methods: {
-      validateContext() {
-        // validates but also fix when possible.
-        const {value, error} = contextSchema.validate(this.context);
-        this.validationErrors = [];
-        this.validatedContext = value;
-
-        if (error) {
-          this.validationErrors = error.details.map((e) => e.message);
-        }
-      },
-      track() {
-        this.trackUser();
-        this.trackComponent();
-      },
       trackUser() {
-        const args = [];
-
-        if (this.userIsConnected && this.validatedContext.user.uuid) {
-          args.push(this.validatedContext.user.uuid);
-        }
-
-        args.push({
-          email: this.validatedContext.user.email || this.validatedContext.backendUser.email,
-          email_verified: this.userLoggedHasEmailVerified,
-          multishop_numbers: this.validatedContext.shops.reduce(
+        // We don't know the SSO identified user...
+        this.$tracking.identify({
+          email: this.validContext.backendUser.email,
+          employeeId: this.validContext.backendUser.employeeId,
+          superadmin: this.validContext.backendUser.isSuperAdmin,
+          v4_onboarded: this.validContext.isOnboardedV4,
+        });
+      },
+      trackComponent() {
+        this.$tracking.track('[ACC] Account Component Viewed', {
+          multishop_numbers: this.validContext.shops.reduce(
             (acc, shop) => acc + shop.shops.length,
             0,
           ),
-          shops: this.associatedShopsForTracking,
-          superadmin: this.validatedContext.user.isSuperAdmin,
-          v4_onboarded: this.validatedContext.isOnboardedV4,
-        });
-
-        this.$tracking.identify(...args);
-      },
-      trackComponent() {
-        let shopUrl = this.validatedContext.currentShop.domain_ssl
-          ? this.validatedContext.currentShop.domain_ssl
-          : this.validatedContext.currentShop.domain;
-        shopUrl += this.validatedContext.currentShop.physicalUri;
-
-        this.$tracking.track('[ACC] Account Component Viewed', {
-          current_shop: this.validatedContext.currentShop,
           ps_account_module_state: this.psAccountModuleState,
           ps_eventbus_installed: this.eventbusIsInstalled,
-          ps_module_from: this.validatedContext.psxName,
-          ps_version: this.validatedContext.currentShop.psVersion,
-          shop_associated: this.validatedContext.currentShop.uuid !== null,
-          shop_bo_id: this.validatedContext.currentShop.id,
-          shop_url: shopUrl,
-          v4_onboarded: this.validatedContext.currentShop.isLinkedV4,
+          ps_module_from: this.validContext.psxName,
+          ps_version: this.shops[0].psVersion,
+          shop_context_id: this.validContext.currentContext.id,
+          shop_context_type: this.validContext.currentContext.type,
+          shop_associated: this.shops.map(
+            (shop) => shop.uuid !== null && !shop.isLinkedV4,
+          ),
+          shop_bo_ids: this.shops.map((shop) => shop.id),
+          shop_employee_ids: this.shops.map((shop) => shop.employeeId),
+          shop_names: this.shops.map((shop) => shop.name),
+          shop_uuids: this.shops.map((shop) => shop.uuid),
+          shop_v4_onboarded: this.shops.map((shop) => shop.isLinkedV4),
+          shop_urls: this.shops.map(
+            (shop) => (shop.domain || shop.domainSsl) + shop.physicalUri,
+          ),
         });
       },
     },
     created() {
-      this.validateContext();
-      if (this.validatedContext.psAccountsIsInstalled) {
-        this.track();
+      setContext(this.context);
+
+      if (this.validContext.psAccountsIsInstalled) {
+        this.trackUser();
+        this.trackComponent();
       }
     },
   };

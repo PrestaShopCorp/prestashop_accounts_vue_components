@@ -4,36 +4,35 @@
       no-body
     >
       <template v-slot:header>
-        <AccountHeader
-          :user-is-connected="userIsConnected"
-        />
+        <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
       </template>
       <b-card-body>
-        <div class="d-flex flex-column overflow-hidden flex-md-row">
-          <AccountShopLinkMessage
-            :user-is-connected="userIsConnected"
-            :validated-context="validatedContext"
-          />
+        <div class="d-flex flex-column flex-md-row">
+          <AccountShopLinkMessage :shops="shops" />
           <AccountLinkToUi
-            :user-is-connected="userIsConnected"
-            :validated-context="validatedContext"
+            :accounts-ui-url="accountsUiUrl"
+            :backend-user="backendUser"
+            :is-super-admin="backendUser.isSuperAdmin"
+            :onboarding-link="onboardingLink"
+            :shops="shops"
+            :shop-context="shopContext"
           />
         </div>
 
         <ModuleUpdateInformation
-          v-if="validatedContext.isOnboardedV4"
+          v-if="isLinkedV4"
           class="mt-3"
         />
 
         <AccountUserEmailNotValidated
-          v-if="userIsConnected && userIsSameAsCurrentShopuser && !userEmailIsValidated"
-          :validated-context="validatedContext"
+          v-if="userHasEmailNotVerified"
+          :sso-resend-verification-email="ssoResendVerificationEmail"
           class="mt-3"
         />
 
         <AccountUserNotSuperAdmin
-          v-if="!validatedContext.user.isSuperAdmin"
-          :validated-context="validatedContext"
+          v-if="!backendUser.isSuperAdmin"
+          :super-admin-email="superAdminEmail"
         />
         <slot />
       </b-card-body>
@@ -68,22 +67,49 @@
       AccountShopLinkMessage,
     },
     props: {
-      validatedContext: {
+      accountsUiUrl: {
+        type: String,
+        required: true,
+      },
+      backendUser: {
         type: Object,
+        required: true,
+      },
+      onboardingLink: {
+        type: String,
+        required: true,
+      },
+      shops: {
+        type: Array,
+        default: () => [],
+      },
+      shopContext: {
+        type: Number,
+        required: true,
+      },
+      ssoResendVerificationEmail: {
+        type: String,
+        required: true,
+      },
+      superAdminEmail: {
+        type: String,
         required: true,
       },
     },
     computed: {
-      userIsConnected() {
-        return this.validatedContext.user.email !== null;
+      hasAllShopsLinked() {
+        return this.shops.every((shop) => shop.uuid);
       },
-      userIsSameAsCurrentShopuser() {
-        const backendUserEmployeeId = this.validatedContext.backendUser.employeeId;
-        const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
-        return backendUserEmployeeId === currentShopEmployeeId;
+      isLinkedV4() {
+        return this.shops.every((shop) => shop.isLinkedV4);
       },
-      userEmailIsValidated() {
-        return this.validatedContext.user.emailIsValidated;
+      userHasEmailNotVerified() {
+        return this.shops.some((shop) => {
+          const isUser = parseInt(shop.employeeId, 10) === this.backendUser.employeeId;
+          const hasEmailVerified = shop.user.emailIsValidated;
+
+          return isUser && !hasEmailVerified && !shop.isLinkedV4;
+        });
       },
     },
   };
@@ -94,30 +120,10 @@
   flex-grow: 1;
 }
 
-.slot-margin {
-  margin-top: 1rem;
-}
-
 .fixed-size {
   /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
   display: inline;
-}
-
-.fixed-size-small {
-  /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
-  height: 20px;
-  width: 20px;
-  display: inline;
-  font-size: 20px;
-}
-
-.settings-btn {
-  color: #6c868e;
-}
-
-.settings-btn:hover {
-  color: #25b9d7;
 }
 </style>
