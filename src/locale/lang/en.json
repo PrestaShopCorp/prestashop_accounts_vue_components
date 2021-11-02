@@ -26,6 +26,10 @@
             "installButton": "Install",
             "loading": "The Prestashop Event Bus module is currently being installed..."
         },
+        "alertShopDomainShouldExists": {
+            "title": "Only shops with an assigned URL can be associated with a PrestaShop account!",
+            "message": "The following shops don't have assigned URLs: "
+        },
         "account": {
             "title": "Associate your shop with a PrestaShop account",
             "authorize": "You can only associate your shop with one account. So be sure to choose the right one!",

@@ -7,16 +7,11 @@
         <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
       </template>
       <b-card-body>
-        <b-alert
-          :show="hasShopsWithoutUrl"
-          :variant="hasAllShopsWithoutUrl ? 'danger' : 'warning'"
-        >
-          <p>
-            Uniquement les boutiques ayant une URL attribuée
-             peuvent être associées à un compte PrestaShop.<br>
-            Ces boutiques n'ont pas d'URL : {{ shopNamesWithoutUrl.join(', ') }}
-          </p>
-        </b-alert>
+        <ShopUrlShouldExists
+          v-if="hasShopsWithoutUrl"
+          :has-all-shops-without-url="hasAllShopsWithoutUrl"
+          :shop-names-without-url="shopNamesWithoutUrl"
+        />
 
         <div class="d-flex flex-column flex-md-row">
           <AccountShopLinkMessage :shops="shopsWithUrl" />
@@ -63,6 +58,7 @@
   import AccountUserEmailNotValidated from '@/components/alert/AccountUserEmailNotValidated';
   import AccountUserNotSuperAdmin from '@/components/alert/AccountUserNotSuperAdmin';
   import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage';
+  import ShopUrlShouldExists from '@/components/alert/ShopUrlShouldExists';
 
   export default {
     name: 'Account',
@@ -76,6 +72,7 @@
       AccountUserEmailNotValidated,
       AccountUserNotSuperAdmin,
       AccountShopLinkMessage,
+      ShopUrlShouldExists,
     },
     props: {
       accountsUiUrl: {
