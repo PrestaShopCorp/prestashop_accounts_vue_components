@@ -122,7 +122,7 @@
       },
       shopNamesWithoutUrl() {
         return this.shops.filter((shop) => shop.domain === null)
-          .map((shop) => `${shop.name} (ID: ${shop.id})`);
+          .map((shop) => shop.name);
       },
       userHasEmailNotVerified() {
         return this.shops.some((shop) => {

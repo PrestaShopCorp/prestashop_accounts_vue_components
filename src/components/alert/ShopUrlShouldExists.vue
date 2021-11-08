@@ -3,11 +3,11 @@
     :variant="hasAllShopsWithoutUrl ? 'danger' : 'warning'"
     show
   >
-    <h3>
+    <h3 class="m-0">
       {{ t('psaccounts.alertShopDomainShouldExists.title') }}
     </h3>
     <p>
-      {{ t('psaccounts.alertShopDomainShouldExists.message') }}
+      <span v-html="t('psaccounts.alertShopDomainShouldExists.message')"></span>
       {{ shopNamesWithoutUrl.join(', ') }}
     </p>
   </b-alert>
