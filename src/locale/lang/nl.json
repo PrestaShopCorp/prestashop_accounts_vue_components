@@ -1,47 +1,51 @@
 {
     "psaccounts": {
         "accountManager": {
-            "errorInstallEnable": "Er is een fout opgetreden. Probeer het nog eens."
+            "errorInstallEnable": "Something went wrong. Please try again."
         },
         "alertAccountNotInstalled": {
-            "title": "Installeer de module PrestaShop Account",
-            "message": "De module PrestaShop account is nodig om de configuratie van deze module voort te zetten.",
-            "installButton": "Installeer",
-            "loading": "Installatie van de module PrestaShop Account aan de gang..."
+            "title": "Install the PrestaShop Account module",
+            "message": "You need the PrestaShop account module to continue setting up this module.",
+            "installButton": "Install",
+            "loading": "The PrestaShop Account module is currently being installed..."
         },
         "alertAccountNotEnabled": {
-            "title": "Activeer de module PrestaShop Account",
-            "message": "De module PrestaShop account is nodig om de configuratie van deze module voort te zetten.",
-            "enableButton": "Activeren",
-            "loading": "Activering van de module PrestaShop Account aan de gang..."
+            "title": "Activate the PrestaShop Account module",
+            "message": "You need the PrestaShop account module to continue setting up this module.",
+            "enableButton": "Activate",
+            "loading": "The PrestaShop Account module is currently being activated..."
         },
         "alertAccountNeedsUpdate": {
-            "title": "Update PrestaShop Accounts-module",
-            "message": "Er is een nieuwe versie van PrestaShop-accounts beschikbaar. Werk de module bij om de services te blijven gebruiken",
-            "installButton": "Bijwerken"
+            "title": "Update PrestaShop Accounts module",
+            "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
+            "installButton": "Update"
         },
         "alertEventBusNotInstalled": {
-            "title": "Installeer de module Prestashop Event Bus",
-            "message": "De module Prestashop Event Bus is nodig om de configuratie van deze module voort te zetten.",
-            "installButton": "Installeer",
-            "loading": "Installatie van de module Prestashop Event Bus aan de gang..."
+            "title": "Install the Prestashop Event Bus module",
+            "message": "You need the Prestashop Event Bus module to continue setting up this module.",
+            "installButton": "Install",
+            "loading": "The Prestashop Event Bus module is currently being installed..."
+        },
+        "alertShopDomainShouldExists": {
+            "title": "Shop URL not filled in!",
+            "message": "Only shop with an assigned URL can be associated to a PrestaShop account.<br />The following shops don't have an assigned URL: "
         },
         "account": {
-            "title": "Koppel uw winkel aan een PrestaShop account",
-            "authorize": "U kunt uw winkel maar aan één account koppelen. Kies het goed!",
-            "authorized": "Uw winkel is gekoppeld aan het PrestaShop account:",
-            "authorizedPartially": "Uw winkels zijn gedeeltelijk gekoppeld aan een PrestaShop account",
-            "authorizedSeveral": "Uw winkels zijn gekoppeld aan meerdere PrestaShop accounts",
-            "connectButton": "Koppelen",
-            "reonboardButton": "Opnieuw verbinden",
-            "disconnectButton": "Een ander account gebruiken",
-            "moduleUpdateInformation": "<strong>Nieuwe update:</strong> u kunt uw geassocieerde winkels beheren.<br /> Gelieve u opnieuw aan te melden <strong>met hetzelfde e-mailadres</strong> om van deze update te kunnen profiteren.<br /> Andere module-updates kunnen beschikbaar zijn in Module Manager, tabblad Updates.",
-            "emailNotVerified": "Er werd een bevestigingsmail verstuurd. Controleer uw inbox en klik op de link om uw account te activeren.",
-            "sendEmail": "Doorsturen",
-            "needToBeAdmin": "Om verder te gaan, moet u een administrator van de winkel zijn.",
-            "pleaseContact": "Neem alstublieft contact op met",
-            "manageAccountButton": "Bekijk mijn geassocieerde winkels",
-            "unlinkButton": "Loskoppelen"
+            "title": "Associate your shop with a PrestaShop account",
+            "authorize": "You can only associate your shop with one account. So be sure to choose the right one!",
+            "authorized": "Your shop is associated with the PrestaShop account:",
+            "authorizedPartially": "Your shops are partially associated with a PrestaShop Account",
+            "authorizedSeveral": "Your shops are associated with several PrestaShop account",
+            "connectButton": "Associate",
+            "reonboardButton": "Re-associate",
+            "disconnectButton": "Use another account",
+            "moduleUpdateInformation": "<strong>New update:</strong> you can manage your associated shops.<br /> Please reassociate yourself using <strong>the same email address</strong> to benefit from this update.<br /> Other module updates may be available in the Updates tab of the module manager.",
+            "emailNotVerified": "A confirmation email has been sent. Check your inbox and click on the link to activate your account.",
+            "sendEmail": "Send it again",
+            "needToBeAdmin": "In order to proceed you need to be administrator of the shop",
+            "pleaseContact": "Please contact",
+            "manageAccountButton": "View my associated shops",
+            "unlinkButton": "Dissociate"
         }
     }
 }
