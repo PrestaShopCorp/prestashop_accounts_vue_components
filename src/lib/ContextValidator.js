@@ -24,7 +24,7 @@ export const shopSchema = Joi.object().keys({
   moduleName: Joi.string(),
   multishop: Joi.boolean(),
   name: Joi.string().required().min(1).max(128),
-  physicalUri: Joi.string(),
+  physicalUri: Joi.string().allow(null).allow(false),
   psVersion: Joi.string(),
   publicKey: Joi.string(),
   url: Joi.string().uri().required(),
