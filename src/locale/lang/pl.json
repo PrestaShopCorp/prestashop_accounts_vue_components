@@ -23,13 +23,19 @@
         "alertEventBusNotInstalled": {
             "title": "Zainstaluj moduł Prestashop Event Bus",
             "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
-            "loading": "Aktywacja modułu Prestashop Event Bus w toku...",
-            "installButton": "Zainstaluj"
+            "installButton": "Zainstaluj",
+            "loading": "Aktywacja modułu Prestashop Event Bus w toku..."
+        },
+        "alertShopDomainShouldExists": {
+            "title": "Shop URL not filled in!",
+            "message": "Only shop with an assigned URL can be associated to a PrestaShop account.<br />The following shops don't have an assigned URL: "
         },
         "account": {
             "title": "Połącz swój sklep z kontem PrestaShop",
             "authorize": "Możesz powiązać swój sklep tylko z jednym kontem. Dokonaj dobrego wyboru!",
             "authorized": "Twój sklep jest powiązany z kontem PrestaShop:",
+            "authorizedPartially": "Your shops are partially associated with a PrestaShop Account",
+            "authorizedSeveral": "Your shops are associated with several PrestaShop account",
             "connectButton": "Połącz",
             "reonboardButton": "Ponownie skojarz",
             "disconnectButton": "Użyj innego konta",
@@ -38,7 +44,8 @@
             "sendEmail": "Wróć",
             "needToBeAdmin": "Aby kontynuować, musisz być administratorem sklepu.",
             "pleaseContact": "Prosimy o kontakt",
-            "manageAccountButton": "Zobacz moje powiązane sklepy"
+            "manageAccountButton": "Zobacz moje powiązane sklepy",
+            "unlinkButton": "Dissociate"
         }
     }
 }
