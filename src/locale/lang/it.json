@@ -17,7 +17,7 @@
         },
         "alertAccountNeedsUpdate": {
             "title": "Aggiorna modulo Account PrestaShop",
-            "message": "È disponibile una nuova versione degli account PrestaShop, aggiorna il modulo per continuare a utilizzare i servizi",
+            "message": "Una nuova versione di PrestaShop Accounts è disponibile, si prega di aggiornare il modulo per continuare a utilizzare i servizi",
             "installButton": "Aggiornare"
         },
         "alertEventBusNotInstalled": {
@@ -28,7 +28,7 @@
         },
         "account": {
             "title": "Associa il tuo negozio a un account PrestaShop",
-            "authorize": "Puoi associare il tuo negozio a un solo account. Sceglilo con cura!",
+            "authorize": "Puoi associare il tuo negozio a un solo account. Quindi assicurati di scegliere quello giusto!",
             "authorized": "Il tuo negozio è associato all'account PrestaShop:",
             "connectButton": "Associa",
             "reonboardButton": "Riassociare",
