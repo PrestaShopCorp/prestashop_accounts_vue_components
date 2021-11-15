@@ -8,6 +8,17 @@ import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotIn
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {use, i18n} from '@/locale';
 import Segment from "@prestashopcorp/segment-vue";
+import Tracking from './plugins/tracking';
+
+const superProperties = [
+  "ps_module_from",
+  "ps_version",
+  "shop.",
+  "shop_context_id",
+  "shop_context_type",
+  "superadmin",
+  "v4_onboarded",
+];
 
 const install = function(vue, opts = {}) {
   if (opts.locale) {
@@ -19,12 +30,16 @@ const install = function(vue, opts = {}) {
   Object.keys(Components).forEach((name) => {
     vue.component(name, Components[name]);
   });
+  if (!window?.analytics) {
+    vue.use(Segment, {
+      id: contextPsAccounts.segmentApiKey,
+      pageCategory: "ps_accounts-ui"
+    });
+  }
+  vue.use(Tracking, {
+    superProperties,
+  });
 };
-
-Vue.use(Segment, {
-  id: contextPsAccounts.segmentApiKey,
-  pageCategory: "ps_accounts-ui"
-})
 
 const Components = {
   PsAccounts,
@@ -35,10 +50,19 @@ const Components = {
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue);
+  install(window.Vue, { locale: window.iso_user || 'en' });
 } else {
   Object.keys(Components).forEach((name) => {
     Vue.component(name, Components[name]);
+  });
+  if (!window?.analytics) {
+    Vue.use(Segment, {
+      id: contextPsAccounts.segmentApiKey,
+      pageCategory: "ps_accounts-ui"
+    });
+  }
+  Vue.use(Tracking, {
+    superProperties,
   });
 }
 

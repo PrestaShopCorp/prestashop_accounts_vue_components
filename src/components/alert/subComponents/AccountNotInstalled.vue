@@ -27,8 +27,7 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import {BAlert, BButton, BLink} from 'bootstrap-vue';
+  import Alert from './Alert';
   import installModule from '../../../lib/moduleManager/InstallModule';
 
   /**
@@ -38,38 +37,17 @@
    */
   export default {
     name: 'AlertAccountNotInstalled',
-    mixins: [Locale],
-    components: {
-      BAlert,
-      BButton,
-      BLink,
-    },
-    props: {
-      validatedContext: {
-        type: Object,
-        required: true,
-      },
-    },
-    data() {
-      return {
-        isLoading: false,
-      };
-    },
+    mixins: [Alert],
     methods: {
       installPsAccounts() {
         this.isLoading = true;
 
-        this.$segment.track('[ACC] PSAccount Install Button Clicked', {
-          shop_bo_id: this.validatedContext.currentShop.id,
-          ps_module_from: this.validatedContext.psxName,
-          v4_onboarded: this.validatedContext.isOnboardedV4,
-          multishop_numbers: this.validatedContext.shops.length || 1,
-        });
+        this.$tracking.track('[ACC] PSAccount Install Button Clicked');
 
         installModule(
           'ps_accounts',
-          this.validatedContext.psAccountsInstallLink,
-          this.validatedContext.psIs17,
+          this.link,
+          this.psIs17,
         ).catch(() => {
           this.isLoading = false;
           this.$emit('hasError');

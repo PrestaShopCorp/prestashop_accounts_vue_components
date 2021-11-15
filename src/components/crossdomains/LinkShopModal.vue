@@ -13,8 +13,9 @@
         >
           <link-shop-crossdomain
             :specificUiUrl="specificUiUrl"
-            :shop="shop"
+            :shops="shops"
             :onBoardingFinished="closeModal"
+            :tracking="tracking"
             :onLogout="onLogout"
             :accountsUiUrl="accountsUiUrl"
             :triggerFallback="triggerFallback"
@@ -41,8 +42,8 @@
       clickOutside: vClickOutside.directive,
     },
     props: {
-      shop: {
-        type: Object,
+      shops: {
+        type: Array,
         required: true,
       },
       specificUiUrl: {
@@ -58,16 +59,21 @@
         required: true,
       },
     },
+    computed: {
+      tracking() {
+        return this.$tracking.properties;
+      },
+    },
     methods: {
       closeModal() {
         this.$emit('closed');
       },
       onLogout() {
-        this.$segment.reset();
+        this.$tracking.reset();
       },
       triggerFallback() {
-        const base64Shop = btoa(JSON.stringify(this.shop));
-        const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shopPayload=${base64Shop}`;
+        const base64Shops = btoa(JSON.stringify(this.shops));
+        const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shops=${base64Shops}&return_to=${encodeURIComponent(window.location.href)}`;
         window.location.assign(fallbackUrl);
       },
     },
@@ -84,6 +90,8 @@
 
 <style lang="scss" scoped>
 .accounts-modal {
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   .close {
     margin-top: -42px !important;
@@ -95,14 +103,25 @@
     justify-content: center;
     height: 100%;
     .crossdomain {
-      width: 80%;
-      height: 80%;
+      width: 100vw;
+      height: 100vh;
       background: #FFFFFF;
       box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       border-radius: 6px;
       & > div {
         height: 100%;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .crossdomain-container {
+      .crossdomain {
+        width: 90%;
+        height: 90%;
+        max-width: 990px;
+        max-height: 810px;
       }
     }
   }

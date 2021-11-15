@@ -14,9 +14,9 @@ export default zoid.create({
   },
 
   props: {
-    shop: {
-      type: 'object',
-      required: false,
+    shops: {
+      type: 'array',
+      required: true,
     },
     specificUiUrl: {
       type: 'string',
@@ -24,6 +24,10 @@ export default zoid.create({
     },
     onBoardingFinished: {
       type: 'function',
+      required: false,
+    },
+    tracking: {
+      type: 'object',
       required: false,
     },
     onLogout: {

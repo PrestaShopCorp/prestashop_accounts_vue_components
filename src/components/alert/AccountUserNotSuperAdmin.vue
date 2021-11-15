@@ -5,13 +5,13 @@
     show
   >
     <p>{{ t('psaccounts.account.needToBeAdmin') }}</p>
-    <p v-if="validatedContext.superAdminEmail">
+    <p>
       {{ t('psaccounts.account.pleaseContact') }}
       <a
         @click="trackClick"
-        :href="'mailto:' + validatedContext.superAdminEmail"
+        :href="'mailto:' + superAdminEmail"
       >
-        {{ validatedContext.superAdminEmail }}
+        {{ superAdminEmail }}
       </a>
     </p>
   </b-alert>
@@ -34,17 +34,14 @@
       BAlert,
     },
     props: {
-      validatedContext: {
-        type: Object,
+      superAdminEmail: {
+        type: String,
         required: true,
       },
     },
     methods: {
       trackClick() {
-        this.$segment.track('[ACC] Link Contact Admin Clicked', {
-          shop_bo_id: this.validatedContext.currentShop.id,
-          ps_module_from: this.validatedContext.psxName,
-        });
+        this.$tracking.track('[ACC] Link Contact Admin Clicked');
       },
     },
   };

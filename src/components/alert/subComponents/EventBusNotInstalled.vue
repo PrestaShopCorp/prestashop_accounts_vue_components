@@ -26,29 +26,12 @@
 </template>
 
 <script>
-  import {BOverlay, BAlert, BButton} from 'bootstrap-vue';
-  import Locale from '@/mixins/locale';
+  import Alert from './Alert';
   import installModule from '../../../lib/moduleManager/InstallModule';
 
   export default {
     name: 'AlertEventBusNotInstalled',
-    mixins: [Locale],
-    components: {
-      BOverlay,
-      BAlert,
-      BButton,
-    },
-    props: {
-      validatedContext: {
-        type: Object,
-        required: true,
-      },
-    },
-    data() {
-      return {
-        isLoading: false,
-      };
-    },
+    mixins: [Alert],
     methods: {
       /**
        * Emitted when install button is clicked.
@@ -57,17 +40,12 @@
       installEventBus() {
         this.isLoading = true;
 
-        this.$segment.track('[ACC] PSEventBus Install Button Clicked', {
-          shop_bo_id: this.validatedContext.currentShop.id,
-          ps_module_from: this.validatedContext.psxName,
-          v4_onboarded: this.validatedContext.isOnboardedV4,
-          multishop_numbers: this.validatedContext.shops.length || 1,
-        });
+        this.$tracking.track('[ACC] PSEventBus Install Button Clicked');
 
         installModule(
           'ps_eventbus',
-          this.validatedContext.dependencies.ps_eventbus.installLink,
-          this.validatedContext.psIs17,
+          this.link,
+          this.psIs17,
         ).catch(() => {
           this.isLoading = false;
           this.$emit('hasError');
