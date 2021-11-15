@@ -67,8 +67,8 @@
 
         installModule(
           'ps_eventbus',
-          this.validatedContext.dependencies.ps_eventbus.installLink,
-          this.validatedContext.psIs17,
+          this.link,
+          this.psIs17,
         ).catch(() => {
           this.isLoading = false;
           this.$emit('hasError');

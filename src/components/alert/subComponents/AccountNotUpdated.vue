@@ -11,7 +11,7 @@
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="updatePsAccounts()"
+        @click="updatePsAccounts"
       >
         {{ t('psaccounts.alertAccountNeedsUpdate.installButton') }}
       </b-button>
@@ -69,8 +69,8 @@
 
         updateModule(
           'ps_accounts',
-          this.validatedContext.psAccountsUpdateLink,
-          this.validatedContext.psIs17,
+          this.link,
+          this.psIs17,
         ).catch(() => {
           this.isLoading = false;
           this.$emit('hasError');

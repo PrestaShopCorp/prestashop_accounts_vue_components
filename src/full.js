@@ -10,8 +10,6 @@ import {use, i18n} from '@/locale';
 import Segment from "@prestashopcorp/segment-vue";
 import VueCompositionAPI from "@vue/composition-api";
 
-Vue.use(VueCompositionAPI);
-
 const install = function(vue, opts = {}) {
   if (opts.locale) {
     use(opts.locale);
@@ -19,6 +17,7 @@ const install = function(vue, opts = {}) {
   if (opts.i18n) {
     i18n(opts.i18n);
   }
+  vue.use(VueCompositionAPI);
   Object.keys(Components).forEach((name) => {
     vue.component(name, Components[name]);
   });
@@ -46,6 +45,8 @@ if (typeof window !== 'undefined' && window.Vue) {
     Vue.component(name, Components[name]);
   });
   if (!window?.analytics) {
+    Vue.use(VueCompositionAPI);
+
     Vue.use(Segment, {
       id: window?.contextPsAccounts?.segmentApiKey,
       pageCategory: "ps_accounts-ui"

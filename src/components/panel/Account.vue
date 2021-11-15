@@ -4,36 +4,41 @@
       no-body
     >
       <template v-slot:header>
-        <AccountHeader
-          :user-is-connected="userIsConnected"
-        />
+        <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
       </template>
       <b-card-body>
-        <div class="d-flex">
-          <AccountShopLinkMessage
-            :user-is-connected="userIsConnected"
-            :validated-context="validatedContext"
-          />
+        <ShopUrlShouldExists
+          v-if="hasShopsWithoutUrl"
+          :has-all-shops-without-url="hasAllShopsWithoutUrl"
+          :shop-names-without-url="shopNamesWithoutUrl"
+        />
+
+        <div class="d-flex flex-column flex-md-row">
+          <AccountShopLinkMessage :shops="shopsWithUrl" />
           <AccountLinkToUi
-            :user-is-connected="userIsConnected"
-            :validated-context="validatedContext"
+            :accounts-ui-url="accountsUiUrl"
+            :backend-user="backendUser"
+            :is-super-admin="backendUser.isSuperAdmin"
+            :onboarding-link="onboardingLink"
+            :shops="shopsWithUrl"
+            :shop-context="shopContext"
           />
         </div>
 
         <ModuleUpdateInformation
-          v-if="validatedContext.isOnboardedV4"
+          v-if="isLinkedV4"
           class="mt-3"
         />
 
         <AccountUserEmailNotValidated
-          v-if="userIsConnected && userIsSameAsCurrentShopuser && !userEmailIsValidated"
-          :validated-context="validatedContext"
+          v-if="userHasEmailNotVerified"
+          :sso-resend-verification-email="ssoResendVerificationEmail"
           class="mt-3"
         />
 
         <AccountUserNotSuperAdmin
-          v-if="!validatedContext.user.isSuperAdmin"
-          :validated-context="validatedContext"
+          v-if="!backendUser.isSuperAdmin"
+          :super-admin-email="superAdminEmail"
         />
         <slot />
       </b-card-body>
@@ -53,6 +58,7 @@
   import AccountUserEmailNotValidated from '@/components/alert/AccountUserEmailNotValidated';
   import AccountUserNotSuperAdmin from '@/components/alert/AccountUserNotSuperAdmin';
   import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage';
+  import ShopUrlShouldExists from '@/components/alert/ShopUrlShouldExists';
 
   export default {
     name: 'Account',
@@ -66,24 +72,65 @@
       AccountUserEmailNotValidated,
       AccountUserNotSuperAdmin,
       AccountShopLinkMessage,
+      ShopUrlShouldExists,
     },
     props: {
-      validatedContext: {
+      accountsUiUrl: {
+        type: String,
+        required: true,
+      },
+      backendUser: {
         type: Object,
+        required: true,
+      },
+      onboardingLink: {
+        type: String,
+        required: true,
+      },
+      shops: {
+        type: Array,
+        default: () => [],
+      },
+      shopContext: {
+        type: Number,
+        required: true,
+      },
+      ssoResendVerificationEmail: {
+        type: String,
+        required: true,
+      },
+      superAdminEmail: {
+        type: String,
         required: true,
       },
     },
     computed: {
-      userIsConnected() {
-        return this.validatedContext.user.email !== null;
+      hasAllShopsLinked() {
+        return this.shops.every((shop) => shop.uuid);
       },
-      userIsSameAsCurrentShopuser() {
-        const backendUserEmployeeId = this.validatedContext.backendUser.employeeId;
-        const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
-        return backendUserEmployeeId === currentShopEmployeeId;
+      hasAllShopsWithoutUrl() {
+        return this.shops.every((shop) => shop.domain === null);
       },
-      userEmailIsValidated() {
-        return this.validatedContext.user.emailIsValidated;
+      hasShopsWithoutUrl() {
+        return this.shops.some((shop) => shop.domain === null);
+      },
+      isLinkedV4() {
+        return this.shops.every((shop) => shop.isLinkedV4);
+      },
+      shopsWithUrl() {
+        return this.shops.filter((shop) => shop.domain);
+      },
+      shopNamesWithoutUrl() {
+        return this.shops.filter((shop) => shop.domain === null)
+          .map((shop) => shop.name);
+      },
+      userHasEmailNotVerified() {
+        return this.shops.some((shop) => {
+          const isUser = parseInt(shop.employeeId, 10) === this.backendUser.employeeId;
+          const hasEmailVerified = shop.user.emailIsValidated;
+
+          return isUser && !hasEmailVerified && !shop.isLinkedV4;
+        });
       },
     },
   };
@@ -94,30 +141,10 @@
   flex-grow: 1;
 }
 
-.slot-margin {
-  margin-top: 1rem;
-}
-
 .fixed-size {
   /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
   display: inline;
-}
-
-.fixed-size-small {
-  /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
-  height: 20px;
-  width: 20px;
-  display: inline;
-  font-size: 20px;
-}
-
-.settings-btn {
-  color: #6c868e;
-}
-
-.settings-btn:hover {
-  color: #25b9d7;
 }
 </style>

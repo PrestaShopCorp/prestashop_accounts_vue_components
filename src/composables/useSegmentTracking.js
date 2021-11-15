@@ -1,9 +1,9 @@
-import {toRefs} from '@vue/composition-api';
 import Vue from 'vue';
+import {toRefs} from '@vue/composition-api';
+import context, {psAccountModuleState} from '@/lib/context';
 
 const state = Vue.observable({
   initialized: false,
-  context: {},
   properties: {},
   superProperties: [
     'current_shop',
@@ -16,13 +16,13 @@ const state = Vue.observable({
     'v4_onboarded',
   ],
 });
-export default function useSegmentTracking(context) {
+export default function useSegmentTracking() {
   function identify(...args) {
     let props = {
-      email: state.context.backendUser.email,
-      employeeId: state.context.backendUser.employeeId,
-      superadmin: state.context.backendUser.isSuperAdmin,
-      v4_onboarded: state.context.isOnboardedV4,
+      email: context().backendUser.email,
+      employeeId: context().backendUser.employeeId,
+      superadmin: context().backendUser.isSuperAdmin,
+      v4_onboarded: context().isOnboardedV4,
     };
     if (args.length === 1 && typeof args[0] === 'object') {
       props = args[0];
@@ -44,23 +44,26 @@ export default function useSegmentTracking(context) {
   }
 
   function trackAccountComponentViewed() {
-    let shopUrl = state.context.currentShop.domain_ssl
-      ? state.context.currentShop.domain_ssl
-      : state.context.currentShop.domain;
-    shopUrl += state.context.currentShop.physicalUri;
+    let shopUrl = context().currentShop.domain_ssl
+      ? context().currentShop.domain_ssl
+      : context().currentShop.domain;
+    shopUrl += context().currentShop.physicalUri;
 
     track('[ACC] Account Component Viewed', {
-      current_shop: JSON.parse(JSON.stringify(state.context.currentShop)),
+      current_shop: JSON.parse(JSON.stringify(context().currentShop)),
       ps_account_module_state: psAccountModuleState(),
+      ps_account_version: context().psAccountsVersion,
       ps_eventbus_installed:
-          state.context.dependencies?.ps_eventbus?.isInstalled ?? false,
-      ps_module_from: state.context.psxName,
-      ps_version: state.context.currentShop.psVersion,
-      shop_associated: state.context.currentShop.uuid !== null,
-      shop_bo_id: state.context.currentShop.id,
+        context().dependencies?.ps_eventbus?.isInstalled ?? false,
+      ps_module_from: context().psxName,
+      ps_version: context().currentShop.psVersion,
+      shop_associated: context().currentShop.uuid !== null,
+      shop_bo_id: context().currentShop.id,
       shop_url: shopUrl,
-      v4_onboarded: state.context.currentShop.isLinkedV4,
+      v4_onboarded: context().currentShop.isLinkedV4,
     });
+
+    return true;
   }
 
   function trackAssociateOrManageAccountButton(action) {
@@ -118,8 +121,6 @@ export default function useSegmentTracking(context) {
   }
 
   if (!state.initialized) {
-    state.context = context;
-
     if (window.localStorage.getItem('tracking')) {
       setSuperProperties(
         JSON.parse(window.localStorage.getItem('tracking') || '{}'),
@@ -127,22 +128,6 @@ export default function useSegmentTracking(context) {
     }
 
     state.initialized = true;
-  }
-
-  function psAccountModuleState() {
-    if (!state.context.psAccountsIsUptodate) {
-      return 'to_update';
-    }
-
-    if (!state.context.psAccountsIsEnabled) {
-      return 'to_enable';
-    }
-
-    if (state.context.psAccountsIsInstalled) {
-      return 'to_install';
-    }
-
-    return 'installed';
   }
 
   return {

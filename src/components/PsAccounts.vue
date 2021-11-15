@@ -2,7 +2,7 @@
   <div>
     <b-alert
       :show="hasError"
-      @dismissed="hasError=false"
+      @dismissed="hasError = false"
       variant="danger"
       dismissible
     >
@@ -12,33 +12,39 @@
     </b-alert>
 
     <b-alert
-      v-if="validationErrors && validationErrors.length"
+      v-if="validContext.errors && validContext.errors.length"
       variant="danger"
       show
     >
       <p>
-        &lt;PsAccounts&gt; integration: Given context is invalid: {{ validationErrors.join(';') }}
+        &lt;PsAccounts&gt; integration: Given context is invalid:
+        {{ validContext.errors.join(';') }}
       </p>
     </b-alert>
 
     <template v-else>
       <PsAccountComponentAlertDisplay
-        :validated-context="validatedContext"
         @hasError="hasError = true"
       />
 
       <template v-if="!hasBlockingAlert">
         <Account
-          :validated-context="validatedContext"
           class="mb-2"
+          :accounts-ui-url="validContext.accountsUiUrl"
+          :backend-user="validContext.backendUser"
+          :onboarding-link="validContext.onboardingLink"
+          :shops="shops"
+          :shop-context="validContext.currentContext.type"
+          :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
+          :super-admin-email="validContext.superAdminEmail"
         >
           <slot
-            v-if="userIsConnected"
+            v-if="hasAllShopsLinked"
             name="account-footer"
           />
         </Account>
         <b-overlay
-          :show="!userIsConnected"
+          :show="!hasAllShopsLinked"
           variant="white"
           spinner-type="null"
           :opacity="0.70"
@@ -53,13 +59,14 @@
 </template>
 
 <script>
+  import validContext, {
+    setContext, shopsInContext,
+  } from '@/lib/context';
   import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
   import Account from '@/components/panel/Account';
-  import context from '@/lib/ContextWrapper';
   import Locale from '@/mixins/locale';
   import {BAlert, BOverlay} from 'bootstrap-vue';
   import useSegmentTracking from '@/composables/useSegmentTracking';
-  import {contextSchema} from '../lib/ContextValidator';
   import 'bootstrap-vue/dist/bootstrap-vue.css';
 
   /**
@@ -90,11 +97,16 @@
       context: {
         type: Object,
         required: false,
-        default: () => context,
+        default: () => window.contextPsAccounts,
       },
     },
-    setup(props) {
-      const {identify, trackAccountComponentViewed} = useSegmentTracking(props.context);
+    data() {
+      return {
+        hasError: false,
+      };
+    },
+    setup() {
+      const {identify, trackAccountComponentViewed} = useSegmentTracking();
 
       return {
         identify,
@@ -102,85 +114,21 @@
       };
     },
     computed: {
-      userIsConnected() {
-        return this.validatedContext.user.email !== null;
-      },
-      userIsSameAsCurrentShopuser() {
-        const backendUserEmployeeId = this.validatedContext.backendUser.employeeId;
-        const currentShopEmployeeId = parseInt(this.validatedContext.currentShop.employeeId, 10);
-
-        return backendUserEmployeeId === currentShopEmployeeId;
-      },
-      userEmailIsValidated() {
-        return this.validatedContext.user.emailIsValidated;
-      },
-      userLoggedHasEmailVerified() {
-        return this.userIsConnected
-          && this.userIsSameAsCurrentShopuser
-          && this.userEmailIsValidated;
-      },
-      eventbusIsInstalled() {
-        return undefined === this.validatedContext.dependencies
-          || this.validatedContext.dependencies.ps_eventbus.isInstalled;
+      validContext,
+      shops: shopsInContext,
+      hasAllShopsLinked() {
+        return this.shops.every((shop) => shop.uuid);
       },
       hasBlockingAlert() {
-        return !this.validatedContext.psAccountsIsInstalled
-          || !this.validatedContext.psAccountsIsUptodate
-          || !this.validatedContext.psAccountsIsEnabled;
-      },
-      associatedShops() {
-        return this.validatedContext.shops.reduce(
-          (acc, shopGroups) => [...acc, ...shopGroups.shops.reduce((accShop, shop) => {
-            if (!shop.uuid) {
-              return accShop;
-            }
-
-            return [...accShop, shop];
-          }, [])],
-          []);
-      },
-      associatedShopsForTracking() {
-        return this.associatedShops.reduce(
-          (acc, shop) => [
-            ...acc,
-            {
-              domain: shop.domain,
-              domain_ssl: shop.domain_ssl,
-              employeeId: shop.employeeId,
-              id: shop.id,
-              isLinkedV4: shop.isLinkedV4,
-              name: shop.name,
-              physicalUri: shop.physicalUri,
-              uuid: shop.uuid,
-            },
-          ],
-          [],
-        );
+        return !this.validContext.psAccountsIsInstalled
+          || !this.validContext.psAccountsIsUptodate
+          || !this.validContext.psAccountsIsEnabled;
       },
     },
-    data() {
-      return {
-        validationErrors: [],
-        validatedContext: this.context,
-        hasError: false,
-      };
-    },
-    methods: {
-      validateContext() {
-        // validates but also fix when possible.
-        const {value, error} = contextSchema.validate(this.context);
-        this.validationErrors = [];
-        this.validatedContext = value;
+    async created() {
+      setContext(this.context);
 
-        if (error) {
-          this.validationErrors = error.details.map((e) => e.message);
-        }
-      },
-    },
-    created() {
-      this.validateContext();
-
-      if (this.validatedContext.psAccountsIsInstalled) {
+      if (this.validContext.psAccountsIsInstalled) {
         this.identify();
         this.trackAccountComponentViewed();
       }

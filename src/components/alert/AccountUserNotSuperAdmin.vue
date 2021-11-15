@@ -5,13 +5,13 @@
     show
   >
     <p>{{ t('psaccounts.account.needToBeAdmin') }}</p>
-    <p v-if="validatedContext.superAdminEmail">
+    <p>
       {{ t('psaccounts.account.pleaseContact') }}
       <a
         @click="trackClick"
-        :href="'mailto:' + validatedContext.superAdminEmail"
+        :href="'mailto:' + superAdminEmail"
       >
-        {{ validatedContext.superAdminEmail }}
+        {{ superAdminEmail }}
       </a>
     </p>
   </b-alert>
@@ -35,8 +35,8 @@
       BAlert,
     },
     props: {
-      validatedContext: {
-        type: Object,
+      superAdminEmail: {
+        type: String,
         required: true,
       },
     },

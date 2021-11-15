@@ -11,7 +11,7 @@
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="enablePsAccounts()"
+        @click="enablePsAccounts"
       >
         {{ t('psaccounts.alertAccountNotEnabled.enableButton') }}
       </b-button>
@@ -69,8 +69,8 @@
 
         enableModule(
           'ps_accounts',
-          this.validatedContext.psAccountsEnableLink,
-          this.validatedContext.psIs17,
+          this.link,
+          this.psIs17,
         ).catch(() => {
           this.isLoading = false;
           this.$emit('hasError');

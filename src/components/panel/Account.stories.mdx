@@ -1,91 +1,128 @@
 import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/blocks';
-import { withKnobs, boolean, object, text } from '@storybook/addon-knobs';
+import { withKnobs, array, boolean, object, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import Account from './Account';
 
 <Meta title="Sub-Components|Panels/Account" component={Account} decorators={[withKnobs]} />
 
-# Connection panel behavior
+# Association panel behavior
 
-The `Account` component is here to let the user connect his shop to PrestaShop services (PS Accounts).
-This component is only in charge of displaying the final panel to let the account connection be done.
+The `Account` component is here to let the user associate his shop to PrestaShop services (PS Accounts).
+This component is only in charge of displaying the final panel to let the account association be done.
 
 _Notice: If context conditions or pre-requisites are not filled, alert messages should be shown (please
 see in the Alerts components section, or use the main component `PsAccounts` that does these checks for
 you in the integration section)._
 
-## Before connection, a button is displayed:
+## Before association, a button is displayed:
 
-<Story name='Not connected' height='220px'>
+<Story name='Not associated' height='220px'>
   {{
     components: {Account},
     props: {
-      user: {
-        default: object('user', {
-          email: null,
-          emailIsValidated: false,
-        }),
+      accountsUiUrl: {
+        default: text('accountsUiUrl', 'https://accounts.prestashop.com'),
       },
-      isAdmin: {
-        default: boolean('isAdmin', true),
+      isOnboardedV4: {
+        default: boolean('isOnboardedV4', false),
       },
       onboardingLink: {
-        default: text('onboardingLink', 'https://perdu.com'),
+        default: text('onboardingLink', 'https://accounts.prestashop.com?shops='),
       },
-      adminEmail: {
-        default: text('adminEmail', 'big.biss@my-shop.com'),
+      shops: {
+        default: array('shops', [{
+          employeeId: null,
+          user: {
+            email: null,
+          },
+          uuid: null,
+        }]),
       },
-      resendEmailLink: {
-        default: text('resendEmailLink', 'http://perdu.com'),
+      ssoResendVerificationEmail: {
+        default: text('ssoResendVerificationEmail', 'http://sso.prestashop.com/email'),
       },
-      manageAccountLink: {
-        default: text('manageAccountLink', 'http://perdu.com'),
-      }
+      superAdminEmail: {
+        default: text('superAdminEmail', 'admin@example.com'),
+      },
+      user: {
+        default: object('user', {
+          emailIsValidated: true,
+          employeeId: 1,
+          isSuperAdmin: true,
+        }),
+      },
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" :manageAccountLink="manageAccountLink" class="m-4" />',
+    template: `
+      <Account
+        :accounts-ui-url="accountsUiUrl"
+        :is-onboarded-v4="isOnboardedV4"
+        :onboarding-link="onboardingLink"
+        :shops="shops"
+        :sso-resend-verification-email="ssoResendVerificationEmail"
+        :super-admin-email="superAdminEmail"
+        :user="user"
+        class="m-4"
+      />`,
   }}
 </Story>
 
 The button will bring the user to PrestaShop servers to link the shop to a user account (the owner / merchant)
 then go back to the module page that displayed the component.
 
-The connection is made once (for all PrestaShop services) so maybe it won't be displayed as this
+The association is made once (for all PrestaShop services) so maybe it won't be displayed as this
 if the shop was already linked to PrestaShop services from another service module before.
 
 
-## After connection, the linked user is shown:
+## After association, the linked user is shown:
 
-<Story name='Connected' height='230px'>
+<Story name='Associated' height='230px'>
   {{
     components: {Account},
     props: {
-      user: {
-        default: object('user', {
-          email: 'merchant@my-shop.com',
-          emailIsValidated: true,
-        }),
+      accountsUiUrl: {
+        default: text('accountsUiUrl', 'https://accounts.prestashop.com'),
       },
-      isAdmin: {
-        default: boolean('isAdmin', true),
+      isOnboardedV4: {
+        default: boolean('isOnboardedV4', false),
       },
       onboardingLink: {
-        default: text('onboardingLink', 'https://perdu.com'),
+        default: text('onboardingLink', 'https://accounts.prestashop.com?shops='),
       },
-      adminEmail: {
-        default: text('adminEmail', 'big.biss@my-shop.com'),
+      shops: {
+        default: array('shops', [{
+          employeeId: '1',
+          user: {
+            email: 'user@example.com',
+          },
+          uuid: 'abcde-fghij',
+        }]),
       },
-      resendEmailLink: {
-        default: text('resendEmailLink', 'http://perdu.com'),
+      ssoResendVerificationEmail: {
+        default: text('ssoResendVerificationEmail', 'http://sso.prestashop.com/email'),
       },
-      manageAccountLink: {
-        default: text('manageAccountLink', 'http://perdu.com'),
-      }
+      superAdminEmail: {
+        default: text('superAdminEmail', 'admin@example.com'),
+      },
+      user: {
+        default: object('user', {
+          emailIsValidated: true,
+          employeeId: 1,
+          isSuperAdmin: true,
+        }),
+      },
     },
-    methods: {
-      event: action('sign-out'),
-    },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" :manageAccountLink="manageAccountLink" @sign-out="event" class="m-4" />',
+    template: `
+      <Account
+        :accounts-ui-url="accountsUiUrl"
+        :is-onboarded-v4="isOnboardedV4"
+        :onboarding-link="onboardingLink"
+        :shops="shops"
+        :sso-resend-verification-email="ssoResendVerificationEmail"
+        :super-admin-email="superAdminEmail"
+        :user="user"
+        class="m-4"
+      />`,
   }}
 </Story>
 
@@ -102,29 +139,49 @@ If the right is missing, the button will be disabled and **a warning will be sho
   {{
     components: {Account},
     props: {
-      user: {
-        default: object('user', {
-          email: null,
-          emailIsValidated: false,
-        }),
+      accountsUiUrl: {
+        default: text('accountsUiUrl', 'https://accounts.prestashop.com'),
       },
-      isAdmin: {
-        default: boolean('isAdmin', false),
+      isOnboardedV4: {
+        default: boolean('isOnboardedV4', false),
       },
       onboardingLink: {
-        default: text('onboardingLink', 'https://perdu.com'),
+        default: text('onboardingLink', 'https://accounts.prestashop.com?shops='),
       },
-      adminEmail: {
-        default: text('adminEmail', 'big.biss@my-shop.com'),
+      shops: {
+        default: array('shops', [{
+          employeeId: null,
+          user: {
+            email: null,
+          },
+          uuid: null,
+        }]),
       },
-      resendEmailLink: {
-        default: text('resendEmailLink', 'http://perdu.com'),
+      ssoResendVerificationEmail: {
+        default: text('ssoResendVerificationEmail', 'http://sso.prestashop.com/email'),
       },
-      manageAccountLink: {
-        default: text('manageAccountLink', 'http://perdu.com'),
-      }
+      superAdminEmail: {
+        default: text('superAdminEmail', 'admin@example.com'),
+      },
+      user: {
+        default: object('user', {
+          emailIsValidated: true,
+          employeeId: 1,
+          isSuperAdmin: false,
+        }),
+      },
     },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" :manageAccountLink="manageAccountLink" class="m-4" />',
+    template: `
+      <Account
+        :accounts-ui-url="accountsUiUrl"
+        :is-onboarded-v4="isOnboardedV4"
+        :onboarding-link="onboardingLink"
+        :shops="shops"
+        :sso-resend-verification-email="ssoResendVerificationEmail"
+        :super-admin-email="superAdminEmail"
+        :user="user"
+        class="m-4"
+      />`,
   }}
 </Story>
 
@@ -139,33 +196,49 @@ link received in is email box):
   {{
     components: {Account},
     props: {
-      user: {
-        default: object('user', {
-          email: 'merchant@my-shop.com',
-          emailIsValidated: false,
-        }),
+      accountsUiUrl: {
+        default: text('accountsUiUrl', 'https://accounts.prestashop.com'),
       },
-      isAdmin: {
-        default: boolean('isAdmin', true),
+      isOnboardedV4: {
+        default: boolean('isOnboardedV4', false),
       },
       onboardingLink: {
-        default: text('onboardingLink', 'https://perdu.com'),
+        default: text('onboardingLink', 'https://accounts.prestashop.com?shops='),
       },
-      adminEmail: {
-        default: text('adminEmail', 'big.biss@my-shop.com'),
+      shops: {
+        default: array('shops', [{
+          employeeId: '1',
+          user: {
+            email: 'user@example.com',
+          },
+          uuid: 'abcde-fghij',
+        }]),
       },
-      resendEmailLink: {
-        default: text('resendEmailLink', 'http://perdu.com'),
+      ssoResendVerificationEmail: {
+        default: text('ssoResendVerificationEmail', 'http://sso.prestashop.com/email'),
       },
-      manageAccountLink: {
-        default: text('manageAccountLink', 'http://perdu.com'),
-      }
+      superAdminEmail: {
+        default: text('superAdminEmail', 'admin@example.com'),
+      },
+      user: {
+        default: object('user', {
+          emailIsValidated: false,
+          employeeId: 1,
+          isSuperAdmin: true,
+        }),
+      },
     },
-    methods: {
-      event: action('sign-out'),
-      sendEmail: action('send-email'),
-    },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" :manageAccountLink="manageAccountLink" @sign-out="event" @send-email="sendEmail" class="m-4" />',
+    template: `
+      <Account
+        :accounts-ui-url="accountsUiUrl"
+        :is-onboarded-v4="isOnboardedV4"
+        :onboarding-link="onboardingLink"
+        :shops="shops"
+        :sso-resend-verification-email="ssoResendVerificationEmail"
+        :super-admin-email="superAdminEmail"
+        :user="user"
+        class="m-4"
+      />`,
   }}
 </Story>
 
@@ -178,32 +251,52 @@ If you need to integrate a slot inside the card, below the merchant account sect
   {{
     components: {Account},
     props: {
-      user: {
-        default: object('user', {
-          email: 'merchant@my-shop.com',
-          emailIsValidated: true,
-        }),
+      accountsUiUrl: {
+        default: text('accountsUiUrl', 'https://accounts.prestashop.com'),
       },
-      isAdmin: {
-        default: boolean('isAdmin', true),
+      isOnboardedV4: {
+        default: boolean('isOnboardedV4', false),
       },
       onboardingLink: {
-        default: text('onboardingLink', 'https://perdu.com'),
+        default: text('onboardingLink', 'https://accounts.prestashop.com?shops='),
       },
-      adminEmail: {
-        default: text('adminEmail', 'big.biss@my-shop.com'),
+      shops: {
+        default: array('shops', [{
+          employeeId: '1',
+          user: {
+            email: 'user@example.com',
+          },
+          uuid: 'abcde-fghij',
+        }]),
       },
-      resendEmailLink: {
-        default: text('resendEmailLink', 'http://perdu.com'),
+      ssoResendVerificationEmail: {
+        default: text('ssoResendVerificationEmail', 'http://sso.prestashop.com/email'),
       },
-      manageAccountLink: {
-        default: text('manageAccountLink', 'http://perdu.com'),
-      }
+      superAdminEmail: {
+        default: text('superAdminEmail', 'admin@example.com'),
+      },
+      user: {
+        default: object('user', {
+          emailIsValidated: true,
+          employeeId: 1,
+          isSuperAdmin: true,
+        }),
+      },
     },
-    methods: {
-      event: action('sign-out'),
-    },
-    template: '<Account :user="user" :isAdmin="isAdmin" :onboardingLink="onboardingLink" :adminEmail="adminEmail" :resendEmailLink="resendEmailLink" :manageAccountLink="manageAccountLink" @sign-out="event" class="m-4"><div style="background:gray;margin-top:1.2rem;padding:0.5rem;">Put here a slot</div></Account>',
+    template: `
+      <Account
+        :accounts-ui-url="accountsUiUrl"
+        :is-onboarded-v4="isOnboardedV4"
+        :onboarding-link="onboardingLink"
+        :shops="shops"
+        :sso-resend-verification-email="ssoResendVerificationEmail"
+        :super-admin-email="superAdminEmail"
+        :user="user"
+        class="m-4"
+      >
+        <div style="background:gray;margin-top:1.2rem;padding:0.5rem;">Put here a slot</div>
+      </Account>
+    `,
   }}
 </Story>
 
