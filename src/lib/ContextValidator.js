@@ -70,6 +70,7 @@ export const contextSchema = Joi.object().keys({
   psAccountsIsInstalled: Joi.boolean().default(true),
   psAccountsUpdateLink: Joi.string().uri().allow(null).default(null),
   psAccountsIsUptodate: Joi.boolean().default(true),
+  psAccountsVersion: Joi.string().optional(),
   psIs17: Joi.boolean().required(),
   psxName: Joi.string(),
   segmentApiKey: Joi.string().allow(null).default(null),
