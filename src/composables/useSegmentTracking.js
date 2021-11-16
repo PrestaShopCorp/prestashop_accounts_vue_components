@@ -9,6 +9,7 @@ const state = Vue.observable({
     'current_shop',
     'multishop_numbers',
     'provider',
+    'ps_account_version',
     'ps_module_from',
     'ps_version',
     'shop_bo_id',
