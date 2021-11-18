@@ -1303,9 +1303,9 @@
     node-fetch "^2.6.1"
 
 "@prestashopcorp/segment-vue@^1.2.10":
-  version "1.2.10"
-  resolved "https://registry.yarnpkg.com/@prestashopcorp/segment-vue/-/segment-vue-1.2.10.tgz#481a0c4b9761b82c2e445fadf715b383f5dcc5d2"
-  integrity sha512-bB+LPAHPPzpt8IvbFiLnohkPERhsPpFEFRBW1ckNATZAGxZwuG20iSUAaW1qTi80RIvyMMOQAax5Vma09kpzSg==
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/@prestashopcorp/segment-vue/-/segment-vue-1.2.11.tgz#5bd5b61c6a01d308ff80b4ed0594ab9ab8b4b431"
+  integrity sha512-9cckRwm7jEu7Lw66Wf+flzabgK9ct+dCtt0/xPPVZGNnyRzVU0u3mPskH/4gs6ruPpxpVjlfeR9WVdzgBIpUsA==
   dependencies:
     load-script "^1.0.0"
 
@@ -13150,6 +13150,11 @@ vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
+
+vue-i18n@^8.26.5:
+  version "8.26.5"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.26.5.tgz#b61e994e7ae83564c6aebd004543156bbdc7c7e9"
+  integrity sha512-qYqfsFd8v2QFSLDAabqXXXpwjGvkuqJtTWqRpZPXpAFO6PArGH4A9vSplnA0HLmnB8km7OB5ZSdP8lkkX0rLew==
 
 vue-inbrowser-compiler-utils@^4.33.6:
   version "4.33.6"

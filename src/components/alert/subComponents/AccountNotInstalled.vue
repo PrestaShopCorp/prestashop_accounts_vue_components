@@ -3,9 +3,9 @@
     variant="warning"
     show
   >
-    <h3>{{ t('psaccounts.alertAccountNotInstalled.title') }}</h3>
+    <h3>{{ $t('psaccounts.alertAccountNotInstalled.title') }}</h3>
     <p>
-      {{ t('psaccounts.alertAccountNotInstalled.message') }}.
+      {{ $t('psaccounts.alertAccountNotInstalled.message') }}.
     </p>
     <p class="mt-2">
       <b-button
@@ -13,20 +13,21 @@
         variant="primary"
         @click="installPsAccounts()"
       >
-        {{ t('psaccounts.alertAccountNotInstalled.installButton') }}
+        {{ $t('psaccounts.alertAccountNotInstalled.installButton') }}
       </b-button>
       <b-link
         href="#"
         disabled
         v-else
       >
-        {{ t('psaccounts.alertAccountNotInstalled.loading') }}
+        {{ $t('psaccounts.alertAccountNotInstalled.loading') }}
       </b-link>
     </p>
   </b-alert>
 </template>
 
 <script>
+  import i18n from '@/locale';
   import Alert from './Alert';
   import installModule from '../../../lib/moduleManager/InstallModule';
 
@@ -37,6 +38,7 @@
    */
   export default {
     name: 'AlertAccountNotInstalled',
+    i18n,
     mixins: [Alert],
     methods: {
       installPsAccounts() {

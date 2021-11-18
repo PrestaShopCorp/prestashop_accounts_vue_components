@@ -3,9 +3,9 @@
     variant="warning"
     show
   >
-    <h3>{{ t('psaccounts.alertAccountNotEnabled.title') }}</h3>
+    <h3>{{ $t('psaccounts.alertAccountNotEnabled.title') }}</h3>
     <p>
-      {{ t('psaccounts.alertAccountNotEnabled.message') }}.
+      {{ $t('psaccounts.alertAccountNotEnabled.message') }}.
     </p>
     <p class="mt-2">
       <b-button
@@ -13,20 +13,21 @@
         variant="primary"
         @click="enablePsAccounts()"
       >
-        {{ t('psaccounts.alertAccountNotEnabled.enableButton') }}
+        {{ $t('psaccounts.alertAccountNotEnabled.enableButton') }}
       </b-button>
       <b-link
         href="#"
         disabled
         v-else
       >
-        {{ t('psaccounts.alertAccountNotEnabled.loading') }}
+        {{ $t('psaccounts.alertAccountNotEnabled.loading') }}
       </b-link>
     </p>
   </b-alert>
 </template>
 
 <script>
+  import i18n from '@/locale';
   import Alert from './Alert';
   import enableModule from '../../../lib/moduleManager/EnableModule';
 
@@ -37,6 +38,7 @@
    */
   export default {
     name: 'AlertAccountNotEnabled',
+    i18n,
     mixins: [Alert],
     methods: {
       enablePsAccounts() {

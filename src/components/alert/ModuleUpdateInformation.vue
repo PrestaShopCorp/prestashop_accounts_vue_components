@@ -3,12 +3,12 @@
     variant="info"
     show
   >
-    <div v-html="t('psaccounts.account.moduleUpdateInformation')" />
+    <div v-html="$t('psaccounts.account.moduleUpdateInformation')" />
   </b-alert>
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
+  import i18n from '@/locale';
   import {
     BAlert,
   } from 'bootstrap-vue';
@@ -20,7 +20,7 @@
    */
   export default {
     name: 'ModuleUpdatedInformation',
-    mixins: [Locale],
+    i18n,
     components: {
       BAlert,
     },

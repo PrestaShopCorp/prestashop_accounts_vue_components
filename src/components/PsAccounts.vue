@@ -7,7 +7,7 @@
       dismissible
     >
       <p>
-        {{ t('psaccounts.accountManager.errorInstallEnable') }}
+        {{ $t('psaccounts.accountManager.errorInstallEnable') }}
       </p>
     </b-alert>
 
@@ -62,12 +62,11 @@
   import validContext, {
     eventbusIsInstalled, psAccountModuleState, setContext, shopsInContext,
   } from '@/lib/context';
+  import i18n from '@/locale';
   import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
   import Account from '@/components/panel/Account';
-  import Locale from '@/mixins/locale';
   import {BAlert, BOverlay} from 'bootstrap-vue';
   import 'bootstrap-vue/dist/bootstrap-vue.css';
-
   /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
    * to ensure each functional case is covered for you. You can use 3 slots: `v-slot:body`,
@@ -79,13 +78,13 @@
    */
   export default {
     name: 'PsAccounts',
+    i18n,
     components: {
       PsAccountComponentAlertDisplay,
       Account,
       BOverlay,
       BAlert,
     },
-    mixins: [Locale],
     props: {
       /**
        * The whole context object given

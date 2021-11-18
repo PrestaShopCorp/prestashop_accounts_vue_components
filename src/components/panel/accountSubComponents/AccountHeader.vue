@@ -19,13 +19,13 @@
     <h3
       class="m-0 d-inline h3 title"
     >
-      {{ t('psaccounts.account.title') }}
+      {{ $t('psaccounts.account.title') }}
     </h3>
   </div>
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
+  import i18n from '@/locale';
   import {
     BIconstack,
     BIconCircleFill,
@@ -34,7 +34,7 @@
 
   export default {
     name: 'AccountHeader',
-    mixins: [Locale],
+    i18n,
     components: {
       BIconstack,
       BIconCircleFill,

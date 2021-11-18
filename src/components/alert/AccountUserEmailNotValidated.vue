@@ -3,21 +3,21 @@
     variant="warning"
     show
   >
-    <div v-html="t('psaccounts.account.emailNotVerified')" />
+    <div v-html="$t('psaccounts.account.emailNotVerified')" />
 
-    <div class="d-flex justify-content-end mt-2">
+    <div class="mt-2 d-flex justify-content-end">
       <b-button
         variant="primary"
         @click="sendEmailConfirmation()"
       >
-        {{ t('psaccounts.account.sendEmail') }}
+        {{ $t('psaccounts.account.sendEmail') }}
       </b-button>
     </div>
   </b-alert>
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
+  import i18n from '@/locale';
   import {
     BAlert,
     BButton,
@@ -29,7 +29,7 @@
    */
   export default {
     name: 'AccountUserEmailNotValidated',
-    mixins: [Locale],
+    i18n,
     components: {
       BAlert,
       BButton,

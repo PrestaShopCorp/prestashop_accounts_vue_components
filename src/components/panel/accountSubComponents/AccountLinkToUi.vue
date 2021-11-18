@@ -8,7 +8,7 @@
       split
       split-variant="outline-primary"
       variant="primary"
-      :text="t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`)"
+      :text="$t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`)"
       :disabled="!backendUser.isSuperAdmin"
       @click="openLinkShopModal(isLinkedV4 ? 'reonboard' : 'associate')"
     >
@@ -16,10 +16,10 @@
         v-if="hasShopsLinked"
         @click="openLinkShopModal('manage')"
       >
-        {{ t(`psaccounts.account.manageAccountButton`) }}
+        {{ $t(`psaccounts.account.manageAccountButton`) }}
       </b-dropdown-item-button>
       <template v-else>
-        {{ t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`) }}
+        {{ $t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`) }}
       </template>
     </component>
 
@@ -31,7 +31,7 @@
       split
       split-variant="outline-primary"
       variant="primary"
-      :text="t(`psaccounts.account.manageAccountButton`)"
+      :text="$t(`psaccounts.account.manageAccountButton`)"
       :disabled="!backendUser.isSuperAdmin"
       @click="openLinkShopModal('manage')"
     >
@@ -39,10 +39,10 @@
         v-if="isShopContext && hasShopsLinkedByUserInBackoffice"
         @click="openLinkShopModal('unlink')"
       >
-        {{ t(`psaccounts.account.unlinkButton`) }}
+        {{ $t(`psaccounts.account.unlinkButton`) }}
       </b-dropdown-item-button>
       <template v-else>
-        {{ t(`psaccounts.account.manageAccountButton`) }}
+        {{ $t(`psaccounts.account.manageAccountButton`) }}
       </template>
     </component>
 
@@ -59,7 +59,7 @@
 
 <script>
   import {CONTEXT_SHOP} from '@/lib/context';
-  import Locale from '@/mixins/locale';
+  import i18n from '@/locale';
   import {
     BButton,
     BDropdown,
@@ -69,7 +69,7 @@
 
   export default {
     name: 'AccountLinkToUi',
-    mixins: [Locale],
+    i18n,
     components: {
       BButton,
       BDropdown,

@@ -3,9 +3,9 @@
     variant="warning"
     show
   >
-    <h3>{{ t('psaccounts.alertAccountNeedsUpdate.title') }}</h3>
+    <h3>{{ $t('psaccounts.alertAccountNeedsUpdate.title') }}</h3>
     <p>
-      {{ t('psaccounts.alertAccountNeedsUpdate.message') }}.
+      {{ $t('psaccounts.alertAccountNeedsUpdate.message') }}.
     </p>
     <p class="mt-2">
       <b-button
@@ -13,20 +13,21 @@
         variant="primary"
         @click="updatePsAccounts()"
       >
-        {{ t('psaccounts.alertAccountNeedsUpdate.installButton') }}
+        {{ $t('psaccounts.alertAccountNeedsUpdate.installButton') }}
       </b-button>
       <b-link
         href="#"
         disabled
         v-else
       >
-        {{ t('psaccounts.alertAccountNotInstalled.loading') }}
+        {{ $t('psaccounts.alertAccountNotInstalled.loading') }}
       </b-link>
     </p>
   </b-alert>
 </template>
 
 <script>
+  import i18n from '@/locale';
   import Alert from './Alert';
   import updateModule from '../../../lib/moduleManager/UpdateModule';
 
@@ -37,6 +38,7 @@
    */
   export default {
     name: 'AlertAccountNotUpdated',
+    i18n,
     mixins: [Alert],
     methods: {
       updatePsAccounts() {

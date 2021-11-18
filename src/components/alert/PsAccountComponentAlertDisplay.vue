@@ -29,7 +29,7 @@
 
 <script>
   import context, {eventbusIsInstalled} from '@/lib/context';
-  import Locale from '@/mixins/locale';
+  import i18n from '@/locale';
   import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
   import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';
   import AccountNotUpdated from '@/components/alert/subComponents/AccountNotUpdated';
@@ -42,13 +42,13 @@
    */
   export default {
     name: 'PsAccountComponentAlertDisplay',
+    i18n,
     components: {
       AccountNotEnabled,
       AccountNotInstalled,
       AccountNotUpdated,
       EventBusNotInstalled,
     },
-    mixins: [Locale],
     computed: {
       context,
       eventbusIsInstalled,

@@ -9,16 +9,16 @@
       show
       variant="warning"
     >
-      <h3>{{ t('psaccounts.alertEventBusNotInstalled.title') }}</h3>
+      <h3>{{ $t('psaccounts.alertEventBusNotInstalled.title') }}</h3>
       <p>
-        {{ t('psaccounts.alertEventBusNotInstalled.message') }}
+        {{ $t('psaccounts.alertEventBusNotInstalled.message') }}
       </p>
       <p class="mt-2">
         <b-button
           variant="primary"
           @click="installEventBus"
         >
-          {{ t('psaccounts.alertEventBusNotInstalled.installButton') }}
+          {{ $t('psaccounts.alertEventBusNotInstalled.installButton') }}
         </b-button>
       </p>
     </b-alert>
@@ -26,11 +26,13 @@
 </template>
 
 <script>
+  import i18n from '@/locale';
   import Alert from './Alert';
   import installModule from '../../../lib/moduleManager/InstallModule';
 
   export default {
     name: 'AlertEventBusNotInstalled',
+    i18n,
     mixins: [Alert],
     methods: {
       /**
