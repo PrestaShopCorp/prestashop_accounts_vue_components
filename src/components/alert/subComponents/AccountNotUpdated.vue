@@ -27,8 +27,7 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import {BAlert, BButton, BLink} from 'bootstrap-vue';
+  import Alert from './Alert';
   import updateModule from '../../../lib/moduleManager/UpdateModule';
 
   /**
@@ -38,23 +37,7 @@
    */
   export default {
     name: 'AlertAccountNotUpdated',
-    mixins: [Locale],
-    components: {
-      BAlert,
-      BButton,
-      BLink,
-    },
-    props: {
-      validatedContext: {
-        type: Object,
-        required: true,
-      },
-    },
-    data() {
-      return {
-        isLoading: false,
-      };
-    },
+    mixins: [Alert],
     methods: {
       updatePsAccounts() {
         this.isLoading = true;
@@ -63,8 +46,8 @@
 
         updateModule(
           'ps_accounts',
-          this.validatedContext.psAccountsUpdateLink,
-          this.validatedContext.psIs17,
+          this.link,
+          this.psIs17,
         ).catch(() => {
           this.isLoading = false;
           this.$emit('hasError');
