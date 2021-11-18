@@ -45,36 +45,24 @@ const Components = {
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(Library/*, { locale: window.iso_user || 'en' }*/);
-  // install(window.Vue, { locale: window.iso_user || 'en' });
+  window.Vue.use(Library);
 } else {
-  Object.keys(Components).forEach((name) => {
-    Vue.component(name, Components[name]);
-  });
-  if (!window?.analytics) {
-    Vue.use(Segment, {
-      id: contextPsAccounts.segmentApiKey,
-      pageCategory: "ps_accounts-ui"
-    });
-  }
-  Vue.use(Tracking, {
-    superProperties,
-  });
+  Vue.use(Library);
 }
 
 export default {
-  version: '0.1.4',
-  // install,
+  version: "0.1.4",
+  Library,
   isOnboardingCompleted,
-  ...Components
+  ...Components,
 };
 
 export {
-  // install,
+  Library,
   isOnboardingCompleted,
   PsAccounts,
   Account,
   AccountNotInstalled,
   AccountNotEnabled,
-  EventBusNotInstalled
+  EventBusNotInstalled,
 };
