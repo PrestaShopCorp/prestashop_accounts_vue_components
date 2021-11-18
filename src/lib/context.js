@@ -75,8 +75,8 @@ export const setContext = (context) => {
 /**
  * Getters
  */
-
 export const eventbusIsInstalled = () => state.dependencies?.ps_eventbus?.isInstalled || false;
+export const eventbusIsEnabled = () => state.dependencies?.ps_eventbus?.isEnabled || false;
 
 export const psAccountModuleState = () => {
   if (!state.psAccountsIsUptodate) {

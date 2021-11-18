@@ -60,7 +60,7 @@
 
 <script>
   import validContext, {
-    eventbusIsInstalled, psAccountModuleState, setContext, shopsInContext,
+    eventbusIsEnabled, eventbusIsInstalled, psAccountModuleState, setContext, shopsInContext,
   } from '@/lib/context';
   import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
   import Account from '@/components/panel/Account';
@@ -106,6 +106,7 @@
     },
     computed: {
       validContext,
+      eventbusIsEnabled,
       eventbusIsInstalled,
       psAccountModuleState,
       shops: shopsInContext,
@@ -135,6 +136,7 @@
             0,
           ),
           ps_account_module_state: this.psAccountModuleState,
+          ps_eventbus_enabled: this.eventbusIsEnabled,
           ps_eventbus_installed: this.eventbusIsInstalled,
           ps_module_from: this.validContext.psxName,
           ps_version: this.shops[0].psVersion,
