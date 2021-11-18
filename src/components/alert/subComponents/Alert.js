@@ -1,4 +1,3 @@
-import Locale from '@/mixins/locale';
 import {BAlert, BButton, BLink} from 'bootstrap-vue';
 
 export default {
@@ -7,7 +6,6 @@ export default {
     BButton,
     BLink,
   },
-  mixins: [Locale],
   props: {
     link: {
       type: String,

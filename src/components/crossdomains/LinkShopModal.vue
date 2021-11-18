@@ -73,7 +73,7 @@
       },
       triggerFallback() {
         const base64Shops = btoa(JSON.stringify(this.shops));
-        const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shops=${base64Shops}`;
+        const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shops=${base64Shops}&return_to=${encodeURIComponent(window.location.href)}`;
         window.location.assign(fallbackUrl);
       },
     },
