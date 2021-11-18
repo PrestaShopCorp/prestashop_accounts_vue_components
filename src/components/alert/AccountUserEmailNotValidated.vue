@@ -35,8 +35,8 @@
       BButton,
     },
     props: {
-      validatedContext: {
-        type: Object,
+      ssoResendVerificationEmail: {
+        type: String,
         required: true,
       },
     },
@@ -44,7 +44,7 @@
       sendEmailConfirmation() {
         this.$tracking.track('[ACC] Link Resend Email Validation Clicked');
 
-        window.open(this.validatedContext.ssoResendVerificationEmail, '_blank');
+        window.open(this.ssoResendVerificationEmail, '_blank');
       },
     },
   };

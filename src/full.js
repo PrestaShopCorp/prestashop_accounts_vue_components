@@ -10,6 +10,16 @@ import {use, i18n} from '@/locale';
 import Segment from "@prestashopcorp/segment-vue";
 import Tracking from './plugins/tracking';
 
+const superProperties = [
+  "ps_module_from",
+  "ps_version",
+  "shop.",
+  "shop_context_id",
+  "shop_context_type",
+  "superadmin",
+  "v4_onboarded",
+];
+
 const install = function(vue, opts = {}) {
   if (opts.locale) {
     use(opts.locale);
@@ -26,24 +36,10 @@ const install = function(vue, opts = {}) {
       pageCategory: "ps_accounts-ui"
     });
   }
+  vue.use(Tracking, {
+    superProperties,
+  });
 };
-
-Vue.use(Segment, {
-  id: contextPsAccounts.segmentApiKey,
-  pageCategory: "ps_accounts-ui"
-})
-
-Vue.use(Tracking, {
-  superProperties: [
-    'current_shop',
-    'multishop_numbers',
-    'ps_module_from',
-    'ps_version',
-    'shop_bo_id',
-    'superadmin',
-    'v4_onboarded'
-  ],
-});
 
 const Components = {
   PsAccounts,
@@ -65,6 +61,9 @@ if (typeof window !== 'undefined' && window.Vue) {
       pageCategory: "ps_accounts-ui"
     });
   }
+  Vue.use(Tracking, {
+    superProperties,
+  });
 }
 
 export default {

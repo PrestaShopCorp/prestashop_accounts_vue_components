@@ -17,7 +17,7 @@
         },
         "alertAccountNeedsUpdate": {
             "title": "Aggiorna modulo Account PrestaShop",
-            "message": "È disponibile una nuova versione degli account PrestaShop, aggiorna il modulo per continuare a utilizzare i servizi",
+            "message": "Una nuova versione di PrestaShop Accounts è disponibile, si prega di aggiornare il modulo per continuare a utilizzare i servizi",
             "installButton": "Aggiornare"
         },
         "alertEventBusNotInstalled": {
@@ -26,10 +26,16 @@
             "installButton": "Installare",
             "loading": "Installazione del modulo Prestashop Event Bus in corso..."
         },
+        "alertShopDomainShouldExists": {
+            "title": "URL del negozio non compilato!",
+            "message": "Solo i negozi con un URL assegnato possono essere associati a un account PrestaShop.<br />I seguenti negozi non hanno un URL assegnato: "
+        },
         "account": {
             "title": "Associa il tuo negozio a un account PrestaShop",
-            "authorize": "Puoi associare il tuo negozio a un solo account. Sceglilo con cura!",
+            "authorize": "Puoi associare il tuo negozio a un solo account. Quindi assicurati di scegliere quello giusto!",
             "authorized": "Il tuo negozio è associato all'account PrestaShop:",
+            "authorizedPartially": "I tuoi negozi sono parzialmente associati a un account PrestaShop",
+            "authorizedSeveral": "I tuoi negozi sono associati a diversi account PrestaShop",
             "connectButton": "Associa",
             "reonboardButton": "Riassociare",
             "disconnectButton": "Usa un altro account",
@@ -38,7 +44,8 @@
             "sendEmail": "Invia di nuovo",
             "needToBeAdmin": "Per continuare, devi essere l'amministratore del negozio",
             "pleaseContact": "Si prega di contattare",
-            "manageAccountButton": "Vedi i miei negozi associati"
+            "manageAccountButton": "Vedi i miei negozi associati",
+            "unlinkButton": "Scollega"
         }
     }
 }
