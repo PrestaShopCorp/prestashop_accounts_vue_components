@@ -11,6 +11,7 @@ import Segment from "@prestashopcorp/segment-vue";
 import Tracking from './plugins/tracking';
 
 const superProperties = [
+  'multishop_numbers',
   "ps_module_from",
   "ps_version",
   "shop.",
