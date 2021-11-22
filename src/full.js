@@ -18,6 +18,7 @@ const superProperties = [
   "shop_context_type",
   "superadmin",
   "v4_onboarded",
+  'ps_account_version'
 ];
 
 const install = function(vue, opts = {}) {
