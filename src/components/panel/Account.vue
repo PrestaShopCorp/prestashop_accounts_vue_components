@@ -7,14 +7,20 @@
         <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
       </template>
       <b-card-body>
+        <ShopUrlShouldExists
+          v-if="hasShopsWithoutUrl"
+          :has-all-shops-without-url="hasAllShopsWithoutUrl"
+          :shop-names-without-url="shopNamesWithoutUrl"
+        />
+
         <div class="d-flex flex-column flex-md-row">
-          <AccountShopLinkMessage :shops="shops" />
+          <AccountShopLinkMessage :shops="shopsWithUrl" />
           <AccountLinkToUi
             :accounts-ui-url="accountsUiUrl"
             :backend-user="backendUser"
             :is-super-admin="backendUser.isSuperAdmin"
             :onboarding-link="onboardingLink"
-            :shops="shops"
+            :shops="shopsWithUrl"
             :shop-context="shopContext"
           />
         </div>
@@ -52,6 +58,7 @@
   import AccountUserEmailNotValidated from '@/components/alert/AccountUserEmailNotValidated';
   import AccountUserNotSuperAdmin from '@/components/alert/AccountUserNotSuperAdmin';
   import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage';
+  import ShopUrlShouldExists from '@/components/alert/ShopUrlShouldExists';
 
   export default {
     name: 'Account',
@@ -65,6 +72,7 @@
       AccountUserEmailNotValidated,
       AccountUserNotSuperAdmin,
       AccountShopLinkMessage,
+      ShopUrlShouldExists,
     },
     props: {
       accountsUiUrl: {
@@ -100,8 +108,21 @@
       hasAllShopsLinked() {
         return this.shops.every((shop) => shop.uuid);
       },
+      hasAllShopsWithoutUrl() {
+        return this.shops.every((shop) => shop.domain === null);
+      },
+      hasShopsWithoutUrl() {
+        return this.shops.some((shop) => shop.domain === null);
+      },
       isLinkedV4() {
         return this.shops.every((shop) => shop.isLinkedV4);
+      },
+      shopsWithUrl() {
+        return this.shops.filter((shop) => shop.domain);
+      },
+      shopNamesWithoutUrl() {
+        return this.shops.filter((shop) => shop.domain === null)
+          .map((shop) => shop.name);
       },
       userHasEmailNotVerified() {
         return this.shops.some((shop) => {

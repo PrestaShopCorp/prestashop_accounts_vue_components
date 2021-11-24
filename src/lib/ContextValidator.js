@@ -17,14 +17,14 @@ export const shopUserSchema = Joi.object().keys({
 }).unknown(true);
 
 export const shopSchema = Joi.object().keys({
-  domain: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domain').required(),
-  domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').required(),
+  domain: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domain').allow(null).required(),
+  domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').allow(null).required(),
   employeeId: Joi.number().allow(null),
   id: Joi.string().required(),
   moduleName: Joi.string(),
   multishop: Joi.boolean(),
   name: Joi.string().required().min(1).max(128),
-  physicalUri: Joi.string(),
+  physicalUri: Joi.string().allow(null).allow(false),
   psVersion: Joi.string(),
   publicKey: Joi.string(),
   url: Joi.string().uri().required(),

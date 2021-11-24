@@ -26,12 +26,16 @@
             "installButton": "Installer",
             "loading": "Installation du module Prestashop Event Bus en cours..."
         },
+        "alertShopDomainShouldExists": {
+            "title": "L'URL de la boutique n'est pas renseignée !",
+            "message": "Seule la boutique avec une URL assignée peut être associée à un compte PrestaShop.<br />Les boutiques suivantes n'ont pas d'URL assignée : "
+        },
         "account": {
             "title": "Associez votre boutique à un compte PrestaShop",
             "authorize": "Vous ne pouvez associer votre boutique qu'à un seul compte. Choisissez le bien !",
             "authorized": "Votre boutique est associée au compte PrestaShop : ",
-            "authorizedPartially": "Your shops are partially associated with a PrestaShop Account",
-            "authorizedSeveral": "Your shops are associated with several PrestaShop account",
+            "authorizedPartially": "Vos boutiques sont partiellement associées à un compte PrestaShop",
+            "authorizedSeveral": "Vos boutiques sont associées à plusieurs comptes PrestaShop",
             "connectButton": "Associer",
             "reonboardButton": "Réassocier",
             "disconnectButton": "Utiliser un autre compte",
@@ -41,7 +45,7 @@
             "needToBeAdmin": "Pour continuer, vous devez être administrateur de la boutique",
             "pleaseContact": "Merci de contacter",
             "manageAccountButton": "Voir mes boutiques associées",
-            "unlinkButton": "Dissociate"
+            "unlinkButton": "Dissocier"
         }
     }
 }
