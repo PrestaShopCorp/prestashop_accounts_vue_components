@@ -135,6 +135,7 @@
             (acc, shop) => acc + shop.shops.length,
             0,
           ),
+          ps_account_version: this.validContext.psAccountsVersion,
           ps_account_module_state: this.psAccountModuleState,
           ps_eventbus_enabled: this.eventbusIsEnabled,
           ps_eventbus_installed: this.eventbusIsInstalled,
