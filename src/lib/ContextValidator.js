@@ -30,7 +30,8 @@ export const shopSchema = Joi.object().keys({
   url: Joi.string().uri().required(),
   user: shopUserSchema.optional().allow({}).default({}),
   uuid: Joi.string().allow(null),
-  virtualUri: Joi.string().optional().allow(''),
+  virtualUri: Joi.string().optional().allow('').allow(null)
+    .allow(false),
 }).unknown(true);
 
 export const shopGroupSchema = Joi.object().keys({
