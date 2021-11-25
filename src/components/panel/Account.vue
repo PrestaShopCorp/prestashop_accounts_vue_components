@@ -4,7 +4,9 @@
       no-body
     >
       <template v-slot:header>
-        <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
+        <AccountHeader :has-all-shops-linked="hasAllShopsLinked">
+          {{ $tc('psaccounts.account.title', shopsWithUrl.length) }}
+        </AccountHeader>
       </template>
       <b-card-body>
         <ShopUrlShouldExists

@@ -19,7 +19,7 @@
     <h3
       class="m-0 d-inline h3 title"
     >
-      {{ $t('psaccounts.account.title') }}
+      <slot />
     </h3>
   </div>
 </template>
