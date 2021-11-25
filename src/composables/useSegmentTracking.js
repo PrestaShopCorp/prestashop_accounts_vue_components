@@ -6,13 +6,14 @@ const state = Vue.observable({
   initialized: false,
   properties: {},
   superProperties: [
-    'current_shop',
     'multishop_numbers',
-    'provider',
     'ps_account_version',
     'ps_module_from',
     'ps_version',
-    'shop_bo_id',
+    'shop_context_id',
+    'shop_context_type',
+    'shop_names',
+    'shop_urls',
     'superadmin',
     'v4_onboarded',
   ],
@@ -45,23 +46,31 @@ export default function useSegmentTracking() {
   }
 
   function trackAccountComponentViewed() {
-    let shopUrl = context().currentShop.domain_ssl
-      ? context().currentShop.domain_ssl
-      : context().currentShop.domain;
-    shopUrl += context().currentShop.physicalUri;
-
     track('[ACC] Account Component Viewed', {
       current_shop: JSON.parse(JSON.stringify(context().currentShop)),
+      multishop_numbers: context().shops.reduce(
+        (acc, shop) => acc + shop.shops.length,
+        0,
+      ),
       ps_account_module_state: psAccountModuleState(),
       ps_account_version: context().psAccountsVersion,
       ps_eventbus_installed:
         context().dependencies?.ps_eventbus?.isInstalled ?? false,
       ps_module_from: context().psxName,
-      ps_version: context().currentShop.psVersion,
-      shop_associated: context().currentShop.uuid !== null,
-      shop_bo_id: context().currentShop.id,
-      shop_url: shopUrl,
-      v4_onboarded: context().currentShop.isLinkedV4,
+      ps_version: context().shops[0].psVersion,
+      shop_associated: context().shops.map(
+        (shop) => shop.uuid !== null && !shop.isLinkedV4,
+      ),
+      shop_bo_ids: context().shops.map((shop) => shop.id),
+      shop_employee_ids: context().shops.map((shop) => shop.employeeId),
+      shop_context_id: context().currentContext.id,
+      shop_context_type: context().currentContext.type,
+      shop_names: context().shops.map((shop) => shop.name),
+      shop_uuids: context().shops.map((shop) => shop.uuid),
+      shop_v4_onboarded: context().shops.map((shop) => shop.isLinkedV4),
+      shop_urls: context().shops.map(
+        (shop) => (shop.domain || shop.domainSsl) + shop.physicalUri,
+      ),
     });
 
     return true;
