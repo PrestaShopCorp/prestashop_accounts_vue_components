@@ -94,6 +94,18 @@ export const psAccountModuleState = () => {
   return 'installed';
 };
 
+export const psEventBusModuleState = () => {
+  if (!eventbusIsEnabled()) {
+    return 'to_enable';
+  }
+
+  if (!eventbusIsInstalled()) {
+    return 'to_install';
+  }
+
+  return 'installed';
+};
+
 export const shops = () => state.shops.reduce(
   (acc, shopGroup) => [...acc, ...shopGroup.shops], [],
 );
