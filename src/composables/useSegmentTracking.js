@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import {toRefs} from '@vue/composition-api';
-import context, {psAccountModuleState} from '@/lib/context';
+import context, {
+  shopsInContext,
+  psAccountModuleState,
+  psEventBusModuleState,
+} from '@/lib/context';
 
 const state = Vue.observable({
   initialized: false,
@@ -46,31 +50,29 @@ export default function useSegmentTracking() {
   }
 
   function trackAccountComponentViewed() {
+    const shopsWithUrl = shopsInContext().filter((shop) => shop.domain);
+
     track('[ACC] Account Component Viewed', {
-      current_shop: JSON.parse(JSON.stringify(context().currentShop)),
       multishop_numbers: context().shops.reduce(
         (acc, shop) => acc + shop.shops.length,
         0,
       ),
       ps_account_module_state: psAccountModuleState(),
       ps_account_version: context().psAccountsVersion,
-      ps_eventbus_installed:
-        context().dependencies?.ps_eventbus?.isInstalled ?? false,
+      ps_eventbus_module_state: psEventBusModuleState(),
       ps_module_from: context().psxName,
-      ps_version: context().shops[0].psVersion,
-      shop_associated: context().shops.map(
+      ps_version: shopsWithUrl[0]?.psVersion,
+      shop_associated: shopsWithUrl.map(
         (shop) => shop.uuid !== null && !shop.isLinkedV4,
       ),
-      shop_bo_ids: context().shops.map((shop) => shop.id),
-      shop_employee_ids: context().shops.map((shop) => shop.employeeId),
+      shop_bo_ids: shopsWithUrl.map((shop) => shop.id),
       shop_context_id: context().currentContext.id,
       shop_context_type: context().currentContext.type,
-      shop_names: context().shops.map((shop) => shop.name),
-      shop_uuids: context().shops.map((shop) => shop.uuid),
-      shop_v4_onboarded: context().shops.map((shop) => shop.isLinkedV4),
-      shop_urls: context().shops.map(
-        (shop) => (shop.domain || shop.domainSsl) + shop.physicalUri,
-      ),
+      shop_employee_ids: shopsWithUrl.map((shop) => shop.employeeId),
+      shop_names: shopsWithUrl.map((shop) => shop.name),
+      shop_uuids: shopsWithUrl.map((shop) => shop.uuid),
+      shop_v4_onboarded: shopsWithUrl.map((shop) => shop.isLinkedV4),
+      shop_urls: shopsWithUrl.map((shop) => (shop.domain || shop.domainSsl) + shop.physicalUri),
     });
 
     return true;

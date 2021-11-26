@@ -106,7 +106,7 @@
     },
     computed: {
       hasAllShopsLinked() {
-        return this.shops.every((shop) => shop.uuid);
+        return this.shopsWithUrl.every((shop) => shop.uuid);
       },
       hasAllShopsWithoutUrl() {
         return this.shops.every((shop) => shop.domain === null);
@@ -115,7 +115,7 @@
         return this.shops.some((shop) => shop.domain === null);
       },
       isLinkedV4() {
-        return this.shops.every((shop) => shop.isLinkedV4);
+        return this.shopsWithUrl.every((shop) => shop.isLinkedV4);
       },
       shopsWithUrl() {
         return this.shops.filter((shop) => shop.domain);
@@ -125,7 +125,7 @@
           .map((shop) => shop.name);
       },
       userHasEmailNotVerified() {
-        return this.shops.some((shop) => {
+        return this.shopsWithUrl.some((shop) => {
           const isUser = parseInt(shop.employeeId, 10) === this.backendUser.employeeId;
           const hasEmailVerified = shop.user.emailIsValidated;
 

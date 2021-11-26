@@ -60,11 +60,7 @@
 
 <script>
   import validContext, {
-<<<<<<< HEAD
     setContext, shopsInContext,
-=======
-    psAccountModuleState, psEventBusModuleState, setContext, shopsInContext,
->>>>>>> master
   } from '@/lib/context';
   import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
   import Account from '@/components/panel/Account';
@@ -101,7 +97,7 @@
       context: {
         type: Object,
         required: false,
-        default: () => window.contextPsAccounts,
+        default: () => window.contextPsAccounts || {},
       },
     },
     data() {
@@ -121,15 +117,18 @@
       validContext,
       shops: shopsInContext,
       hasAllShopsLinked() {
-        return this.shops.every((shop) => shop.uuid);
+        return this.shopsWithUrl.every((shop) => shop.uuid);
       },
       hasBlockingAlert() {
         return !this.validContext.psAccountsIsInstalled
           || !this.validContext.psAccountsIsUptodate
           || !this.validContext.psAccountsIsEnabled;
       },
+      shopsWithUrl() {
+        return this.shops.filter((shop) => shop.domain);
+      },
     },
-    async created() {
+    created() {
       setContext(this.context);
 
       if (this.validContext.psAccountsIsInstalled) {
