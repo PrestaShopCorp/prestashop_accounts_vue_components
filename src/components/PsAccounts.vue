@@ -60,7 +60,11 @@
 
 <script>
   import validContext, {
+<<<<<<< HEAD
     setContext, shopsInContext,
+=======
+    psAccountModuleState, psEventBusModuleState, setContext, shopsInContext,
+>>>>>>> master
   } from '@/lib/context';
   import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
   import Account from '@/components/panel/Account';
