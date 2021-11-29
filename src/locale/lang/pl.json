@@ -27,10 +27,10 @@
             "loading": "Aktywacja modułu Prestashop Event Bus w toku..."
         },
         "alertEventBusNotEnabled": {
-            "title": "Activate the PrestaShop Event Bus module",
-            "message": "You need the PrestaShop Event Bus module to continue setting up this module.",
-            "enableButton": "Activate",
-            "loading": "The PrestaShop Event Bus module is currently being activated..."
+            "title": "Aktywuj moduł PrestaShop Event Bus",
+            "message": "Potrzebujesz modułu PrestaShop Event Bus, aby kontynuować konfigurację tego modułu.",
+            "enableButton": "Aktywuj",
+            "loading": "Moduł PrestaShop Event Bus jest obecnie w trakcie aktywacji..."
         },
         "alertShopDomainShouldExists": {
             "title": "URL sklepu nie jest wypełniony!",
