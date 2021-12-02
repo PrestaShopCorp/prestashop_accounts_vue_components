@@ -60,7 +60,7 @@
 
 <script>
   import validContext, {
-    eventbusIsInstalled, psAccountModuleState, setContext, shopsInContext,
+    psAccountModuleState, psEventBusModuleState, setContext, shopsInContext,
   } from '@/lib/context';
   import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
   import Account from '@/components/panel/Account';
@@ -106,8 +106,8 @@
     },
     computed: {
       validContext,
-      eventbusIsInstalled,
       psAccountModuleState,
+      psEventBusModuleState,
       shops: shopsInContext,
       hasAllShopsLinked() {
         return this.shopsWithUrl.every((shop) => shop.uuid);
@@ -137,8 +137,9 @@
             (acc, shop) => acc + shop.shops.length,
             0,
           ),
+          ps_account_version: this.validContext.psAccountsVersion,
           ps_account_module_state: this.psAccountModuleState,
-          ps_eventbus_installed: this.eventbusIsInstalled,
+          ps_eventbus_module_state: this.psEventBusModuleState,
           ps_module_from: this.validContext.psxName,
           ps_version: this.shopsWithUrl[0].psVersion,
           shop_context_id: this.validContext.currentContext.id,

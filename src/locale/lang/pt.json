@@ -26,6 +26,12 @@
             "installButton": "Instalar",
             "loading": "Instalação do módulo Prestashop Event Bus em curso..."
         },
+        "alertEventBusNotEnabled": {
+            "title": "Ativar o módulo de ônibus de eventos PrestaShop",
+            "message": "Você precisa do módulo PrestaShop Event Bus para continuar configurando este módulo.",
+            "enableButton": "Ativar",
+            "loading": "O módulo PrestaShop Event Bus está actualmente a ser activado..."
+        },
         "alertShopDomainShouldExists": {
             "title": "URL da loja não preenchida!",
             "message": "Somente lojas com um URL atribuído podem ser associadas a uma conta PrestaShop.<br />As seguintes lojas não têm uma URL atribuída: "

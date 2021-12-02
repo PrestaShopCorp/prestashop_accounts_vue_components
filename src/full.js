@@ -11,6 +11,7 @@ import Segment from "@prestashopcorp/segment-vue";
 import Tracking from './plugins/tracking';
 
 const superProperties = [
+  'multishop_numbers',
   "ps_module_from",
   "ps_version",
   "shop.",
@@ -18,6 +19,7 @@ const superProperties = [
   "shop_context_type",
   "superadmin",
   "v4_onboarded",
+  'ps_account_version'
 ];
 
 const install = function(vue, opts = {}) {
