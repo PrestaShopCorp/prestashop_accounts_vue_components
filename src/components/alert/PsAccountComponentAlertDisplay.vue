@@ -24,15 +24,22 @@
       :psIs17="context.psIs17"
       @hasError="$emit('hasError')"
     />
+    <EventBusNotEnabled
+      v-if="!eventbusIsEnabled"
+      :link="context.dependencies.ps_eventbus.enableLink"
+      :psIs17="context.psIs17"
+      @hasError="$emit('hasError')"
+    />
   </div>
 </template>
 
 <script>
-  import context, {eventbusIsInstalled} from '@/lib/context';
+  import context, {eventbusIsEnabled, eventbusIsInstalled} from '@/lib/context';
   import i18n from '@/locale';
   import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
   import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';
   import AccountNotUpdated from '@/components/alert/subComponents/AccountNotUpdated';
+  import EventBusNotEnabled from '@/components/alert/subComponents/EventBusNotEnabled';
   import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotInstalled';
 
   /**
@@ -47,10 +54,12 @@
       AccountNotEnabled,
       AccountNotInstalled,
       AccountNotUpdated,
+      EventBusNotEnabled,
       EventBusNotInstalled,
     },
     computed: {
       context,
+      eventbusIsEnabled,
       eventbusIsInstalled,
     },
   };
