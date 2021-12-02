@@ -26,6 +26,12 @@
             "installButton": "Installationsprogramm",
             "loading": "Installation des Moduls Prestashop Event Bus in Arbeit..."
         },
+        "alertEventBusNotEnabled": {
+            "title": "Aktivieren Sie das PrestaShop Event Bus Modul",
+            "message": "Sie benötigen das PrestaShop Event Bus-Modul, um dieses Modul weiter einzurichten.",
+            "enableButton": "Aktivator",
+            "loading": "Das PrestaShop Event Bus Modul wird gerade aktiviert..."
+        },
         "alertShopDomainShouldExists": {
             "title": "Shop URL nicht ausgefüllt!",
             "message": "Nur Shops mit einer zugewiesenen URL können mit einem PrestaShop-Konto verknüpft werden.<br />Die folgenden Shops haben keine zugewiesene URL: "

@@ -26,6 +26,12 @@
             "installButton": "Installeer",
             "loading": "Installatie van de module Prestashop Event Bus aan de gang..."
         },
+        "alertEventBusNotEnabled": {
+            "title": "Activeer de PrestaShop Event Bus module",
+            "message": "U heeft de PrestaShop Event Bus module nodig om verder te gaan met het opzetten van deze module.",
+            "enableButton": "Activeren",
+            "loading": "De PrestaShop Event Bus module wordt momenteel geactiveerd..."
+        },
         "alertShopDomainShouldExists": {
             "title": "Winkel URL niet ingevuld!",
             "message": "Alleen winkels met een toegewezen URL kunnen aan een PrestaShop account gekoppeld worden.<br />De volgende winkels hebben geen toegewezen URL: "
