@@ -7,7 +7,7 @@
       {{ t('psaccounts.alertShopDomainShouldExists.title') }}
     </h3>
     <p>
-      <span v-html="t('psaccounts.alertShopDomainShouldExists.message')"></span>
+      <span v-html="t('psaccounts.alertShopDomainShouldExists.message')" />
       {{ shopNamesWithoutUrl.join(', ') }}
     </p>
   </b-alert>

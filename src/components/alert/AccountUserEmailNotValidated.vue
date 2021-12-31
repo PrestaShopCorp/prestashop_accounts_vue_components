@@ -36,6 +36,10 @@
       BButton,
     },
     props: {
+      /**
+       * URL used for activating PrestaShop Accounts<br />
+       * should be https://auth.prestashop.com/account/send-verification-email
+       */
       ssoResendVerificationEmail: {
         type: String,
         required: true,

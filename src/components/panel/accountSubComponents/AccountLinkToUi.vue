@@ -1,5 +1,8 @@
 <template>
-  <div v-if="!hasAllShopsWithoutUrl" class="align-self-center">
+  <div
+    v-if="!hasAllShopsWithoutUrl"
+    class="align-self-center"
+  >
     <component
       :is="hasShopsLinked ? 'b-dropdown' : 'b-button'"
       v-if="!hasAllShopsLinked"

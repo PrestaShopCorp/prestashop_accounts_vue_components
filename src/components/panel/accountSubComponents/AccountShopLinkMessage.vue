@@ -12,8 +12,12 @@
           v-if="hasShopsLinkedBySameUser"
           class="text-left text-sm-center text-md-left"
         >
-          <p class="m-0 align-middle">{{ t('psaccounts.account.authorized') }}</p>
-          <p class="m-0 align-middle text-break text-muted d-md-block">{{ linkedUserEmail }}</p>
+          <p class="m-0 align-middle">
+            {{ t('psaccounts.account.authorized') }}
+          </p>
+          <p class="m-0 align-middle text-break text-muted d-md-block">
+            {{ linkedUserEmail }}
+          </p>
         </div>
         <span
           v-else-if="hasOneOrMoreNotLinkedShop"

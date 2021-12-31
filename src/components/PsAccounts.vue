@@ -90,9 +90,9 @@
     props: {
       /**
        * The whole context object given
-       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
+       * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
        * If left empty (by default), the context will be retrieved from JS global
-       * vars automatically.
+       * var window.contextPsAccounts automatically.
        */
       context: {
         type: Object,

@@ -7,8 +7,8 @@ import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnable
 import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotInstalled';
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {use, i18n} from '@/locale';
-import Segment from "@prestashopcorp/segment-vue";
-import VueCompositionAPI from "@vue/composition-api";
+import {Segment, VueCompositionAPI} from '@/ExternalDependencies';
+
 
 const install = function(vue, opts = {}) {
   if (opts.locale) {
@@ -27,7 +27,6 @@ const install = function(vue, opts = {}) {
       pageCategory: "ps_accounts-ui"
     });
   }
-  vue.us
 };
 
 const Components = {
@@ -44,9 +43,8 @@ if (typeof window !== 'undefined' && window.Vue) {
   Object.keys(Components).forEach((name) => {
     Vue.component(name, Components[name]);
   });
+  Vue.use(VueCompositionAPI);
   if (!window?.analytics) {
-    Vue.use(VueCompositionAPI);
-
     Vue.use(Segment, {
       id: window?.contextPsAccounts?.segmentApiKey,
       pageCategory: "ps_accounts-ui"

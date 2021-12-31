@@ -3,31 +3,31 @@
     <AccountNotInstalled
       v-if="!context.psAccountsIsInstalled"
       :link="context.psAccountsInstallLink"
-      :psIs17="context.psIs17"
+      :ps-is17="context.psIs17"
       @hasError="$emit('hasError')"
     />
     <AccountNotEnabled
       v-else-if="!context.psAccountsIsEnabled"
       :link="context.psAccountsEnableLink"
-      :psIs17="context.psIs17"
+      :ps-is17="context.psIs17"
       @hasError="$emit('hasError')"
     />
     <AccountNotUpdated
       v-else-if="!context.psAccountsIsUptodate"
       :link="context.psAccountsUpdateLink"
-      :psIs17="context.psIs17"
+      :ps-is17="context.psIs17"
       @hasError="$emit('hasError')"
     />
     <EventBusNotInstalled
       v-if="!eventbusIsInstalled"
       :link="context.dependencies.ps_eventbus.installLink"
-      :psIs17="context.psIs17"
+      :ps-is17="context.psIs17"
       @hasError="$emit('hasError')"
     />
     <EventBusNotEnabled
       v-if="!eventbusIsEnabled"
       :link="context.dependencies.ps_eventbus.enableLink"
-      :psIs17="context.psIs17"
+      :ps-is17="context.psIs17"
       @hasError="$emit('hasError')"
     />
   </div>
