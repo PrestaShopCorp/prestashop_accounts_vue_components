@@ -19,14 +19,14 @@
       @hasError="$emit('hasError')"
     />
     <EventBusNotInstalled
-      v-if="!eventbusIsInstalled"
-      :link="context.dependencies.ps_eventbus.installLink"
+      v-else-if="!eventbusIsInstalled"
+      :link="eventbusInstallLink"
       :ps-is17="context.psIs17"
       @hasError="$emit('hasError')"
     />
     <EventBusNotEnabled
-      v-if="!eventbusIsEnabled"
-      :link="context.dependencies.ps_eventbus.enableLink"
+      v-else-if="!eventbusIsEnabled"
+      :link="eventbusEnableLink"
       :ps-is17="context.psIs17"
       @hasError="$emit('hasError')"
     />
@@ -34,7 +34,9 @@
 </template>
 
 <script>
-  import context, {eventbusIsEnabled, eventbusIsInstalled} from '@/lib/context';
+  import context, {
+    eventbusIsEnabled, eventbusIsInstalled, eventbusInstallLink, eventbusEnableLink,
+  } from '@/lib/context';
   import Locale from '@/mixins/locale';
   import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
   import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';
@@ -61,6 +63,8 @@
       context,
       eventbusIsEnabled,
       eventbusIsInstalled,
+      eventbusInstallLink,
+      eventbusEnableLink,
     },
   };
 </script>
