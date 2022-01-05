@@ -1,4 +1,4 @@
-import Joi from '@hapi/joi';
+import Joi from 'joi';
 
 export const backendUserSchema = Joi.object().keys({
   email: Joi.string().email({tlds: false}).allow(null).default(null),

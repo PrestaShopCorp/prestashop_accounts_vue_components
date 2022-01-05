@@ -1,5 +1,5 @@
-import Locale from '@/mixins/locale';
 import {BAlert, BButton, BLink} from 'bootstrap-vue';
+import Locale from '@/mixins/locale';
 
 export default {
   components: {

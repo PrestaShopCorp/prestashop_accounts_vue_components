@@ -25,28 +25,28 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import {
+import {
+  BIconstack,
+  BIconCircleFill,
+  BIconCheck,
+} from 'bootstrap-vue';
+import Locale from '@/mixins/locale';
+
+export default {
+  name: 'AccountHeader',
+  mixins: [Locale],
+  components: {
     BIconstack,
     BIconCircleFill,
     BIconCheck,
-  } from 'bootstrap-vue';
-
-  export default {
-    name: 'AccountHeader',
-    mixins: [Locale],
-    components: {
-      BIconstack,
-      BIconCircleFill,
-      BIconCheck,
+  },
+  props: {
+    hasAllShopsLinked: {
+      type: Boolean,
+      required: true,
     },
-    props: {
-      hasAllShopsLinked: {
-        type: Boolean,
-        required: true,
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style scoped>

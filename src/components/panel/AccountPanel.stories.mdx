@@ -2,13 +2,13 @@ import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/
 import { withKnobs, array, boolean, object, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import Account from './Account';
+import AccountPanel from './AccountPanel';
 
-<Meta title="Sub-Components|Panels/Account" component={Account} decorators={[withKnobs]} />
+<Meta title="Sub-Components|Panels/AccountPanel" component={AccountPanel} decorators={[withKnobs]} />
 
 # Association panel behavior
 
-The `Account` component is here to let the user associate his shop to PrestaShop services (PS Accounts).
+The `AccountPanel` component is here to let the user associate his shop to PrestaShop services (PS Accounts).
 This component is only in charge of displaying the final panel to let the account association be done.
 
 _Notice: If context conditions or pre-requisites are not filled, alert messages should be shown (please
@@ -19,7 +19,7 @@ you in the integration section)._
 
 <Story name='Not associated' height='175px'>
   {{
-    components: {Account},
+    components: {AccountPanel},
     props: {
       accountsUiUrl: {
         default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
@@ -88,7 +88,7 @@ if the shop was already linked to PrestaShop services from another service modul
 
 <Story name='Associated' height='175px'>
   {{
-    components: {Account},
+    components: {AccountPanel},
     props: {
       accountsUiUrl: {
         default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
@@ -158,7 +158,7 @@ If the right is missing, the button will be disabled and **a warning will be sho
 
 <Story name='Need to be admin' height='290px'>
   {{
-    components: {Account},
+    components: {AccountPanel},
     props: {
       accountsUiUrl: {
         default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
@@ -225,7 +225,7 @@ link received in his email box):
 
 <Story name='Email validation needed' height='310px'>
   {{
-    components: {Account},
+    components: {AccountPanel},
     props: {
       accountsUiUrl: {
         default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
@@ -290,7 +290,7 @@ If you need to integrate a slot inside the card, below the merchant account sect
 
 <Story name='Case with a slot' height='230px'>
   {{
-    components: {Account},
+    components: {AccountPanel},
     props: {
       accountsUiUrl: {
         default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
@@ -361,10 +361,10 @@ You still need to manage the spacing of your slot with CSS.
 _Notice: If you need to integrate the standard behavior of PS Accounts, please see the
 [`PsAccounts` component in the integration section](?path=/docs/integration-psaccounts-panel--connected)._
 
-If you need a custom integration of PS Accounts sub-components, here is the Account panel:
+If you need a custom integration of PS Accounts sub-components, here is the AccountPanel panel:
 
 ```html
-<Account
+<AccountPanel
   :accounts-ui-url="validContext.accountsUiUrl"
   :backend-user="validContext.backendUser"
   :onboarding-link="validContext.onboardingLink"
@@ -377,10 +377,10 @@ If you need a custom integration of PS Accounts sub-components, here is the Acco
     v-if="hasAllShopsLinked"
     name="account-footer"
   />
-</Account>
+</AccountPanel>
 ```
 
 # Technical details
 
-<Description of={Account} />
-<Props of={Account} />
+<Description of={AccountPanel} />
+<Props of={AccountPanel} />

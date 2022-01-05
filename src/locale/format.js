@@ -1,7 +1,7 @@
 const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
 
 // eslint-disable-next-line no-unused-vars
-export default function (Vue) {
+export default function format(Vue) {
   /**
    * template
    *
@@ -13,7 +13,7 @@ export default function (Vue) {
   function template(string, ...args) {
     if (args.length === 1 && typeof args[0] === 'object') {
       // eslint-disable-next-line no-param-reassign
-      args = args[0];
+      [args] = args;
     }
 
     if (!args || !args.hasOwnProperty) {

@@ -27,55 +27,55 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import useSegmentTracking from '@/composables/useSegmentTracking';
-  import {BAlert, BButton, BLink} from 'bootstrap-vue';
-  import updateModule from '../../../lib/moduleManager/UpdateModule';
+import {BAlert, BButton, BLink} from 'bootstrap-vue';
+import Locale from '@/mixins/locale';
+import useSegmentTracking from '@/composables/useSegmentTracking';
+import updateModule from '../../../lib/moduleManager/UpdateModule';
 
-  /**
+/**
    * This sub-component can be used in a custom integration when the `PsAccounts`
    * component does not meets special needs. This part will display a warning message
    * telling the PS Accounts module is not installed on the shop (and a button to install it).
    */
-  export default {
-    name: 'AlertAccountNotUpdated',
-    mixins: [Locale],
-    components: {
-      BAlert,
-      BButton,
-      BLink,
+export default {
+  name: 'AlertAccountNotUpdated',
+  mixins: [Locale],
+  components: {
+    BAlert,
+    BButton,
+    BLink,
+  },
+  props: {
+    validatedContext: {
+      type: Object,
+      required: true,
     },
-    props: {
-      validatedContext: {
-        type: Object,
-        required: true,
-      },
-    },
-    setup() {
-      const {trackPsAccountUpdateButton} = useSegmentTracking();
+  },
+  setup() {
+    const {trackPsAccountUpdateButton} = useSegmentTracking();
 
-      return {trackPsAccountUpdateButton};
-    },
-    data() {
-      return {
-        isLoading: false,
-      };
-    },
-    methods: {
-      updatePsAccounts() {
-        this.isLoading = true;
+    return {trackPsAccountUpdateButton};
+  },
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+  methods: {
+    updatePsAccounts() {
+      this.isLoading = true;
 
-        this.trackPsAccountUpdateButton();
+      this.trackPsAccountUpdateButton();
 
-        updateModule(
-          'ps_accounts',
-          this.link,
-          this.psIs17,
-        ).catch(() => {
-          this.isLoading = false;
-          this.$emit('hasError');
-        });
-      },
+      updateModule(
+        'ps_accounts',
+        this.link,
+        this.psIs17,
+      ).catch(() => {
+        this.isLoading = false;
+        this.$emit('hasError');
+      });
     },
-  };
+  },
+};
 </script>

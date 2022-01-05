@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Vue from 'vue';
 import PsAccounts from '@/components/PsAccounts';
-import Account from '@/components/panel/Account';
+import AccountPanel from "@/components/panel/AccountPanel";
 import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';
 import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
 import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotInstalled';
@@ -31,10 +31,10 @@ const install = function(vue, opts = {}) {
 
 const Components = {
   PsAccounts,
-  Account,
+  AccountPanel,
   AccountNotInstalled,
   AccountNotEnabled,
-  EventBusNotInstalled
+  EventBusNotInstalled,
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -67,7 +67,7 @@ export {
   install,
   isOnboardingCompleted,
   PsAccounts,
-  Account,
+  AccountPanel,
   AccountNotInstalled,
   AccountNotEnabled,
   EventBusNotInstalled
