@@ -3,7 +3,7 @@
     <b-card
       no-body
     >
-      <template v-slot:header>
+      <template #header>
         <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
       </template>
       <b-card-body>
@@ -47,11 +47,11 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
   import {
     BCard,
     BCardBody,
   } from 'bootstrap-vue';
+  import Locale from '@/mixins/locale';
   import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader';
   import AccountLinkToUi from '@/components/panel/accountSubComponents/AccountLinkToUi';
   import ModuleUpdateInformation from '@/components/alert/ModuleUpdateInformation';

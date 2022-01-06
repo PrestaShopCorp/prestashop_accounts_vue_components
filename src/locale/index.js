@@ -1,7 +1,6 @@
-import AllLanguages from '@/locale/lang';
-
 import Vue from 'vue';
 import deepmerge from 'deepmerge';
+import AllLanguages from '@/locale/lang';
 import Format from './format';
 
 const format = Format(Vue);

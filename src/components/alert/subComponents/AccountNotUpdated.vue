@@ -27,9 +27,9 @@
 </template>
 
 <script>
+  import {BAlert, BButton, BLink} from 'bootstrap-vue';
   import Locale from '@/mixins/locale';
   import useSegmentTracking from '@/composables/useSegmentTracking';
-  import {BAlert, BButton, BLink} from 'bootstrap-vue';
   import updateModule from '../../../lib/moduleManager/UpdateModule';
 
   /**

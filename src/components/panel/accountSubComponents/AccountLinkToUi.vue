@@ -61,14 +61,14 @@
 </template>
 
 <script>
-  import {CONTEXT_SHOP} from '@/lib/context';
-  import Locale from '@/mixins/locale';
-  import useSegmentTracking from '@/composables/useSegmentTracking';
   import {
     BButton,
     BDropdown,
     BDropdownItemButton,
   } from 'bootstrap-vue';
+  import {CONTEXT_SHOP} from '@/lib/context';
+  import Locale from '@/mixins/locale';
+  import useSegmentTracking from '@/composables/useSegmentTracking';
   import LinkShopModal from '@/components/crossdomains/LinkShopModal';
 
   export default {
@@ -183,6 +183,7 @@
       },
     },
     watch: {
+      // eslint-disable-next-line vue/no-arrow-functions-in-watch
       cdcUiDisplayed: (cdcUiDisplayed) => {
         if (cdcUiDisplayed) {
           document.body.classList.add('ui-displayed');

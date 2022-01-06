@@ -18,11 +18,11 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import useSegmentTracking from '@/composables/useSegmentTracking';
   import {
     BAlert,
   } from 'bootstrap-vue';
+  import Locale from '@/mixins/locale';
+  import useSegmentTracking from '@/composables/useSegmentTracking';
 
   /**
    * This sub-component shows a message is the user is not a super-admin

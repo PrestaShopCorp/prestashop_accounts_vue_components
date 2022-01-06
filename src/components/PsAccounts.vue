@@ -59,13 +59,13 @@
 </template>
 
 <script>
+  import {BAlert, BOverlay} from 'bootstrap-vue';
   import validContext, {
     setContext, shopsInContext,
-  } from '@/lib/context';
+    } from '@/lib/context';
   import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
   import Account from '@/components/panel/Account';
   import Locale from '@/mixins/locale';
-  import {BAlert, BOverlay} from 'bootstrap-vue';
   import useSegmentTracking from '@/composables/useSegmentTracking';
   import 'bootstrap-vue/dist/bootstrap-vue.css';
 

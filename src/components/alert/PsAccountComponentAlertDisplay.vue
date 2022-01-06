@@ -36,7 +36,7 @@
 <script>
   import context, {
     eventbusIsEnabled, eventbusIsInstalled, eventbusInstallLink, eventbusEnableLink,
-  } from '@/lib/context';
+    } from '@/lib/context';
   import Locale from '@/mixins/locale';
   import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
   import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';

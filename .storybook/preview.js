@@ -4,7 +4,7 @@ import { configure } from '@storybook/vue';
 import 'bootstrap-vue/dist/bootstrap-vue';
 import 'prestakit/dist/css/bootstrap-prestashop-ui-kit.css';
 import Vue from "vue";
-import {Segment, VueCompositionAPI} from '@/ExternalDependencies';
+import { Segment, VueCompositionAPI } from '@/ExternalDependencies';
 
 Vue.use(Segment, {
   id: process.env.VUE_APP_SEGMENT,

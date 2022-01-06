@@ -17,12 +17,12 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import useSegmentTracking from '@/composables/useSegmentTracking';
   import {
     BAlert,
     BButton,
   } from 'bootstrap-vue';
+  import Locale from '@/mixins/locale';
+  import useSegmentTracking from '@/composables/useSegmentTracking';
 
   /**
    * This alert shows a message if the user email is not validated

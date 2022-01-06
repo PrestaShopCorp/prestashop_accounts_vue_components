@@ -25,12 +25,12 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
   import {
     BIconstack,
     BIconCircleFill,
     BIconCheck,
   } from 'bootstrap-vue';
+  import Locale from '@/mixins/locale';
 
   export default {
     name: 'AccountHeader',
