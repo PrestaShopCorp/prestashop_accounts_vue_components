@@ -20,7 +20,7 @@ export const shopSchema = Joi.object().keys({
   domain: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domain').allow(null).required(),
   domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').allow(null).required(),
   employeeId: Joi.number().allow(null),
-  frontUrl: Joi.optional().string().uri(),
+  frontUrl: Joi.string().optional().uri().allow(null),
   id: Joi.string().required(),
   moduleName: Joi.string(),
   multishop: Joi.boolean(),
