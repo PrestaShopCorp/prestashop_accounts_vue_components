@@ -40,9 +40,14 @@ export default {
     BButton,
   },
   props: {
-    validatedContext: {
-      type: Object,
-      required: true,
+    link: {
+      type: [String, null],
+      required: false,
+      default: null,
+    },
+    psIs17: {
+      type: Boolean,
+      default: true,
     },
   },
   setup() {

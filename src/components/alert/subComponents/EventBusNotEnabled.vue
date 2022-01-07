@@ -39,6 +39,17 @@ import useSegmentTracking from '../../../composables/useSegmentTracking';
 export default {
   name: 'AlertEventBusNotEnabled',
   mixins: [Alert],
+  props: {
+    link: {
+      type: [String, null],
+      required: false,
+      default: null,
+    },
+    psIs17: {
+      type: Boolean,
+      default: true,
+    },
+  },
   setup() {
     const {trackPsEventBusEnableButton} = useSegmentTracking();
 

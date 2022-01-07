@@ -52,6 +52,10 @@ if (typeof window !== 'undefined' && window.Vue) {
   }
 }
 
+new Vue({
+  render: (h) => h(PsAccounts),
+}).$mount("prestashop-accounts");
+
 export default {
   version: '0.1.4',
   locale: use,

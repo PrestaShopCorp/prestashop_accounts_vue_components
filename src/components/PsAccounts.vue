@@ -67,7 +67,6 @@ import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponen
 import AccountPanel from '@/components/panel/AccountPanel';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
@@ -138,3 +137,8 @@ export default {
   },
 };
 </script>
+
+<style>
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
+@import '~prestakit/dist/css/bootstrap-prestashop-ui-kit.css';
+</style>

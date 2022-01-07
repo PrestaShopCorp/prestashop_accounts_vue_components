@@ -1,10 +1,10 @@
-import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs';
 import { withKnobs, array, boolean, object, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import AccountPanel from './AccountPanel';
 
-<Meta title="Sub-Components|Panels/AccountPanel" component={AccountPanel} decorators={[withKnobs]} />
+<Meta title="Sub-Components/Panels/AccountPanel" component={AccountPanel} decorators={[withKnobs]} />
 
 # Association panel behavior
 
@@ -63,7 +63,7 @@ you in the integration section)._
       },
     },
     template: `
-      <Account
+      <AccountPanel
         :accounts-ui-url="accountsUiUrl"
         :is-onboarded-v4="isOnboardedV4"
         :onboarding-link="onboardingLink"
@@ -133,7 +133,7 @@ if the shop was already linked to PrestaShop services from another service modul
       },
     },
     template: `
-      <Account
+      <AccountPanel
         :accounts-ui-url="accountsUiUrl"
         :is-onboarded-v4="isOnboardedV4"
         :onboarding-link="onboardingLink"
@@ -202,7 +202,7 @@ If the right is missing, the button will be disabled and **a warning will be sho
       },
     },
     template: `
-      <Account
+      <AccountPanel
         :accounts-ui-url="accountsUiUrl"
         :is-onboarded-v4="isOnboardedV4"
         :onboarding-link="onboardingLink"
@@ -269,7 +269,7 @@ link received in his email box):
       },
     },
     template: `
-      <Account
+      <AccountPanel
         :accounts-ui-url="accountsUiUrl"
         :is-onboarded-v4="isOnboardedV4"
         :onboarding-link="onboardingLink"
@@ -335,7 +335,7 @@ If you need to integrate a slot inside the card, below the merchant account sect
       },
     },
     template: `
-      <Account
+      <AccountPanel
         :accounts-ui-url="accountsUiUrl"
         :is-onboarded-v4="isOnboardedV4"
         :onboarding-link="onboardingLink"
@@ -347,7 +347,7 @@ If you need to integrate a slot inside the card, below the merchant account sect
         class="m-4"
       >
         <div style="background:gray;margin-top:1.2rem;padding:0.5rem;">Put here a slot</div>
-      </Account>
+      </AccountPanel>
     `,
   }}
 </Story>
