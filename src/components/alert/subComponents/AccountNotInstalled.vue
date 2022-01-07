@@ -47,12 +47,13 @@ export default {
   },
   props: {
     link: {
-      type: [String, null],
+      type: [ String, null ],
       required: false,
       default: null,
     },
     psIs17: {
       type: Boolean,
+      required: false,
       default: true,
     },
   },
