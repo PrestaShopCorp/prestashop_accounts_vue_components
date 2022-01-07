@@ -27,7 +27,6 @@ const install = function(vue, opts = {}) {
       pageCategory: "ps_accounts-ui"
     });
   }
-  vue.us
 };
 
 const Components = {
