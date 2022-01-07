@@ -41,7 +41,7 @@ export default {
   mixins: [Alert],
   props: {
     link: {
-      type: [ String, null ],
+      type: [String, null],
       required: false,
       default: null,
     },

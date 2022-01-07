@@ -47,7 +47,7 @@ export default {
   },
   props: {
     link: {
-      type: [ String, null ],
+      type: [String, null],
       required: false,
       default: null,
     },
