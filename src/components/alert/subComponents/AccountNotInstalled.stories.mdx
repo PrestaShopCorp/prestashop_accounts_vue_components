@@ -1,5 +1,5 @@
 import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/blocks';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import AccountNotInstalled from './AccountNotInstalled';
@@ -16,14 +16,17 @@ and the process is blocked until the module is installed again.
   {{
     components: {AccountNotInstalled},
     props: {
-      accountIsInstalled: {
-        default: boolean('accountIsInstalled', false),
+      link: {
+        default: text('link', 'https://...'),
+      },
+      psIs17: {
+        default: boolean('psIs17', true),
       },
     },
     methods: {
-      event: action('install'),
+      event: action('hasError'),
     },
-    template: '<AccountNotInstalled class="m-4" :accountIsInstalled="accountIsInstalled" @install="event" />',
+    template: '<AccountNotInstalled class="m-4" :link="link" :ps-is17="psIs17" @hasError="event" />',
   }}
 </Story>
 
@@ -36,7 +39,7 @@ _Notice: If you need to integrate the standard behavior of PS Accounts, please s
 If you need a custom integration of PS Accounts sub-components, here is the AccountNotInstalled block:
 
 ```html
-<AccountNotInstalled :accountIsInstalled="accountIsInstalled" @install="event" class="m-4" />
+<AccountNotInstalled :link="link" :ps-is17="psIs17" @hasError="event" class="m-4" />
 ```
 
 # Technical details

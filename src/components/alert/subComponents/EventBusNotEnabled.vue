@@ -38,6 +38,18 @@
   export default {
     name: 'AlertEventBusNotEnabled',
     mixins: [Alert],
+    props: {
+      link: {
+        type: [ String, null ],
+        required: false,
+        default: null,
+      },
+      psIs17: {
+        type: Boolean,
+        required: false,
+        default: true,
+      },
+    },
     methods: {
       enableEventBus() {
         this.isLoading = true;

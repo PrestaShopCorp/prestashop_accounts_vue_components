@@ -46,9 +46,15 @@
     },
     mixins: [Locale],
     props: {
-      validatedContext: {
-        type: Object,
-        required: true,
+      link: {
+        type: [ String, null ],
+        required: false,
+        default: null,
+      },
+      psIs17: {
+        type: Boolean,
+        required: false,
+        default: true,
       },
     },
     setup() {
