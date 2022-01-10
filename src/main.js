@@ -1,33 +1,12 @@
-/* eslint-disable */
 import Vue from 'vue';
 import PsAccounts from '@/components/PsAccounts';
-import AccountPanel from "@/components/panel/AccountPanel";
+import AccountPanel from '@/components/panel/AccountPanel';
 import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';
 import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
 import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotInstalled';
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {use, i18n} from '@/locale';
 import {Segment, VueCompositionAPI} from '@/ExternalDependencies';
-
-
-const install = function(vue, opts = {}) {
-  if (opts.locale) {
-    use(opts.locale);
-  }
-  if (opts.i18n) {
-    i18n(opts.i18n);
-  }
-  vue.use(VueCompositionAPI);
-  Object.keys(Components).forEach((name) => {
-    vue.component(name, Components[name]);
-  });
-  if (!window?.analytics) {
-    vue.use(Segment, {
-      id: window?.contextPsAccounts?.segmentApiKey,
-      pageCategory: "ps_accounts-ui"
-    });
-  }
-};
 
 const Components = {
   PsAccounts,
@@ -37,24 +16,47 @@ const Components = {
   EventBusNotInstalled,
 };
 
-if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue, { locale: window.iso_user || 'en' });
-} else {
+function install(vue, opts = {}) {
+  if (opts.locale) {
+    use(opts.locale);
+  }
+  if (opts.i18n) {
+    i18n(opts.i18n);
+  }
+
+  vue.use(VueCompositionAPI);
+
   Object.keys(Components).forEach((name) => {
-    Vue.component(name, Components[name]);
+    vue.component(name, Components[name]);
   });
-  Vue.use(VueCompositionAPI);
+
   if (!window?.analytics) {
-    Vue.use(Segment, {
+    vue.use(Segment, {
       id: window?.contextPsAccounts?.segmentApiKey,
-      pageCategory: "ps_accounts-ui"
+      pageCategory: 'ps_accounts-ui',
     });
   }
 }
 
-new Vue({
-  render: (h) => h(PsAccounts),
-}).$mount("prestashop-accounts");
+// this method can be called like that window.psaccountsVue.init()
+export function init() {
+  Vue.use(install);
+  new Vue({
+    components: {
+      'prestashop-accounts': PsAccounts,
+    },
+  }).$mount('prestashop-accounts');
+}
+
+// if (typeof window !== 'undefined' && !window.Vue) {
+//   Vue.use(install);
+
+//   new Vue({
+//     components: {
+//       'prestashop-accounts': PsAccounts,
+//     },
+//   }).$mount('prestashop-accounts');
+// }
 
 export default {
   version: '0.1.4',
@@ -62,7 +64,7 @@ export default {
   i18n,
   install,
   isOnboardingCompleted,
-  ...Components
+  ...Components,
 };
 
 export {
@@ -74,5 +76,5 @@ export {
   AccountPanel,
   AccountNotInstalled,
   AccountNotEnabled,
-  EventBusNotInstalled
+  EventBusNotInstalled,
 };

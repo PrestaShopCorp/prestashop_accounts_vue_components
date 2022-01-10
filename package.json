@@ -7,8 +7,8 @@
     "*.json"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve src/full.js",
-    "build": "vue-cli-service build --target lib --name psaccountsVue src/full.js",
+    "serve": "vue-cli-service serve src/main.js",
+    "build": "vue-cli-service build --target lib --name psaccountsVue src/main.js",
     "build:dev": "yarn build --mode development",
     "build:watch": "yarn build --watch",
     "build-lib": "yarn build",
