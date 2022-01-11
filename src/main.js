@@ -23,13 +23,10 @@ function install(vue, opts = {}) {
   if (opts.i18n) {
     i18n(opts.i18n);
   }
-
   vue.use(VueCompositionAPI);
-
   Object.keys(Components).forEach((name) => {
     vue.component(name, Components[name]);
   });
-
   if (!window?.analytics) {
     vue.use(Segment, {
       id: window?.contextPsAccounts?.segmentApiKey,
@@ -38,25 +35,20 @@ function install(vue, opts = {}) {
   }
 }
 
-// this method can be called like that window.psaccountsVue.init()
-export function init() {
-  Vue.use(install);
-  new Vue({
-    components: {
-      'prestashop-accounts': PsAccounts,
-    },
-  }).$mount('prestashop-accounts');
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue, {locale: window.iso_user || 'en'});
+} else {
+  Object.keys(Components).forEach((name) => {
+    Vue.component(name, Components[name]);
+  });
+  Vue.use(VueCompositionAPI);
+  if (!window?.analytics) {
+    Vue.use(Segment, {
+      id: window?.contextPsAccounts?.segmentApiKey,
+      pageCategory: 'ps_accounts-ui',
+    });
+  }
 }
-
-// if (typeof window !== 'undefined' && !window.Vue) {
-//   Vue.use(install);
-
-//   new Vue({
-//     components: {
-//       'prestashop-accounts': PsAccounts,
-//     },
-//   }).$mount('prestashop-accounts');
-// }
 
 export default {
   version: '0.1.4',

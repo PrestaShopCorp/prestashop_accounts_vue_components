@@ -55,10 +55,6 @@
         <slot name="customBody" />
       </template>
     </template>
-    body slot:
-    <slot />
-    footer slot:
-    <slot name="footer" />
   </div>
 </template>
 

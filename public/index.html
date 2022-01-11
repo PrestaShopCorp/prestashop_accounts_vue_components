@@ -13,12 +13,23 @@
     </noscript>
     
     <div class="m-4">
-      <prestashop-accounts>
-          test slot
-          <!--<event-bus-not-installed />-->
-          <template v-slot:footer><span style="background: red">test footer</span></template>
-      </prestashop-accounts>
+      <div id="app"></div>
     </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+  <script>
+    setTimeout(() => {
+      var PsAccounts = window?.psaccountsVue?.PsAccounts;
+      
+      new Vue({
+        //components: {
+        //  PsAccounts: window?.psaccountsVue?.PsAccounts,
+        //}
+        // render: h => h(PsAccounts),
+        template: '<PsAccounts />',
+      }).$mount('#app')
+    }, 1000);
+  </script>
 
     <!-- built files will be auto injected -->
   </body>
