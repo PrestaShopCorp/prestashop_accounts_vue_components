@@ -39,24 +39,14 @@ function install(vue, opts = {}) {
 }
 
 // this method can be called like that window.psaccountsVue.init()
-// Vue.use(install);
-// export function init() {
-//   new Vue({
-//     components: {
-//       'prestashop-accounts': PsAccounts,
-//     },
-//   }).$mount('prestashop-accounts');
-// }
-
-// if (typeof window !== 'undefined' && !window.Vue) {
 Vue.use(install);
-
-new Vue({
-  components: {
-    'prestashop-accounts': PsAccounts,
-  },
-}).$mount('prestashop-accounts');
-// }
+export function init() {
+  new Vue({
+    components: {
+      'prestashop-accounts': PsAccounts,
+    },
+  }).$mount('prestashop-accounts');
+}
 
 export default {
   version: '0.1.4',
