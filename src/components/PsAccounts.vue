@@ -161,7 +161,7 @@
     created() {
       setContext(this.context);
 
-      if (this.validContext.psAccountsIsInstalled) {
+      if (this.validContext.psAccountsIsInstalled && this.validContext.psAccountsIsEnabled) {
         this.trackUser();
         this.trackComponent();
       }

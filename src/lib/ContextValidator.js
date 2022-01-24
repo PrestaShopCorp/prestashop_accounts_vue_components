@@ -26,7 +26,7 @@ export const shopSchema = Joi.object().keys({
   multishop: Joi.boolean(),
   name: Joi.string().required().min(1).max(128),
   physicalUri: Joi.string().allow(null).allow(false),
-  psVersion: Joi.string(),
+  psVersion: Joi.string().optional(),
   publicKey: Joi.string(),
   url: Joi.string().uri().required(),
   user: shopUserSchema.optional().allow({}).default({}),
@@ -40,7 +40,7 @@ export const shopGroupSchema = Joi.object().keys({
   moduleName: Joi.string(),
   multishop: Joi.boolean(),
   name: Joi.string().required().min(1).max(128),
-  psVersion: Joi.string(),
+  psVersion: Joi.string().optional(),
   shops: Joi.array().items(shopSchema).min(1).max(128)
     .required(),
 }).unknown(true);
