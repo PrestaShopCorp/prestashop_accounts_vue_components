@@ -110,12 +110,15 @@
       psEventBusModuleState,
       shops: shopsInContext,
       hasAllShopsLinked() {
-        return this.shops.every((shop) => shop.uuid);
+        return this.shopsWithUrl.every((shop) => shop.uuid);
       },
       hasBlockingAlert() {
         return !this.validContext.psAccountsIsInstalled
           || !this.validContext.psAccountsIsUptodate
           || !this.validContext.psAccountsIsEnabled;
+      },
+      shopsWithUrl() {
+        return this.shops.filter((shop) => shop.domain);
       },
     },
     methods: {
@@ -138,19 +141,19 @@
           ps_account_module_state: this.psAccountModuleState,
           ps_eventbus_module_state: this.psEventBusModuleState,
           ps_module_from: this.validContext.psxName,
-          ps_version: this.shops[0].psVersion,
+          ps_version: this.shopsWithUrl[0].psVersion,
           shop_context_id: this.validContext.currentContext.id,
           shop_context_type: this.validContext.currentContext.type,
-          shop_associated: this.shops.map(
+          shop_associated: this.shopsWithUrl.map(
             (shop) => shop.uuid !== null && !shop.isLinkedV4,
           ),
-          shop_bo_ids: this.shops.map((shop) => shop.id),
-          shop_employee_ids: this.shops.map((shop) => shop.employeeId),
-          shop_names: this.shops.map((shop) => shop.name),
-          shop_uuids: this.shops.map((shop) => shop.uuid),
-          shop_v4_onboarded: this.shops.map((shop) => shop.isLinkedV4),
-          shop_urls: this.shops.map(
-            (shop) => (shop.domain || shop.domainSsl) + shop.physicalUri,
+          shop_bo_ids: this.shopsWithUrl.map((shop) => shop.id),
+          shop_employee_ids: this.shopsWithUrl.map((shop) => shop.employeeId),
+          shop_names: this.shopsWithUrl.map((shop) => shop.name),
+          shop_uuids: this.shopsWithUrl.map((shop) => shop.uuid),
+          shop_v4_onboarded: this.shopsWithUrl.map((shop) => shop.isLinkedV4),
+          shop_urls: this.shopsWithUrl.map(
+            (shop) => (shop.domain || shop.domainSsl) + shop.physicalUri + shop.virtualUri,
           ),
         });
       },
