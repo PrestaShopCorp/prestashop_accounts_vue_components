@@ -1,21 +1,21 @@
 {
   "name": "prestashop_accounts_vue_components",
   "version": "1.5.5",
+  "scripts": {
+    "serve": "vue-cli-service serve src/main.ts",
+    "build": "vue-cli-service build --target lib --name psaccountsVue src/main.ts",
+    "lint": "vue-cli-service lint",
+    "build-lib": "yarn build",
+    "build-storybook": "build-storybook",
+    "build:dev": "yarn build --mode development",
+    "build:watch": "yarn build --watch",
+    "storybook": "start-storybook"
+  },
   "main": "./dist/psaccountsVue.common.js",
   "files": [
     "dist/*",
     "*.json"
   ],
-  "scripts": {
-    "serve": "vue-cli-service serve src/main.js",
-    "build": "vue-cli-service build --target lib --name psaccountsVue src/main.js",
-    "build:dev": "yarn build --mode development",
-    "build:watch": "yarn build --watch",
-    "build-lib": "yarn build",
-    "lint": "vue-cli-service lint",
-    "storybook": "start-storybook",
-    "build-storybook": "build-storybook"
-  },
   "dependencies": {
     "@prestashopcorp/segment-vue": "^2.1.7",
     "@vue/composition-api": "^1.4.3",
@@ -36,9 +36,13 @@
     "@storybook/addons": "^6.4.9",
     "@storybook/theming": "^6.4.9",
     "@storybook/vue": "^6.4.9",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "^4.5.15",
     "@vue/cli-plugin-eslint": "^5.0.0-beta.7",
+    "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-service": "^4.5.15",
+    "@vue/eslint-config-typescript": "^9.1.0",
     "babel-preset-vue": "^2.0.2",
     "eslint": "^8.6.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -47,6 +51,7 @@
     "eslint-plugin-vue": "^8.2.0",
     "sass": "^1.45.2",
     "sass-loader": "^10.2.0",
+    "typescript": "~4.1.5",
     "vue-template-compiler": "^2.6.14"
   },
   "browserslist": [

@@ -1,6 +1,67 @@
 import Vue from 'vue';
 import {contextSchema} from '@/lib/ContextValidator';
 
+interface BackendUser {
+  email: string;
+  // ...
+  employeeId: number;
+  isSuperAdmin: boolean;
+}
+
+enum ShopContext {
+  Shop = 1,
+  Group = 2,
+  All = 4,
+}
+
+interface Shop {
+  domain: string;
+  domainSsl: string;
+  employeeId: string;
+  id: string;
+  isLinkedV4: boolean;
+  // ...
+  name: string;
+  physicalUri: string;
+  psVersion: string;
+  uuid?: string;
+}
+
+interface ShopGroup {
+  id: string;
+  // ...
+  shops: Shop[];
+}
+
+interface User {
+  // ...
+}
+
+interface State {
+  backendUser?: BackendUser;
+  currentContext?: {
+    id?: number;
+    type: ShopContext;
+  };
+  dependencies?: Record<
+    string,
+    {
+      isInstalled?: boolean;
+      isEnabled?: boolean;
+      installLink?: string;
+      enableLink?: string;
+    }
+  >;
+  isOnboardedV4?: boolean;
+  psAccountsIsEnabled: boolean;
+  psAccountsIsInstalled: boolean;
+  psAccountsIsUptodate: boolean;
+  psAccountsVersion?: string;
+  psxName?: string;
+  shops: ShopGroup[];
+  user: User;
+}
+
 export const CONTEXT_SHOP = 1;
 export const CONTEXT_GROUP = 2;
 export const CONTEXT_ALL = 4;
@@ -26,9 +87,9 @@ const defaultState = () => ({
   manageAccountLink: null,
 });
 
-const state = Vue.observable(defaultState());
+const state = Vue.observable<State>(defaultState());
 
-export const setContext = (context) => {
+export function setContext<T extends Record<string, unknown>>(context: T): void {
   const mergedContext = {
     ...defaultState(),
     ...(window.contextPsAccounts || {}),
@@ -61,7 +122,7 @@ export const setContext = (context) => {
       );
     },
   );
-};
+}
 
 /**
  * Getters
@@ -100,31 +161,35 @@ export const psEventBusModuleState = () => {
 };
 
 export const shops = () => state.shops.reduce(
-  (acc, shopGroup) => [...acc, ...shopGroup.shops], [],
+  (acc, shopGroup) => [...acc, ...shopGroup.shops], [] as Shop[],
 );
 
 export const shopsInContext = () => {
-  if (state.currentContext.type === CONTEXT_ALL) { // All
+  if (!state.currentContext) {
+    return [];
+  }
+
+  if (state.currentContext.type === ShopContext.All) {
     return shops();
   }
 
-  if (state.currentContext.type === CONTEXT_GROUP) { // Group
+  if (state.currentContext.type === ShopContext.Group) {
     return [
       ...state.shops.find(
-        (shopGroup) => parseInt(shopGroup.id, 10) === state.currentContext.id,
+        (shopGroup) => parseInt(shopGroup.id, 10) === state.currentContext?.id,
       )?.shops || [],
     ];
   }
 
   // Shop
   const shop = state.shops.reduce(
-    (acc, shopGroup) => [...acc, ...shopGroup.shops], [],
+    (acc, shopGroup) => [...acc, ...shopGroup.shops], [] as Shop[],
   )
     .find(
-      (shop2) => parseInt(shop2.id, 10) === state.currentContext.id,
+      (shop2) => parseInt(shop2.id, 10) === state.currentContext?.id,
     );
 
   return shop ? [shop] : [];
 };
 
-export default () => state;
+export default (): State => state;

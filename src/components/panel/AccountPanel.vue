@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {
   BCard,
   BCardBody,
@@ -64,7 +65,7 @@ import ShopUrlShouldExists from '@/components/alert/ShopUrlShouldExists';
    * does not meets special needs.
    * This part will display a block to let the user link his account through a button.
    */
-export default {
+export default Vue.extend({
   name: 'AccountPanel',
   mixins: [Locale],
   components: {
@@ -166,7 +167,7 @@ export default {
       });
     },
   },
-};
+});
 </script>
 
 <style scoped>

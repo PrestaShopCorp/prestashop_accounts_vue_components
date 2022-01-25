@@ -1,11 +1,20 @@
 module.exports = {
   root: true,
+
   env: {
     node: true,
   },
+
   parserOptions: {
-    parser: '@babel/eslint-parser',
+    parser: '@typescript-eslint/parser',
   },
-  extends: ['prestashop', 'plugin:vue/strongly-recommended'],
+
+  extends: ['prestashop', 'plugin:vue/strongly-recommended', '@vue/typescript'],
+
   plugins: ['import', 'vue'],
+
+  rules: {
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'off',
+  },
 };

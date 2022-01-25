@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {
   BButton,
   BDropdown,
@@ -71,7 +72,7 @@ import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 import LinkShopModal from '@/components/crossdomains/LinkShopModal';
 
-export default {
+export default Vue.extend({
   name: 'AccountLinkToUi',
   mixins: [Locale],
   components: {
@@ -192,7 +193,7 @@ export default {
       document.body.classList.remove('ui-displayed');
     },
   },
-};
+});
 </script>
 
 <style>

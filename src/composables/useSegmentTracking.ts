@@ -8,7 +8,7 @@ import context, {
 
 const state = Vue.observable({
   initialized: false,
-  properties: {},
+  properties: {} as Record<string, unknown>,
   superProperties: [
     'multishop_numbers',
     'ps_account_version',
@@ -23,11 +23,11 @@ const state = Vue.observable({
   ],
 });
 export default function useSegmentTracking() {
-  function identify(...args) {
+  function identify(...args: any[]) {
     let props = {
-      email: context().backendUser.email,
-      employeeId: context().backendUser.employeeId,
-      superadmin: context().backendUser.isSuperAdmin,
+      email: context().backendUser?.email,
+      employeeId: context().backendUser?.employeeId,
+      superadmin: context().backendUser?.isSuperAdmin,
       v4_onboarded: context().isOnboardedV4,
     };
 
@@ -43,7 +43,7 @@ export default function useSegmentTracking() {
     setSuperProperties(props);
   }
 
-  function track(name, props = {}) {
+  function track(name: string, props = {}) {
     // eslint-disable-next-line no-unused-expressions
     Vue.prototype.$segment?.track(name, {...state.properties, ...props});
 
@@ -67,8 +67,8 @@ export default function useSegmentTracking() {
         (shop) => shop.uuid !== null && !shop.isLinkedV4,
       ),
       shop_bo_ids: shopsWithUrl.map((shop) => shop.id),
-      shop_context_id: context().currentContext.id,
-      shop_context_type: context().currentContext.type,
+      shop_context_id: context().currentContext?.id,
+      shop_context_type: context().currentContext?.type,
       shop_employee_ids: shopsWithUrl.map((shop) => shop.employeeId),
       shop_names: shopsWithUrl.map((shop) => shop.name),
       shop_uuids: shopsWithUrl.map((shop) => shop.uuid),
@@ -79,7 +79,7 @@ export default function useSegmentTracking() {
     return true;
   }
 
-  function trackAssociateOrManageAccountButton(action) {
+  function trackAssociateOrManageAccountButton(action: string) {
     const eventName = ['reonboard', 'associate'].includes(action)
       ? '[ACC] Associate Button Clicked'
       : '[ACC] Manage Account Button Clicked';
@@ -125,7 +125,7 @@ export default function useSegmentTracking() {
     // }
   }
 
-  function setSuperProperties(props) {
+  function setSuperProperties<T>(props: Record<string, T>) {
     Object.keys(props).forEach((key) => {
       if (state.superProperties.includes(key)) {
         state.properties[key] = props[key];

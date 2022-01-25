@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {
   BAlert,
 } from 'bootstrap-vue';
@@ -18,11 +19,11 @@ import Locale from '@/mixins/locale';
    * and tell him to reonboard with the same email address and
    * update other modules;
    */
-export default {
+export default Vue.extend({
   name: 'ModuleUpdatedInformation',
   mixins: [Locale],
   components: {
     BAlert,
   },
-};
+});
 </script>

@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import context, {
   eventbusIsEnabled, eventbusIsInstalled, eventbusInstallLink, eventbusEnableLink,
 } from '@/lib/context';
@@ -49,7 +50,7 @@ import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotIn
    * component does not meets special needs. This part will display a warning message
    * telling the PS Accounts module is not enabled on the shop (and a button to enable it).
    */
-export default {
+export default Vue.extend({
   name: 'PsAccountComponentAlertDisplay',
   components: {
     AccountNotEnabled,
@@ -66,5 +67,5 @@ export default {
     eventbusInstallLink,
     eventbusEnableLink,
   },
-};
+});
 </script>

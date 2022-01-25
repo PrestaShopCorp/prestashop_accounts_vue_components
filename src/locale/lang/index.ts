@@ -16,4 +16,4 @@ export default {
   nl,
   pl,
   pt,
-};
+} as Record<string | number | symbol, object>;

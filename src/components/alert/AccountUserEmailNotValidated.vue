@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {
   BAlert,
   BButton,
@@ -28,7 +29,7 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    * This alert shows a message if the user email is not validated
    * and tell him to validate his account;
    */
-export default {
+export default Vue.extend({
   name: 'AccountUserEmailNotValidated',
   mixins: [Locale],
   components: {
@@ -57,5 +58,5 @@ export default {
       window.open(this.ssoResendVerificationEmail, '_blank');
     },
   },
-};
+});
 </script>

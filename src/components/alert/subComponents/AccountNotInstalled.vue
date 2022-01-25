@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {BAlert, BButton, BLink} from 'bootstrap-vue';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
@@ -37,7 +38,7 @@ import installModule from '../../../lib/moduleManager/InstallModule';
    * component does not meets special needs. This part will display a warning message
    * telling the PS Accounts module is not installed on the shop (and a button to install it).
    */
-export default {
+export default Vue.extend({
   name: 'AlertAccountNotInstalled',
   mixins: [Locale],
   components: {
@@ -83,5 +84,5 @@ export default {
       });
     },
   },
-};
+});
 </script>

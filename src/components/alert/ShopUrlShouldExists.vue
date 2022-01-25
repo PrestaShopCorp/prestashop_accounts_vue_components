@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {
   BAlert,
 } from 'bootstrap-vue';
@@ -22,7 +23,7 @@ import Locale from '@/mixins/locale';
 /**
    * This alert shows a message if a shop domain is not set;
    */
-export default {
+export default Vue.extend({
   name: 'ShopUrlShouldExists',
   mixins: [Locale],
   components: {
@@ -40,5 +41,5 @@ export default {
       default: () => ([]),
     },
   },
-};
+});
 </script>

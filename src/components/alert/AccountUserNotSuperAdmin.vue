@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {
   BAlert,
 } from 'bootstrap-vue';
@@ -28,7 +29,7 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    * This sub-component shows a message is the user is not a super-admin
    * and tell him to contact one to continue the process
    */
-export default {
+export default Vue.extend({
   name: 'AccountUserNotSuperAdmin',
   mixins: [Locale],
   components: {
@@ -50,5 +51,5 @@ export default {
       this.trackLinkContactAdmin();
     },
   },
-};
+});
 </script>

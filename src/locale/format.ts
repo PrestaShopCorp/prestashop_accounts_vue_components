@@ -1,7 +1,8 @@
+// @ts-nocheck
 const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
 
 // eslint-disable-next-line no-unused-vars
-export default function format(Vue) {
+export default function format<T>(Vue: T) {
   /**
    * template
    *
@@ -10,7 +11,7 @@ export default function format(Vue) {
    * @return {String}
    */
 
-  function template(string, ...args) {
+  function template(string: string, ...args) {
     if (args.length === 1 && typeof args[0] === 'object') {
       // eslint-disable-next-line no-param-reassign
       [args] = args;
@@ -22,8 +23,7 @@ export default function format(Vue) {
     }
 
     return string.replace(RE_NARGS, (match, prefix, i, index) => {
-      if (string[index - 1] === '{'
-        && string[index + match.length] === '}') {
+      if (string[index - 1] === '{' && string[index + match.length] === '}') {
         return i;
       }
 

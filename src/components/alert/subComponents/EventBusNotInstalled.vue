@@ -26,12 +26,13 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {BOverlay, BAlert, BButton} from 'bootstrap-vue';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 import installModule from '../../../lib/moduleManager/InstallModule';
 
-export default {
+export default Vue.extend({
   name: 'AlertEventBusNotInstalled',
   mixins: [Locale],
   components: {
@@ -81,7 +82,7 @@ export default {
       });
     },
   },
-};
+});
 </script>
 
 <style></style>

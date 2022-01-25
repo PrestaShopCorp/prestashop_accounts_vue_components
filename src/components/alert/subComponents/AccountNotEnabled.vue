@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {BAlert, BButton, BLink} from 'bootstrap-vue';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
@@ -37,7 +38,7 @@ import enableModule from '../../../lib/moduleManager/EnableModule';
    * component does not meets special needs. This part will display a warning message
    * telling the PS Accounts module is not enabled on the shop (and a button to enable it).
    */
-export default {
+export default Vue.extend({
   name: 'AlertAccountNotEnabled',
   components: {
     BAlert,
@@ -83,5 +84,5 @@ export default {
       });
     },
   },
-};
+});
 </script>

@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {BAlert, BOverlay} from 'bootstrap-vue';
 import validContext, {
   setContext, shopsInContext,
@@ -77,7 +78,7 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    * and a special `v-slot:customBody` that will always be
    * displayed (you have to manage display condition by yourself).
    */
-export default {
+export default Vue.extend({
   name: 'PsAccounts',
   components: {
     PsAccountComponentAlertDisplay,
@@ -135,7 +136,7 @@ export default {
       this.trackAccountComponentViewed();
     }
   },
-};
+});
 </script>
 
 <style>

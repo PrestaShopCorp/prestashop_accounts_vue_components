@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import Alert from './Alert';
 import enableModule from '../../../lib/moduleManager/EnableModule';
 import useSegmentTracking from '../../../composables/useSegmentTracking';
@@ -36,7 +37,7 @@ import useSegmentTracking from '../../../composables/useSegmentTracking';
    * component does not meets special needs. This part will display a warning message
    * telling the PS EventBus module is not enabled on the shop (and a button to enable it).
    */
-export default {
+export default Vue.extend({
   name: 'AlertEventBusNotEnabled',
   mixins: [Alert],
   props: {
@@ -72,5 +73,5 @@ export default {
       });
     },
   },
-};
+});
 </script>

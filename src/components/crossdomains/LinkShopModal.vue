@@ -34,7 +34,7 @@ import vClickOutside from 'v-click-outside';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 import LinkShopCrossDomain from './linkShopCrossDomain';
 
-export default {
+export default Vue.extend({
   name: 'LinkShopModal',
   components: {
     'link-shop-crossdomain': LinkShopCrossDomain.driver('vue', Vue),
@@ -87,7 +87,7 @@ export default {
       }
     }, 60000);
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

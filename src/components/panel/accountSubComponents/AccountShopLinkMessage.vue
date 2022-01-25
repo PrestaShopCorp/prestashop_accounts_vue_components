@@ -40,9 +40,10 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import Locale from '@/mixins/locale';
 
-export default {
+export default Vue.extend({
   name: 'AccountShopLinkMessage',
   mixins: [Locale],
   props: {
@@ -68,5 +69,5 @@ export default {
       return this.linkedShops[0]?.user?.email || '';
     },
   },
-};
+});
 </script>

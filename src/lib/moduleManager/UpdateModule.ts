@@ -1,9 +1,9 @@
 import manageModuleAction from './ManageModuleAction';
 
-export default function enableModule(moduleName, actionLink, isPs17) {
+export default function updateModule(moduleName: string, actionLink: string, isPs17: boolean) {
   return manageModuleAction({
     module: moduleName,
-    action: 'enable',
+    action: 'update',
     actionLink,
   },
   isPs17,
