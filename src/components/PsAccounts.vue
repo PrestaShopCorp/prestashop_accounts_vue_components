@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="main_ps_accounts">
     <b-alert
       :show="hasError"
       @dismissed="hasError = false"
@@ -37,8 +37,7 @@
           :shop-context="validContext.currentContext.type"
           :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
           :super-admin-email="validContext.superAdminEmail"
-        >
-        </AccountPanel>
+        />
         <b-overlay
           :show="!hasAllShopsLinked"
           variant="white"
@@ -46,7 +45,7 @@
           :opacity="0.70"
           blur="0px"
         >
-          <slot/>
+          <slot />
         </b-overlay>
       </template>
     </template>
@@ -131,6 +130,8 @@ export default {
 </script>
 
 <style>
-@import '~bootstrap-vue/dist/bootstrap-vue.css';
-@import '~prestakit/dist/css/bootstrap-prestashop-ui-kit.css';
+#main_ps_accounts {
+  @import '~bootstrap-vue/dist/bootstrap-vue.css';
+  @import '~prestakit/dist/css/bootstrap-prestashop-ui-kit.css';
+}
 </style>
