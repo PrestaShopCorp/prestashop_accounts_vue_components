@@ -20,6 +20,7 @@ export const shopSchema = Joi.object().keys({
   domain: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domain').allow(null).required(),
   domainSsl: Joi.string().pattern(/([a-z0-9]+(-[a-z0-9]+)*)+/i, 'domainSsl').allow(null).required(),
   employeeId: Joi.number().allow(null),
+  frontUrl: Joi.string().optional().uri().allow(null),
   id: Joi.string().required(),
   moduleName: Joi.string(),
   multishop: Joi.boolean(),
@@ -30,6 +31,8 @@ export const shopSchema = Joi.object().keys({
   url: Joi.string().uri().required(),
   user: shopUserSchema.optional().allow({}).default({}),
   uuid: Joi.string().allow(null),
+  virtualUri: Joi.string().optional().allow('').allow(null)
+    .allow(false),
 }).unknown(true);
 
 export const shopGroupSchema = Joi.object().keys({
