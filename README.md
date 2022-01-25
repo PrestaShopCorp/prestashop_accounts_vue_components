@@ -1,4 +1,4 @@
-# prestashop_accounts_vue_components
+# Prestashop Accounts Vue Components
 
 ## Community Service & PrestaShop X modules
 
@@ -20,35 +20,30 @@ To work as a Community Service or as PrestaShop X, a module needs three parts:
 ## Installation
 
 ```bash
-yarn
+yarn install
 ```
 
 ## Usage
 
-For view storybook run
+### Storybook
+
+#### Local
 
 ```bash
-yarn start-storybook
+yarn storybook
 ```
 
-and go on [local storybook](http://localhost:33199/?path=/docs/introduction--page)
-or use online [integration storybook](https://storybook-accounts.distribution.prestashop.net/?path=/docs/introduction--page)
+#### Integration / Production
 
-## Storybooks
+[Storybook integration](https://storybook-accounts.distribution-integration.prestashop.net/) (trigger on PR labeled 'quality assurance needed')
 
-Storybook integration (trigger on PR labeled 'quality assurance needed'): 
+[Storybook production](https://storybook-accounts.distribution.prestashop.net/) (trigger on push master/main)
 
-https://storybook-accounts.distribution-integration.prestashop.net/
+### CDN
 
-Storybook production (trigger on push master/main) : 
+To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page.
 
-https://storybook-accounts.distribution.prestashop.net/
-
-## CDN
-
-To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page. 
-
-```
+```html
 # To load version 1.4.2
 <script src="https://storage.googleapis.com/prestashop-vuejs-cdn/accounts/1.4.2/prestashop_accounts_vue_components.min.js"></script>
 
