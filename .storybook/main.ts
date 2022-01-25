@@ -23,6 +23,12 @@ module.exports = {
     };
 
     config.module.rules.push({
+      test: /\.ts$/,
+      loader: "ts-loader",
+      options: { appendTsSuffixTo: [/\.vue$/] },
+    });
+
+    config.module.rules.push({
       test: /\.scss$/,
       use: [
         require.resolve("vue-style-loader"),
