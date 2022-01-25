@@ -10,11 +10,22 @@ module.exports = {
   },
 
   extends: ['prestashop', 'plugin:vue/strongly-recommended', '@vue/typescript'],
-
   plugins: ['import', 'vue'],
 
   rules: {
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'off',
   },
+
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
+      ],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };
