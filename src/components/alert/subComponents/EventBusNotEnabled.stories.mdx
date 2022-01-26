@@ -1,10 +1,32 @@
 import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/blocks';
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import EventBusNotEnabled from './EventBusNotEnabled.vue';
 
-<Meta title="Sub-Components/Alerts/Alert event bus not enabled" component={EventBusNotEnabled} decorators={[withKnobs]} />
+<Meta
+  title="Sub-Components/Alerts/Alert event bus not enabled"
+  argTypes={{
+    link: {
+      control: {
+        type: 'text',
+      },
+    },
+    psIs17: {
+      control: {
+        type: 'boolean',
+      },
+    },
+  }}
+  component={EventBusNotEnabled} />
+
+export const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { EventBusNotEnabled },
+  methods: {
+    event: action('hasError'),
+  },
+  template: `<EventBusNotEnabled v-bind="$props" @hasError="event" class="m-4" />`,
+})
 
 # Alert block: PS EventBus module is disabled
 
@@ -12,22 +34,14 @@ When the PS EventBus module is disabled in the module manager of the backoffice,
 be done properly. So the user should be warned with that message and the process is blocked until the
 module is enabled again.
 
-<Story name='Disabled' height='220px'>
-  {{
-    components: {EventBusNotEnabled},
-    props: {
-      link: {
-        default: text('link', 'https://...'),
-      },
-      psIs17: {
-        default: boolean('psIs17', true),
-      },
-    },
-    methods: {
-      event: action('hasError'),
-    },
-    template: '<EventBusNotEnabled class="m-4" :link="link" :ps-is17="psIs17" @hasError="event" />',
-  }}
+<Story
+  name='Disabled'
+  height='220px'
+  args={{
+    link: 'https://link',
+    psIs17: true,
+  }}>
+  {Template.bind({})}
 </Story>
 
 ---
@@ -39,7 +53,7 @@ _Notice: If you need to integrate the standard behavior of PS PsAccounts, please
 If you need a custom integration of PS EventBus sub-components, here is the EventBusNotEnabled block:
 
 ```html
-<EventBusNotEnabled :link="link" :ps-is17="psIs17" @hasError="event" class="m-4" />
+<EventBusNotEnabled :link="link" :ps-is17="psIs17" @hasError="event" />
 ```
 
 # Technical details

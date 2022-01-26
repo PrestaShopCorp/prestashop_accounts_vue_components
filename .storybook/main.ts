@@ -5,7 +5,7 @@ module.exports = {
   logLevel: "debug",
   addons: [
     "@storybook/addon-actions",
-    "@storybook/addon-knobs",
+    "@storybook/addon-controls",
     {
       // TODO: check theses options
       name: "@storybook/addon-docs",
