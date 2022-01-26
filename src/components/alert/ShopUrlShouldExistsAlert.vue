@@ -1,8 +1,5 @@
 <template>
-  <b-alert
-    :variant="hasAllShopsWithoutUrl ? 'danger' : 'warning'"
-    show
-  >
+  <BaseAlert :variant="hasAllShopsWithoutUrl ? 'danger' : 'warning'">
     <h3 class="m-0">
       {{ t('psaccounts.alertShopDomainShouldExists.title') }}
     </h3>
@@ -10,24 +7,22 @@
       <span v-html="t('psaccounts.alertShopDomainShouldExists.message')" />
       {{ shopNamesWithoutUrl.join(', ') }}
     </p>
-  </b-alert>
+  </BaseAlert>
 </template>
 
-<script>
-import Vue from 'vue';
-import {
-  BAlert,
-} from 'bootstrap-vue';
+<script lang="ts">
+import {defineComponent} from '@vue/composition-api';
+import BaseAlert from './BaseAlert.vue';
 import Locale from '@/mixins/locale';
 
 /**
    * This alert shows a message if a shop domain is not set;
    */
-export default Vue.extend({
-  name: 'ShopUrlShouldExists',
+export default defineComponent({
+  name: 'ShopUrlShouldExistsAlert',
   mixins: [Locale],
   components: {
-    BAlert,
+    BaseAlert,
   },
   props: {
     hasAllShopsWithoutUrl: {

@@ -1,0 +1,53 @@
+import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+
+import ModuleAlert from './ModuleAlert.vue';
+
+<Meta
+  title="Components/Alert/Module Alert"
+  component={ModuleAlert} />
+
+export const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { ModuleAlert },
+  methods: {
+    onAction: action('action'),
+  },
+  template: `<ModuleAlert v-bind="$props" @action="onAction" class="m-4" />`,
+})
+
+# Module Alert: An alert for module needed action
+
+When PS Accounts need a dependant module action, 
+that module alert component is used to warn user.
+
+<Story
+  name='Module Alert'
+  args={{
+    title: 'Activate the PrestaShop Event Bus module',
+    message: 'You need the PrestaShop Event Bus module to continue setting up this module.',
+    actionText: 'Activate',
+    loading: false,
+    loadingText: 'The PrestaShop Event Bus module is currently being activated...',
+  }}>
+  {Template.bind({})}
+</Story>
+
+## Integration
+
+```html
+<ModuleAlert
+  title="Activate the PrestaShop Event Bus module"
+  message="You need the PrestaShop Event Bus module to continue setting up this module."
+  action-text ="Activate"
+  :loading="false"
+  loading-text="The PrestaShop Event Bus module is currently being activated..."
+  @action="() => {}"
+  />
+```
+
+## Technical details
+
+<Description of={ModuleAlert} />
+<Props of={ModuleAlert} />
+

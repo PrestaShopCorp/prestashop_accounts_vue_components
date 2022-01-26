@@ -9,7 +9,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
   },
 
-  extends: ['prestashop', 'plugin:vue/strongly-recommended', '@vue/typescript'],
+  extends: ['prestashop', 'plugin:vue/strongly-recommended', '@vue/typescript/recommended'],
   plugins: ['import', 'vue'],
 
   rules: {

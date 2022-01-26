@@ -24,8 +24,8 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import {defineComponent} from '@vue/composition-api';
 import {
   BIconstack,
   BIconCircleFill,
@@ -33,7 +33,7 @@ import {
 } from 'bootstrap-vue';
 import Locale from '@/mixins/locale';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'AccountHeader',
   mixins: [Locale],
   components: {

@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import {toRefs} from '@vue/composition-api';
-import context, {
-  shopsInContext,
-  psAccountModuleState,
-  psEventBusModuleState,
-} from '@/lib/context';
+import useContext from './useContext';
+
+const modules: Record<string, string> = {
+  ps_accounts: 'PSAccounts',
+  ps_eventbus: 'PSEventBus',
+};
 
 const state = Vue.observable({
   initialized: false,
@@ -23,12 +24,19 @@ const state = Vue.observable({
   ],
 });
 export default function useSegmentTracking() {
+  const {
+    context,
+    psAccountModuleState,
+    psEventBusModuleState,
+    shopsInContext,
+  } = useContext();
+
   function identify(...args: any[]) {
     let props = {
-      email: context().backendUser?.email,
-      employeeId: context().backendUser?.employeeId,
-      superadmin: context().backendUser?.isSuperAdmin,
-      v4_onboarded: context().isOnboardedV4,
+      email: context.value.backendUser?.email,
+      employeeId: context.value.backendUser?.employeeId,
+      superadmin: context.value.backendUser?.isSuperAdmin,
+      v4_onboarded: context.value.isOnboardedV4,
     };
 
     if (args.length === 1 && typeof args[0] === 'object') {
@@ -51,29 +59,29 @@ export default function useSegmentTracking() {
   }
 
   function trackAccountComponentViewed() {
-    const shopsWithUrl = shopsInContext().filter((shop) => shop.domain);
+    const shopsWithUrl = shopsInContext.value.filter((shop) => shop.domain);
 
     track('[ACC] Account Component Viewed', {
-      multishop_numbers: context().shops.reduce(
+      multishop_numbers: context.value.shops.reduce(
         (acc, shop) => acc + shop.shops.length,
         0,
       ),
-      ps_account_module_state: psAccountModuleState(),
-      ps_account_version: context().psAccountsVersion,
-      ps_eventbus_module_state: psEventBusModuleState(),
-      ps_module_from: context().psxName,
+      ps_account_module_state: psAccountModuleState.value,
+      ps_account_version: context.value.psAccountsVersion,
+      ps_eventbus_module_state: psEventBusModuleState.value,
+      ps_module_from: context.value.psxName,
       ps_version: shopsWithUrl[0]?.psVersion,
       shop_associated: shopsWithUrl.map(
         (shop) => shop.uuid !== null && !shop.isLinkedV4,
       ),
       shop_bo_ids: shopsWithUrl.map((shop) => shop.id),
-      shop_context_id: context().currentContext?.id,
-      shop_context_type: context().currentContext?.type,
+      shop_context_id: context.value.currentContext?.id,
+      shop_context_type: context.value.currentContext?.type,
       shop_employee_ids: shopsWithUrl.map((shop) => shop.employeeId),
       shop_names: shopsWithUrl.map((shop) => shop.name),
       shop_uuids: shopsWithUrl.map((shop) => shop.uuid),
       shop_v4_onboarded: shopsWithUrl.map((shop) => shop.isLinkedV4),
-      shop_urls: shopsWithUrl.map((shop) => (shop.domain || shop.domainSsl) + shop.physicalUri),
+      shop_urls: shopsWithUrl.map((shop) => (shop.domain || shop.domainSsl || '') + shop.physicalUri),
     });
 
     return true;
@@ -95,24 +103,9 @@ export default function useSegmentTracking() {
     track('[ACC] Link Resend Email Validation Clicked');
   }
 
-  function trackPsAccountEnableButton() {
-    track('[ACC] PSAccount Enable Button Clicked');
-  }
-
-  function trackPsAccountInstallButton() {
-    track('[ACC] PSAccount Install Button Clicked');
-  }
-
-  function trackPsAccountUpdateButton() {
-    track('[ACC] PSAccount Update Button Clicked');
-  }
-
-  function trackPsEventBusEnableButton() {
-    track('[ACC] PSEventBus Enable Button Clicked');
-  }
-
-  function trackPsEventBusInstallButton() {
-    track('[ACC] PSEventBus Install Button Clicked');
+  function trackModuleAction(module: string, action: string) {
+    const actionCapitalized = action.charAt(0).toUpperCase() + action.slice(1);
+    track(`[ACC] ${modules[module]} ${actionCapitalized} Button Clicked`);
   }
 
   function reset() {
@@ -155,10 +148,6 @@ export default function useSegmentTracking() {
     trackAssociateOrManageAccountButton,
     trackLinkContactAdmin,
     trackLinkResendEmailValidation,
-    trackPsAccountEnableButton,
-    trackPsAccountInstallButton,
-    trackPsAccountUpdateButton,
-    trackPsEventBusEnableButton,
-    trackPsEventBusInstallButton,
+    trackModuleAction,
   };
 }

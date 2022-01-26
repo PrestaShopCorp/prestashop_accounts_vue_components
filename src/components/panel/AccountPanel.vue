@@ -7,7 +7,7 @@
         <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
       </template>
       <b-card-body>
-        <ShopUrlShouldExists
+        <ShopUrlShouldExistsAlert
           v-if="hasShopsWithoutUrl"
           :has-all-shops-without-url="hasAllShopsWithoutUrl"
           :shop-names-without-url="shopNamesWithoutUrl"
@@ -25,18 +25,18 @@
           />
         </div>
 
-        <ModuleUpdateInformation
+        <ModuleUpdateInformationAlert
           v-if="isLinkedV4"
           class="mt-3"
         />
 
-        <AccountUserEmailNotValidated
+        <UserEmailNotValidatedAlert
           v-if="userHasEmailNotVerified"
           :sso-resend-verification-email="ssoResendVerificationEmail"
           class="mt-3"
         />
 
-        <AccountUserNotSuperAdmin
+        <UserNotSuperAdminAlert
           v-if="!backendUser.isSuperAdmin"
           :super-admin-email="superAdminEmail"
         />
@@ -46,26 +46,29 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import {
+  computed, defineComponent, PropType,
+} from '@vue/composition-api';
 import {
   BCard,
   BCardBody,
 } from 'bootstrap-vue';
+import {Shop} from '@/models/shop';
 import Locale from '@/mixins/locale';
-import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader';
-import AccountLinkToUi from '@/components/panel/accountSubComponents/AccountLinkToUi';
-import ModuleUpdateInformation from '@/components/alert/ModuleUpdateInformation';
-import AccountUserEmailNotValidated from '@/components/alert/AccountUserEmailNotValidated';
-import AccountUserNotSuperAdmin from '@/components/alert/AccountUserNotSuperAdmin';
-import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage';
-import ShopUrlShouldExists from '@/components/alert/ShopUrlShouldExists';
+import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader.vue';
+import AccountLinkToUi from '@/components/panel/accountSubComponents/AccountLinkToUi.vue';
+import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage.vue';
+import ModuleUpdateInformationAlert from '@/components/alert/ModuleUpdateInformationAlert.vue';
+import ShopUrlShouldExistsAlert from '@/components/alert/ShopUrlShouldExistsAlert.vue';
+import UserEmailNotValidatedAlert from '@/components/alert/UserEmailNotValidatedAlert.vue';
+import UserNotSuperAdminAlert from '@/components/alert/UserNotSuperAdminAlert.vue';
 /**
    * This sub-component can be used in a custom integration when the `PsAccounts` component
    * does not meets special needs.
    * This part will display a block to let the user link his account through a button.
    */
-export default Vue.extend({
+export default defineComponent({
   name: 'AccountPanel',
   mixins: [Locale],
   components: {
@@ -73,11 +76,11 @@ export default Vue.extend({
     BCardBody,
     AccountHeader,
     AccountLinkToUi,
-    ModuleUpdateInformation,
-    AccountUserEmailNotValidated,
-    AccountUserNotSuperAdmin,
     AccountShopLinkMessage,
-    ShopUrlShouldExists,
+    ModuleUpdateInformationAlert,
+    ShopUrlShouldExistsAlert,
+    UserEmailNotValidatedAlert,
+    UserNotSuperAdminAlert,
   },
   props: {
     /**
@@ -108,7 +111,7 @@ export default Vue.extend({
        * In single shop context, contains this shop information
        */
     shops: {
-      type: Array,
+      type: Array as PropType<Shop[]>,
       default: () => [],
     },
     /**
@@ -138,34 +141,38 @@ export default Vue.extend({
       required: true,
     },
   },
-  computed: {
-    hasAllShopsLinked() {
-      return this.shopsWithUrl.every((shop) => shop.uuid);
-    },
-    hasAllShopsWithoutUrl() {
-      return this.shops.every((shop) => shop.domain === null);
-    },
-    hasShopsWithoutUrl() {
-      return this.shops.some((shop) => shop.domain === null);
-    },
-    isLinkedV4() {
-      return this.shopsWithUrl.every((shop) => shop.isLinkedV4);
-    },
-    shopsWithUrl() {
-      return this.shops.filter((shop) => shop.domain);
-    },
-    shopNamesWithoutUrl() {
-      return this.shops.filter((shop) => shop.domain === null)
-        .map((shop) => shop.name);
-    },
-    userHasEmailNotVerified() {
-      return this.shopsWithUrl.some((shop) => {
-        const isUser = parseInt(shop.employeeId, 10) === this.backendUser.employeeId;
-        const hasEmailVerified = shop.user.emailIsValidated;
+  setup(props) {
+    const hasAllShopsLinked = computed(() => shopsWithUrl.value.every((shop) => shop.uuid));
 
-        return isUser && !hasEmailVerified && !shop.isLinkedV4;
-      });
-    },
+    const hasAllShopsWithoutUrl = computed(() => props.shops.every((shop) => shop.domain === null));
+
+    const hasShopsWithoutUrl = computed(() => props.shops.some((shop) => shop.domain === null));
+
+    const isLinkedV4 = computed(() => shopsWithUrl.value.every((shop) => shop.isLinkedV4));
+
+    const shopsWithUrl = computed(() => props.shops.filter((shop) => shop.domain));
+
+    const shopNamesWithoutUrl = computed(
+      () => props.shops.filter((shop) => shop.domain === null)
+        .map((shop) => shop.name),
+    );
+
+    const userHasEmailNotVerified = computed(() => shopsWithUrl.value.some((shop) => {
+      const isUser = shop.employeeId === props.backendUser.employeeId;
+      const hasEmailVerified = shop.user && shop.user.emailIsValidated;
+
+      return isUser && !hasEmailVerified && !shop.isLinkedV4;
+    }));
+
+    return {
+      hasAllShopsLinked,
+      hasAllShopsWithoutUrl,
+      hasShopsWithoutUrl,
+      isLinkedV4,
+      shopsWithUrl,
+      shopNamesWithoutUrl,
+      userHasEmailNotVerified,
+    };
   },
 });
 </script>

@@ -60,19 +60,22 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import {
+  computed, defineComponent, PropType, ref, watch,
+} from '@vue/composition-api';
 import {
   BButton,
   BDropdown,
   BDropdownItemButton,
 } from 'bootstrap-vue';
-import {CONTEXT_SHOP} from '@/lib/context';
+import {Shop} from '@/models/shop';
+import {ShopContext} from '@/types/context.type';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
-import LinkShopModal from '@/components/crossdomains/LinkShopModal';
+import LinkShopModal from '@/components/crossdomains/LinkShopModal.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'AccountLinkToUi',
   mixins: [Locale],
   components: {
@@ -80,12 +83,6 @@ export default Vue.extend({
     BDropdown,
     BDropdownItemButton,
     LinkShopModal,
-  },
-  data() {
-    return {
-      action: 'associate',
-      cdcUiDisplayed: false,
-    };
   },
   props: {
     accountsUiUrl: {
@@ -101,7 +98,7 @@ export default Vue.extend({
       required: true,
     },
     shops: {
-      type: Array,
+      type: Array as PropType<Shop[]>,
       default: () => [],
     },
     shopContext: {
@@ -109,89 +106,87 @@ export default Vue.extend({
       required: true,
     },
   },
-  setup() {
+  setup(props) {
+    const action = ref('associate');
+    const cdcUiDisplayed = ref(false);
+
     const {trackAssociateOrManageAccountButton} = useSegmentTracking();
 
-    return {trackAssociateOrManageAccountButton};
-  },
-  computed: {
-    hasAllShopsLinked() {
-      return this.unlinkedShops.length === 0;
-    },
-    hasAllShopsWithoutUrl() {
-      return this.shops.every((shop) => shop.domain === null);
-    },
-    hasShopsLinked() {
-      return this.hasShopsLinkedByUserInBackoffice || this.hasShopsLinkedWithoutEmployeeId;
-    },
-    hasShopsLinkedByUserInBackoffice() {
-      return this.shops.some(
-        (shop) => parseInt(shop.employeeId, 10) === this.backendUser.employeeId,
-      );
-    },
-    hasShopsLinkedWithoutEmployeeId() {
-      return this.shops.some(
-        (shop) => shop.uuid !== null && !shop.isLinkedV4 && shop.employeeId === null,
-      );
-    },
-    isLinkedV4() {
-      return this.shops.every((shop) => shop.isLinkedV4);
-    },
-    isShopContext() {
-      return this.shopContext === CONTEXT_SHOP;
-    },
-    specificUiUrl() {
-      if (['reonboard', 'associate'].includes(this.action)) {
+    const hasAllShopsLinked = computed(() => unlinkedShops.value.length === 0);
+
+    const hasAllShopsWithoutUrl = computed(() => props.shops.every((shop) => shop.domain === null));
+
+    const hasShopsLinked = computed(
+      () => hasShopsLinkedByUserInBackoffice.value || hasShopsLinkedWithoutEmployeeId.value,
+    );
+
+    const hasShopsLinkedByUserInBackoffice = computed(() => props.shops.some(
+      (shop) => shop.employeeId === props.backendUser.employeeId,
+    ));
+
+    const hasShopsLinkedWithoutEmployeeId = computed(() => props.shops.some(
+      (shop) => shop.uuid !== null && !shop.isLinkedV4 && shop.employeeId === null,
+    ));
+
+    const isLinkedV4 = computed(() => props.shops.every((shop) => shop.isLinkedV4));
+
+    const isShopContext = computed(() => props.shopContext === ShopContext.Shop);
+
+    const specificUiUrl = computed(() => {
+      if (['reonboard', 'associate'].includes(action.value)) {
         return '';
       }
 
-      if (['unlink'].includes(this.action)) {
-        return `/shop/${this.shops[0].uuid}`;
+      if (['unlink'].includes(action.value)) {
+        return `/shop/${props.shops[0].uuid}`;
       }
 
       return '/shop';
-    },
-    trackEventName() {
-      if (['reonboard', 'associate'].includes(this.action)) {
-        return '[ACC] Associate Button Clicked';
-      }
+    });
 
-      if (['unlink'].includes(this.action)) {
-        return '[ACC] Unlink Shop Button Clicked';
-      }
+    const unlinkedShops = computed(
+      () => props.shops.filter((shop) => !shop.uuid || (shop.uuid && shop.isLinkedV4)),
+    );
 
-      return '[ACC] Manage Account Button Clicked';
-    },
-    unlinkedShops() {
-      return this.shops.filter((shop) => !shop.uuid || (shop.uuid && shop.isLinkedV4));
-    },
-    unlinkedShopsWithEmployeeId() {
-      return this.unlinkedShops.map((shop) => ({
-        ...shop,
-        employeeId: this.backendUser.employeeId.toString(),
-      }));
-    },
-  },
-  methods: {
-    openLinkShopModal() {
-      this.trackAssociateOrManageAccountButton();
+    const unlinkedShopsWithEmployeeId = computed(() => unlinkedShops.value.map((shop) => ({
+      ...shop,
+      employeeId: props.backendUser.employeeId.toString(),
+    })));
 
-      this.cdcUiDisplayed = true;
-    },
-    closeOnBoarding() {
-      this.cdcUiDisplayed = false;
+    function openLinkShopModal(act: string) {
+      action.value = act;
+      trackAssociateOrManageAccountButton(action.value);
+
+      cdcUiDisplayed.value = true;
+    }
+
+    function closeOnBoarding() {
+      cdcUiDisplayed.value = false;
       window.location.reload();
-    },
-  },
-  watch: {
-    cdcUiDisplayed(cdcUiDisplayed) {
+    }
+
+    watch(cdcUiDisplayed, (cdcUiDisplayed) => {
       if (cdcUiDisplayed) {
         document.body.classList.add('ui-displayed');
         return;
       }
 
       document.body.classList.remove('ui-displayed');
-    },
+    });
+
+    return {
+      cdcUiDisplayed,
+      hasAllShopsLinked,
+      hasAllShopsWithoutUrl,
+      hasShopsLinked,
+      hasShopsLinkedByUserInBackoffice,
+      isLinkedV4,
+      isShopContext,
+      specificUiUrl,
+      unlinkedShopsWithEmployeeId,
+      openLinkShopModal,
+      closeOnBoarding,
+    };
   },
 });
 </script>

@@ -19,7 +19,10 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@types/*": [
+        "src/types/*"
+      ],
     },
     "lib": [
       "esnext",

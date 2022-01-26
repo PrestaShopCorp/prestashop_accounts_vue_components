@@ -1,27 +1,24 @@
 <template>
-  <b-alert
+  <BaseAlert
     variant="warning"
     class="mt-4"
-    show
   >
     <p>{{ t('psaccounts.account.needToBeAdmin') }}</p>
     <p>
       {{ t('psaccounts.account.pleaseContact') }}
       <a
-        @click="trackClick"
+        @click="trackLinkContactAdmin"
         :href="'mailto:' + superAdminEmail"
       >
         {{ superAdminEmail }}
       </a>
     </p>
-  </b-alert>
+  </BaseAlert>
 </template>
 
-<script>
-import Vue from 'vue';
-import {
-  BAlert,
-} from 'bootstrap-vue';
+<script lang="ts">
+import {defineComponent} from '@vue/composition-api';
+import BaseAlert from './BaseAlert.vue';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
@@ -29,11 +26,11 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    * This sub-component shows a message is the user is not a super-admin
    * and tell him to contact one to continue the process
    */
-export default Vue.extend({
-  name: 'AccountUserNotSuperAdmin',
+export default defineComponent({
+  name: 'UserNotSuperAdminAlert',
   mixins: [Locale],
   components: {
-    BAlert,
+    BaseAlert,
   },
   props: {
     superAdminEmail: {
@@ -45,11 +42,6 @@ export default Vue.extend({
     const {trackLinkContactAdmin} = useSegmentTracking();
 
     return {trackLinkContactAdmin};
-  },
-  methods: {
-    trackClick() {
-      this.trackLinkContactAdmin();
-    },
   },
 });
 </script>

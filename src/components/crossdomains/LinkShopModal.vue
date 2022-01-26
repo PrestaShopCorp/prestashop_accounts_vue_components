@@ -15,7 +15,7 @@
             :specificUiUrl="specificUiUrl"
             :shops="shops"
             :onBoardingFinished="closeModal"
-            :tracking="tracking"
+            :tracking="trackingProps"
             :onLogout="onLogout"
             :accountsUiUrl="accountsUiUrl"
             :triggerFallback="triggerFallback"
@@ -26,15 +26,16 @@
   </transition>
 </template>
 
-<script lang="js">
+<script>
 // vue/attribute-hyphenation breaks props of cdc on lint
 /* eslint vue/attribute-hyphenation: "off" */
 import Vue from 'vue';
+import {defineComponent, onMounted} from '@vue/composition-api';
 import vClickOutside from 'v-click-outside';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 import LinkShopCrossDomain from './linkShopCrossDomain';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'LinkShopModal',
   components: {
     'link-shop-crossdomain': LinkShopCrossDomain.driver('vue', Vue),
@@ -60,32 +61,36 @@ export default Vue.extend({
       required: true,
     },
   },
-  setup() {
-    const {properties: tracking, reset} = useSegmentTracking();
+  setup(props, {emit}) {
+    const {properties: trackingProps, reset} = useSegmentTracking();
 
-    return {tracking, reset};
-  },
-  methods: {
-    closeModal() {
-      this.$emit('closed');
-    },
-    onLogout() {
-      this.reset();
-    },
-    triggerFallback() {
-      const base64Shops = btoa(JSON.stringify(this.shops));
-      let fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?`;
+    function closeModal() {
+      emit('closed');
+    }
+
+    function onLogout() {
+      reset();
+    }
+
+    function triggerFallback() {
+      const base64Shops = btoa(JSON.stringify(props.shops));
+      let fallbackUrl = `${props.accountsUiUrl}${props.specificUiUrl}?`;
       fallbackUrl += `shops=${base64Shops}&return_to=${encodeURIComponent(window.location.href)}`;
       window.location.assign(fallbackUrl);
-    },
-  },
-  mounted() {
+    }
+
+    onMounted(() => {
     // FallBack for crossdomain component
-    setTimeout(() => {
-      if (document.querySelector('.crossdomain .zoid-invisible')) {
-        this.triggerFallback();
-      }
-    }, 60000);
+      setTimeout(() => {
+        if (document.querySelector('.crossdomain .zoid-invisible')) {
+          triggerFallback();
+        }
+      }, 60000);
+    });
+
+    return {
+      closeModal, onLogout, trackingProps, triggerFallback,
+    };
   },
 });
 </script>

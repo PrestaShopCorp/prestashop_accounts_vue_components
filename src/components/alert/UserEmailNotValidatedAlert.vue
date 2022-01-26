@@ -1,27 +1,22 @@
 <template>
-  <b-alert
-    variant="warning"
-    show
-  >
+  <BaseAlert variant="warning">
     <div v-html="t('psaccounts.account.emailNotVerified')" />
 
     <div class="mt-2 d-flex justify-content-end">
-      <b-button
+      <BaseButton
         variant="primary"
-        @click="sendEmailConfirmation()"
+        @click="sendEmailConfirmation"
       >
         {{ t('psaccounts.account.sendEmail') }}
-      </b-button>
+      </BaseButton>
     </div>
-  </b-alert>
+  </BaseAlert>
 </template>
 
-<script>
-import Vue from 'vue';
-import {
-  BAlert,
-  BButton,
-} from 'bootstrap-vue';
+<script lang="ts">
+import {defineComponent} from '@vue/composition-api';
+import BaseAlert from './BaseAlert.vue';
+import BaseButton from '@/components/BaseButton.vue';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
@@ -29,12 +24,12 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    * This alert shows a message if the user email is not validated
    * and tell him to validate his account;
    */
-export default Vue.extend({
-  name: 'AccountUserEmailNotValidated',
+export default defineComponent({
+  name: 'UserEmailNotValidatedAlert',
   mixins: [Locale],
   components: {
-    BAlert,
-    BButton,
+    BaseAlert,
+    BaseButton,
   },
   props: {
     /**
@@ -46,17 +41,16 @@ export default Vue.extend({
       required: true,
     },
   },
-  setup() {
+  setup(props) {
     const {trackLinkResendEmailValidation} = useSegmentTracking();
 
-    return {trackLinkResendEmailValidation};
-  },
-  methods: {
-    sendEmailConfirmation() {
-      this.trackLinkResendEmailValidation();
+    function sendEmailConfirmation() {
+      trackLinkResendEmailValidation();
 
-      window.open(this.ssoResendVerificationEmail, '_blank');
-    },
+      window.open(props.ssoResendVerificationEmail, '_blank');
+    }
+
+    return {sendEmailConfirmation};
   },
 });
 </script>

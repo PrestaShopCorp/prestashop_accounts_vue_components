@@ -1,9 +1,6 @@
 import Vue from 'vue';
 import PsAccounts from '@/components/PsAccounts.vue';
 import AccountPanel from '@/components/panel/AccountPanel.vue';
-import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled.vue';
-import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled.vue';
-import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotInstalled.vue';
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {use, i18n, i18nHandlerCb} from '@/locale';
 import {Segment, VueCompositionAPI} from '@/ExternalDependencies';
@@ -11,9 +8,6 @@ import {Segment, VueCompositionAPI} from '@/ExternalDependencies';
 const Components: Record<string, any> = {
   PsAccounts,
   AccountPanel,
-  AccountNotInstalled,
-  AccountNotEnabled,
-  EventBusNotInstalled,
 };
 
 interface Opts {
@@ -71,7 +65,4 @@ export {
   isOnboardingCompleted,
   PsAccounts,
   AccountPanel,
-  AccountNotInstalled,
-  AccountNotEnabled,
-  EventBusNotInstalled,
 };

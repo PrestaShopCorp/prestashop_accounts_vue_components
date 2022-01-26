@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
 

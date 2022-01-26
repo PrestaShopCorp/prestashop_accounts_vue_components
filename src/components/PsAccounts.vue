@@ -26,7 +26,6 @@
       <PsAccountComponentAlertDisplay
         @hasError="hasError = true"
       />
-
       <template v-if="!hasBlockingAlert">
         <AccountPanel
           class="mb-2"
@@ -34,7 +33,7 @@
           :backend-user="validContext.backendUser"
           :onboarding-link="validContext.onboardingLink"
           :shops="shops"
-          :shop-context="validContext.currentContext.type"
+          :shop-context="validContext.currentContext ? validContext.currentContext.type : 4"
           :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
           :super-admin-email="validContext.superAdminEmail"
         >
@@ -58,14 +57,14 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import {
+  computed, defineComponent, onMounted, ref,
+} from '@vue/composition-api';
 import {BAlert, BOverlay} from 'bootstrap-vue';
-import validContext, {
-  setContext, shopsInContext,
-} from '@/lib/context';
-import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
-import AccountPanel from '@/components/panel/AccountPanel';
+import useContext from '@/composables/useContext';
+import PsAccountComponentAlertDisplay from '@/containers/PsAccountComponentAlertDisplay.vue';
+import AccountPanel from '@/components/panel/AccountPanel.vue';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
@@ -78,7 +77,7 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    * and a special `v-slot:customBody` that will always be
    * displayed (you have to manage display condition by yourself).
    */
-export default Vue.extend({
+export default defineComponent({
   name: 'PsAccounts',
   components: {
     PsAccountComponentAlertDisplay,
@@ -100,41 +99,39 @@ export default Vue.extend({
       default: () => window.contextPsAccounts || {},
     },
   },
-  data() {
-    return {
-      hasError: false,
-    };
-  },
-  setup() {
+  setup(props) {
+    const {
+      context,
+      setContext,
+      shopsInContext,
+    } = useContext();
     const {identify, trackAccountComponentViewed} = useSegmentTracking();
+    const hasError = ref(false);
+
+    const hasAllShopsLinked = computed(() => shopsWithUrl.value.every((shop) => shop.uuid));
+
+    const hasBlockingAlert = computed(() => !context.value.psAccountsIsInstalled
+          || !context.value.psAccountsIsUptodate
+          || !context.value.psAccountsIsEnabled);
+
+    const shopsWithUrl = computed(() => shopsInContext.value.filter((shop) => shop.domain));
+
+    onMounted(() => {
+      setContext(props.context);
+
+      if (context.value.psAccountsIsInstalled && context.value.psAccountsIsEnabled) {
+        identify();
+        trackAccountComponentViewed();
+      }
+    });
 
     return {
-      identify,
-      trackAccountComponentViewed,
+      validContext: context,
+      hasAllShopsLinked,
+      hasBlockingAlert,
+      hasError,
+      shops: shopsInContext,
     };
-  },
-  computed: {
-    validContext,
-    shops: shopsInContext,
-    hasAllShopsLinked() {
-      return this.shopsWithUrl.every((shop) => shop.uuid);
-    },
-    hasBlockingAlert() {
-      return !this.validContext.psAccountsIsInstalled
-          || !this.validContext.psAccountsIsUptodate
-          || !this.validContext.psAccountsIsEnabled;
-    },
-    shopsWithUrl() {
-      return this.shops.filter((shop) => shop.domain);
-    },
-  },
-  created() {
-    setContext(this.context);
-
-    if (this.validContext.psAccountsIsInstalled && this.validContext.psAccountsIsEnabled) {
-      this.identify();
-      this.trackAccountComponentViewed();
-    }
   },
 });
 </script>

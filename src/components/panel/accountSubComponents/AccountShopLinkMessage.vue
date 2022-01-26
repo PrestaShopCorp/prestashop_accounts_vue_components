@@ -39,35 +39,41 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import {computed, defineComponent, PropType} from '@vue/composition-api';
+import {Shop} from '@/models/shop';
 import Locale from '@/mixins/locale';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'AccountShopLinkMessage',
   mixins: [Locale],
   props: {
     shops: {
-      type: Array,
+      type: Array as PropType<Shop[]>,
       default: () => [],
     },
   },
-  computed: {
-    hasOneOrMoreNotLinkedShop() {
-      return this.shops.some((shop) => !shop.uuid);
-    },
-    hasSomeShopsLinked() {
-      return this.shops.some((shop) => shop.uuid && !shop.isLinkedV4);
-    },
-    hasShopsLinkedBySameUser() {
-      return this.shops.every((shop) => shop.employeeId === this.shops[0].employeeId);
-    },
-    linkedShops() {
-      return this.shops.filter((shop) => shop.uuid && !shop.isLinkedV4);
-    },
-    linkedUserEmail() {
-      return this.linkedShops[0]?.user?.email || '';
-    },
+  setup(props) {
+    const hasOneOrMoreNotLinkedShop = computed(() => props.shops.some((shop) => !shop.uuid));
+
+    const hasSomeShopsLinked = computed(
+      () => props.shops.some((shop) => shop.uuid && !shop.isLinkedV4),
+    );
+
+    const hasShopsLinkedBySameUser = computed(
+      () => props.shops.every((shop) => shop.employeeId === props.shops[0].employeeId),
+    );
+
+    const linkedShops = computed(() => props.shops.filter((shop) => shop.uuid && !shop.isLinkedV4));
+
+    const linkedUserEmail = computed(() => linkedShops.value[0]?.user?.email || '');
+
+    return {
+      hasOneOrMoreNotLinkedShop,
+      hasSomeShopsLinked,
+      hasShopsLinkedBySameUser,
+      linkedUserEmail,
+    };
   },
 });
 </script>

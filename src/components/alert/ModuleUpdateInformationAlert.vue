@@ -1,17 +1,12 @@
 <template>
-  <b-alert
-    variant="info"
-    show
-  >
+  <BaseAlert variant="info">
     <div v-html="t('psaccounts.account.moduleUpdateInformation')" />
-  </b-alert>
+  </BaseAlert>
 </template>
 
-<script>
-import Vue from 'vue';
-import {
-  BAlert,
-} from 'bootstrap-vue';
+<script lang="ts">
+import {defineComponent} from '@vue/composition-api';
+import BaseAlert from './BaseAlert.vue';
 import Locale from '@/mixins/locale';
 
 /**
@@ -19,11 +14,11 @@ import Locale from '@/mixins/locale';
    * and tell him to reonboard with the same email address and
    * update other modules;
    */
-export default Vue.extend({
-  name: 'ModuleUpdatedInformation',
+export default defineComponent({
+  name: 'ModuleUpdateInformationAlert',
   mixins: [Locale],
   components: {
-    BAlert,
+    BaseAlert,
   },
 });
 </script>

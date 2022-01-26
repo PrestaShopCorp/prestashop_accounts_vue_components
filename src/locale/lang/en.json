@@ -3,34 +3,41 @@
         "accountManager": {
             "errorInstallEnable": "Something went wrong. Please try again."
         },
-        "alertAccountNotInstalled": {
-            "title": "Install the PrestaShop Account module",
-            "message": "You need the PrestaShop account module to continue setting up this module.",
-            "installButton": "Install",
-            "loading": "The PrestaShop Account module is currently being installed..."
-        },
-        "alertAccountNotEnabled": {
-            "title": "Activate the PrestaShop Account module",
-            "message": "You need the PrestaShop account module to continue setting up this module.",
-            "enableButton": "Activate",
-            "loading": "The PrestaShop Account module is currently being activated..."
-        },
-        "alertAccountNeedsUpdate": {
-            "title": "Update PrestaShop Accounts module",
-            "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
-            "installButton": "Update"
-        },
-        "alertEventBusNotInstalled": {
-            "title": "Install the Prestashop Event Bus module",
-            "message": "You need the Prestashop Event Bus module to continue setting up this module.",
-            "installButton": "Install",
-            "loading": "The Prestashop Event Bus module is currently being installed..."
-        },
-        "alertEventBusNotEnabled": {
-            "title": "Activate the PrestaShop Event Bus module",
-            "message": "You need the PrestaShop Event Bus module to continue setting up this module.",
-            "enableButton": "Activate",
-            "loading": "The PrestaShop Event Bus module is currently being activated..."
+        "alert": {
+            "ps_accounts": {
+                "enable": {
+                  "title": "Activate the PrestaShop Account module",
+                  "message": "You need the PrestaShop account module to continue setting up this module.",
+                  "action": "Activate",
+                  "loading": "The PrestaShop Account module is currently being activated..."
+                },
+                "install": {
+                  "title": "Install the PrestaShop Account module",
+                  "message": "You need the PrestaShop account module to continue setting up this module.",
+                  "action": "Install",
+                  "loading": "The PrestaShop Account module is currently being installed..."
+                },
+                "update": {
+                  "title": "Update PrestaShop Accounts module",
+                  "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
+                  "action": "Update",
+                  "loading": "The PrestaShop Account module is currently being updated..."
+                }
+            },
+            "ps_eventbus": {
+                "enable": {
+                  "title": "Activate the PrestaShop Event Bus module",
+                  "message": "You need the PrestaShop Event Bus module to continue setting up this module.",
+                  "action": "Activate",
+                  "loading": "The PrestaShop Event Bus module is currently being activated..."
+                },
+                "install": {
+                  "title": "Install the Prestashop Event Bus module",
+                  "message": "You need the Prestashop Event Bus module to continue setting up this module.",
+                  "action": "Install",
+                  "loading": "The Prestashop Event Bus module is currently being installed..."
+                }
+            }
         },
         "alertShopDomainShouldExists": {
             "title": "Shop URL not filled in!",
