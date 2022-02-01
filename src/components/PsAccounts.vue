@@ -37,7 +37,12 @@
           :shop-context="validContext.currentContext.type"
           :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
           :super-admin-email="validContext.superAdminEmail"
-        />
+        >
+          <slot
+            v-if="hasAllShopsLinked"
+            name="account-footer"
+          />
+        </AccountPanel>
         <b-overlay
           :show="!hasAllShopsLinked"
           variant="white"
@@ -46,7 +51,9 @@
           blur="0px"
         >
           <slot />
+          <slot name="body" />
         </b-overlay>
+        <slot name="customBody" />
       </template>
     </template>
   </div>
