@@ -174,7 +174,7 @@ export default {
   methods: {
     openLinkShopModal(action = 'associate') {
       this.action = action;
-      this.trackAssociateOrManageAccountButton();
+      this.trackAssociateOrManageAccountButton(action);
 
       this.cdcUiDisplayed = true;
     },
