@@ -1,5 +1,5 @@
 <template>
-  <div id="main_ps_accounts">
+  <div>
     <b-alert
       :show="hasError"
       @dismissed="hasError = false"
@@ -138,9 +138,8 @@ export default {
 };
 </script>
 
-<style>
-#main_ps_accounts {
-  @import '~bootstrap-vue/dist/bootstrap-vue.css';
-  @import '~prestakit/dist/css/bootstrap-prestashop-ui-kit.css';
+<style lang="scss" scoped>
+::v-deep {
+  @import '~prestakit/scss/application';
 }
 </style>
