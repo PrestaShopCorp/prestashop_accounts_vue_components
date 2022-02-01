@@ -1,4 +1,3 @@
-import Joi from 'joi';
 import {Shop} from '@/models/shop';
 import {BackendUser, User} from '@/models/user';
 

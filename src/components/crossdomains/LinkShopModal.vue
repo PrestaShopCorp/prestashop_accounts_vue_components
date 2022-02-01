@@ -26,7 +26,7 @@
   </transition>
 </template>
 
-<script>
+<script lang="ts">
 // vue/attribute-hyphenation breaks props of cdc on lint
 /* eslint vue/attribute-hyphenation: "off" */
 import Vue from 'vue';

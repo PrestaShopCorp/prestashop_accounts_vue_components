@@ -12,13 +12,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {
   computed,
   defineComponent, ref,
 } from '@vue/composition-api';
 import Locale from '@/mixins/locale';
-import ModuleAlert from '@/components/alert/ModuleAlert';
+import ModuleAlert from '@/components/alert/ModuleAlert.vue';
 import usePSModuleManagement, {Action, Module} from '@/composables/usePSModuleManagement';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 import useContext from '@/composables/useContext';
@@ -54,7 +54,7 @@ export default defineComponent({
         return {
           module: Module.PsAccounts,
           action: Action.Install,
-          link: context.value.sAccountsInstallLink,
+          link: context.value.psAccountsInstallLink,
         };
       }
 
