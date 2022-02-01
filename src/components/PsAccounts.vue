@@ -136,7 +136,8 @@ export default defineComponent({
 });
 </script>
 
-<style>
-@import '~bootstrap-vue/dist/bootstrap-vue.css';
-@import '~prestakit/dist/css/bootstrap-prestashop-ui-kit.css';
+<style lang="scss" scoped>
+::v-deep {
+  @import '~prestakit/scss/application';
+}
 </style>
