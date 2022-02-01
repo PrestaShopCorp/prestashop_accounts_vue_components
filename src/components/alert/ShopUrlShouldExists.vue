@@ -32,12 +32,10 @@ export default {
     hasAllShopsWithoutUrl: {
       type: Boolean,
       required: true,
-      default: false,
     },
     shopNamesWithoutUrl: {
       type: Array,
       required: true,
-      default: () => ([]),
     },
   },
 };

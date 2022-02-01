@@ -172,7 +172,8 @@ export default {
     },
   },
   methods: {
-    openLinkShopModal() {
+    openLinkShopModal(action = 'associate') {
+      this.action = action;
       this.trackAssociateOrManageAccountButton();
 
       this.cdcUiDisplayed = true;
