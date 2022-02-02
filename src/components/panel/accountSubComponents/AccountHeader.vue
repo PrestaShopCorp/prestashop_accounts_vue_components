@@ -1,21 +1,12 @@
 <template>
   <div class="d-flex align-items-center">
-    <b-iconstack
+    <span
       v-if="hasAllShopsLinked"
-      font-scale="1.5"
-      class="w-auto mr-3 align-bottom fixed-size"
-      width="24"
-      height="24"
+      class="mr-3 bg-success rounded-circle"
+      style="width: 24px; height: 24px"
     >
-      <b-icon-circle-fill
-        stacked
-        variant="success"
-      />
-      <b-icon-check
-        stacked
-        variant="white"
-      />
-    </b-iconstack>
+      <CheckIcon class="text-white" />
+    </span>
     <h3
       class="m-0 d-inline h3 title"
     >
@@ -26,21 +17,15 @@
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
-import {
-  BIconstack,
-  BIconCircleFill,
-  BIconCheck,
-} from 'bootstrap-vue';
 import Locale from '@/mixins/locale';
+import CheckIcon from '@/assets/icons/check.svg?inline';
 
 export default defineComponent({
   name: 'AccountHeader',
-  mixins: [Locale],
   components: {
-    BIconstack,
-    BIconCircleFill,
-    BIconCheck,
+    CheckIcon,
   },
+  mixins: [Locale],
   props: {
     hasAllShopsLinked: {
       type: Boolean,

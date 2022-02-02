@@ -3,8 +3,8 @@ import {contextSchema} from '@/lib/ContextValidator';
 import {Context, ShopContext} from '@/types/context.type';
 import {Shop} from '@/models/shop';
 
-const defaultContext = (): Context => ({
-  psIs17: true,
+const defaultContext = (): Partial<Context> => ({
+  // psIs17: true,
   psAccountsInstallLink: null,
   psAccountsEnableLink: null,
   psAccountsUpdateLink: null,
@@ -25,12 +25,16 @@ const defaultContext = (): Context => ({
   errors: undefined,
 });
 
-const state = reactive({
-  context: defaultContext(),
+interface State {
+  context: Context | Partial<Context>,
+}
+
+const state = reactive<State>({
+  context: {},
 });
 
 export default function useContext() {
-  function setContext<T extends Partial<Context>>(_context: T): void {
+  function setContext<T extends Context>(_context: T): void {
     const mergedContext = {
       ...defaultContext(),
       ...(window.contextPsAccounts || {}),
@@ -45,7 +49,7 @@ export default function useContext() {
       mergedContext,
     );
 
-    const validContext = {
+    const validContext: Context = {
       ...value,
       errors: error
         ? error.details.map(
@@ -98,7 +102,7 @@ export default function useContext() {
     return 'installed';
   });
 
-  const shops = computed(() => state.context.shops.reduce(
+  const shops = computed(() => state.context.shops?.reduce(
     (acc, shopGroup) => [...acc, ...shopGroup.shops],
       [] as Shop[],
   ),
@@ -115,7 +119,7 @@ export default function useContext() {
 
     if (state.context.currentContext.type === ShopContext.Group) {
       return [
-        ...(state.context.shops.find(
+        ...(state.context.shops?.find(
           (shopGroup) => parseInt(shopGroup.id, 10) === state.context.currentContext?.id,
         )?.shops || []),
       ];
@@ -123,7 +127,7 @@ export default function useContext() {
 
     // Shop
     const shop = state.context.shops
-      .reduce((acc, shopGroup) => [...acc, ...shopGroup.shops], [] as Shop[])
+      ?.reduce((acc, shopGroup) => [...acc, ...shopGroup.shops], [] as Shop[])
       .find((shop2) => parseInt(shop2.id, 10) === state.context.currentContext?.id);
 
     return shop ? [shop] : [];

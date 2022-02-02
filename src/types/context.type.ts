@@ -21,7 +21,7 @@ export interface ShopGroup {
   shops: Shop[];
 }
 
-export interface Context {
+export type Context = {
   accountsUiUrl?: string | null;
   adminAjaxLink?: string | null;
   backendUser?: Partial<BackendUser>;

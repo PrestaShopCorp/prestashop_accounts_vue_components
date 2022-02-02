@@ -1,5 +1,5 @@
 const isOnboardingCompleted = () => {
-  const user = window.contextPsAccounts ? window.contextPsAccounts.user : {};
+  const user = window.contextPsAccounts.user || {};
 
   return !!((user.email && typeof user.email === 'string' && user.email.length > 0)
     && (user.isSuperAdmin === true));

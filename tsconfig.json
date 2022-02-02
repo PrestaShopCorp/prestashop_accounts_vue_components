@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "module": "ESNext",
+    "target": "esnext",
+    "module": "esnext",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
@@ -9,6 +9,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    // "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
@@ -19,10 +20,7 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ],
-      "@types/*": [
-        "src/types/*"
-      ],
+      ]
     },
     "lib": [
       "esnext",
@@ -31,9 +29,6 @@
       "scripthost"
     ]
   },
-  "exclude": [
-    "node_modules"
-  ],
    "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
@@ -41,4 +36,7 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
+  "exclude": [
+    "node_modules"
+  ]
 }

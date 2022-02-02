@@ -1,5 +1,6 @@
 <template>
   <b-button
+    :disabled="disabled"
     :variant="variant"
     @click="$emit('click')"
   >
@@ -32,6 +33,10 @@ export default defineComponent({
     BButton,
   },
   props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
     variant: {
       type: String as PropType<Variant>,
       default: Variant.Primary,

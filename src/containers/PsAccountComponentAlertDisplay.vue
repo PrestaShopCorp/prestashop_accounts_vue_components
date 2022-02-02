@@ -45,7 +45,7 @@ export default defineComponent({
       eventbusEnableLink,
     } = useContext();
 
-    const {manageModule} = usePSModuleManagement(context.value.psIs17);
+    const {manageModule} = usePSModuleManagement(context.value.psIs17 || false);
 
     const {trackModuleAction} = useSegmentTracking();
 

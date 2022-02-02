@@ -1,12 +1,10 @@
 <template>
   <div>
-    <b-card
-      no-body
-    >
+    <BaseCard>
       <template #header>
         <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
       </template>
-      <b-card-body>
+      <BaseCardBody>
         <ShopUrlShouldExistsAlert
           v-if="hasShopsWithoutUrl"
           :has-all-shops-without-url="hasAllShopsWithoutUrl"
@@ -41,8 +39,8 @@
           :super-admin-email="superAdminEmail"
         />
         <slot />
-      </b-card-body>
-    </b-card>
+      </BaseCardBody>
+    </BaseCard>
   </div>
 </template>
 
@@ -50,12 +48,10 @@
 import {
   computed, defineComponent, PropType,
 } from '@vue/composition-api';
-import {
-  BCard,
-  BCardBody,
-} from 'bootstrap-vue';
 import {Shop} from '@/models/shop';
 import Locale from '@/mixins/locale';
+import BaseCard from '@/components/BaseCard.vue';
+import BaseCardBody from '@/components/BaseCardBody.vue';
 import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader.vue';
 import AccountLinkToUi from '@/components/panel/accountSubComponents/AccountLinkToUi.vue';
 import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage.vue';
@@ -72,8 +68,8 @@ export default defineComponent({
   name: 'AccountPanel',
   mixins: [Locale],
   components: {
-    BCard,
-    BCardBody,
+    BaseCard,
+    BaseCardBody,
     AccountHeader,
     AccountLinkToUi,
     AccountShopLinkMessage,

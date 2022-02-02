@@ -59,10 +59,10 @@ export default function useSegmentTracking() {
   }
 
   function trackAccountComponentViewed() {
-    const shopsWithUrl = shopsInContext.value.filter((shop) => shop.domain);
+    const shopsWithUrl = shopsInContext.value?.filter((shop) => shop.domain) || [];
 
     track('[ACC] Account Component Viewed', {
-      multishop_numbers: context.value.shops.reduce(
+      multishop_numbers: context.value.shops?.reduce(
         (acc, shop) => acc + shop.shops.length,
         0,
       ),

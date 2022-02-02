@@ -1,26 +1,24 @@
 <template>
   <div>
-    <b-alert
-      :show="hasError"
-      @dismissed="hasError = false"
+    <BaseAlert
       variant="danger"
+      :show="hasError"
       dismissible
+      @dismissed="hasError = false"
     >
       <p>
         {{ t('psaccounts.accountManager.errorInstallEnable') }}
       </p>
-    </b-alert>
-
-    <b-alert
+    </BaseAlert>
+    <BaseAlert
       v-if="validContext.errors && validContext.errors.length"
       variant="danger"
-      show
     >
       <p>
         &lt;PsAccounts&gt; integration: Given context is invalid:
         {{ validContext.errors.join(';') }}
       </p>
-    </b-alert>
+    </BaseAlert>
 
     <template v-else>
       <PsAccountComponentAlertDisplay
@@ -42,15 +40,9 @@
             name="account-footer"
           />
         </AccountPanel>
-        <b-overlay
-          :show="!hasAllShopsLinked"
-          variant="white"
-          spinner-type="null"
-          :opacity="0.70"
-          blur="0px"
-        >
+        <BaseOverlay :show="!hasAllShopsLinked">
           <slot name="body" />
-        </b-overlay>
+        </BaseOverlay>
         <slot name="customBody" />
       </template>
     </template>
@@ -59,14 +51,16 @@
 
 <script lang="ts">
 import {
-  computed, defineComponent, onMounted, ref,
+  computed, defineComponent, onMounted, PropType, ref,
 } from '@vue/composition-api';
-import {BAlert, BOverlay} from 'bootstrap-vue';
+import BaseAlert from '@/components/alert/BaseAlert.vue';
+import BaseOverlay from '@/components/BaseOverlay.vue';
 import useContext from '@/composables/useContext';
 import PsAccountComponentAlertDisplay from '@/containers/PsAccountComponentAlertDisplay.vue';
 import AccountPanel from '@/components/panel/AccountPanel.vue';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
+import {Context} from '@/types/context.type';
 
 /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
@@ -80,10 +74,10 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
 export default defineComponent({
   name: 'PsAccounts',
   components: {
-    PsAccountComponentAlertDisplay,
     AccountPanel,
-    BOverlay,
-    BAlert,
+    BaseAlert,
+    BaseOverlay,
+    PsAccountComponentAlertDisplay,
   },
   mixins: [Locale],
   props: {
@@ -94,7 +88,7 @@ export default defineComponent({
        * var window.contextPsAccounts automatically.
        */
     context: {
-      type: Object,
+      type: Object as PropType<Context>,
       required: false,
       default: () => window.contextPsAccounts || {},
     },
@@ -114,7 +108,7 @@ export default defineComponent({
           || !context.value.psAccountsIsUptodate
           || !context.value.psAccountsIsEnabled);
 
-    const shopsWithUrl = computed(() => shopsInContext.value.filter((shop) => shop.domain));
+    const shopsWithUrl = computed(() => shopsInContext.value?.filter((shop) => shop.domain) || []);
 
     onMounted(() => {
       setContext(props.context);

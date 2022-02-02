@@ -1,7 +1,9 @@
 <template>
   <b-alert
+    :dismissible="dismissible"
+    :show="show"
     :variant="variant"
-    show
+    @dismissed="$emit('dismissed')"
   >
     <slot />
   </b-alert>
@@ -31,6 +33,14 @@ export default defineComponent({
     BAlert,
   },
   props: {
+    dismissible: {
+      type: Boolean,
+      default: false,
+    },
+    show: {
+      type: Boolean,
+      default: true,
+    },
     variant: {
       type: String as PropType<Variant>,
       default: Variant.Primary,
