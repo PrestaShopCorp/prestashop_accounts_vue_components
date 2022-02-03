@@ -56,7 +56,7 @@
 import {
   computed, defineComponent, PropType, ref, watch,
 } from '@vue/composition-api';
-import i18n from '@/locale';
+import i18n from '@/i18n';
 import {Shop, ShopContext} from '@/types/context';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseDropdown from '@/components/BaseDropdown.vue';

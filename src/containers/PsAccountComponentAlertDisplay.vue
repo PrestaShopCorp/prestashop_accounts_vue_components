@@ -17,7 +17,7 @@ import {
   computed,
   defineComponent, ref,
 } from '@vue/composition-api';
-import i18n from '@/locale';
+import i18n from '@/i18n';
 import ModuleAlert from '@/components/alert/ModuleAlert.vue';
 import usePSModuleManagement, {Action, Module} from '@/composables/usePSModuleManagement';
 import useSegmentTracking from '@/composables/useSegmentTracking';

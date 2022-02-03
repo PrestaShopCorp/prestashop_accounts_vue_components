@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
-import i18n from '@/locale';
+import i18n from '@/i18n';
 import BaseAlert from './BaseAlert.vue';
 import BaseButton from '@/components/BaseButton.vue';
 

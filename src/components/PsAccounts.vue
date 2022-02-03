@@ -53,7 +53,7 @@
 import {
   computed, defineComponent, onMounted, PropType, ref,
 } from '@vue/composition-api';
-import i18n from '@/locale';
+import i18n from '@/i18n';
 import {Context} from '@/types/context';
 import AccountPanel from '@/components/panel/AccountPanel.vue';
 import BaseAlert from '@/components/alert/BaseAlert.vue';

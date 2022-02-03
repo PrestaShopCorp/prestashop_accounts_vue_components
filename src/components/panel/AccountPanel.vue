@@ -50,7 +50,7 @@
 import {
   computed, defineComponent, PropType,
 } from '@vue/composition-api';
-import i18n from '@/locale';
+import i18n from '@/i18n';
 import {Shop} from '@/types/context';
 import BaseCard from '@/components/BaseCard.vue';
 import BaseCardBody from '@/components/BaseCardBody.vue';

@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
-import i18n from '@/locale';
+import i18n from '@/i18n';
 import CheckIcon from '@/assets/icons/check.svg?inline';
 
 export default defineComponent({
