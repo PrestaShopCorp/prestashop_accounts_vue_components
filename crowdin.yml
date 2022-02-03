@@ -4,9 +4,9 @@ append_commit_message: false
 pull_request_labels:
   - translations
 files:
-  - source: /src/locale/lang/en.json
+  - source: /src/locales/en.json
     dest: vue-components.json
-    translation: /src/locale/lang/%two_letters_code%.json
+    translation: /src/locales/%two_letters_code%.json
     type: json
     labels:
       - psaccounts
