@@ -41,6 +41,7 @@
           />
         </AccountPanel>
         <BaseOverlay :show="!hasAllShopsLinked">
+          <slot />
           <slot name="body" />
         </BaseOverlay>
         <slot name="customBody" />
@@ -64,12 +65,9 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
-   * to ensure each functional case is covered for you. You can use 3 slots: `v-slot:body`,
+   * to ensure each functional case is covered for you. You can use the default slots
    * that will be disabled if the user account is not well linked (you should put your
-   * module configuration panel here), `v-slot:account-footer` that will be displayed
-   * on the footer of the PsAccount component if the user is validated and logged,
-   * and a special `v-slot:customBody` that will always be
-   * displayed (you have to manage display condition by yourself).
+   * module configuration panel here)
    */
 export default defineComponent({
   name: 'PsAccounts',

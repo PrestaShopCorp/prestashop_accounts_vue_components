@@ -1,6 +1,11 @@
 {
   "name": "prestashop_accounts_vue_components",
   "version": "1.5.5",
+  "main": "./dist/psaccountsVue.common.js",
+  "files": [
+    "dist/*",
+    "*.json"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve src/main.ts",
     "build": "vue-cli-service build --target lib --name psaccountsVue src/main.ts",
@@ -12,11 +17,6 @@
     "build:watch": "yarn build --watch",
     "storybook": "start-storybook"
   },
-  "main": "./dist/psaccountsVue.common.js",
-  "files": [
-    "dist/*",
-    "*.json"
-  ],
   "dependencies": {
     "@prestashopcorp/segment-vue": "^2.1.7",
     "@vue/composition-api": "^1.4.3",

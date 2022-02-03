@@ -43,13 +43,56 @@ yarn storybook
 
 To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page.
 
-```html
-# To load version 1.4.2
-<script src="https://storage.googleapis.com/prestashop-vuejs-cdn/accounts/1.4.2/prestashop_accounts_vue_components.min.js"></script>
+To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page. 
 
-# To load latest patched version 1.4 
-<script src="https://storage.googleapis.com/prestashop-vuejs-cdn/accounts/1.4.x/prestashop_accounts_vue_components.min.js"></script>
+```html
+# To load version 4.0.0
+<script src="https://unpkg.com/prestashop_accounts_vue_components@4.0.0"></script>
+
+# To load latest patched version 4.0
+<script src="https://unpkg.com/prestashop_accounts_vue_components@4.0"></script>
 
 # To load latest version
-<script src="https://storage.googleapis.com/prestashop-vuejs-cdn/accounts/1.x.x/prestashop_accounts_vue_components.min.js"></script>
+<script src="https://unpkg.com/prestashop_accounts_vue_components"></script>
+```
+
+To use the prestashop_accounts_vue_components, you need a prestashop-accounts html tag, when it's in the page
+you can then call the init function of psaccountsVue
+
+```html
+<prestashop-accounts></prestashop-accounts>
+
+<script>
+    window.psaccountsVue.init();
+</script>
+```
+
+If you need to use the vue cdn for your app, please create your app with the vue esm-browser as follow
+
+```html
+<div id="app"></div>
+
+<script src="https://unpkg.com/prestashop_accounts_vue_components@4.0.0"></script>
+
+<script type="module">
+    import { createApp } from 'https://unpkg.com/vue@3.2.26/dist/vue.esm-browser.js';
+
+    const App = {
+        data() {
+            return {
+                name: "John",
+            };
+        },
+        template: `<div>
+			<h1>Hello {{ name }}</h1>
+			<prestashop-accounts></prestashop-accounts>
+		</div>`,
+		mounted() {
+			window.psaccountsVue.init();
+		}
+
+    };
+
+    createApp(App).mount("#app");
+</script>
 ```

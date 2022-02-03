@@ -14,6 +14,8 @@ module.exports = {
       .use('vue-svg-loader')
       .loader('vue-svg-loader');
 
+    // config.resolve.alias.set('vue$', 'vue/dist/vue.esm.js');
+
     config.module
       .rule('images')
       .use('url-loader')
@@ -21,4 +23,5 @@ module.exports = {
       .tap((options) => Object.assign(options, {esModule: false, limit: 10240}),
       );
   },
+  runtimeCompiler: true,
 };

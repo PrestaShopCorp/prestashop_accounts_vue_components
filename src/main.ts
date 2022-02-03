@@ -26,10 +26,14 @@ const Library = {
   },
 };
 
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(Library);
-} else {
-  Vue.use(Library);
+// this method can be called like that window.psaccountsVue.init()
+Vue.use(Library);
+export function init() {
+  new Vue({
+    components: {
+      'prestashop-accounts': PsAccounts,
+    },
+  }).$mount('prestashop-accounts');
 }
 
 export default {
