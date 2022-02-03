@@ -75,7 +75,7 @@ If you need to use the vue cdn for your app, please create your app with the vue
 ```
 <div id="app"></div>
 
-<script src="http://prestashop17.atournerie.docker.localhost/upload/psaccountsVue.umd.min.js"></script>
+<script src="https://unpkg.com/prestashop_accounts_vue_components@4.0.0"></script>
 
 <script type="module">
     import { createApp } from 'https://unpkg.com/vue@3.2.26/dist/vue.esm-browser.js';
