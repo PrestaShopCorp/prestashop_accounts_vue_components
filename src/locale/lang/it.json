@@ -37,9 +37,9 @@
             "message": "Solo i negozi con un URL assegnato possono essere associati a un account PrestaShop.<br />I seguenti negozi non hanno un URL assegnato: "
         },
         "account": {
-            "title": "Associate your shop with a PrestaShop account | Associate your shops with a PrestaShop account",
+            "title": "Associa il tuo negozio a un account PrestaShop | Associa i tuoi negozi a un account PrestaShop",
             "authorize": "Puoi associare il tuo negozio a un solo account. Quindi assicurati di scegliere quello giusto!",
-            "authorized": "Your shop is associated with the PrestaShop account: | Your shops is associated with the PrestaShop account:",
+            "authorized": "Il tuo negozio è associato all'account PrestaShop: | Il tuo negozio è associato all'account PrestaShop:",
             "authorizedPartially": "I tuoi negozi sono parzialmente associati a un account PrestaShop",
             "authorizedSeveral": "I tuoi negozi sono associati a diversi account PrestaShop",
             "connectButton": "Associa",
