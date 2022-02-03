@@ -3,9 +3,9 @@
     variant="warning"
     show
   >
-    <h3>{{ t('psaccounts.alertAccountNeedsUpdate.title') }}</h3>
+    <h3>{{ $t('psaccounts.alertAccountNeedsUpdate.title') }}</h3>
     <p>
-      {{ t('psaccounts.alertAccountNeedsUpdate.message') }}.
+      {{ $t('psaccounts.alertAccountNeedsUpdate.message') }}.
     </p>
     <p class="mt-2">
       <b-button
@@ -13,24 +13,23 @@
         variant="primary"
         @click="updatePsAccounts"
       >
-        {{ t('psaccounts.alertAccountNeedsUpdate.installButton') }}
+        {{ $t('psaccounts.alertAccountNeedsUpdate.installButton') }}
       </b-button>
       <b-link
         href="#"
         disabled
         v-else
       >
-        {{ t('psaccounts.alertAccountNotInstalled.loading') }}
+        {{ $t('psaccounts.alertAccountNotInstalled.loading') }}
       </b-link>
     </p>
   </b-alert>
 </template>
 
 <script>
-import {BAlert, BButton, BLink} from 'bootstrap-vue';
-import Locale from '@/mixins/locale';
+import Alert from './Alert';
+import updateModule from '@/lib/moduleManager/UpdateModule';
 import useSegmentTracking from '@/composables/useSegmentTracking';
-import updateModule from '../../../lib/moduleManager/UpdateModule';
 
 /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -39,33 +38,11 @@ import updateModule from '../../../lib/moduleManager/UpdateModule';
    */
 export default {
   name: 'AlertAccountNotUpdated',
-  mixins: [Locale],
-  components: {
-    BAlert,
-    BButton,
-    BLink,
-  },
-  props: {
-    link: {
-      type: [String, null],
-      required: false,
-      default: null,
-    },
-    psIs17: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
-  },
+  mixins: [Alert],
   setup() {
     const {trackPsAccountUpdateButton} = useSegmentTracking();
 
     return {trackPsAccountUpdateButton};
-  },
-  data() {
-    return {
-      isLoading: false,
-    };
   },
   methods: {
     updatePsAccounts() {

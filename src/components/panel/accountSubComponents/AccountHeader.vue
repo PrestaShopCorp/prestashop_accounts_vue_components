@@ -19,7 +19,7 @@
     <h3
       class="m-0 d-inline h3 title"
     >
-      {{ t('psaccounts.account.title') }}
+      <slot />
     </h3>
   </div>
 </template>
@@ -30,11 +30,11 @@ import {
   BIconCircleFill,
   BIconCheck,
 } from 'bootstrap-vue';
-import Locale from '@/mixins/locale';
+import i18n from '@/locale';
 
 export default {
   name: 'AccountHeader',
-  mixins: [Locale],
+  i18n,
   components: {
     BIconstack,
     BIconCircleFill,

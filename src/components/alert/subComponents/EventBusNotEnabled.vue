@@ -3,24 +3,24 @@
     variant="warning"
     show
   >
-    <h3>{{ t('psaccounts.alertEventBusNotEnabled.title') }}</h3>
+    <h3>{{ $t('psaccounts.alertEventBusNotEnabled.title') }}</h3>
     <p>
-      {{ t('psaccounts.alertEventBusNotEnabled.message') }}.
+      {{ $t('psaccounts.alertEventBusNotEnabled.message') }}.
     </p>
     <p class="mt-2">
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="enableEventBus()"
+        @click="enableEventBus"
       >
-        {{ t('psaccounts.alertEventBusNotEnabled.enableButton') }}
+        {{ $t('psaccounts.alertEventBusNotEnabled.enableButton') }}
       </b-button>
       <b-link
         href="#"
         disabled
         v-else
       >
-        {{ t('psaccounts.alertEventBusNotEnabled.loading') }}
+        {{ $t('psaccounts.alertEventBusNotEnabled.loading') }}
       </b-link>
     </p>
   </b-alert>
@@ -28,8 +28,8 @@
 
 <script>
 import Alert from './Alert';
-import enableModule from '../../../lib/moduleManager/EnableModule';
-import useSegmentTracking from '../../../composables/useSegmentTracking';
+import enableModule from '@/lib/moduleManager/EnableModule';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
    * This sub-component can be used in a custom integration when the `EventBus`
@@ -39,18 +39,6 @@ import useSegmentTracking from '../../../composables/useSegmentTracking';
 export default {
   name: 'AlertEventBusNotEnabled',
   mixins: [Alert],
-  props: {
-    link: {
-      type: [String, null],
-      required: false,
-      default: null,
-    },
-    psIs17: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
-  },
   setup() {
     const {trackPsEventBusEnableButton} = useSegmentTracking();
 

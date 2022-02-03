@@ -9,16 +9,16 @@
       show
       variant="warning"
     >
-      <h3>{{ t('psaccounts.alertEventBusNotInstalled.title') }}</h3>
+      <h3>{{ $t('psaccounts.alertEventBusNotInstalled.title') }}</h3>
       <p>
-        {{ t('psaccounts.alertEventBusNotInstalled.message') }}
+        {{ $t('psaccounts.alertEventBusNotInstalled.message') }}
       </p>
       <p class="mt-2">
         <b-button
           variant="primary"
           @click="installEventBus"
         >
-          {{ t('psaccounts.alertEventBusNotInstalled.installButton') }}
+          {{ $t('psaccounts.alertEventBusNotInstalled.installButton') }}
         </b-button>
       </p>
     </b-alert>
@@ -26,40 +26,21 @@
 </template>
 
 <script>
-import {BOverlay, BAlert, BButton} from 'bootstrap-vue';
-import Locale from '@/mixins/locale';
+import {BOverlay} from 'bootstrap-vue';
+import Alert from './Alert';
+import installModule from '@/lib/moduleManager/InstallModule';
 import useSegmentTracking from '@/composables/useSegmentTracking';
-import installModule from '../../../lib/moduleManager/InstallModule';
 
 export default {
   name: 'AlertEventBusNotInstalled',
-  mixins: [Locale],
+  mixins: [Alert],
   components: {
     BOverlay,
-    BAlert,
-    BButton,
-  },
-  props: {
-    link: {
-      type: [String, null],
-      required: false,
-      default: null,
-    },
-    psIs17: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
   },
   setup() {
     const {trackPsEventBusInstallButton} = useSegmentTracking();
 
     return {trackPsEventBusInstallButton};
-  },
-  data() {
-    return {
-      isLoading: false,
-    };
   },
   methods: {
     /**

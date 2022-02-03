@@ -13,7 +13,7 @@
           class="text-left text-sm-center text-md-left"
         >
           <p class="m-0 align-middle">
-            {{ t('psaccounts.account.authorized') }}
+            {{ $tc('psaccounts.account.authorized', linkedShops.length) }}
           </p>
           <p class="m-0 align-middle text-break text-muted d-md-block">
             {{ linkedUserEmail }}
@@ -22,29 +22,29 @@
         <span
           v-else-if="hasOneOrMoreNotLinkedShop"
         >
-          {{ t('psaccounts.account.authorizedPartially') }}
+          {{ $t('psaccounts.account.authorizedPartially') }}
         </span>
         <span
           v-else
         >
-          {{ t('psaccounts.account.authorizedSeveral') }}
+          {{ $t('psaccounts.account.authorizedSeveral') }}
         </span>
       </template>
       <span
         v-else
       >
-        {{ t('psaccounts.account.authorize') }}
+        {{ $t('psaccounts.account.authorize') }}
       </span>
     </div>
   </div>
 </template>
 
 <script>
-import Locale from '@/mixins/locale';
+import i18n from '@/locale';
 
 export default {
   name: 'AccountShopLinkMessage',
-  mixins: [Locale],
+  i18n,
   props: {
     shops: {
       type: Array,

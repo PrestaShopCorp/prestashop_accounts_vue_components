@@ -3,7 +3,7 @@
     variant="info"
     show
   >
-    <div v-html="t('psaccounts.account.moduleUpdateInformation')" />
+    <div v-html="$t('psaccounts.account.moduleUpdateInformation')" />
   </b-alert>
 </template>
 
@@ -11,7 +11,7 @@
 import {
   BAlert,
 } from 'bootstrap-vue';
-import Locale from '@/mixins/locale';
+import i18n from '@/locale';
 
 /**
    * This alert shows a message if the user is already onboard in v4
@@ -20,7 +20,7 @@ import Locale from '@/mixins/locale';
    */
 export default {
   name: 'ModuleUpdatedInformation',
-  mixins: [Locale],
+  i18n,
   components: {
     BAlert,
   },

@@ -1,13 +1,13 @@
 import {BAlert, BButton, BLink} from 'bootstrap-vue';
-import Locale from '@/mixins/locale';
+import i18n from '@/locale';
 
 export default {
+  i18n,
   components: {
     BAlert,
     BButton,
     BLink,
   },
-  mixins: [Locale],
   props: {
     link: {
       type: String,

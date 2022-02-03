@@ -4,9 +4,9 @@
     class="mt-4"
     show
   >
-    <p>{{ t('psaccounts.account.needToBeAdmin') }}</p>
+    <p>{{ $t('psaccounts.account.needToBeAdmin') }}</p>
     <p>
-      {{ t('psaccounts.account.pleaseContact') }}
+      {{ $t('psaccounts.account.pleaseContact') }}
       <a
         @click="trackClick"
         :href="'mailto:' + superAdminEmail"
@@ -21,7 +21,7 @@
 import {
   BAlert,
 } from 'bootstrap-vue';
-import Locale from '@/mixins/locale';
+import i18n from '@/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
@@ -30,7 +30,7 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    */
 export default {
   name: 'AccountUserNotSuperAdmin',
-  mixins: [Locale],
+  i18n,
   components: {
     BAlert,
   },

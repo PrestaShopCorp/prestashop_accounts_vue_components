@@ -37,9 +37,9 @@
             "message": "Tylko sklep z przypisanym adresem URL może być powiązany z kontem PrestaShop.<br />Następujące sklepy nie mają przypisanego adresu URL: "
         },
         "account": {
-            "title": "Połącz swój sklep z kontem PrestaShop",
+            "title": "Połącz swój sklep z kontem PrestaShop | Połącz swoje sklepy z kontem PrestaShop",
             "authorize": "Możesz powiązać swój sklep tylko z jednym kontem. Dokonaj dobrego wyboru!",
-            "authorized": "Twój sklep jest powiązany z kontem PrestaShop:",
+            "authorized": "Twój sklep jest powiązany z kontem PrestaShop: | Twoje sklepy są powiązane z kontem PrestaShop:",
             "authorizedPartially": "Twoje sklepy są częściowo powiązane z kontem PrestaShop",
             "authorizedSeveral": "Twoje sklepy są powiązane z kilkoma kontami PrestaShop",
             "connectButton": "Połącz",

@@ -3,25 +3,22 @@
     variant="warning"
     show
   >
-    <div v-html="t('psaccounts.account.emailNotVerified')" />
+    <div v-html="$t('psaccounts.account.emailNotVerified')" />
 
     <div class="mt-2 d-flex justify-content-end">
       <b-button
         variant="primary"
-        @click="sendEmailConfirmation()"
+        @click="sendEmailConfirmation"
       >
-        {{ t('psaccounts.account.sendEmail') }}
+        {{ $t('psaccounts.account.sendEmail') }}
       </b-button>
     </div>
   </b-alert>
 </template>
 
 <script>
-import {
-  BAlert,
-  BButton,
-} from 'bootstrap-vue';
-import Locale from '@/mixins/locale';
+import {BAlert, BButton} from 'bootstrap-vue';
+import i18n from '@/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
@@ -30,16 +27,16 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    */
 export default {
   name: 'AccountUserEmailNotValidated',
-  mixins: [Locale],
+  i18n,
   components: {
     BAlert,
     BButton,
   },
   props: {
     /**
-       * URL used for activating PrestaShop Accounts<br />
-       * should be https://auth.prestashop.com/account/send-verification-email
-       */
+         * URL used for activating PrestaShop Accounts<br />
+         * should be https://auth.prestashop.com/account/send-verification-email
+         */
     ssoResendVerificationEmail: {
       type: String,
       required: true,

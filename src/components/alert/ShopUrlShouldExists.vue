@@ -4,10 +4,10 @@
     show
   >
     <h3 class="m-0">
-      {{ t('psaccounts.alertShopDomainShouldExists.title') }}
+      {{ $t('psaccounts.alertShopDomainShouldExists.title') }}
     </h3>
     <p>
-      <span v-html="t('psaccounts.alertShopDomainShouldExists.message')" />
+      <span v-html="$t('psaccounts.alertShopDomainShouldExists.message')" />
       {{ shopNamesWithoutUrl.join(', ') }}
     </p>
   </b-alert>
@@ -17,14 +17,14 @@
 import {
   BAlert,
 } from 'bootstrap-vue';
-import Locale from '@/mixins/locale';
+import i18n from '@/locale';
 
 /**
    * This alert shows a message if a shop domain is not set;
    */
 export default {
   name: 'ShopUrlShouldExists',
-  mixins: [Locale],
+  i18n,
   components: {
     BAlert,
   },

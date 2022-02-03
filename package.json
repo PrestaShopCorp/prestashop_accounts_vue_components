@@ -26,6 +26,7 @@
     "prestakit": "^1.2.3",
     "v-click-outside": "^3.1.2",
     "vue": "^2.6.14",
+    "vue-i18n": "^8.26.5",
     "zoid": "^9.0.63"
   },
   "devDependencies": {
@@ -46,7 +47,7 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-vue": "^8.2.0",
     "node-sass": "^7.0.1",
-    "sass-loader": "6.0.7",
+    "sass-loader": "^6.0.7",
     "vue-template-compiler": "^2.6.14"
   },
   "browserslist": [

@@ -1,5 +1,5 @@
 <template>
-  <div id="main_ps_accounts">
+  <div>
     <b-alert
       :show="hasError"
       @dismissed="hasError = false"
@@ -7,7 +7,7 @@
       dismissible
     >
       <p>
-        {{ t('psaccounts.accountManager.errorInstallEnable') }}
+        {{ $t('psaccounts.accountManager.errorInstallEnable') }}
       </p>
     </b-alert>
 
@@ -64,9 +64,9 @@ import {BAlert, BOverlay} from 'bootstrap-vue';
 import validContext, {
   setContext, shopsInContext,
 } from '@/lib/context';
+import i18n from '@/locale';
 import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
 import AccountPanel from '@/components/panel/AccountPanel';
-import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
@@ -77,20 +77,20 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    */
 export default {
   name: 'PsAccounts',
+  i18n,
   components: {
     PsAccountComponentAlertDisplay,
     AccountPanel,
     BOverlay,
     BAlert,
   },
-  mixins: [Locale],
   props: {
     /**
-       * The whole context object given
-       * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
-       * If left empty (by default), the context will be retrieved from JS global
-       * var window.contextPsAccounts automatically.
-       */
+         * The whole context object given
+         * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
+         * If left empty (by default), the context will be retrieved from JS global
+         * var window.contextPsAccounts automatically.
+         */
     context: {
       type: Object,
       required: false,
@@ -118,8 +118,8 @@ export default {
     },
     hasBlockingAlert() {
       return !this.validContext.psAccountsIsInstalled
-          || !this.validContext.psAccountsIsUptodate
-          || !this.validContext.psAccountsIsEnabled;
+            || !this.validContext.psAccountsIsUptodate
+            || !this.validContext.psAccountsIsEnabled;
     },
     shopsWithUrl() {
       return this.shops.filter((shop) => shop.domain);

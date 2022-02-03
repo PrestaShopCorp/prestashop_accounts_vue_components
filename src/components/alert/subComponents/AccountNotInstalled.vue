@@ -3,9 +3,9 @@
     variant="warning"
     show
   >
-    <h3>{{ t('psaccounts.alertAccountNotInstalled.title') }}</h3>
+    <h3>{{ $t('psaccounts.alertAccountNotInstalled.title') }}</h3>
     <p>
-      {{ t('psaccounts.alertAccountNotInstalled.message') }}.
+      {{ $t('psaccounts.alertAccountNotInstalled.message') }}.
     </p>
     <p class="mt-2">
       <b-button
@@ -13,24 +13,23 @@
         variant="primary"
         @click="installPsAccounts"
       >
-        {{ t('psaccounts.alertAccountNotInstalled.installButton') }}
+        {{ $t('psaccounts.alertAccountNotInstalled.installButton') }}
       </b-button>
       <b-link
         href="#"
         disabled
         v-else
       >
-        {{ t('psaccounts.alertAccountNotInstalled.loading') }}
+        {{ $t('psaccounts.alertAccountNotInstalled.loading') }}
       </b-link>
     </p>
   </b-alert>
 </template>
 
 <script>
-import {BAlert, BButton, BLink} from 'bootstrap-vue';
-import Locale from '@/mixins/locale';
+import Alert from './Alert';
+import installModule from '@/lib/moduleManager/InstallModule';
 import useSegmentTracking from '@/composables/useSegmentTracking';
-import installModule from '../../../lib/moduleManager/InstallModule';
 
 /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -39,40 +38,17 @@ import installModule from '../../../lib/moduleManager/InstallModule';
    */
 export default {
   name: 'AlertAccountNotInstalled',
-  mixins: [Locale],
-  components: {
-    BAlert,
-    BButton,
-    BLink,
-  },
-  props: {
-    link: {
-      type: [String, null],
-      required: false,
-      default: null,
-    },
-    psIs17: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
-  },
+  mixins: [Alert],
   setup() {
     const {trackPsAccountInstallButton} = useSegmentTracking();
 
     return {trackPsAccountInstallButton};
-  },
-  data() {
-    return {
-      isLoading: false,
-    };
   },
   methods: {
     installPsAccounts() {
       this.isLoading = true;
 
       this.trackPsAccountInstallButton();
-
       installModule(
         'ps_accounts',
         this.link,
