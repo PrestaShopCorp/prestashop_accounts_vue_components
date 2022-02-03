@@ -19,9 +19,9 @@
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
+import i18n from '@/locale';
 import BaseAlert from './BaseAlert.vue';
 import BaseButton from '@/components/BaseButton.vue';
-import Locale from '@/mixins/locale';
 
 /**
  * This component is used to display warning alert telling the PSAccounts module or
@@ -29,11 +29,11 @@ import Locale from '@/mixins/locale';
  */
 export default defineComponent({
   name: 'ModuleAlert',
+  i18n,
   components: {
     BaseAlert,
     BaseButton,
   },
-  mixins: [Locale],
   props: {
     actionText: {
       type: String,

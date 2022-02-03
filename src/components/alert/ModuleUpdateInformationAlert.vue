@@ -1,13 +1,13 @@
 <template>
   <BaseAlert variant="info">
-    <div v-html="t('psaccounts.account.moduleUpdateInformation')" />
+    <div v-html="$t('psaccounts.account.moduleUpdateInformation')" />
   </BaseAlert>
 </template>
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
+import i18n from '@/locale';
 import BaseAlert from './BaseAlert.vue';
-import Locale from '@/mixins/locale';
 
 /**
    * This alert shows a message if the user is already onboard in v4
@@ -16,7 +16,7 @@ import Locale from '@/mixins/locale';
    */
 export default defineComponent({
   name: 'ModuleUpdateInformationAlert',
-  mixins: [Locale],
+  i18n,
   components: {
     BaseAlert,
   },

@@ -3,9 +3,9 @@
     variant="warning"
     class="mt-4"
   >
-    <p>{{ t('psaccounts.account.needToBeAdmin') }}</p>
+    <p>{{ $t('psaccounts.account.needToBeAdmin') }}</p>
     <p>
-      {{ t('psaccounts.account.pleaseContact') }}
+      {{ $t('psaccounts.account.pleaseContact') }}
       <a
         @click="trackLinkContactAdmin"
         :href="'mailto:' + superAdminEmail"
@@ -18,8 +18,8 @@
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
+import i18n from '@/locale';
 import BaseAlert from './BaseAlert.vue';
-import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
@@ -28,7 +28,7 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    */
 export default defineComponent({
   name: 'UserNotSuperAdminAlert',
-  mixins: [Locale],
+  i18n,
   components: {
     BaseAlert,
   },

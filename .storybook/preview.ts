@@ -1,5 +1,7 @@
 import Vue from "vue";
-import { Segment, VueCompositionAPI } from "@/ExternalDependencies";
+import { Segment, VueCompositionAPI, VueI18n } from "@/ExternalDependencies";
+
+import "prestakit/scss/application.scss";
 
 import "prestakit/scss/application.scss";
 
@@ -10,3 +12,5 @@ Vue.use(Segment, {
 });
 
 Vue.use(VueCompositionAPI);
+
+Vue.use(VueI18n);

@@ -7,7 +7,7 @@
       :is="hasShopsLinked ? 'BaseDropdown' : 'BaseButton'"
       v-if="!hasAllShopsLinked"
       :id="`associate-shop-${hasShopsLinked ? 'dropdown' : 'button'}`"
-      :text="t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`)"
+      :text="$t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`)"
       :disabled="!backendUser.isSuperAdmin"
       @click="openLinkShopModal(isLinkedV4 ? 'reonboard' : 'associate')"
     >
@@ -15,10 +15,10 @@
         v-if="hasShopsLinked"
         @click="openLinkShopModal('manage')"
       >
-        {{ t(`psaccounts.account.manageAccountButton`) }}
+        {{ $t(`psaccounts.account.manageAccountButton`) }}
       </BaseDropdownItemButton>
       <template v-else>
-        {{ t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`) }}
+        {{ $t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`) }}
       </template>
     </component>
 
@@ -26,7 +26,7 @@
       :is="isShopContext && hasShopsLinkedByUserInBackoffice ? 'BaseDropdown' : 'BaseButton'"
       v-else-if="hasShopsLinked"
       :id="`manage-shops-${ isShopContext ? 'dropdown' : 'button'}`"
-      :text="t(`psaccounts.account.manageAccountButton`)"
+      :text="$t(`psaccounts.account.manageAccountButton`)"
       :disabled="!backendUser.isSuperAdmin"
       @click="openLinkShopModal('manage')"
     >
@@ -34,10 +34,10 @@
         v-if="isShopContext && hasShopsLinkedByUserInBackoffice"
         @click="openLinkShopModal('unlink')"
       >
-        {{ t(`psaccounts.account.unlinkButton`) }}
+        {{ $t(`psaccounts.account.unlinkButton`) }}
       </BaseDropdownItemButton>
       <template v-else>
-        {{ t(`psaccounts.account.manageAccountButton`) }}
+        {{ $t(`psaccounts.account.manageAccountButton`) }}
       </template>
     </component>
 
@@ -56,17 +56,17 @@
 import {
   computed, defineComponent, PropType, ref, watch,
 } from '@vue/composition-api';
+import i18n from '@/locale';
+import {Shop, ShopContext} from '@/types/context';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseDropdown from '@/components/BaseDropdown.vue';
 import BaseDropdownItemButton from '@/components/BaseDropdownItemButton.vue';
-import {Shop, ShopContext} from '@/types/context';
-import Locale from '@/mixins/locale';
-import useSegmentTracking from '@/composables/useSegmentTracking';
 import LinkShopModal from '@/components/crossdomains/LinkShopModal.vue';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
 export default defineComponent({
   name: 'AccountLinkToUi',
-  mixins: [Locale],
+  i18n,
   components: {
     BaseButton,
     BaseDropdown,

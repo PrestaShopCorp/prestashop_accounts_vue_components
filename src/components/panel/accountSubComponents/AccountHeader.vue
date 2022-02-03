@@ -10,22 +10,22 @@
     <h3
       class="m-0 d-inline h3 title"
     >
-      {{ t('psaccounts.account.title') }}
+      <slot />
     </h3>
   </div>
 </template>
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
-import Locale from '@/mixins/locale';
+import i18n from '@/locale';
 import CheckIcon from '@/assets/icons/check.svg?inline';
 
 export default defineComponent({
   name: 'AccountHeader',
+  i18n,
   components: {
     CheckIcon,
   },
-  mixins: [Locale],
   props: {
     hasAllShopsLinked: {
       type: Boolean,

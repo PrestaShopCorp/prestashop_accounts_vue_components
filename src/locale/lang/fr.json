@@ -37,9 +37,9 @@
             "message": "Seule la boutique avec une URL assignée peut être associée à un compte PrestaShop.<br />Les boutiques suivantes n'ont pas d'URL assignée : "
         },
         "account": {
-            "title": "Associez votre boutique à un compte PrestaShop",
+            "title": "Associer votre boutique à un compte PrestaShop | Associer vos boutiques à un compte PrestaShop",
             "authorize": "Vous ne pouvez associer votre boutique qu'à un seul compte. Choisissez le bien !",
-            "authorized": "Votre boutique est associée au compte PrestaShop : ",
+            "authorized": "Votre boutique est associée au compte PrestaShop : | Votre boutique est associée au compte PrestaShop :",
             "authorizedPartially": "Vos boutiques sont partiellement associées à un compte PrestaShop",
             "authorizedSeveral": "Vos boutiques sont associées à plusieurs comptes PrestaShop",
             "connectButton": "Associer",

@@ -1,3 +1,4 @@
+import {LocaleMessages} from 'vue-i18n';
 import de from '@/locale/lang/de.json';
 import en from '@/locale/lang/en.json';
 import es from '@/locale/lang/es.json';
@@ -16,4 +17,4 @@ export default {
   nl,
   pl,
   pt,
-} as Record<string | number | symbol, object>;
+} as LocaleMessages;

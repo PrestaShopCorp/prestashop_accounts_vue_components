@@ -1,13 +1,13 @@
 <template>
   <BaseAlert variant="warning">
-    <div v-html="t('psaccounts.account.emailNotVerified')" />
+    <div v-html="$t('psaccounts.account.emailNotVerified')" />
 
     <div class="mt-2 d-flex justify-content-end">
       <BaseButton
         variant="primary"
         @click="sendEmailConfirmation"
       >
-        {{ t('psaccounts.account.sendEmail') }}
+        {{ $t('psaccounts.account.sendEmail') }}
       </BaseButton>
     </div>
   </BaseAlert>
@@ -15,9 +15,9 @@
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
+import i18n from '@/locale';
 import BaseAlert from './BaseAlert.vue';
 import BaseButton from '@/components/BaseButton.vue';
-import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
@@ -26,16 +26,16 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    */
 export default defineComponent({
   name: 'UserEmailNotValidatedAlert',
-  mixins: [Locale],
+  i18n,
   components: {
     BaseAlert,
     BaseButton,
   },
   props: {
     /**
-       * URL used for activating PrestaShop Accounts<br />
-       * should be https://auth.prestashop.com/account/send-verification-email
-       */
+         * URL used for activating PrestaShop Accounts<br />
+         * should be https://auth.prestashop.com/account/send-verification-email
+         */
     ssoResendVerificationEmail: {
       type: String,
       required: true,

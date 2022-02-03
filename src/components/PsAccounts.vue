@@ -7,7 +7,7 @@
       @dismissed="hasError = false"
     >
       <p>
-        {{ t('psaccounts.accountManager.errorInstallEnable') }}
+        {{ $t('psaccounts.accountManager.errorInstallEnable') }}
       </p>
     </BaseAlert>
     <BaseAlert
@@ -53,14 +53,14 @@
 import {
   computed, defineComponent, onMounted, PropType, ref,
 } from '@vue/composition-api';
+import i18n from '@/locale';
+import {Context} from '@/types/context';
+import AccountPanel from '@/components/panel/AccountPanel.vue';
 import BaseAlert from '@/components/alert/BaseAlert.vue';
 import BaseOverlay from '@/components/BaseOverlay.vue';
-import useContext from '@/composables/useContext';
 import PsAccountComponentAlertDisplay from '@/containers/PsAccountComponentAlertDisplay.vue';
-import AccountPanel from '@/components/panel/AccountPanel.vue';
-import Locale from '@/mixins/locale';
+import useContext from '@/composables/useContext';
 import useSegmentTracking from '@/composables/useSegmentTracking';
-import {Context} from '@/types/context';
 
 /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
@@ -73,20 +73,20 @@ import {Context} from '@/types/context';
    */
 export default defineComponent({
   name: 'PsAccounts',
+  i18n,
   components: {
     AccountPanel,
     BaseAlert,
     BaseOverlay,
     PsAccountComponentAlertDisplay,
   },
-  mixins: [Locale],
   props: {
     /**
-       * The whole context object given
-       * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
-       * If left empty (by default), the context will be retrieved from JS global
-       * var window.contextPsAccounts automatically.
-       */
+         * The whole context object given
+         * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
+         * If left empty (by default), the context will be retrieved from JS global
+         * var window.contextPsAccounts automatically.
+         */
     context: {
       type: Object as PropType<Context>,
       required: false,
