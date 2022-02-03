@@ -14,31 +14,29 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import {
-    BAlert,
-  } from 'bootstrap-vue';
+import {
+  BAlert,
+} from 'bootstrap-vue';
+import Locale from '@/mixins/locale';
 
-  /**
+/**
    * This alert shows a message if a shop domain is not set;
    */
-  export default {
-    name: 'ShopUrlShouldExists',
-    mixins: [Locale],
-    components: {
-      BAlert,
+export default {
+  name: 'ShopUrlShouldExists',
+  mixins: [Locale],
+  components: {
+    BAlert,
+  },
+  props: {
+    hasAllShopsWithoutUrl: {
+      type: Boolean,
+      required: true,
     },
-    props: {
-      hasAllShopsWithoutUrl: {
-        type: Boolean,
-        required: true,
-        default: false,
-      },
-      shopNamesWithoutUrl: {
-        type: Array,
-        required: true,
-        default: () => ([]),
-      },
+    shopNamesWithoutUrl: {
+      type: Array,
+      required: true,
     },
-  };
+  },
+};
 </script>

@@ -26,62 +26,62 @@
 </template>
 
 <script>
-  import {BOverlay, BAlert, BButton} from 'bootstrap-vue';
-  import Locale from '@/mixins/locale';
-  import useSegmentTracking from '@/composables/useSegmentTracking';
-  import installModule from '../../../lib/moduleManager/InstallModule';
+import {BOverlay, BAlert, BButton} from 'bootstrap-vue';
+import Locale from '@/mixins/locale';
+import useSegmentTracking from '@/composables/useSegmentTracking';
+import installModule from '../../../lib/moduleManager/InstallModule';
 
-  export default {
-    name: 'AlertEventBusNotInstalled',
-    mixins: [Locale],
-    components: {
-      BOverlay,
-      BAlert,
-      BButton,
+export default {
+  name: 'AlertEventBusNotInstalled',
+  mixins: [Locale],
+  components: {
+    BOverlay,
+    BAlert,
+    BButton,
+  },
+  props: {
+    link: {
+      type: [String, null],
+      required: false,
+      default: null,
     },
-    props: {
-      link: {
-        type: [ String, null ],
-        required: false,
-        default: null,
-      },
-      psIs17: {
-        type: Boolean,
-        required: false,
-        default: true,
-      },
+    psIs17: {
+      type: Boolean,
+      required: false,
+      default: true,
     },
-    setup() {
-      const {trackPsEventBusInstallButton} = useSegmentTracking();
+  },
+  setup() {
+    const {trackPsEventBusInstallButton} = useSegmentTracking();
 
-      return {trackPsEventBusInstallButton};
-    },
-    data() {
-      return {
-        isLoading: false,
-      };
-    },
-    methods: {
-      /**
+    return {trackPsEventBusInstallButton};
+  },
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+  methods: {
+    /**
        * Emitted when install button is clicked.
        * @type {Event}
        */
-      installEventBus() {
-        this.isLoading = true;
+    installEventBus() {
+      this.isLoading = true;
 
-        this.trackPsEventBusInstallButton();
+      this.trackPsEventBusInstallButton();
 
-        installModule(
-          'ps_eventbus',
-          this.link,
-          this.psIs17,
-        ).catch(() => {
-          this.isLoading = false;
-          this.$emit('hasError');
-        });
-      },
+      installModule(
+        'ps_eventbus',
+        this.link,
+        this.psIs17,
+      ).catch(() => {
+        this.isLoading = false;
+        this.$emit('hasError');
+      });
     },
-  };
+  },
+};
 </script>
 
 <style></style>

@@ -18,37 +18,37 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import useSegmentTracking from '@/composables/useSegmentTracking';
-  import {
-    BAlert,
-  } from 'bootstrap-vue';
+import {
+  BAlert,
+} from 'bootstrap-vue';
+import Locale from '@/mixins/locale';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
-  /**
+/**
    * This sub-component shows a message is the user is not a super-admin
    * and tell him to contact one to continue the process
    */
-  export default {
-    name: 'AccountUserNotSuperAdmin',
-    mixins: [Locale],
-    components: {
-      BAlert,
+export default {
+  name: 'AccountUserNotSuperAdmin',
+  mixins: [Locale],
+  components: {
+    BAlert,
+  },
+  props: {
+    superAdminEmail: {
+      type: String,
+      required: true,
     },
-    props: {
-      superAdminEmail: {
-        type: String,
-        required: true,
-      },
-    },
-    setup() {
-      const {trackLinkContactAdmin} = useSegmentTracking();
+  },
+  setup() {
+    const {trackLinkContactAdmin} = useSegmentTracking();
 
-      return {trackLinkContactAdmin};
+    return {trackLinkContactAdmin};
+  },
+  methods: {
+    trackClick() {
+      this.trackLinkContactAdmin();
     },
-    methods: {
-      trackClick() {
-        this.trackLinkContactAdmin();
-      },
-    },
-  };
+  },
+};
 </script>

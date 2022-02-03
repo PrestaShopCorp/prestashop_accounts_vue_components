@@ -40,33 +40,33 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
+import Locale from '@/mixins/locale';
 
-  export default {
-    name: 'AccountShopLinkMessage',
-    mixins: [Locale],
-    props: {
-      shops: {
-        type: Array,
-        default: () => [],
-      },
+export default {
+  name: 'AccountShopLinkMessage',
+  mixins: [Locale],
+  props: {
+    shops: {
+      type: Array,
+      default: () => [],
     },
-    computed: {
-      hasOneOrMoreNotLinkedShop() {
-        return this.shops.some((shop) => !shop.uuid);
-      },
-      hasSomeShopsLinked() {
-        return this.shops.some((shop) => shop.uuid && !shop.isLinkedV4);
-      },
-      hasShopsLinkedBySameUser() {
-        return this.shops.every((shop) => shop.employeeId === this.shops[0].employeeId);
-      },
-      linkedShops() {
-        return this.shops.filter((shop) => shop.uuid && !shop.isLinkedV4);
-      },
-      linkedUserEmail() {
-        return this.linkedShops[0]?.user?.email || '';
-      },
+  },
+  computed: {
+    hasOneOrMoreNotLinkedShop() {
+      return this.shops.some((shop) => !shop.uuid);
     },
-  };
+    hasSomeShopsLinked() {
+      return this.shops.some((shop) => shop.uuid && !shop.isLinkedV4);
+    },
+    hasShopsLinkedBySameUser() {
+      return this.shops.every((shop) => shop.employeeId === this.shops[0].employeeId);
+    },
+    linkedShops() {
+      return this.shops.filter((shop) => shop.uuid && !shop.isLinkedV4);
+    },
+    linkedUserEmail() {
+      return this.linkedShops[0]?.user?.email || '';
+    },
+  },
+};
 </script>

@@ -8,21 +8,21 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import {
-    BAlert,
-  } from 'bootstrap-vue';
+import {
+  BAlert,
+} from 'bootstrap-vue';
+import Locale from '@/mixins/locale';
 
-  /**
+/**
    * This alert shows a message if the user is already onboard in v4
    * and tell him to reonboard with the same email address and
    * update other modules;
    */
-  export default {
-    name: 'ModuleUpdatedInformation',
-    mixins: [Locale],
-    components: {
-      BAlert,
-    },
-  };
+export default {
+  name: 'ModuleUpdatedInformation',
+  mixins: [Locale],
+  components: {
+    BAlert,
+  },
+};
 </script>

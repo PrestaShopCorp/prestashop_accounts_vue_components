@@ -27,61 +27,61 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import useSegmentTracking from '@/composables/useSegmentTracking';
-  import {BAlert, BButton, BLink} from 'bootstrap-vue';
-  import enableModule from '../../../lib/moduleManager/EnableModule';
+import {BAlert, BButton, BLink} from 'bootstrap-vue';
+import Locale from '@/mixins/locale';
+import useSegmentTracking from '@/composables/useSegmentTracking';
+import enableModule from '../../../lib/moduleManager/EnableModule';
 
-  /**
+/**
    * This sub-component can be used in a custom integration when the `PsAccounts`
    * component does not meets special needs. This part will display a warning message
    * telling the PS Accounts module is not enabled on the shop (and a button to enable it).
    */
-  export default {
-    name: 'AlertAccountNotEnabled',
-    components: {
-      BAlert,
-      BButton,
-      BLink,
+export default {
+  name: 'AlertAccountNotEnabled',
+  components: {
+    BAlert,
+    BButton,
+    BLink,
+  },
+  mixins: [Locale],
+  props: {
+    link: {
+      type: [String, null],
+      required: false,
+      default: null,
     },
-    mixins: [Locale],
-    props: {
-      link: {
-        type: [ String, null ],
-        required: false,
-        default: null,
-      },
-      psIs17: {
-        type: Boolean,
-        required: false,
-        default: true,
-      },
+    psIs17: {
+      type: Boolean,
+      required: false,
+      default: true,
     },
-    setup() {
-      const {trackPsAccountEnableButton} = useSegmentTracking();
+  },
+  setup() {
+    const {trackPsAccountEnableButton} = useSegmentTracking();
 
-      return {trackPsAccountEnableButton};
-    },
-    data() {
-      return {
-        isLoading: false,
-      };
-    },
-    methods: {
-      enablePsAccounts() {
-        this.isLoading = true;
+    return {trackPsAccountEnableButton};
+  },
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+  methods: {
+    enablePsAccounts() {
+      this.isLoading = true;
 
-        this.trackPsAccountEnableButton();
+      this.trackPsAccountEnableButton();
 
-        enableModule(
-          'ps_accounts',
-          this.link,
-          this.psIs17,
-        ).catch(() => {
-          this.isLoading = false;
-          this.$emit('hasError');
-        });
-      },
+      enableModule(
+        'ps_accounts',
+        this.link,
+        this.psIs17,
+      ).catch(() => {
+        this.isLoading = false;
+        this.$emit('hasError');
+      });
     },
-  };
+  },
+};
 </script>

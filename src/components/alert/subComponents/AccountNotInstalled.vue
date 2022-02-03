@@ -27,61 +27,61 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import useSegmentTracking from '@/composables/useSegmentTracking';
-  import {BAlert, BButton, BLink} from 'bootstrap-vue';
-  import installModule from '../../../lib/moduleManager/InstallModule';
+import {BAlert, BButton, BLink} from 'bootstrap-vue';
+import Locale from '@/mixins/locale';
+import useSegmentTracking from '@/composables/useSegmentTracking';
+import installModule from '../../../lib/moduleManager/InstallModule';
 
-  /**
+/**
    * This sub-component can be used in a custom integration when the `PsAccounts`
    * component does not meets special needs. This part will display a warning message
    * telling the PS Accounts module is not installed on the shop (and a button to install it).
    */
-  export default {
-    name: 'AlertAccountNotInstalled',
-    mixins: [Locale],
-    components: {
-      BAlert,
-      BButton,
-      BLink,
+export default {
+  name: 'AlertAccountNotInstalled',
+  mixins: [Locale],
+  components: {
+    BAlert,
+    BButton,
+    BLink,
+  },
+  props: {
+    link: {
+      type: [String, null],
+      required: false,
+      default: null,
     },
-    props: {
-      link: {
-        type: [ String, null ],
-        required: false,
-        default: null,
-      },
-      psIs17: {
-        type: Boolean,
-        required: false,
-        default: true,
-      },
+    psIs17: {
+      type: Boolean,
+      required: false,
+      default: true,
     },
-    setup() {
-      const {trackPsAccountInstallButton} = useSegmentTracking();
+  },
+  setup() {
+    const {trackPsAccountInstallButton} = useSegmentTracking();
 
-      return {trackPsAccountInstallButton};
-    },
-    data() {
-      return {
-        isLoading: false,
-      };
-    },
-    methods: {
-      installPsAccounts() {
-        this.isLoading = true;
+    return {trackPsAccountInstallButton};
+  },
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+  methods: {
+    installPsAccounts() {
+      this.isLoading = true;
 
-        this.trackPsAccountInstallButton();
+      this.trackPsAccountInstallButton();
 
-        installModule(
-          'ps_accounts',
-          this.link,
-          this.psIs17,
-        ).catch(() => {
-          this.isLoading = false;
-          this.$emit('hasError');
-        });
-      },
+      installModule(
+        'ps_accounts',
+        this.link,
+        this.psIs17,
+      ).catch(() => {
+        this.isLoading = false;
+        this.$emit('hasError');
+      });
     },
-  };
+  },
+};
 </script>

@@ -30,10 +30,11 @@ export default function useSegmentTracking() {
       superadmin: context().backendUser.isSuperAdmin,
       v4_onboarded: context().isOnboardedV4,
     };
+
     if (args.length === 1 && typeof args[0] === 'object') {
-      props = args[0];
+      [props] = args;
     } else if (args.length >= 2 && typeof args[1] === 'object') {
-      props = args[1];
+      [, props] = args;
     }
 
     // eslint-disable-next-line no-unused-expressions
@@ -106,6 +107,10 @@ export default function useSegmentTracking() {
     track('[ACC] PSAccount Update Button Clicked');
   }
 
+  function trackPsEventBusEnableButton() {
+    track('[ACC] PSEventBus Enable Button Clicked');
+  }
+
   function trackPsEventBusInstallButton() {
     track('[ACC] PSEventBus Install Button Clicked');
   }
@@ -153,6 +158,7 @@ export default function useSegmentTracking() {
     trackPsAccountEnableButton,
     trackPsAccountInstallButton,
     trackPsAccountUpdateButton,
+    trackPsEventBusEnableButton,
     trackPsEventBusInstallButton,
   };
 }

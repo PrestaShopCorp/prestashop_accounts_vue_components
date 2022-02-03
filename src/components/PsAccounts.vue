@@ -28,7 +28,7 @@
       />
 
       <template v-if="!hasBlockingAlert">
-        <Account
+        <AccountPanel
           class="mb-2"
           :accounts-ui-url="validContext.accountsUiUrl"
           :backend-user="validContext.backendUser"
@@ -42,7 +42,7 @@
             v-if="hasAllShopsLinked"
             name="account-footer"
           />
-        </Account>
+        </AccountPanel>
         <b-overlay
           :show="!hasAllShopsLinked"
           variant="white"
@@ -59,17 +59,16 @@
 </template>
 
 <script>
-  import validContext, {
-    setContext, shopsInContext,
-  } from '@/lib/context';
-  import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
-  import Account from '@/components/panel/Account';
-  import Locale from '@/mixins/locale';
-  import {BAlert, BOverlay} from 'bootstrap-vue';
-  import useSegmentTracking from '@/composables/useSegmentTracking';
-  import 'bootstrap-vue/dist/bootstrap-vue.css';
+import {BAlert, BOverlay} from 'bootstrap-vue';
+import validContext, {
+  setContext, shopsInContext,
+} from '@/lib/context';
+import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
+import AccountPanel from '@/components/panel/AccountPanel';
+import Locale from '@/mixins/locale';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
-  /**
+/**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
    * to ensure each functional case is covered for you. You can use 3 slots: `v-slot:body`,
    * that will be disabled if the user account is not well linked (you should put your
@@ -78,63 +77,69 @@
    * and a special `v-slot:customBody` that will always be
    * displayed (you have to manage display condition by yourself).
    */
-  export default {
-    name: 'PsAccounts',
-    components: {
-      PsAccountComponentAlertDisplay,
-      Account,
-      BOverlay,
-      BAlert,
-    },
-    mixins: [Locale],
-    props: {
-      /**
+export default {
+  name: 'PsAccounts',
+  components: {
+    PsAccountComponentAlertDisplay,
+    AccountPanel,
+    BOverlay,
+    BAlert,
+  },
+  mixins: [Locale],
+  props: {
+    /**
        * The whole context object given
        * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
        * If left empty (by default), the context will be retrieved from JS global
        * var window.contextPsAccounts automatically.
        */
-      context: {
-        type: Object,
-        required: false,
-        default: () => window.contextPsAccounts || {},
-      },
+    context: {
+      type: Object,
+      required: false,
+      default: () => window.contextPsAccounts || {},
     },
-    data() {
-      return {
-        hasError: false,
-      };
-    },
-    setup() {
-      const {identify, trackAccountComponentViewed} = useSegmentTracking();
+  },
+  data() {
+    return {
+      hasError: false,
+    };
+  },
+  setup() {
+    const {identify, trackAccountComponentViewed} = useSegmentTracking();
 
-      return {
-        identify,
-        trackAccountComponentViewed,
-      };
+    return {
+      identify,
+      trackAccountComponentViewed,
+    };
+  },
+  computed: {
+    validContext,
+    shops: shopsInContext,
+    hasAllShopsLinked() {
+      return this.shopsWithUrl.every((shop) => shop.uuid);
     },
-    computed: {
-      validContext,
-      shops: shopsInContext,
-      hasAllShopsLinked() {
-        return this.shopsWithUrl.every((shop) => shop.uuid);
-      },
-      hasBlockingAlert() {
-        return !this.validContext.psAccountsIsInstalled
+    hasBlockingAlert() {
+      return !this.validContext.psAccountsIsInstalled
           || !this.validContext.psAccountsIsUptodate
           || !this.validContext.psAccountsIsEnabled;
-      },
-      shopsWithUrl() {
-        return this.shops.filter((shop) => shop.domain);
-      },
     },
-    created() {
-      setContext(this.context);
+    shopsWithUrl() {
+      return this.shops.filter((shop) => shop.domain);
+    },
+  },
+  created() {
+    setContext(this.context);
 
-      if (this.validContext.psAccountsIsInstalled && this.validContext.psAccountsIsEnabled) {
-        this.identify();
-        this.trackAccountComponentViewed();
-      }
-    },
-  };
+    if (this.validContext.psAccountsIsInstalled && this.validContext.psAccountsIsEnabled) {
+      this.identify();
+      this.trackAccountComponentViewed();
+    }
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+::v-deep {
+  @import '~prestakit/scss/application';
+}
+</style>
