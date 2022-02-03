@@ -1,7 +1,6 @@
 import {computed, reactive, toRefs} from '@vue/composition-api';
 import {contextSchema} from '@/lib/ContextValidator';
-import {Context, ShopContext} from '@/types/context.type';
-import {Shop} from '@/models/shop';
+import {Context, Shop, ShopContext} from '@/types/context';
 
 const defaultContext = (): Partial<Context> => ({
   // psIs17: true,

@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import {computed, defineComponent, PropType} from '@vue/composition-api';
-import {Shop} from '@/models/shop';
+import {Shop} from '@/types/context';
 import Locale from '@/mixins/locale';
 
 export default defineComponent({

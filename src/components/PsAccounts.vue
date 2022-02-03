@@ -60,7 +60,7 @@ import PsAccountComponentAlertDisplay from '@/containers/PsAccountComponentAlert
 import AccountPanel from '@/components/panel/AccountPanel.vue';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
-import {Context} from '@/types/context.type';
+import {Context} from '@/types/context';
 
 /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly

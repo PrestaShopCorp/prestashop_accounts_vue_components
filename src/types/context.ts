@@ -1,24 +1,13 @@
-import {Shop} from '@/models/shop';
-import {BackendUser, User} from '@/models/user';
-
 export enum ShopContext {
   Shop = 1,
   Group = 2,
   All = 4,
 }
 
-export interface CurrentContext {
-  id?: number | null;
-  type: ShopContext;
-}
-
-export interface ShopGroup {
-  id: string;
-  moduleName?: string;
-  multishop?: boolean;
-  name: string;
-  psVersion?: string;
-  shops: Shop[];
+export interface BackendUser {
+  email?: string | null;
+  employeeId?: number;
+  isSuperAdmin: boolean;
 }
 
 export type Context = {
@@ -55,4 +44,44 @@ export type Context = {
   superAdminEmail?: string | null;
   user?: Partial<User> | null;
   errors?: string[];
+};
+
+export interface CurrentContext {
+  id?: number | null;
+  type: ShopContext;
+}
+
+export interface Shop {
+  domain: string | null;
+  domainSsl: string | null;
+  employeeId?: number | null; // string ?
+  frontUrl?: string | null;
+  id: string;
+  isLinkedV4?: boolean; // ?
+  moduleName?: string;
+  multishop?: boolean;
+  name: string;
+  physicalUri?: string | boolean | null;
+  psVersion?: string;
+  publicKey: string;
+  url: string;
+  user?: Partial<User>;
+  uuid?: string | null;
+  virtualUri?: string | boolean | null;
+}
+
+export interface ShopGroup {
+  id: string;
+  moduleName?: string;
+  multishop?: boolean;
+  name: string;
+  psVersion?: string;
+  shops: Shop[];
+}
+
+export interface User {
+  email?: string | null;
+  emailIsValidated?: boolean;
+  isSuperAdmin: boolean;
+  uuid?: string | null;
 }

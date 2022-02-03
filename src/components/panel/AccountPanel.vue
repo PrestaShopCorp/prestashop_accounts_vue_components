@@ -48,7 +48,7 @@
 import {
   computed, defineComponent, PropType,
 } from '@vue/composition-api';
-import {Shop} from '@/models/shop';
+import {Shop} from '@/types/context';
 import Locale from '@/mixins/locale';
 import BaseCard from '@/components/BaseCard.vue';
 import BaseCardBody from '@/components/BaseCardBody.vue';

@@ -59,8 +59,7 @@ import {
 import BaseButton from '@/components/BaseButton.vue';
 import BaseDropdown from '@/components/BaseDropdown.vue';
 import BaseDropdownItemButton from '@/components/BaseDropdownItemButton.vue';
-import {Shop} from '@/models/shop';
-import {ShopContext} from '@/types/context.type';
+import {Shop, ShopContext} from '@/types/context';
 import Locale from '@/mixins/locale';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 import LinkShopModal from '@/components/crossdomains/LinkShopModal.vue';
