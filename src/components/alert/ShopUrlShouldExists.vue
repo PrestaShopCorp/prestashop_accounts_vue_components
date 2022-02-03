@@ -7,38 +7,36 @@
       {{ $t('psaccounts.alertShopDomainShouldExists.title') }}
     </h3>
     <p>
-      <span v-html="$t('psaccounts.alertShopDomainShouldExists.message')"></span>
+      <span v-html="$t('psaccounts.alertShopDomainShouldExists.message')" />
       {{ shopNamesWithoutUrl.join(', ') }}
     </p>
   </b-alert>
 </template>
 
 <script>
-  import i18n from '@/locale';
-  import {
-    BAlert,
-  } from 'bootstrap-vue';
+import {
+  BAlert,
+} from 'bootstrap-vue';
+import i18n from '@/locale';
 
-  /**
+/**
    * This alert shows a message if a shop domain is not set;
    */
-  export default {
-    name: 'ShopUrlShouldExists',
-    i18n,
-    components: {
-      BAlert,
+export default {
+  name: 'ShopUrlShouldExists',
+  i18n,
+  components: {
+    BAlert,
+  },
+  props: {
+    hasAllShopsWithoutUrl: {
+      type: Boolean,
+      required: true,
     },
-    props: {
-      hasAllShopsWithoutUrl: {
-        type: Boolean,
-        required: true,
-        default: false,
-      },
-      shopNamesWithoutUrl: {
-        type: Array,
-        required: true,
-        default: () => ([]),
-      },
+    shopNamesWithoutUrl: {
+      type: Array,
+      required: true,
     },
-  };
+  },
+};
 </script>

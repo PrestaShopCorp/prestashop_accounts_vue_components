@@ -11,7 +11,7 @@
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="updatePsAccounts()"
+        @click="updatePsAccounts"
       >
         {{ $t('psaccounts.alertAccountNeedsUpdate.installButton') }}
       </b-button>
@@ -27,34 +27,38 @@
 </template>
 
 <script>
-  import i18n from '@/locale';
-  import Alert from './Alert';
-  import updateModule from '../../../lib/moduleManager/UpdateModule';
+import Alert from './Alert';
+import updateModule from '@/lib/moduleManager/UpdateModule';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
-  /**
+/**
    * This sub-component can be used in a custom integration when the `PsAccounts`
    * component does not meets special needs. This part will display a warning message
    * telling the PS Accounts module is not installed on the shop (and a button to install it).
    */
-  export default {
-    name: 'AlertAccountNotUpdated',
-    i18n,
-    mixins: [Alert],
-    methods: {
-      updatePsAccounts() {
-        this.isLoading = true;
+export default {
+  name: 'AlertAccountNotUpdated',
+  mixins: [Alert],
+  setup() {
+    const {trackPsAccountUpdateButton} = useSegmentTracking();
 
-        this.$tracking.track('[ACC] PSAccount Install Button Clicked');
+    return {trackPsAccountUpdateButton};
+  },
+  methods: {
+    updatePsAccounts() {
+      this.isLoading = true;
 
-        updateModule(
-          'ps_accounts',
-          this.link,
-          this.psIs17,
-        ).catch(() => {
-          this.isLoading = false;
-          this.$emit('hasError');
-        });
-      },
+      this.trackPsAccountUpdateButton();
+
+      updateModule(
+        'ps_accounts',
+        this.link,
+        this.psIs17,
+      ).catch(() => {
+        this.isLoading = false;
+        this.$emit('hasError');
+      });
     },
-  };
+  },
+};
 </script>

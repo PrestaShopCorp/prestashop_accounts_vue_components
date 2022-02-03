@@ -1,6 +1,6 @@
 import manageModuleAction from './ManageModuleAction';
 
-export default function (moduleName, actionLink, isPs17) {
+export default function updateModule(moduleName, actionLink, isPs17) {
   return manageModuleAction({
     module: moduleName,
     action: 'update',

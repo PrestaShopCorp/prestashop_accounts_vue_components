@@ -8,7 +8,7 @@
     <div class="mt-2 d-flex justify-content-end">
       <b-button
         variant="primary"
-        @click="sendEmailConfirmation()"
+        @click="sendEmailConfirmation"
       >
         {{ $t('psaccounts.account.sendEmail') }}
       </b-button>
@@ -17,35 +17,42 @@
 </template>
 
 <script>
-  import i18n from '@/locale';
-  import {
-    BAlert,
-    BButton,
-  } from 'bootstrap-vue';
+import {BAlert, BButton} from 'bootstrap-vue';
+import i18n from '@/locale';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
-  /**
+/**
    * This alert shows a message if the user email is not validated
    * and tell him to validate his account;
    */
-  export default {
-    name: 'AccountUserEmailNotValidated',
-    i18n,
-    components: {
-      BAlert,
-      BButton,
+export default {
+  name: 'AccountUserEmailNotValidated',
+  i18n,
+  components: {
+    BAlert,
+    BButton,
+  },
+  props: {
+    /**
+         * URL used for activating PrestaShop Accounts<br />
+         * should be https://auth.prestashop.com/account/send-verification-email
+         */
+    ssoResendVerificationEmail: {
+      type: String,
+      required: true,
     },
-    props: {
-      ssoResendVerificationEmail: {
-        type: String,
-        required: true,
-      },
-    },
-    methods: {
-      sendEmailConfirmation() {
-        this.$tracking.track('[ACC] Link Resend Email Validation Clicked');
+  },
+  setup() {
+    const {trackLinkResendEmailValidation} = useSegmentTracking();
 
-        window.open(this.ssoResendVerificationEmail, '_blank');
-      },
+    return {trackLinkResendEmailValidation};
+  },
+  methods: {
+    sendEmailConfirmation() {
+      this.trackLinkResendEmailValidation();
+
+      window.open(this.ssoResendVerificationEmail, '_blank');
     },
-  };
+  },
+};
 </script>

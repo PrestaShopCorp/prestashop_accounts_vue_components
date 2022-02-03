@@ -1,49 +1,35 @@
-/* eslint-disable */
 import Vue from 'vue';
 import PsAccounts from '@/components/PsAccounts';
-import Account from '@/components/panel/Account';
+import AccountPanel from '@/components/panel/AccountPanel';
 import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';
 import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
 import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotInstalled';
 import {isOnboardingCompleted} from '@/lib/Helpers';
-import Segment from "@prestashopcorp/segment-vue";
-import Tracking from './plugins/tracking';
-
-const superProperties = [
-  'multishop_numbers',
-  "ps_module_from",
-  "ps_version",
-  "shop.",
-  "shop_context_id",
-  "shop_context_type",
-  "superadmin",
-  "v4_onboarded",
-  'ps_account_version'
-];
-
-const Library = {
-  install(vue, opts = {}) {
-    Object.keys(Components).forEach((name) => {
-      vue.component(name, Components[name]);
-    });
-    if (!window?.analytics) {
-      vue.use(Segment, {
-        id: contextPsAccounts.segmentApiKey,
-        pageCategory: "ps_accounts-ui",
-      });
-    }
-    vue.use(Tracking, {
-      superProperties,
-    });
-  },
-}
+import {Segment, VueCompositionAPI} from '@/ExternalDependencies';
 
 const Components = {
   PsAccounts,
-  Account,
+  AccountPanel,
   AccountNotInstalled,
   AccountNotEnabled,
-  EventBusNotInstalled
+  EventBusNotInstalled,
+};
+
+const Library = {
+  install(vue) {
+    Object.keys(Components).forEach((name) => {
+      vue.component(name, Components[name]);
+    });
+
+    vue.use(VueCompositionAPI);
+
+    if (!window?.analytics) {
+      vue.use(Segment, {
+        id: window?.contextPsAccounts?.segmentApiKey,
+        pageCategory: 'ps_accounts-ui',
+      });
+    }
+  },
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -53,7 +39,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: "0.1.4",
+  version: '0.1.4',
   Library,
   isOnboardingCompleted,
   ...Components,
@@ -63,7 +49,7 @@ export {
   Library,
   isOnboardingCompleted,
   PsAccounts,
-  Account,
+  AccountPanel,
   AccountNotInstalled,
   AccountNotEnabled,
   EventBusNotInstalled,

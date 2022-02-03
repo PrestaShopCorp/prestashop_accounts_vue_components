@@ -27,65 +27,67 @@
 </template>
 
 <script lang="js">
-  // vue/attribute-hyphenation breaks props of cdc on lint
-  /* eslint vue/attribute-hyphenation: "off" */
-  import Vue from 'vue';
-  import vClickOutside from 'v-click-outside';
-  import LinkShopCrossDomain from './linkShopCrossDomain';
+// vue/attribute-hyphenation breaks props of cdc on lint
+/* eslint vue/attribute-hyphenation: "off" */
+import Vue from 'vue';
+import vClickOutside from 'v-click-outside';
+import useSegmentTracking from '@/composables/useSegmentTracking';
+import LinkShopCrossDomain from './linkShopCrossDomain';
 
-  export default {
-    name: 'Modal',
-    components: {
-      'link-shop-crossdomain': LinkShopCrossDomain.driver('vue', Vue),
+export default {
+  name: 'LinkShopModal',
+  components: {
+    'link-shop-crossdomain': LinkShopCrossDomain.driver('vue', Vue),
+  },
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
+  props: {
+    shops: {
+      type: Array,
+      required: true,
     },
-    directives: {
-      clickOutside: vClickOutside.directive,
+    specificUiUrl: {
+      type: String,
+      required: true,
     },
-    props: {
-      shops: {
-        type: Array,
-        required: true,
-      },
-      specificUiUrl: {
-        type: String,
-        required: true,
-      },
-      onBoardingLink: {
-        type: String,
-        required: true,
-      },
-      accountsUiUrl: {
-        type: String,
-        required: true,
-      },
+    onBoardingLink: {
+      type: String,
+      required: true,
     },
-    computed: {
-      tracking() {
-        return this.$tracking.properties;
-      },
+    accountsUiUrl: {
+      type: String,
+      required: true,
     },
-    methods: {
-      closeModal() {
-        this.$emit('closed');
-      },
-      onLogout() {
-        this.$tracking.reset();
-      },
-      triggerFallback() {
-        const base64Shops = btoa(JSON.stringify(this.shops));
-        const fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?shops=${base64Shops}&return_to=${encodeURIComponent(window.location.href)}`;
-        window.location.assign(fallbackUrl);
-      },
+  },
+  setup() {
+    const {properties: tracking, reset} = useSegmentTracking();
+
+    return {tracking, reset};
+  },
+  methods: {
+    closeModal() {
+      this.$emit('closed');
     },
-    mounted() {
-      // FallBack for crossdomain component
-      setTimeout(() => {
-        if (document.querySelector('.crossdomain .zoid-invisible')) {
-          this.triggerFallback();
-        }
-      }, 60000);
+    onLogout() {
+      this.reset();
     },
-  };
+    triggerFallback() {
+      const base64Shops = btoa(JSON.stringify(this.shops));
+      let fallbackUrl = `${this.accountsUiUrl}${this.specificUiUrl}?`;
+      fallbackUrl += `shops=${base64Shops}&return_to=${encodeURIComponent(window.location.href)}`;
+      window.location.assign(fallbackUrl);
+    },
+  },
+  mounted() {
+    // FallBack for crossdomain component
+    setTimeout(() => {
+      if (document.querySelector('.crossdomain .zoid-invisible')) {
+        this.triggerFallback();
+      }
+    }, 60000);
+  },
+};
 </script>
 
 <style lang="scss" scoped>

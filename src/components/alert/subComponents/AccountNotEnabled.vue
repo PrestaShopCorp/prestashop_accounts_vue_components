@@ -11,7 +11,7 @@
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="enablePsAccounts()"
+        @click="enablePsAccounts"
       >
         {{ $t('psaccounts.alertAccountNotEnabled.enableButton') }}
       </b-button>
@@ -27,34 +27,38 @@
 </template>
 
 <script>
-  import i18n from '@/locale';
-  import Alert from './Alert';
-  import enableModule from '../../../lib/moduleManager/EnableModule';
+import Alert from './Alert';
+import enableModule from '@/lib/moduleManager/EnableModule';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
-  /**
+/**
    * This sub-component can be used in a custom integration when the `PsAccounts`
    * component does not meets special needs. This part will display a warning message
    * telling the PS Accounts module is not enabled on the shop (and a button to enable it).
    */
-  export default {
-    name: 'AlertAccountNotEnabled',
-    i18n,
-    mixins: [Alert],
-    methods: {
-      enablePsAccounts() {
-        this.isLoading = true;
+export default {
+  name: 'AlertAccountNotEnabled',
+  mixins: [Alert],
+  setup() {
+    const {trackPsAccountEnableButton} = useSegmentTracking();
 
-        this.$tracking.track('[ACC] PSAccount Enable Button Clicked');
+    return {trackPsAccountEnableButton};
+  },
+  methods: {
+    enablePsAccounts() {
+      this.isLoading = true;
 
-        enableModule(
-          'ps_accounts',
-          this.link,
-          this.psIs17,
-        ).catch(() => {
-          this.isLoading = false;
-          this.$emit('hasError');
-        });
-      },
+      this.trackPsAccountEnableButton();
+
+      enableModule(
+        'ps_accounts',
+        this.link,
+        this.psIs17,
+      ).catch(() => {
+        this.isLoading = false;
+        this.$emit('hasError');
+      });
     },
-  };
+  },
+};
 </script>

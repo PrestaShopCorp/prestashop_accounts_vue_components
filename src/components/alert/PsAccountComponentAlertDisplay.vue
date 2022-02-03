@@ -34,37 +34,37 @@
 </template>
 
 <script>
-  import context, {
-    eventbusIsEnabled, eventbusIsInstalled, eventbusInstallLink, eventbusEnableLink,
-  } from '@/lib/context';
-  import i18n from '@/locale';
-  import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
-  import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';
-  import AccountNotUpdated from '@/components/alert/subComponents/AccountNotUpdated';
-  import EventBusNotEnabled from '@/components/alert/subComponents/EventBusNotEnabled';
-  import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotInstalled';
+import context, {
+  eventbusIsEnabled, eventbusIsInstalled, eventbusInstallLink, eventbusEnableLink,
+} from '@/lib/context';
+import i18n from '@/locale';
+import AccountNotEnabled from '@/components/alert/subComponents/AccountNotEnabled';
+import AccountNotInstalled from '@/components/alert/subComponents/AccountNotInstalled';
+import AccountNotUpdated from '@/components/alert/subComponents/AccountNotUpdated';
+import EventBusNotEnabled from '@/components/alert/subComponents/EventBusNotEnabled';
+import EventBusNotInstalled from '@/components/alert/subComponents/EventBusNotInstalled';
 
-  /**
+/**
    * This sub-component can be used in a custom integration when the `PsAccounts`
    * component does not meets special needs. This part will display a warning message
    * telling the PS Accounts module is not enabled on the shop (and a button to enable it).
    */
-  export default {
-    name: 'PsAccountComponentAlertDisplay',
-    i18n,
-    components: {
-      AccountNotEnabled,
-      AccountNotInstalled,
-      AccountNotUpdated,
-      EventBusNotEnabled,
-      EventBusNotInstalled,
-    },
-    computed: {
-      context,
-      eventbusIsEnabled,
-      eventbusIsInstalled,
-      eventbusInstallLink,
-      eventbusEnableLink,
-    },
-  };
+export default {
+  name: 'PsAccountComponentAlertDisplay',
+  i18n,
+  components: {
+    AccountNotEnabled,
+    AccountNotInstalled,
+    AccountNotUpdated,
+    EventBusNotEnabled,
+    EventBusNotInstalled,
+  },
+  computed: {
+    context,
+    eventbusIsEnabled,
+    eventbusIsInstalled,
+    eventbusInstallLink,
+    eventbusEnableLink,
+  },
+};
 </script>

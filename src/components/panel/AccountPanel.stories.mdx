@@ -1,14 +1,14 @@
-import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs';
 import { withKnobs, array, boolean, object, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import Account from './Account';
+import AccountPanel from './AccountPanel';
 
-<Meta title="Sub-Components|Panels/Account" component={Account} decorators={[withKnobs]} />
+<Meta title="Sub-Components/Panels/AccountPanel" component={AccountPanel} decorators={[withKnobs]} />
 
 # Association panel behavior
 
-The `Account` component is here to let the user associate his shop to PrestaShop services (PS Accounts).
+The `AccountPanel` component is here to let the user associate his shop to PrestaShop services (PS Accounts).
 This component is only in charge of displaying the final panel to let the account association be done.
 
 _Notice: If context conditions or pre-requisites are not filled, alert messages should be shown (please
@@ -17,12 +17,12 @@ you in the integration section)._
 
 ## Before association, a button is displayed:
 
-<Story name='Not associated' height='220px'>
+<Story name='Not associated' height='175px'>
   {{
-    components: {Account},
+    components: {AccountPanel},
     props: {
       accountsUiUrl: {
-        default: text('accountsUiUrl', 'https://accounts.prestashop.com'),
+        default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
       },
       isOnboardedV4: {
         default: boolean('isOnboardedV4', false),
@@ -32,7 +32,9 @@ you in the integration section)._
       },
       shops: {
         default: array('shops', [{
+          domain: 'myshop.com',
           employeeId: null,
+          isLinkedV4: false,
           user: {
             email: null,
           },
@@ -52,9 +54,16 @@ you in the integration section)._
           isSuperAdmin: true,
         }),
       },
+      backendUser: {
+        default: object('user', {
+          email: 'admin@example.com',
+          isSuperAdmin: true,
+          employeeId: 1,
+        }),
+      },
     },
     template: `
-      <Account
+      <AccountPanel
         :accounts-ui-url="accountsUiUrl"
         :is-onboarded-v4="isOnboardedV4"
         :onboarding-link="onboardingLink"
@@ -62,12 +71,13 @@ you in the integration section)._
         :sso-resend-verification-email="ssoResendVerificationEmail"
         :super-admin-email="superAdminEmail"
         :user="user"
+        :backend-user="backendUser"
         class="m-4"
       />`,
   }}
 </Story>
 
-The button will bring the user to PrestaShop servers to link the shop to a user account (the owner / merchant)
+The button will bring the user to PrestaShop Accounts modal to link the shop to a user account (the owner / merchant)
 then go back to the module page that displayed the component.
 
 The association is made once (for all PrestaShop services) so maybe it won't be displayed as this
@@ -76,12 +86,12 @@ if the shop was already linked to PrestaShop services from another service modul
 
 ## After association, the linked user is shown:
 
-<Story name='Associated' height='230px'>
+<Story name='Associated' height='175px'>
   {{
-    components: {Account},
+    components: {AccountPanel},
     props: {
       accountsUiUrl: {
-        default: text('accountsUiUrl', 'https://accounts.prestashop.com'),
+        default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
       },
       isOnboardedV4: {
         default: boolean('isOnboardedV4', false),
@@ -91,9 +101,12 @@ if the shop was already linked to PrestaShop services from another service modul
       },
       shops: {
         default: array('shops', [{
+          domain: 'myshop.com',
           employeeId: '1',
+          isLinkedV4: false,
           user: {
             email: 'user@example.com',
+            emailIsValidated: true
           },
           uuid: 'abcde-fghij',
         }]),
@@ -111,9 +124,16 @@ if the shop was already linked to PrestaShop services from another service modul
           isSuperAdmin: true,
         }),
       },
+      backendUser: {
+        default: object('user', {
+          email: 'admin@example.com',
+          isSuperAdmin: true,
+          employeeId: 1,
+        }),
+      },
     },
     template: `
-      <Account
+      <AccountPanel
         :accounts-ui-url="accountsUiUrl"
         :is-onboarded-v4="isOnboardedV4"
         :onboarding-link="onboardingLink"
@@ -121,6 +141,7 @@ if the shop was already linked to PrestaShop services from another service modul
         :sso-resend-verification-email="ssoResendVerificationEmail"
         :super-admin-email="superAdminEmail"
         :user="user"
+        :backend-user="backendUser"
         class="m-4"
       />`,
   }}
@@ -135,12 +156,12 @@ if the shop was already linked to PrestaShop services from another service modul
 The shop's owner / merchant **must** have administrator rights to be able to link its shop to PrestaShop services.
 If the right is missing, the button will be disabled and **a warning will be shown** to the user:
 
-<Story name='Need to be admin' height='350px'>
+<Story name='Need to be admin' height='290px'>
   {{
-    components: {Account},
+    components: {AccountPanel},
     props: {
       accountsUiUrl: {
-        default: text('accountsUiUrl', 'https://accounts.prestashop.com'),
+        default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
       },
       isOnboardedV4: {
         default: boolean('isOnboardedV4', false),
@@ -150,7 +171,9 @@ If the right is missing, the button will be disabled and **a warning will be sho
       },
       shops: {
         default: array('shops', [{
+          domain: 'myshop.com',
           employeeId: null,
+          isLinkedV4: false,
           user: {
             email: null,
           },
@@ -170,9 +193,16 @@ If the right is missing, the button will be disabled and **a warning will be sho
           isSuperAdmin: false,
         }),
       },
+      backendUser: {
+        default: object('user', {
+          email: 'admin@example.com',
+          isSuperAdmin: true,
+          employeeId: 1,
+        }),
+      },
     },
     template: `
-      <Account
+      <AccountPanel
         :accounts-ui-url="accountsUiUrl"
         :is-onboarded-v4="isOnboardedV4"
         :onboarding-link="onboardingLink"
@@ -180,6 +210,7 @@ If the right is missing, the button will be disabled and **a warning will be sho
         :sso-resend-verification-email="ssoResendVerificationEmail"
         :super-admin-email="superAdminEmail"
         :user="user"
+        :backend-user="backendUser"
         class="m-4"
       />`,
   }}
@@ -190,14 +221,14 @@ If the right is missing, the button will be disabled and **a warning will be sho
 
 During the linking process, the user can create a new/unconfirmed PrestaShop account to link its shop.
 In this case, after this process, **a warning will remain that the user must confirm his email** (clicking on a
-link received in is email box):
+link received in his email box):
 
-<Story name='Email validation needed' height='380px'>
+<Story name='Email validation needed' height='310px'>
   {{
-    components: {Account},
+    components: {AccountPanel},
     props: {
       accountsUiUrl: {
-        default: text('accountsUiUrl', 'https://accounts.prestashop.com'),
+        default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
       },
       isOnboardedV4: {
         default: boolean('isOnboardedV4', false),
@@ -207,7 +238,9 @@ link received in is email box):
       },
       shops: {
         default: array('shops', [{
+          domain: 'myshop.com',
           employeeId: '1',
+          isLinkedV4: false,
           user: {
             email: 'user@example.com',
           },
@@ -227,9 +260,16 @@ link received in is email box):
           isSuperAdmin: true,
         }),
       },
+      backendUser: {
+        default: object('user', {
+          email: 'admin@example.com',
+          isSuperAdmin: true,
+          employeeId: 1,
+        }),
+      },
     },
     template: `
-      <Account
+      <AccountPanel
         :accounts-ui-url="accountsUiUrl"
         :is-onboarded-v4="isOnboardedV4"
         :onboarding-link="onboardingLink"
@@ -237,6 +277,7 @@ link received in is email box):
         :sso-resend-verification-email="ssoResendVerificationEmail"
         :super-admin-email="superAdminEmail"
         :user="user"
+        :backend-user="backendUser"
         class="m-4"
       />`,
   }}
@@ -247,12 +288,12 @@ link received in is email box):
 
 If you need to integrate a slot inside the card, below the merchant account section:
 
-<Story name='Case with a slot' height='260px'>
+<Story name='Case with a slot' height='230px'>
   {{
-    components: {Account},
+    components: {AccountPanel},
     props: {
       accountsUiUrl: {
-        default: text('accountsUiUrl', 'https://accounts.prestashop.com'),
+        default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
       },
       isOnboardedV4: {
         default: boolean('isOnboardedV4', false),
@@ -262,9 +303,12 @@ If you need to integrate a slot inside the card, below the merchant account sect
       },
       shops: {
         default: array('shops', [{
+          domain: 'myshop.com',
           employeeId: '1',
+          isLinkedV4: false,
           user: {
             email: 'user@example.com',
+            emailIsValidated: true,
           },
           uuid: 'abcde-fghij',
         }]),
@@ -282,9 +326,16 @@ If you need to integrate a slot inside the card, below the merchant account sect
           isSuperAdmin: true,
         }),
       },
+      backendUser: {
+        default: object('user', {
+          email: 'admin@example.com',
+          isSuperAdmin: true,
+          employeeId: 1,
+        }),
+      },
     },
     template: `
-      <Account
+      <AccountPanel
         :accounts-ui-url="accountsUiUrl"
         :is-onboarded-v4="isOnboardedV4"
         :onboarding-link="onboardingLink"
@@ -292,10 +343,11 @@ If you need to integrate a slot inside the card, below the merchant account sect
         :sso-resend-verification-email="ssoResendVerificationEmail"
         :super-admin-email="superAdminEmail"
         :user="user"
+        :backend-user="backendUser"
         class="m-4"
       >
         <div style="background:gray;margin-top:1.2rem;padding:0.5rem;">Put here a slot</div>
-      </Account>
+      </AccountPanel>
     `,
   }}
 </Story>
@@ -309,17 +361,26 @@ You still need to manage the spacing of your slot with CSS.
 _Notice: If you need to integrate the standard behavior of PS Accounts, please see the
 [`PsAccounts` component in the integration section](?path=/docs/integration-psaccounts-panel--connected)._
 
-If you need a custom integration of PS Accounts sub-components, here is the Account panel:
+If you need a custom integration of PS Accounts sub-components, here is the AccountPanel panel:
 
 ```html
-<Account :isAdmin="isAdmin" :user="user" :onboardingLink="onboardingLink" :adminEmail="adminEmail"
-  :resendEmailLink="resendEmailLink" @sign-out="signOutFn" @send-email="sendEmailFn"
-  :manageAccountLink="manageAccountLink" class="m-4">
-  <div style="background:gray;margin-top:1.2rem;padding:0.5rem;">optional slot goes here</div>
-</Account>
+<AccountPanel
+  :accounts-ui-url="validContext.accountsUiUrl"
+  :backend-user="validContext.backendUser"
+  :onboarding-link="validContext.onboardingLink"
+  :shops="shops"
+  :shop-context="validContext.currentContext.type"
+  :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
+  :super-admin-email="validContext.superAdminEmail"
+>
+  <slot
+    v-if="hasAllShopsLinked"
+    name="account-footer"
+  />
+</AccountPanel>
 ```
 
 # Technical details
 
-<Description of={Account} />
-<Props of={Account} />
+<Description of={AccountPanel} />
+<Props of={AccountPanel} />

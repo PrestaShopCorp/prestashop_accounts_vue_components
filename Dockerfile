@@ -4,6 +4,7 @@ FROM node:12-alpine as package
 WORKDIR /app
 
 ADD package.json package.json
+ADD yarn.lock yarn.lock
 
 RUN yarn --only=prod
 

@@ -26,35 +26,43 @@
 </template>
 
 <script>
-  import i18n from '@/locale';
-  import Alert from './Alert';
-  import installModule from '../../../lib/moduleManager/InstallModule';
+import {BOverlay} from 'bootstrap-vue';
+import Alert from './Alert';
+import installModule from '@/lib/moduleManager/InstallModule';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
-  export default {
-    name: 'AlertEventBusNotInstalled',
-    i18n,
-    mixins: [Alert],
-    methods: {
-      /**
+export default {
+  name: 'AlertEventBusNotInstalled',
+  mixins: [Alert],
+  components: {
+    BOverlay,
+  },
+  setup() {
+    const {trackPsEventBusInstallButton} = useSegmentTracking();
+
+    return {trackPsEventBusInstallButton};
+  },
+  methods: {
+    /**
        * Emitted when install button is clicked.
        * @type {Event}
        */
-      installEventBus() {
-        this.isLoading = true;
+    installEventBus() {
+      this.isLoading = true;
 
-        this.$tracking.track('[ACC] PSEventBus Install Button Clicked');
+      this.trackPsEventBusInstallButton();
 
-        installModule(
-          'ps_eventbus',
-          this.link,
-          this.psIs17,
-        ).catch(() => {
-          this.isLoading = false;
-          this.$emit('hasError');
-        });
-      },
+      installModule(
+        'ps_eventbus',
+        this.link,
+        this.psIs17,
+      ).catch(() => {
+        this.isLoading = false;
+        this.$emit('hasError');
+      });
     },
-  };
+  },
+};
 </script>
 
 <style></style>

@@ -18,31 +18,37 @@
 </template>
 
 <script>
-  import i18n from '@/locale';
-  import {
-    BAlert,
-  } from 'bootstrap-vue';
+import {
+  BAlert,
+} from 'bootstrap-vue';
+import i18n from '@/locale';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
-  /**
+/**
    * This sub-component shows a message is the user is not a super-admin
    * and tell him to contact one to continue the process
    */
-  export default {
-    name: 'AccountUserNotSuperAdmin',
-    i18n,
-    components: {
-      BAlert,
+export default {
+  name: 'AccountUserNotSuperAdmin',
+  i18n,
+  components: {
+    BAlert,
+  },
+  props: {
+    superAdminEmail: {
+      type: String,
+      required: true,
     },
-    props: {
-      superAdminEmail: {
-        type: String,
-        required: true,
-      },
+  },
+  setup() {
+    const {trackLinkContactAdmin} = useSegmentTracking();
+
+    return {trackLinkContactAdmin};
+  },
+  methods: {
+    trackClick() {
+      this.trackLinkContactAdmin();
     },
-    methods: {
-      trackClick() {
-        this.$tracking.track('[ACC] Link Contact Admin Clicked');
-      },
-    },
-  };
+  },
+};
 </script>

@@ -1,6 +1,8 @@
 import {BAlert, BButton, BLink} from 'bootstrap-vue';
+import i18n from '@/locale';
 
 export default {
+  i18n,
   components: {
     BAlert,
     BButton,

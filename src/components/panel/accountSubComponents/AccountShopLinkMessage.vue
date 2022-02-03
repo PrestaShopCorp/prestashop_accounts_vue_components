@@ -15,7 +15,9 @@
           <p class="m-0 align-middle">
             {{ $tc('psaccounts.account.authorized', linkedShops.length) }}
           </p>
-          <p class="m-0 align-middle text-break text-muted d-md-block">{{ linkedUserEmail }}</p>
+          <p class="m-0 align-middle text-break text-muted d-md-block">
+            {{ linkedUserEmail }}
+          </p>
         </div>
         <span
           v-else-if="hasOneOrMoreNotLinkedShop"
@@ -38,33 +40,33 @@
 </template>
 
 <script>
-  import i18n from '@/locale';
+import i18n from '@/locale';
 
-  export default {
-    name: 'AccountShopLinkMessage',
-    i18n,
-    props: {
-      shops: {
-        type: Array,
-        default: () => [],
-      },
+export default {
+  name: 'AccountShopLinkMessage',
+  i18n,
+  props: {
+    shops: {
+      type: Array,
+      default: () => [],
     },
-    computed: {
-      hasOneOrMoreNotLinkedShop() {
-        return this.shops.some((shop) => !shop.uuid);
-      },
-      hasSomeShopsLinked() {
-        return this.shops.some((shop) => shop.uuid && !shop.isLinkedV4);
-      },
-      hasShopsLinkedBySameUser() {
-        return this.shops.every((shop) => shop.employeeId === this.shops[0].employeeId);
-      },
-      linkedShops() {
-        return this.shops.filter((shop) => shop.uuid && !shop.isLinkedV4);
-      },
-      linkedUserEmail() {
-        return this.linkedShops[0]?.user?.email || '';
-      },
+  },
+  computed: {
+    hasOneOrMoreNotLinkedShop() {
+      return this.shops.some((shop) => !shop.uuid);
     },
-  };
+    hasSomeShopsLinked() {
+      return this.shops.some((shop) => shop.uuid && !shop.isLinkedV4);
+    },
+    hasShopsLinkedBySameUser() {
+      return this.shops.every((shop) => shop.employeeId === this.shops[0].employeeId);
+    },
+    linkedShops() {
+      return this.shops.filter((shop) => shop.uuid && !shop.isLinkedV4);
+    },
+    linkedUserEmail() {
+      return this.linkedShops[0]?.user?.email || '';
+    },
+  },
+};
 </script>

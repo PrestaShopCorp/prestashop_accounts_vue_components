@@ -8,21 +8,21 @@
 </template>
 
 <script>
-  import i18n from '@/locale';
-  import {
-    BAlert,
-  } from 'bootstrap-vue';
+import {
+  BAlert,
+} from 'bootstrap-vue';
+import i18n from '@/locale';
 
-  /**
+/**
    * This alert shows a message if the user is already onboard in v4
    * and tell him to reonboard with the same email address and
    * update other modules;
    */
-  export default {
-    name: 'ModuleUpdatedInformation',
-    i18n,
-    components: {
-      BAlert,
-    },
-  };
+export default {
+  name: 'ModuleUpdatedInformation',
+  i18n,
+  components: {
+    BAlert,
+  },
+};
 </script>
