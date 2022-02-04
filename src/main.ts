@@ -4,7 +4,7 @@ import AccountPanel from '@/components/panel/AccountPanel.vue';
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {Segment, VueCompositionAPI} from '@/ExternalDependencies';
 
-const Components: Record<string, any> = {
+const Components: Record<string, Vue.VueConstructor> = {
   PsAccounts,
   AccountPanel,
 };

@@ -31,8 +31,8 @@ export default function useSegmentTracking() {
     shopsInContext,
   } = useContext();
 
-  function identify(...args: any[]) {
-    let props = {
+  function identify(...args: Record<string, unknown>[]) {
+    let props: Record<string, unknown> = {
       email: context.value.backendUser?.email,
       employeeId: context.value.backendUser?.employeeId,
       superadmin: context.value.backendUser?.isSuperAdmin,
