@@ -59,7 +59,7 @@ import AccountPanel from '@/components/panel/AccountPanel.vue';
 import BaseAlert from '@/components/alert/BaseAlert.vue';
 import BaseOverlay from '@/components/BaseOverlay.vue';
 import PsAccountComponentAlertDisplay from '@/containers/PsAccountComponentAlertDisplay.vue';
-import useContext from '@/composables/useContext';
+import usePSAccountsContext from '@/composables/usePSAccountsContext';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
@@ -98,7 +98,7 @@ export default defineComponent({
       context,
       setContext,
       shopsInContext,
-    } = useContext();
+    } = usePSAccountsContext();
     const {identify, trackAccountComponentViewed} = useSegmentTracking();
     const hasError = ref(false);
 

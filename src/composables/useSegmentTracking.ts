@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {toRefs} from '@vue/composition-api';
-import useContext from './useContext';
+import usePSAccountsContext from './usePSAccountsContext';
 
 const modules: Record<string, string> = {
   ps_accounts: 'PSAccounts',
@@ -29,7 +29,7 @@ export default function useSegmentTracking() {
     psAccountModuleState,
     psEventBusModuleState,
     shopsInContext,
-  } = useContext();
+  } = usePSAccountsContext();
 
   function identify(...args: Record<string, unknown>[]) {
     let props: Record<string, unknown> = {

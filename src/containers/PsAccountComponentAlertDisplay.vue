@@ -21,7 +21,7 @@ import i18n from '@/i18n';
 import ModuleAlert from '@/components/alert/ModuleAlert.vue';
 import usePSModuleManagement, {Action, Module} from '@/composables/usePSModuleManagement';
 import useSegmentTracking from '@/composables/useSegmentTracking';
-import useContext from '@/composables/useContext';
+import usePSAccountsContext from '@/composables/usePSAccountsContext';
 
 /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -43,7 +43,7 @@ export default defineComponent({
       eventbusIsInstalled,
       eventbusInstallLink,
       eventbusEnableLink,
-    } = useContext();
+    } = usePSAccountsContext();
 
     const {manageModule} = usePSModuleManagement(context.value.psIs17 || false);
 
