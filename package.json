@@ -50,7 +50,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "file-loader": "^6.0.0",
     "flat": "^5.0.0",
-    "node-sass": "^4.14.0",
+    "node-sass": "^7.0.0",
     "prompt-confirm": "^2.0.4",
     "recursive-diff": "^1.0.7",
     "sass-loader": "^8.0.2",
