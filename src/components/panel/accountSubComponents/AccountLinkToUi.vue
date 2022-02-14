@@ -132,14 +132,14 @@
       },
       specificUiUrl() {
         if (['reonboard', 'associate'].includes(this.action)) {
-          return '';
+          return '/link-shop';
         }
 
         if (['unlink'].includes(this.action)) {
-          return `/shop/${this.shops[0].uuid}`;
+          return `/link-shop/shop/${this.shops[0].uuid}`;
         }
 
-        return '/shop';
+        return '/link-shop/shop';
       },
       trackEventName() {
         if (['reonboard', 'associate'].includes(this.action)) {
