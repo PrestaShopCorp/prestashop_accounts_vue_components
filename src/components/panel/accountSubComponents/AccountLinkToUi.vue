@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="!hasAllShopsWithoutUrl"
-    class="align-self-center"
-  >
+  <div v-if="!hasAllShopsWithoutUrl">
     <component
       :is="hasShopsLinked ? 'BaseDropdown' : 'BaseButton'"
       v-if="!hasAllShopsLinked"
@@ -143,6 +140,10 @@ export default defineComponent({
     })));
 
     function openLinkShopModal(act: string) {
+      if (!props.backendUser.isSuperAdmin) {
+        return;
+      }
+
       action.value = act;
       trackAssociateOrManageAccountButton(action.value);
 

@@ -1,4 +1,7 @@
-declare module '*.svg?inline' {
-  const content: any;
+declare module "*.svg?inline" {
+  import type { DefineComponent } from "vue";
+
+  const component: DefineComponent;
   export default content;
-}y;
+}
+y;

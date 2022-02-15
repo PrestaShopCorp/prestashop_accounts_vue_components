@@ -1,9 +1,9 @@
 <template>
   <BaseAlert :variant="hasAllShopsWithoutUrl ? 'danger' : 'warning'">
-    <h3 class="m-0">
+    <h3 class="acc-m-0 acc-p-0 acc-text-base acc-font-bold">
       {{ $t('psaccounts.alertShopDomainShouldExists.title') }}
     </h3>
-    <p>
+    <p class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm">
       <span v-html="$t('psaccounts.alertShopDomainShouldExists.message')" />
       {{ shopNamesWithoutUrl.join(', ') }}
     </p>

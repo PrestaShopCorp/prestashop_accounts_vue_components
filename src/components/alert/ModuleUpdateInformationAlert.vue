@@ -1,6 +1,8 @@
 <template>
   <BaseAlert variant="info">
-    <div v-html="$t('psaccounts.account.moduleUpdateInformation')" />
+    <p
+      v-html="$t('psaccounts.account.moduleUpdateInformation')"
+      class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6" />
   </BaseAlert>
 </template>
 

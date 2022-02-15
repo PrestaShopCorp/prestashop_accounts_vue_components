@@ -6,27 +6,28 @@
       dismissible
       @dismissed="hasError = false"
     >
-      <p>
+      <p class="acc-text-sm acc-leading-6">
         {{ $t('psaccounts.accountManager.errorInstallEnable') }}
       </p>
     </BaseAlert>
+
     <BaseAlert
       v-if="validContext.errors && validContext.errors.length"
+      :class="{'acc-mt-4': hasError}"
       variant="danger"
     >
-      <p>
+      <p class="acc-text-sm acc-leading-6">
         &lt;PsAccounts&gt; integration: Given context is invalid:
         {{ validContext.errors.join(';') }}
       </p>
     </BaseAlert>
-
     <template v-else>
       <PsAccountComponentAlertDisplay
+        class="acc-mb-4"
         @hasError="hasError = true"
       />
       <template v-if="!hasBlockingAlert">
         <AccountPanel
-          class="mb-2"
           :accounts-ui-url="validContext.accountsUiUrl"
           :backend-user="validContext.backendUser"
           :onboarding-link="validContext.onboardingLink"
@@ -40,9 +41,12 @@
             name="account-footer"
           />
         </AccountPanel>
-        <BaseOverlay :show="!hasAllShopsLinked">
+        <BaseOverlay
+          class="acc-mt-4"
+          :show="!hasAllShopsLinked">
           <slot name="body" />
         </BaseOverlay>
+        <!-- TODO: add a div with a acc-mt-4 margin -->
         <slot name="customBody" />
       </template>
     </template>
@@ -61,6 +65,7 @@ import BaseOverlay from '@/components/BaseOverlay.vue';
 import PsAccountComponentAlertDisplay from '@/containers/PsAccountComponentAlertDisplay.vue';
 import usePSAccountsContext from '@/composables/usePSAccountsContext';
 import useSegmentTracking from '@/composables/useSegmentTracking';
+import '@/assets/css/index.css';
 
 /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
@@ -129,9 +134,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss" scoped>
-::v-deep {
-  @import '~prestakit/scss/application';
-}
-</style>

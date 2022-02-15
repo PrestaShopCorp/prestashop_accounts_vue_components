@@ -1,20 +1,41 @@
 <template>
-  <b-dropdown
-    :disabled="disabled"
-    :right="right"
-    :split="split"
-    :split-variant="splitVariant"
-    :text="text"
-    :variant="variant"
-    @click="$emit('click')"
-  >
-    <slot />
-  </b-dropdown>
+  <div
+    class="acc-relative acc-inline-flex acc-font-sans acc-align-middle"
+    v-click-outside="() => expanded = false"
+    @keyup.esc="expanded = false">
+    <BaseButton
+      :id="`acc-dropdown-${_uid}`"
+      outlined
+      :disabled="disabled"
+      class="acc-rounded-r-none"
+      @click="$emit('click')">
+        {{ text }}
+    </BaseButton>
+    <BaseButton
+      :disabled="disabled"
+      aria-haspopup="true"
+      :aria-expanded="expanded"
+      class="acc-rounded-l-none focus:acc-ring-0"
+      @click="expanded = !expanded">
+      <ExpandMoreIcon class="acc-w-5 acc-h-5 acc-transform acc-transition-transform" :class="{ 'acc--rotate-180': expanded }" />
+    </BaseButton> 
+    <ul
+      v-show="expanded"
+      role="menu"
+      tabindex="-1"
+      :aria-labelledby="`acc-dropdown-${_uid}`"
+      class="acc-z-50 acc-absolute acc-top-full acc-right-0 acc-mt-1 acc-py-1 acc-bg-white acc-rounded acc-border acc-border-primary acc-shadow"
+      style="min-width: 8rem;">
+      <slot />
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
-import {BDropdown} from 'bootstrap-vue';
+import {defineComponent, ref} from '@vue/composition-api';
+import vClickOutside from 'v-click-outside';
+import BaseButton from './BaseButton.vue';
+import ExpandMoreIcon from '@/assets/icons/expand_more.svg?inline';
 
 /**
  * This is the BaseDropdown component.
@@ -22,33 +43,26 @@ import {BDropdown} from 'bootstrap-vue';
 export default defineComponent({
   name: 'BaseDropdown',
   components: {
-    BDropdown,
+    BaseButton,
+    ExpandMoreIcon,
+  },
+  directives: {
+    clickOutside: vClickOutside.directive,
   },
   props: {
     disabled: {
       type: Boolean,
       default: false,
     },
-    right: {
-      type: Boolean,
-      default: true,
-    },
-    split: {
-      type: Boolean,
-      default: true,
-    },
-    splitVariant: {
-      type: String,
-      default: 'outline-primary',
-    },
     text: {
       type: String,
       required: true,
     },
-    variant: {
-      type: String,
-      default: 'primary',
-    },
   },
+  setup() {
+    const expanded = ref(false);
+
+    return {expanded};
+  }
 });
 </script>

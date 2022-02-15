@@ -486,7 +486,7 @@ export const FooterSlotTemplate = (args, {argTypes}) => ({
     },
     template: '<PsAccounts :context="context" @actioned="actionEvent" @viewed="viewEvent" class="m-4">' +
       '<template v-slot:body>- Module configuration slot -</template>' +
-      '<template v-slot:account-footer><div style="background:gray;margin-top:1.2rem;padding:0.5rem;">My other component in the footer of the account component</div></template>'+
+      '<template v-slot:account-footer><div style="padding:0.5rem; background: gray; color: #fff;">My other component in the footer of the account component</div></template>'+
     '</PsAccounts>',
   })
 
@@ -509,7 +509,7 @@ export const FooterSlotTemplate = (args, {argTypes}) => ({
               domainSsl: 'my-secure-domain.com',
               user: {
                 email: 'merchant@my-shop.com',
-                emailIsValidated: false,
+                emailIsValidated: true,
                 isSuperAdmin: true,
               },
               employeeId: '1',

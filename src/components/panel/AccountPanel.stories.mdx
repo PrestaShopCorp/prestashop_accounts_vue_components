@@ -187,6 +187,15 @@ link received in his email box):
 
 If you need to integrate a slot inside the card, below the merchant account section:
 
+export const SlotTemplate = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { AccountPanel },
+  template: `
+    <AccountPanel v-bind="$props" class="m-4">
+      <div style="padding: 0.5rem; background: gray; color: #fff;">Put here a slot</div>
+    </AccountPanel>`,
+})
+
 <Story
   name='Case with a slot'
   height='175px'
@@ -218,7 +227,7 @@ If you need to integrate a slot inside the card, below the merchant account sect
       employeeId: 1,
     },
   }}>
-  {Template.bind({})}
+  {SlotTemplate.bind({})}
 </Story>
 
 You still need to manage the spacing of your slot with CSS.

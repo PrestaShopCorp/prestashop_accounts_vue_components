@@ -1,15 +1,14 @@
 <template>
-  <BaseAlert
-    variant="warning"
-    class="mt-4"
-  >
-    <p>{{ $t('psaccounts.account.needToBeAdmin') }}</p>
-    <p>
+  <BaseAlert variant="warning">
+    <p class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6">
+      {{ $t('psaccounts.account.needToBeAdmin') }}
+    </p>
+    <p class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6">
       {{ $t('psaccounts.account.pleaseContact') }}
       <a
         @click="trackLinkContactAdmin"
         :href="'mailto:' + superAdminEmail"
-      >
+        class="acc-font-semibold acc-text-gray-800 acc-underline hover:acc-text-gray-600">
         {{ superAdminEmail }}
       </a>
     </p>

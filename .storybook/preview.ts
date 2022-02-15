@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { Segment, VueCompositionAPI, VueI18n } from "@/ExternalDependencies";
 
-import "prestakit/scss/application.scss";
+import "@/assets/css/index.css";
 
 Vue.use(Segment, {
   id: process.env.VUE_APP_SEGMENT,

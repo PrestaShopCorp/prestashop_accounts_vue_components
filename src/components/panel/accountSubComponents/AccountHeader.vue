@@ -1,15 +1,12 @@
 <template>
-  <div class="d-flex align-items-center">
+  <div class="acc-flex acc-items-center acc-font-sans acc-font-semibold">
     <span
       v-if="hasAllShopsLinked"
-      class="mr-3 bg-success rounded-circle"
-      style="width: 24px; height: 24px"
+      class="acc-flex-shrink-0 acc-w-6 acc-h-6 acc-mr-2 acc-p-0.5 acc-rounded-full acc-bg-success-darker"
     >
-      <CheckIcon class="text-white" />
+      <CheckIcon class="acc-text-white" />
     </span>
-    <h3
-      class="m-0 d-inline h3 title"
-    >
+    <h3 class="acc-m-0">
       <slot />
     </h3>
   </div>
@@ -34,11 +31,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-.title {
-  color: #363a41;
-  font-family: 'Open Sans', helvetica, arial, sans-serif;
-  font-weight: 600;
-}
-</style>

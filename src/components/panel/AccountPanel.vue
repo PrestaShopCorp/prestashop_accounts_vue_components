@@ -1,49 +1,55 @@
 <template>
-  <div>
-    <BaseCard>
-      <template #header>
-        <AccountHeader :has-all-shops-linked="hasAllShopsLinked">
-          {{ $tc('psaccounts.account.title', shopsWithUrl.length) }}
-        </AccountHeader>
-      </template>
-      <BaseCardBody>
-        <ShopUrlShouldExistsAlert
-          v-if="hasShopsWithoutUrl"
-          :has-all-shops-without-url="hasAllShopsWithoutUrl"
-          :shop-names-without-url="shopNamesWithoutUrl"
-        />
+  <BaseCard>
+    <template #header>
+      <AccountHeader :has-all-shops-linked="hasAllShopsLinked">
+        {{ $tc('psaccounts.account.title', shopsWithUrl.length) }}
+      </AccountHeader>
+    </template>
+    <template #body>
+      <ShopUrlShouldExistsAlert
+        v-if="hasShopsWithoutUrl"
+        :has-all-shops-without-url="hasAllShopsWithoutUrl"
+        :shop-names-without-url="shopNamesWithoutUrl"
+      />
 
-        <div class="d-flex flex-column flex-md-row">
-          <AccountShopLinkMessage :shops="shopsWithUrl" />
-          <AccountLinkToUi
-            :accounts-ui-url="accountsUiUrl"
-            :backend-user="backendUser"
-            :is-super-admin="backendUser.isSuperAdmin"
-            :onboarding-link="onboardingLink"
-            :shops="shopsWithUrl"
-            :shop-context="shopContext"
-          />
-        </div>
-
-        <ModuleUpdateInformationAlert
-          v-if="isLinkedV4"
-          class="mt-3"
+      <div
+        class="acc-flex acc-flex-col acc-items-center md:acc-flex-row"
+        :class="{'acc-mt-2': hasShopsWithoutUrl}">
+        <AccountShopLinkMessage
+          class="md:acc-mr-2"
+          :shops="shopsWithUrl" />
+        <AccountLinkToUi
+          class="acc-mt-2 md:acc-mt-0"
+          :accounts-ui-url="accountsUiUrl"
+          :backend-user="backendUser"
+          :onboarding-link="onboardingLink"
+          :shops="shopsWithUrl"
+          :shop-context="shopContext"
         />
+      </div>
 
-        <UserEmailNotValidatedAlert
-          v-if="userHasEmailNotVerified"
-          :sso-resend-verification-email="ssoResendVerificationEmail"
-          class="mt-3"
-        />
+      <ModuleUpdateInformationAlert
+        v-if="isLinkedV4"
+        class="acc-mt-2"
+      />
 
-        <UserNotSuperAdminAlert
-          v-if="!backendUser.isSuperAdmin"
-          :super-admin-email="superAdminEmail"
-        />
+      <UserEmailNotValidatedAlert
+        v-if="userHasEmailNotVerified"
+        class="acc-mt-2"
+        :sso-resend-verification-email="ssoResendVerificationEmail"
+      />
+
+      <UserNotSuperAdminAlert
+        v-if="!backendUser.isSuperAdmin"
+        class="acc-mt-2"
+        :super-admin-email="superAdminEmail"
+      />
+
+      <div v-if="$slots.default" class="acc-mt-2">
         <slot />
-      </BaseCardBody>
-    </BaseCard>
-  </div>
+      </div>
+    </template>
+  </BaseCard>
 </template>
 
 <script lang="ts">
@@ -53,7 +59,6 @@ import {
 import i18n from '@/i18n';
 import {Shop} from '@/types/context';
 import BaseCard from '@/components/BaseCard.vue';
-import BaseCardBody from '@/components/BaseCardBody.vue';
 import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader.vue';
 import AccountLinkToUi from '@/components/panel/accountSubComponents/AccountLinkToUi.vue';
 import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage.vue';
@@ -72,7 +77,6 @@ export default defineComponent({
   i18n,
   components: {
     BaseCard,
-    BaseCardBody,
     AccountHeader,
     AccountLinkToUi,
     AccountShopLinkMessage,
@@ -175,16 +179,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-.flex-grow-1 {
-  flex-grow: 1;
-}
-
-.fixed-size {
-  /* Fix a chromium bug (SVG height/width attributes & CSS styles) */
-  height: 24px;
-  width: 24px;
-  display: inline;
-}
-</style>
