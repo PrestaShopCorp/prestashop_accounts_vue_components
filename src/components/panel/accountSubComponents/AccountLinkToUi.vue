@@ -39,7 +39,7 @@
     </component>
 
     <link-shop-modal
-      v-if="cdcUiDisplayed"
+      ref="linkShopModal"
       :accounts-ui-url="accountsUiUrl"
       :on-boarding-link="onboardingLink"
       :shops="unlinkedShopsWithEmployeeId"
@@ -92,7 +92,7 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  setup(props, { refs }) {
     const action = ref('associate');
     const cdcUiDisplayed = ref(false);
 
@@ -157,10 +157,12 @@ export default defineComponent({
 
     watch(cdcUiDisplayed, (cdcUiDisplayed) => {
       if (cdcUiDisplayed) {
+        (refs.linkShopModal as InstanceType<typeof LinkShopModal>)?.open();
         document.body.classList.add('ui-displayed');
         return;
       }
 
+      (refs.linkShopModal as InstanceType<typeof LinkShopModal>)?.close();
       document.body.classList.remove('ui-displayed');
     });
 
