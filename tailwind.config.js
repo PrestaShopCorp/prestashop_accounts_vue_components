@@ -19,6 +19,7 @@ module.exports = {
           active: "#21a6c1",
         },
         success: {
+          DEFAULT: '#4CBB6C',
           lighter: "#cbf2d4",
           darker: "#53d572",
         },

@@ -3,7 +3,7 @@
     type="button"
     role="menuitem"
     @click="$emit('click')"
-    class="acc-block acc-w-full acc-p-1 acc-font-sans acc-font-semibold acc-text-cyan-darker acc-text-left acc-text-sm acc-whitespace-nowrap hover:acc-text-primary focus:acc-text-primary focus:acc-outline-none">
+    class="acc-block acc-w-full acc-py-1 acc-px-2 acc-font-sans acc-font-semibold acc-text-cyan-darker acc-text-left acc-text-sm acc-whitespace-nowrap hover:acc-text-primary focus:acc-text-primary focus:acc-outline-none">
     <slot />
   </button>
 </template>
