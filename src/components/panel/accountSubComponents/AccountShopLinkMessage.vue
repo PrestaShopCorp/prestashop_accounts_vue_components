@@ -1,9 +1,7 @@
 <template>
   <div class="acc-flex acc-flex-col acc-flex-grow acc-items-center md:acc-flex-row">
-    <img
-      class="acc-w-11 acc-h-11 md:acc-mr-3"
-      src="~@/assets/img/puffin_logo.png"
-    >
+    <PuffinLogo
+      class="acc-w-11 acc-h-11 md:acc-mr-3" />
     <div class="acc-mt-2 acc-font-sans acc-text-sm acc-text-center acc-align-middle md:acc-mt-0 md:acc-text-left">
       <template v-if="hasSomeShopsLinked">
         <div
@@ -41,9 +39,14 @@ import {computed, defineComponent, PropType} from '@vue/composition-api';
 import i18n from '@/i18n';
 import {Shop} from '@/types/context';
 
+import PuffinLogo from '@/assets/img/puffin_logo.svg?inline';
+
 export default defineComponent({
   name: 'AccountShopLinkMessage',
   i18n,
+  components: {
+    PuffinLogo,
+  },
   props: {
     shops: {
       type: Array as PropType<Shop[]>,
