@@ -5,6 +5,7 @@ module.exports = {
   logLevel: "debug",
   addons: [
     "@storybook/preset-typescript",
+    "@storybook/addon-postcss",
     "@storybook/addon-actions",
     {
       // TODO: check theses options
