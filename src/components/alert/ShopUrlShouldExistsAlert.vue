@@ -16,8 +16,9 @@ import i18n from '@/i18n';
 import BaseAlert from './BaseAlert.vue';
 
 /**
-   * This alert shows a message if a shop domain is not set;
-   */
+ * This component shows a warning or danger alert if among the shops in the current context, 
+ * some of them does not a url set.
+ */
 export default defineComponent({
   name: 'ShopUrlShouldExistsAlert',
   i18n,
@@ -25,10 +26,17 @@ export default defineComponent({
     BaseAlert,
   },
   props: {
+    /**
+     * Define is all shops (or partial) in the current context 
+     * are without url set.
+     */
     hasAllShopsWithoutUrl: {
       type: Boolean,
       required: true,
     },
+    /**
+     * List shop names without url set.
+     */
     shopNamesWithoutUrl: {
       type: Array,
       required: true,

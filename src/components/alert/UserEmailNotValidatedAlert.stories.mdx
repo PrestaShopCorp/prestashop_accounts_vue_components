@@ -1,51 +1,36 @@
-import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Description, Meta, Story, Preview, Props } from '@storybook/addon-docs';
 import { action } from '@storybook/addon-actions';
 
 import UserEmailNotValidatedAlert from './UserEmailNotValidatedAlert.vue';
 
 <Meta
-  title="Sub-Components/Alerts/Alert user email not validated"
-  argTypes={{
-    ssoResendVerificationEmail: {
-      control: {
-        type: 'text',
-      },
-    },
-  }}
+  title="Components/Alert"
   component={UserEmailNotValidatedAlert} />
 
 export const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { UserEmailNotValidatedAlert },
-  methods: {
-    event: action('hasError'),
-  },
-  template: `<UserEmailNotValidatedAlert v-bind="$props" class="m-4" />`,
+  template: `<UserEmailNotValidatedAlert v-bind="$props" />`,
 })
 
-# Alert: User email not validated
+# Alert: User Email Not Validated Alert
 
-When a user is connected with an account not verified. While the email is not validated, 
-the user should be warned with that message.
+<Description of={UserEmailNotValidatedAlert} />
 
 <Story
-  name='Not validated'
-  height='220px'
+  name='User Email Not Validated Alert'
   args={{
     ssoResendVerificationEmail: '/resend-email-validation-link',
   }}>
   {Template.bind({})}
 </Story>
 
----
-# Integration
+<ArgsTable story="User Email Not Validated Alert" />
+
+## Integration
 
 ```html
-<UserEmailNotValidatedAlert ssoResendVerificationEmail="/resend-email-validation-link" />
+<UserEmailNotValidatedAlert sso-resend-verification-email="/resend-email-validation-link" />
 ```
 
-# Technical details
-
-<Description of={UserEmailNotValidatedAlert} />
 <Props of={UserEmailNotValidatedAlert} />
-

@@ -6,7 +6,6 @@ module.exports = {
   addons: [
     "@storybook/preset-typescript",
     "@storybook/addon-postcss",
-    "@storybook/addon-actions",
     {
       // TODO: check theses options
       name: "@storybook/addon-docs",
@@ -17,6 +16,7 @@ module.exports = {
       },
     },
     "@storybook/addon-controls",
+    "@storybook/addon-actions",
   ],
   webpackFinal: async (config) => {
     config.resolve.alias = {

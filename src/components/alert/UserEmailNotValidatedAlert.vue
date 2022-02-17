@@ -20,8 +20,8 @@ import BaseButton from '@/components/BaseButton.vue';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
-   * This alert shows a message if the user email is not validated
-   * and tell him to validate his account;
+   * This component shows a warning alert if the user email is not validated
+   * and tell him to validate his account.
    */
 export default defineComponent({
   name: 'UserEmailNotValidatedAlert',
@@ -32,9 +32,9 @@ export default defineComponent({
   },
   props: {
     /**
-         * URL used for activating PrestaShop Accounts<br />
-         * should be https://auth.prestashop.com/account/send-verification-email
-         */
+     * URL used for activating PrestaShop Accounts
+     * (should be https://auth.prestashop.com/account/send-verification-email)
+     */
     ssoResendVerificationEmail: {
       type: String,
       required: true,

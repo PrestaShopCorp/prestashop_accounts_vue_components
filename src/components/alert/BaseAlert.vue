@@ -18,6 +18,7 @@
         'acc-text-info-darker': variant === 'info',
       }" />
     <div class="acc-flex-1 acc-mx-4">
+      <!-- @slot Alert content -->
       <slot />
     </div>
     <button
@@ -53,7 +54,7 @@ export enum Variant {
 }
 
 /**
- * This is the BaseAlert component.
+ * `BaseAlert` component allows to display an alert message.
  */
 export default defineComponent({
   name: 'BaseAlert',
@@ -64,19 +65,35 @@ export default defineComponent({
     InfoIcon,
   },
   props: {
+    /**
+     * Allow alert to be dismissable
+     */
     dismissible: {
       type: Boolean,
       default: false,
     },
+    /**
+     * Show the alert
+     */
     show: {
       type: Boolean,
       default: true,
     },
+    /**
+     * The variant for the alert
+     * @values success, danger, warning, info
+     */
     variant: {
       type: String as PropType<Variant>,
       default: Variant.Success,
     },
   },
+  emits: [
+    /**
+     * Dismissed event
+     */
+    'dismissed',
+  ],
   setup(props, {emit}) {
     const isDisplayed = ref(props.show);
 

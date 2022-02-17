@@ -3,6 +3,10 @@
     class="acc-relative acc-inline-flex acc-font-sans acc-align-middle"
     v-click-outside="() => expanded = false"
     @keyup.esc="expanded = false">
+    <!--
+      click event
+      @event click
+    -->
     <BaseButton
       :id="`acc-dropdown-${_uid}`"
       outlined
@@ -26,6 +30,7 @@
       :aria-labelledby="`acc-dropdown-${_uid}`"
       class="acc-z-50 acc-absolute acc-top-full acc-right-0 acc-mt-1 acc-py-1 acc-bg-white acc-rounded acc-border acc-border-primary acc-shadow"
       style="min-width: 8rem;">
+      <!-- @slot Dropdown items -->
       <slot />
     </ul>
   </div>
@@ -50,10 +55,16 @@ export default defineComponent({
     clickOutside: vClickOutside.directive,
   },
   props: {
+    /**
+     * Disabled state of the dropdown
+     */
     disabled: {
       type: Boolean,
       default: false,
     },
+    /**
+     * Text of main button of the dropdown
+     */
     text: {
       type: String,
       required: true,

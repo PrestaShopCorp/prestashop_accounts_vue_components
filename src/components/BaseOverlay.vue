@@ -1,5 +1,6 @@
 <template>
   <div class="acc-relative" style="">
+    <!-- @slot content -->
     <slot />
     <div v-show="show" class="acc-z-10 acc-absolute acc-inset-0">
       <div class="acc-absolute acc-inset-0 acc-opacity-70 acc-bg-white acc-blur-0 acc-select-none acc-pointer-events-none"></div>
@@ -16,6 +17,9 @@ import {defineComponent} from '@vue/composition-api';
 export default defineComponent({
   name: 'BaseOverlay',
   props: {
+    /**
+     * Show the overlay
+     */
     show: {
       type: Boolean,
       default: false,

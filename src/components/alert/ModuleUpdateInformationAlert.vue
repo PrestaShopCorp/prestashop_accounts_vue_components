@@ -12,9 +12,9 @@ import i18n from '@/i18n';
 import BaseAlert from './BaseAlert.vue';
 
 /**
-   * This alert shows a message if the user is already onboard in v4
-   * and tell him to reonboard with the same email address and
-   * update other modules;
+   * When a v4 onboarded user updates the ps accounts module on v5, 
+   * an information alert informs the user to reonboard 
+   * with the same email and update other modules.
    */
 export default defineComponent({
   name: 'ModuleUpdateInformationAlert',

@@ -22,9 +22,9 @@ import BaseAlert from './BaseAlert.vue';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
-   * This sub-component shows a message is the user is not a super-admin
-   * and tell him to contact one to continue the process
-   */
+ * This component shows a warning alert isfthe user is not a superadmin
+ * and tell him to contact one to continue the process.
+ */
 export default defineComponent({
   name: 'UserNotSuperAdminAlert',
   i18n,
@@ -32,6 +32,9 @@ export default defineComponent({
     BaseAlert,
   },
   props: {
+    /**
+     * Super admin email
+     */
     superAdminEmail: {
       type: String,
       required: true,

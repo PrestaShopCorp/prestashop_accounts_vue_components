@@ -7,6 +7,10 @@
       {{ message }}
     </p>
     <div class="acc-mt-4">
+      <!--
+        action event
+        @event action
+      -->
       <BaseButton
         v-if="!loading"
         @click="$emit('action')"
@@ -38,22 +42,37 @@ export default defineComponent({
     BaseButton,
   },
   props: {
+    /**
+     * Text of the alert button
+     */
     actionText: {
       type: String,
       required: true,
     },
+    /**
+     * Set alert action as loading state
+     */
     loading: {
       type: Boolean,
       required: true,
     },
+    /**
+     * Text displayed on alert is in loading state
+     */
     loadingText: {
       type: String,
       required: true,
     },
+    /**
+     * Message of the alert
+     */
     message: {
       type: String,
       required: true,
     },
+    /**
+     * Title of the alert
+     */
     title: {
       type: String,
       required: true,

@@ -1,4 +1,8 @@
 <template>
+  <!--
+    click event
+    @event click
+  -->
   <button
     type="button"
     :disabled="disabled"
@@ -15,6 +19,7 @@
       }
     ]"
     @click="$emit('click')">
+    <!-- @slot Button content -->
     <slot />
   </button>
 </template>
@@ -32,14 +37,24 @@ export enum Variant {
 export default defineComponent({
   name: 'BaseButton',
   props: {
+    /**
+     * Disabled state of the button
+     */
     disabled: {
       type: Boolean,
       default: false,
     },
+    /**
+     * Outlined style of the button
+     */
     outlined: {
       type: Boolean,
       default: false,
     },
+    /**
+     * Variant of the button
+     * @values primary
+     */
     variant: {
       type: String as PropType<Variant>,
       default: Variant.Primary,
