@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { ScopedCss  } from "./decorators/scoped-css";
 import { Segment, VueCompositionAPI, VueI18n } from "@/ExternalDependencies";
 
 import "@/assets/css/index.css";
@@ -12,3 +13,7 @@ Vue.use(Segment, {
 Vue.use(VueCompositionAPI);
 
 Vue.use(VueI18n);
+
+export const decorators = [
+  ScopedCss,
+];

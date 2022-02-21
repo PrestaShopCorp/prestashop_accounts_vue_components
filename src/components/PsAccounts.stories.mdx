@@ -5,7 +5,10 @@ import PsAccounts from './PsAccounts.vue';
 
 <Meta
   title="Integration/PsAccounts panel"
-  component={PsAccounts} />
+  component={PsAccounts}
+  parameters={{
+    disableScopedCssDecorator: true,
+  }} />
 
 export const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
@@ -115,7 +118,7 @@ Once integrated, the component can show different cases:
   height='200px'
   args={{
       ...props,
-    }}>
+  }}>
   {Template.bind({})}
 </Story>
 
