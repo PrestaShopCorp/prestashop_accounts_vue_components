@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="psaccounts">
     <BaseAlert
       variant="danger"
       :show="hasError"

@@ -1,6 +1,6 @@
 module.exports = {
   prefix: "acc-",
-  important: true,
+  important: '#psaccounts',
   purge: ["./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
