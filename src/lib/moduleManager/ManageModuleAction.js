@@ -16,7 +16,7 @@ function manageModuleAction16(action) {
   });
 }
 
-export default function (action, isPs17) {
+export default function manageModuleAction(action, isPs17) {
   // if on ps before 1.7.3 just reload the page
   if (!isPs17) {
     return manageModuleAction16(action);

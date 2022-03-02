@@ -4,7 +4,9 @@
       no-body
     >
       <template v-slot:header>
-        <AccountHeader :has-all-shops-linked="hasAllShopsLinked" />
+        <AccountHeader :has-all-shops-linked="hasAllShopsLinked">
+          {{ $tc('psaccounts.account.title', shopsWithUrl.length) }}
+        </AccountHeader>
       </template>
       <b-card-body>
         <ShopUrlShouldExists
@@ -47,7 +49,7 @@
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
+  import i18n from '@/locale';
   import {
     BCard,
     BCardBody,
@@ -62,7 +64,7 @@
 
   export default {
     name: 'Account',
-    mixins: [Locale],
+    i18n,
     components: {
       BCard,
       BCardBody,

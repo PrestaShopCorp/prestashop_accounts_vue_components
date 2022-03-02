@@ -19,34 +19,34 @@
     <h3
       class="m-0 d-inline h3 title"
     >
-      {{ t('psaccounts.account.title') }}
+      <slot />
     </h3>
   </div>
 </template>
 
 <script>
-  import Locale from '@/mixins/locale';
-  import {
+import {
+  BIconstack,
+  BIconCircleFill,
+  BIconCheck,
+} from 'bootstrap-vue';
+import i18n from '@/locale';
+
+export default {
+  name: 'AccountHeader',
+  i18n,
+  components: {
     BIconstack,
     BIconCircleFill,
     BIconCheck,
-  } from 'bootstrap-vue';
-
-  export default {
-    name: 'AccountHeader',
-    mixins: [Locale],
-    components: {
-      BIconstack,
-      BIconCircleFill,
-      BIconCheck,
+  },
+  props: {
+    hasAllShopsLinked: {
+      type: Boolean,
+      required: true,
     },
-    props: {
-      hasAllShopsLinked: {
-        type: Boolean,
-        required: true,
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style scoped>

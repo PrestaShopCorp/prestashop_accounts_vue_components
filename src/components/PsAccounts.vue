@@ -7,7 +7,7 @@
       dismissible
     >
       <p>
-        {{ t('psaccounts.accountManager.errorInstallEnable') }}
+        {{ $t('psaccounts.accountManager.errorInstallEnable') }}
       </p>
     </b-alert>
 
@@ -28,7 +28,7 @@
       />
 
       <template v-if="!hasBlockingAlert">
-        <Account
+        <AccountPanel
           class="mb-2"
           :accounts-ui-url="validContext.accountsUiUrl"
           :backend-user="validContext.backendUser"
@@ -42,7 +42,7 @@
             v-if="hasAllShopsLinked"
             name="account-footer"
           />
-        </Account>
+        </AccountPanel>
         <b-overlay
           :show="!hasAllShopsLinked"
           variant="white"
@@ -50,6 +50,7 @@
           :opacity="0.70"
           blur="0px"
         >
+          <slot />
           <slot name="body" />
         </b-overlay>
         <slot name="customBody" />
@@ -59,112 +60,84 @@
 </template>
 
 <script>
-  import validContext, {
-    psAccountModuleState, psEventBusModuleState, setContext, shopsInContext,
-  } from '@/lib/context';
-  import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
-  import Account from '@/components/panel/Account';
-  import Locale from '@/mixins/locale';
-  import {BAlert, BOverlay} from 'bootstrap-vue';
-  import 'bootstrap-vue/dist/bootstrap-vue.css';
+import {BAlert, BOverlay} from 'bootstrap-vue';
+import validContext, {
+  setContext, shopsInContext,
+} from '@/lib/context';
+import i18n from '@/locale';
+import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
+import AccountPanel from '@/components/panel/AccountPanel';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
-  /**
+/**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
-   * to ensure each functional case is covered for you. You can use 3 slots: `v-slot:body`,
+   * to ensure each functional case is covered for you. You can use the default slots
    * that will be disabled if the user account is not well linked (you should put your
-   * module configuration panel here), `v-slot:account-footer` that will be displayed
-   * on the footer of the PsAccount component if the user is validated and logged,
-   * and a special `v-slot:customBody` that will always be
-   * displayed (you have to manage display condition by yourself).
+   * module configuration panel here)
    */
-  export default {
-    name: 'PsAccounts',
-    components: {
-      PsAccountComponentAlertDisplay,
-      Account,
-      BOverlay,
-      BAlert,
+export default {
+  name: 'PsAccounts',
+  i18n,
+  components: {
+    PsAccountComponentAlertDisplay,
+    AccountPanel,
+    BOverlay,
+    BAlert,
+  },
+  props: {
+    /**
+         * The whole context object given
+         * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
+         * If left empty (by default), the context will be retrieved from JS global
+         * var window.contextPsAccounts automatically.
+         */
+    context: {
+      type: Object,
+      required: false,
+      default: () => window.contextPsAccounts || {},
     },
-    mixins: [Locale],
-    props: {
-      /**
-       * The whole context object given
-       * [by prestashop\_accounts\_auth library presenter function](https://github.com/PrestaShopCorp/prestashop_accounts_auth#usage).
-       * If left empty (by default), the context will be retrieved from JS global
-       * vars automatically.
-       */
-      context: {
-        type: Object,
-        required: false,
-        default: () => ({}),
-      },
-    },
-    data() {
-      return {
-        hasError: false,
-      };
-    },
-    computed: {
-      validContext,
-      psAccountModuleState,
-      psEventBusModuleState,
-      shops: shopsInContext,
-      hasAllShopsLinked() {
-        return this.shopsWithUrl.every((shop) => shop.uuid);
-      },
-      hasBlockingAlert() {
-        return !this.validContext.psAccountsIsInstalled
-          || !this.validContext.psAccountsIsUptodate
-          || !this.validContext.psAccountsIsEnabled;
-      },
-      shopsWithUrl() {
-        return this.shops.filter((shop) => shop.domain);
-      },
-    },
-    methods: {
-      trackUser() {
-        // We don't know the SSO identified user...
-        this.$tracking.identify({
-          email: this.validContext.backendUser.email,
-          employeeId: this.validContext.backendUser.employeeId,
-          superadmin: this.validContext.backendUser.isSuperAdmin,
-          v4_onboarded: this.validContext.isOnboardedV4,
-        });
-      },
-      trackComponent() {
-        this.$tracking.track('[ACC] Account Component Viewed', {
-          multishop_numbers: this.validContext.shops.reduce(
-            (acc, shop) => acc + shop.shops.length,
-            0,
-          ),
-          ps_account_version: this.validContext.psAccountsVersion,
-          ps_account_module_state: this.psAccountModuleState,
-          ps_eventbus_module_state: this.psEventBusModuleState,
-          ps_module_from: this.validContext.psxName,
-          ps_version: this.shopsWithUrl[0].psVersion,
-          shop_context_id: this.validContext.currentContext.id,
-          shop_context_type: this.validContext.currentContext.type,
-          shop_associated: this.shopsWithUrl.map(
-            (shop) => shop.uuid !== null && !shop.isLinkedV4,
-          ),
-          shop_bo_ids: this.shopsWithUrl.map((shop) => shop.id),
-          shop_employee_ids: this.shopsWithUrl.map((shop) => shop.employeeId),
-          shop_names: this.shopsWithUrl.map((shop) => shop.name),
-          shop_uuids: this.shopsWithUrl.map((shop) => shop.uuid),
-          shop_v4_onboarded: this.shopsWithUrl.map((shop) => shop.isLinkedV4),
-          shop_urls: this.shopsWithUrl.map(
-            (shop) => (shop.domain || shop.domainSsl) + shop.physicalUri + shop.virtualUri,
-          ),
-        });
-      },
-    },
-    created() {
-      setContext(this.context);
+  },
+  data() {
+    return {
+      hasError: false,
+    };
+  },
+  setup() {
+    const {identify, trackAccountComponentViewed} = useSegmentTracking();
 
-      if (this.validContext.psAccountsIsInstalled && this.validContext.psAccountsIsEnabled) {
-        this.trackUser();
-        this.trackComponent();
-      }
+    return {
+      identify,
+      trackAccountComponentViewed,
+    };
+  },
+  computed: {
+    validContext,
+    shops: shopsInContext,
+    hasAllShopsLinked() {
+      return this.shopsWithUrl.every((shop) => shop.uuid);
     },
-  };
+    hasBlockingAlert() {
+      return !this.validContext.psAccountsIsInstalled
+            || !this.validContext.psAccountsIsUptodate
+            || !this.validContext.psAccountsIsEnabled;
+    },
+    shopsWithUrl() {
+      return this.shops.filter((shop) => shop.domain);
+    },
+  },
+  created() {
+    setContext(this.context);
+
+    if (this.validContext.psAccountsIsInstalled && this.validContext.psAccountsIsEnabled) {
+      this.identify();
+      this.trackAccountComponentViewed();
+    }
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+::v-deep {
+  @import '~prestakit/scss/application';
+}
+</style>

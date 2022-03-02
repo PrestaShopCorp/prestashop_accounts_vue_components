@@ -3,56 +3,62 @@
     variant="warning"
     show
   >
-    <h3>{{ t('psaccounts.alertEventBusNotEnabled.title') }}</h3>
+    <h3>{{ $t('psaccounts.alertEventBusNotEnabled.title') }}</h3>
     <p>
-      {{ t('psaccounts.alertEventBusNotEnabled.message') }}.
+      {{ $t('psaccounts.alertEventBusNotEnabled.message') }}.
     </p>
     <p class="mt-2">
       <b-button
         v-if="!isLoading"
         variant="primary"
-        @click="enableEventBus()"
+        @click="enableEventBus"
       >
-        {{ t('psaccounts.alertEventBusNotEnabled.enableButton') }}
+        {{ $t('psaccounts.alertEventBusNotEnabled.enableButton') }}
       </b-button>
       <b-link
         href="#"
         disabled
         v-else
       >
-        {{ t('psaccounts.alertEventBusNotEnabled.loading') }}
+        {{ $t('psaccounts.alertEventBusNotEnabled.loading') }}
       </b-link>
     </p>
   </b-alert>
 </template>
 
 <script>
-  import Alert from './Alert';
-  import enableModule from '../../../lib/moduleManager/EnableModule';
+import Alert from './Alert';
+import enableModule from '@/lib/moduleManager/EnableModule';
+import useSegmentTracking from '@/composables/useSegmentTracking';
 
-  /**
+/**
    * This sub-component can be used in a custom integration when the `EventBus`
    * component does not meets special needs. This part will display a warning message
    * telling the PS EventBus module is not enabled on the shop (and a button to enable it).
    */
-  export default {
-    name: 'AlertEventBusNotEnabled',
-    mixins: [Alert],
-    methods: {
-      enableEventBus() {
-        this.isLoading = true;
+export default {
+  name: 'AlertEventBusNotEnabled',
+  mixins: [Alert],
+  setup() {
+    const {trackPsEventBusEnableButton} = useSegmentTracking();
 
-        this.$tracking.track('[ACC] PSEventBus Enable Button Clicked');
+    return {trackPsEventBusEnableButton};
+  },
+  methods: {
+    enableEventBus() {
+      this.isLoading = true;
 
-        enableModule(
-          'ps_eventbus',
-          this.link,
-          this.psIs17,
-        ).catch(() => {
-          this.isLoading = false;
-          this.$emit('hasError');
-        });
-      },
+      this.trackPsEventBusEnableButton();
+
+      enableModule(
+        'ps_eventbus',
+        this.link,
+        this.psIs17,
+      ).catch(() => {
+        this.isLoading = false;
+        this.$emit('hasError');
+      });
     },
-  };
+  },
+};
 </script>

@@ -48,6 +48,11 @@ resource "kubernetes_deployment" "storybook" {
           name = "ui"
           image = "eu.gcr.io/${local.project}/accounts-vue-components:${var.app_version}"
           image_pull_policy = "Always"
+
+          env {
+            name = "Timestamp"
+            value = timestamp()
+          }
         }
       }
     }

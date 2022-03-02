@@ -34,7 +34,7 @@ jobs:
       - name: Terraform init
         working-directory: cloud
         run: |
-          terraform init -backend-config="bucket=distribution-integration"
+          terraform init
           terraform workspace select alpha
           terraform fmt
         env:
@@ -55,8 +55,7 @@ jobs:
       - name: Build and push finale image
         run: |
           docker build . \
-            --tag="eu.gcr.io/distribution-integration/accounts-vue-components:latest" \
-            --cache-from="eu.gcr.io/distribution-integration/accounts-vue-components-package:latest"
+            --tag="eu.gcr.io/distribution-integration/accounts-vue-components:latest" 
           docker push "eu.gcr.io/distribution-integration/accounts-vue-components:latest"
         env:
           TAG: ${{ steps.get_tag.outputs.TAG }}

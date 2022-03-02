@@ -1,5 +1,8 @@
 <template>
-  <div v-if="!hasAllShopsWithoutUrl" class="align-self-center">
+  <div
+    v-if="!hasAllShopsWithoutUrl"
+    class="align-self-center"
+  >
     <component
       :is="hasShopsLinked ? 'b-dropdown' : 'b-button'"
       v-if="!hasAllShopsLinked"
@@ -8,7 +11,7 @@
       split
       split-variant="outline-primary"
       variant="primary"
-      :text="t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`)"
+      :text="$t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`)"
       :disabled="!backendUser.isSuperAdmin"
       @click="openLinkShopModal(isLinkedV4 ? 'reonboard' : 'associate')"
     >
@@ -16,10 +19,10 @@
         v-if="hasShopsLinked"
         @click="openLinkShopModal('manage')"
       >
-        {{ t(`psaccounts.account.manageAccountButton`) }}
+        {{ $t(`psaccounts.account.manageAccountButton`) }}
       </b-dropdown-item-button>
       <template v-else>
-        {{ t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`) }}
+        {{ $t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`) }}
       </template>
     </component>
 
@@ -31,7 +34,7 @@
       split
       split-variant="outline-primary"
       variant="primary"
-      :text="t(`psaccounts.account.manageAccountButton`)"
+      :text="$t(`psaccounts.account.manageAccountButton`)"
       :disabled="!backendUser.isSuperAdmin"
       @click="openLinkShopModal('manage')"
     >
@@ -39,10 +42,10 @@
         v-if="isShopContext && hasShopsLinkedByUserInBackoffice"
         @click="openLinkShopModal('unlink')"
       >
-        {{ t(`psaccounts.account.unlinkButton`) }}
+        {{ $t(`psaccounts.account.unlinkButton`) }}
       </b-dropdown-item-button>
       <template v-else>
-        {{ t(`psaccounts.account.manageAccountButton`) }}
+        {{ $t(`psaccounts.account.manageAccountButton`) }}
       </template>
     </component>
 
@@ -58,133 +61,139 @@
 </template>
 
 <script>
-  import {CONTEXT_SHOP} from '@/lib/context';
-  import Locale from '@/mixins/locale';
-  import {
+import {
+  BButton,
+  BDropdown,
+  BDropdownItemButton,
+} from 'bootstrap-vue';
+import {CONTEXT_SHOP} from '@/lib/context';
+import i18n from '@/locale';
+import useSegmentTracking from '@/composables/useSegmentTracking';
+import LinkShopModal from '@/components/crossdomains/LinkShopModal';
+
+export default {
+  name: 'AccountLinkToUi',
+  i18n,
+  components: {
     BButton,
     BDropdown,
     BDropdownItemButton,
-  } from 'bootstrap-vue';
-  import LinkShopModal from '@/components/crossdomains/LinkShopModal';
-
-  export default {
-    name: 'AccountLinkToUi',
-    mixins: [Locale],
-    components: {
-      BButton,
-      BDropdown,
-      BDropdownItemButton,
-      LinkShopModal,
+    LinkShopModal,
+  },
+  data() {
+    return {
+      action: 'associate',
+      cdcUiDisplayed: false,
+    };
+  },
+  props: {
+    accountsUiUrl: {
+      type: String,
+      required: true,
     },
-    data() {
-      return {
-        action: 'associate',
-        cdcUiDisplayed: false,
-      };
+    backendUser: {
+      type: Object,
+      required: true,
     },
-    props: {
-      accountsUiUrl: {
-        type: String,
-        required: true,
-      },
-      backendUser: {
-        type: Object,
-        required: true,
-      },
-      onboardingLink: {
-        type: String,
-        required: true,
-      },
-      shops: {
-        type: Array,
-        default: () => [],
-      },
-      shopContext: {
-        type: Number,
-        required: true,
-      },
+    onboardingLink: {
+      type: String,
+      required: true,
     },
-    computed: {
-      hasAllShopsLinked() {
-        return this.unlinkedShops.length === 0;
-      },
-      hasAllShopsWithoutUrl() {
-        return this.shops.every((shop) => shop.domain === null);
-      },
-      hasShopsLinked() {
-        return this.hasShopsLinkedByUserInBackoffice || this.hasShopsLinkedWithoutEmployeeId;
-      },
-      hasShopsLinkedByUserInBackoffice() {
-        return this.shops.some(
-          (shop) => parseInt(shop.employeeId, 10) === this.backendUser.employeeId,
-        );
-      },
-      hasShopsLinkedWithoutEmployeeId() {
-        return this.shops.some(
-          (shop) => shop.uuid !== null && !shop.isLinkedV4 && shop.employeeId === null,
-        );
-      },
-      isLinkedV4() {
-        return this.shops.every((shop) => shop.isLinkedV4);
-      },
-      isShopContext() {
-        return this.shopContext === CONTEXT_SHOP;
-      },
-      specificUiUrl() {
-        if (['reonboard', 'associate'].includes(this.action)) {
-          return '';
-        }
-
-        if (['unlink'].includes(this.action)) {
-          return `/shop/${this.shops[0].uuid}`;
-        }
-
-        return '/shop';
-      },
-      trackEventName() {
-        if (['reonboard', 'associate'].includes(this.action)) {
-          return '[ACC] Associate Button Clicked';
-        }
-
-        if (['unlink'].includes(this.action)) {
-          return '[ACC] Unlink Shop Button Clicked';
-        }
-
-        return '[ACC] Manage Account Button Clicked';
-      },
-      unlinkedShops() {
-        return this.shops.filter((shop) => !shop.uuid || (shop.uuid && shop.isLinkedV4));
-      },
-      unlinkedShopsWithEmployeeId() {
-        return this.unlinkedShops.map((shop) => ({
-          ...shop,
-          employeeId: this.backendUser.employeeId.toString(),
-        }));
-      },
+    shops: {
+      type: Array,
+      default: () => [],
     },
-    methods: {
-      openLinkShopModal(action = 'associate') {
-        this.action = action;
-        this.$tracking.track(this.trackEventName);
-
-        this.cdcUiDisplayed = true;
-      },
-      closeOnBoarding() {
-        this.cdcUiDisplayed = false;
-        window.location.reload();
-      },
+    shopContext: {
+      type: Number,
+      required: true,
     },
-    watch: {
-      cdcUiDisplayed: (cdcUiDisplayed) => {
-        if (cdcUiDisplayed) {
-          document.body.classList.add('ui-displayed');
-          return;
-        }
+  },
+  setup() {
+    const {trackAssociateOrManageAccountButton} = useSegmentTracking();
 
-        document.body.classList.remove('ui-displayed');
-      },
+    return {trackAssociateOrManageAccountButton};
+  },
+  computed: {
+    hasAllShopsLinked() {
+      return this.unlinkedShops.length === 0;
     },
-  };
+    hasAllShopsWithoutUrl() {
+      return this.shops.every((shop) => shop.domain === null);
+    },
+    hasShopsLinked() {
+      return this.hasShopsLinkedByUserInBackoffice || this.hasShopsLinkedWithoutEmployeeId;
+    },
+    hasShopsLinkedByUserInBackoffice() {
+      return this.shops.some(
+        (shop) => parseInt(shop.employeeId, 10) === this.backendUser.employeeId,
+      );
+    },
+    hasShopsLinkedWithoutEmployeeId() {
+      return this.shops.some(
+        (shop) => shop.uuid !== null && !shop.isLinkedV4 && shop.employeeId === null,
+      );
+    },
+    isLinkedV4() {
+      return this.shops.every((shop) => shop.isLinkedV4);
+    },
+    isShopContext() {
+      return this.shopContext === CONTEXT_SHOP;
+    },
+    specificUiUrl() {
+      if (['reonboard', 'associate'].includes(this.action)) {
+        return '';
+      }
+
+      if (['unlink'].includes(this.action)) {
+        return `/shop/${this.shops[0].uuid}`;
+      }
+
+      return '/shop';
+    },
+    trackEventName() {
+      if (['reonboard', 'associate'].includes(this.action)) {
+        return '[ACC] Associate Button Clicked';
+      }
+
+      if (['unlink'].includes(this.action)) {
+        return '[ACC] Unlink Shop Button Clicked';
+      }
+
+      return '[ACC] Manage Account Button Clicked';
+    },
+    unlinkedShops() {
+      return this.shops.filter((shop) => !shop.uuid || (shop.uuid && shop.isLinkedV4));
+    },
+    unlinkedShopsWithEmployeeId() {
+      return this.unlinkedShops.map((shop) => ({
+        ...shop,
+        employeeId: this.backendUser.employeeId.toString(),
+      }));
+    },
+  },
+  methods: {
+    openLinkShopModal(action = 'associate') {
+      this.action = action;
+      this.trackAssociateOrManageAccountButton(action);
+
+      this.cdcUiDisplayed = true;
+    },
+    closeOnBoarding() {
+      this.cdcUiDisplayed = false;
+      window.location.reload();
+    },
+  },
+  watch: {
+    cdcUiDisplayed(cdcUiDisplayed) {
+      if (cdcUiDisplayed) {
+        document.body.classList.add('ui-displayed');
+        return;
+      }
+
+      document.body.classList.remove('ui-displayed');
+    },
+  },
+};
 </script>
 
 <style>
