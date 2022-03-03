@@ -1,4 +1,4 @@
-import {computed, reactive, toRefs} from '@vue/composition-api';
+import {computed, reactive, toRefs} from 'vue-demi';
 import {contextSchema} from '@/lib/ContextValidator';
 import {Context, Shop, ShopContext} from '@/types/context';
 

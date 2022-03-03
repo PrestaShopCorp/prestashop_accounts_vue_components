@@ -52,8 +52,7 @@
 <script lang="ts">
 import {
   computed, defineComponent, PropType, ref, watch,
-} from '@vue/composition-api';
-import i18n from '@/i18n';
+} from 'vue-demi';
 import {Shop, ShopContext} from '@/types/context';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseDropdown from '@/components/BaseDropdown.vue';
@@ -63,7 +62,6 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
 
 export default defineComponent({
   name: 'AccountLinkToUi',
-  i18n,
   components: {
     BaseButton,
     BaseDropdown,

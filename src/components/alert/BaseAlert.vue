@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType, ref, watch} from '@vue/composition-api';
+import {defineComponent, PropType, ref, watch} from 'vue-demi';
 
 import SuccessIcon from '@/assets/icons/check.svg?inline';
 import DangerIcon from '@/assets/icons/report.svg?inline';

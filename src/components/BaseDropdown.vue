@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from '@vue/composition-api';
+import {defineComponent, ref} from 'vue-demi';
 import vClickOutside from 'v-click-outside';
 import BaseButton from './BaseButton.vue';
 import ExpandMoreIcon from '@/assets/icons/expand_more.svg?inline';

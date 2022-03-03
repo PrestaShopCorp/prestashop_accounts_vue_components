@@ -35,15 +35,13 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, PropType} from '@vue/composition-api';
-import i18n from '@/i18n';
+import {computed, defineComponent, PropType} from 'vue-demi';
 import {Shop} from '@/types/context';
 
 import PuffinLogo from '@/assets/img/puffin_logo.svg?inline';
 
 export default defineComponent({
   name: 'AccountShopLinkMessage',
-  i18n,
   components: {
     PuffinLogo,
   },

@@ -57,8 +57,7 @@
 <script lang="ts">
 import {
   computed, defineComponent, onMounted, PropType, ref,
-} from '@vue/composition-api';
-import i18n from '@/i18n';
+} from 'vue-demi';
 import {Context} from '@/types/context';
 import AccountPanel from '@/components/panel/AccountPanel.vue';
 import BaseAlert from '@/components/alert/BaseAlert.vue';
@@ -76,7 +75,6 @@ import '@/assets/css/index.css';
    */
 export default defineComponent({
   name: 'PsAccounts',
-  i18n,
   components: {
     AccountPanel,
     BaseAlert,

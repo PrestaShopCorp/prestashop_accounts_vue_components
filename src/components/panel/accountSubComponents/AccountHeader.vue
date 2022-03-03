@@ -13,13 +13,11 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
-import i18n from '@/i18n';
+import {defineComponent} from 'vue-demi';
 import CheckIcon from '@/assets/icons/check.svg?inline';
 
 export default defineComponent({
   name: 'AccountHeader',
-  i18n,
   components: {
     CheckIcon,
   },

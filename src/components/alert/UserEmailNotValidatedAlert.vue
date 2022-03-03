@@ -13,8 +13,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
-import i18n from '@/i18n';
+import {defineComponent} from 'vue-demi';
 import BaseAlert from './BaseAlert.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import useSegmentTracking from '@/composables/useSegmentTracking';
@@ -25,7 +24,6 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    */
 export default defineComponent({
   name: 'UserEmailNotValidatedAlert',
-  i18n,
   components: {
     BaseAlert,
     BaseButton,

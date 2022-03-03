@@ -14,8 +14,7 @@
 import {
   computed,
   defineComponent, ref,
-} from '@vue/composition-api';
-import i18n from '@/i18n';
+} from 'vue-demi';
 import ModuleAlert from '@/components/alert/ModuleAlert.vue';
 import usePSModuleManagement, {Action, Module} from '@/composables/usePSModuleManagement';
 import useSegmentTracking from '@/composables/useSegmentTracking';
@@ -28,7 +27,6 @@ import usePSAccountsContext from '@/composables/usePSAccountsContext';
    */
 export default defineComponent({
   name: 'PsAccountComponentAlertDisplay',
-  i18n,
   components: {
     ModuleAlert,
   },

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {toRefs} from '@vue/composition-api';
+import {reactive, toRefs} from 'vue-demi';
 import usePSAccountsContext from './usePSAccountsContext';
 
 const modules: Record<string, string> = {
@@ -7,7 +7,7 @@ const modules: Record<string, string> = {
   ps_eventbus: 'PSEventBus',
 };
 
-const state = Vue.observable({
+const state = reactive({
   initialized: false,
   properties: {} as Record<string, unknown>,
   superProperties: [

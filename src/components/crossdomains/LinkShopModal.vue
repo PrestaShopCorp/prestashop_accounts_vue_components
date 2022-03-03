@@ -32,7 +32,7 @@
 // vue/attribute-hyphenation breaks props of cdc on lint
 /* eslint vue/attribute-hyphenation: "off" */
 import Vue from 'vue';
-import {defineComponent, onMounted, ref} from '@vue/composition-api';
+import {defineComponent, onMounted, ref} from 'vue-demi';
 import vClickOutside from 'v-click-outside';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 import LinkShopCrossDomain from './linkShopCrossDomain';

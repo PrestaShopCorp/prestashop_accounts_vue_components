@@ -11,8 +11,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
-import i18n from '@/i18n';
+import {defineComponent} from 'vue-demi';
 import BaseAlert from './BaseAlert.vue';
 
 /**
@@ -21,7 +20,6 @@ import BaseAlert from './BaseAlert.vue';
  */
 export default defineComponent({
   name: 'ShopUrlShouldExistsAlert',
-  i18n,
   components: {
     BaseAlert,
   },

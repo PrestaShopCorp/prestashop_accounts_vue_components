@@ -55,8 +55,7 @@
 <script lang="ts">
 import {
   computed, defineComponent, PropType,
-} from '@vue/composition-api';
-import i18n from '@/i18n';
+} from 'vue-demi';
 import {Shop} from '@/types/context';
 import BaseCard from '@/components/BaseCard.vue';
 import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader.vue';
@@ -74,7 +73,6 @@ import UserNotSuperAdminAlert from '@/components/alert/UserNotSuperAdminAlert.vu
    */
 export default defineComponent({
   name: 'AccountPanel',
-  i18n,
   components: {
     BaseCard,
     AccountHeader,
