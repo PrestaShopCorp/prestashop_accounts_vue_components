@@ -47,8 +47,9 @@
           <slot />
           <slot name="body" />
         </BaseOverlay>
-        <!-- TODO: add a div with a acc-mt-4 margin -->
-        <slot name="customBody" />
+        <div class="acc-mt-4">
+          <slot name="customBody" />
+        </div>
       </template>
     </template>
   </div>
