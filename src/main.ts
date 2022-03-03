@@ -4,7 +4,9 @@ import AccountPanel from '@/components/panel/AccountPanel.vue';
 import {isOnboardingCompleted} from '@/lib/Helpers';
 import {Segment, VueCompositionAPI} from '@/ExternalDependencies';
 
-const Components: Record<string, any> = {
+const version = process.env.VUE_APP_VERSION;
+
+const Components: Record<string, any>  = {
   PsAccounts,
   AccountPanel,
 };
@@ -37,17 +39,18 @@ function init() {
 }
 
 export default {
-  version: '0.1.4',
-  init,
-  Plugin,
-  isOnboardingCompleted,
   ...Components,
+  init,
+  isOnboardingCompleted,
+  Plugin,
+  version,
 };
 
 export {
-  init,
-  Plugin,
-  isOnboardingCompleted,
-  PsAccounts,
   AccountPanel,
+  init,
+  isOnboardingCompleted,
+  Plugin,
+  PsAccounts,
+  version,
 };
