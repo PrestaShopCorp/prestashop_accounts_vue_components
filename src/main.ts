@@ -9,7 +9,7 @@ const Components: Record<string, any> = {
   AccountPanel,
 };
 
-const Library = {
+const Plugin = {
   install(vue: typeof Vue) {
     Object.keys(Components).forEach((name) => {
       vue.component(name, Components[name]);
@@ -26,9 +26,9 @@ const Library = {
   },
 };
 
-// this method can be called like that window.psaccountsVue.init()
-Vue.use(Library);
-export function init() {
+function init() {
+  Vue.use(Plugin);
+
   new Vue({
     components: {
       'prestashop-accounts': PsAccounts,
@@ -38,13 +38,15 @@ export function init() {
 
 export default {
   version: '0.1.4',
-  Library,
+  init,
+  Plugin,
   isOnboardingCompleted,
   ...Components,
 };
 
 export {
-  Library,
+  init,
+  Plugin,
   isOnboardingCompleted,
   PsAccounts,
   AccountPanel,
