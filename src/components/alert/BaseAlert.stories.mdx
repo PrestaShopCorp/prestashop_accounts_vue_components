@@ -1,0 +1,63 @@
+import { ArgsTable, Canvas, Description, Meta, Story, Preview, Props } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+
+import BaseAlert, { Variant } from './BaseAlert.vue';
+
+<Meta
+  title="Components/Alert"
+  component={BaseAlert}
+  argTypes={{
+    default: {
+      control: 'text',
+      defaultValue: 'Alert content',
+      table: {
+        control: 'text'
+      }
+    },
+  }} />
+
+export const Template = (args, { argTypes }) => ({
+  components: { BaseAlert },
+  props: Object.keys(args),
+  methods: {
+    onDismissed: action('dismissed'),
+  },
+  template: `
+    <BaseAlert v-bind="$props" @dismissed="onDismissed">
+      {{ $props.default }}
+    </BaseAlert>
+  `,
+})
+
+# Base Alert
+
+<Description of={BaseAlert} />
+
+<Canvas>
+  <Story
+    name='Base Alert'
+    args={{
+      dismissible: false,
+      show: true,
+      variant: 'success',
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Base Alert" />
+
+## Integration
+
+```html
+<BaseAlert
+  :dismissible="true"
+  :show="true"
+  variant="success"
+  @dismissed="onDismissed">
+  alert content
+</BaseAlert>
+```
+
+<Props of={BaseAlert} />
+

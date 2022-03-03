@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="!hasAllShopsWithoutUrl"
-    class="align-self-center"
-  >
+  <div v-if="!hasAllShopsWithoutUrl">
     <component
       :is="hasShopsLinked ? 'BaseDropdown' : 'BaseButton'"
       v-if="!hasAllShopsLinked"
@@ -42,7 +39,7 @@
     </component>
 
     <link-shop-modal
-      v-if="cdcUiDisplayed"
+      ref="linkShopModal"
       :accounts-ui-url="accountsUiUrl"
       :on-boarding-link="onboardingLink"
       :shops="unlinkedShopsWithEmployeeId"
@@ -95,7 +92,7 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  setup(props, { refs }) {
     const action = ref('associate');
     const cdcUiDisplayed = ref(false);
 
@@ -143,6 +140,10 @@ export default defineComponent({
     })));
 
     function openLinkShopModal(act: string) {
+      if (!props.backendUser.isSuperAdmin) {
+        return;
+      }
+
       action.value = act;
       trackAssociateOrManageAccountButton(action.value);
 
@@ -156,10 +157,12 @@ export default defineComponent({
 
     watch(cdcUiDisplayed, (cdcUiDisplayed) => {
       if (cdcUiDisplayed) {
+        (refs.linkShopModal as InstanceType<typeof LinkShopModal>)?.open();
         document.body.classList.add('ui-displayed');
         return;
       }
 
+      (refs.linkShopModal as InstanceType<typeof LinkShopModal>)?.close();
       document.body.classList.remove('ui-displayed');
     });
 

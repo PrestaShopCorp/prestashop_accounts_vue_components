@@ -1,20 +1,22 @@
 <template>
   <transition name="fade">
     <div
-      class="modal accounts-modal d-block"
+      v-show="opened"
+      class="acc-z-1500 acc-fixed acc-inset-0 acc-bg-black acc-bg-opacity-50 acc-overflow-hidden acc-outline-none"
     >
       <div
-        class="crossdomain-container"
+        class="acc-flex acc-flex-col acc-items-center acc-justify-center acc-w-full acc-h-full"
         role="document"
       >
         <div
-          class="crossdomain"
-          v-click-outside="closeModal"
+          v-if="opened"
+          class="acc-w-screen acc-h-screen acc-bg-white acc-rounded-lg acc-shadow-2xl acc-overflow-hidden crossdomain"
+          v-click-outside="close"
         >
           <link-shop-crossdomain
             :specificUiUrl="specificUiUrl"
             :shops="shops"
-            :onBoardingFinished="closeModal"
+            :onBoardingFinished="close"
             :tracking="trackingProps"
             :onLogout="onLogout"
             :accountsUiUrl="accountsUiUrl"
@@ -30,7 +32,7 @@
 // vue/attribute-hyphenation breaks props of cdc on lint
 /* eslint vue/attribute-hyphenation: "off" */
 import Vue from 'vue';
-import {defineComponent, onMounted} from '@vue/composition-api';
+import {defineComponent, onMounted, ref} from '@vue/composition-api';
 import vClickOutside from 'v-click-outside';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 import LinkShopCrossDomain from './linkShopCrossDomain';
@@ -63,8 +65,14 @@ export default defineComponent({
   },
   setup(props, {emit}) {
     const {properties: trackingProps, reset} = useSegmentTracking();
+    const opened = ref(false);
 
-    function closeModal() {
+    function open() {
+      opened.value = true;
+    }
+
+    function close() {
+      opened.value = false;
       emit('closed');
     }
 
@@ -89,50 +97,27 @@ export default defineComponent({
     });
 
     return {
-      closeModal, onLogout, trackingProps, triggerFallback,
+      opened, open, close, onLogout, trackingProps, triggerFallback,
     };
   },
 });
 </script>
 
-<style lang="scss" scoped>
-.accounts-modal {
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  .close {
-    margin-top: -42px !important;
-  }
-  .crossdomain-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    .crossdomain {
-      width: 100vw;
-      height: 100vh;
-      background: #FFFFFF;
-      box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      border-radius: 6px;
-      & > div {
-        height: 100%;
-      }
-    }
+<style scoped>
+@screen md {
+  .crossdomain {
+    width: 90% !important;
+    height: 90% !important;
+    max-width: 990px;
+    max-height: 810px;
   }
 
-  @media (min-width: 768px) {
-    .crossdomain-container {
-      .crossdomain {
-        width: 90%;
-        height: 90%;
-        max-width: 990px;
-        max-height: 810px;
-      }
-    }
+  .crossdomain > div {
+      width: 100%;
+      height: 100%;
   }
 }
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .25s;
 }

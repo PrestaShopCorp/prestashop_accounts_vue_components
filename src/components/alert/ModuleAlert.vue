@@ -1,19 +1,26 @@
 <template>
   <BaseAlert variant="warning">
-    <h3>{{ title }}</h3>
-    <p>{{ message }}</p>
-    <p class="mt-2">
+    <h3 class="acc-m-0 acc-p-0 acc-text-base acc-font-bold">
+      {{ title }}
+      </h3>
+    <p class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm">
+      {{ message }}
+    </p>
+    <div class="acc-mt-4">
+      <!--
+        action event
+        @event action
+      -->
       <BaseButton
         v-if="!loading"
-        variant="primary"
         @click="$emit('action')"
       >
         {{ actionText }}
       </BaseButton>
-      <strong v-else>
+      <p v-else>
         <u>{{ loadingText }}</u>
-      </strong>
-    </p>
+      </p>
+    </div>
   </BaseAlert>
 </template>
 
@@ -35,22 +42,37 @@ export default defineComponent({
     BaseButton,
   },
   props: {
+    /**
+     * Text of the alert button
+     */
     actionText: {
       type: String,
       required: true,
     },
+    /**
+     * Set alert action as loading state
+     */
     loading: {
       type: Boolean,
       required: true,
     },
+    /**
+     * Text displayed on alert is in loading state
+     */
     loadingText: {
       type: String,
       required: true,
     },
+    /**
+     * Message of the alert
+     */
     message: {
       type: String,
       required: true,
     },
+    /**
+     * Title of the alert
+     */
     title: {
       type: String,
       required: true,

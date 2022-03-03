@@ -1,28 +1,25 @@
 <template>
-  <b-overlay
-    :show="show"
-    variant="white"
-    spinner-type="null"
-    :opacity="0.70"
-    blur="0px"
-  >
+  <div class="acc-relative" style="">
+    <!-- @slot content -->
     <slot />
-  </b-overlay>
+    <div v-show="show" class="acc-z-10 acc-absolute acc-inset-0">
+      <div class="acc-absolute acc-inset-0 acc-opacity-70 acc-bg-white acc-blur-0 acc-select-none acc-pointer-events-none"></div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
-import {BOverlay} from 'bootstrap-vue';
 
 /**
  * This is the BaseOverlay component.
  */
 export default defineComponent({
   name: 'BaseOverlay',
-  components: {
-    BOverlay,
-  },
   props: {
+    /**
+     * Show the overlay
+     */
     show: {
       type: Boolean,
       default: false,

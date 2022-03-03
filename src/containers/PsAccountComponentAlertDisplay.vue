@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <ModuleAlert
-      v-if="alert.module && alert.action"
-      :title="$t(`psaccounts.alert.${alert.module}.${alert.action}.title`)"
-      :message="$t(`psaccounts.alert.${alert.module}.${alert.action}.message`)"
-      :action-text="$t(`psaccounts.alert.${alert.module}.${alert.action}.action`)"
-      :loading-text="$t(`psaccounts.alert.${alert.module}.${alert.action}.loading`)"
-      :loading="loading"
-      @action="onAction"
-    />
-  </div>
+  <ModuleAlert
+    v-if="alert.module && alert.action"
+    :title="$t(`psaccounts.alert.${alert.module}.${alert.action}.title`)"
+    :message="$t(`psaccounts.alert.${alert.module}.${alert.action}.message`)"
+    :action-text="$t(`psaccounts.alert.${alert.module}.${alert.action}.action`)"
+    :loading-text="$t(`psaccounts.alert.${alert.module}.${alert.action}.loading`)"
+    :loading="loading"
+    @action="onAction"
+  />
 </template>
 
 <script lang="ts">
@@ -21,7 +19,7 @@ import i18n from '@/i18n';
 import ModuleAlert from '@/components/alert/ModuleAlert.vue';
 import usePSModuleManagement, {Action, Module} from '@/composables/usePSModuleManagement';
 import useSegmentTracking from '@/composables/useSegmentTracking';
-import useContext from '@/composables/useContext';
+import usePSAccountsContext from '@/composables/usePSAccountsContext';
 
 /**
    * This sub-component can be used in a custom integration when the `PsAccounts`
@@ -43,7 +41,7 @@ export default defineComponent({
       eventbusIsInstalled,
       eventbusInstallLink,
       eventbusEnableLink,
-    } = useContext();
+    } = usePSAccountsContext();
 
     const {manageModule} = usePSModuleManagement(context.value.psIs17 || false);
 

@@ -1,20 +1,19 @@
-# Build package
-FROM node:12-alpine as package
+# Build package (install js depdendencies)
+FROM node:lts-alpine as package
 
 WORKDIR /app
 
 ADD package.json package.json
 ADD yarn.lock yarn.lock
 
-RUN yarn --only=prod
+RUN yarn install
 
-## Build vuejs
+## Build storybook
 FROM package as builder
 
 WORKDIR /app
 ADD . .
 RUN yarn run build-storybook
-
 
 ### Build clean docker image with only needed files
 FROM nginx:stable-alpine as production

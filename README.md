@@ -35,9 +35,9 @@ yarn storybook
 
 #### Integration / Production
 
-[Storybook integration](https://storybook-accounts.distribution-integration.prestashop.net/) (trigger on PR labeled 'quality assurance needed')
+[Storybook integration](https://storybook-accounts.distribution-integration.prestashop.net/) (triggered on PR labeled 'quality assurance needed')
 
-[Storybook production](https://storybook-accounts.distribution.prestashop.net/) (trigger on push master/main)
+[Storybook production](https://storybook-accounts.distribution.prestashop.net/) (triggered on push master/main)
 
 ### CDN
 

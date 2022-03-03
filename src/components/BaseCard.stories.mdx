@@ -1,0 +1,56 @@
+import { ArgsTable, Canvas, Description, Meta, Story, Preview, Props } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+
+import BaseCard, { Variant } from './BaseCard.vue';
+
+<Meta
+  title="Components/Card"
+  component={BaseCard}
+  argTypes={{
+    header: {
+      control: 'text',
+      defaultValue: 'Card header'
+    },
+    body: {
+      control: 'text',
+      defaultValue: 'Card body'
+    },
+  }} />
+
+export const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { BaseCard },
+  methods: {
+    onClick: action('clicked'),
+  },
+  template: `
+    <BaseCard v-bind="$props" @click="onClick">
+      <template #header>{{ $props.header }}</template>
+      <template #body>{{ $props.body }}</template>
+    </BaseCard>
+  `,
+})
+
+# Base Card
+
+<Description of={BaseCard} />
+
+<Canvas>
+  <Story
+    name='Base Card'>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Base Card" />
+
+## Integration
+
+```html
+<BaseCard>
+  <template #header>header</template>
+  <template #body>body</template>
+</BaseCard>
+```
+
+<Props of={BaseCard} />

@@ -1,4 +1,4 @@
-import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Description, Meta, Story, Preview, Props } from '@storybook/addon-docs';
 import { action } from '@storybook/addon-actions';
 
 import ModuleAlert from './ModuleAlert.vue';
@@ -8,30 +8,33 @@ import ModuleAlert from './ModuleAlert.vue';
   component={ModuleAlert} />
 
 export const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
   components: { ModuleAlert },
+  props: Object.keys(argTypes),
   methods: {
     onAction: action('action'),
   },
-  template: `<ModuleAlert v-bind="$props" @action="onAction" class="m-4" />`,
+  template: `<ModuleAlert v-bind="$props" @action="onAction" />`,
 })
 
 # Module Alert: An alert for module needed action
 
-When PS Accounts need a dependant module action, 
-that module alert component is used to warn user.
+<Description of={ModuleAlert} />
 
-<Story
-  name='Module Alert'
-  args={{
-    title: 'Activate the PrestaShop Event Bus module',
-    message: 'You need the PrestaShop Event Bus module to continue setting up this module.',
-    actionText: 'Activate',
-    loading: false,
-    loadingText: 'The PrestaShop Event Bus module is currently being activated...',
-  }}>
-  {Template.bind({})}
-</Story>
+<Canvas>
+  <Story
+    name='Module Alert'
+    args={{
+      title: 'Activate the PrestaShop Event Bus module',
+      message: 'You need the PrestaShop Event Bus module to continue setting up this module.',
+      actionText: 'Activate',
+      loading: false,
+      loadingText: 'The PrestaShop Event Bus module is currently being activated...',
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Module Alert" />
 
 ## Integration
 
@@ -39,15 +42,12 @@ that module alert component is used to warn user.
 <ModuleAlert
   title="Activate the PrestaShop Event Bus module"
   message="You need the PrestaShop Event Bus module to continue setting up this module."
-  action-text ="Activate"
+  action-text="Activate"
   :loading="false"
   loading-text="The PrestaShop Event Bus module is currently being activated..."
-  @action="() => {}"
+  @action="onAction"
   />
 ```
 
-## Technical details
-
-<Description of={ModuleAlert} />
 <Props of={ModuleAlert} />
 

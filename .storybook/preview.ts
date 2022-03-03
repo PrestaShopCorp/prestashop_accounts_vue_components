@@ -1,9 +1,8 @@
 import Vue from "vue";
+import { ScopedCss  } from "./decorators/scoped-css";
 import { Segment, VueCompositionAPI, VueI18n } from "@/ExternalDependencies";
 
-import "prestakit/scss/application.scss";
-
-import "prestakit/scss/application.scss";
+import "@/assets/css/index.css";
 
 Vue.use(Segment, {
   id: process.env.VUE_APP_SEGMENT,
@@ -14,3 +13,7 @@ Vue.use(Segment, {
 Vue.use(VueCompositionAPI);
 
 Vue.use(VueI18n);
+
+export const decorators = [
+  ScopedCss,
+];

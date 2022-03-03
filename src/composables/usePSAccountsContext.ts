@@ -32,7 +32,7 @@ const state = reactive<State>({
   context: {},
 });
 
-export default function useContext() {
+export default function usePSAccountsContext() {
   function setContext<T extends Context>(_context: T): void {
     const mergedContext = {
       ...defaultContext(),

@@ -6,7 +6,7 @@ import {Segment, VueCompositionAPI} from '@/ExternalDependencies';
 
 const version = process.env.VUE_APP_VERSION;
 
-const Components: Record<string, any>  = {
+const Components: Record<string, Vue.VueConstructor> = {
   PsAccounts,
   AccountPanel,
 };
