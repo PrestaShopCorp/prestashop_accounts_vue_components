@@ -1,8 +1,8 @@
 <template>
   <BaseAlert variant="warning">
-    <p
-      v-html="$t('psaccounts.account.emailNotVerified')"
-      class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6" />
+    <p class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6">
+      {{$t('psaccounts.account.emailNotVerified')}}
+    </p>
 
     <div class="acc-mt-4">
       <BaseButton @click="sendEmailConfirmation">

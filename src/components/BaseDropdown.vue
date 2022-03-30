@@ -1,8 +1,8 @@
 <template>
   <div
     class="acc-relative acc-inline-flex acc-font-sans acc-align-middle"
-    v-click-outside="() => expanded = false"
-    @keyup.esc="expanded = false">
+    v-click-outside="closeDropdown"
+    @keyup.esc="closeDropdown">
     <!--
       click event
       @event click
@@ -20,9 +20,9 @@
       aria-haspopup="true"
       :aria-expanded="expanded"
       class="acc-rounded-l-none focus:acc-ring-0"
-      @click="expanded = !expanded">
+      @click="toggleDropdown">
       <ExpandMoreIcon class="acc-w-5 acc-h-5 acc-transform acc-transition-transform" :class="{ 'acc--rotate-180': expanded }" />
-    </BaseButton> 
+    </BaseButton>
     <ul
       v-show="expanded"
       role="menu"
@@ -73,7 +73,11 @@ export default defineComponent({
   setup() {
     const expanded = ref(false);
 
-    return {expanded};
+    const closeDropdown = () => expanded.value = false;
+
+    const toggleDropdown = () => expanded.value = !expanded.value;
+
+    return {expanded, closeDropdown, toggleDropdown};
   }
 });
 </script>

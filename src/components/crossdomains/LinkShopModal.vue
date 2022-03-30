@@ -111,13 +111,11 @@ export default defineComponent({
     max-width: 990px;
     max-height: 810px;
   }
-
-  .crossdomain > div {
-      width: 100%;
-      height: 100%;
-  }
 }
-
+.crossdomain > div {
+  width: 100%;
+  height: 100%;
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .25s;
 }
