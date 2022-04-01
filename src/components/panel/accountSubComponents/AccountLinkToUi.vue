@@ -23,6 +23,7 @@
       :is="isShopContext && hasShopsLinkedByUserInBackoffice ? 'BaseDropdown' : 'BaseButton'"
       v-else-if="hasShopsLinked"
       :id="`manage-shops-${ isShopContext ? 'dropdown' : 'button'}`"
+      variant="secondary"
       :text="$t(`psaccounts.account.manageAccountButton`)"
       :disabled="!backendUser.isSuperAdmin"
       @click="openLinkShopModal('manage')"

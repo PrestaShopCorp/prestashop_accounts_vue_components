@@ -10,7 +10,7 @@
           <p class="acc-m-0">
             {{ $tc('psaccounts.account.authorized', linkedShops.length) }}
           </p>
-          <p class="acc-m-0 acc-text-cyan-darker acc-break-words">
+          <p class="acc-m-0 acc-text-grey-600 acc-break-words">
             {{ linkedUserEmail }}
           </p>
         </div>

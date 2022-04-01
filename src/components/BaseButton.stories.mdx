@@ -11,6 +11,10 @@ import BaseButton, { Variant } from './BaseButton.vue';
       control: 'text',
       defaultValue: 'Button content'
     },
+    variant: {
+      control: 'radio',
+      options: [...Object.values(Variant)],
+    }
   }} />
 
 export const Template = (args, { argTypes }) => ({
@@ -35,7 +39,6 @@ export const Template = (args, { argTypes }) => ({
     name='Base Button'
     args={{
       disabled: false,
-      outlined: false,
       variant: Variant.Primary,
     }}>
     {Template.bind({})}
@@ -49,7 +52,6 @@ export const Template = (args, { argTypes }) => ({
 ```html
 <BaseButton
   :disabled="false"
-  :outlined="false"
   variant="primary"
   @click="onClick">
   button content

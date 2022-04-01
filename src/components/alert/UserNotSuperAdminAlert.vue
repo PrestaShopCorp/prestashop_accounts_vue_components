@@ -8,7 +8,7 @@
       <a
         @click="trackLinkContactAdmin"
         :href="'mailto:' + superAdminEmail"
-        class="acc-font-semibold acc-text-gray-800 acc-underline hover:acc-text-gray-600">
+        class="acc-font-semibold acc-text-grey-900 acc-underline hover:acc-text-grey-600">
         {{ superAdminEmail }}
       </a>
     </p>
