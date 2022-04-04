@@ -1,6 +1,6 @@
 <template>
   <div
-    class="acc-relative acc-inline-flex acc-font-sans acc-align-middle"
+    class="acc-relative acc-inline-flex acc-font-primary acc-align-middle"
     v-click-outside="closeDropdown"
     @keyup.esc="closeDropdown">
     <!--

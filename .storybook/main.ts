@@ -17,6 +17,7 @@ module.exports = {
     },
     "@storybook/addon-controls",
     "@storybook/addon-actions",
+    "@storybook/addon-viewport",
   ],
   webpackFinal: async (config) => {
     config.resolve.alias = {

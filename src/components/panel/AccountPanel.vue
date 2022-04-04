@@ -30,22 +30,22 @@
 
       <ModuleUpdateInformationAlert
         v-if="isLinkedV4"
-        class="acc-mt-2"
+        class="acc-mt-6"
       />
 
       <UserEmailNotValidatedAlert
         v-if="userHasEmailNotVerified"
-        class="acc-mt-2"
+        class="acc-mt-6"
         :sso-resend-verification-email="ssoResendVerificationEmail"
       />
 
       <UserNotSuperAdminAlert
         v-if="!backendUser.isSuperAdmin"
-        class="acc-mt-2"
+        class="acc-mt-6"
         :super-admin-email="superAdminEmail"
       />
 
-      <div v-if="$slots.default" class="acc-mt-2">
+      <div v-if="$slots.default" class="acc-mt-6">
         <slot />
       </div>
     </template>

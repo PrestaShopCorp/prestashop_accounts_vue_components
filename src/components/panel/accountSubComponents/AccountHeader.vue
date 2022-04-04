@@ -1,12 +1,12 @@
 <template>
-  <div class="acc-flex acc-items-center acc-font-sans acc-font-semibold">
+  <div class="acc-flex acc-items-center">
     <span
       v-if="hasAllShopsLinked"
       class="acc-flex-shrink-0 acc-w-6 acc-h-6 acc-mr-2 acc-p-0.5 acc-rounded-full acc-bg-success-500"
     >
       <CheckIcon class="acc-text-white" />
     </span>
-    <h3 class="acc-m-0">
+    <h3 class="acc-m-0 acc-font-primary acc-font-semibold">
       <slot />
     </h3>
   </div>

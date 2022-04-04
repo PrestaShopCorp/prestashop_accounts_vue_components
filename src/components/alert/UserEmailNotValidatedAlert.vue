@@ -5,7 +5,7 @@
       variant="warning"
       @clicked="sendEmailConfirmation"
   >
-    <p>{{$t('psaccounts.account.emailNotVerified.description')}}</p>
+    <p class="acc-m-0 acc-p-0">{{$t('psaccounts.account.emailNotVerified.description')}}</p>
   </BaseAlert>
 </template>
 

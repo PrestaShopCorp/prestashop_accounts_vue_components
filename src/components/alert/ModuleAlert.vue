@@ -4,7 +4,7 @@
        @event action
      -->
   <BaseAlert :title="title" :button-label="loading ? loadingText : actionText" variant="warning" @clicked="$emit('action')">
-    <p>
+    <p class="acc-m-0 acc-p-0">
       {{ message }}
     </p>
   </BaseAlert>

@@ -2,7 +2,7 @@
   <div class="acc-flex acc-flex-col acc-flex-grow acc-items-center md:acc-flex-row">
     <PuffinLogo
       class="acc-w-11 acc-h-11 md:acc-mr-3" />
-    <div class="acc-mt-2 acc-font-sans acc-text-sm acc-text-center acc-align-middle md:acc-mt-0 md:acc-text-left">
+    <div class="acc-mt-2 acc-font-secondary acc-text-sm acc-text-center acc-align-middle md:acc-mt-0 md:acc-text-left">
       <template v-if="hasSomeShopsLinked">
         <div
           v-if="hasShopsLinkedBySameUser"

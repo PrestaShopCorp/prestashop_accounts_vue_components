@@ -1,33 +1,35 @@
 <template>
   <div
     v-if="isDisplayed"
-    class="acc-relative acc-flex acc-flex-row acc-items-start acc-p-4 acc-border acc-rounded-lg"
+    class="acc-relative acc-flex acc-flex-col md:acc-flex-row acc-items-start acc-p-4 acc-border acc-rounded-lg"
     :class="{
       'acc-bg-success-50 acc-border-success-500': variant === 'success',
       'acc-bg-danger-50 acc-border-danger-500': variant === 'danger',
       'acc-bg-warning-50 acc-border-warning-500': variant === 'warning',
       'acc-bg-info-50 acc-border-info-500': variant === 'info',
     }">
+    <div class="acc-flex acc-flex-row acc-flex-grow">
       <component
           :is="`${variant}-icon`"
-          class="acc-w-6"
+          class="acc-w-6 acc-h-6 acc-flex-shrink-0"
           :class="{
         'acc-text-success-500': variant === 'success',
         'acc-text-danger-500': variant === 'danger',
         'acc-text-warning-500': variant === 'warning',
         'acc-text-info-500': variant === 'info',
       }" />
-    <div class="acc-flex acc-flex-col acc-mx-4 acc-flex-grow">
-      <h1 v-if="title" class="acc-text-base acc-font-semibold acc-font-primary acc-mb-1">{{ title }}</h1>
-      <div class="acc-flex-1 acc-font-secondary acc-text-sm">
-        <!-- @slot Alert description -->
-        <slot />
+      <div class="acc-mx-4">
+        <h1 v-if="title" class="acc-text-base acc-font-semibold acc-font-primary acc-mb-1">{{ title }}</h1>
+        <div class="acc-flex-1 acc-font-secondary acc-text-sm">
+          <!-- @slot Alert description -->
+          <slot />
+        </div>
       </div>
     </div>
 
     <button
         v-if="buttonLabel"
-        class="acc-font-primary acc-text-grey-900 acc-font-semibold acc-text-sm acc-px-4 acc-py-3 acc-border acc-rounded"
+        class="acc-font-primary acc-text-grey-900 acc-font-semibold acc-text-sm acc-px-4 acc-py-3 acc-border acc-rounded acc-mt-2 acc-ml-10 md:acc-m-0 block"
         :class="{
           'acc-border-success-500': variant === 'success',
           'acc-border-danger-500': variant === 'danger',
