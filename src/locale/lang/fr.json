@@ -1,7 +1,7 @@
 {
     "psaccounts": {
         "accountManager": {
-            "errorInstallEnable": "Une erreur est survenue, merci de réessayer."
+            "errorInstallEnable": "Une erreur s'est produite. Veuillez réessayer."
         },
         "alertAccountNotInstalled": {
             "title": "Installez le module PrestaShop Account",
