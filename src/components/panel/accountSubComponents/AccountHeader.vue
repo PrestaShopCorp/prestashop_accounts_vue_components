@@ -1,44 +1,25 @@
 <template>
-  <div class="d-flex align-items-center">
-    <b-iconstack
+  <div class="acc-flex acc-items-center">
+    <span
       v-if="hasAllShopsLinked"
-      font-scale="1.5"
-      class="w-auto mr-3 align-bottom fixed-size"
-      width="24"
-      height="24"
+      class="acc-flex-shrink-0 acc-w-6 acc-h-6 acc-mr-2 acc-p-0.5 acc-rounded-full acc-bg-success-500"
     >
-      <b-icon-circle-fill
-        stacked
-        variant="success"
-      />
-      <b-icon-check
-        stacked
-        variant="white"
-      />
-    </b-iconstack>
-    <h3
-      class="m-0 d-inline h3 title"
-    >
+      <CheckIcon class="acc-text-white" />
+    </span>
+    <h3 class="acc-m-0 acc-font-primary acc-font-semibold">
       <slot />
     </h3>
   </div>
 </template>
 
-<script>
-import {
-  BIconstack,
-  BIconCircleFill,
-  BIconCheck,
-} from 'bootstrap-vue';
-import i18n from '@/locale';
+<script lang="ts">
+import {defineComponent} from 'vue-demi';
+import CheckIcon from '@/assets/icons/check.svg?inline';
 
-export default {
+export default defineComponent({
   name: 'AccountHeader',
-  i18n,
   components: {
-    BIconstack,
-    BIconCircleFill,
-    BIconCheck,
+    CheckIcon,
   },
   props: {
     hasAllShopsLinked: {
@@ -46,13 +27,5 @@ export default {
       required: true,
     },
   },
-};
+});
 </script>
-
-<style scoped>
-.title {
-  color: #363a41;
-  font-family: 'Open Sans', helvetica, arial, sans-serif;
-  font-weight: 600;
-}
-</style>

@@ -1,10 +1,17 @@
 import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs';
-import { withKnobs, array, boolean, object, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import AccountPanel from './AccountPanel';
+import AccountPanel from './AccountPanel.vue';
 
-<Meta title="Sub-Components/Panels/AccountPanel" component={AccountPanel} decorators={[withKnobs]} />
+<Meta
+  title="Components/Panels/AccountPanel"
+  component={AccountPanel} />
+
+export const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { AccountPanel },
+  template: `<AccountPanel v-bind="$props" class="m-4" />`,
+})
 
 # Association panel behavior
 
@@ -17,64 +24,37 @@ you in the integration section)._
 
 ## Before association, a button is displayed:
 
-<Story name='Not associated' height='175px'>
-  {{
-    components: {AccountPanel},
-    props: {
-      accountsUiUrl: {
-        default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
-      },
-      isOnboardedV4: {
-        default: boolean('isOnboardedV4', false),
-      },
-      onboardingLink: {
-        default: text('onboardingLink', 'https://accounts.prestashop.com?shops='),
-      },
-      shops: {
-        default: array('shops', [{
-          domain: 'myshop.com',
-          employeeId: null,
-          isLinkedV4: false,
-          user: {
-            email: null,
-          },
-          uuid: null,
-        }]),
-      },
-      ssoResendVerificationEmail: {
-        default: text('ssoResendVerificationEmail', 'http://sso.prestashop.com/email'),
-      },
-      superAdminEmail: {
-        default: text('superAdminEmail', 'admin@example.com'),
-      },
+<Story
+  name='Not associated'
+  height='175px'
+  args={{
+    accountsUiUrl: 'https://accounts.distribution.prestashop.net/en',
+    isOnboardedV4: false,
+    onboardingLink: 'https://accounts.prestashop.com?shops=',
+    shops: [{
+      domain: 'myshop.com',
+      employeeId: null,
+      isLinkedV4: false,
       user: {
-        default: object('user', {
-          emailIsValidated: true,
-          employeeId: 1,
-          isSuperAdmin: true,
-        }),
+        email: null,
       },
-      backendUser: {
-        default: object('user', {
-          email: 'admin@example.com',
-          isSuperAdmin: true,
-          employeeId: 1,
-        }),
-      },
+      uuid: null,
+    }],
+    shopContext: 4,
+    ssoResendVerificationEmail: 'http://sso.prestashop.com/email',
+    superAdminEmail: 'admin@example.com',
+    user: {
+      emailIsValidated: true,
+      employeeId: 1,
+      isSuperAdmin: true,
     },
-    template: `
-      <AccountPanel
-        :accounts-ui-url="accountsUiUrl"
-        :is-onboarded-v4="isOnboardedV4"
-        :onboarding-link="onboardingLink"
-        :shops="shops"
-        :sso-resend-verification-email="ssoResendVerificationEmail"
-        :super-admin-email="superAdminEmail"
-        :user="user"
-        :backend-user="backendUser"
-        class="m-4"
-      />`,
-  }}
+    backendUser: {
+      email: 'admin@example.com',
+      isSuperAdmin: true,
+      employeeId: 1,
+    },
+  }}>
+  {Template.bind({})}
 </Story>
 
 The button will bring the user to PrestaShop Accounts modal to link the shop to a user account (the owner / merchant)
@@ -86,65 +66,38 @@ if the shop was already linked to PrestaShop services from another service modul
 
 ## After association, the linked user is shown:
 
-<Story name='Associated' height='175px'>
-  {{
-    components: {AccountPanel},
-    props: {
-      accountsUiUrl: {
-        default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
-      },
-      isOnboardedV4: {
-        default: boolean('isOnboardedV4', false),
-      },
-      onboardingLink: {
-        default: text('onboardingLink', 'https://accounts.prestashop.com?shops='),
-      },
-      shops: {
-        default: array('shops', [{
-          domain: 'myshop.com',
-          employeeId: '1',
-          isLinkedV4: false,
-          user: {
-            email: 'user@example.com',
-            emailIsValidated: true
-          },
-          uuid: 'abcde-fghij',
-        }]),
-      },
-      ssoResendVerificationEmail: {
-        default: text('ssoResendVerificationEmail', 'http://sso.prestashop.com/email'),
-      },
-      superAdminEmail: {
-        default: text('superAdminEmail', 'admin@example.com'),
-      },
+<Story
+  name='Associated'
+  height='175px'
+  args={{
+    accountsUiUrl: 'https://accounts.distribution.prestashop.net/en',
+    isOnboardedV4: false,
+    onboardingLink: 'https://accounts.prestashop.com?shops=',
+    shops: [{
+      domain: 'myshop.com',
+      employeeId: 1,
+      isLinkedV4: false,
       user: {
-        default: object('user', {
-          emailIsValidated: true,
-          employeeId: 1,
-          isSuperAdmin: true,
-        }),
+        email: 'user@example.com',
+        emailIsValidated: true
       },
-      backendUser: {
-        default: object('user', {
-          email: 'admin@example.com',
-          isSuperAdmin: true,
-          employeeId: 1,
-        }),
-      },
+      uuid: 'abcde-fghij',
+    }],
+    shopContext: 4,
+    ssoResendVerificationEmail: 'http://sso.prestashop.com/email',
+    superAdminEmail: 'admin@example.com',
+    user: {
+      email: 'admin@example.com',
+      isSuperAdmin: true,
+      employeeId: 1,
     },
-    template: `
-      <AccountPanel
-        :accounts-ui-url="accountsUiUrl"
-        :is-onboarded-v4="isOnboardedV4"
-        :onboarding-link="onboardingLink"
-        :shops="shops"
-        :sso-resend-verification-email="ssoResendVerificationEmail"
-        :super-admin-email="superAdminEmail"
-        :user="user"
-        :backend-user="backendUser"
-        class="m-4"
-      />`,
-  }}
+    backendUser: {
+      email: 'admin@example.com',
+      isSuperAdmin: true,
+      employeeId: 1,
+    },
+  }}>
+  {Template.bind({})}
 </Story>
 
 
@@ -156,64 +109,37 @@ if the shop was already linked to PrestaShop services from another service modul
 The shop's owner / merchant **must** have administrator rights to be able to link its shop to PrestaShop services.
 If the right is missing, the button will be disabled and **a warning will be shown** to the user:
 
-<Story name='Need to be admin' height='290px'>
-  {{
-    components: {AccountPanel},
-    props: {
-      accountsUiUrl: {
-        default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
-      },
-      isOnboardedV4: {
-        default: boolean('isOnboardedV4', false),
-      },
-      onboardingLink: {
-        default: text('onboardingLink', 'https://accounts.prestashop.com?shops='),
-      },
-      shops: {
-        default: array('shops', [{
-          domain: 'myshop.com',
-          employeeId: null,
-          isLinkedV4: false,
-          user: {
-            email: null,
-          },
-          uuid: null,
-        }]),
-      },
-      ssoResendVerificationEmail: {
-        default: text('ssoResendVerificationEmail', 'http://sso.prestashop.com/email'),
-      },
-      superAdminEmail: {
-        default: text('superAdminEmail', 'admin@example.com'),
-      },
+<Story
+  name='Need to be admin'
+  height='175px'
+  args={{
+    accountsUiUrl: 'https://accounts.distribution.prestashop.net/en',
+    isOnboardedV4: false,
+    onboardingLink: 'https://accounts.prestashop.com?shops=',
+    shops: [{
+      domain: 'myshop.com',
+      employeeId: null,
+      isLinkedV4: false,
       user: {
-        default: object('user', {
-          emailIsValidated: true,
-          employeeId: 1,
-          isSuperAdmin: false,
-        }),
+        email: null,
       },
-      backendUser: {
-        default: object('user', {
-          email: 'admin@example.com',
-          isSuperAdmin: true,
-          employeeId: 1,
-        }),
-      },
+      uuid: null,
+    }],
+    shopContext: 4,
+    ssoResendVerificationEmail: 'http://sso.prestashop.com/email',
+    superAdminEmail: 'admin@example.com',
+    user: {
+      email: 'admin@example.com',
+      isSuperAdmin: true,
+      employeeId: 1,
     },
-    template: `
-      <AccountPanel
-        :accounts-ui-url="accountsUiUrl"
-        :is-onboarded-v4="isOnboardedV4"
-        :onboarding-link="onboardingLink"
-        :shops="shops"
-        :sso-resend-verification-email="ssoResendVerificationEmail"
-        :super-admin-email="superAdminEmail"
-        :user="user"
-        :backend-user="backendUser"
-        class="m-4"
-      />`,
-  }}
+    backendUser: {
+      email: 'admin@example.com',
+      isSuperAdmin: false,
+      employeeId: 1,
+    },
+  }}>
+  {Template.bind({})}
 </Story>
 
 
@@ -223,64 +149,37 @@ During the linking process, the user can create a new/unconfirmed PrestaShop acc
 In this case, after this process, **a warning will remain that the user must confirm his email** (clicking on a
 link received in his email box):
 
-<Story name='Email validation needed' height='310px'>
-  {{
-    components: {AccountPanel},
-    props: {
-      accountsUiUrl: {
-        default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
-      },
-      isOnboardedV4: {
-        default: boolean('isOnboardedV4', false),
-      },
-      onboardingLink: {
-        default: text('onboardingLink', 'https://accounts.prestashop.com?shops='),
-      },
-      shops: {
-        default: array('shops', [{
-          domain: 'myshop.com',
-          employeeId: '1',
-          isLinkedV4: false,
-          user: {
-            email: 'user@example.com',
-          },
-          uuid: 'abcde-fghij',
-        }]),
-      },
-      ssoResendVerificationEmail: {
-        default: text('ssoResendVerificationEmail', 'http://sso.prestashop.com/email'),
-      },
-      superAdminEmail: {
-        default: text('superAdminEmail', 'admin@example.com'),
-      },
+<Story
+  name='Email validation needed'
+  height='175px'
+  args={{
+    accountsUiUrl: 'https://accounts.distribution.prestashop.net/en',
+    isOnboardedV4: false,
+    onboardingLink: 'https://accounts.prestashop.com?shops=',
+    shops: [{
+      domain: 'myshop.com',
+      employeeId: 1,
+      isLinkedV4: false,
       user: {
-        default: object('user', {
-          emailIsValidated: false,
-          employeeId: 1,
-          isSuperAdmin: true,
-        }),
+        email: 'user@example.com',
       },
-      backendUser: {
-        default: object('user', {
-          email: 'admin@example.com',
-          isSuperAdmin: true,
-          employeeId: 1,
-        }),
-      },
+      uuid: 'abcde-fghij',
+    }],
+    shopContext: 4,
+    ssoResendVerificationEmail: 'http://sso.prestashop.com/email',
+    superAdminEmail: 'admin@example.com',
+    user: {
+      emailIsValidated: false,
+      employeeId: 1,
+      isSuperAdmin: true,
     },
-    template: `
-      <AccountPanel
-        :accounts-ui-url="accountsUiUrl"
-        :is-onboarded-v4="isOnboardedV4"
-        :onboarding-link="onboardingLink"
-        :shops="shops"
-        :sso-resend-verification-email="ssoResendVerificationEmail"
-        :super-admin-email="superAdminEmail"
-        :user="user"
-        :backend-user="backendUser"
-        class="m-4"
-      />`,
-  }}
+    backendUser: {
+      email: 'admin@example.com',
+      isSuperAdmin: true,
+      employeeId: 1,
+    },
+  }}>
+  {Template.bind({})}
 </Story>
 
 
@@ -288,68 +187,47 @@ link received in his email box):
 
 If you need to integrate a slot inside the card, below the merchant account section:
 
-<Story name='Case with a slot' height='230px'>
-  {{
-    components: {AccountPanel},
-    props: {
-      accountsUiUrl: {
-        default: text('accountsUiUrl', 'https://accounts.distribution.prestashop.net/en'),
-      },
-      isOnboardedV4: {
-        default: boolean('isOnboardedV4', false),
-      },
-      onboardingLink: {
-        default: text('onboardingLink', 'https://accounts.prestashop.com?shops='),
-      },
-      shops: {
-        default: array('shops', [{
-          domain: 'myshop.com',
-          employeeId: '1',
-          isLinkedV4: false,
-          user: {
-            email: 'user@example.com',
-            emailIsValidated: true,
-          },
-          uuid: 'abcde-fghij',
-        }]),
-      },
-      ssoResendVerificationEmail: {
-        default: text('ssoResendVerificationEmail', 'http://sso.prestashop.com/email'),
-      },
-      superAdminEmail: {
-        default: text('superAdminEmail', 'admin@example.com'),
-      },
+export const SlotTemplate = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { AccountPanel },
+  template: `
+    <AccountPanel v-bind="$props" class="m-4">
+      <div style="padding: 0.5rem; background: gray; color: #fff;">Put here a slot</div>
+    </AccountPanel>`,
+})
+
+<Story
+  name='Case with a slot'
+  height='175px'
+  args={{
+    accountsUiUrl: 'https://accounts.distribution.prestashop.net/en',
+    isOnboardedV4: false,
+    onboardingLink: 'https://accounts.prestashop.com?shops=',
+    shops: [{
+      domain: 'myshop.com',
+      employeeId: 1,
+      isLinkedV4: false,
       user: {
-        default: object('user', {
-          emailIsValidated: true,
-          employeeId: 1,
-          isSuperAdmin: true,
-        }),
+        email: 'user@example.com',
+        emailIsValidated: true,
       },
-      backendUser: {
-        default: object('user', {
-          email: 'admin@example.com',
-          isSuperAdmin: true,
-          employeeId: 1,
-        }),
-      },
+      uuid: 'abcde-fghij',
+    }],
+    shopContext: 4,
+    ssoResendVerificationEmail: 'http://sso.prestashop.com/email',
+    superAdminEmail: 'admin@example.com',
+    user: {
+      emailIsValidated: true,
+      employeeId: 1,
+      isSuperAdmin: true,
     },
-    template: `
-      <AccountPanel
-        :accounts-ui-url="accountsUiUrl"
-        :is-onboarded-v4="isOnboardedV4"
-        :onboarding-link="onboardingLink"
-        :shops="shops"
-        :sso-resend-verification-email="ssoResendVerificationEmail"
-        :super-admin-email="superAdminEmail"
-        :user="user"
-        :backend-user="backendUser"
-        class="m-4"
-      >
-        <div style="background:gray;margin-top:1.2rem;padding:0.5rem;">Put here a slot</div>
-      </AccountPanel>
-    `,
-  }}
+    backendUser: {
+      email: 'admin@example.com',
+      isSuperAdmin: true,
+      employeeId: 1,
+    },
+  }}>
+  {SlotTemplate.bind({})}
 </Story>
 
 You still need to manage the spacing of your slot with CSS.

@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+coverage
 
 # storybook build
 storybook-static/
@@ -28,9 +29,9 @@ yarn-error.log*
 
 
 #Terraform
-cloud/.terraform*
-cloud/gcp-token.json
+.cloud/.terraform*
+.cloud/gcp-token.json
 gcp-token.json
-cloud/.terraform.lock.hcl
-cloud/.terraform/environment
+.cloud/.terraform.lock.hcl
+.cloud/.terraform/environment
 .terraform
