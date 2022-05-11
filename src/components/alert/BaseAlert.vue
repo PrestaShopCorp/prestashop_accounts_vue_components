@@ -19,7 +19,7 @@
         'acc-text-info-500': variant === 'info',
       }" />
       <div class="acc-mx-4">
-        <h1 v-if="title" class="acc-text-base acc-font-semibold acc-font-primary acc-mb-1">{{ title }}</h1>
+        <h3 v-if="title" class="acc-text-base acc-font-semibold acc-font-primary acc-mb-1">{{ title }}</h3>
         <div class="acc-flex-1 acc-font-secondary acc-text-sm">
           <!-- @slot Alert description -->
           <slot />
