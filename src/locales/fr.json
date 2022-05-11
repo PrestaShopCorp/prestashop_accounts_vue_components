@@ -1,0 +1,67 @@
+{
+    "psaccounts": {
+        "accountManager": {
+            "errorInstallEnable": "Une erreur est survenue, merci de réessayer."
+        },
+        "alert": {
+            "ps_accounts": {
+                "enable": {
+                    "title": "Activate the PrestaShop Account module",
+                    "message": "You need the PrestaShop account module to continue setting up this module.",
+                    "action": "Activate",
+                    "loading": "The PrestaShop Account module is currently being activated..."
+                },
+                "install": {
+                    "title": "Install the PrestaShop Account module",
+                    "message": "You need the PrestaShop account module to continue setting up this module.",
+                    "action": "Install",
+                    "loading": "The PrestaShop Account module is currently being installed..."
+                },
+                "update": {
+                    "title": "Update PrestaShop Accounts module",
+                    "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
+                    "action": "Update",
+                    "loading": "The PrestaShop Account module is currently being updated..."
+                }
+            },
+            "ps_eventbus": {
+                "enable": {
+                    "title": "Activate the PrestaShop Event Bus module",
+                    "message": "You need the PrestaShop Event Bus module to continue setting up this module.",
+                    "action": "Activate",
+                    "loading": "The PrestaShop Event Bus module is currently being activated..."
+                },
+                "install": {
+                    "title": "Install the Prestashop Event Bus module",
+                    "message": "You need the Prestashop Event Bus module to continue setting up this module.",
+                    "action": "Install",
+                    "loading": "The Prestashop Event Bus module is currently being installed..."
+                }
+            }
+        },
+        "alertShopDomainShouldExists": {
+            "title": "L'URL de la boutique n'est pas renseignée !",
+            "message": "Seule la boutique avec une URL assignée peut être associée à un compte PrestaShop.<br />Les boutiques suivantes n'ont pas d'URL assignée : "
+        },
+        "account": {
+            "title": "Associer votre boutique à un compte PrestaShop | Associer vos boutiques à un compte PrestaShop",
+            "authorize": "Vous ne pouvez associer votre boutique qu'à un seul compte. Choisissez le bien !",
+            "authorized": "Votre boutique est associée au compte PrestaShop : | Votre boutique est associée au compte PrestaShop :",
+            "authorizedPartially": "Vos boutiques sont partiellement associées à un compte PrestaShop",
+            "authorizedSeveral": "Vos boutiques sont associées à plusieurs comptes PrestaShop",
+            "connectButton": "Associer",
+            "reonboardButton": "Réassocier",
+            "disconnectButton": "Utiliser un autre compte",
+            "moduleUpdateInformation": "<strong>Nouvelle mise à jour :</strong> vous pouvez gérer vos boutiques associées.<br /> Merci de vous réassocier en utilisant <strong>la même adresse mail</strong> pour profiter de cette mise à jour.<br /> D'autres mises à jour de modules peuvent être disponibles dans Gestionnaire de modules onglet Mises à jour.",
+            "emailNotVerified": {
+                "title": "A confirmation email has been sent.",
+                "description": "Check your inbox and click on the link to activate your account."
+            },
+            "sendEmail": "Renvoyer",
+            "needToBeAdmin": "Pour continuer, vous devez être administrateur de la boutique",
+            "pleaseContact": "Merci de contacter",
+            "manageAccountButton": "Voir mes boutiques associées",
+            "unlinkButton": "Dissocier"
+        }
+    }
+}
