@@ -1,0 +1,67 @@
+{
+    "psaccounts": {
+        "accountManager": {
+            "errorInstallEnable": "Ha ocurrido un error. Inténtalo de nuevo."
+        },
+        "alert": {
+            "ps_accounts": {
+                "enable": {
+                    "title": "Activate the PrestaShop Account module",
+                    "message": "You need the PrestaShop account module to continue setting up this module.",
+                    "action": "Activate",
+                    "loading": "The PrestaShop Account module is currently being activated..."
+                },
+                "install": {
+                    "title": "Install the PrestaShop Account module",
+                    "message": "You need the PrestaShop account module to continue setting up this module.",
+                    "action": "Install",
+                    "loading": "The PrestaShop Account module is currently being installed..."
+                },
+                "update": {
+                    "title": "Update PrestaShop Accounts module",
+                    "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
+                    "action": "Update",
+                    "loading": "The PrestaShop Account module is currently being updated..."
+                }
+            },
+            "ps_eventbus": {
+                "enable": {
+                    "title": "Activate the PrestaShop Event Bus module",
+                    "message": "You need the PrestaShop Event Bus module to continue setting up this module.",
+                    "action": "Activate",
+                    "loading": "The PrestaShop Event Bus module is currently being activated..."
+                },
+                "install": {
+                    "title": "Install the Prestashop Event Bus module",
+                    "message": "You need the Prestashop Event Bus module to continue setting up this module.",
+                    "action": "Install",
+                    "loading": "The Prestashop Event Bus module is currently being installed..."
+                }
+            }
+        },
+        "alertShopDomainShouldExists": {
+            "title": "URL de la tienda no rellenada",
+            "message": "Sólo la tienda con una URL asignada puede ser asociada a una cuenta de PrestaShop.<br />Las siguientes tiendas no tienen una URL asignada: "
+        },
+        "account": {
+            "title": "Asociar su tienda a una cuenta PrestaShop | Asociar sus tiendas a una cuenta PrestaShop",
+            "authorize": "Solo puedes vincular tu tienda a una cuenta. ¡Elígela bien!",
+            "authorized": "Su tienda está asociada a la cuenta de PrestaShop: | Su tienda está asociada a la cuenta de PrestaShop:",
+            "authorizedPartially": "Sus tiendas están parcialmente asociadas a una cuenta PrestaShop",
+            "authorizedSeveral": "Sus tiendas están asociadas a varias cuentas de PrestaShop",
+            "connectButton": "Vincular",
+            "reonboardButton": "Vincular de nuevo",
+            "disconnectButton": "Usar otra cuenta",
+            "moduleUpdateInformation": "<strong>Nueva actualización:</strong> puedes gestionar tus tiendas asociadas.<br /> Por favor, vuelve a asociarte utilizando <strong>la misma dirección de correo electrónico para beneficiar de esta actualización</strong> para beneficiarse de esta actualización.<br /> Otras actualizaciones del módulo pueden estar disponibles en la pestaña Actualizaciones del gestor de módulos.",
+            "emailNotVerified": {
+                "title": "A confirmation email has been sent.",
+                "description": "Check your inbox and click on the link to activate your account."
+            },
+            "sendEmail": "Enviar de nuevo",
+            "needToBeAdmin": "Para continuar, debes ser un administrador de la tienda",
+            "pleaseContact": "Ponte en contacto con",
+            "manageAccountButton": "Ver mis tiendas vinculadas",
+            "unlinkButton": "Desvincular esta tienda"
+        }
+    }
+}
