@@ -6,36 +6,36 @@
         "alert": {
             "ps_accounts": {
                 "enable": {
-                    "title": "Activate the PrestaShop Account module",
-                    "message": "You need the PrestaShop account module to continue setting up this module.",
-                    "action": "Activate",
-                    "loading": "The PrestaShop Account module is currently being activated..."
+                    "title": "Aktywuj moduł PrestaShop Account",
+                    "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
+                    "action": "Aktywuj",
+                    "loading": "Aktywacja modułu PrestaShop Account w toku..."
                 },
                 "install": {
-                    "title": "Install the PrestaShop Account module",
-                    "message": "You need the PrestaShop account module to continue setting up this module.",
-                    "action": "Install",
-                    "loading": "The PrestaShop Account module is currently being installed..."
+                    "title": "Zainstaluj moduł PrestaShop Account",
+                    "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
+                    "action": "Zainstaluj",
+                    "loading": "Aktywacja modułu PrestaShop Account w toku..."
                 },
                 "update": {
-                    "title": "Update PrestaShop Accounts module",
-                    "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
-                    "action": "Update",
-                    "loading": "The PrestaShop Account module is currently being updated..."
+                    "title": "Zaktualizuj moduł Konta PrestaShop",
+                    "message": "Dostępna jest nowa wersja Kont PrestaShop, zaktualizuj moduł, aby móc dalej korzystać z usług",
+                    "action": "Aktualizacja",
+                    "loading": "Moduł PrestaShop Account jest obecnie aktualizowany..."
                 }
             },
             "ps_eventbus": {
                 "enable": {
-                    "title": "Activate the PrestaShop Event Bus module",
-                    "message": "You need the PrestaShop Event Bus module to continue setting up this module.",
-                    "action": "Activate",
-                    "loading": "The PrestaShop Event Bus module is currently being activated..."
+                    "title": "Aktywuj moduł PrestaShop Event Bus",
+                    "message": "Potrzebujesz modułu PrestaShop Event Bus, aby kontynuować konfigurację tego modułu.",
+                    "action": "Aktywuj",
+                    "loading": "Moduł PrestaShop Event Bus jest obecnie aktywowany..."
                 },
                 "install": {
-                    "title": "Install the Prestashop Event Bus module",
-                    "message": "You need the Prestashop Event Bus module to continue setting up this module.",
-                    "action": "Install",
-                    "loading": "The Prestashop Event Bus module is currently being installed..."
+                    "title": "Zainstaluj moduł Prestashop Event Bus",
+                    "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
+                    "action": "Zainstaluj",
+                    "loading": "Aktywacja modułu Prestashop Event Bus w toku..."
                 }
             }
         },
@@ -54,8 +54,8 @@
             "disconnectButton": "Użyj innego konta",
             "moduleUpdateInformation": "<strong>Nowa aktualizacja:</strong> możesz zarządzać swoimi powiązanymi sklepami.<br /> Prosimy o ponowne dołączenie przy użyciu <strong>tego samego adresu e-mail</strong> ,aby skorzystać z tej aktualizacji.<br /> Inne aktualizacje modułu mogą być dostępne w Managerze modułów, w zakładce Aktualizacje.",
             "emailNotVerified": {
-                "title": "A confirmation email has been sent.",
-                "description": "Check your inbox and click on the link to activate your account."
+                "title": "Została wysłana wiadomość e-mail z potwierdzeniem.",
+                "description": "Sprawdź swoją skrzynkę odbiorczą i kliknij link, aby aktywować konto."
             },
             "sendEmail": "Wróć",
             "needToBeAdmin": "Aby kontynuować, musisz być administratorem sklepu.",
