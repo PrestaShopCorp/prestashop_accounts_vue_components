@@ -1,40 +1,38 @@
 <template>
-  <div>
-    <b-alert
-      :show="hasError"
-      @dismissed="hasError = false"
+  <div id="psaccounts">
+    <BaseAlert
       variant="danger"
+      :show="hasError"
       dismissible
+      @dismissed="hasError = false"
     >
-      <p>
+      <p class="acc-text-sm acc-leading-6">
         {{ $t('psaccounts.accountManager.errorInstallEnable') }}
       </p>
-    </b-alert>
+    </BaseAlert>
 
-    <b-alert
+    <BaseAlert
       v-if="validContext.errors && validContext.errors.length"
+      :class="{'acc-mt-4': hasError}"
       variant="danger"
-      show
     >
-      <p>
+      <p class="acc-text-sm acc-leading-6">
         &lt;PsAccounts&gt; integration: Given context is invalid:
         {{ validContext.errors.join(';') }}
       </p>
-    </b-alert>
-
+    </BaseAlert>
     <template v-else>
       <PsAccountComponentAlertDisplay
+        class="acc-mb-4"
         @hasError="hasError = true"
       />
-
       <template v-if="!hasBlockingAlert">
         <AccountPanel
-          class="mb-2"
           :accounts-ui-url="validContext.accountsUiUrl"
           :backend-user="validContext.backendUser"
           :onboarding-link="validContext.onboardingLink"
           :shops="shops"
-          :shop-context="validContext.currentContext.type"
+          :shop-context="validContext.currentContext ? validContext.currentContext.type : 4"
           :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
           :super-admin-email="validContext.superAdminEmail"
         >
@@ -43,31 +41,32 @@
             name="account-footer"
           />
         </AccountPanel>
-        <b-overlay
-          :show="!hasAllShopsLinked"
-          variant="white"
-          spinner-type="null"
-          :opacity="0.70"
-          blur="0px"
-        >
+        <BaseOverlay
+          class="acc-mt-4"
+          :show="!hasAllShopsLinked">
           <slot />
           <slot name="body" />
-        </b-overlay>
-        <slot name="customBody" />
+        </BaseOverlay>
+        <div class="acc-mt-4">
+          <slot name="customBody" />
+        </div>
       </template>
     </template>
   </div>
 </template>
 
-<script>
-import {BAlert, BOverlay} from 'bootstrap-vue';
-import validContext, {
-  setContext, shopsInContext,
-} from '@/lib/context';
-import i18n from '@/locale';
-import PsAccountComponentAlertDisplay from '@/components/alert/PsAccountComponentAlertDisplay';
-import AccountPanel from '@/components/panel/AccountPanel';
+<script lang="ts">
+import {
+  computed, defineComponent, onMounted, PropType, ref,
+} from 'vue-demi';
+import {Context} from '@/types/context';
+import AccountPanel from '@/components/panel/AccountPanel.vue';
+import BaseAlert from '@/components/alert/BaseAlert.vue';
+import BaseOverlay from '@/components/BaseOverlay.vue';
+import PsAccountComponentAlertDisplay from '@/containers/PsAccountComponentAlertDisplay.vue';
+import usePSAccountsContext from '@/composables/usePSAccountsContext';
 import useSegmentTracking from '@/composables/useSegmentTracking';
+import '@/assets/css/index.css';
 
 /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
@@ -75,14 +74,13 @@ import useSegmentTracking from '@/composables/useSegmentTracking';
    * that will be disabled if the user account is not well linked (you should put your
    * module configuration panel here)
    */
-export default {
+export default defineComponent({
   name: 'PsAccounts',
-  i18n,
   components: {
-    PsAccountComponentAlertDisplay,
     AccountPanel,
-    BOverlay,
-    BAlert,
+    BaseAlert,
+    BaseOverlay,
+    PsAccountComponentAlertDisplay,
   },
   props: {
     /**
@@ -92,52 +90,44 @@ export default {
          * var window.contextPsAccounts automatically.
          */
     context: {
-      type: Object,
+      type: Object as PropType<Context>,
       required: false,
       default: () => window.contextPsAccounts || {},
     },
   },
-  data() {
-    return {
-      hasError: false,
-    };
-  },
-  setup() {
+  setup(props) {
+    const {
+      context,
+      setContext,
+      shopsInContext,
+    } = usePSAccountsContext();
     const {identify, trackAccountComponentViewed} = useSegmentTracking();
+    const hasError = ref(false);
+
+    const hasAllShopsLinked = computed(() => shopsWithUrl.value.every((shop) => shop.uuid));
+
+    const hasBlockingAlert = computed(() => !context.value.psAccountsIsInstalled
+          || !context.value.psAccountsIsUptodate
+          || !context.value.psAccountsIsEnabled);
+
+    const shopsWithUrl = computed(() => shopsInContext.value?.filter((shop) => shop.domain) || []);
+
+    onMounted(() => {
+      setContext(props.context);
+
+      if (context.value.psAccountsIsInstalled && context.value.psAccountsIsEnabled) {
+        identify();
+        trackAccountComponentViewed();
+      }
+    });
 
     return {
-      identify,
-      trackAccountComponentViewed,
+      validContext: context,
+      hasAllShopsLinked,
+      hasBlockingAlert,
+      hasError,
+      shops: shopsInContext,
     };
   },
-  computed: {
-    validContext,
-    shops: shopsInContext,
-    hasAllShopsLinked() {
-      return this.shopsWithUrl.every((shop) => shop.uuid);
-    },
-    hasBlockingAlert() {
-      return !this.validContext.psAccountsIsInstalled
-            || !this.validContext.psAccountsIsUptodate
-            || !this.validContext.psAccountsIsEnabled;
-    },
-    shopsWithUrl() {
-      return this.shops.filter((shop) => shop.domain);
-    },
-  },
-  created() {
-    setContext(this.context);
-
-    if (this.validContext.psAccountsIsInstalled && this.validContext.psAccountsIsEnabled) {
-      this.identify();
-      this.trackAccountComponentViewed();
-    }
-  },
-};
+});
 </script>
-
-<style lang="scss" scoped>
-::v-deep {
-  @import '~prestakit/scss/application';
-}
-</style>

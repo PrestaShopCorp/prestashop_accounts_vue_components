@@ -1,4 +1,4 @@
-# prestashop_accounts_vue_components
+# Prestashop Accounts Vue Components
 
 ## Community Service & PrestaShop X modules
 
@@ -20,35 +20,32 @@ To work as a Community Service or as PrestaShop X, a module needs three parts:
 ## Installation
 
 ```bash
-yarn
+yarn install
 ```
 
 ## Usage
 
-For view storybook run
+### Storybook
+
+#### Local
 
 ```bash
-yarn start-storybook
+yarn storybook
 ```
 
-and go on [local storybook](http://localhost:33199/?path=/docs/introduction--page)
-or use online [integration storybook](https://storybook-accounts.distribution.prestashop.net/?path=/docs/introduction--page)
+#### Integration / Production
 
-## Storybooks
+[Storybook integration](https://storybook-accounts.distribution-integration.prestashop.net/) (triggered on PR labeled 'quality assurance needed')
 
-Storybook integration (trigger on PR labeled 'quality assurance needed'): 
+[Storybook production](https://storybook-accounts.distribution.prestashop.net/) (triggered on push master/main)
 
-https://storybook-accounts.distribution-integration.prestashop.net/
+### CDN
 
-Storybook production (trigger on push master/main) : 
-
-https://storybook-accounts.distribution.prestashop.net/
-
-## CDN
+To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page.
 
 To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page. 
 
-```
+```html
 # To load version 4.0.0
 <script src="https://unpkg.com/prestashop_accounts_vue_components@4.0.0"></script>
 
@@ -62,7 +59,7 @@ To load a hosted library, copy and paste the HTML snippet for that library (show
 To use the prestashop_accounts_vue_components, you need a prestashop-accounts html tag, when it's in the page
 you can then call the init function of psaccountsVue
 
-```
+```html
 <prestashop-accounts></prestashop-accounts>
 
 <script>
@@ -72,7 +69,7 @@ you can then call the init function of psaccountsVue
 
 If you need to use the vue cdn for your app, please create your app with the vue esm-browser as follow
 
-```
+```html
 <div id="app"></div>
 
 <script src="https://unpkg.com/prestashop_accounts_vue_components@4.0.0"></script>

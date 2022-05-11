@@ -1,10 +1,91 @@
 import { Meta, Story, Preview, Props, Description } from '@storybook/addon-docs';
-import { withKnobs, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import PsAccounts from './PsAccounts';
+import PsAccounts from './PsAccounts.vue';
 
-<Meta title="Integration/PsAccounts panel" component={PsAccounts} decorators={[withKnobs]} />
+<Meta
+  title="Integration/PsAccounts panel"
+  component={PsAccounts}
+  parameters={{
+    disableScopedCssDecorator: true,
+  }} />
+
+export const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { PsAccounts },
+  methods: {
+    actionEvent: action('actioned'),
+    viewEvent: action('viewed'),
+  },
+  template: `
+    <PsAccounts v-bind="$props" @actioned="actionEvent" @viewed="viewEvent" class="m-4">
+      <template v-slot:body>{{slotContent}}</template>
+    </PsAccounts>
+  `,
+})
+
+export const props = {
+  context: {
+    accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
+    adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
+    psIs17: true,
+    psAccountsInstallLink: null,
+    psAccountsEnableLink: null,
+    psAccountsIsInstalled: true,
+    psAccountsIsEnabled: true,
+    psAccountsIsUptodate: true,
+    currentContext: {
+      id: '1',
+      type: '1',
+    },
+    currentShop: {
+      id: '1',
+      name: 'PrestaShop',
+      url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+      domain: 'my-domain.com',
+      domainSsl: 'my-secure-domain.com',
+    },
+    shops: [
+      {
+        id: '1',
+        name: 'Default',
+        shops: [
+          {
+            id: '1',
+            name: 'PrestaShop',
+            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+            domain: 'my-domain.com',
+            domainSsl: 'my-secure-domain.com',
+            isLinkedV4: false,
+          }
+        ],
+      },
+    ],
+    backendUser: {
+      email: 'email@bo.com',
+      isSuperAdmin: true,
+      employeeId: 1,
+    },
+    user: {
+      email: null,
+      emailIsValidated: false,
+      isSuperAdmin: true,
+    },
+    onboardingLink: 'http://perdu.com',
+    superAdminEmail: 'big.boss@my-shop.com',
+    ssoResendVerificationEmail: 'http://perdu.com',
+    manageAccountLink: 'http://perdu.com',
+    dependencies: {
+        "ps_eventbus": {
+          "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
+          "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
+          "isEnabled": true,
+          "isInstalled": true,
+        },
+    },
+  },
+  slotContent: '- Module settings part, disabled -',
+}
 
 # PsAccounts component purposes
 
@@ -32,282 +113,80 @@ Once integrated, the component can show different cases:
 
 ### The user is not connected yet
 
-<Story name='Not connected' height='200px'>
-  {{
-    components: { PsAccounts },
-    props: {
-      context: {
-        default: object('context', {
-          accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-          adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-          psIs17: true,
-          psAccountsInstallLink: null,
-          psAccountsEnableLink: null,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
-          psAccountsIsUptodate: true,
-          currentContext: {
-            id: 1,
-            type: 1,
-          },
-          currentShop: {
-            id: '1',
-            name: 'PrestaShop',
-            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-            domain: 'my-domain.com',
-            domainSsl: 'my-secure-domain.com',
-          },
-          shops: [
-            {
-              id: '1',
-              name: 'Default',
-              shops: [
-                {
-                  id: '1',
-                  name: 'PrestaShop',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain.com',
-                  domainSsl: 'my-secure-domain.com',
-                  isLinkedV4: false,
-                }
-              ],
-            },
-          ],
-          backendUser: {
-            email: 'email@bo.com',
-            isSuperAdmin: true,
-          },
-          user: {
-            email: null,
-            emailIsValidated: false,
-            isSuperAdmin: true,
-          },
-          onboardingLink: 'http://perdu.com',
-          superAdminEmail: 'big.boss@my-shop.com',
-          ssoResendVerificationEmail: 'http://perdu.com',
-          manageAccountLink: 'http://perdu.com',
-          dependencies: {
-              "ps_eventbus": {
-                "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "isEnabled": true,
-                "isInstalled": true,
-              },
-          },
-        })
-      },
-    },
-    methods: {
-      actionEvent: action('actioned'),
-      viewEvent: action('viewed'),
-    },
-    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
-      '<template v-slot:body>- Module settings part, disabled -</template>' +
-    '</PsAccounts>',
-  }}
+<Story
+  name='Not connected'
+  height='200px'
+  args={{
+      ...props,
+  }}>
+  {Template.bind({})}
 </Story>
 
 _You can see that the settings part given in the `v-slot:body` is disabled (covered
 by a translucent shield to avoid any interaction on it)._
 
 
-### Multi-store configuration
-
-If the shop is in a multi-store context with already associated shops inside his back office, the user will have a selector like this:
-
-<Story name='Multistore selection' height='200px'>
-  {{
-    components: { PsAccounts },
-    props: {
-      context: {
-        default: object('context', {
-          accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-          adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-          psIs17: true,
-          psAccountsInstallLink: null,
-          psAccountsEnableLink: null,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
-          psAccountsIsUptodate: true,
-          currentContext: {
-            id: 1,
-            type: 1,
-          },
-          currentShop: {
-            id: '1',
-            name: 'PrestaShop',
-            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-            domain: 'my-domain.com',
-            domainSsl: 'my-secure-domain.com',
-          },
-          shops: [
-            {
-              id: '1',
-              name: 'Default',
-              shops: [
-                {
-                  id: '1',
-                  name: 'PrestaShop',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain.com',
-                  domainSsl: 'my-secure-domain.com',
-                  employeeId: '1',
-                  user: {
-                    email: 'merchant@my-shop.com',
-                    emailIsValidated: true,
-                    isSuperAdmin: true,
-                  },
-                },
-                {
-                  id: '2',
-                  name: 'PrestaShop 2',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain2.com',
-                  domainSsl: 'my-secure-domain2.com',
-                  employeeId: '1',
-                  user: {
-                    email: 'merchant@my-shop.com',
-                    emailIsValidated: true,
-                    isSuperAdmin: true,
-                  },
-                }
-              ],
-            },
-          ],
-          backendUser: {
-            email: 'email@bo.com',
-            isSuperAdmin: true,
-            employeeId: '1',
-          },
-          user: {
-            email: null,
-            emailIsValidated: false,
-            isSuperAdmin: true,
-          },
-          onboardingLink: 'http://perdu.com',
-          superAdminEmail: 'big.boss@my-shop.com',
-          ssoResendVerificationEmail: 'http://perdu.com',
-          manageAccountLink: 'http://perdu.com',
-          dependencies: {
-            "ps_eventbus": {
-                "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "isEnabled": true,
-                "isInstalled": true,
-            },
-          },
-        })
-      },
-    },
-    methods: {
-      actionEvent: action('actioned'),
-      viewEvent: action('viewed'),
-    },
-    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
-      '<template v-slot:body>- Module settings part, disabled -</template>' +
-    '</PsAccounts>',
-  }}
-</Story>
-
-
 ### The user is connected, but his email is not yet validated
 
-<Story name='Email validation needed' height='340px'>
-  {{
-    components: { PsAccounts },
-    props: {
+<Story
+  name='Email validation needed'
+  height='200px'
+  args={{
+      ...props,
       context: {
-        default: object('context', {
-          accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-          adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-          psIs17: true,
-          psAccountsInstallLink: null,
-          psAccountsEnableLink: null,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
-          psAccountsIsUptodate: true,
-          currentContext: {
-            id: 1,
-            type: 1,
-          },
-          currentShop: {
+        ...props.context,
+        shops: [
+          {
             id: '1',
-            name: 'PrestaShop',
-            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-            domain: 'my-domain.com',
-            domainSsl: 'my-secure-domain.com',
-          },
-          shops: [
-            {
-              id: '1',
-              name: 'Default',
-              shops: [
-                {
-                  id: '1',
-                  name: 'PrestaShop',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain.com',
-                  domainSsl: 'my-secure-domain.com',
-                  user: {
-                    email: 'merchant@my-shop.com',
-                    emailIsValidated: false,
-                    isSuperAdmin: true,
-                  },
-                  employeeId: '1',
-                  isLinkedV4: false,
-                  uuid: 'abcde-fghij',
+            name: 'Default',
+            shops: [
+              {
+                id: '1',
+                name: 'PrestaShop',
+                url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+                domain: 'my-domain.com',
+                domainSsl: 'my-secure-domain.com',
+                user: {
+                  email: 'merchant@my-shop.com',
+                  emailIsValidated: false,
+                  isSuperAdmin: true,
                 },
-                {
-                  id: '2',
-                  name: 'shop2',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain2.com',
-                  domainSsl: 'my-secure-domain2.com',
-                  user: {
-                    email: 'merchant@my-shop.com',
-                    emailIsValidated: false,
-                    isSuperAdmin: true,
-                  },
-                  employeeId: '1',
-                  isLinkedV4: false,
-                  uuid: 'abcde-fghij',
+                employeeId: '1',
+                isLinkedV4: false,
+                uuid: 'abcde-fghij',
+              },
+              {
+                id: '2',
+                name: 'shop2',
+                url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
+                domain: 'my-domain2.com',
+                domainSsl: 'my-secure-domain2.com',
+                user: {
+                  email: 'merchant@my-shop.com',
+                  emailIsValidated: false,
+                  isSuperAdmin: true,
                 },
-              ],
-            },
-          ],
-          user: {
-            email: 'merchant@my-shop.com',
-            emailIsValidated: false,
-            isSuperAdmin: true,
+                employeeId: '1',
+                isLinkedV4: false,
+                uuid: 'abcde-fghij',
+              },
+            ],
           },
-          backendUser: {
-            email: 'admin@example.com',
-            isSuperAdmin: true,
-            employeeId: 1,
-          },
-          onboardingLink: 'http://perdu.com',
-          superAdminEmail: 'big.boss@my-shop.com',
-          ssoResendVerificationEmail: 'http://perdu.com',
-          manageAccountLink: 'http://perdu.com',
-          dependencies: {
-            "ps_eventbus": {
-                "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "isEnabled": true,
-                "isInstalled": true,
-            },
-          },
-        })
+        ],
+        backendUser: {
+          email: 'admin@example.com',
+          isSuperAdmin: true,
+          employeeId: 1,
+        },
+        user: {
+          email: 'merchant@my-shop.com',
+          emailIsValidated: false,
+          isSuperAdmin: true,
+        },
       },
-    },
-    methods: {
-      actionEvent: action('actioned'),
-      viewEvent: action('viewed'),
-    },
-    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
-      '<template v-slot:body>- I am connected, but the email is not validated -</template>' +
-    '</PsAccounts>',
-  }}
+      slotContent: '- I am connected, but the email is not validated -',
+    }}>
+  {Template.bind({})}
 </Story>
 
 In this case, the user cannot continue his settings process. He have to validate
@@ -316,102 +195,65 @@ his address from the link received in his mailbox.
 
 ### The user is connected
 
-<Story name='Connected' height='205px'>
-  {{
-    components: { PsAccounts },
-    props: {
+<Story
+  name='Connected'
+  height='200px'
+  args={{
+      ...props,
       context: {
-        default: object('context', {
-          accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-          adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-          psIs17: true,
-          psAccountsInstallLink: null,
-          psAccountsEnableLink: null,
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
-          psAccountsIsUptodate: true,
-          currentContext: {
-            id: 1,
-            type: 1,
-          },
-          currentShop: {
+        ...props.context,
+        shops: [
+          {
             id: '1',
-            name: 'PrestaShop',
-            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-            domain: 'my-domain.com',
-            domainSsl: 'my-secure-domain.com',
-          },
-          shops: [
-            {
-              id: '1',
-              name: 'Default',
-              shops: [
-                {
-                  id: '1',
-                  name: 'PrestaShop',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain.com',
-                  domainSsl: 'my-secure-domain.com',
-                  user: {
-                    email: 'merchant@my-shop.com',
-                    emailIsValidated: true,
-                    isSuperAdmin: true,
-                  },
-                  employeeId: '1',
-                  isLinkedV4: false,
-                  uuid: 'abcde-fghij',
+            name: 'Default',
+            shops: [
+              {
+                id: '1',
+                name: 'PrestaShop',
+                url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+                domain: 'my-domain.com',
+                domainSsl: 'my-secure-domain.com',
+                user: {
+                  email: 'merchant@my-shop.com',
+                  emailIsValidated: true,
+                  isSuperAdmin: true,
                 },
-                {
-                  id: '2',
-                  name: 'shop2',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain2.com',
-                  domainSsl: 'my-secure-domain2.com',
-                  user: {
-                    email: 'merchant@my-shop.com',
-                    emailIsValidated: true,
-                    isSuperAdmin: true,
-                  },
-                  employeeId: '1',
-                  isLinkedV4: false,
-                  uuid: 'abcde-fghij',
+                employeeId: '1',
+                isLinkedV4: false,
+                uuid: 'abcde-fghij',
+              },
+              {
+                id: '2',
+                name: 'shop2',
+                url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
+                domain: 'my-domain2.com',
+                domainSsl: 'my-secure-domain2.com',
+                user: {
+                  email: 'merchant@my-shop.com',
+                  emailIsValidated: true,
+                  isSuperAdmin: true,
                 },
-              ],
-            },
-          ],
-          user: {
-            email: 'merchant@my-shop.com',
-            emailIsValidated: true,
-            isSuperAdmin: true,
+                employeeId: '1',
+                isLinkedV4: false,
+                uuid: 'abcde-fghij',
+              },
+            ],
           },
-          backendUser: {
-            email: 'admin@example.com',
-            isSuperAdmin: true,
-            employeeId: 1,
-          },
-          onboardingLink: 'http://perdu.com',
-          superAdminEmail: 'big.boss@my-shop.com',
-          ssoResendVerificationEmail: 'http://perdu.com',
-          manageAccountLink: 'http://perdu.com',
-          dependencies: {
-            "ps_eventbus": {
-                "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "isEnabled": true,
-                "isInstalled": true,
-            },
-          },
-        })
+        ],
+        user: {
+          email: 'merchant@my-shop.com',
+          emailIsValidated: true,
+          isSuperAdmin: true,
+        },
+        backendUser: {
+          email: 'admin@example.com',
+          isSuperAdmin: true,
+          employeeId: 1,
+        },
       },
-    },
-    methods: {
-      actionEvent: action('actioned'),
-      viewEvent: action('viewed'),
-    },
-    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
-      '<template v-slot:body>- Module configuration slot -</template>' +
-    '</PsAccounts>',
-  }}
+      slotContent: '- Module configuration slot -',
+    }}>
+  {Template.bind({})}
 </Story>
 
 Once the merchant has successfully linked his shop, the module should give
@@ -425,407 +267,157 @@ accessible until the merchant is done with PrestaShop account onboarding.
 
 You can have these different cases when the shop prerequisites are not fully validated:
 
-<Story name='Not installed' height='200px'>
-  {{
-    components: { PsAccounts },
-    props: {
+<Story
+  name='Not installed'
+  height='200px'
+  args={{
+      ...props,
       context: {
-        default: object('context', {
-          accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-          adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-          psIs17: true,
-          psAccountsInstallLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
-          psAccountsEnableLink: null,
-          psAccountsNeedsUpgrade: false,
-          psAccountsIsInstalled: false,
-          psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
-          currentShop: {
+        ...props.context,
+        psAccountsIsInstalled: false,
+        shops: [
+          {
             id: '1',
-            name: 'PrestaShop',
-            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-            domain: 'my-domain.com',
-            domainSsl: 'my-secure-domain.com',
-          },
-          shops: [
-            {
-              id: '1',
-              name: 'Default',
-              shops: [
-                {
-                  id: '1',
-                  name: 'PrestaShop',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain.com',
-                  domainSsl: 'my-secure-domain.com',
-                },
-                {
-                  id: '2',
-                  name: 'shop2',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain2.com',
-                  domainSsl: 'my-secure-domain2.com',
-                },
-              ],
-            },
-          ],
-          user: {
-            email: 'merchant@my-shop.com',
-            emailIsValidated: true,
-            isSuperAdmin: true,
-          },
-          backendUser: {
-            email: 'admin@example.com',
-            isSuperAdmin: true,
-            employeeId: 1,
-          },
-          onboardingLink: 'http://perdu.com',
-          superAdminEmail: 'big.boss@my-shop.com',
-          ssoResendVerificationEmail: 'http://perdu.com',
-          manageAccountLink: 'http://perdu.com',
-          dependencies: {
-            "ps_eventbus": {
-                "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "isEnabled": true,
-                "isInstalled": true,
-            },
-          },
-        })
-      },
-    },
-    methods: {
-      actionEvent: action('actioned'),
-      viewEvent: action('viewed'),
-    },
-    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
-      '<template v-slot:body>- Module settings part, disabled -</template>' +
-    '</PsAccounts>',
-  }}
-</Story>
-
----
-
-<Story name='Not enabled' height='200px'>
-  {{
-    components: { PsAccounts },
-    props: {
-      context: {
-        default: object('context', {
-          accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-          adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-          psIs17: true,
-          psAccountsInstallLink: null,
-          psAccountsEnableLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/enable/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
-          psAccountsNeedsUpgrade: false,
-          psAccountsIsEnabled: false,
-          psAccountsIsInstalled: true,
-          psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
-          currentShop: {
-            id: '1',
-            name: 'PrestaShop',
-            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-            domain: 'my-domain.com',
-            domainSsl: 'my-secure-domain.com',
-          },
-          shops: [
-            {
-              id: '1',
-              name: 'Default',
-              shops: [
-                {
-                  id: '1',
-                  name: 'PrestaShop',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain.com',
-                  domainSsl: 'my-secure-domain.com',
-                },
-                {
-                  id: '2',
-                  name: 'shop2',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain2.com',
-                  domainSsl: 'my-secure-domain2.com',
-                },
-              ],
-            },
-          ],
-          user: {
-            email: 'merchant@my-shop.com',
-            emailIsValidated: true,
-            isSuperAdmin: true,
-          },
-          backendUser: {
-            email: 'admin@example.com',
-            isSuperAdmin: true,
-            employeeId: 1,
-          },
-          onboardingLink: 'http://perdu.com',
-          superAdminEmail: 'big.boss@my-shop.com',
-          ssoResendVerificationEmail: 'http://perdu.com',
-          manageAccountLink: 'http://perdu.com',
-          dependencies: {
-            "ps_eventbus": {
-            "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-            "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-            "isEnabled": true,
-            "isInstalled": true,
-            },
-          },
-        })
-      },
-    },
-    methods: {
-      actionEvent: action('actioned'),
-      viewEvent: action('viewed'),
-    },
-    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
-      '<template v-slot:body>- Module settings part, disabled -</template>' +
-    '</PsAccounts>',
-  }}
-</Story>
-
----
-
-<Story name='Ps event bus not installed' height='510px'>
-  {{
-    components: { PsAccounts },
-        props: {
-          context: {
-            default: object('context', {
-              accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-              adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-              psIs17: true,
-              psAccountsInstallLink: null,
-              psAccountsEnableLink: null,
-              psAccountsNeedsUpgrade: false,
-              psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
-              psAccountsIsInstalled: true,
-              psAccountsIsEnabled: true,
-              psAccountsIsUptodate: true,
-              currentContext: {
-                id: 1,
-                type: 1,
-              },
-              currentShop: {
+            name: 'Default',
+            shops: [
+              {
                 id: '1',
                 name: 'PrestaShop',
                 url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                 domain: 'my-domain.com',
                 domainSsl: 'my-secure-domain.com',
               },
-              shops: [
-                {
-                  id: '1',
-                  name: 'Default',
-                  shops: [
-                    {
-                      id: '1',
-                      name: 'PrestaShop',
-                      url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                      domain: 'my-domain.com',
-                      domainSsl: 'my-secure-domain.com',
-                    }
-                  ],
-                },
-              ],
-              user: {
-                email: null,
-                emailIsValidated: false,
-                isSuperAdmin: true,
+              {
+                id: '2',
+                name: 'shop2',
+                url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
+                domain: 'my-domain2.com',
+                domainSsl: 'my-secure-domain2.com',
               },
-              backendUser: {
-                email: 'admin@example.com',
-                isSuperAdmin: true,
-                employeeId: 1,
-              },
-              onboardingLink: 'http://perdu.com',
-              superAdminEmail: 'big.boss@my-shop.com',
-              ssoResendVerificationEmail: 'http://perdu.com',
-              manageAccountLink: 'http://perdu.com',
-              dependencies: {
-                  "ps_eventbus": {
-                    "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                    "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                    "isEnabled": false,
-                    "isInstalled": false,
-                  },
-              },
-            })
+            ],
           },
+        ],
+        user: {
+          email: 'merchant@my-shop.com',
+          emailIsValidated: true,
+          isSuperAdmin: true,
         },
-        methods: {
-          actionEvent: action('actioned'),
-          viewEvent: action('viewed'),
+        backendUser: {
+          email: 'admin@example.com',
+          isSuperAdmin: true,
+          employeeId: 1,
         },
-        template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
-          '<template v-slot:body>- Module settings part, disabled -</template>' +
-        '</PsAccounts>',
-  }}
+      },
+    }}>
+  {Template.bind({})}
 </Story>
 
 ---
 
-<Story name='Ps Accounts needs an update' height='200px'>
-  {{
-    components: { PsAccounts },
-        props: {
-          context: {
-            default: object('context', {
-              accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-              adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-              psIs17: true,
-              psAccountsInstallLink: null,
-              psAccountsEnableLink: null,
-              psAccountsIsUptodate: false,
-              psAccountsUpdateLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
-              psAccountsIsInstalled: true,
-              psAccountsIsEnabled: true,
-              psAccountsIsUptodate: false,
-              currentContext: {
-              id: 1,
-              type: 1,
-              },
-              currentShop: {
+<Story
+  name='Not enabled'
+  height='200px'
+  args={{
+      ...props,
+      context: {
+        ...props.context,
+        psAccountsIsEnabled: false,
+        shops: [
+          {
+            id: '1',
+            name: 'Default',
+            shops: [
+              {
                 id: '1',
                 name: 'PrestaShop',
                 url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
                 domain: 'my-domain.com',
                 domainSsl: 'my-secure-domain.com',
               },
-              shops: [
-                {
-                  id: '1',
-                  name: 'Default',
-                  shops: [
-                    {
-                      id: '1',
-                      name: 'PrestaShop',
-                      url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                      domain: 'my-domain.com',
-                      domainSsl: 'my-secure-domain.com',
-                    }
-                  ],
-                },
-              ],
-              user: {
-                email: null,
-                emailIsValidated: false,
-                isSuperAdmin: true,
+              {
+                id: '2',
+                name: 'shop2',
+                url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
+                domain: 'my-domain2.com',
+                domainSsl: 'my-secure-domain2.com',
               },
-              backendUser: {
-                email: 'admin@example.com',
-                isSuperAdmin: true,
-                employeeId: 1,
-              },
-              onboardingLink: 'http://perdu.com',
-              superAdminEmail: 'big.boss@my-shop.com',
-              ssoResendVerificationEmail: 'http://perdu.com',
-              manageAccountLink: 'http://perdu.com',
-              dependencies: {
-                  "ps_eventbus": {
-                    "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                    "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                    "isEnabled": true,
-                    "isInstalled": true,
-                  },
-              },
-            })
+            ],
           },
+        ],
+        user: {
+          email: 'merchant@my-shop.com',
+          emailIsValidated: true,
+          isSuperAdmin: true,
         },
-        methods: {
-          actionEvent: action('actioned'),
-          viewEvent: action('viewed'),
+        backendUser: {
+          email: 'admin@example.com',
+          isSuperAdmin: true,
+          employeeId: 1,
         },
-        template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
-          '<template v-slot:body>- Module settings part, disabled -</template>' +
-        '</PsAccounts>',
-  }}
+      },
+    }}>
+  {Template.bind({})}
 </Story>
 
 ---
 
-<Story name='No admin rights' height='320px'>
-  {{
-    components: { PsAccounts },
-    props: {
+<Story
+  name='Ps event bus not installed'
+  height='200px'
+  args={{
+      ...props,
       context: {
-        default: object('context', {
-          accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-          adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-          psIs17: true,
-          psAccountsInstallLink: null,
-          psAccountsEnableLink: null,
-          psAccountsNeedsUpgrade: false,
-          psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
-          psAccountsIsUptodate: true,
-          currentContext: {
-            id: 1,
-            type: 1,
+        ...props.context,
+        dependencies: {
+          ...(props.context ? props.context.dependencies : {}),
+          ps_eventbus: {
+            ...(props.context ? props.context.dependencies.ps_eventbus : {}),
+            isEnabled: false,
+            isInstalled: false,
           },
-          currentShop: {
-            id: '1',
-            name: 'PrestaShop',
-            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-            domain: 'my-domain.com',
-            domainSsl: 'my-secure-domain.com',
-          },
-          shops: [
-            {
-              id: '1',
-              name: 'Default',
-              shops: [
-                {
-                  id: '1',
-                  name: 'PrestaShop',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain.com',
-                  domainSsl: 'my-secure-domain.com',
-                },
-                {
-                  id: '2',
-                  name: 'shop2',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-2&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain2.com',
-                  domainSsl: 'my-secure-domain2.com',
-                },
-              ],
-            },
-          ],
-          user: {
-            email: null,
-            emailIsValidated: false,
-            isSuperAdmin: false,
-          },
-          backendUser: {
-            email: 'admin@example.com',
-            isSuperAdmin: false,
-            employeeId: 1,
-          },
-          onboardingLink: 'http://perdu.com',
-          superAdminEmail: 'big.boss@my-shop.com',
-          ssoResendVerificationEmail: 'http://perdu.com',
-          manageAccountLink: 'http://perdu.com',
-          dependencies: {
-            "ps_eventbus": {
-                "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "isEnabled": true,
-                "isInstalled": true,
-            },
-          },
-        })
+        },
       },
-    },
-    methods: {
-      actionEvent: action('actioned'),
-      viewEvent: action('viewed'),
-    },
-    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
-      '<template v-slot:body>- Module settings part, disabled -</template>' +
-    '</PsAccounts>',
-  }}
+    }}>
+  {Template.bind({})}
+</Story>
+
+---
+
+<Story
+  name='Ps Accounts needs an update'
+  height='200px'
+  args={{
+      ...props,
+      context: {
+        ...props.context,
+        psAccountsIsUptodate: false,
+      },
+    }}>
+  {Template.bind({})}
+</Story>
+
+---
+
+<Story
+  name='No admin rights'
+  height='200px'
+  args={{
+      ...props,
+      context: {
+        ...props.context,
+        user: {
+          email: null,
+          emailIsValidated: false,
+          isSuperAdmin: false,
+        },
+        backendUser: {
+          email: 'admin@example.com',
+          isSuperAdmin: false,
+          employeeId: 1,
+        },
+      },
+    }}>
+  {Template.bind({})}
 </Story>
 
 ## Context invalidity cases
@@ -833,67 +425,17 @@ You can have these different cases when the shop prerequisites are not fully val
 If the given context is not well formed, a validation error will be shown by the
 component and the standard behavior won't let the user do anything:
 
-<Story name='Invalid context' height='120px'>
-  {{
-    components: { PsAccounts },
-    props: {
+<Story
+  name='Invalid context'
+  height='200px'
+  args={{
+      ...props,
       context: {
-        default: object('context', {
-          accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-          adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-          psIs17: true,
-          psAccountsInstallLink: 'true', // will pass: can be casted to uri by Joi
-          psAccountsEnableLink: 'true', // will pass: can be casted to uri by Joi
-          psAccountsNeedsUpgrade: false,
-          psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
-          currentShop: {
-            id: '1',
-            name: 'PrestaShop',
-            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-            domain: 'my-domain.com',
-            domainSsl: 'my-secure-domain.com',
-          },
-          shops: [
-            {
-              id: '1',
-              name: 'Default',
-              shops: [
-                {
-                  id: '1',
-                  name: 'PrestaShop',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain.com',
-                  domainSsl: 'my-secure-domain.com',
-                }
-              ],
-            },
-          ],
-          backendUser: {
-            employeeId: 2,
-            isSuperAdmin: true,
-          },
-          user: {
-            email: 'this-is-not-a-valid-email',
-            emailIsValidated: 42,
-            isSuperAdmin: 0.07,
-          },
-          onboardingLink: '42*',
-          superAdminEmail: '56',
-          ssoResendVerificationEmail: true,
-          manageAccountLink: 42
-        })
+        ...props.context,
+        manageAccountLink: 42
       },
-    },
-    methods: {
-      actionEvent: action('actioned'),
-      viewEvent: action('viewed'),
-    },
-    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
-      '<template v-slot:body>- I am connected -</template>' +
-      '<template v-slot:account-footer><div style="background:gray;margin-top:1.2rem;padding:0.5rem;">My other component in the footer of the account component</div></template>' +
-      '<template v-slot:customBody>- Custom body, always present -</template>' +
-    '</PsAccounts>',
-  }}
+    }}>
+  {Template.bind({})}
 </Story>
 
 So you have to comply with the context object format or simply use the one
@@ -938,80 +480,50 @@ And in the template part:
 
 If you want to pass something to the component footer like another component you can by using the slot account-footer
 
-<Story name='Using the component footer slot' height='340px'>
-  {{
+export const FooterSlotTemplate = (args, {argTypes}) => ({
+    props: Object.keys(argTypes),
     components: { PsAccounts },
-    props: {
-      context: {
-        default: object('context', {
-          accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-          adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
-          psIs17: true,
-          psAccountsInstallLink: null,
-          psAccountsEnableLink: null,
-          psAccountsNeedsUpgrade: false,
-          psAccountsUpgradeLink: 'http://localhost:8082/admin-dev/index.php/improve/modules/manage/action/install/ps_accounts?_token=dCspOkG6tWwGoJIKdugKufBFtdNF--UPq8NVmyiUKLM',
-          psAccountsIsInstalled: true,
-          psAccountsIsEnabled: true,
-          psAccountsIsUptodate: true,
-          currentContext: {
-            id: 1,
-            type: 1,
-          },
-          currentShop: {
-            id: '1',
-            name: 'PrestaShop',
-            url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-            domain: 'my-domain.com',
-            domainSsl: 'my-secure-domain.com',
-          },
-          shops: [
-            {
-              id: '1',
-              name: 'Default',
-              shops: [
-                {
-                  id: '1',
-                  name: 'PrestaShop',
-                  url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-                  domain: 'my-domain.com',
-                  domainSsl: 'my-secure-domain.com',
-                  uuid: 'abcde-fghij',
-                },
-              ],
-            },
-          ],
-          backendUser: {
-            employeeId: 2,
-            isSuperAdmin: true,
-          },
-          user: {
-            email: 'merchant@my-shop.com',
-            emailIsValidated: true,
-            isSuperAdmin: true,
-          },
-          onboardingLink: 'http://perdu.com',
-          superAdminEmail: 'big.boss@my-shop.com',
-          ssoResendVerificationEmail: 'http://perdu.com',
-          manageAccountLink: 'http://perdu.com',
-          dependencies: {
-            "ps_eventbus": {
-                "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "installLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/install/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
-                "isEnabled": true,
-                "isInstalled": true,
-            },
-          },
-        })
-      },
-    },
     methods: {
       actionEvent: action('actioned'),
       viewEvent: action('viewed'),
     },
-    template: '<PsAccounts :context="context" class="m-4" @actioned="actionEvent" @viewed="viewEvent">' +
+    template: '<PsAccounts :context="context" @actioned="actionEvent" @viewed="viewEvent" class="m-4">' +
       '<template v-slot:body>- Module configuration slot -</template>' +
-      '<template v-slot:account-footer><div style="background:gray;margin-top:1.2rem;padding:0.5rem;">My other component in the footer of the account component</div></template>'+
+      '<template v-slot:account-footer><div style="padding:0.5rem; background: gray; color: #fff;">My other component in the footer of the account component</div></template>'+
     '</PsAccounts>',
+  })
+
+<Story
+  name='Using the component footer slot'
+  args={{
+    ...props,
+    context: {
+      ...props.context,
+      shops: [
+        {
+          id: '1',
+          name: 'Default',
+          shops: [
+            {
+              id: '1',
+              name: 'PrestaShop',
+              url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
+              domain: 'my-domain.com',
+              domainSsl: 'my-secure-domain.com',
+              user: {
+                email: 'merchant@my-shop.com',
+                emailIsValidated: true,
+                isSuperAdmin: true,
+              },
+              employeeId: '1',
+              isLinkedV4: false,
+              uuid: 'abcde-fghij',
+            },
+          ],
+        },
+      ],
+    }
   }}
+  height='200px'>
+  {FooterSlotTemplate.bind({})}
 </Story>

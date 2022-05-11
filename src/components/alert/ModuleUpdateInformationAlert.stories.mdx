@@ -1,0 +1,30 @@
+import { Canvas, Description, Meta, Story, Preview } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+
+import ModuleUpdateInformationAlert from './ModuleUpdateInformationAlert.vue';
+
+<Meta
+  title="Components/Alert"
+  component={ModuleUpdateInformationAlert} />
+
+export const Template = (args, { argTypes }) => ({
+  components: { ModuleUpdateInformationAlert },
+  template: `<ModuleUpdateInformationAlert />`,
+})
+
+# Alert: Module Is Updated
+
+<Description of={ModuleUpdateInformationAlert} />
+
+<Canvas>
+  <Story name='Module Is Updated Alert'>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+---
+# Integration
+
+```html
+<ModuleUpdateInformationAlert />
+```
