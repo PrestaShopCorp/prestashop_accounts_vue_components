@@ -14,6 +14,9 @@ import BaseAlert, { Variant } from './BaseAlert.vue';
         control: 'text'
       }
     },
+    title: {
+      control: 'text'
+    }
   }} />
 
 export const Template = (args, { argTypes }) => ({
@@ -37,6 +40,8 @@ export const Template = (args, { argTypes }) => ({
   <Story
     name='Base Alert'
     args={{
+      title: '',
+      buttonLabel: '',
       dismissible: false,
       show: true,
       variant: 'success',

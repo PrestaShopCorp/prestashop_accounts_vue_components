@@ -1,21 +1,17 @@
 <template>
-  <BaseAlert variant="warning">
-    <p class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6">
-      {{$t('psaccounts.account.emailNotVerified')}}
-    </p>
-
-    <div class="acc-mt-4">
-      <BaseButton @click="sendEmailConfirmation">
-        {{ $t('psaccounts.account.sendEmail') }}
-      </BaseButton>
-    </div>
+  <BaseAlert
+      :title="$t('psaccounts.account.emailNotVerified.title')"
+      :button-label="$t('psaccounts.account.sendEmail')"
+      variant="warning"
+      @clicked="sendEmailConfirmation"
+  >
+    <p class="acc-m-0 acc-p-0">{{$t('psaccounts.account.emailNotVerified.description')}}</p>
   </BaseAlert>
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue-demi';
 import BaseAlert from './BaseAlert.vue';
-import BaseButton from '@/components/BaseButton.vue';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
@@ -26,7 +22,6 @@ export default defineComponent({
   name: 'UserEmailNotValidatedAlert',
   components: {
     BaseAlert,
-    BaseButton,
   },
   props: {
     /**

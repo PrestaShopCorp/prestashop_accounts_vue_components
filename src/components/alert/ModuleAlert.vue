@@ -1,33 +1,18 @@
 <template>
-  <BaseAlert variant="warning">
-    <h3 class="acc-m-0 acc-p-0 acc-text-base acc-font-bold">
-      {{ title }}
-      </h3>
-    <p class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm">
+  <!--
+       action event
+       @event action
+     -->
+  <BaseAlert :title="title" :button-label="loading ? loadingText : actionText" variant="warning" @clicked="$emit('action')">
+    <p class="acc-m-0 acc-p-0">
       {{ message }}
     </p>
-    <div class="acc-mt-4">
-      <!--
-        action event
-        @event action
-      -->
-      <BaseButton
-        v-if="!loading"
-        @click="$emit('action')"
-      >
-        {{ actionText }}
-      </BaseButton>
-      <p v-else>
-        <u>{{ loadingText }}</u>
-      </p>
-    </div>
   </BaseAlert>
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue-demi';
 import BaseAlert from './BaseAlert.vue';
-import BaseButton from '@/components/BaseButton.vue';
 
 /**
  * This component is used to display warning alert telling the PSAccounts module or
@@ -37,7 +22,6 @@ export default defineComponent({
   name: 'ModuleAlert',
   components: {
     BaseAlert,
-    BaseButton,
   },
   props: {
     /**
