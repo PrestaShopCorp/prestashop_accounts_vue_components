@@ -3,34 +3,41 @@
         "accountManager": {
             "errorInstallEnable": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
         },
-        "alertAccountNotInstalled": {
-            "title": "Installieren Sie das Modul PrestaShop Account",
-            "message": "Das Modul PrestaShop account ist notwendig, um die Konfiguration dieses Moduls fortzusetzen.",
-            "installButton": "Installationsprogramm",
-            "loading": "Installation des Moduls PrestaShop Account in Arbeit..."
-        },
-        "alertAccountNotEnabled": {
-            "title": "Aktivieren Sie das Modul PrestaShop Account",
-            "message": "Das Modul PrestaShop account ist notwendig, um die Konfiguration dieses Moduls fortzusetzen.",
-            "enableButton": "Aktivator",
-            "loading": "Aktivierung des Moduls PrestaShop Account in Arbeit..."
-        },
-        "alertAccountNeedsUpdate": {
-            "title": "PrestaShop-Kontenmodul aktualisieren",
-            "message": "Eine neue Version von PrestaShop-Konten ist verfügbar. Bitte aktualisieren Sie das Modul, um die Dienste weiterhin nutzen zu können",
-            "installButton": "Aktualisieren"
-        },
-        "alertEventBusNotInstalled": {
-            "title": "Installieren Sie das Modul Prestashop Event Bus",
-            "message": "Das Modul Prestashop Event Bus ist notwendig, um die Konfiguration dieses Moduls fortzusetzen.",
-            "installButton": "Installationsprogramm",
-            "loading": "Installation des Moduls Prestashop Event Bus in Arbeit..."
-        },
-        "alertEventBusNotEnabled": {
-            "title": "Aktivieren Sie das PrestaShop Event Bus Modul",
-            "message": "Sie benötigen das PrestaShop Event Bus-Modul, um dieses Modul weiter einzurichten.",
-            "enableButton": "Aktivator",
-            "loading": "Das PrestaShop Event Bus Modul wird gerade aktiviert..."
+        "alert": {
+            "ps_accounts": {
+                "enable": {
+                    "title": "Aktivieren Sie das Modul PrestaShop Account",
+                    "message": "Das Modul PrestaShop account ist notwendig, um die Konfiguration dieses Moduls fortzusetzen.",
+                    "action": "Aktivator",
+                    "loading": "Aktivierung des Moduls PrestaShop Account in Arbeit..."
+                },
+                "install": {
+                    "title": "Installieren Sie das Modul PrestaShop Account",
+                    "message": "Das Modul PrestaShop account ist notwendig, um die Konfiguration dieses Moduls fortzusetzen.",
+                    "action": "Installationsprogramm",
+                    "loading": "Installation des Moduls PrestaShop Account in Arbeit..."
+                },
+                "update": {
+                    "title": "PrestaShop-Kontenmodul aktualisieren",
+                    "message": "Eine neue Version von PrestaShop-Konten ist verfügbar. Bitte aktualisieren Sie das Modul, um die Dienste weiterhin nutzen zu können",
+                    "action": "Aktualisieren",
+                    "loading": "Das PrestaShop Account-Modul wird derzeit aktualisiert..."
+                }
+            },
+            "ps_eventbus": {
+                "enable": {
+                    "title": "Aktivieren Sie das PrestaShop Event Bus Modul",
+                    "message": "Sie benötigen das PrestaShop Event Bus-Modul, um dieses Modul weiter einzurichten.",
+                    "action": "Aktivator",
+                    "loading": "Das PrestaShop Event Bus Modul wird gerade aktiviert..."
+                },
+                "install": {
+                    "title": "Installieren Sie das Modul Prestashop Event Bus",
+                    "message": "Das Modul Prestashop Event Bus ist notwendig, um die Konfiguration dieses Moduls fortzusetzen.",
+                    "action": "Installationsprogramm",
+                    "loading": "Installation des Moduls Prestashop Event Bus in Arbeit..."
+                }
+            }
         },
         "alertShopDomainShouldExists": {
             "title": "Shop URL nicht ausgefüllt!",
@@ -46,7 +53,10 @@
             "reonboardButton": "Neu zuordnen",
             "disconnectButton": "Benutze ein anderes Konto",
             "moduleUpdateInformation": "<strong>Neues Update:</strong> Sie können Ihre zugeordneten Shops verwalten.<br /> Bitte melden Sie sich mit <strong>der gleichen E-Mail-Adresse erneut an,</strong> um von diesem Update zu profitieren.<br /> Andere Modul-Updates sind möglicherweise auf der Registerkarte \"Updates\" des Modul-Managers verfügbar.",
-            "emailNotVerified": "Eine Bestätigungs-E-Mail wurde gesendet. Überprüfen Sie Ihren Posteingang und klicken Sie auf den Link, um Ihr Konto zu aktivieren.",
+            "emailNotVerified": {
+                "title": "Eine Bestätigungs-E-Mail wurde verschickt.",
+                "description": "Prüfen Sie Ihren Posteingang und klicken Sie auf den Link, um Ihr Konto zu aktivieren."
+            },
             "sendEmail": "Erneut senden",
             "needToBeAdmin": "Um fortzufahren, müssen Sie Administrator des Geschäfts sein",
             "pleaseContact": "Vielen Dank für den Kontakt",

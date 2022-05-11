@@ -3,34 +3,41 @@
         "accountManager": {
             "errorInstallEnable": "Er is een fout opgetreden. Probeer het nog eens."
         },
-        "alertAccountNotInstalled": {
-            "title": "Installeer de module PrestaShop Account",
-            "message": "De module PrestaShop account is nodig om de configuratie van deze module voort te zetten.",
-            "installButton": "Installeer",
-            "loading": "Installatie van de module PrestaShop Account aan de gang..."
-        },
-        "alertAccountNotEnabled": {
-            "title": "Activeer de module PrestaShop Account",
-            "message": "De module PrestaShop account is nodig om de configuratie van deze module voort te zetten.",
-            "enableButton": "Activeren",
-            "loading": "Activering van de module PrestaShop Account aan de gang..."
-        },
-        "alertAccountNeedsUpdate": {
-            "title": "Update PrestaShop Accounts-module",
-            "message": "Er is een nieuwe versie van PrestaShop-accounts beschikbaar. Werk de module bij om de services te blijven gebruiken",
-            "installButton": "Bijwerken"
-        },
-        "alertEventBusNotInstalled": {
-            "title": "Installeer de module Prestashop Event Bus",
-            "message": "De module Prestashop Event Bus is nodig om de configuratie van deze module voort te zetten.",
-            "installButton": "Installeer",
-            "loading": "Installatie van de module Prestashop Event Bus aan de gang..."
-        },
-        "alertEventBusNotEnabled": {
-            "title": "Activeer de PrestaShop Event Bus module",
-            "message": "U heeft de PrestaShop Event Bus module nodig om verder te gaan met het opzetten van deze module.",
-            "enableButton": "Activeren",
-            "loading": "De PrestaShop Event Bus module wordt momenteel geactiveerd..."
+        "alert": {
+            "ps_accounts": {
+                "enable": {
+                    "title": "Activeer de module PrestaShop Account",
+                    "message": "De module PrestaShop account is nodig om de configuratie van deze module voort te zetten.",
+                    "action": "Activeren",
+                    "loading": "Activering van de module PrestaShop Account aan de gang..."
+                },
+                "install": {
+                    "title": "Installeer de module PrestaShop Account",
+                    "message": "De module PrestaShop account is nodig om de configuratie van deze module voort te zetten.",
+                    "action": "Installeer",
+                    "loading": "Installatie van de module PrestaShop Account aan de gang..."
+                },
+                "update": {
+                    "title": "Update PrestaShop Accounts-module",
+                    "message": "Er is een nieuwe versie van PrestaShop-accounts beschikbaar. Werk de module bij om de services te blijven gebruiken",
+                    "action": "Bijwerken",
+                    "loading": "De PrestaShop Account module wordt momenteel bijgewerkt..."
+                }
+            },
+            "ps_eventbus": {
+                "enable": {
+                    "title": "Activeer de PrestaShop Event Bus module",
+                    "message": "U heeft de PrestaShop Event Bus module nodig om verder te gaan met het opzetten van deze module.",
+                    "action": "Activeren",
+                    "loading": "De PrestaShop Event Bus module wordt momenteel geactiveerd..."
+                },
+                "install": {
+                    "title": "Installeer de module Prestashop Event Bus",
+                    "message": "De module Prestashop Event Bus is nodig om de configuratie van deze module voort te zetten.",
+                    "action": "Installeer",
+                    "loading": "Installatie van de module Prestashop Event Bus aan de gang..."
+                }
+            }
         },
         "alertShopDomainShouldExists": {
             "title": "Winkel URL niet ingevuld!",
@@ -46,7 +53,10 @@
             "reonboardButton": "Opnieuw verbinden",
             "disconnectButton": "Een ander account gebruiken",
             "moduleUpdateInformation": "<strong>Nieuwe update:</strong> u kunt uw geassocieerde winkels beheren.<br /> Gelieve u opnieuw aan te melden <strong>met hetzelfde e-mailadres</strong> om van deze update te kunnen profiteren.<br /> Andere module-updates kunnen beschikbaar zijn in Module Manager, tabblad Updates.",
-            "emailNotVerified": "Er werd een bevestigingsmail verstuurd. Controleer uw inbox en klik op de link om uw account te activeren.",
+            "emailNotVerified": {
+                "title": "Er is een bevestigingsmail verzonden.",
+                "description": "Controleer uw inbox en klik op de link om uw account te activeren."
+            },
             "sendEmail": "Doorsturen",
             "needToBeAdmin": "Om verder te gaan, moet u een administrator van de winkel zijn.",
             "pleaseContact": "Neem alstublieft contact op met",

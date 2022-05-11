@@ -3,34 +3,41 @@
         "accountManager": {
             "errorInstallEnable": "Ocorreu um erro, por favor tente novamente."
         },
-        "alertAccountNotInstalled": {
-            "title": "Ativar o módulo PrestaShop Account",
-            "message": "O módulo PrestaShop Account é necessário para continuar a configuração deste módulo.",
-            "installButton": "Instalar",
-            "loading": "Instalação do módulo PrestaShop Account em curso..."
-        },
-        "alertAccountNotEnabled": {
-            "title": "Ativar o módulo PrestaShop Account",
-            "message": "O módulo PrestaShop Account é necessário para continuar a configuração deste módulo.",
-            "enableButton": "Ativar",
-            "loading": "Ativação do módulo PrestaShop Account em curso..."
-        },
-        "alertAccountNeedsUpdate": {
-            "title": "Atualizar módulo de contas PrestaShop",
-            "message": "Uma nova versão das contas PrestaShop está disponível, atualize o módulo para continuar usando os serviços",
-            "installButton": "Atualizar"
-        },
-        "alertEventBusNotInstalled": {
-            "title": "Ativar o módulo Prestashop Event Bus",
-            "message": "O módulo Prestashop Event Bus é necessário para continuar a configuração deste módulo.",
-            "installButton": "Instalar",
-            "loading": "Instalação do módulo Prestashop Event Bus em curso..."
-        },
-        "alertEventBusNotEnabled": {
-            "title": "Ativar o módulo de ônibus de eventos PrestaShop",
-            "message": "Você precisa do módulo PrestaShop Event Bus para continuar configurando este módulo.",
-            "enableButton": "Ativar",
-            "loading": "O módulo PrestaShop Event Bus está actualmente a ser activado..."
+        "alert": {
+            "ps_accounts": {
+                "enable": {
+                    "title": "Ativar o módulo PrestaShop Account",
+                    "message": "O módulo PrestaShop Account é necessário para continuar a configuração deste módulo.",
+                    "action": "Ativar",
+                    "loading": "Ativação do módulo PrestaShop Account em curso..."
+                },
+                "install": {
+                    "title": "Ativar o módulo PrestaShop Account",
+                    "message": "O módulo PrestaShop Account é necessário para continuar a configuração deste módulo.",
+                    "action": "Instalar",
+                    "loading": "Instalação do módulo PrestaShop Account em curso..."
+                },
+                "update": {
+                    "title": "Atualizar módulo de contas PrestaShop",
+                    "message": "Uma nova versão das contas PrestaShop está disponível, atualize o módulo para continuar usando os serviços",
+                    "action": "Atualizar",
+                    "loading": "O módulo Conta PrestaShop está actualmente a ser actualizado..."
+                }
+            },
+            "ps_eventbus": {
+                "enable": {
+                    "title": "Activar o módulo PrestaShop Event Bus",
+                    "message": "É necessário o módulo PrestaShop Event Bus para continuar a configurar este módulo.",
+                    "action": "Ativar",
+                    "loading": "O módulo PrestaShop Event Bus está actualmente a ser activado..."
+                },
+                "install": {
+                    "title": "Ativar o módulo Prestashop Event Bus",
+                    "message": "O módulo Prestashop Event Bus é necessário para continuar a configuração deste módulo.",
+                    "action": "Instalar",
+                    "loading": "Instalação do módulo Prestashop Event Bus em curso..."
+                }
+            }
         },
         "alertShopDomainShouldExists": {
             "title": "URL da loja não preenchida!",
@@ -46,7 +53,10 @@
             "reonboardButton": "Reassociate",
             "disconnectButton": "Usar outra conta",
             "moduleUpdateInformation": "<strong>Nova actualização:</strong> pode gerir as suas lojas associadas.<br /> Por favor, volte a participar usando o <strong>mesmo endereço de correio electrónico</strong> para tirar partido desta actualização.<br /> Outras actualizações de módulos podem estar disponíveis em Module Manager, separador Updates.",
-            "emailNotVerified": "Um e-mail de confirmação foi enviado. Confira a sua caixa de entrada e clique no link para ativar a sua conta.",
+            "emailNotVerified": {
+                "title": "Foi enviado um e-mail de confirmação.",
+                "description": "Verifique a sua caixa de entrada e clique no link para activar a sua conta."
+            },
             "sendEmail": "Reenviar",
             "needToBeAdmin": "Para continuar, deverá ser um administrador da loja.",
             "pleaseContact": "Por favor entre em contacto",
