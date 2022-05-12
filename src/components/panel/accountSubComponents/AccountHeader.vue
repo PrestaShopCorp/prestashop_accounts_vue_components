@@ -6,9 +6,9 @@
     >
       <CheckIcon class="acc-text-white" />
     </span>
-    <h3 class="acc-m-0 acc-font-primary acc-font-semibold">
+    <p class="acc-m-0 acc-font-primary acc-font-semibold">
       <slot />
-    </h3>
+    </p>
   </div>
 </template>
 
