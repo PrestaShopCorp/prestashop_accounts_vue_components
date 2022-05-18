@@ -36,7 +36,7 @@ export default defineComponent({
     const {
       context,
       eventbusIsEnabled,
-      eventbusIsInstalled,
+      eventbusShouldBeInstalled,
       eventbusInstallLink,
       eventbusEnableLink,
     } = usePSAccountsContext();
@@ -70,7 +70,7 @@ export default defineComponent({
         };
       }
 
-      if (!eventbusIsInstalled.value) {
+      if (eventbusShouldBeInstalled.value) {
         return {
           module: Module.PsEventbus,
           action: Action.Install,
