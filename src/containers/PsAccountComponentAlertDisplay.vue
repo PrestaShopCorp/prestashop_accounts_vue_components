@@ -35,7 +35,7 @@ export default defineComponent({
 
     const {
       context,
-      eventbusIsEnabled,
+      eventbusShouldBeEnabled,
       eventbusShouldBeInstalled,
       eventbusInstallLink,
       eventbusEnableLink,
@@ -78,7 +78,7 @@ export default defineComponent({
         };
       }
 
-      if (!eventbusIsEnabled.value) {
+      if (eventbusShouldBeEnabled.value) {
         return {
           module: Module.PsEventbus,
           action: Action.Enable,

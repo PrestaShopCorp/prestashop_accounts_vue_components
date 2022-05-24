@@ -74,6 +74,9 @@ export default function usePSAccountsContext() {
   const eventbusShouldBeInstalled = computed(
     () => !eventbusIsInstalled.value && state.context.psIs17,
   );
+  const eventbusShouldBeEnabled = computed(
+      () => state.context.psIs17 && !eventbusIsEnabled,
+  );
 
   const psAccountModuleState = computed(() => {
     if (!state.context.psAccountsIsUptodate) {
@@ -137,6 +140,7 @@ export default function usePSAccountsContext() {
   return {
     ...toRefs(state),
     eventbusIsEnabled,
+    eventbusShouldBeEnabled,
     eventbusShouldBeInstalled,
     eventbusInstallLink,
     eventbusEnableLink,
