@@ -75,7 +75,7 @@ export default function usePSAccountsContext() {
     () => !eventbusIsInstalled.value && state.context.psIs17,
   );
   const eventbusShouldBeEnabled = computed(
-      () => state.context.psIs17 && !eventbusIsEnabled,
+      () => state.context.psIs17 && !eventbusIsEnabled.value,
   );
 
   const psAccountModuleState = computed(() => {
