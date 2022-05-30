@@ -3,7 +3,6 @@ import {contextSchema} from '@/lib/ContextValidator';
 import {Context, Shop, ShopContext} from '@/types/context';
 
 const defaultContext = (): Partial<Context> => ({
-  // psIs17: true,
   psAccountsInstallLink: null,
   psAccountsEnableLink: null,
   psAccountsUpdateLink: null,
@@ -72,6 +71,12 @@ export default function usePSAccountsContext() {
   const eventbusEnableLink = computed(
     () => state.context.dependencies?.ps_eventbus?.enableLink || '',
   );
+  const eventbusShouldBeInstalled = computed(
+    () => !eventbusIsInstalled.value && state.context.psIs17,
+  );
+  const eventbusShouldBeEnabled = computed(
+      () => state.context.psIs17 && !eventbusIsEnabled.value,
+  );
 
   const psAccountModuleState = computed(() => {
     if (!state.context.psAccountsIsUptodate) {
@@ -134,8 +139,9 @@ export default function usePSAccountsContext() {
 
   return {
     ...toRefs(state),
-    eventbusIsInstalled,
     eventbusIsEnabled,
+    eventbusShouldBeEnabled,
+    eventbusShouldBeInstalled,
     eventbusInstallLink,
     eventbusEnableLink,
     psAccountModuleState,

@@ -4,18 +4,15 @@
 
 To work as a Community Service or as PrestaShop X, a module needs three parts:
 
-### [module ps_accounts](http://github.com/PrestaShopCorp/ps_accounts)
+### [Prestashop Accounts Installer](https://github.com/PrestaShopCorp/prestashop-accounts-installer)
 
-* Contains all the controllers
+An utility package to install ps_accounts module or present data to trigger manual install from psx configuration page.
 
-### [library npm](http://github.com/PrestaShopCorp/prestashop_accounts_vue_components)
+This module also give you access to ps_accounts services through its module service container dealing with the installation status of the module.
 
-* Contains all the vuejs components to manage onboarding
+### [UI Components](http://github.com/PrestaShopCorp/prestashop_accounts_vue_components)
 
-### [library composer](http://github.com/PrestaShopCorp/prestashop_accounts_auth)
-
-* Wraps all the calls to ps_accounts
-* Contains all the Firebase logic
+- Contains all the UI components to manage onboarding.
 
 ## Installation
 
@@ -43,14 +40,12 @@ yarn storybook
 
 To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page.
 
-To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page. 
-
 ```html
-# To load version 4.0.0
-<script src="https://unpkg.com/prestashop_accounts_vue_components@4.0.0"></script>
+# To load version 4.1.0
+<script src="https://unpkg.com/prestashop_accounts_vue_components@4.1.0"></script>
 
-# To load latest patched version 4.0
-<script src="https://unpkg.com/prestashop_accounts_vue_components@4.0"></script>
+# To load latest patched version 4.1
+<script src="https://unpkg.com/prestashop_accounts_vue_components@4.1"></script>
 
 # To load latest version
 <script src="https://unpkg.com/prestashop_accounts_vue_components"></script>
@@ -63,7 +58,7 @@ you can then call the init function of psaccountsVue
 <prestashop-accounts></prestashop-accounts>
 
 <script>
-    window.psaccountsVue.init();
+  window.psaccountsVue.init();
 </script>
 ```
 
@@ -75,24 +70,23 @@ If you need to use the vue cdn for your app, please create your app with the vue
 <script src="https://unpkg.com/prestashop_accounts_vue_components@4.0.0"></script>
 
 <script type="module">
-    import { createApp } from 'https://unpkg.com/vue@3.2.26/dist/vue.esm-browser.js';
+  import { createApp } from "https://unpkg.com/vue@3.2.26/dist/vue.esm-browser.js";
 
-    const App = {
-        data() {
-            return {
-                name: "John",
-            };
-        },
-        template: `<div>
-			<h1>Hello {{ name }}</h1>
-			<prestashop-accounts></prestashop-accounts>
-		</div>`,
-		mounted() {
-			window.psaccountsVue.init();
-		}
+  const App = {
+    data() {
+      return {
+        name: "John",
+      };
+    },
+    template: `<div>
+            <h1>Hello {{ name }}</h1>
+            <prestashop-accounts></prestashop-accounts>
+        </div>`,
+    mounted() {
+      window.psaccountsVue.init();
+    },
+  };
 
-    };
-
-    createApp(App).mount("#app");
+  createApp(App).mount("#app");
 </script>
 ```
