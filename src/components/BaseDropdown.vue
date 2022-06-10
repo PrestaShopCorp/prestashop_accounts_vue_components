@@ -21,7 +21,7 @@
       :aria-expanded="expanded"
       class="acc-rounded-l-none focus:acc-ring-0"
       @click="toggleDropdown">
-      <MoreVertIcon class="acc-w-5 acc-h-5" />
+      <MoreHorIcon class="acc-w-5 acc-h-5" />
     </BaseButton>
     <ul
       v-show="expanded"
@@ -40,7 +40,7 @@
 import {defineComponent, ref} from 'vue-demi';
 import vClickOutside from 'v-click-outside';
 import BaseButton from './BaseButton.vue';
-import MoreVertIcon from '@/assets/icons/more_vert.svg?inline';
+import MoreHorIcon from '@/assets/icons/more_hor.svg?inline';
 
 /**
  * This is the BaseDropdown component.
@@ -49,7 +49,7 @@ export default defineComponent({
   name: 'BaseDropdown',
   components: {
     BaseButton,
-    MoreVertIcon,
+    MoreHorIcon,
   },
   directives: {
     clickOutside: vClickOutside.directive,
