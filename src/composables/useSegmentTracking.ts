@@ -88,11 +88,19 @@ export default function useSegmentTracking() {
   }
 
   function trackAssociateOrManageAccountButton(action: string) {
-    const eventName = ['reonboard', 'associate'].includes(action)
-      ? '[ACC] Associate Button Clicked'
-      : '[ACC] Manage Account Button Clicked';
+    if (["reonboard", "associate"].includes(action)) {
+      track("[ACC] Associate Button Clicked", {
+        reonboard: action === "reonboard",
+      });
+      return;
+    }
 
-    track(eventName);
+    if (action === "unlink") {
+      track("[ACC] Dissociate Button Clicked");
+      return;
+    }
+
+    track("[ACC] See My Associated Shops Button Clicked");
   }
 
   function trackLinkContactAdmin() {
