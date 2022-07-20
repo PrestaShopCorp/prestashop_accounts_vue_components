@@ -14,6 +14,7 @@
           v-click-outside="close"
         >
           <link-shop-crossdomain
+            :app="app"
             :specificUiUrl="specificUiUrl"
             :shops="shops"
             :onBoardingFinished="close"
@@ -46,6 +47,10 @@ export default defineComponent({
     clickOutside: vClickOutside.directive,
   },
   props: {
+    app: {
+      type: String,
+      required: true,
+    },
     shops: {
       type: Array,
       required: true,
