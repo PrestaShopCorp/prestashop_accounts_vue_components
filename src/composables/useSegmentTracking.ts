@@ -13,7 +13,6 @@ const state = reactive({
   superProperties: [
     'multishop_numbers',
     'ps_account_version',
-    'ps_module_from',
     'ps_version',
     'shop_context_id',
     'shop_context_type',
@@ -69,7 +68,7 @@ export default function useSegmentTracking() {
       ps_account_module_state: psAccountModuleState.value,
       ps_account_version: context.value.psAccountsVersion,
       ps_eventbus_module_state: psEventBusModuleState.value,
-      ps_module_from: context.value.psxName,
+      source: context.value.psxName,
       ps_version: shopsWithUrl[0]?.psVersion,
       shop_associated: shopsWithUrl.map(
         (shop) => shop.uuid !== null && !shop.isLinkedV4,
@@ -88,11 +87,19 @@ export default function useSegmentTracking() {
   }
 
   function trackAssociateOrManageAccountButton(action: string) {
-    const eventName = ['reonboard', 'associate'].includes(action)
-      ? '[ACC] Associate Button Clicked'
-      : '[ACC] Manage Account Button Clicked';
+    if (["reonboard", "associate"].includes(action)) {
+      track("[ACC] Associate Button Clicked", {
+        reonboard: action === "reonboard",
+      });
+      return;
+    }
 
-    track(eventName);
+    if (action === "unlink") {
+      track("[ACC] Dissociate Button Clicked");
+      return;
+    }
+
+    track("[ACC] See My Associated Shops Button Clicked");
   }
 
   function trackLinkContactAdmin() {
