@@ -42,6 +42,7 @@
     <link-shop-modal
       ref="linkShopModal"
       :accounts-ui-url="accountsUiUrl"
+      :app="app"
       :on-boarding-link="onboardingLink"
       :shops="unlinkedShopsWithEmployeeId"
       :specific-ui-url="specificUiUrl"
@@ -71,6 +72,10 @@ export default defineComponent({
   },
   props: {
     accountsUiUrl: {
+      type: String,
+      required: true,
+    },
+    app: {
       type: String,
       required: true,
     },

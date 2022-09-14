@@ -21,6 +21,7 @@
         <AccountLinkToUi
           class="acc-mt-2 md:acc-mt-0"
           :accounts-ui-url="accountsUiUrl"
+          :app="app"
           :backend-user="backendUser"
           :onboarding-link="onboardingLink"
           :shops="shopsWithUrl"
@@ -89,6 +90,13 @@ export default defineComponent({
          * should be https://accounts.distribution.prestashop.net/en
          */
     accountsUiUrl: {
+      type: String,
+      required: true,
+    },
+    /**
+         * Name of the module
+         */
+    app: {
       type: String,
       required: true,
     },

@@ -29,6 +29,7 @@
       <template v-if="!hasBlockingAlert">
         <AccountPanel
           :accounts-ui-url="validContext.accountsUiUrl"
+          :app="app"
           :backend-user="validContext.backendUser"
           :onboarding-link="validContext.onboardingLink"
           :shops="shops"
@@ -104,6 +105,8 @@ export default defineComponent({
     const {identify, trackAccountComponentViewed} = useSegmentTracking();
     const hasError = ref(false);
 
+    const app = computed(() => context.value.psxName);
+
     const hasAllShopsLinked = computed(() => shopsWithUrl.value.every((shop) => shop.uuid));
 
     const hasBlockingAlert = computed(() => !context.value.psAccountsIsInstalled
@@ -123,6 +126,7 @@ export default defineComponent({
 
     return {
       validContext: context,
+      app,
       hasAllShopsLinked,
       hasBlockingAlert,
       hasError,
