@@ -1,6 +1,8 @@
 import * as zoid from 'zoid/dist/zoid.frameworks';
 
-export default zoid.create({
+// eslint-disable-next-line
+// @ts-ignore
+const zoidExport = window.psAccountZoidExport || zoid.create({
   tag: "crossdomains-account-link-shop",
   // TODO Put accounts-ui prod url when there is no env
   url: ({ props }: { props: Record<string, unknown> }) =>
@@ -58,3 +60,9 @@ export default zoid.create({
     },
   },
 });
+
+// eslint-disable-next-line
+// @ts-ignore
+window.psAccountZoidExport = zoidExport;
+
+export default zoidExport;
