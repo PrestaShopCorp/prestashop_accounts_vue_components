@@ -1,5 +1,5 @@
 preserve_hierarchy: true
-commit_message: "[ci skip] fix: New (%language%) translations"
+commit_message: "fix: New (%language%) translations"
 append_commit_message: false
 pull_request_labels:
   - translations
