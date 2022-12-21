@@ -17,7 +17,6 @@ import {
 } from 'vue-demi';
 import ModuleAlert from '@/components/alert/ModuleAlert.vue';
 import usePSModuleManagement, {Action, Module} from '@/composables/usePSModuleManagement';
-import useSegmentTracking from '@/composables/useSegmentTracking';
 import usePSAccountsContext from '@/composables/usePSAccountsContext';
 
 /**
@@ -43,7 +42,6 @@ export default defineComponent({
 
     const {manageModule} = usePSModuleManagement(context.value.psIs17 || false);
 
-    const {trackModuleAction} = useSegmentTracking();
 
     const alert = computed(() => {
       if (!context.value.psAccountsIsInstalled) {
@@ -100,8 +98,6 @@ export default defineComponent({
 
       try {
         loading.value = true;
-
-        trackModuleAction(alert.value.module, alert.value.action);
 
         await manageModule(
           alert.value.module,
