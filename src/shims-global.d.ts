@@ -7,5 +7,6 @@ declare global {
     analytics: unknown;
     contextPsAccounts: Context;
     iso_user: string;
+    psAccountZoidExport: any;
   }
 }
