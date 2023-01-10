@@ -18,8 +18,6 @@
             :specificUiUrl="specificUiUrl"
             :shops="shops"
             :onBoardingFinished="close"
-            :tracking="trackingProps"
-            :onLogout="onLogout"
             :accountsUiUrl="accountsUiUrl"
             :triggerFallback="triggerFallback"
           />
@@ -35,7 +33,6 @@
 import Vue from 'vue';
 import {defineComponent, onMounted, ref} from 'vue-demi';
 import vClickOutside from 'v-click-outside';
-import useSegmentTracking from '@/composables/useSegmentTracking';
 import LinkShopCrossDomain from './linkShopCrossDomain';
 
 export default defineComponent({
@@ -69,7 +66,6 @@ export default defineComponent({
     },
   },
   setup(props, {emit}) {
-    const {properties: trackingProps, reset} = useSegmentTracking();
     const opened = ref(false);
 
     function open() {
@@ -79,10 +75,6 @@ export default defineComponent({
     function close() {
       opened.value = false;
       emit('closed');
-    }
-
-    function onLogout() {
-      reset();
     }
 
     function triggerFallback() {
@@ -102,7 +94,7 @@ export default defineComponent({
     });
 
     return {
-      opened, open, close, onLogout, trackingProps, triggerFallback,
+      opened, open, close, triggerFallback,
     };
   },
 });

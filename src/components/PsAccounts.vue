@@ -66,7 +66,6 @@ import BaseAlert from '@/components/alert/BaseAlert.vue';
 import BaseOverlay from '@/components/BaseOverlay.vue';
 import PsAccountComponentAlertDisplay from '@/containers/PsAccountComponentAlertDisplay.vue';
 import usePSAccountsContext from '@/composables/usePSAccountsContext';
-import useSegmentTracking from '@/composables/useSegmentTracking';
 import '@/assets/css/index.css';
 
 /**
@@ -102,7 +101,6 @@ export default defineComponent({
       setContext,
       shopsInContext,
     } = usePSAccountsContext();
-    const {identify, trackAccountComponentViewed} = useSegmentTracking();
     const hasError = ref(false);
 
     const app = computed(() => context.value.psxName);
@@ -117,11 +115,6 @@ export default defineComponent({
 
     onMounted(() => {
       setContext(props.context);
-
-      if (context.value.psAccountsIsInstalled && context.value.psAccountsIsEnabled) {
-        identify();
-        trackAccountComponentViewed();
-      }
     });
 
     return {

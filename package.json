@@ -18,7 +18,6 @@
     "storybook": "start-storybook"
   },
   "dependencies": {
-    "@prestashopcorp/segment-vue": "^2.1.7",
     "@vue/composition-api": "^1.4.3",
     "babel-loader": "^8.2.3",
     "deepmerge": "^4.2.2",

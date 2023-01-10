@@ -4,7 +4,6 @@ import i18n from './i18n';
 import PsAccounts from '@/components/PsAccounts.vue';
 import AccountPanel from '@/components/panel/AccountPanel.vue';
 import {isOnboardingCompleted} from '@/lib/Helpers';
-import {Segment} from '@/ExternalDependencies';
 
 const version = process.env.VUE_APP_VERSION;
 
@@ -20,13 +19,6 @@ const Plugin = {
     Object.keys(Components).forEach((name) => {
       vue.component(name, Components[name]);
     });
-
-    if (!window?.analytics) {
-      vue.use(Segment, {
-        id: window?.contextPsAccounts?.segmentApiKey,
-        pageCategory: 'ps_accounts-ui',
-      });
-    }
   },
 };
 
