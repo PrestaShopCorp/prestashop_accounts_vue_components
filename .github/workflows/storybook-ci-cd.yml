@@ -75,7 +75,7 @@ jobs:
         run: |
           terraform init
           terraform workspace select default          
-          terraform apply -auto-approve
+          terraform apply -auto-approve --var hash_id ${{ github.sha }}
         env:
           SHA: ${{ github.sha }}
           GOOGLE_CREDENTIALS: ${{ secrets.PRODUCTION_GOOGLE_APPLICATION_CREDENTIALS }}
