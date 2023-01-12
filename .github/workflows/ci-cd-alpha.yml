@@ -1,12 +1,16 @@
-name: Accounts CI/CD
+name: Storybook Integration CI/CD
 
 on:
   pull_request:
     types: [opened,edited,reopened,synchronize,labeled]
 
+env:
+  TERRAFORM_FOLDER: "terraform/envs/integration"
+  TERRAFORM_VERSION: "1.1.7"
+
 jobs:
-  alpha:
-    name: Alpha - Storybook
+  integration:
+    name: Integration - Storybook
     runs-on: ubuntu-latest
     timeout-minutes: 10
     if: contains(github.event.pull_request.labels.*.name, 'quality assurance needed')
@@ -14,6 +18,10 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
+
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
 
       - name: Get the version
         id: get_version
@@ -30,15 +38,6 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.INTEGRATION_GOOGLE_APPLICATION_CREDENTIALS }}
           GCLOUD_CLUSTER: ${{ secrets.INTEGRATION_GCLOUD_CLUSTER }}
-
-      - name: Terraform init
-        working-directory: .cloud
-        run: |
-          terraform init
-          terraform workspace select alpha
-          terraform fmt
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.INTEGRATION_GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Docker pull
         continue-on-error: true
@@ -60,9 +59,16 @@ jobs:
         env:
           TAG: ${{ steps.get_tag.outputs.TAG }}
 
+      - name: Reconfig git to download terraform modules from private repos
+        run: |
+          git config --global url."https://oauth2:${{ secrets.TERRAFORM_ACCESS_TOKEN }}@github.com".insteadOf ssh://git@github.com
+
       - name: Terraform apply
-        working-directory: .cloud
-        run: terraform apply -auto-approve
+        working-directory: ${{ env.TERRAFORM_FOLDER }}
+        run: |
+          terraform init
+          terraform workspace select default
+          terraform apply -auto-approve --var hash_id=${{ github.sha }}
         env:
           SHA: ${{ github.sha }}
           GOOGLE_CREDENTIALS: ${{ secrets.INTEGRATION_GOOGLE_APPLICATION_CREDENTIALS }}
