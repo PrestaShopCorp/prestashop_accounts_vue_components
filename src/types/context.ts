@@ -38,7 +38,6 @@ export type Context = {
   psAccountsVersion?: string;
   psIs17: boolean;
   psxName?: string;
-  segmentApiKey?: string | null;
   shops: ShopGroup[];
   ssoResendVerificationEmail?: string | null;
   superAdminEmail?: string | null;
