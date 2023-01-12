@@ -8,8 +8,9 @@ on:
 
   pull_request:
     types: [opened,edited,reopened,synchronize,labeled]
+
 env:
-  TERRAFORM_FOLDER: "terraform/envs/production"
+  TERRAFORM_FOLDER_PRODUCTION: "terraform/envs/production"
   TERRAFORM_VERSION: "1.1.7"
 
 
@@ -70,7 +71,7 @@ jobs:
           git config --global url."https://oauth2:${{ secrets.TERRAFORM_ACCESS_TOKEN }}@github.com".insteadOf ssh://git@github.com
 
       - name: Terraform apply
-        working-directory: ${{ env.TERRAFORM_FOLDER }}
+        working-directory: ${{ env.TERRAFORM_FOLDER_PRODUCTION }}
         run: |
           terraform init
           terraform workspace select default          
