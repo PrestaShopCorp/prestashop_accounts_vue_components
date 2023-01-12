@@ -5,10 +5,6 @@ on:
     branches:
       - master
       - main
-
-  pull_request:
-    types: [opened,edited,reopened,synchronize,labeled]
-
 env:
   TERRAFORM_FOLDER_PRODUCTION: "terraform/envs/production"
   TERRAFORM_VERSION: "1.1.7"
@@ -19,7 +15,6 @@ jobs:
     name: Production - Storybook
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    if: contains(github.event.pull_request.labels.*.name, 'quality assurance needed')
 
     steps:
       - name: Checkout the repository
