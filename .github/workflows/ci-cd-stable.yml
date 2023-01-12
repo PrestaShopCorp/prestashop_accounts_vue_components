@@ -5,16 +5,23 @@ on:
     branches:
       - master
       - main
+env:
+  TERRAFORM_FOLDER: "terraform/envs/production"
+
 
 jobs:
-  stable:
-    name: Stable - Storybook
+  production:
+    name: Production - Storybook
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
+
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
 
       - name: Get the version
         id: get_version
@@ -31,15 +38,6 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.PRODUCTION_GOOGLE_APPLICATION_CREDENTIALS }}
           GCLOUD_CLUSTER: ${{ secrets.PRODUCTION_GCLOUD_CLUSTER }}
-
-      - name: Terraform init
-        working-directory: .cloud
-        run: |
-          terraform init -backend-config="bucket=integration-ditribution-terraform-state"
-          terraform workspace select stable
-          terraform fmt
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.PRODUCTION_GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Docker pull
         continue-on-error: true
@@ -62,9 +60,16 @@ jobs:
         env:
           TAG: ${{ steps.get_tag.outputs.TAG }}
 
+      - name: Reconfig git to download terraform modules from private repos
+        run: |
+          git config --global url."https://oauth2:${{ secrets.TERRAFORM_ACCESS_TOKEN }}@github.com".insteadOf ssh://git@github.com
+
       - name: Terraform apply
-        working-directory: .cloud
-        run: terraform apply -auto-approve
+        working-directory: ${{ env.TERRAFORM_FOLDER }}
+        run: |
+          terraform init
+          terraform workspace select default          
+          terraform apply -auto-approve
         env:
           SHA: ${{ github.sha }}
           GOOGLE_CREDENTIALS: ${{ secrets.PRODUCTION_GOOGLE_APPLICATION_CREDENTIALS }}
