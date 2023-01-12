@@ -1,4 +1,4 @@
-name: Accounts CI/CD
+name: Storybook Integration CI/CD
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ env:
 
 jobs:
   integration:
-    name: Inegration - Storybook
+    name: Integration - Storybook
     runs-on: ubuntu-latest
     timeout-minutes: 10
     #if: contains(github.event.pull_request.labels.*.name, 'quality assurance needed')

@@ -1,4 +1,4 @@
-name: Accounts CI/CD
+name: Storybook Production CI/CD
 
 on:
   push:
