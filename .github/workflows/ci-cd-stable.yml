@@ -10,6 +10,7 @@ on:
     types: [opened,edited,reopened,synchronize,labeled]
 env:
   TERRAFORM_FOLDER: "terraform/envs/production"
+  TERRAFORM_VERSION: "1.1.7"
 
 
 jobs:
