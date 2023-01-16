@@ -4,15 +4,11 @@
 
 <script lang="ts">
 import {defineComponent, onMounted} from 'vue-demi';
-import vClickOutside from 'v-click-outside';
 import useSegmentTracking from '@/composables/useSegmentTracking';
 import LinkShopCrossDomain from './linkShopCrossDomain';
 
 export default defineComponent({
   name: 'LinkShopModal',
-  directives: {
-    clickOutside: vClickOutside.directive,
-  },
   props: {
     app: {
       type: String,
@@ -45,7 +41,9 @@ export default defineComponent({
       tracking: trackingProps,
       onLogout,
       accountsUiUrl: props.accountsUiUrl,
-      triggerFallback
+      triggerFallback,
+      onDestroy: () => close(),
+      onClose: () => close()
     });
 
     function open() {
@@ -83,24 +81,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-@screen md {
-  .crossdomain {
-    width: 90% !important;
-    height: 90% !important;
-    max-width: 990px;
-    max-height: 810px;
-  }
-}
-.crossdomain > div {
-  width: 100%;
-  height: 100%;
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .25s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-</style>
