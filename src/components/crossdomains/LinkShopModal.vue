@@ -33,25 +33,27 @@ export default defineComponent({
   },
   setup(props, {emit}) {
     const {properties: trackingProps, reset} = useSegmentTracking();
-    const linkShop = LinkShopCrossDomain({
-      app: props.app,
-      specificUiUrl: props.specificUiUrl,
-      shops: props.shops,
-      onBoardingFinished: close,
-      tracking: trackingProps,
-      onLogout,
-      accountsUiUrl: props.accountsUiUrl,
-      triggerFallback,
-      onDestroy: () => close(),
-      onClose: () => close()
-    });
+    let linkShop: any = null;
 
     function open() {
+      console.log('props', props);
+      linkShop = LinkShopCrossDomain({
+        app: props.app,
+        specificUiUrl: props.specificUiUrl,
+        shops: props.shops,
+        onBoardingFinished: close,
+        tracking: trackingProps,
+        onLogout,
+        accountsUiUrl: props.accountsUiUrl,
+        triggerFallback,
+        onDestroy: () => close(),
+        onClose: () => close()
+      });
       linkShop.render(undefined, 'popup');
     }
 
     function close() {
-      linkShop.close();
+      linkShop?.close();
       emit('closed');
     }
 

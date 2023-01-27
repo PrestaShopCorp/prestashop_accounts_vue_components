@@ -41,6 +41,7 @@
 
     <link-shop-modal
       ref="linkShopModal"
+      v-show="cdcUiDisplayed"
       :accounts-ui-url="accountsUiUrl"
       :app="app"
       :on-boarding-link="onboardingLink"
@@ -128,6 +129,7 @@ export default defineComponent({
       }
 
       if (['unlink'].includes(action.value)) {
+        console.log('UNLINK OUAICH');
         return `/shop/${props.shops[0].uuid}`;
       }
 
