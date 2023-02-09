@@ -40,8 +40,7 @@
     </component>
 
     <link-shop-modal
-      ref="linkShopModal"
-      v-show="cdcUiDisplayed"
+      v-if="cdcUiDisplayed"
       :accounts-ui-url="accountsUiUrl"
       :app="app"
       :on-boarding-link="onboardingLink"
@@ -54,7 +53,7 @@
 
 <script lang="ts">
 import {
-  computed, defineComponent, PropType, ref, watch,
+  computed, defineComponent, PropType, ref,
 } from 'vue-demi';
 import {Shop, ShopContext} from '@/types/context';
 import BaseButton from '@/components/BaseButton.vue';
@@ -62,6 +61,16 @@ import BaseDropdown from '@/components/BaseDropdown.vue';
 import BaseDropdownItemButton from '@/components/BaseDropdownItemButton.vue';
 import LinkShopModal from '@/components/crossdomains/LinkShopModal.vue';
 import useSegmentTracking from '@/composables/useSegmentTracking';
+
+type actionToUrlType = {
+  reonboard: string,
+  associate: string,
+  unlink: string,
+  manage: string,
+  connect: string
+}
+
+type actions = "reonboard"|"associate"|"unlink"|"manage"|"connect";
 
 export default defineComponent({
   name: 'AccountLinkToUi',
@@ -97,8 +106,7 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props, { refs }) {
-    const action = ref('associate');
+  setup(props) {
     const cdcUiDisplayed = ref(false);
 
     const {trackAssociateOrManageAccountButton} = useSegmentTracking();
@@ -123,18 +131,14 @@ export default defineComponent({
 
     const isShopContext = computed(() => props.shopContext === ShopContext.Shop);
 
-    const specificUiUrl = computed(() => {
-      if (['reonboard', 'associate'].includes(action.value)) {
-        return '';
-      }
-
-      if (['unlink'].includes(action.value)) {
-        console.log('UNLINK OUAICH');
-        return `/shop/${props.shops[0].uuid}`;
-      }
-
-      return '/shop';
-    });
+    const specificUiUrl = ref('');
+    const chooseUiUrlFromAction: actionToUrlType  = {
+      reonboard: '',
+      associate: '',
+      unlink: `/shop/${props.shops[0].uuid}`,
+      manage: '/shop',
+      connect: '/shop'
+    }
 
     const unlinkedShops = computed(
       () => props.shops.filter((shop) => !shop.uuid || (shop.uuid && shop.isLinkedV4)),
@@ -145,13 +149,13 @@ export default defineComponent({
       employeeId: props.backendUser.employeeId.toString(),
     })));
 
-    function openLinkShopModal(act: string) {
+    function openLinkShopModal(act: actions) {
       if (!props.backendUser.isSuperAdmin) {
         return;
       }
 
-      action.value = act;
-      trackAssociateOrManageAccountButton(action.value);
+      trackAssociateOrManageAccountButton(act);
+      specificUiUrl.value = chooseUiUrlFromAction?.[act];
 
       cdcUiDisplayed.value = true;
     }
@@ -160,17 +164,6 @@ export default defineComponent({
       cdcUiDisplayed.value = false;
       window.location.reload();
     }
-
-    watch(cdcUiDisplayed, (cdcUiDisplayed) => {
-      if (cdcUiDisplayed) {
-        (refs.linkShopModal as InstanceType<typeof LinkShopModal>)?.open();
-        document.body.classList.add('ui-displayed');
-        return;
-      }
-
-      (refs.linkShopModal as InstanceType<typeof LinkShopModal>)?.close();
-      document.body.classList.remove('ui-displayed');
-    });
 
     return {
       cdcUiDisplayed,
@@ -190,7 +183,4 @@ export default defineComponent({
 </script>
 
 <style>
-body.ui-displayed {
-  overflow: hidden;
-}
 </style>
