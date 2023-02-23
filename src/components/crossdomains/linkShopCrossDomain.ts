@@ -8,8 +8,8 @@ export default zoid.create({
   defaultContext: "popup",
 
   dimensions: {
-    width: "600px",
-    height: "600px"
+    width: "1200px",
+    height: "800px"
   },
 
   props: {
