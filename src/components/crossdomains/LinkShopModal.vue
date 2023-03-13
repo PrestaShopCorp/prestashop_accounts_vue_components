@@ -4,7 +4,6 @@
 
 <script lang="ts">
 import {defineComponent, onMounted} from 'vue-demi';
-import useSegmentTracking from '@/composables/useSegmentTracking';
 import LinkShopCrossDomain from './linkShopCrossDomain';
 
 export default defineComponent({
@@ -32,14 +31,11 @@ export default defineComponent({
     },
   },
   setup(props, {emit}) {
-    const {properties: trackingProps, reset} = useSegmentTracking();
     const linkShop = LinkShopCrossDomain({
       app: props.app,
       specificUiUrl: props.specificUiUrl,
       shops: props.shops,
       onBoardingFinished: close,
-      tracking: trackingProps,
-      onLogout,
       accountsUiUrl: props.accountsUiUrl,
       triggerFallback,
       onDestroy: () => close(),
@@ -51,10 +47,6 @@ export default defineComponent({
     function close() {
       linkShop?.close();
       emit('closed');
-    }
-
-    function onLogout() {
-      reset();
     }
 
     function triggerFallback() {
@@ -74,7 +66,7 @@ export default defineComponent({
     });
 
     return {
-      open, close, onLogout, trackingProps, triggerFallback,
+      open, close, triggerFallback,
     };
   },
 });

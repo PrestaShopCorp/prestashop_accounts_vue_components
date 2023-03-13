@@ -6,7 +6,6 @@
     <p class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6">
       {{ $t('psaccounts.account.pleaseContact') }}
       <a
-        @click="trackLinkContactAdmin"
         :href="'mailto:' + superAdminEmail"
         class="acc-font-semibold acc-text-grey-900 acc-underline hover:acc-text-grey-600">
         {{ superAdminEmail }}
@@ -18,7 +17,6 @@
 <script lang="ts">
 import {defineComponent} from 'vue-demi';
 import BaseAlert from './BaseAlert.vue';
-import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
  * This component shows a warning alert isfthe user is not a superadmin
@@ -37,11 +35,6 @@ export default defineComponent({
       type: String,
       required: true,
     },
-  },
-  setup() {
-    const {trackLinkContactAdmin} = useSegmentTracking();
-
-    return {trackLinkContactAdmin};
   },
 });
 </script>

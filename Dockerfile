@@ -1,5 +1,5 @@
 # Build package (install js depdendencies)
-FROM node:lts-alpine as package
+FROM node:16-alpine as package
 
 WORKDIR /app
 

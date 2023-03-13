@@ -12,7 +12,6 @@
 <script lang="ts">
 import {defineComponent} from 'vue-demi';
 import BaseAlert from './BaseAlert.vue';
-import useSegmentTracking from '@/composables/useSegmentTracking';
 
 /**
    * This component shows a warning alert if the user email is not validated
@@ -34,11 +33,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const {trackLinkResendEmailValidation} = useSegmentTracking();
-
     function sendEmailConfirmation() {
-      trackLinkResendEmailValidation();
-
       window.open(props.ssoResendVerificationEmail, '_blank');
     }
 

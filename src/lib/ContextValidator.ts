@@ -76,7 +76,6 @@ export const contextSchema = Joi.object().keys({
   psAccountsVersion: Joi.string().optional(),
   psIs17: Joi.boolean().required(),
   psxName: Joi.string(),
-  segmentApiKey: Joi.string().allow(null).default(null),
   shops: Joi.array().items(shopGroupSchema).required().min(0)
     .max(128),
   ssoResendVerificationEmail: Joi.string().uri().optional().allow(null)

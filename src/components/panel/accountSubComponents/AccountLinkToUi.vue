@@ -60,7 +60,6 @@ import BaseButton from '@/components/BaseButton.vue';
 import BaseDropdown from '@/components/BaseDropdown.vue';
 import BaseDropdownItemButton from '@/components/BaseDropdownItemButton.vue';
 import LinkShopModal from '@/components/crossdomains/LinkShopModal.vue';
-import useSegmentTracking from '@/composables/useSegmentTracking';
 
 type actionToUrlType = {
   reonboard: string,
@@ -109,7 +108,6 @@ export default defineComponent({
   setup(props) {
     const cdcUiDisplayed = ref(false);
 
-    const {trackAssociateOrManageAccountButton} = useSegmentTracking();
 
     const hasAllShopsLinked = computed(() => unlinkedShops.value.length === 0);
 
@@ -154,7 +152,6 @@ export default defineComponent({
         return;
       }
 
-      trackAssociateOrManageAccountButton(act);
       specificUiUrl.value = chooseUiUrlFromAction?.[act];
 
       cdcUiDisplayed.value = true;
