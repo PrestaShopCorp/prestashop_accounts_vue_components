@@ -2,16 +2,14 @@ import * as zoid from 'zoid/dist/zoid.frameworks';
 
 const zoidExport = window?.psAccountZoidExport || zoid.create({
   tag: "crossdomains-account-link-shop",
-  // TODO Put accounts-ui prod url when there is no env
   url: ({ props }: { props: Record<string, unknown> }) =>
-    `${props.accountsUiUrl}${props.specificUiUrl}/`,
+    `${props.accountsUiUrl}${props.specificUiUrl}/?isPopup=true`,
 
-  context: "iframe",
+  defaultContext: "popup",
 
-  // The size of the component on their page. Only px and % strings are supported
   dimensions: {
-    height: "100%",
-    width: "100%",
+    width: "900px",
+    height: "600px"
   },
 
   props: {

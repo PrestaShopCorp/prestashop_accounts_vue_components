@@ -1,48 +1,13 @@
 <template>
-  <transition name="fade">
-    <div
-      v-show="opened"
-      class="acc-z-1500 acc-fixed acc-inset-0 acc-bg-black acc-bg-opacity-50 acc-overflow-hidden acc-outline-none"
-    >
-      <div
-        class="acc-flex acc-flex-col acc-items-center acc-justify-center acc-w-full acc-h-full"
-        role="document"
-      >
-        <div
-          v-if="opened"
-          class="acc-w-screen acc-h-screen acc-bg-white acc-rounded-lg acc-shadow-2xl acc-overflow-hidden crossdomain"
-          v-click-outside="close"
-        >
-          <link-shop-crossdomain
-            :app="app"
-            :specificUiUrl="specificUiUrl"
-            :shops="shops"
-            :onBoardingFinished="close"
-            :accountsUiUrl="accountsUiUrl"
-            :triggerFallback="triggerFallback"
-          />
-        </div>
-      </div>
-    </div>
-  </transition>
+  <div></div>
 </template>
 
 <script lang="ts">
-// vue/attribute-hyphenation breaks props of cdc on lint
-/* eslint vue/attribute-hyphenation: "off" */
-import Vue from 'vue';
-import {defineComponent, onMounted, ref} from 'vue-demi';
-import vClickOutside from 'v-click-outside';
+import {defineComponent, onMounted} from 'vue-demi';
 import LinkShopCrossDomain from './linkShopCrossDomain';
 
 export default defineComponent({
   name: 'LinkShopModal',
-  components: {
-    'link-shop-crossdomain': LinkShopCrossDomain.driver('vue', Vue),
-  },
-  directives: {
-    clickOutside: vClickOutside.directive,
-  },
   props: {
     app: {
       type: String,
@@ -66,14 +31,21 @@ export default defineComponent({
     },
   },
   setup(props, {emit}) {
-    const opened = ref(false);
+    const linkShop = LinkShopCrossDomain({
+      app: props.app,
+      specificUiUrl: props.specificUiUrl,
+      shops: props.shops,
+      onBoardingFinished: close,
+      accountsUiUrl: props.accountsUiUrl,
+      triggerFallback,
+      onDestroy: () => close(),
+      onClose: () => close()
+    });
 
-    function open() {
-      opened.value = true;
-    }
+    linkShop.render(undefined, 'popup');
 
     function close() {
-      opened.value = false;
+      linkShop?.close();
       emit('closed');
     }
 
@@ -94,29 +66,8 @@ export default defineComponent({
     });
 
     return {
-      opened, open, close, triggerFallback,
+      open, close, triggerFallback,
     };
   },
 });
 </script>
-
-<style scoped>
-@screen md {
-  .crossdomain {
-    width: 90% !important;
-    height: 90% !important;
-    max-width: 990px;
-    max-height: 810px;
-  }
-}
-.crossdomain > div {
-  width: 100%;
-  height: 100%;
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .25s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-</style>
