@@ -59,7 +59,7 @@
 <script lang="ts">
 import {
   computed, defineComponent, onMounted, PropType, ref,
-} from 'vue-demi';
+} from 'vue';
 import {Context} from '@/types/context';
 import AccountPanel from '@/components/panel/AccountPanel.vue';
 import BaseAlert from '@/components/alert/BaseAlert.vue';

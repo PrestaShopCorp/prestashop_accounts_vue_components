@@ -1,33 +1,21 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    browser: true,
+    es2021: true,
+    node: true
   },
-  extends: [
-    // 'plugin:vue/strongly-recommended',
-    'plugin:vue/essential',
-    // 'prestashop',
-    '@vue/typescript/recommended',
-  ],
+  extends: ['@prestashopcorp/eslint-config-ts', 'plugin:vue/vue3-recommended'],
+  parser: "vue-eslint-parser",
   parserOptions: {
-    ecmaVersion: 2020,
+    parser: '@typescript-eslint/parser',
+    project: ['./tsconfig.json'],
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    extraFileExtensions: [".vue"]
   },
+  ignorePatterns: ['.eslintrc.js', 'commitlint.config.js', 'playground/src/vite-env.d.ts', 'dist'],
   rules: {
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': 'off',
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-  },
-
-  overrides: [
-    {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
-      env: {
-        jest: true,
-      },
-    },
-  ],
+    '@typescript-eslint/explicit-function-return-type': 'off'
+  }
 };

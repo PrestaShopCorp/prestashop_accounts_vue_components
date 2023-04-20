@@ -14,7 +14,7 @@
 import {
   computed,
   defineComponent, ref,
-} from 'vue-demi';
+} from 'vue';
 import ModuleAlert from '@/components/alert/ModuleAlert.vue';
 import usePSModuleManagement, {Action, Module} from '@/composables/usePSModuleManagement';
 import usePSAccountsContext from '@/composables/usePSAccountsContext';

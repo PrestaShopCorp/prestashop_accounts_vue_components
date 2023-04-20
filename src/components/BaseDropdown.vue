@@ -1,15 +1,15 @@
 <template>
   <div
     class="acc-relative acc-inline-flex acc-font-primary acc-align-middle"
-    v-click-outside="closeDropdown"
+    ref="dropdown"
     @keyup.esc="closeDropdown">
     <!--
       click event
       @event click
     -->
     <BaseButton
-      :id="`acc-dropdown-${_uid}`"
-      variant="secondary"
+      :id="`acc-dropdown-${uid}`"
+      :variant="Variant.Secondary"
       :disabled="disabled"
       class="acc-rounded-r-none"
       @click="$emit('click')">
@@ -37,10 +37,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from 'vue-demi';
-import vClickOutside from 'v-click-outside';
-import BaseButton from './BaseButton.vue';
-import MoreHorIcon from '@/assets/icons/more_hor.svg?inline';
+import { defineComponent, ref } from 'vue';
+import BaseButton, { Variant } from './BaseButton.vue';
+import MoreHorIcon from '@/assets/icons/more_hor.vue';
+import { onClickOutside } from "@vueuse/core"
 
 /**
  * This is the BaseDropdown component.
@@ -50,9 +50,6 @@ export default defineComponent({
   components: {
     BaseButton,
     MoreHorIcon,
-  },
-  directives: {
-    clickOutside: vClickOutside.directive,
   },
   props: {
     /**
@@ -72,12 +69,16 @@ export default defineComponent({
   },
   setup() {
     const expanded = ref(false);
+    const dropdown = ref(null);
+    const uid = Math.floor(Math.random() * 10000);
 
     const closeDropdown = () => expanded.value = false;
 
     const toggleDropdown = () => expanded.value = !expanded.value;
 
-    return {expanded, closeDropdown, toggleDropdown};
+    onClickOutside(dropdown, closeDropdown)
+
+    return {expanded, closeDropdown, toggleDropdown, uid, Variant};
   }
 });
 </script>

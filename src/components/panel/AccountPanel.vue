@@ -56,7 +56,7 @@
 <script lang="ts">
 import {
   computed, defineComponent, PropType,
-} from 'vue-demi';
+} from 'vue';
 import {Shop} from '@/types/context';
 import BaseCard from '@/components/BaseCard.vue';
 import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader.vue';

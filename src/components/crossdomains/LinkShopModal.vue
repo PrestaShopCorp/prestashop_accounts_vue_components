@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted} from 'vue-demi';
+import { defineComponent, onMounted } from 'vue';
 import LinkShopCrossDomain from './linkShopCrossDomain';
 
 export default defineComponent({

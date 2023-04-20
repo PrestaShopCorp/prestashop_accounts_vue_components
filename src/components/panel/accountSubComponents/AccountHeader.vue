@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue-demi';
-import CheckIcon from '@/assets/icons/check.svg?inline';
+import CheckIcon from '@/assets/icons/check.vue';
 
 export default defineComponent({
   name: 'AccountHeader',

@@ -5,5 +5,3 @@ declare module '*.vue' {
 }
 
 declare module 'zoid/dist/zoid.frameworks';
-declare module 'v-click-outside';
-declare module '@prestashopcorp/segment-vue';

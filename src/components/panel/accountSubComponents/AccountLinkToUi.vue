@@ -54,7 +54,7 @@
 <script lang="ts">
 import {
   computed, defineComponent, PropType, ref,
-} from 'vue-demi';
+} from 'vue';
 import {Shop, ShopContext} from '@/types/context';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseDropdown from '@/components/BaseDropdown.vue';

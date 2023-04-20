@@ -1,5 +1,5 @@
 <template>
-  <BaseAlert variant="warning">
+  <BaseAlert :variant="Variant.Warning">
     <p class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6">
       {{ $t('psaccounts.account.needToBeAdmin') }}
     </p>
@@ -14,27 +14,16 @@
   </BaseAlert>
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue-demi';
-import BaseAlert from './BaseAlert.vue';
-
+<script setup lang="ts">
 /**
  * This component shows a warning alert isfthe user is not a superadmin
  * and tell him to contact one to continue the process.
  */
-export default defineComponent({
-  name: 'UserNotSuperAdminAlert',
-  components: {
-    BaseAlert,
-  },
-  props: {
-    /**
-     * Super admin email
-     */
-    superAdminEmail: {
-      type: String,
-      required: true,
-    },
-  },
-});
+import BaseAlert, { Variant } from './BaseAlert.vue';
+
+interface UserNotSuperAdminAlert {
+  superAdminEmail: string;
+}
+
+defineProps<UserNotSuperAdminAlert>()
 </script>

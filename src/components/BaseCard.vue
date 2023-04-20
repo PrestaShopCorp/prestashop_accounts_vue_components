@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue-demi';
+import {defineComponent} from 'vue';
 
 /**
  * This is the BaseCard component.

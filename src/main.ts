@@ -1,36 +1,31 @@
-import Vue from 'vue';
-import VueI18n from 'vue-i18n';
-import i18n from './i18n';
+import { App, createApp } from 'vue';
+import { i18n } from './locales';
 import PsAccounts from '@/components/PsAccounts.vue';
 import AccountPanel from '@/components/panel/AccountPanel.vue';
 import {isOnboardingCompleted} from '@/lib/Helpers';
 
-const version = process.env.VUE_APP_VERSION;
+const version = "5.0.0"
 
-const Components: Record<string, Vue.VueConstructor> = {
+const Components: Record<string, any> = {
   PsAccounts,
   AccountPanel,
 };
 
 const Plugin = {
-  install(vue: typeof Vue) {
-    vue.use(VueI18n);
+  install(app: App) {
+    app.use(i18n);
 
     Object.keys(Components).forEach((name) => {
-      vue.component(name, Components[name]);
+      app.component(name, Components[name]);
     });
   },
 };
 
-function init() {
-  Vue.use(Plugin);
+const app = createApp(PsAccounts);
 
-  new Vue({
-    i18n: i18n(),
-    components: {
-      'prestashop-accounts': PsAccounts,
-    },
-  }).$mount('prestashop-accounts');
+function init() {
+
+  app.use(Plugin).mount('prestashop-accounts');
 }
 
 export default {
