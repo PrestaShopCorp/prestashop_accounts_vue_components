@@ -1,64 +1,65 @@
 <template>
-  <BaseCard>
-    <template #header>
-      <AccountHeader :has-all-shops-linked="hasAllShopsLinked">
-        {{ $tc('psaccounts.account.title', shopsWithUrl.length) }}
-      </AccountHeader>
-    </template>
-    <template #body>
-      <ShopUrlShouldExistsAlert
-        v-if="hasShopsWithoutUrl"
-        :has-all-shops-without-url="hasAllShopsWithoutUrl"
-        :shop-names-without-url="shopNamesWithoutUrl"
+  <puik-card>
+    <AccountHeader :has-all-shops-linked="hasAllShopsLinked">
+      {{ $tc('psaccounts.account.title', shopsWithUrl.length) }}
+    </AccountHeader>
+    <ShopUrlShouldExistsAlert
+      v-if="hasShopsWithoutUrl"
+      :has-all-shops-without-url="hasAllShopsWithoutUrl"
+      :shop-names-without-url="shopNamesWithoutUrl"
+    />
+
+    <div
+      class="acc-flex acc-flex-col acc-items-center md:acc-flex-row"
+      :class="{'acc-mt-2': hasShopsWithoutUrl}"
+    >
+      <AccountShopLinkMessage
+        class="md:acc-mr-2"
+        :shops="shopsWithUrl"
       />
-
-      <div
-        class="acc-flex acc-flex-col acc-items-center md:acc-flex-row"
-        :class="{'acc-mt-2': hasShopsWithoutUrl}">
-        <AccountShopLinkMessage
-          class="md:acc-mr-2"
-          :shops="shopsWithUrl" />
-        <AccountLinkToUi
-          class="acc-mt-2 md:acc-mt-0"
-          :accounts-ui-url="accountsUiUrl"
-          :app="app"
-          :backend-user="backendUser"
-          :onboarding-link="onboardingLink"
-          :shops="shopsWithUrl"
-          :shop-context="shopContext"
-        />
-      </div>
-
-      <ModuleUpdateInformationAlert
-        v-if="isLinkedV4"
-        class="acc-mt-6"
+      <AccountLinkToUi
+        class="acc-mt-2 md:acc-mt-0"
+        :accounts-ui-url="accountsUiUrl"
+        :app="app"
+        :backend-user="backendUser"
+        :onboarding-link="onboardingLink"
+        :shops="shopsWithUrl"
+        :shop-context="shopContext"
       />
+    </div>
 
-      <UserEmailNotValidatedAlert
-        v-if="userHasEmailNotVerified"
-        class="acc-mt-6"
-        :sso-resend-verification-email="ssoResendVerificationEmail"
-      />
+    <ModuleUpdateInformationAlert
+      v-if="isLinkedV4"
+      class="acc-mt-6"
+    />
 
-      <UserNotSuperAdminAlert
-        v-if="!backendUser.isSuperAdmin"
-        class="acc-mt-6"
-        :super-admin-email="superAdminEmail"
-      />
+    <UserEmailNotValidatedAlert
+      v-if="userHasEmailNotVerified"
+      class="acc-mt-6"
+      :sso-resend-verification-email="ssoResendVerificationEmail"
+    />
 
-      <div v-if="$slots.default" class="acc-mt-6">
-        <slot />
-      </div>
-    </template>
-  </BaseCard>
+    <UserNotSuperAdminAlert
+      v-if="!backendUser.isSuperAdmin"
+      class="acc-mt-6"
+      :super-admin-email="superAdminEmail"
+    />
+
+    <div
+      v-if="hasSlotContent($slots.default)"
+      class="acc-mt-6"
+    >
+      <slot />
+    </div>
+  </puik-card>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {
-  computed, defineComponent, PropType,
+  computed, onMounted, useSlots
 } from 'vue';
-import {Shop} from '@/types/context';
-import BaseCard from '@/components/BaseCard.vue';
+import { Shop } from '@/types/context';
+import { hasSlotContent } from '@/lib/utils';
 import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader.vue';
 import AccountLinkToUi from '@/components/panel/accountSubComponents/AccountLinkToUi.vue';
 import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage.vue';
@@ -72,116 +73,81 @@ import UserNotSuperAdminAlert from '@/components/alert/UserNotSuperAdminAlert.vu
    * does not meets special needs.
    * This part will display a block to let the user link his account through a button.
    */
-export default defineComponent({
-  name: 'AccountPanel',
-  components: {
-    BaseCard,
-    AccountHeader,
-    AccountLinkToUi,
-    AccountShopLinkMessage,
-    ModuleUpdateInformationAlert,
-    ShopUrlShouldExistsAlert,
-    UserEmailNotValidatedAlert,
-    UserNotSuperAdminAlert,
-  },
-  props: {
+  interface AccountPanelProps {
     /**
-         * URL loaded inside the association workflow modal<br />
-         * should be https://accounts.distribution.prestashop.net/en
-         */
-    accountsUiUrl: {
-      type: String,
-      required: true,
-    },
+    * URL loaded inside the association workflow modal<br />
+    * should be https://accounts.distribution.prestashop.net/en
+    */
+    accountsUiUrl: string;
     /**
-         * Name of the module
-         */
-    app: {
-      type: String,
-      required: true,
-    },
+    * Name of the module
+    */
+    app: string;
     /**
-         * User currently logged into the back office
-         */
-    backendUser: {
-      type: Object,
-      required: true,
-    },
+    * User currently logged into the back office
+    */
+    backendUser: Record<string, any>;
     /**
-         * The onboarding link, generated
-         * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended)
-         */
-    onboardingLink: {
-      type: String,
-      required: true,
-    },
+    * The onboarding link, generated
+    * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended)
+    */
+    onboardingLink: string;
     /**
-         * In multistore context, contains the whole shop tree (all groups and all shops).
-         * In single shop context, contains this shop information
-         */
-    shops: {
-      type: Array as PropType<Shop[]>,
-      default: () => [],
-    },
+    * In multistore context, contains the whole shop tree (all groups and all shops).
+    * In single shop context, contains this shop information
+    */
+    shops?: Shop[];
     /**
-         * Current shop context, possible values :<br />
-         * 4 - all shops<br />
-         * 2 - group<br />
-         * 1 - single shop
-         */
-    shopContext: {
-      type: Number,
-      required: true,
-    },
+    * Current shop context, possible values :<br />
+    * 4 - all shops<br />
+    * 2 - group<br />
+    * 1 - single shop
+    */
+    shopContext: number;
     /**
-         * URL used for activating PrestaShop Accounts<br />
-         * should be https://auth.prestashop.com/account/send-verification-email
-         */
-    ssoResendVerificationEmail: {
-      type: String,
-      required: true,
-    },
+    * URL used for activating PrestaShop Accounts<br />
+    * should be https://auth.prestashop.com/account/send-verification-email
+    */
+    ssoResendVerificationEmail: string;
     /**
-         * The super admin email used in the wording
-         * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended)
-         */
-    superAdminEmail: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    const hasAllShopsLinked = computed(() => shopsWithUrl.value.every((shop) => shop.uuid));
+    * The super admin email used in the wording
+    * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended)
+    */
+    superAdminEmail: string;
+  }
 
-    const hasAllShopsWithoutUrl = computed(() => props.shops.every((shop) => shop.domain === null));
-
-    const hasShopsWithoutUrl = computed(() => props.shops.some((shop) => shop.domain === null));
-
-    const isLinkedV4 = computed(() => shopsWithUrl.value.every((shop) => shop.isLinkedV4));
-
-    const shopsWithUrl = computed(() => props.shops.filter((shop) => shop.domain));
-
-    const shopNamesWithoutUrl = computed(
-      () => props.shops.filter((shop) => shop.domain === null)
-        .map((shop) => shop.name),
-    );
-
-    const userHasEmailNotVerified = computed(() => shopsWithUrl.value.some((shop) => {
-      const isUser = shop.employeeId === props.backendUser.employeeId;
-      const hasEmailVerified = shop.user && shop.user.emailIsValidated;
-
-      return isUser && !hasEmailVerified && !shop.isLinkedV4;
-    }));
-
-    return {
-      hasAllShopsLinked,
-      hasAllShopsWithoutUrl,
-      hasShopsWithoutUrl,
-      isLinkedV4,
-      shopsWithUrl,
-      shopNamesWithoutUrl,
-      userHasEmailNotVerified,
-    };
-  },
+const props = withDefaults(defineProps<AccountPanelProps>(), {
+  shops: () => []
 });
+
+const slots = useSlots();
+
+const shopsWithUrl = computed(() => props.shops.filter((shop) => shop.domain));
+
+const hasAllShopsWithoutUrl = computed(() => props.shops.every((shop) => shop.domain === null));
+
+const hasShopsWithoutUrl = computed(() => props.shops.some((shop) => shop.domain === null));
+
+const hasAllShopsLinked = computed(() => shopsWithUrl.value.every((shop) => shop.uuid));
+
+const isLinkedV4 = computed(() => shopsWithUrl.value.every((shop) => shop.isLinkedV4));
+
+const shopNamesWithoutUrl = computed(
+  () => props.shops.filter((shop) => shop.domain === null)
+    .map((shop) => shop.name)
+);
+
+const userHasEmailNotVerified = computed(() => shopsWithUrl.value.some((shop) => {
+  const isUser = shop.employeeId === props.backendUser.employeeId;
+  const hasEmailVerified = shop.user && shop.user.emailIsValidated;
+
+  return isUser && !hasEmailVerified && !shop.isLinkedV4;
+}));
+
+const kek = computed(() => hasSlotContent(slots.default));
+
+onMounted(() => {
+  console.log(kek.value);
+});
+
 </script>

@@ -1,9 +1,10 @@
 <template>
-  <BaseAlert :variant="Variant.Info">
+  <puik-alert variant="info">
     <p
+      class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6"
       v-html="$t('psaccounts.account.moduleUpdateInformation')"
-      class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6" />
-  </BaseAlert>
+    />
+  </puik-alert>
 </template>
 
 <script setup lang="ts">
@@ -12,5 +13,5 @@
    * an information alert informs the user to reonboard
    * with the same email and update other modules.
    */
-import BaseAlert, { Variant } from './BaseAlert.vue';
+// TODO: use i18n component
 </script>

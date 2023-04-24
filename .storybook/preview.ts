@@ -1,17 +1,17 @@
-import Vue from "vue";
-import { ScopedCss  } from "./decorators/scoped-css";
-import { VueI18n } from "@/ExternalDependencies";
-import i18n from '@/i18n';
-
+import { i18n } from './../src/locales/index';
+import { ScopedCss } from "./decorators/scoped-css";
 import "@/assets/css/index.css";
+import { setup } from "@storybook/vue3"
 
-Vue.use(VueI18n);
+setup((app) => {
+  app.use(i18n);
+})
+
 
 export const decorators = [
   ScopedCss,
   () => {
     return {
-      i18n: i18n(),
       template: `<story />`,
     };
   },

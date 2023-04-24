@@ -4,7 +4,11 @@
       v-if="hasAllShopsLinked"
       class="acc-flex-shrink-0 acc-w-6 acc-h-6 acc-mr-2 acc-p-0.5 acc-rounded-full acc-bg-success-500"
     >
-      <CheckIcon class="acc-text-white" />
+      <puik-icon
+        class="acc-text-white"
+        font-size="1.25rem"
+        icon="check"
+      />
     </span>
     <p class="acc-m-0 acc-font-primary acc-font-semibold">
       <slot />
@@ -12,20 +16,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue-demi';
-import CheckIcon from '@/assets/icons/check.vue';
+<script setup lang="ts">
+interface AccountHeaderProps {
+  hasAllShopsLinked: boolean;
+}
 
-export default defineComponent({
-  name: 'AccountHeader',
-  components: {
-    CheckIcon,
-  },
-  props: {
-    hasAllShopsLinked: {
-      type: Boolean,
-      required: true,
-    },
-  },
-});
+defineProps<AccountHeaderProps>();
 </script>

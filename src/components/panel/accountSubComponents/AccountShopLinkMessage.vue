@@ -4,6 +4,7 @@
       :src="require('@/assets/img/logo.png')"
       class="acc-w-11 acc-h-11 md:acc-mr-3" />
     <div class="acc-mt-2 acc-font-primary acc-text-sm acc-text-center acc-align-middle md:acc-mt-0 md:acc-text-left">
+
       <template v-if="hasSomeShopsLinked">
         <div
           v-if="hasShopsLinkedBySameUser"
@@ -35,40 +36,29 @@
   </div>
 </template>
 
-<script lang="ts">
-import {computed, defineComponent, PropType} from 'vue-demi';
-import {Shop} from '@/types/context';
+<script setup lang="ts">
+import { computed } from 'vue';
+import PuffinLogo from '@/assets/img/puffin_logo.vue';
+import { Shop } from '@/types/context';
+interface AccountShopLinkMessageProps {
+  shops?: Shop[];
+}
 
-export default defineComponent({
-  name: 'AccountShopLinkMessage',
-  props: {
-    shops: {
-      type: Array as PropType<Shop[]>,
-      default: () => [],
-    },
-  },
-  setup(props) {
-    const hasOneOrMoreNotLinkedShop = computed(() => props.shops.some((shop) => !shop.uuid));
-
-    const hasSomeShopsLinked = computed(
-      () => props.shops.some((shop) => shop.uuid && !shop.isLinkedV4),
-    );
-
-    const hasShopsLinkedBySameUser = computed(
-      () => props.shops.every((shop) => shop.employeeId === props.shops[0].employeeId),
-    );
-
-    const linkedShops = computed(() => props.shops.filter((shop) => shop.uuid && !shop.isLinkedV4));
-
-    const linkedUserEmail = computed(() => linkedShops.value[0]?.user?.email || '');
-
-    return {
-      hasOneOrMoreNotLinkedShop,
-      hasSomeShopsLinked,
-      hasShopsLinkedBySameUser,
-      linkedShops,
-      linkedUserEmail,
-    };
-  },
+const props = withDefaults(defineProps<AccountShopLinkMessageProps>(), {
+  shops: () => []
 });
+
+const hasOneOrMoreNotLinkedShop = computed(() => props.shops.some((shop) => !shop.uuid));
+
+const hasSomeShopsLinked = computed(
+  () => props.shops.some((shop) => shop.uuid && !shop.isLinkedV4)
+);
+
+const hasShopsLinkedBySameUser = computed(
+  () => props.shops.every((shop) => shop.employeeId === props.shops[0].employeeId)
+);
+
+const linkedShops = computed(() => props.shops.filter((shop) => shop.uuid && !shop.isLinkedV4));
+
+const linkedUserEmail = computed(() => linkedShops.value[0]?.user?.email || '');
 </script>

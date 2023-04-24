@@ -1,12 +1,11 @@
-import {Context} from './types/context';
+import { Context } from './types/context';
 
 export {};
 
 declare global {
   interface Window {
-    analytics: unknown;
-    contextPsAccounts: Context;
-    iso_user: string;
-    psAccountZoidExport: any;
+    contextPsAccounts: Context
+    iso_user: string
+    psAccountZoidExport: any
   }
 }

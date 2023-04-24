@@ -1,4 +1,4 @@
-import { ArgsTable, Canvas, Description, Meta, Story, Preview, Props } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Description, Meta, Story } from '@storybook/addon-docs';
 import { action } from '@storybook/addon-actions';
 
 import UserNotSuperAdminAlert from './UserNotSuperAdminAlert.vue';
@@ -35,4 +35,4 @@ export const Template = (args, { argTypes }) => ({
 <UserNotSuperAdminAlert super-admin-email="email@example.org" />
 ```
 
-<Props of={UserNotSuperAdminAlert} />
+<ArgsTable of={UserNotSuperAdminAlert} />

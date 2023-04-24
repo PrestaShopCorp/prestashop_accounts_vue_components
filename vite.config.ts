@@ -2,9 +2,13 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
+import Components from "unplugin-vue-components/vite"
+import {PuikResolver} from "@prestashopcorp/puik"
 
 export default defineConfig({
-    plugins: [vue(), cssInjectedByJsPlugin()],
+    plugins: [vue(), Components({
+        resolvers: [PuikResolver()]
+    }), cssInjectedByJsPlugin()],
     build: {
         lib: {
             entry: resolve(__dirname, 'src/main.ts'),

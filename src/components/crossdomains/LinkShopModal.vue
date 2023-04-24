@@ -1,73 +1,55 @@
 <template>
-  <div></div>
+  <div />
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted } from 'vue';
+<script setup lang="ts">
+import { onMounted } from 'vue';
 import LinkShopCrossDomain from './linkShopCrossDomain';
+import { Shop } from '@/types/context';
 
-export default defineComponent({
-  name: 'LinkShopModal',
-  props: {
-    app: {
-      type: String,
-      required: true,
-    },
-    shops: {
-      type: Array,
-      required: true,
-    },
-    specificUiUrl: {
-      type: String,
-      required: true,
-    },
-    onBoardingLink: {
-      type: String,
-      required: true,
-    },
-    accountsUiUrl: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props, {emit}) {
-    const linkShop = LinkShopCrossDomain({
-      app: props.app,
-      specificUiUrl: props.specificUiUrl,
-      shops: props.shops,
-      onBoardingFinished: close,
-      accountsUiUrl: props.accountsUiUrl,
-      triggerFallback,
-      onDestroy: () => close(),
-      onClose: () => close()
-    });
+interface LinkShopModalProps {
+  app: string;
+  shops: Shop[];
+  specificUiUrl: string;
+  accountsUiUrl: string;
+}
 
-    linkShop.render(undefined, 'popup');
+const props = defineProps<LinkShopModalProps>();
 
-    function close() {
-      linkShop?.close();
-      emit('closed');
+const emit = defineEmits(['closed']);
+
+function close () {
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  linkShop?.close();
+  emit('closed');
+}
+
+function triggerFallback () {
+  const base64Shops = btoa(JSON.stringify(props.shops));
+  let fallbackUrl = `${props.accountsUiUrl}${props.specificUiUrl}?`;
+  fallbackUrl += `shops=${base64Shops}&return_to=${encodeURIComponent(window.location.href)}`;
+  window.location.assign(fallbackUrl);
+}
+
+const linkShop = LinkShopCrossDomain({
+  app: props.app,
+  specificUiUrl: props.specificUiUrl,
+  shops: props.shops,
+  onBoardingFinished: close,
+  accountsUiUrl: props.accountsUiUrl,
+  triggerFallback,
+  onDestroy: () => close(),
+  onClose: () => close()
+});
+
+linkShop.render(undefined, 'popup');
+
+onMounted(() => {
+  // FallBack for crossdomain component
+  setTimeout(() => {
+    if (document.querySelector('.crossdomain .zoid-invisible')) {
+      triggerFallback();
     }
-
-    function triggerFallback() {
-      const base64Shops = btoa(JSON.stringify(props.shops));
-      let fallbackUrl = `${props.accountsUiUrl}${props.specificUiUrl}?`;
-      fallbackUrl += `shops=${base64Shops}&return_to=${encodeURIComponent(window.location.href)}`;
-      window.location.assign(fallbackUrl);
-    }
-
-    onMounted(() => {
-    // FallBack for crossdomain component
-      setTimeout(() => {
-        if (document.querySelector('.crossdomain .zoid-invisible')) {
-          triggerFallback();
-        }
-      }, 60000);
-    });
-
-    return {
-      open, close, triggerFallback,
-    };
-  },
+  }, 60000);
 });
 </script>
