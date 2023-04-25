@@ -26,12 +26,3 @@ yarn-error.log*
 *.sw?
 .nova
 *.code-workspace
-
-
-#Terraform
-.cloud/.terraform*
-.cloud/gcp-token.json
-gcp-token.json
-.cloud/.terraform.lock.hcl
-.cloud/.terraform/environment
-.terraform

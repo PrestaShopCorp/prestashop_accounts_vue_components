@@ -1,8 +1,0 @@
-.cloud
-.github
-dist
-node_modules
-storybook-static
-.dockerignore
-crowdin.yml
-terraform
