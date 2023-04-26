@@ -41,11 +41,8 @@ yarn storybook
 To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page.
 
 ```html
-# To load version 4.1.0
-<script src="https://unpkg.com/prestashop_accounts_vue_components@4.1.0" defer></script>
-
-# To load latest patched version 4.1
-<script src="https://unpkg.com/prestashop_accounts_vue_components@4.1" defer></script>
+# To load latest minor version 4
+<script src="https://unpkg.com/prestashop_accounts_vue_components@4" defer></script>
 
 # To load latest version
 <script src="https://unpkg.com/prestashop_accounts_vue_components" defer></script>
@@ -67,7 +64,7 @@ If you need to use the vue cdn for your app, please create your app with the vue
 ```html
 <div id="app"></div>
 
-<script src="https://unpkg.com/prestashop_accounts_vue_components@4.0.0" defer></script>
+<script src="https://unpkg.com/prestashop_accounts_vue_components@4" defer></script>
 
 <script type="module">
   import { createApp } from "https://unpkg.com/vue@3.2.26/dist/vue.esm-browser.js";
