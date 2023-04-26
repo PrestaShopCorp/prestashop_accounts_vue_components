@@ -6,11 +6,6 @@ module.exports = {
     extend: {
       colors: {
         'blue-focus': '#458FFF',
-        brand: {
-          pink: '#E6006B',
-          'dark-pink': '#B20053',
-          'dark-blue': '#011638',
-        },
         grey: {
           50: '#FAFAFB', // Background grey in the DS
           100: '#EDEEF0', // Grey 50 in DS
@@ -20,13 +15,6 @@ module.exports = {
           500: '#C8D7E4', // Border Main in DS
           600: '#697180', // Grey 500 in DS
           900: '#363A41', // Font Main
-        },
-        purple: {
-          50: '#E9E6F8',
-          100: '#C7C0EE',
-          500: '#442CC7',
-          700: '#3521BA',
-          900: '#1F10A6',
         },
         success: {
           50: '#E4F0EA',
@@ -56,10 +44,22 @@ module.exports = {
           700: '#113DEB',
           900: '#0725E4',
         },
+        primary: {
+          get DEFAULT() {
+            return this['800']
+          },
+          100: '#FFFFFF',
+          200: '#F7F7F7',
+          300: '#EEEEEE',
+          400: '#DDDDDD',
+          500: '#BBBBBB',
+          600: '#5E5E5E',
+          700: '#3F3F3D',
+          800: '#1D1D1B',
+        }
       },
       fontFamily: {
-        primary: ['Inter', 'Helvetica', 'Verdana', 'sans-serif'],
-        secondary: ['Roboto', 'Helvetica', 'Verdana', 'sans-serif'],
+        primary: ['IBM Plex Sans', 'Helvetica', 'Verdana', 'sans-serif'],
       },
       zIndex: {
         1500: '1500',

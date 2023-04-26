@@ -28,7 +28,7 @@
       role="menu"
       tabindex="-1"
       :aria-labelledby="`acc-dropdown-${_uid}`"
-      class="acc-z-50 acc-absolute acc-top-full acc-right-0 acc-mt-1 acc-py-1 acc-bg-white acc-rounded acc-border acc-border-purple-500 acc-shadow"
+      class="acc-z-50 acc-absolute acc-top-full acc-right-0 acc-mt-1 acc-py-1 acc-bg-white acc-border acc-border-primary acc-shadow"
       style="min-width: 8rem;">
       <!-- @slot Dropdown items -->
       <slot />
