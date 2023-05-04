@@ -1,6 +1,6 @@
 {
   "name": "prestashop_accounts_vue_components",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "main": "./dist/psaccountsVue.umd.min.js",
   "files": [
     "dist/*",
@@ -19,7 +19,7 @@
     "storybook": "storybook dev"
   },
   "dependencies": {
-    "@prestashopcorp/puik": "v0.9.0",
+    "@prestashopcorp/puik": "1.2.0",
     "@vueuse/core": "^10.0.2",
     "deepmerge": "^4.3.1",
     "joi": "^17.9.1",
@@ -37,7 +37,6 @@
     "@storybook/theming": "^7.0.6",
     "@storybook/vue3": "^7.0.6",
     "@storybook/vue3-vite": "^7.0.6",
-    "@types/jest": "^24.0.19",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vue/test-utils": "^2.3.2",
     "autoprefixer": "^10.4.14",

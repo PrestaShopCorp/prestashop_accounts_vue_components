@@ -4,9 +4,12 @@
     :variant="hasAllShopsWithoutUrl ? 'danger' : 'warning'"
   >
     <p class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm">
-      <span v-html="$t('psaccounts.alertShopDomainShouldExists.message')" />
-      {{ shopNamesWithoutUrl.join(', ') }}
+      {{ $t('psaccounts.alertShopDomainShouldExists.message') }}
     </p>
+    <span class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm">
+      {{ $t('psaccounts.alertShopDomainShouldExists.shopList') }}
+      {{ shopNamesWithoutUrl.join(', ') }}
+    </span>
   </puik-alert>
 </template>
 

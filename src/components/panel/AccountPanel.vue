@@ -1,8 +1,11 @@
 <template>
-  <puik-card>
-    <AccountHeader :has-all-shops-linked="hasAllShopsLinked">
+  <puik-card
+    variant="highlight"
+    class="acc-p-6"
+  >
+    <p class="acc-m-0 puik-h5">
       {{ $tc('psaccounts.account.title', shopsWithUrl.length) }}
-    </AccountHeader>
+    </p>
     <ShopUrlShouldExistsAlert
       v-if="hasShopsWithoutUrl"
       :has-all-shops-without-url="hasAllShopsWithoutUrl"
@@ -30,18 +33,15 @@
 
     <ModuleUpdateInformationAlert
       v-if="isLinkedV4"
-      class="acc-mt-6"
     />
 
     <UserEmailNotValidatedAlert
       v-if="userHasEmailNotVerified"
-      class="acc-mt-6"
       :sso-resend-verification-email="ssoResendVerificationEmail"
     />
 
     <UserNotSuperAdminAlert
       v-if="!backendUser.isSuperAdmin"
-      class="acc-mt-6"
       :super-admin-email="superAdminEmail"
     />
 
@@ -56,17 +56,10 @@
 
 <script setup lang="ts">
 import {
-  computed, onMounted, useSlots
+  computed
 } from 'vue';
 import { Shop } from '@/types/context';
 import { hasSlotContent } from '@/lib/utils';
-import AccountHeader from '@/components/panel/accountSubComponents/AccountHeader.vue';
-import AccountLinkToUi from '@/components/panel/accountSubComponents/AccountLinkToUi.vue';
-import AccountShopLinkMessage from '@/components/panel/accountSubComponents/AccountShopLinkMessage.vue';
-import ModuleUpdateInformationAlert from '@/components/alert/ModuleUpdateInformationAlert.vue';
-import ShopUrlShouldExistsAlert from '@/components/alert/ShopUrlShouldExistsAlert.vue';
-import UserEmailNotValidatedAlert from '@/components/alert/UserEmailNotValidatedAlert.vue';
-import UserNotSuperAdminAlert from '@/components/alert/UserNotSuperAdminAlert.vue';
 
 /**
    * This sub-component can be used in a custom integration when the `PsAccounts` component
@@ -120,15 +113,11 @@ const props = withDefaults(defineProps<AccountPanelProps>(), {
   shops: () => []
 });
 
-const slots = useSlots();
-
 const shopsWithUrl = computed(() => props.shops.filter((shop) => shop.domain));
 
 const hasAllShopsWithoutUrl = computed(() => props.shops.every((shop) => shop.domain === null));
 
 const hasShopsWithoutUrl = computed(() => props.shops.some((shop) => shop.domain === null));
-
-const hasAllShopsLinked = computed(() => shopsWithUrl.value.every((shop) => shop.uuid));
 
 const isLinkedV4 = computed(() => shopsWithUrl.value.every((shop) => shop.isLinkedV4));
 
@@ -143,11 +132,5 @@ const userHasEmailNotVerified = computed(() => shopsWithUrl.value.some((shop) =>
 
   return isUser && !hasEmailVerified && !shop.isLinkedV4;
 }));
-
-const kek = computed(() => hasSlotContent(slots.default));
-
-onMounted(() => {
-  console.log(kek.value);
-});
 
 </script>

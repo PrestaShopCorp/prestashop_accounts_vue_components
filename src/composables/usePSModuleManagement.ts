@@ -9,11 +9,11 @@ export enum Module {
   PsAccounts = 'ps_accounts',
 }
 
-export default function usePSModuleManagement(isPs17: boolean) {
-  async function manageModule(module: Module, action: Action, link: string) {
+export default function usePSModuleManagement (isPs17: boolean) {
+  async function manageModule (module: Module, action: Action, link: string) {
     try {
-      const response = await fetch(link, {method: 'POST'});
-      if(isPs17) {
+      const response = await fetch(link, { method: 'POST' });
+      if (isPs17) {
         const data = await response.json();
 
         if (!response.ok) {

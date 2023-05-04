@@ -27,7 +27,6 @@ export const Template = (args, { argTypes }) => ({
 export const props = {
   context: {
     accountsUiUrl: "https://accounts.distribution.prestashop.net/en",
-    adminAjaxLink: "http://localhost:8082/admin-dev/index.php?controller=AdminAjaxPsAccounts&ajax=1&token=0c02b2c71c53f0ec068a03572123cecc",
     psIs17: true,
     psAccountsInstallLink: null,
     psAccountsEnableLink: null,
@@ -37,13 +36,6 @@ export const props = {
     currentContext: {
       id: '1',
       type: '1',
-    },
-    currentShop: {
-      id: '1',
-      name: 'PrestaShop',
-      url: 'http://localhost:8082/admin-dev/index.php?controller=AdminModules&setShopContext=s-1&token=7e6ed965a445faaa639275d16418264d',
-      domain: 'my-domain.com',
-      domainSsl: 'my-secure-domain.com',
     },
     shops: [
       {
@@ -74,7 +66,6 @@ export const props = {
     onboardingLink: 'http://perdu.com',
     superAdminEmail: 'big.boss@my-shop.com',
     ssoResendVerificationEmail: 'http://perdu.com',
-    manageAccountLink: 'http://perdu.com',
     dependencies: {
         "ps_eventbus": {
           "enableLink": "http://localhost:80/admin-dev/index.php/improve/modules/manage/action/enable/ps_eventbus?_token=up_TmQFm66p9dwunsmfNzk2UfDD3a8tsxdW5a7KviKw",
@@ -432,7 +423,7 @@ component and the standard behavior won't let the user do anything:
       ...props,
       context: {
         ...props.context,
-        manageAccountLink: 42
+        domain: 2
       },
     }}>
   {Template.bind({})}

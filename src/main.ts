@@ -2,29 +2,28 @@ import { App, createApp } from 'vue';
 import { i18n } from './locales';
 import PsAccounts from '@/components/PsAccounts.vue';
 import AccountPanel from '@/components/panel/AccountPanel.vue';
-import {isOnboardingCompleted} from '@/lib/Helpers';
+import { isOnboardingCompleted } from '@/lib/Helpers';
 
-const version = "5.0.0"
+const version = '5.0.0';
 
 const Components: Record<string, any> = {
   PsAccounts,
-  AccountPanel,
+  AccountPanel
 };
 
 const Plugin = {
-  install(app: App) {
+  install (app: App) {
     app.use(i18n);
 
     Object.keys(Components).forEach((name) => {
       app.component(name, Components[name]);
     });
-  },
+  }
 };
 
 const app = createApp(PsAccounts);
 
-function init() {
-
+function init () {
   app.use(Plugin).mount('prestashop-accounts');
 }
 
@@ -33,7 +32,7 @@ export default {
   init,
   isOnboardingCompleted,
   Plugin,
-  version,
+  version
 };
 
 export {
@@ -42,5 +41,5 @@ export {
   isOnboardingCompleted,
   Plugin,
   PsAccounts,
-  version,
+  version
 };

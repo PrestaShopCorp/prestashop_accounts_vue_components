@@ -5,9 +5,7 @@
       variant="danger"
       @dismissed="hasError = false"
     >
-      <p class="acc-text-sm acc-leading-6">
-        {{ $t('psaccounts.accountManager.errorInstallEnable') }}
-      </p>
+      {{ $t('psaccounts.accountManager.errorInstallEnable') }}
     </puik-alert>
 
     <puik-alert
@@ -15,15 +13,13 @@
       :class="{'acc-mt-4': hasError}"
       variant="danger"
     >
-      <p class="acc-text-sm acc-leading-6">
-        &lt;PsAccounts&gt; integration: Given context is invalid:
-        {{ context.errors.join(';') }}
-      </p>
+      &lt;PsAccounts&gt; integration: Given context is invalid:
+      {{ context.errors.join(';') }}
     </puik-alert>
     <template v-else>
       <PsAccountComponentAlertDisplay
         class="acc-mb-4"
-        @hasError="hasError = true"
+        @has-error="hasError = true"
       />
       <template v-if="!hasBlockingAlert">
         <AccountPanel
@@ -61,9 +57,6 @@ import {
   computed, onMounted, ref
 } from 'vue';
 import { Context } from '@/types/context';
-import AccountPanel from '@/components/panel/AccountPanel.vue';
-import BaseOverlay from '@/components/BaseOverlay.vue';
-import PsAccountComponentAlertDisplay from '@/containers/PsAccountComponentAlertDisplay.vue';
 import usePSAccountsContext from '@/composables/usePSAccountsContext';
 import '@/assets/css/index.css';
 

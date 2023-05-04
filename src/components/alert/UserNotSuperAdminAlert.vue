@@ -5,12 +5,9 @@
     </p>
     <p class="acc-m-0 acc-p-0">
       {{ $t('psaccounts.account.pleaseContact') }}
-      <a
-        :href="'mailto:' + superAdminEmail"
-        class="acc-font-semibold acc-text-grey-900 acc-underline hover:acc-text-grey-600"
-      >
+      <puik-link :href="'mailto:' + superAdminEmail">
         {{ superAdminEmail }}
-      </a>
+      </puik-link>
     </p>
   </puik-alert>
 </template>

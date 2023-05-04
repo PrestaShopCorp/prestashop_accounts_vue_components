@@ -12,10 +12,8 @@ export interface BackendUser {
 
 export interface Context {
   accountsUiUrl: string
-  adminAjaxLink: string
   backendUser: Partial<BackendUser>
   currentContext: CurrentContext
-  currentShop: Shop | null
   dependencies?: Record<
   string,
   {
@@ -25,9 +23,6 @@ export interface Context {
     enableLink?: string
   }
   >
-  isOnboardedV4: boolean
-  isShopContext: boolean
-  manageAccountLink: string
   onboardingLink: string
   psAccountsEnableLink: string | null
   psAccountsInstallLink: string | null
@@ -35,7 +30,6 @@ export interface Context {
   psAccountsIsInstalled: boolean
   psAccountsIsUptodate: boolean
   psAccountsUpdateLink: string | null
-  psAccountsVersion: string
   psIs17: boolean
   psxName: string
   shops: ShopGroup[]

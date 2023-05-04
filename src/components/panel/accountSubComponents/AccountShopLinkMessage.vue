@@ -4,7 +4,6 @@
       :src="require('@/assets/img/logo.png')"
       class="acc-w-11 acc-h-11 md:acc-mr-3" />
     <div class="acc-mt-2 acc-font-primary acc-text-sm acc-text-center acc-align-middle md:acc-mt-0 md:acc-text-left">
-
       <template v-if="hasSomeShopsLinked">
         <div
           v-if="hasShopsLinkedBySameUser"
@@ -12,7 +11,7 @@
           <p class="acc-m-0">
             {{ $tc('psaccounts.account.authorized', linkedShops.length) }}
           </p>
-          <p class="acc-m-0 acc-text-grey-600 acc-break-words">
+          <p class="acc-m-0 acc-text-font-500 acc-break-words">
             {{ linkedUserEmail }}
           </p>
         </div>

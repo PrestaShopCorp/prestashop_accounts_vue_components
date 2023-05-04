@@ -16,6 +16,7 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js', 'commitlint.config.js', 'playground/src/vite-env.d.ts', 'dist'],
   rules: {
-    '@typescript-eslint/explicit-function-return-type': 'off'
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/strict-boolean-expressions': 'off'
   }
 };

@@ -1,9 +1,20 @@
 <template>
   <puik-alert variant="info">
-    <p
+    <i18n-t
       class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6"
-      v-html="$t('psaccounts.account.moduleUpdateInformation')"
-    />
+      keypath="psaccounts.account.moduleUpdateInformation.part1"
+      tag="p"
+    >
+      <strong>{{ $t('psaccounts.account.moduleUpdateInformation.part2') }}</strong>
+    </i18n-t>
+    <i18n-t
+      class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6"
+      keypath="psaccounts.account.moduleUpdateInformation.part3"
+      tag="p"
+    >
+      <strong>{{ $t('psaccounts.account.moduleUpdateInformation.part4') }}</strong>
+    </i18n-t>
+    {{ $t('psaccounts.account.moduleUpdateInformation.part5') }}
   </puik-alert>
 </template>
 
@@ -13,5 +24,4 @@
    * an information alert informs the user to reonboard
    * with the same email and update other modules.
    */
-// TODO: use i18n component
 </script>
