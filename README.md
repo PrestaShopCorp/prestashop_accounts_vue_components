@@ -30,12 +30,6 @@ yarn install
 yarn storybook
 ```
 
-#### Integration / Production
-
-[Storybook integration](https://storybook-accounts.distribution-integration.prestashop.net/) (triggered on PR labeled 'quality assurance needed')
-
-[Storybook production](https://storybook-accounts.distribution.prestashop.net/) (triggered on push master/main)
-
 ### CDN
 
 To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page.
