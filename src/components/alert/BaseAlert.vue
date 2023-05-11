@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="isDisplayed"
-    class="acc-relative acc-flex acc-flex-col md:acc-flex-row acc-items-start acc-p-4 acc-border acc-rounded-lg"
+    class="acc-relative acc-flex acc-flex-col md:acc-flex-row acc-items-start acc-p-4 acc-border"
     :class="{
       'acc-bg-success-50 acc-border-success-500': variant === 'success',
       'acc-bg-danger-50 acc-border-danger-500': variant === 'danger',
@@ -20,7 +20,7 @@
       }" />
       <div class="acc-mx-4">
         <h3 v-if="title" class="acc-text-base acc-font-semibold acc-font-primary acc-mb-1">{{ title }}</h3>
-        <div class="acc-flex-1 acc-font-secondary acc-text-sm">
+        <div class="acc-flex-1 acc-font-primary acc-text-sm">
           <!-- @slot Alert description -->
           <slot />
         </div>
@@ -29,7 +29,7 @@
 
     <button
         v-if="buttonLabel"
-        class="acc-font-primary acc-text-grey-900 acc-font-semibold acc-text-sm acc-px-4 acc-py-3 acc-border acc-rounded acc-mt-2 acc-ml-10 md:acc-m-0 block"
+        class="block acc-font-primary acc-text-grey-900 acc-font-semibold acc-text-sm acc-px-4 acc-py-3 acc-border acc-mt-2 acc-ml-10 md:acc-m-0"
         :class="{
           'acc-border-success-500': variant === 'success',
           'acc-border-danger-500': variant === 'danger',
