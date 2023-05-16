@@ -47,10 +47,6 @@ const zoidExport = window?.psAccountZoidExport || zoid.create({
     accountsUiUrl: {
       type: 'string',
       required: true
-    },
-    triggerFallback: {
-      type: 'function',
-      required: false
     }
   }
 });

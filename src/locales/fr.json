@@ -23,20 +23,6 @@
           "action": "Mettre à jour",
           "loading": "Le module Compte PrestaShop est actuellement en cours de mise à jour..."
         }
-      },
-      "ps_eventbus": {
-        "enable": {
-          "title": "Activez le module PrestaShop Event Bus",
-          "message": "Vous avez besoin du module PrestaShop Event Bus pour continuer à configurer ce module.",
-          "action": "Activer",
-          "loading": "Le module PrestaShop Event Bus est actuellement en cours d'activation..."
-        },
-        "install": {
-          "title": "Installez le module Prestashop Event Bus",
-          "message": "Le module Prestashop Event Bus est nécessaire pour continuer la configuration de ce module.",
-          "action": "Installer",
-          "loading": "Installation du module Prestashop Event Bus en cours..."
-        }
       }
     },
     "alertShopDomainShouldExists": {

@@ -1,50 +1,62 @@
 <template>
   <div id="psaccounts">
-    <puik-alert
-      v-show="hasError"
-      variant="danger"
-      @dismissed="hasError = false"
-    >
-      {{ $t('psaccounts.accountManager.errorInstallEnable') }}
-    </puik-alert>
-
-    <puik-alert
-      v-if="context.errors && context.errors.length"
-      :class="{'acc-mt-4': hasError}"
-      variant="danger"
-    >
-      &lt;PsAccounts&gt; integration: Given context is invalid:
-      {{ context.errors.join(';') }}
-    </puik-alert>
+    <ContextValidatorAlert
+      v-if="errors.length"
+      :errors="errors"
+    />
     <template v-else>
-      <PsAccountComponentAlertDisplay
+      <ModuleDependenciesAlert
+        :ps-accounts-is-enabled="context.psAccountsIsEnabled"
+        :ps-accounts-enable-link="context.psAccountsEnableLink"
+        :ps-accounts-is-installed="context.psAccountsIsInstalled"
+        :ps-accounts-install-link="context.psAccountsInstallLink"
+        :ps-accounts-is-uptodate="context.psAccountsIsUptodate"
+        :ps-accounts-update-link="context.psAccountsUpdateLink"
+      />
+
+      <ShopUrlShouldExistsAlert
+        v-if="shopsWithoutUrl.length"
         class="acc-mb-4"
-        @has-error="hasError = true"
+        :shops-without-url="shopsWithoutUrl"
+      />
+
+      <ModuleUpdateInformationAlert
+        v-if="isLinkedV4"
+        class="acc-mb-4"
+      />
+
+      <UserNotSuperAdminAlert
+        v-if="!context.backendUser.isSuperAdmin"
+        class="acc-mb-4"
+        :super-admin-email="context.superAdminEmail"
       />
       <template v-if="!hasBlockingAlert">
         <AccountPanel
           :accounts-ui-url="context.accountsUiUrl"
           :app="context.psxName"
-          :backend-user="context.backendUser"
-          :onboarding-link="context.onboardingLink"
-          :shops="shopsInContext"
+          :is-super-admin="context.backendUser.isSuperAdmin"
+          :shops="shopsToLink"
+          :shops-in-context="shopsInContext"
           :shop-context="context.currentContext ? context.currentContext.type : 4"
-          :sso-resend-verification-email="context.ssoResendVerificationEmail"
-          :super-admin-email="context.superAdminEmail"
+          :shops-without-url="shopsWithoutUrl"
         >
           <slot
-            v-if="hasAllShopsLinked"
+            v-if="!shopsToLink.length"
             name="account-footer"
           />
         </AccountPanel>
         <BaseOverlay
+          v-if="hasSlotContent($slots.default)"
           class="acc-mt-4"
-          :show="!hasAllShopsLinked"
+          :show="!!shopsToLink.length"
         >
           <slot />
           <slot name="body" />
         </BaseOverlay>
-        <div class="acc-mt-4">
+        <div
+          v-if="hasSlotContent($slots.customBody)"
+          class="acc-mt-4"
+        >
           <slot name="customBody" />
         </div>
       </template>
@@ -53,13 +65,11 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed, onMounted, ref
-} from 'vue';
-import { Context } from '@/types/context';
-import usePSAccountsContext from '@/composables/usePSAccountsContext';
+import { computed, ref } from 'vue';
+import { Context, Shop, ShopContext } from '@/types/context';
+import { contextSchema } from '@/lib/ContextValidator';
 import '@/assets/css/index.css';
-
+import { hasSlotContent } from '@/lib/utils';
   /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
    * to ensure each functional case is covered for you. You can use the default slots
@@ -78,23 +88,52 @@ import '@/assets/css/index.css';
 const props = withDefaults(defineProps<PsAccountsProps>(), {
   context: () => window.contextPsAccounts || {}
 });
+const errors = ref<string[]>([]);
 
-const {
-  context,
-  setContext,
-  shopsInContext
-} = usePSAccountsContext();
-const hasError = ref(false);
+const { error } = contextSchema.validate(props.context);
 
-const shopsWithUrl = computed(() => shopsInContext.value?.filter((shop) => shop.domain) || []);
+if (error) {
+  errors.value = error.details.map(
+    (e) => e.message
+  );
+}
 
-const hasAllShopsLinked = computed(() => shopsWithUrl.value.every((shop) => shop.uuid));
+const shops = props.context.shops.reduce<Shop[]>(
+  (acc, shopGroup) => [...acc, ...shopGroup.shops],
+  []
+);
+const shopsInContext = computed(() => {
+  if (props.context.currentContext.type === ShopContext.All) {
+    return shops;
+  }
 
-const hasBlockingAlert = computed(() => !context.value.psAccountsIsInstalled ||
-          !context.value.psAccountsIsUptodate ||
-          !context.value.psAccountsIsEnabled);
+  if (props.context.currentContext.type === ShopContext.Group) {
+    return [
+      ...(props.context.shops.find(
+        (shopGroup) => parseInt(shopGroup.id, 10) === props.context.currentContext?.id
+      )?.shops ?? [])
+    ];
+  }
 
-onMounted(() => {
-  setContext(props.context);
+  // Shop
+  const shop = shops.find((shop) => parseInt(shop.id, 10) === props.context.currentContext?.id);
+
+  return shop ? [shop] : [];
 });
+
+const shopsToLink = computed(() =>
+  shopsInContext.value.map((shop) => ({ ...shop, employeeId: String(props.context.backendUser.employeeId) }))
+    .filter((shop) => (!shop.uuid || (shop.uuid && shop.isLinkedV4)) && shop.domain)
+);
+
+const hasBlockingAlert = computed(() =>
+  !props.context.psAccountsIsInstalled || !props.context.psAccountsIsUptodate || !props.context.psAccountsIsEnabled
+);
+
+const isLinkedV4 = computed(() => shopsInContext.value.every((shop) => shop.isLinkedV4));
+
+const shopsWithoutUrl = computed(
+  () => shopsInContext.value.filter((shop) => shop.domain === null)
+    .map((shop) => shop.name)
+);
 </script>

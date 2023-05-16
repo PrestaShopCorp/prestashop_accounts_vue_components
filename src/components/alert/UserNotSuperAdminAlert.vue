@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 /**
- * This component shows a warning alert isfthe user is not a superadmin
+ * This component shows a warning alert if the user is not a superadmin
  * and tell him to contact one to continue the process.
  */
 

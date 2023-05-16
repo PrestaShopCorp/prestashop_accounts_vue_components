@@ -23,20 +23,6 @@
           "action": "Actualizare",
           "loading": "Modulul PrestaShop Account este în curs de actualizare..."
         }
-      },
-      "ps_eventbus": {
-        "enable": {
-          "title": "Activează modulul Prestashop Event Bus",
-          "message": "Ai nevoie de modulul PrestaShop Event Bus pentru a continua configurarea acestui modul.",
-          "action": "Activează",
-          "loading": "Modulul Prestashop Event Bus este în curs de activare..."
-        },
-        "install": {
-          "title": "Instalează modulul Prestashop Event Bus",
-          "message": "Ai nevoie de modulul PrestaShop Event Bus pentru a continua configurarea acestui modul.",
-          "action": "Instalează",
-          "loading": "Modulul Prestashop Event Bus este în curs de instalare..."
-        }
       }
     },
     "alertShopDomainShouldExists": {

@@ -1,4 +1,4 @@
-import { Context } from './types/context';
+import { Context } from '@/types/context';
 
 export {};
 

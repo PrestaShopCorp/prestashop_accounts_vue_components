@@ -23,20 +23,6 @@
           "action": "Bijwerken",
           "loading": "De PrestaShop Account module wordt momenteel bijgewerkt..."
         }
-      },
-      "ps_eventbus": {
-        "enable": {
-          "title": "Activeer de PrestaShop Event Bus module",
-          "message": "U heeft de PrestaShop Event Bus module nodig om verder te gaan met het opzetten van deze module.",
-          "action": "Activeren",
-          "loading": "De PrestaShop Event Bus module wordt momenteel geactiveerd..."
-        },
-        "install": {
-          "title": "Installeer de module Prestashop Event Bus",
-          "message": "De module Prestashop Event Bus is nodig om de configuratie van deze module voort te zetten.",
-          "action": "Installeer",
-          "loading": "Installatie van de module Prestashop Event Bus aan de gang..."
-        }
       }
     },
     "alertShopDomainShouldExists": {

@@ -7,7 +7,8 @@ import {PuikResolver} from "@prestashopcorp/puik"
 
 export default defineConfig({
     plugins: [vue(), Components({
-        resolvers: [PuikResolver()]
+        resolvers: [PuikResolver()],
+        dts: 'src/types/components.d.ts'
     }), cssInjectedByJsPlugin()],
     build: {
         lib: {

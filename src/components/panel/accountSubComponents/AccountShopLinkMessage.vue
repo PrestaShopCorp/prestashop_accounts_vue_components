@@ -1,10 +1,10 @@
 <template>
   <div class="acc-flex acc-flex-col acc-flex-grow acc-items-center md:acc-flex-row">
     <img
-      :src="require('@/assets/img/logo.png')"
+      :src="PsLogo"
       class="acc-w-11 acc-h-11 md:acc-mr-3" />
-    <div class="acc-mt-2 acc-font-primary acc-text-sm acc-text-center acc-align-middle md:acc-mt-0 md:acc-text-left">
-      <template v-if="hasSomeShopsLinked">
+    <div class="acc-mt-2 puik-body-default acc-text-center acc-align-middle md:acc-mt-0 md:acc-text-left">
+      <template v-if="linkedShops.length">
         <div
           v-if="hasShopsLinkedBySameUser"
         >
@@ -16,14 +16,9 @@
           </p>
         </div>
         <span
-          v-else-if="hasOneOrMoreNotLinkedShop"
+          v-else-if="linkedShops.length !== shopsInContext.length"
         >
           {{ $t('psaccounts.account.authorizedPartially') }}
-        </span>
-        <span
-          v-else
-        >
-          {{ $t('psaccounts.account.authorizedSeveral') }}
         </span>
       </template>
       <span
@@ -37,27 +32,21 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import PuffinLogo from '@/assets/img/puffin_logo.vue';
 import { Shop } from '@/types/context';
+import PsLogo from '@/assets/img/logo.png';
 interface AccountShopLinkMessageProps {
-  shops?: Shop[];
+  shopsInContext?: Shop[];
 }
 
 const props = withDefaults(defineProps<AccountShopLinkMessageProps>(), {
-  shops: () => []
+  shopsInContext: () => []
 });
 
-const hasOneOrMoreNotLinkedShop = computed(() => props.shops.some((shop) => !shop.uuid));
-
-const hasSomeShopsLinked = computed(
-  () => props.shops.some((shop) => shop.uuid && !shop.isLinkedV4)
-);
-
 const hasShopsLinkedBySameUser = computed(
-  () => props.shops.every((shop) => shop.employeeId === props.shops[0].employeeId)
+  () => props.shopsInContext.every((shop) => shop.employeeId === props.shopsInContext[0].employeeId)
 );
 
-const linkedShops = computed(() => props.shops.filter((shop) => shop.uuid && !shop.isLinkedV4));
+const linkedShops = computed(() => props.shopsInContext.filter((shop) => shop.uuid && !shop.isLinkedV4));
 
 const linkedUserEmail = computed(() => linkedShops.value[0]?.user?.email || '');
 </script>

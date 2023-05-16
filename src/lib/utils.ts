@@ -14,3 +14,13 @@ export function hasSlotContent (slot: Slot | undefined, slotProps = {}): boolean
     );
   });
 }
+
+export enum Action {
+  Enable = 'enable',
+  Install = 'install',
+  Update = 'update',
+}
+
+export enum Module {
+  PsAccounts = 'ps_accounts',
+}

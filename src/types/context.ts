@@ -12,17 +12,9 @@ export interface BackendUser {
 
 export interface Context {
   accountsUiUrl: string
-  backendUser: Partial<BackendUser>
+  backendUser: BackendUser
   currentContext: CurrentContext
-  dependencies?: Record<
-  string,
-  {
-    isInstalled?: boolean
-    isEnabled?: boolean
-    installLink?: string
-    enableLink?: string
-  }
-  >
+  dependencies?: Dependencies
   onboardingLink: string
   psAccountsEnableLink: string | null
   psAccountsInstallLink: string | null
@@ -39,6 +31,16 @@ export interface Context {
   errors?: string[]
 }
 
+export type Dependencies = Record<
+string,
+{
+  isInstalled?: boolean
+  isEnabled?: boolean
+  installLink?: string
+  enableLink?: string
+}
+>;
+
 export interface CurrentContext {
   id: number | null
   type: ShopContext
@@ -47,7 +49,7 @@ export interface CurrentContext {
 export interface Shop {
   domain: string | null
   domainSsl: string | null
-  employeeId?: number | null // string ?
+  employeeId?: string | null
   frontUrl?: string | null
   id: string
   isLinkedV4?: boolean // ?

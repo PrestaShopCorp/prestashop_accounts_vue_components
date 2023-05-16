@@ -1,49 +1,29 @@
 <template>
   <puik-card
-    variant="highlight"
     class="acc-p-6"
   >
     <p class="acc-m-0 puik-h5">
-      {{ $tc('psaccounts.account.title', shopsWithUrl.length) }}
+      {{ $tc('psaccounts.account.title', shopsInContext.length) }}
     </p>
-    <ShopUrlShouldExistsAlert
-      v-if="hasShopsWithoutUrl"
-      :has-all-shops-without-url="hasAllShopsWithoutUrl"
-      :shop-names-without-url="shopNamesWithoutUrl"
-    />
 
     <div
       class="acc-flex acc-flex-col acc-items-center md:acc-flex-row"
-      :class="{'acc-mt-2': hasShopsWithoutUrl}"
     >
       <AccountShopLinkMessage
         class="md:acc-mr-2"
-        :shops="shopsWithUrl"
+        :shops-in-context="shopsInContext"
       />
       <AccountLinkToUi
+        v-if="!shopsWithoutUrl.length"
         class="acc-mt-2 md:acc-mt-0"
         :accounts-ui-url="accountsUiUrl"
         :app="app"
-        :backend-user="backendUser"
-        :onboarding-link="onboardingLink"
-        :shops="shopsWithUrl"
-        :shop-context="shopContext"
+        :is-super-admin="isSuperAdmin"
+        :shops="shops"
+        :shops-without-url="shopsWithoutUrl"
+        :has-shops-linked="hasShopsLinked"
       />
     </div>
-
-    <ModuleUpdateInformationAlert
-      v-if="isLinkedV4"
-    />
-
-    <UserEmailNotValidatedAlert
-      v-if="userHasEmailNotVerified"
-      :sso-resend-verification-email="ssoResendVerificationEmail"
-    />
-
-    <UserNotSuperAdminAlert
-      v-if="!backendUser.isSuperAdmin"
-      :super-admin-email="superAdminEmail"
-    />
 
     <div
       v-if="hasSlotContent($slots.default)"
@@ -55,11 +35,9 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed
-} from 'vue';
 import { Shop } from '@/types/context';
 import { hasSlotContent } from '@/lib/utils';
+import { computed } from 'vue';
 
 /**
    * This sub-component can be used in a custom integration when the `PsAccounts` component
@@ -77,19 +55,16 @@ import { hasSlotContent } from '@/lib/utils';
     */
     app: string;
     /**
-    * User currently logged into the back office
+    * User currently logged into the back office is super admin
     */
-    backendUser: Record<string, any>;
-    /**
-    * The onboarding link, generated
-    * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended)
-    */
-    onboardingLink: string;
+    isSuperAdmin: boolean;
     /**
     * In multistore context, contains the whole shop tree (all groups and all shops).
     * In single shop context, contains this shop information
     */
     shops?: Shop[];
+    shopsInContext: Shop[];
+    shopsWithoutUrl?: string[];
     /**
     * Current shop context, possible values :<br />
     * 4 - all shops<br />
@@ -97,40 +72,12 @@ import { hasSlotContent } from '@/lib/utils';
     * 1 - single shop
     */
     shopContext: number;
-    /**
-    * URL used for activating PrestaShop Accounts<br />
-    * should be https://auth.prestashop.com/account/send-verification-email
-    */
-    ssoResendVerificationEmail: string;
-    /**
-    * The super admin email used in the wording
-    * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended)
-    */
-    superAdminEmail: string;
   }
 
 const props = withDefaults(defineProps<AccountPanelProps>(), {
-  shops: () => []
+  shops: () => [],
+  shopsWithoutUrl: () => []
 });
 
-const shopsWithUrl = computed(() => props.shops.filter((shop) => shop.domain));
-
-const hasAllShopsWithoutUrl = computed(() => props.shops.every((shop) => shop.domain === null));
-
-const hasShopsWithoutUrl = computed(() => props.shops.some((shop) => shop.domain === null));
-
-const isLinkedV4 = computed(() => shopsWithUrl.value.every((shop) => shop.isLinkedV4));
-
-const shopNamesWithoutUrl = computed(
-  () => props.shops.filter((shop) => shop.domain === null)
-    .map((shop) => shop.name)
-);
-
-const userHasEmailNotVerified = computed(() => shopsWithUrl.value.some((shop) => {
-  const isUser = shop.employeeId === props.backendUser.employeeId;
-  const hasEmailVerified = shop.user && shop.user.emailIsValidated;
-
-  return isUser && !hasEmailVerified && !shop.isLinkedV4;
-}));
-
+const hasShopsLinked = computed(() => props.shopsInContext.some((shop) => shop.uuid && !shop.isLinkedV4));
 </script>

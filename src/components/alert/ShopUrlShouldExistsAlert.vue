@@ -1,14 +1,14 @@
 <template>
   <puik-alert
     :title="$t('psaccounts.alertShopDomainShouldExists.title')"
-    :variant="hasAllShopsWithoutUrl ? 'danger' : 'warning'"
+    variant="danger"
   >
     <p class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm">
       {{ $t('psaccounts.alertShopDomainShouldExists.message') }}
     </p>
     <span class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm">
       {{ $t('psaccounts.alertShopDomainShouldExists.shopList') }}
-      {{ shopNamesWithoutUrl.join(', ') }}
+      {{ shopsWithoutUrl.join(', ') }}
     </span>
   </puik-alert>
 </template>
@@ -21,14 +21,9 @@
 
 interface ShopUrlShouldExistsAlertProps {
   /**
-  * Define is all shops (or partial) in the current context
-  * are without url set.
-  */
-  hasAllShopsWithoutUrl: boolean;
-  /**
   * List shop names without url set.
   */
-  shopNamesWithoutUrl: string[];
+  shopsWithoutUrl: string[];
 }
 
 defineProps<ShopUrlShouldExistsAlertProps>();
