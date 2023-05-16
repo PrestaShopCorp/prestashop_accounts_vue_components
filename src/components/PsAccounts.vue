@@ -12,6 +12,7 @@
         :ps-accounts-install-link="context.psAccountsInstallLink"
         :ps-accounts-is-uptodate="context.psAccountsIsUptodate"
         :ps-accounts-update-link="context.psAccountsUpdateLink"
+        :ps-is17="context.psIs17"
       />
 
       <ShopUrlShouldExistsAlert

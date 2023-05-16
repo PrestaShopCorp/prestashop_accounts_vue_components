@@ -24,11 +24,11 @@ import { ref, computed } from 'vue';
 
 interface ModuleDependenciesAlertProps {
   psAccountsIsEnabled: boolean;
-  psAccountsEnableLink: string;
+  psAccountsEnableLink: string | null;
   psAccountsIsInstalled: boolean;
-  psAccountsInstallLink: string;
+  psAccountsInstallLink: string | null;
   psAccountsIsUptodate: boolean;
-  psAccountsUpdateLink: string;
+  psAccountsUpdateLink: string | null;
   psIs17: boolean;
 }
 
