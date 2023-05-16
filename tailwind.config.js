@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-const {puikTailwindPreset} = require('@prestashopcorp/puik')
+const { puikTailwindPreset } = require('@prestashopcorp/puik');
 module.exports = {
-  prefix: "acc-",
+  prefix: 'acc-',
   presets: [puikTailwindPreset],
   important: '#psaccounts',
-  content: ["./src/**/*.{vue,js,ts,jsx,tsx}"],
-  plugins: [],
+  content: ['./src/**/*.{vue,js,ts,jsx,tsx}'],
+  plugins: []
 };

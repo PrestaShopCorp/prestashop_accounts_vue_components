@@ -14,7 +14,7 @@ module.exports = {
     sourceType: 'module',
     extraFileExtensions: [".vue"]
   },
-  ignorePatterns: ['.eslintrc.js', 'commitlint.config.js', 'playground/src/vite-env.d.ts', 'dist'],
+  ignorePatterns: ['.eslintrc.js', 'commitlint.config.js', 'dist'],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off'
