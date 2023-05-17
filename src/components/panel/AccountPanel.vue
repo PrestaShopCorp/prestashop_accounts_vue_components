@@ -2,16 +2,23 @@
   <puik-card
     class="acc-p-6"
   >
-    <p class="acc-m-0 puik-h5">
-      {{ $tc('psaccounts.account.title', shopsInContext.length) }}
-    </p>
-
+    <div class="acc-flex acc-flex-row acc-items-center">
+      <PuikIcon
+        v-if="hasShopsLinked"
+        class="acc-text-white acc-bg-green-500 acc-rounded-full acc-p-1 acc-mr-2"
+        icon="check"
+      />
+      <p class="acc-m-0 puik-h5">
+        {{ $tc('psaccounts.account.title', shopsInContext.length) }}
+      </p>
+    </div>
     <div
       class="acc-flex acc-flex-col acc-items-center md:acc-flex-row"
     >
       <AccountShopLinkMessage
         class="md:acc-mr-2"
         :shops-in-context="shopsInContext"
+        :shop-context="shopContext"
       />
       <AccountLinkToUi
         v-if="!shopsWithoutUrl.length"
@@ -20,7 +27,6 @@
         :app="app"
         :is-super-admin="isSuperAdmin"
         :shops="shops"
-        :shops-without-url="shopsWithoutUrl"
         :has-shops-linked="hasShopsLinked"
       />
     </div>

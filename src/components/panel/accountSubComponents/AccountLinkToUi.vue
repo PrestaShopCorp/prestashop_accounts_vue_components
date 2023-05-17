@@ -8,7 +8,7 @@
       :disabled="!isSuperAdmin"
       @click="openLinkShopModal()"
     >
-      {{ $t(`psaccounts.account.${isLinkedV4 ? 'reonboard' : 'connect'}Button`) }}
+      {{ $t(`psaccounts.account.connectButton`) }}
     </puik-button>
 
     <puik-button
@@ -32,7 +32,6 @@ interface AccountLinkToUiProps {
   isSuperAdmin: boolean;
   shops?: Shop[];
   hasShopsLinked: boolean;
-  isLinkedV4?: boolean;
 }
 
 const props = withDefaults(defineProps<AccountLinkToUiProps>(), {
@@ -55,6 +54,3 @@ function openLinkShopModal (path: string = '') {
   open();
 }
 </script>
-
-<style>
-</style>

@@ -6,46 +6,50 @@
     >
     <div class="acc-mt-2 puik-body-default acc-text-center acc-align-middle md:acc-mt-0 md:acc-text-left">
       <template v-if="linkedShops.length">
-        <div
-          v-if="hasShopsLinkedBySameUser"
-        >
+        <div v-if="shopContext === ShopContext.All || props.shopContext === ShopContext.Group">
+          <p
+            v-if="linkedShops.length === shopsInContext.length"
+            class="acc-m-0"
+          >
+            {{ $t('psaccounts.account.authorizedMultishop') }}
+          </p>
+          <span
+            v-else
+          >
+            {{ $t('psaccounts.account.authorizedPartially') }}
+          </span>
+        </div>
+        <div v-else>
           <p class="acc-m-0">
-            {{ $tc('psaccounts.account.authorized', linkedShops.length) }}
+            {{ $t('psaccounts.account.authorized') }}
           </p>
           <p class="acc-m-0 acc-text-font-500 acc-break-words">
             {{ linkedUserEmail }}
           </p>
         </div>
-        <span
-          v-else-if="linkedShops.length !== shopsInContext.length"
-        >
-          {{ $t('psaccounts.account.authorizedPartially') }}
-        </span>
       </template>
-      <span
+      <p
         v-else
+        class="acc-m-0"
       >
-        {{ $t('psaccounts.account.authorize') }}
-      </span>
+        {{ $tc('psaccounts.account.authorize', shopsInContext.length) }}
+      </p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { Shop } from '@/types/context';
+import { Shop, ShopContext } from '@/types/context';
 import PsLogo from '@/assets/img/logo.png';
 interface AccountShopLinkMessageProps {
   shopsInContext?: Shop[];
+  shopContext: number;
 }
 
 const props = withDefaults(defineProps<AccountShopLinkMessageProps>(), {
   shopsInContext: () => []
 });
-
-const hasShopsLinkedBySameUser = computed(
-  () => props.shopsInContext.every((shop) => shop.employeeId === props.shopsInContext[0].employeeId)
-);
 
 const linkedShops = computed(() => props.shopsInContext.filter((shop) => shop.uuid && !shop.isLinkedV4));
 

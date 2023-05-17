@@ -20,6 +20,7 @@ declare module '@vue/runtime-core' {
     PuikAlert: typeof import('@prestashopcorp/puik/es')['PuikAlert']
     PuikButton: typeof import('@prestashopcorp/puik/es')['PuikButton']
     PuikCard: typeof import('@prestashopcorp/puik/es')['PuikCard']
+    PuikIcon: typeof import('@prestashopcorp/puik/es')['PuikIcon']
     PuikLink: typeof import('@prestashopcorp/puik/es')['PuikLink']
     ShopUrlShouldExistsAlert: typeof import('./../components/alert/ShopUrlShouldExistsAlert.vue')['default']
     UserNotSuperAdminAlert: typeof import('./../components/alert/UserNotSuperAdminAlert.vue')['default']
