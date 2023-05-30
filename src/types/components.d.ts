@@ -12,7 +12,7 @@ declare module '@vue/runtime-core' {
     AccountLinkToUi: typeof import('./../components/panel/accountSubComponents/AccountLinkToUi.vue')['default']
     AccountPanel: typeof import('./../components/panel/AccountPanel.vue')['default']
     AccountShopLinkMessage: typeof import('./../components/panel/accountSubComponents/AccountShopLinkMessage.vue')['default']
-    BaseOverlay: typeof import('./../components/BaseOverlay.vue')['default']
+    BaseOverlay: typeof import('./../components/common/BaseOverlay.vue')['default']
     ContextValidatorAlert: typeof import('./../components/alert/ContextValidatorAlert.vue')['default']
     ModuleDependenciesAlert: typeof import('./../components/alert/ModuleDependenciesAlert.vue')['default']
     ModuleUpdateInformationAlert: typeof import('./../components/alert/ModuleUpdateInformationAlert.vue')['default']

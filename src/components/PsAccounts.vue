@@ -3,6 +3,7 @@
     <ContextValidatorAlert
       v-if="errors.length"
       :errors="errors"
+      data-testid="account-context-validator-alert"
     />
     <template v-else>
       <ModuleDependenciesAlert
@@ -19,17 +20,20 @@
         v-if="shopsWithoutUrl.length"
         class="acc-mb-4"
         :shops-without-url="shopsWithoutUrl"
+        data-testid="account-shop-url-should-exists-alert"
       />
 
       <ModuleUpdateInformationAlert
         v-if="isLinkedV4"
         class="acc-mb-4"
+        data-testid="account-module-information-alert"
       />
 
       <UserNotSuperAdminAlert
         v-if="!context.backendUser.isSuperAdmin"
         class="acc-mb-4"
         :super-admin-email="context.superAdminEmail"
+        data-testid="account-user-not-super-admin"
       />
       <template v-if="!hasBlockingAlert">
         <AccountPanel
@@ -37,9 +41,10 @@
           :app="context.psxName"
           :is-super-admin="context.backendUser.isSuperAdmin"
           :shops="shopsToLink"
-          :shops-in-context="shopsInContext"
+          :shops-in-context="[]"
           :shop-context="context.currentContext ? context.currentContext.type : 4"
           :shops-without-url="shopsWithoutUrl"
+          data-testid="account-panel"
         >
           <slot
             v-if="!shopsToLink.length"

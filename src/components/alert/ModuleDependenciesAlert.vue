@@ -12,6 +12,7 @@
     :title="$t(`psaccounts.alert.${alert.module}.${alert.action}.title`)"
     :button-label="loading ? $t(`psaccounts.alert.${alert.module}.${alert.action}.loading`) : $t(`psaccounts.alert.${alert.module}.${alert.action}.action`)"
     variant="warning"
+    data-testid="account-module-dependencies-alert"
     @click="onAction"
   >
     {{ $t(`psaccounts.alert.${alert.module}.${alert.action}.message`) }}
@@ -78,16 +79,14 @@ async function onAction () {
     loading.value = true;
     const response = await fetch(alert.value.link, { method: 'POST' });
     if (props.psIs17) {
-      const data = await response.json();
-
       if (!response.ok) {
         throw new Error(`An error has occured: ${response.status}`);
       }
+      const data = await response.json();
 
       if (data[alert.value.module].status === false) {
         throw new Error(`Cannot ${alert.value.action} ${alert.value.module} module.`);
       }
-
       window.location.reload();
     }
   } catch (e) {

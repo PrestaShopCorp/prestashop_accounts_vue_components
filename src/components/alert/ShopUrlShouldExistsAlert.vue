@@ -2,11 +2,18 @@
   <puik-alert
     :title="$t('psaccounts.alertShopDomainShouldExists.title')"
     variant="danger"
+    data-testid="shop-url-alert"
   >
-    <p class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm">
+    <p
+      class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm"
+      data-testid="shop-url-alert-message"
+    >
       {{ $t('psaccounts.alertShopDomainShouldExists.message') }}
     </p>
-    <span class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm">
+    <span
+      class="acc-m-0 acc-mt-2 acc-p-0 acc-text-sm"
+      data-testid="shop-url-alert-shop-list"
+    >
       {{ $t('psaccounts.alertShopDomainShouldExists.shopList') }}
       {{ shopsWithoutUrl.join(', ') }}
     </span>

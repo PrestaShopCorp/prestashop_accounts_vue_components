@@ -7,6 +7,7 @@
         v-if="hasShopsLinked"
         class="acc-text-white acc-bg-green-500 acc-rounded-full acc-p-1 acc-mr-2"
         icon="check"
+        data-testid="account-panel-linked-icon"
       />
       <p class="acc-m-0 puik-h5">
         {{ $tc('psaccounts.account.title', shopsInContext.length) }}
@@ -28,12 +29,14 @@
         :is-super-admin="isSuperAdmin"
         :shops="shops"
         :has-shops-linked="hasShopsLinked"
+        data-testid="account-link-buttons"
       />
     </div>
 
     <div
       v-if="hasSlotContent($slots.default)"
       class="acc-mt-6"
+      data-testid="account-panel-slot"
     >
       <slot />
     </div>

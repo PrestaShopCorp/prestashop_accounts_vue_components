@@ -1,5 +1,8 @@
 <template>
-  <puik-alert variant="info">
+  <puik-alert
+    variant="info"
+    data-testid="account-module-update-information-alert"
+  >
     <i18n-t
       class="acc-m-0 acc-p-0 acc-text-sm acc-leading-6"
       keypath="psaccounts.account.moduleUpdateInformation.part1"

@@ -6,10 +6,13 @@ import Components from 'unplugin-vue-components/vite';
 import { PuikResolver } from '@prestashopcorp/puik';
 
 export default defineConfig({
-  plugins: [vue(), Components({
-    resolvers: [PuikResolver()],
-    dts: 'src/types/components.d.ts'
-  }), cssInjectedByJsPlugin()],
+  plugins: [
+    vue(),
+    Components({
+      resolvers: [PuikResolver()],
+      dts: 'src/types/components.d.ts'
+    }),
+    cssInjectedByJsPlugin()],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),

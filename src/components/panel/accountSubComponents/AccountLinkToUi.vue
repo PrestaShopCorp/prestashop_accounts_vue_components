@@ -6,6 +6,7 @@
       v-if="shops.length"
       id="associate-shop-button"
       :disabled="!isSuperAdmin"
+      data-testid="account-link-to-ui-link-shop-button"
       @click="openLinkShopModal()"
     >
       {{ $t(`psaccounts.account.connectButton`) }}
@@ -15,6 +16,8 @@
       v-if="hasShopsLinked"
       id="manage-shops-button"
       variant="secondary"
+      data-testid="account-link-to-ui-manage-shops-button"
+      :disabled="!isSuperAdmin"
       @click="openLinkShopModal('/shop')"
     >
       {{ $t(`psaccounts.account.manageAccountButton`) }}
@@ -45,10 +48,6 @@ const { open, state } = useLinkShopCrossDomain({
 });
 
 function openLinkShopModal (path: string = '') {
-  if (!props.isSuperAdmin) {
-    return;
-  }
-
   state.specificUiUrl = path;
 
   open();
