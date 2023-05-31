@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  accounts_ui_ci:
+  ci:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: pnpm i --frozen-lockfile
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_RO }}
       
       - name: Run linter 👀
         run: pnpm run lint
