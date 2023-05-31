@@ -15,7 +15,13 @@ jobs:
         node-version: [18]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.x.x
 
       - name: Setup node env ${{ matrix.node-version }} 🏗
         uses: actions/setup-node@v3
