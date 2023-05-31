@@ -1,11 +1,11 @@
-import UserNotSuperAdminAlert from '@/components/alert/UserNotSuperAdminAlert.vue';
+import AlertUserNotSuperAdmin from '@/components/alert/AlertUserNotSuperAdmin.vue';
 import { faker } from '@faker-js/faker';
 import { VueWrapper, MountingOptions, mount } from '@vue/test-utils';
 import { describe, it, expect } from 'vitest';
 
-type ComponentProps = InstanceType<typeof UserNotSuperAdminAlert>['$props'];
+type ComponentProps = InstanceType<typeof AlertUserNotSuperAdmin>['$props'];
 
-describe('UserNotSuperAdminAlert component tests', () => {
+describe('AlertUserNotSuperAdmin component tests', () => {
   let wrapper: VueWrapper<any>;
   const findAlert = () => wrapper.find('[data-testid=user-not-admin-alert]');
   const findAlertDescription = () => wrapper.find('[data-testid=user-not-admin-alert-message]');
@@ -13,7 +13,7 @@ describe('UserNotSuperAdminAlert component tests', () => {
     props: Partial<ComponentProps> = {},
     options: MountingOptions<any> = {}
   ) => {
-    wrapper = mount(UserNotSuperAdminAlert, {
+    wrapper = mount(AlertUserNotSuperAdmin, {
       props,
       ...options
     });

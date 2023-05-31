@@ -1,0 +1,74 @@
+import { Meta, Story, Description, ArgTypes } from '@storybook/blocks';
+import { NotLinked, PartiallyLinked, Linked, SlotTemplate } from "./AccountPanel.stories"
+
+import AccountPanel from './AccountPanel.vue';
+
+<Meta title="Components/Panels/AccountPanel"/>
+
+# Association panel behavior
+
+The `AccountPanel` component is here to let the user associate his shop to PrestaShop services (PS Accounts).
+This component is only in charge of displaying the final panel to let the account association be done.
+
+_Notice: If context conditions or pre-requisites are not filled, alert messages should be shown (please
+see in the Alerts components section, or use the main component `PsAccounts` that does these checks for
+you in the integration section)._
+
+## Before association, a button is displayed:
+
+<Story of={NotLinked} height='175px'/>
+
+The button will bring the user to PrestaShop Accounts modal to link the shop to a user account (the owner / merchant)
+then go back to the module page that displayed the component.
+
+The association is made once (for all PrestaShop services) so maybe it won't be displayed as this
+if the shop was already linked to PrestaShop services from another service module before.
+
+
+## After association, the linked user is shown:
+
+<Story of={Linked} height='175px'/>
+
+# Specific behaviors
+
+## Partially linked (MultiShop)
+
+If all the shops in the current context aren't all linked the component will be in a state that allows to associate the rest of the not linked shops and manage the linked shops
+
+<Story of={PartiallyLinked} height='175px'/>
+
+
+## A slot inside the card
+
+If you need to integrate a slot inside the card, below the merchant account section:
+
+<Story of={SlotTemplate} height='175px' />
+
+You still need to manage the spacing of your slot with CSS.
+
+
+---
+# Integration
+
+_Notice: If you need to integrate the standard behavior of PS Accounts, please see the
+[`PsAccounts` component in the integration section](?path=/docs/integration-psaccounts-panel--connected)._
+
+If you need a custom integration of PS Accounts sub-components, here is the AccountPanel panel:
+
+```html
+<AccountPanel
+  :accounts-ui-url="validContext.accountsUiUrl"
+  :app="context.psxName"
+  :isSuperAdmin="validContext.backendUser.isSuperAdmin"
+  :shops="shopsToLink"
+  :shop-context="validContext.currentContext.type"
+  :shops-without-url="shopsWithoutUrl"
+>
+  <p>My slot Content</p>
+</AccountPanel>
+```
+
+# Technical details
+
+<Description of={AccountPanel} />
+<ArgTypes of={AccountPanel} />

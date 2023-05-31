@@ -26,12 +26,12 @@
  * some of them does not a url set.
  */
 
-interface ShopUrlShouldExistsAlertProps {
+interface AlertShopUrlShouldExistsProps {
   /**
   * List shop names without url set.
   */
   shopsWithoutUrl: string[];
 }
 
-defineProps<ShopUrlShouldExistsAlertProps>();
+defineProps<AlertShopUrlShouldExistsProps>();
 </script>

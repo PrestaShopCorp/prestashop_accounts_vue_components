@@ -9,10 +9,10 @@
 </template>
 
 <script setup lang="ts">
-interface ContextValidatorAlertProps {
+interface AlertContextValidatorProps {
   errors: string[]
 }
-defineProps<ContextValidatorAlertProps>();
+defineProps<AlertContextValidatorProps>();
 </script>
 
 <style scoped>

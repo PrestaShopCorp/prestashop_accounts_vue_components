@@ -26,12 +26,12 @@
  * and tell him to contact one to continue the process.
  */
 
-interface UserNotSuperAdminAlert {
+interface AlertUserNotSuperAdminProps {
   /**
   * Super admin email
   */
   superAdminEmail: string;
 }
 
-defineProps<UserNotSuperAdminAlert>();
+defineProps<AlertUserNotSuperAdminProps>();
 </script>

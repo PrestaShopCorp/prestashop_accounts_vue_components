@@ -1,0 +1,115 @@
+import { Meta, Story, Description, ArgTypes } from '@storybook/blocks';
+import { NotLinked, Linked, IncorrectContext, NotInstalled, NotEnabled, NeedsAnUpdate, NotSuperAdmin } from "./PsAccounts.stories"
+import PsAccounts from './PsAccounts.vue';
+
+<Meta
+  title="Integration/PsAccounts panel"
+  component={PsAccounts}
+  parameters={{
+    disableScopedCssDecorator: true,
+  }} />
+
+
+# PsAccounts component purposes
+
+`PsAccounts` component is the only one you need to instantiate if you have standard needs.
+This component will take a context object (that is injected in javascript through your module,
+[in the PHP part, with a specific presenter](https://github.com/PrestaShopCorp/prestashop-accounts-installer)) and **all cases will be managed
+for you (error cases, insufficient prerequisites, button to link user account, etc...)**.
+
+
+## Prerequisites to integrate the component
+
+- Your module must have **a settings page**, to display in the PrestaShop backoffice, in the
+Modules / Module manager part, when the user clicks on the 'Configure' button.
+- This **page must use VueJS** (to let `PsAccounts` being integrated in a correct way).
+- Your **settings should be unavailable as long as the user is not linked** to PrestaShop account yet
+(the **`PsAccounts` component will manage this condition** for you through its slots).
+- Before to add `PsAccounts` to your settings page, you need to **inject the presenter given by
+[prestashop-accounts-installer](https://github.com/PrestaShopCorp/prestashop-accounts-installer) in the PHP code** of your module.
+
+---
+## Component behaviors
+
+Once integrated, the component can show different cases:
+
+
+### The user is not connected yet
+
+<Story of={ NotLinked } height='200px'/>
+
+_You can see that the settings part given in the `v-slot:body` is disabled (covered
+by a translucent shield to avoid any interaction on it)._
+
+### The user is connected
+
+<Story of={ Linked } height='200px' />
+
+Once the merchant has successfully linked his shop, the module should give
+access to the merchant to its configuration (onboarding panel under PrestaShop
+Account panel, configuration tabs...). These features don't have to be
+accessible until the merchant is done with PrestaShop account onboarding.
+
+
+---
+## Missing prerequisites cases
+
+You can have these different cases when the shop prerequisites are not fully validated:
+
+<Story of={ NotInstalled } height='200px' />
+
+---
+
+<Story of={ NotEnabled } height='200px' />
+
+---
+
+<Story of={ NeedsAnUpdate } height='200px' />
+
+---
+
+<Story of={ NotSuperAdmin } height='200px' />
+
+
+## Context invalidity cases
+
+If the given context is not well formed, a validation error will be shown by the
+component and the standard behavior won't let the user do anything:
+
+<Story of={ IncorrectContext } height='200px' />
+
+So you have to comply with the context object format or simply use the one
+given by the PHP presenter of ps_accounts module.
+
+
+---
+# Integration
+
+Let's integrate the component itself:
+
+In your own VueJS component:
+```javascript
+import {PsAccounts} from 'prestashop_accounts_vue_components';
+export default {
+  name: 'MyComponent',
+  components: {
+    PsAccounts,
+    ...
+  },
+  ...
+}
+```
+
+And in the template part:
+```html
+<PsAccounts :context="context">
+  <template v-slot:body> <div>Slot shown when account is linked</div> </template>
+  <template v-slot:account-footer><div>My other component in the footer of the account component</div></template>
+  <template v-slot:customBody> <div>Custom body, always shown (for custom display condition)</div> </template>
+</PsAccounts>
+```
+
+# Technical details
+
+<Description of={PsAccounts} />
+<ArgTypes of={PsAccounts} /> 

@@ -1,10 +1,10 @@
 import { Module, Action } from '@/lib/utils';
-import ModuleDependenciesAlert from '@/components/alert/ModuleDependenciesAlert.vue';
+import AlertModuleDependencies from '@/components/alert/AlertModuleDependencies.vue';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { MountingOptions, VueWrapper, mount, flushPromises } from '@vue/test-utils';
-type ComponentProps = InstanceType<typeof ModuleDependenciesAlert>['$props'];
+type ComponentProps = InstanceType<typeof AlertModuleDependencies>['$props'];
 
-describe('ModuleDependenciesAlert component tests', () => {
+describe('AlertModuleDependencies component tests', () => {
   // @ts-expect-error SILENCE JSDOM ERRORS ABOUT LOCATION RELOAD
   window.location = vi.fn();
   global.fetch = vi.fn();
@@ -15,7 +15,7 @@ describe('ModuleDependenciesAlert component tests', () => {
   const findAlertDescription = () => wrapper.find('.puik-alert__description');
   const findAlertButton = () => wrapper.find('.puik-button');
   const factory = (props: Partial<ComponentProps>, options?: MountingOptions<any>) => {
-    wrapper = mount(ModuleDependenciesAlert, {
+    wrapper = mount(AlertModuleDependencies, {
       props: {
         psAccountsEnableLink: '/enable',
         psAccountsInstallLink: '/install',

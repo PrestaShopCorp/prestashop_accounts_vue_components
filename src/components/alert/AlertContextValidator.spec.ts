@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { MountingOptions, VueWrapper, mount } from '@vue/test-utils';
-import ContextValidatorAlert from '@/components/alert/ContextValidatorAlert.vue';
+import ContextValidatorAlert from '@/components/alert/AlertContextValidator.vue';
 import { faker } from '@faker-js/faker';
 type ComponentProps = InstanceType<typeof ContextValidatorAlert>['$props'];
 

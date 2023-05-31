@@ -1,12 +1,12 @@
 <template>
   <div id="psaccounts">
-    <ContextValidatorAlert
+    <AlertContextValidator
       v-if="errors.length"
       :errors="errors"
       data-testid="account-context-validator-alert"
     />
     <template v-else>
-      <ModuleDependenciesAlert
+      <AlertModuleDependencies
         :ps-accounts-is-enabled="context.psAccountsIsEnabled"
         :ps-accounts-enable-link="context.psAccountsEnableLink"
         :ps-accounts-is-installed="context.psAccountsIsInstalled"
@@ -16,20 +16,20 @@
         :ps-is17="context.psIs17"
       />
 
-      <ShopUrlShouldExistsAlert
+      <AlertShopUrlShouldExists
         v-if="shopsWithoutUrl.length"
         class="acc-mb-4"
         :shops-without-url="shopsWithoutUrl"
         data-testid="account-shop-url-should-exists-alert"
       />
 
-      <ModuleUpdateInformationAlert
+      <AlertModuleUpdateInformation
         v-if="isLinkedV4"
         class="acc-mb-4"
         data-testid="account-module-information-alert"
       />
 
-      <UserNotSuperAdminAlert
+      <AlertUserNotSuperAdmin
         v-if="!context.backendUser.isSuperAdmin"
         class="acc-mb-4"
         :super-admin-email="context.superAdminEmail"
@@ -41,7 +41,7 @@
           :app="context.psxName"
           :is-super-admin="context.backendUser.isSuperAdmin"
           :shops="shopsToLink"
-          :shops-in-context="[]"
+          :shops-in-context="shopsInContext"
           :shop-context="context.currentContext ? context.currentContext.type : 4"
           :shops-without-url="shopsWithoutUrl"
           data-testid="account-panel"

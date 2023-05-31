@@ -23,7 +23,7 @@
 import { Module, Action } from '@/lib/utils';
 import { ref, computed } from 'vue';
 
-interface ModuleDependenciesAlertProps {
+interface AlertModuleDependenciesProps {
   psAccountsIsEnabled: boolean;
   psAccountsEnableLink: string | null;
   psAccountsIsInstalled: boolean;
@@ -36,7 +36,7 @@ interface ModuleDependenciesAlertProps {
 const loading = ref(false);
 const error = ref(false);
 
-const props = defineProps<ModuleDependenciesAlertProps>();
+const props = defineProps<AlertModuleDependenciesProps>();
 
 const alert = computed(() => {
   if (!props.psAccountsIsInstalled) {

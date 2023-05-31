@@ -1,16 +1,11 @@
 const path = require("path");
 module.exports = {
-  stories: ["../src/**/*.stories.@(js|mdx)"],
+  stories: [
+    "../src/**/*.mdx",
+    "../src/**/*.stories.ts"
+  ],
   logLevel: "debug",
-  addons: [{
-    // TODO: check theses options
-    name: "@storybook/addon-docs",
-    options: {
-      configureJSX: true,
-      babelOptions: {},
-      sourceLoaderOptions: null
-    }
-  }, "@storybook/addon-controls", "@storybook/addon-actions", "@storybook/addon-viewport"],
+  addons: ["@storybook/addon-essentials"],
   framework: {
     name: "@storybook/vue3-vite",
     options: {}

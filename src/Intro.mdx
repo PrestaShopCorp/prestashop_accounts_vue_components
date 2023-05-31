@@ -1,4 +1,5 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import { NotLinked, Linked } from "./components/panel/AccountPanel.stories"
 
 <Meta title=" Introduction" />
 
@@ -23,13 +24,13 @@ to install / activate a module that uses PrestaShop account authentication syste
 module configuration page should display a connection box** before letting the module
 settings available, as this:
 
-<Story id="components-panels-accountpanel--not-associated" height='175px' />
+<Story of={NotLinked} height='175px' />
 
 This linking process **has to be done by the merchant only once for all modules**.
 If the merchant already linked his shop from another module, then the component will look
 like this:
 
-<Story id="components-panels-accountpanel--associated" height='175px' />
+<Story of={Linked} height='175px' />
 
 Once the merchant successfully linked his shop, the module should display its configuration
 panel below this section.
