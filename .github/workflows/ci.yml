@@ -37,7 +37,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_RO }}
       
       - name: Run linter 👀
-        run: pnpm run lint
+        run: pnpm lint
       
       - name: Run tests 🧪
-        run: pnpm run test
+        run: pnpm test
+
+      - name: Run build
+        run: pnpm build
