@@ -4,20 +4,12 @@ import PsAccounts from '@/components/PsAccounts.vue';
 import AccountPanel from '@/components/panel/AccountPanel.vue';
 import { isOnboardingCompleted } from '@/lib/Helpers';
 
-const version = '5.0.0';
-
-const Components: Record<string, any> = {
-  PsAccounts,
-  AccountPanel
-};
+const version = import.meta.env.PACKAGE_VERSION;
 
 const Plugin = {
   install (app: App) {
     app.use(i18n);
-
-    Object.keys(Components).forEach((name) => {
-      app.component(name, Components[name]);
-    });
+    app.component('PsAccounts', PsAccounts);
   }
 };
 
@@ -28,7 +20,7 @@ function init () {
 }
 
 export default {
-  ...Components,
+  PsAccounts,
   init,
   isOnboardingCompleted,
   Plugin,

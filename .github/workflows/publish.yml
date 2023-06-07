@@ -22,6 +22,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@master
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.x.x
+
       - name: Setup node env 🏗
         uses: actions/setup-node@v3
         with:
