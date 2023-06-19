@@ -18,6 +18,7 @@ export default defineConfig({
     cssInjectedByJsPlugin()
   ],
   build: {
+    emptyOutDir: false,
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
       name: 'psaccountsVue',

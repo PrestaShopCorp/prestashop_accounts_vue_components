@@ -4,13 +4,14 @@
   "main": "./dist/psaccountsVue.js",
   "module": "./dist/psaccountsVue.mjs",
   "unpkg": "./dist/psaccountsVue.js",
+  "types": "./dist/types/main.d.ts",
   "files": [
     "dist/*",
     "*.json"
   ],
   "scripts": {
     "prepare": "husky install",
-    "build": "vue-tsc --noEmit --project ./tsconfig.build.json && vite build && vite build --config vite-cdn.config.ts",
+    "build": "rimraf ./dist && vue-tsc --project ./tsconfig.build.json && vite build && vite build --config vite-cdn.config.ts",
     "dev": "vite",
     "serve": "vite preview",
     "test": "vitest --no-threads",
@@ -23,6 +24,7 @@
   "dependencies": {
     "@prestashopcorp/puik": "1.2.1",
     "joi": "^17.9.2",
+    "rimraf": "^5.0.1",
     "zoid": "9.0.63"
   },
   "devDependencies": {
