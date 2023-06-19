@@ -1,42 +1,17 @@
 # Prestashop Accounts Vue Components
 
-## Community Service & PrestaShop X modules
-
-To work as a Community Service or as PrestaShop X, a module needs three parts:
-
-### [Prestashop Accounts Installer](https://github.com/PrestaShopCorp/prestashop-accounts-installer)
-
-An utility package to install ps_accounts module or present data to trigger manual install from psx configuration page.
-
-This module also give you access to ps_accounts services through its module service container dealing with the installation status of the module.
-
-### [UI Components](http://github.com/PrestaShopCorp/prestashop_accounts_vue_components)
-
-- Contains all the UI components to manage onboarding.
-
-## Installation
-
-```bash
-yarn install
-```
-
 ## Usage
 
-### Storybook
+We recommend using the Web component by loading the library through CDN to receive the latest components updates
+### CDN (Recommended)
 
-#### Local
-
-```bash
-yarn storybook
-```
-
-### CDN
+#### Web Component (Recommended)
 
 To load a hosted library, copy and paste the HTML snippet for that library (shown below) in your web page.
 
 ```html
-# To load latest minor version 4
-<script src="https://unpkg.com/prestashop_accounts_vue_components@4" defer></script>
+# To load latest minor version 5
+<script src="https://unpkg.com/prestashop_accounts_vue_components@5" defer></script>
 
 # To load latest version
 <script src="https://unpkg.com/prestashop_accounts_vue_components" defer></script>
@@ -53,12 +28,14 @@ you can then call the init function of psaccountsVue
 </script>
 ```
 
-If you need to use the vue cdn for your app, please create your app with the vue esm-browser as follow
+#### Vue component
+
+If you want to use the component in VueJS you will need to load VueJS through cdn too 
 
 ```html
 <div id="app"></div>
 
-<script src="https://unpkg.com/prestashop_accounts_vue_components@4" defer></script>
+<script src="https://unpkg.com/prestashop_accounts_vue_components@5/psaccountsVue.umd.js" defer></script>
 
 <script type="module">
   import { createApp } from "https://unpkg.com/vue@3.2.26/dist/vue.esm-browser.js";
@@ -81,6 +58,56 @@ If you need to use the vue cdn for your app, please create your app with the vue
   createApp(App).mount("#app");
 </script>
 ```
+
+### Local install
+
+First you need to install the package using your package manager
+```sh
+# chose your favorite package manager
+# NPM
+$ npm install prestashop_accounts_vue_components --save
+
+# Yarn
+$ yarn add prestashop_accounts_vue_components
+
+# pnpm
+$ pnpm install prestashop_accounts_vue_components
+```
+
+Then you need to choose a way to integrate your component
+
+#### Web component (recommended)
+```html
+<template>
+  <div>
+    <prestashop-accounts></prestashop-accounts>
+  </div>
+</template>
+<script>
+import PsAccounts from "prestashop_accounts_vue_components"
+
+PsAccounts.init();
+// OR if you want to use a custom name for the tag
+import { PsAccountsWebComponent } from "prestashop_accounts_vue_components"
+
+customElements.define('your-tag-name', PsAccountsWebComponent)
+</script>
+```
+
+#### Vue component
+
+```html
+<template>
+  <div>
+    <PsAccounts />
+  </div>
+</template>
+<script setup>
+import { PsAccounts } from "prestashop_accounts_vue_components";
+</script>
+```
+
+## Compatibility
 
 Compatible version of prestashop_accounts_vue_components with PsAccounts  
 

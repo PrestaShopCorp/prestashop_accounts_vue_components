@@ -56,19 +56,19 @@ accessible until the merchant is done with PrestaShop account onboarding.
 
 You can have these different cases when the shop prerequisites are not fully validated:
 
-<Story of={ NotInstalled } height='200px' />
+<Story of={ NotInstalled } />
 
 ---
 
-<Story of={ NotEnabled } height='200px' />
+<Story of={ NotEnabled } />
 
 ---
 
-<Story of={ NeedsAnUpdate } height='200px' />
+<Story of={ NeedsAnUpdate } />
 
 ---
 
-<Story of={ NotSuperAdmin } height='200px' />
+<Story of={ NotSuperAdmin } />
 
 
 ## Context invalidity cases
@@ -76,7 +76,7 @@ You can have these different cases when the shop prerequisites are not fully val
 If the given context is not well formed, a validation error will be shown by the
 component and the standard behavior won't let the user do anything:
 
-<Story of={ IncorrectContext } height='200px' />
+<Story of={ IncorrectContext } />
 
 So you have to comply with the context object format or simply use the one
 given by the PHP presenter of ps_accounts module.

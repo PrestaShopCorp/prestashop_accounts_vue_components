@@ -40,11 +40,12 @@
       "reonboardButton": "Riassociare",
       "disconnectButton": "Usa un altro account",
       "moduleUpdateInformation": {
-        "part1": "{0} da oggi, puoi gestire i tuoi negozi associati.",
-        "part2": "Nuovo aggiornamento:",
-        "part3": "Ti preghiamo di riassociarli, {0} per usufruire di questo aggiornamento.",
+        "part1": "Nuovo aggiornamento: ",
+        "part2": "da oggi, puoi gestire i tuoi negozi associati.",
+        "part3": "Ti preghiamo di riassociarli,",
         "part4": "utilizzando lo stesso indirizzo e-mail",
-        "part5": "Altri aggiornamenti del modulo sono disponibili nella sezione \"Module Manager\", alla scheda \"Aggiornamenti\""
+        "part5": "per usufruire di questo aggiornamento.",
+        "part6": "Altri aggiornamenti del modulo sono disponibili nella sezione \"Module Manager\", alla scheda \"Aggiornamenti\""
       },
       "emailNotVerified": {
         "title": "Una mail di conferma è stata inviata.",

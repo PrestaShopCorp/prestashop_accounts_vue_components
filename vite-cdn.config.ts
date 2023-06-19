@@ -18,19 +18,17 @@ export default defineConfig({
     cssInjectedByJsPlugin()
   ],
   build: {
+    emptyOutDir: false,
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
       name: 'psaccountsVue',
-      fileName: 'psaccountsVue',
-      formats: ['es', 'umd']
+      fileName: () => 'psaccountsVue.js',
+      formats: ['iife']
     },
     rollupOptions: {
-      external: ['vue'],
       output: {
-        globals: {
-          vue: 'Vue'
-        },
-        exports: 'named'
+        exports: 'named',
+        inlineDynamicImports: true
       }
     }
   },
@@ -46,6 +44,7 @@ export default defineConfig({
       }
     ]
   },
+  // TODO: FIND DEP TO REMOVE TO AVOID ERROR
   define: {
     'process.env': {},
     'import.meta.env.PACKAGE_VERSION': JSON.stringify(pkg.version)

@@ -10,7 +10,7 @@
         data-testid="account-panel-linked-icon"
       />
       <p class="acc-m-0 puik-h5">
-        {{ $tc('psaccounts.account.title', shopsInContext.length) }}
+        {{ t('psaccounts.account.title', shopsInContext.length) }}
       </p>
     </div>
     <div
@@ -47,6 +47,7 @@
 import { Shop } from '@/types/context';
 import { hasSlotContent } from '@/lib/utils';
 import { computed } from 'vue';
+import { useLocale } from '@/composables/useLocale';
 
 /**
    * This sub-component can be used in a custom integration when the `PsAccounts` component
@@ -87,6 +88,8 @@ const props = withDefaults(defineProps<AccountPanelProps>(), {
   shops: () => [],
   shopsWithoutUrl: () => []
 });
+
+const { t } = useLocale();
 
 const hasShopsLinked = computed(() => props.shopsInContext.some((shop) => shop.uuid && !shop.isLinkedV4));
 </script>

@@ -14,7 +14,3 @@ interface AlertContextValidatorProps {
 }
 defineProps<AlertContextValidatorProps>();
 </script>
-
-<style scoped>
-
-</style>

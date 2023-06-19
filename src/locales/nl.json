@@ -40,11 +40,12 @@
       "reonboardButton": "Opnieuw verbinden",
       "disconnectButton": "Een ander account gebruiken",
       "moduleUpdateInformation": {
-        "part1": "{0} u kunt uw geassocieerde winkels beheren.",
-        "part2": "Nieuwe update:",
-        "part3": "Gelieve u opnieuw aan te melden {0} om van deze update te kunnen profiteren.",
+        "part1": "Nieuwe update: ",
+        "part2": "u kunt uw geassocieerde winkels beheren.",
+        "part3": "Gelieve u opnieuw aan te melden",
         "part4": "met hetzelfde e-mailadres",
-        "part5": "Andere module-updates kunnen beschikbaar zijn in Module Manager, tabblad Updates."
+        "part5": "om van deze update te kunnen profiteren.",
+        "part6": "Andere module-updates kunnen beschikbaar zijn in Module Manager, tabblad Updates."
       },
       "emailNotVerified": {
         "title": "Er is een bevestigingsmail verzonden.",

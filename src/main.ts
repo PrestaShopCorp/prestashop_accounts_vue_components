@@ -1,37 +1,25 @@
-import { App, createApp } from 'vue';
-import { i18n } from './locales';
+import { App, defineCustomElement } from 'vue';
 import PsAccounts from '@/components/PsAccounts.vue';
-import AccountPanel from '@/components/panel/AccountPanel.vue';
 import { isOnboardingCompleted } from '@/lib/Helpers';
 
-const version = import.meta.env.PACKAGE_VERSION;
-
-const Plugin = {
+const installGlobalComponents = {
   install (app: App) {
-    app.use(i18n);
     app.component('PsAccounts', PsAccounts);
   }
 };
 
-const app = createApp(PsAccounts);
+const PsAccountsWebComponent = defineCustomElement(PsAccounts);
 
-function init () {
-  app.use(Plugin).mount('prestashop-accounts');
-}
-
-export default {
-  PsAccounts,
-  init,
-  isOnboardingCompleted,
-  Plugin,
-  version
+const init = () => {
+  customElements.define('prestashop-accounts', PsAccountsWebComponent);
 };
 
+export default installGlobalComponents;
+
 export {
-  AccountPanel,
+  installGlobalComponents,
   init,
   isOnboardingCompleted,
-  Plugin,
   PsAccounts,
-  version
+  PsAccountsWebComponent
 };

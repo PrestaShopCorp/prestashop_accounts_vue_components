@@ -47,7 +47,7 @@
           data-testid="account-panel"
         >
           <slot
-            v-if="!shopsToLink.length"
+            v-if="hasSlotContent($slots['account-footer']) && !shopsToLink.length"
             name="account-footer"
           />
         </AccountPanel>
@@ -143,3 +143,13 @@ const shopsWithoutUrl = computed(
     .map((shop) => shop.name)
 );
 </script>
+
+<style lang="scss">
+@import "@/assets/css/index";
+@import "~@prestashopcorp/puik/theme/base";
+@import "~@prestashopcorp/puik/theme/puik-button";
+@import "~@prestashopcorp/puik/theme/puik-card";
+@import "~@prestashopcorp/puik/theme/puik-icon";
+@import "~@prestashopcorp/puik/theme/puik-alert";
+@import "~@prestashopcorp/puik/theme/puik-link";
+</style>

@@ -40,11 +40,12 @@
       "reonboardButton": "Ponownie skojarz",
       "disconnectButton": "Użyj innego konta",
       "moduleUpdateInformation": {
-        "part1": "{0} możesz zarządzać swoimi powiązanymi sklepami.",
-        "part2": "Nowa aktualizacja:",
-        "part3": "Prosimy o ponowne dołączenie przy użyciu {0} ,aby skorzystać z tej aktualizacji.",
+        "part1": "Nowa aktualizacja: ",
+        "part2": "możesz zarządzać swoimi powiązanymi sklepami.",
+        "part3": "Prosimy o ponowne dołączenie przy użyciu,",
         "part4": "tego samego adresu e-mail",
-        "part5": "Inne aktualizacje modułu mogą być dostępne w Managerze modułów, w zakładce Aktualizacje."
+        "part5": "aby skorzystać z tej aktualizacji.",
+        "part6": "Inne aktualizacje modułu mogą być dostępne w Managerze modułów, w zakładce Aktualizacje."
       },
       "emailNotVerified": {
         "title": "Została wysłana wiadomość e-mail z potwierdzeniem.",

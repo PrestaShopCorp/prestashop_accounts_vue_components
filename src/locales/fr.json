@@ -40,11 +40,12 @@
       "reonboardButton": "Réassocier",
       "disconnectButton": "Utiliser un autre compte",
       "moduleUpdateInformation": {
-        "part1": "{0} vous pouvez gérer vos boutiques associées.",
-        "part2": "Nouvelle mise à jour :",
-        "part3": "Merci de vous réassocier en utilisant {0} pour profiter de cette mise à jour.",
+        "part1": "Nouvelle mise à jour: ",
+        "part2": "vous pouvez gérer vos boutiques associées.",
+        "part3": "Merci de vous réassocier en utilisant",
         "part4": "la même adresse mail",
-        "part5": "D'autres mises à jour de modules peuvent être disponibles dans Gestionnaire de modules onglet Mises à jour."
+        "part5": "pour profiter de cette mise à jour.",
+        "part6": "D'autres mises à jour de modules peuvent être disponibles dans Gestionnaire de modules onglet Mises à jour."
       },
       "emailNotVerified": {
         "title": "Un courriel de confirmation a été envoyé.",

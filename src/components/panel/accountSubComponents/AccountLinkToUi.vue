@@ -9,7 +9,7 @@
       data-testid="account-link-to-ui-link-shop-button"
       @click="openLinkShopModal()"
     >
-      {{ $t(`psaccounts.account.connectButton`) }}
+      {{ t(`psaccounts.account.connectButton`) }}
     </puik-button>
 
     <puik-button
@@ -20,7 +20,7 @@
       :disabled="!isSuperAdmin"
       @click="openLinkShopModal('/shop')"
     >
-      {{ $t(`psaccounts.account.manageAccountButton`) }}
+      {{ t(`psaccounts.account.manageAccountButton`) }}
     </puik-button>
   </div>
 </template>
@@ -28,6 +28,7 @@
 <script setup lang="ts">
 import { Shop } from '@/types/context';
 import { useLinkShopCrossDomain } from '@/composables/useLinkShopCrossDomain';
+import { useLocale } from '@/composables/useLocale';
 
 interface AccountLinkToUiProps {
   accountsUiUrl: string;
@@ -40,6 +41,8 @@ interface AccountLinkToUiProps {
 const props = withDefaults(defineProps<AccountLinkToUiProps>(), {
   shops: () => []
 });
+
+const { t } = useLocale();
 
 const { open, state } = useLinkShopCrossDomain({
   accountsUiUrl: props.accountsUiUrl,

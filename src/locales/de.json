@@ -40,11 +40,12 @@
       "reonboardButton": "Neu zuordnen",
       "disconnectButton": "Benutze ein anderes Konto",
       "moduleUpdateInformation": {
-        "part1": "{0} Sie können Ihre zugeordneten Shops verwalten.",
-        "part2": "Neues Update:",
-        "part3": "Bitte melden Sie sich mit {0} um von diesem Update zu profitieren.",
+        "part1": "Neues Update: ",
+        "part2": "Sie können Ihre zugeordneten Shops verwalten.",
+        "part3": "Bitte melden Sie sich mit",
         "part4": "der gleichen E-Mail-Adresse erneut an,",
-        "part5": "Andere Modul-Updates sind möglicherweise auf der Registerkarte \"Updates\" des Modul-Managers verfügbar."
+        "part5": "um von diesem Update zu profitieren.",
+        "part6": "Andere Modul-Updates sind möglicherweise auf der Registerkarte \"Updates\" des Modul-Managers verfügbar."
       },
       "emailNotVerified": {
         "title": "Eine Bestätigungs-E-Mail wurde verschickt.",

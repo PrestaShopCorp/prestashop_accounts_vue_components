@@ -38,11 +38,12 @@
       "authorizedMultishop": "All your stores are linked with a PrestaShop account",
       "connectButton": "Link",
       "moduleUpdateInformation": {
-        "part1": "{0} you can manage your linked stores.",
-        "part2": "New update:",
-        "part3": "Please link your store again using {0} to benefit from this update.",
+        "part1": "New update: ",
+        "part2": "you can manage your linked stores.",
+        "part3": "Please link your store again using",
         "part4": "the same email address",
-        "part5": "Other module updates may be available in the Updates tab of the module manager."
+        "part5": "to benefit from this update.",
+        "part6": "Other module updates may be available in the Updates tab of the module manager."
       },
       "emailNotVerified": {
         "title": "A confirmation email has been sent.",

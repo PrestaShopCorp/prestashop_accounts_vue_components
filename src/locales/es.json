@@ -40,11 +40,12 @@
       "reonboardButton": "Vincular de nuevo",
       "disconnectButton": "Usar otra cuenta",
       "moduleUpdateInformation": {
-        "part1": "{0} puedes gestionar tus tiendas asociadas.",
-        "part2": "Nueva actualización:",
-        "part3": "Vuelve a asociarte utilizando {0} para beneficiarte de esta actualización.",
+        "part1": "Nueva actualización: ",
+        "part2": "puedes gestionar tus tiendas asociadas.",
+        "part3": "Vuelve a asociarte utilizando",
         "part4": "la misma dirección de correo electrónico",
-        "part5": "Otras actualizaciones del módulo pueden estar disponibles en la pestaña Actualizaciones del gestor de módulos."
+        "part5": "para beneficiarte de esta actualización.",
+        "part6": "Otras actualizaciones del módulo pueden estar disponibles en la pestaña Actualizaciones del gestor de módulos."
       },
       "emailNotVerified": {
         "title": "Se ha enviado un correo electrónico de confirmación.",

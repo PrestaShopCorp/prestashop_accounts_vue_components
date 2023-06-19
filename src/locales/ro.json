@@ -40,11 +40,12 @@
       "reonboardButton": "Reasociază",
       "disconnectButton": "Folosește un alt cont",
       "moduleUpdateInformation": {
-        "part1": "{0} poți gestiona magazinele asociate.",
-        "part2": "Nouă actualizare:",
-        "part3": "Te rugăm să te reasociezi folosind {0} pentru a beneficia de această actualizare.",
+        "part1": "Nouă actualizare: ",
+        "part2": "poți gestiona magazinele asociate.",
+        "part3": "Te rugăm să te reasociezi folosind",
         "part4": "aceeași adresă de e-mail",
-        "part5": "Alte actualizări ale modulelor pot fi disponibile în fila Actualizări din managerul de module."
+        "part5": "pentru a beneficia de această actualizare.",
+        "part6": "Alte actualizări ale modulelor pot fi disponibile în fila Actualizări din managerul de module."
       },
       "emailNotVerified": {
         "title": "Un e-mail de confirmare a fost trimis la adresa.",

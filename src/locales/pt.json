@@ -40,11 +40,12 @@
       "reonboardButton": "Reassociate",
       "disconnectButton": "Usar outra conta",
       "moduleUpdateInformation": {
-        "part1": "{0} pode gerir as suas lojas associadas.",
-        "part2": "Nova actualização:",
-        "part3": "Por favor, volte a participar usando o {0} para tirar partido desta actualização.",
+        "part1": "Nova actualização: ",
+        "part2": "pode gerir as suas lojas associadas.",
+        "part3": "Por favor, volte a participar usando o",
         "part4": "mesmo endereço de correio electrónico",
-        "part5": "Outras actualizações de módulos podem estar disponíveis em Module Manager, separador Updates."
+        "part5": "para tirar partido desta actualização.",
+        "part6": "Outras actualizações de módulos podem estar disponíveis em Module Manager, separador Updates."
       },
       "emailNotVerified": {
         "title": "Foi enviado um e-mail de confirmação.",

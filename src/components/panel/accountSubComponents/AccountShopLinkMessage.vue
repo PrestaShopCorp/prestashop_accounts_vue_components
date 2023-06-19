@@ -17,13 +17,13 @@
             class="acc-m-0"
             data-testid="account-shop-link-message-all-shops-linked"
           >
-            {{ $t('psaccounts.account.authorizedMultishop') }}
+            {{ t('psaccounts.account.authorizedMultishop') }}
           </p>
           <span
             v-else
             data-testid="account-shop-link-message-partially-linked-shops"
           >
-            {{ $t('psaccounts.account.authorizedPartially') }}
+            {{ t('psaccounts.account.authorizedPartially') }}
           </span>
         </div>
         <div v-else>
@@ -31,7 +31,7 @@
             class="acc-m-0"
             data-testid="account-shop-link-message-single-shop-linked"
           >
-            {{ $t('psaccounts.account.authorized') }}
+            {{ t('psaccounts.account.authorized') }}
           </p>
           <p
             class="acc-m-0 acc-text-font-500 acc-break-words"
@@ -46,7 +46,7 @@
         class="acc-m-0"
         data-testid="account-shop-link-message-not-linked"
       >
-        {{ $tc('psaccounts.account.authorize', shopsInContext.length) }}
+        {{ t('psaccounts.account.authorize', shopsInContext.length) }}
       </p>
     </div>
   </div>
@@ -56,6 +56,7 @@
 import { computed } from 'vue';
 import { Shop, ShopContext } from '@/types/context';
 import PsLogo from '@/assets/img/logo.png';
+import { useLocale } from '@/composables/useLocale';
 interface AccountShopLinkMessageProps {
   shopsInContext?: Shop[];
   shopContext: number;
@@ -64,6 +65,8 @@ interface AccountShopLinkMessageProps {
 const props = withDefaults(defineProps<AccountShopLinkMessageProps>(), {
   shopsInContext: () => []
 });
+
+const { t } = useLocale();
 
 const linkedShops = computed(() => props.shopsInContext.filter((shop) => shop.uuid && !shop.isLinkedV4));
 
