@@ -47,6 +47,6 @@ jobs:
           VERSION: ${{ steps.get_tag.outputs.TAG }}
 
       - name: Publish
-        run: pnpm publish
+        run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
