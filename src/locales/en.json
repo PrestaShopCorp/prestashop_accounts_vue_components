@@ -27,15 +27,15 @@
     },
     "alertShopDomainShouldExists": {
       "title": "Store URL not filled in!",
-      "message": "Only store with an assigned URL can be associated to a PrestaShop account.",
+      "message": "Only store with an assigned URL can be linked to a PrestaShop account.",
       "shopList": "The following stores don't have an assigned URL: "
     },
     "account": {
       "title": "Link your store to a PrestaShop account | Link your stores to a PrestaShop account",
       "authorize": "You can only link your store to one account. | You can only link your stores to one account.",
       "authorized": "Your store is linked with the PrestaShop account",
-      "authorizedPartially": "Your stores are partially linked with a PrestaShop account",
-      "authorizedMultishop": "All your stores are linked with a PrestaShop account",
+      "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
+      "authorizedMultishop": "All your stores are linked to a PrestaShop account",
       "connectButton": "Link",
       "moduleUpdateInformation": {
         "part1": "New update: ",
