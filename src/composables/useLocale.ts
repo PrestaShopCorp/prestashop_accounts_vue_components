@@ -10,7 +10,8 @@ import pt from '../locales/pt.json';
 import ro from '../locales/ro.json';
 
 const i18n = createI18n({
-  locale: window.iso_user || 'en',
+  locale: window.iso_user,
+  fallbackLocale: 'en',
   legacy: false,
   messages: {
     de,
