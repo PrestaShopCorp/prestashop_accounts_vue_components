@@ -11,7 +11,7 @@ const installGlobalComponents = {
 const PsAccountsWebComponent = defineCustomElement(PsAccounts);
 
 const init = () => {
-  customElements.define('prestashop-accounts', PsAccountsWebComponent);
+  customElements.get('prestashop-accounts') || customElements.define('prestashop-accounts', PsAccountsWebComponent);
 };
 
 export default installGlobalComponents;
