@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 const { puikTailwindPreset } = require('@prestashopcorp/puik');
 module.exports = {
+  corePlugins: {
+    preflight: false
+  },
   prefix: 'acc-',
   presets: [puikTailwindPreset],
   important: '#psaccounts',
