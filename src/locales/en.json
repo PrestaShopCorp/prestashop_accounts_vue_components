@@ -33,7 +33,7 @@
     "account": {
       "title": "Link your store to a PrestaShop account | Link your stores to a PrestaShop account",
       "authorize": "You can only link your store to one account. | You can only link your stores to one account.",
-      "authorized": "Your store is linked with the PrestaShop account",
+      "authorized": "Your store is linked to the PrestaShop account",
       "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
       "authorizedMultishop": "All your stores are linked to a PrestaShop account",
       "connectButton": "Link",
