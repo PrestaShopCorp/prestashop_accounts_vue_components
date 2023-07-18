@@ -1,67 +1,58 @@
 {
-    "psaccounts": {
-        "accountManager": {
-            "errorInstallEnable": "Wystąpił błąd, spróbuj ponownie."
+  "psaccounts": {
+    "accountManager": {
+      "errorInstallEnable": "Wystąpił błąd, spróbuj ponownie."
+    },
+    "alert": {
+      "ps_accounts": {
+        "enable": {
+          "title": "Aktywuj moduł PrestaShop Account",
+          "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
+          "action": "Aktywuj",
+          "loading": "Aktywacja modułu PrestaShop Account w toku..."
         },
-        "alert": {
-            "ps_accounts": {
-                "enable": {
-                    "title": "Aktywuj moduł PrestaShop Account",
-                    "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
-                    "action": "Aktywuj",
-                    "loading": "Aktywacja modułu PrestaShop Account w toku..."
-                },
-                "install": {
-                    "title": "Zainstaluj moduł PrestaShop Account",
-                    "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
-                    "action": "Zainstaluj",
-                    "loading": "Aktywacja modułu PrestaShop Account w toku..."
-                },
-                "update": {
-                    "title": "Zaktualizuj moduł Konta PrestaShop",
-                    "message": "Dostępna jest nowa wersja Kont PrestaShop, zaktualizuj moduł, aby móc dalej korzystać z usług",
-                    "action": "Aktualizacja",
-                    "loading": "Moduł PrestaShop Account jest obecnie aktualizowany..."
-                }
-            },
-            "ps_eventbus": {
-                "enable": {
-                    "title": "Aktywuj moduł PrestaShop Event Bus",
-                    "message": "Potrzebujesz modułu PrestaShop Event Bus, aby kontynuować konfigurację tego modułu.",
-                    "action": "Aktywuj",
-                    "loading": "Moduł PrestaShop Event Bus jest obecnie aktywowany..."
-                },
-                "install": {
-                    "title": "Zainstaluj moduł Prestashop Event Bus",
-                    "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
-                    "action": "Zainstaluj",
-                    "loading": "Aktywacja modułu Prestashop Event Bus w toku..."
-                }
-            }
+        "install": {
+          "title": "Zainstaluj moduł PrestaShop Account",
+          "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
+          "action": "Zainstaluj",
+          "loading": "Aktywacja modułu PrestaShop Account w toku..."
         },
-        "alertShopDomainShouldExists": {
-            "title": "URL sklepu nie jest wypełniony!",
-            "message": "Tylko sklep z przypisanym adresem URL może być powiązany z kontem PrestaShop.<br />Następujące sklepy nie mają przypisanego adresu URL: "
-        },
-        "account": {
-            "title": "Połącz swój sklep z kontem PrestaShop | Połącz swoje sklepy z kontem PrestaShop",
-            "authorize": "Możesz powiązać swój sklep tylko z jednym kontem. Dokonaj dobrego wyboru!",
-            "authorized": "Twój sklep jest powiązany z kontem PrestaShop: | Twoje sklepy są powiązane z kontem PrestaShop:",
-            "authorizedPartially": "Twoje sklepy są częściowo powiązane z kontem PrestaShop",
-            "authorizedSeveral": "Twoje sklepy są powiązane z kilkoma kontami PrestaShop",
-            "connectButton": "Połącz",
-            "reonboardButton": "Ponownie skojarz",
-            "disconnectButton": "Użyj innego konta",
-            "moduleUpdateInformation": "<strong>Nowa aktualizacja:</strong> możesz zarządzać swoimi powiązanymi sklepami.<br /> Prosimy o ponowne dołączenie przy użyciu <strong>tego samego adresu e-mail</strong> ,aby skorzystać z tej aktualizacji.<br /> Inne aktualizacje modułu mogą być dostępne w Managerze modułów, w zakładce Aktualizacje.",
-            "emailNotVerified": {
-                "title": "Została wysłana wiadomość e-mail z potwierdzeniem.",
-                "description": "Sprawdź swoją skrzynkę odbiorczą i kliknij link, aby aktywować konto."
-            },
-            "sendEmail": "Wróć",
-            "needToBeAdmin": "Aby kontynuować, musisz być administratorem sklepu.",
-            "pleaseContact": "Prosimy o kontakt",
-            "manageAccountButton": "Zobacz moje powiązane sklepy",
-            "unlinkButton": "Odłącz"
+        "update": {
+          "title": "Zaktualizuj moduł Konta PrestaShop",
+          "message": "Dostępna jest nowa wersja Kont PrestaShop, zaktualizuj moduł, aby móc dalej korzystać z usług",
+          "action": "Aktualizacja",
+          "loading": "Moduł PrestaShop Account jest obecnie aktualizowany..."
         }
+      }
+    },
+    "alertShopDomainShouldExists": {
+      "title": "Store URL not filled in!",
+      "message": "Only store with an assigned URL can be linked to a PrestaShop account.",
+      "shopList": "The following stores don't have an assigned URL: "
+    },
+    "account": {
+      "title": "Link your store to a PrestaShop account | Link your stores to a PrestaShop account",
+      "authorize": "You can only link your store to one account. | You can only link your stores to one account.",
+      "authorized": "Your store is linked to the PrestaShop account",
+      "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
+      "authorizedMultishop": "All your stores are linked to a PrestaShop account",
+      "connectButton": "Link",
+      "moduleUpdateInformation": {
+        "part1": "New update: ",
+        "part2": "you can manage your linked stores.",
+        "part3": "Please link your store again using",
+        "part4": "the same email address",
+        "part5": "to benefit from this update.",
+        "part6": "Other module updates may be available in the Updates tab of the module manager."
+      },
+      "emailNotVerified": {
+        "title": "Została wysłana wiadomość e-mail z potwierdzeniem.",
+        "description": "Sprawdź swoją skrzynkę odbiorczą i kliknij link, aby aktywować konto."
+      },
+      "sendEmail": "Wróć",
+      "needToBeAdmin": "In order to proceed you need to be administrator of the store",
+      "pleaseContact": "Prosimy o kontakt",
+      "manageAccountButton": "Manage linked stores"
     }
+  }
 }
