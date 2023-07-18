@@ -1,6 +1,6 @@
 {
   "name": "prestashop_accounts_vue_components",
-  "version": "5.0.0-test-1",
+  "version": "5.0.0",
   "main": "./dist/psaccountsVue.js",
   "module": "./dist/psaccountsVue.mjs",
   "unpkg": "./dist/psaccountsVue.js",
