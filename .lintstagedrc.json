@@ -1,0 +1,3 @@
+{
+    "./**/*.{ts,vue,js}": "yarn lint:fix"
+}

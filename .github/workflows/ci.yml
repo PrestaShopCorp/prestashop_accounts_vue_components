@@ -1,34 +1,46 @@
 name: Accounts Vue Components CI
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
 
 jobs:
-  accounts_ui_ci:
+  ci:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [16]
+        node-version: [18]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.x.x
 
       - name: Setup node env ${{ matrix.node-version }} 🏗
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn"
+          cache: "pnpm"
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@prestashopcorp'
 
       - name: Install dependencies 👨🏻‍💻
-        run: yarn --frozen-lockfile --silent
+        run: pnpm i --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_RO }}
+      
+      - name: Run linter 👀
+        run: pnpm lint
+      
+      - name: Run tests 🧪
+        run: pnpm test
 
-      - run: yarn run lint
-
-      - run: yarn run test:unit
+      - name: Run build
+        run: pnpm build

@@ -1,0 +1,11 @@
+{
+    "i18n-ally.localesPaths": [
+        "src/locales"
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "i18n-ally.keystyle": "nested",
+    "vite.autoStart": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+}

@@ -1,67 +1,61 @@
 {
-    "psaccounts": {
-        "accountManager": {
-            "errorInstallEnable": "Une erreur s'est produite. Veuillez réessayer."
+  "psaccounts": {
+    "accountManager": {
+      "errorInstallEnable": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "alert": {
+      "ps_accounts": {
+        "enable": {
+          "title": "Activez le module PrestaShop Account",
+          "message": "Le module PrestaShop Account est nécessaire pour continuer la configuration de ce module.",
+          "action": "Activer",
+          "loading": "Activation du module PrestaShop Account en cours..."
         },
-        "alert": {
-            "ps_accounts": {
-                "enable": {
-                    "title": "Activez le module PrestaShop Account",
-                    "message": "Le module PrestaShop Account est nécessaire pour continuer la configuration de ce module.",
-                    "action": "Activer",
-                    "loading": "Activation du module PrestaShop Account en cours..."
-                },
-                "install": {
-                    "title": "Installez le module PrestaShop Account",
-                    "message": "Le module PrestaShop Account est nécessaire pour continuer la configuration de ce module.",
-                    "action": "Installer",
-                    "loading": "Installation du module PrestaShop Account en cours..."
-                },
-                "update": {
-                    "title": "Mettez à jour le module PrestaShop Account",
-                    "message": "Une nouvelle version de PrestaShop Account est disponible, merci de mettre à jour le module pour continuer d'utiliser les services",
-                    "action": "Mettre à jour",
-                    "loading": "Le module Compte PrestaShop est actuellement en cours de mise à jour..."
-                }
-            },
-            "ps_eventbus": {
-                "enable": {
-                    "title": "Activez le module PrestaShop Event Bus",
-                    "message": "Vous avez besoin du module PrestaShop Event Bus pour continuer à configurer ce module.",
-                    "action": "Activer",
-                    "loading": "Le module PrestaShop Event Bus est actuellement en cours d'activation..."
-                },
-                "install": {
-                    "title": "Installez le module Prestashop Event Bus",
-                    "message": "Le module Prestashop Event Bus est nécessaire pour continuer la configuration de ce module.",
-                    "action": "Installer",
-                    "loading": "Installation du module Prestashop Event Bus en cours..."
-                }
-            }
+        "install": {
+          "title": "Installez le module PrestaShop Account",
+          "message": "Le module PrestaShop Account est nécessaire pour continuer la configuration de ce module.",
+          "action": "Installer",
+          "loading": "Installation du module PrestaShop Account en cours..."
         },
-        "alertShopDomainShouldExists": {
-            "title": "L'URL de la boutique n'est pas renseignée !",
-            "message": "Seule la boutique avec une URL assignée peut être associée à un compte PrestaShop.<br />Les boutiques suivantes n'ont pas d'URL assignée : "
-        },
-        "account": {
-            "title": "Associer votre boutique à un compte PrestaShop | Associer vos boutiques à un compte PrestaShop",
-            "authorize": "Vous ne pouvez associer votre boutique qu'à un seul compte. Choisissez le bien !",
-            "authorized": "Votre boutique est associée au compte PrestaShop : | Votre boutique est associée au compte PrestaShop :",
-            "authorizedPartially": "Vos boutiques sont partiellement associées à un compte PrestaShop",
-            "authorizedSeveral": "Vos boutiques sont associées à plusieurs comptes PrestaShop",
-            "connectButton": "Associer",
-            "reonboardButton": "Réassocier",
-            "disconnectButton": "Utiliser un autre compte",
-            "moduleUpdateInformation": "<strong>Nouvelle mise à jour :</strong> vous pouvez gérer vos boutiques associées.<br /> Merci de vous réassocier en utilisant <strong>la même adresse mail</strong> pour profiter de cette mise à jour.<br /> D'autres mises à jour de modules peuvent être disponibles dans Gestionnaire de modules onglet Mises à jour.",
-            "emailNotVerified": {
-                "title": "Un courriel de confirmation a été envoyé.",
-                "description": "Vérifiez votre boîte de réception et cliquez sur le lien pour activer votre compte."
-            },
-            "sendEmail": "Renvoyer",
-            "needToBeAdmin": "Pour continuer, vous devez être administrateur de la boutique",
-            "pleaseContact": "Merci de contacter",
-            "manageAccountButton": "Voir mes boutiques associées",
-            "unlinkButton": "Dissocier"
+        "update": {
+          "title": "Mettez à jour le module PrestaShop Account",
+          "message": "Une nouvelle version de PrestaShop Account est disponible, merci de mettre à jour le module pour continuer d'utiliser les services",
+          "action": "Mettre à jour",
+          "loading": "Le module Compte PrestaShop est actuellement en cours de mise à jour..."
         }
+      }
+    },
+    "alertShopDomainShouldExists": {
+      "title": "L'URL de la boutique n'est pas renseignée !",
+      "message": "Seule la boutique avec une URL assignée peut être associée à un compte PrestaShop.",
+      "shopList": "Les boutiques suivantes n'ont pas d'URL assignée: "
+    },
+    "account": {
+      "title": "Associer votre boutique à un compte PrestaShop | Associer vos boutiques à un compte PrestaShop",
+      "authorize": "Vous ne pouvez associer votre boutique qu'à un seul compte. Choisissez le bien !",
+      "authorized": "Votre boutique est associée au compte PrestaShop : | Votre boutique est associée au compte PrestaShop :",
+      "authorizedPartially": "Vos boutiques sont partiellement associées à un compte PrestaShop",
+      "authorizedSeveral": "Vos boutiques sont associées à plusieurs comptes PrestaShop",
+      "connectButton": "Associer",
+      "reonboardButton": "Réassocier",
+      "disconnectButton": "Utiliser un autre compte",
+      "moduleUpdateInformation": {
+        "part1": "Nouvelle mise à jour: ",
+        "part2": "vous pouvez gérer vos boutiques associées.",
+        "part3": "Merci de vous réassocier en utilisant",
+        "part4": "la même adresse mail",
+        "part5": "pour profiter de cette mise à jour.",
+        "part6": "D'autres mises à jour de modules peuvent être disponibles dans Gestionnaire de modules onglet Mises à jour."
+      },
+      "emailNotVerified": {
+        "title": "Un courriel de confirmation a été envoyé.",
+        "description": "Vérifiez votre boîte de réception et cliquez sur le lien pour activer votre compte."
+      },
+      "sendEmail": "Renvoyer",
+      "needToBeAdmin": "Pour continuer, vous devez être administrateur de la boutique",
+      "pleaseContact": "Merci de contacter",
+      "manageAccountButton": "Voir mes boutiques associées",
+      "unlinkButton": "Dissocier"
     }
+  }
 }

@@ -1,19 +1,19 @@
 import Joi from 'joi';
 
 export const backendUserSchema = Joi.object().keys({
-  email: Joi.string().email({tlds: false}).allow(null).default(null),
+  email: Joi.string().email({ tlds: false }).allow(null).default(null),
   employeeId: Joi.number(),
-  isSuperAdmin: Joi.boolean().required(),
+  isSuperAdmin: Joi.boolean().required()
 }).unknown(true);
 
 export const currentContextSchema = Joi.object().keys({
   type: Joi.number().required(),
-  id: Joi.number().allow(null).default(null),
+  id: Joi.number().allow(null).default(null)
 }).unknown(true);
 
 export const shopUserSchema = Joi.object().keys({
-  email: Joi.string().email({tlds: false}).allow(null).default(null),
-  uuid: Joi.string().allow(null),
+  email: Joi.string().email({ tlds: false }).allow(null).default(null),
+  uuid: Joi.string().allow(null)
 }).unknown(true);
 
 export const shopSchema = Joi.object().keys({
@@ -32,7 +32,7 @@ export const shopSchema = Joi.object().keys({
   user: shopUserSchema.optional().allow({}).default({}),
   uuid: Joi.string().allow(null),
   virtualUri: Joi.string().optional().allow('').allow(null)
-    .allow(false),
+    .allow(false)
 }).unknown(true);
 
 export const shopGroupSchema = Joi.object().keys({
@@ -42,28 +42,21 @@ export const shopGroupSchema = Joi.object().keys({
   name: Joi.string().required().min(1).max(128),
   psVersion: Joi.string().optional(),
   shops: Joi.array().items(shopSchema).min(1).max(128)
-    .required(),
+    .required()
 }).unknown(true);
 
 export const userSchema = Joi.object().keys({
-  email: Joi.string().email({tlds: false}).allow(null).default(null),
+  email: Joi.string().email({ tlds: false }).allow(null).default(null),
   emailIsValidated: Joi.boolean(),
   isSuperAdmin: Joi.boolean().required(),
-  uuid: Joi.string().allow(null),
+  uuid: Joi.string().allow(null)
 }).unknown(true);
 
 export const contextSchema = Joi.object().keys({
   accountsUiUrl: Joi.string().allow(null).default(null),
-  adminAjaxLink: Joi.string().allow(null).default(null),
   backendUser: backendUserSchema.optional().allow({}).default({}),
   currentContext: currentContextSchema.optional().allow({}).default({}),
-  currentShop: shopSchema.optional().allow(null).default(null),
   // dependencies
-  isOnboardedV4: Joi.boolean(),
-  isShopContext: Joi.boolean(),
-  manageAccountLink: Joi.string().uri().optional().allow(null)
-    .allow('')
-    .default(null),
   onboardingLink: Joi.string().uri().optional().allow(null)
     .allow('')
     .default(null),
@@ -73,7 +66,6 @@ export const contextSchema = Joi.object().keys({
   psAccountsIsInstalled: Joi.boolean().default(true),
   psAccountsUpdateLink: Joi.string().uri().allow(null).default(null),
   psAccountsIsUptodate: Joi.boolean().default(true),
-  psAccountsVersion: Joi.string().optional(),
   psIs17: Joi.boolean().required(),
   psxName: Joi.string(),
   shops: Joi.array().items(shopGroupSchema).required().min(0)
@@ -81,7 +73,7 @@ export const contextSchema = Joi.object().keys({
   ssoResendVerificationEmail: Joi.string().uri().optional().allow(null)
     .allow('')
     .default(null),
-  superAdminEmail: Joi.string().email({tlds: false}).allow(null).default(null),
-  user: userSchema.optional().allow({}).default({email: null}),
+  superAdminEmail: Joi.string().email({ tlds: false }).allow(null).default(null),
+  user: userSchema.optional().allow({}).default({ email: null })
 
 }).unknown(true);

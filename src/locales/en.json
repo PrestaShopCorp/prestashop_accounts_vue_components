@@ -1,67 +1,58 @@
 {
-    "psaccounts": {
-        "accountManager": {
-            "errorInstallEnable": "Something went wrong. Please try again."
+  "psaccounts": {
+    "accountManager": {
+      "errorInstallEnable": "Something went wrong. Please try again."
+    },
+    "alert": {
+      "ps_accounts": {
+        "enable": {
+          "title": "Activate the PrestaShop Account module",
+          "message": "You need the PrestaShop account module to continue setting up this module.",
+          "action": "Activate",
+          "loading": "The PrestaShop Account module is currently being activated..."
         },
-        "alert": {
-            "ps_accounts": {
-                "enable": {
-                  "title": "Activate the PrestaShop Account module",
-                  "message": "You need the PrestaShop account module to continue setting up this module.",
-                  "action": "Activate",
-                  "loading": "The PrestaShop Account module is currently being activated..."
-                },
-                "install": {
-                  "title": "Install the PrestaShop Account module",
-                  "message": "You need the PrestaShop account module to continue setting up this module.",
-                  "action": "Install",
-                  "loading": "The PrestaShop Account module is currently being installed..."
-                },
-                "update": {
-                  "title": "Update PrestaShop Accounts module",
-                  "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
-                  "action": "Update",
-                  "loading": "The PrestaShop Account module is currently being updated..."
-                }
-            },
-            "ps_eventbus": {
-                "enable": {
-                  "title": "Activate the PrestaShop Event Bus module",
-                  "message": "You need the PrestaShop Event Bus module to continue setting up this module.",
-                  "action": "Activate",
-                  "loading": "The PrestaShop Event Bus module is currently being activated..."
-                },
-                "install": {
-                  "title": "Install the Prestashop Event Bus module",
-                  "message": "You need the Prestashop Event Bus module to continue setting up this module.",
-                  "action": "Install",
-                  "loading": "The Prestashop Event Bus module is currently being installed..."
-                }
-            }
+        "install": {
+          "title": "Install the PrestaShop Account module",
+          "message": "You need the PrestaShop account module to continue setting up this module.",
+          "action": "Install",
+          "loading": "The PrestaShop Account module is currently being installed..."
         },
-        "alertShopDomainShouldExists": {
-            "title": "Shop URL not filled in!",
-            "message": "Only shop with an assigned URL can be associated to a PrestaShop account.<br />The following shops don't have an assigned URL: "
-        },
-        "account": {
-            "title": "Associate your shop with a PrestaShop account | Associate your shops with a PrestaShop account",
-            "authorize": "You can only associate your shop with one account. So be sure to choose the right one!",
-            "authorized": "Your shop is associated with the PrestaShop account: | Your shops is associated with the PrestaShop account:",
-            "authorizedPartially": "Your shops are partially associated with a PrestaShop Account",
-            "authorizedSeveral": "Your shops are associated with several PrestaShop account",
-            "connectButton": "Associate",
-            "reonboardButton": "Re-associate",
-            "disconnectButton": "Use another account",
-            "moduleUpdateInformation": "<strong>New update:</strong> you can manage your associated shops.<br /> Please reassociate yourself using <strong>the same email address</strong> to benefit from this update.<br /> Other module updates may be available in the Updates tab of the module manager.",
-            "emailNotVerified": {
-              "title": "A confirmation email has been sent.",
-              "description": "Check your inbox and click on the link to activate your account."
-            },
-            "sendEmail": "Send it again",
-            "needToBeAdmin": "In order to proceed you need to be administrator of the shop",
-            "pleaseContact": "Please contact",
-            "manageAccountButton": "View my associated shops",
-            "unlinkButton": "Dissociate"
+        "update": {
+          "title": "Update PrestaShop Accounts module",
+          "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
+          "action": "Update",
+          "loading": "The PrestaShop Account module is currently being updated..."
         }
+      }
+    },
+    "alertShopDomainShouldExists": {
+      "title": "Store URL not filled in!",
+      "message": "Only store with an assigned URL can be linked to a PrestaShop account.",
+      "shopList": "The following stores don't have an assigned URL: "
+    },
+    "account": {
+      "title": "Link your store to a PrestaShop account | Link your stores to a PrestaShop account",
+      "authorize": "You can only link your store to one account. | You can only link your stores to one account.",
+      "authorized": "Your store is linked to the PrestaShop account",
+      "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
+      "authorizedMultishop": "All your stores are linked to a PrestaShop account",
+      "connectButton": "Link",
+      "moduleUpdateInformation": {
+        "part1": "New update: ",
+        "part2": "you can manage your linked stores.",
+        "part3": "Please link your store again using",
+        "part4": "the same email address",
+        "part5": "to benefit from this update.",
+        "part6": "Other module updates may be available in the Updates tab of the module manager."
+      },
+      "emailNotVerified": {
+        "title": "A confirmation email has been sent.",
+        "description": "Check your inbox and click on the link to activate your account."
+      },
+      "sendEmail": "Send it again",
+      "needToBeAdmin": "In order to proceed you need to be administrator of the store",
+      "pleaseContact": "Please contact",
+      "manageAccountButton": "Manage linked stores"
     }
+  }
 }

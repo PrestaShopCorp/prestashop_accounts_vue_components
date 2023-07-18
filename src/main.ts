@@ -1,51 +1,25 @@
-import Vue from 'vue';
-import VueI18n from 'vue-i18n';
-import i18n from './i18n';
+import { App, defineCustomElement } from 'vue';
 import PsAccounts from '@/components/PsAccounts.vue';
-import AccountPanel from '@/components/panel/AccountPanel.vue';
-import {isOnboardingCompleted} from '@/lib/Helpers';
+import { isOnboardingCompleted } from '@/lib/Helpers';
 
-const version = process.env.VUE_APP_VERSION;
-
-const Components: Record<string, Vue.VueConstructor> = {
-  PsAccounts,
-  AccountPanel,
+const installGlobalComponents = {
+  install (app: App) {
+    app.component('PsAccounts', PsAccounts);
+  }
 };
 
-const Plugin = {
-  install(vue: typeof Vue) {
-    vue.use(VueI18n);
+const PsAccountsWebComponent = defineCustomElement(PsAccounts);
 
-    Object.keys(Components).forEach((name) => {
-      vue.component(name, Components[name]);
-    });
-  },
+const init = () => {
+  customElements.get('prestashop-accounts') ?? customElements.define('prestashop-accounts', PsAccountsWebComponent);
 };
 
-function init() {
-  Vue.use(Plugin);
-
-  new Vue({
-    i18n: i18n(),
-    components: {
-      'prestashop-accounts': PsAccounts,
-    },
-  }).$mount('prestashop-accounts');
-}
-
-export default {
-  ...Components,
-  init,
-  isOnboardingCompleted,
-  Plugin,
-  version,
-};
+export default installGlobalComponents;
 
 export {
-  AccountPanel,
+  installGlobalComponents,
   init,
   isOnboardingCompleted,
-  Plugin,
   PsAccounts,
-  version,
+  PsAccountsWebComponent
 };

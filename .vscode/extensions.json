@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "Vue.volar",
+        "lokalise.i18n-ally",
+        "dbaeumer.vscode-eslint",
+        "ZixuanChen.vitest-explorer"
+    ]
+}

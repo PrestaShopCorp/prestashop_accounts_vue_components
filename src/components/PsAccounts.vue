@@ -1,54 +1,68 @@
 <template>
   <div id="psaccounts">
-    <BaseAlert
-      variant="danger"
-      :show="hasError"
-      dismissible
-      @dismissed="hasError = false"
-    >
-      <p class="acc-text-sm acc-leading-6">
-        {{ $t('psaccounts.accountManager.errorInstallEnable') }}
-      </p>
-    </BaseAlert>
-
-    <BaseAlert
-      v-if="validContext.errors && validContext.errors.length"
-      :class="{'acc-mt-4': hasError}"
-      variant="danger"
-    >
-      <p class="acc-text-sm acc-leading-6">
-        &lt;PsAccounts&gt; integration: Given context is invalid:
-        {{ validContext.errors.join(';') }}
-      </p>
-    </BaseAlert>
+    <AlertContextValidator
+      v-if="errors.length"
+      :errors="errors"
+      data-testid="account-context-validator-alert"
+    />
     <template v-else>
-      <PsAccountComponentAlertDisplay
+      <AlertModuleDependencies
+        :ps-accounts-is-enabled="context.psAccountsIsEnabled"
+        :ps-accounts-enable-link="context.psAccountsEnableLink"
+        :ps-accounts-is-installed="context.psAccountsIsInstalled"
+        :ps-accounts-install-link="context.psAccountsInstallLink"
+        :ps-accounts-is-uptodate="context.psAccountsIsUptodate"
+        :ps-accounts-update-link="context.psAccountsUpdateLink"
+        :ps-is17="context.psIs17"
+      />
+
+      <AlertShopUrlShouldExists
+        v-if="shopsWithoutUrl.length"
         class="acc-mb-4"
-        @hasError="hasError = true"
+        :shops-without-url="shopsWithoutUrl"
+        data-testid="account-shop-url-should-exists-alert"
+      />
+
+      <AlertModuleUpdateInformation
+        v-if="isLinkedV4"
+        class="acc-mb-4"
+        data-testid="account-module-information-alert"
+      />
+
+      <AlertUserNotSuperAdmin
+        v-if="!context.backendUser.isSuperAdmin"
+        class="acc-mb-4"
+        :super-admin-email="context.superAdminEmail"
+        data-testid="account-user-not-super-admin"
       />
       <template v-if="!hasBlockingAlert">
         <AccountPanel
-          :accounts-ui-url="validContext.accountsUiUrl"
-          :app="app"
-          :backend-user="validContext.backendUser"
-          :onboarding-link="validContext.onboardingLink"
-          :shops="shops"
-          :shop-context="validContext.currentContext ? validContext.currentContext.type : 4"
-          :sso-resend-verification-email="validContext.ssoResendVerificationEmail"
-          :super-admin-email="validContext.superAdminEmail"
+          :accounts-ui-url="context.accountsUiUrl"
+          :app="context.psxName"
+          :is-super-admin="context.backendUser.isSuperAdmin"
+          :shops="shopsToLink"
+          :shops-in-context="shopsInContext"
+          :shop-context="context.currentContext ? context.currentContext.type : 4"
+          :shops-without-url="shopsWithoutUrl"
+          data-testid="account-panel"
         >
           <slot
-            v-if="hasAllShopsLinked"
+            v-if="hasSlotContent($slots['account-footer']) && !shopsToLink.length"
             name="account-footer"
           />
         </AccountPanel>
         <BaseOverlay
+          v-if="hasSlotContent($slots.default)"
           class="acc-mt-4"
-          :show="!hasAllShopsLinked">
+          :show="!!shopsToLink.length"
+        >
           <slot />
           <slot name="body" />
         </BaseOverlay>
-        <div class="acc-mt-4">
+        <div
+          v-if="hasSlotContent($slots.customBody)"
+          class="acc-mt-4"
+        >
           <slot name="customBody" />
         </div>
       </template>
@@ -56,75 +70,86 @@
   </div>
 </template>
 
-<script lang="ts">
-import {
-  computed, defineComponent, onMounted, PropType, ref,
-} from 'vue-demi';
-import {Context} from '@/types/context';
-import AccountPanel from '@/components/panel/AccountPanel.vue';
-import BaseAlert from '@/components/alert/BaseAlert.vue';
-import BaseOverlay from '@/components/BaseOverlay.vue';
-import PsAccountComponentAlertDisplay from '@/containers/PsAccountComponentAlertDisplay.vue';
-import usePSAccountsContext from '@/composables/usePSAccountsContext';
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import { Context, Shop, ShopContext } from '@/types/context';
+import { contextSchema } from '@/lib/ContextValidator';
 import '@/assets/css/index.css';
-
-/**
+import { hasSlotContent } from '@/lib/utils';
+  /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
    * to ensure each functional case is covered for you. You can use the default slots
    * that will be disabled if the user account is not well linked (you should put your
    * module configuration panel here)
    */
-export default defineComponent({
-  name: 'PsAccounts',
-  components: {
-    AccountPanel,
-    BaseAlert,
-    BaseOverlay,
-    PsAccountComponentAlertDisplay,
-  },
-  props: {
+  interface PsAccountsProps {
     /**
-         * The whole context object given
-         * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
-         * If left empty (by default), the context will be retrieved from JS global
-         * var window.contextPsAccounts automatically.
-         */
-    context: {
-      type: Object as PropType<Context>,
-      required: false,
-      default: () => window.contextPsAccounts || {},
-    },
-  },
-  setup(props) {
-    const {
-      context,
-      setContext,
-      shopsInContext,
-    } = usePSAccountsContext();
-    const hasError = ref(false);
-
-    const app = computed(() => context.value.psxName);
-
-    const hasAllShopsLinked = computed(() => shopsWithUrl.value.every((shop) => shop.uuid));
-
-    const hasBlockingAlert = computed(() => !context.value.psAccountsIsInstalled
-          || !context.value.psAccountsIsUptodate
-          || !context.value.psAccountsIsEnabled);
-
-    const shopsWithUrl = computed(() => shopsInContext.value?.filter((shop) => shop.domain) || []);
-
-    onMounted(() => {
-      setContext(props.context);
-    });
-
-    return {
-      validContext: context,
-      app,
-      hasAllShopsLinked,
-      hasBlockingAlert,
-      hasError,
-      shops: shopsInContext,
-    };
-  },
+    * The whole context object given
+    * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
+    * If left empty (by default), the context will be retrieved from JS global
+    * var window.contextPsAccounts automatically.
+    */
+    context?: Context;
+  }
+const props = withDefaults(defineProps<PsAccountsProps>(), {
+  context: () => window.contextPsAccounts || {}
 });
+const errors = ref<string[]>([]);
+
+const { error } = contextSchema.validate(props.context);
+
+if (error) {
+  errors.value = error.details.map(
+    (e) => e.message
+  );
+}
+
+const shops = props.context.shops.reduce<Shop[]>(
+  (acc, shopGroup) => [...acc, ...shopGroup.shops],
+  []
+);
+const shopsInContext = computed(() => {
+  if (props.context.currentContext.type === ShopContext.All) {
+    return shops;
+  }
+
+  if (props.context.currentContext.type === ShopContext.Group) {
+    return [
+      ...(props.context.shops.find(
+        (shopGroup) => parseInt(shopGroup.id, 10) === props.context.currentContext?.id
+      )?.shops ?? [])
+    ];
+  }
+
+  // Shop
+  const shop = shops.find((shop) => parseInt(shop.id, 10) === props.context.currentContext?.id);
+
+  return shop ? [shop] : [];
+});
+
+const shopsToLink = computed(() =>
+  shopsInContext.value.map((shop) => ({ ...shop, employeeId: String(props.context.backendUser.employeeId) }))
+    .filter((shop) => (!shop.uuid || (shop.uuid && shop.isLinkedV4)) && shop.domain)
+);
+
+const hasBlockingAlert = computed(() =>
+  !props.context.psAccountsIsInstalled || !props.context.psAccountsIsUptodate || !props.context.psAccountsIsEnabled
+);
+
+const isLinkedV4 = computed(() => shopsInContext.value.every((shop) => shop.isLinkedV4));
+
+const shopsWithoutUrl = computed(
+  () => shopsInContext.value.filter((shop) => shop.domain === null)
+    .map((shop) => shop.name)
+);
 </script>
+
+<style lang="scss">
+@import "@/assets/css/index";
+@import "~@prestashopcorp/puik/theme/base";
+@import "~@prestashopcorp/puik/theme/puik-button";
+@import "~@prestashopcorp/puik/theme/puik-card";
+@import "~@prestashopcorp/puik/theme/puik-icon";
+@import "~@prestashopcorp/puik/theme/puik-alert";
+@import "~@prestashopcorp/puik/theme/puik-link";
+</style>
