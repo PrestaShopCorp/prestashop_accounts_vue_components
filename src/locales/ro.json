@@ -1,67 +1,58 @@
 {
-    "psaccounts": {
-        "accountManager": {
-            "errorInstallEnable": "A apărut o problemă. Te rugăm să mai încerci o dată."
+  "psaccounts": {
+    "accountManager": {
+      "errorInstallEnable": "A apărut o problemă. Te rugăm să mai încerci o dată."
+    },
+    "alert": {
+      "ps_accounts": {
+        "enable": {
+          "title": "Activează modulul PrestaShop Account",
+          "message": "Ai nevoie de modulul PrestaShop Account pentru a continua configurarea acestui modul.",
+          "action": "Activează",
+          "loading": "Modulul PrestaShop Account este în curs de activare..."
         },
-        "alert": {
-            "ps_accounts": {
-                "enable": {
-                    "title": "Activează modulul PrestaShop Account",
-                    "message": "Ai nevoie de modulul PrestaShop Account pentru a continua configurarea acestui modul.",
-                    "action": "Activează",
-                    "loading": "Modulul PrestaShop Account este în curs de activare..."
-                },
-                "install": {
-                    "title": "Instalează modulul PrestaShop Account",
-                    "message": "Ai nevoie de modulul PrestaShop Account pentru a continua configurarea acestui modul.",
-                    "action": "Instalează",
-                    "loading": "Modulul PrestaShop Account este în curs de instalare..."
-                },
-                "update": {
-                    "title": "Actualizează modulul Prestashop Account",
-                    "message": "O nouă versiune a PrestaShop Account este disponibilă, te rugăm să actualizezi modulul pentru a continua să utilizezi serviciile",
-                    "action": "Actualizare",
-                    "loading": "Modulul PrestaShop Account este în curs de actualizare..."
-                }
-            },
-            "ps_eventbus": {
-                "enable": {
-                    "title": "Activează modulul Prestashop Event Bus",
-                    "message": "Ai nevoie de modulul PrestaShop Event Bus pentru a continua configurarea acestui modul.",
-                    "action": "Activează",
-                    "loading": "Modulul Prestashop Event Bus este în curs de activare..."
-                },
-                "install": {
-                    "title": "Instalează modulul Prestashop Event Bus",
-                    "message": "Ai nevoie de modulul PrestaShop Event Bus pentru a continua configurarea acestui modul.",
-                    "action": "Instalează",
-                    "loading": "Modulul Prestashop Event Bus este în curs de instalare..."
-                }
-            }
+        "install": {
+          "title": "Instalează modulul PrestaShop Account",
+          "message": "Ai nevoie de modulul PrestaShop Account pentru a continua configurarea acestui modul.",
+          "action": "Instalează",
+          "loading": "Modulul PrestaShop Account este în curs de instalare..."
         },
-        "alertShopDomainShouldExists": {
-            "title": "URL-ul magazinului nu este completat!",
-            "message": "Doar magazinul cu un URL atribuit poate fi asociat unui cont PrestaShop.<br />Următoarele magazine nu au un URL atribuit: "
-        },
-        "account": {
-            "title": "Asociază-ți magazinul cu un cont PrestaShop | Asociază-ți magazinele cu un cont PrestaShop",
-            "authorize": "Poți asocia magazinul doar cu un singur cont. Așa că ai grijă să il alegi pe cel potrivit!",
-            "authorized": "Magazinul tău este asociat cu contul tău din PrestaShop. | Magazinele tale sunt asociate cu contul tău din PrestaShop:",
-            "authorizedPartially": "Magazinele tale au fost parțial asociate cu contul tău PrestaShop Account",
-            "authorizedSeveral": "Magazinele tale sunt asociate cu mai multe conturi de PrestaShop",
-            "connectButton": "Asociază",
-            "reonboardButton": "Reasociază",
-            "disconnectButton": "Folosește un alt cont",
-            "moduleUpdateInformation": "<strong>Nouă actualizare:</strong> poți gestiona magazinele asociate.<br /> Te rugăm să te reasociezi folosind <strong>aceeași adresă de e-mail</strong> pentru a beneficia de această actualizare.<br /> Alte actualizări ale modulelor pot fi disponibile în fila Actualizări din managerul de module.",
-            "emailNotVerified": {
-                "title": "Un e-mail de confirmare a fost trimis la adresa.",
-                "description": "Verifică căsuța poștală și fă clic pe link pentru a activa contul."
-            },
-            "sendEmail": "Trimite din nou",
-            "needToBeAdmin": "Pentru a continua, trebuie să fii administratorul magazinului",
-            "pleaseContact": "Te rugăm să contactezi",
-            "manageAccountButton": "Vezi magazinele mele asociate",
-            "unlinkButton": "Disociază"
+        "update": {
+          "title": "Actualizează modulul Prestashop Account",
+          "message": "O nouă versiune a PrestaShop Account este disponibilă, te rugăm să actualizezi modulul pentru a continua să utilizezi serviciile",
+          "action": "Actualizare",
+          "loading": "Modulul PrestaShop Account este în curs de actualizare..."
         }
+      }
+    },
+    "alertShopDomainShouldExists": {
+      "title": "Store URL not filled in!",
+      "message": "Only store with an assigned URL can be linked to a PrestaShop account.",
+      "shopList": "The following stores don't have an assigned URL: "
+    },
+    "account": {
+      "title": "Link your store to a PrestaShop account | Link your stores to a PrestaShop account",
+      "authorize": "You can only link your store to one account. | You can only link your stores to one account.",
+      "authorized": "Your store is linked to the PrestaShop account",
+      "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
+      "authorizedMultishop": "All your stores are linked to a PrestaShop account",
+      "connectButton": "Link",
+      "moduleUpdateInformation": {
+        "part1": "New update: ",
+        "part2": "you can manage your linked stores.",
+        "part3": "Please link your store again using",
+        "part4": "the same email address",
+        "part5": "to benefit from this update.",
+        "part6": "Other module updates may be available in the Updates tab of the module manager."
+      },
+      "emailNotVerified": {
+        "title": "Un e-mail de confirmare a fost trimis la adresa.",
+        "description": "Verifică căsuța poștală și fă clic pe link pentru a activa contul."
+      },
+      "sendEmail": "Trimite din nou",
+      "needToBeAdmin": "In order to proceed you need to be administrator of the store",
+      "pleaseContact": "Te rugăm să contactezi",
+      "manageAccountButton": "Manage linked stores"
     }
+  }
 }
