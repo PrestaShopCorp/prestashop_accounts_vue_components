@@ -26,36 +26,33 @@
       }
     },
     "alertShopDomainShouldExists": {
-      "title": "URL de la tienda sin rellenar",
-      "message": "Solo la tienda con una URL asignada se puede asociar a una cuenta PrestaShop.",
-      "shopList": "Las siguientes tiendas no tienen una URL asignada: "
+      "title": "Store URL not filled in!",
+      "message": "Only store with an assigned URL can be linked to a PrestaShop account.",
+      "shopList": "The following stores don't have an assigned URL: "
     },
     "account": {
-      "title": "Asociar tu tienda a una cuenta PrestaShop | Asociar tus tiendas a una cuenta PrestaShop",
-      "authorize": "Solo puedes vincular tu tienda a una cuenta. ¡Elígela bien!",
-      "authorized": "Tu tienda está asociada a la cuenta PrestaShop: | Tu tienda está asociada a la cuenta PrestaShop:",
-      "authorizedPartially": "Tus tiendas están parcialmente asociadas a una cuenta PrestaShop",
-      "authorizedSeveral": "Tus tiendas están asociadas a varias cuentas PrestaShop",
-      "connectButton": "Vincular",
-      "reonboardButton": "Vincular de nuevo",
-      "disconnectButton": "Usar otra cuenta",
+      "title": "Link your store to a PrestaShop account | Link your stores to a PrestaShop account",
+      "authorize": "You can only link your store to one account. | You can only link your stores to one account.",
+      "authorized": "Your store is linked to the PrestaShop account",
+      "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
+      "authorizedMultishop": "All your stores are linked to a PrestaShop account",
+      "connectButton": "Link",
       "moduleUpdateInformation": {
-        "part1": "Nueva actualización: ",
-        "part2": "puedes gestionar tus tiendas asociadas.",
-        "part3": "Vuelve a asociarte utilizando",
-        "part4": "la misma dirección de correo electrónico",
-        "part5": "para beneficiarte de esta actualización.",
-        "part6": "Otras actualizaciones del módulo pueden estar disponibles en la pestaña Actualizaciones del gestor de módulos."
+        "part1": "New update: ",
+        "part2": "you can manage your linked stores.",
+        "part3": "Please link your store again using",
+        "part4": "the same email address",
+        "part5": "to benefit from this update.",
+        "part6": "Other module updates may be available in the Updates tab of the module manager."
       },
       "emailNotVerified": {
         "title": "Se ha enviado un correo electrónico de confirmación.",
         "description": "Comprueba tu bandeja de entrada y haz clic en el enlace para activar tu cuenta."
       },
       "sendEmail": "Enviar de nuevo",
-      "needToBeAdmin": "Para continuar, debes ser administrador de la tienda",
+      "needToBeAdmin": "In order to proceed you need to be administrator of the store",
       "pleaseContact": "Ponte en contacto con",
-      "manageAccountButton": "Ver mis tiendas vinculadas",
-      "unlinkButton": "Desvincular esta tienda"
+      "manageAccountButton": "Manage linked stores"
     }
   }
 }
