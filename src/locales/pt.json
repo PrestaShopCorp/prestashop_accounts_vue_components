@@ -26,36 +26,33 @@
       }
     },
     "alertShopDomainShouldExists": {
-      "title": "URL da loja não preenchida!",
-      "message": "Somente lojas com um URL atribuído podem ser associadas a uma conta PrestaShop.",
-      "shopList": "As seguintes lojas não têm uma URL atribuída: "
+      "title": "URL da loja não preenchido!",
+      "message": "Somente lojas que possuam um URL atribuído podem ser vinculadas a uma conta PrestaShop.",
+      "shopList": "As seguintes lojas não possuem um URL atribuído: "
     },
     "account": {
-      "title": "Associar a sua loja a uma conta PrestaShop | Associar a sua loja a uma conta PrestaShop",
-      "authorize": "Apenas pode associar a sua loja a uma conta. Escolha bem!",
-      "authorized": "A sua loja está associada à conta da PrestaShop: | A sua loja está associada à conta da PrestaShop:",
-      "authorizedPartially": "As suas lojas estão parcialmente associadas a uma conta PrestaShop",
-      "authorizedSeveral": "As suas lojas estão associadas a várias contas PrestaShop",
-      "connectButton": "Associada",
-      "reonboardButton": "Reassociate",
-      "disconnectButton": "Usar outra conta",
+      "title": "Vincule sua loja a uma conta PrestaShop | Vincule suas lojas a uma conta PrestaShop",
+      "authorize": "Você só pode vincular sua loja a uma conta. | Você só pode vincular suas lojas a uma conta.",
+      "authorized": "Sua loja está vinculada à conta PrestaShop",
+      "authorizedPartially": "Suas lojas estão parcialmente vinculadas a uma conta PrestaShop",
+      "authorizedMultishop": "Todas as suas lojas estão vinculadas a uma conta PrestaShop",
+      "connectButton": "Link",
       "moduleUpdateInformation": {
-        "part1": "Nova actualização: ",
-        "part2": "pode gerir as suas lojas associadas.",
-        "part3": "Por favor, volte a participar usando o",
-        "part4": "mesmo endereço de correio electrónico",
-        "part5": "para tirar partido desta actualização.",
-        "part6": "Outras actualizações de módulos podem estar disponíveis em Module Manager, separador Updates."
+        "part1": "Nova atualização: ",
+        "part2": "você pode gerenciar suas lojas vinculadas.",
+        "part3": "Vincule sua loja novamente usando",
+        "part4": "o mesmo endereço de e-mail",
+        "part5": "para poder usar esta atualização.",
+        "part6": "Outras atualizações de módulo podem estar disponíveis na guia Atualizações do gerenciador de módulos."
       },
       "emailNotVerified": {
         "title": "Foi enviado um e-mail de confirmação.",
         "description": "Verifique a sua caixa de entrada e clique no link para activar a sua conta."
       },
       "sendEmail": "Reenviar",
-      "needToBeAdmin": "Para continuar, deverá ser um administrador da loja.",
+      "needToBeAdmin": "Para prosseguir, você precisa ser administrador da loja",
       "pleaseContact": "Por favor entre em contacto",
-      "manageAccountButton": "Ver as minhas lojas associadas",
-      "unlinkButton": "Desassociar"
+      "manageAccountButton": "Gerenciar lojas vinculadas"
     }
   }
 }
