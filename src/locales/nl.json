@@ -26,36 +26,33 @@
       }
     },
     "alertShopDomainShouldExists": {
-      "title": "Winkel URL niet ingevuld!",
-      "message": "Alleen winkels met een toegewezen URL kunnen aan een PrestaShop account gekoppeld worden.",
+      "title": "Winkel-URL niet ingevuld!",
+      "message": "Alleen winkels met een toegewezen URL kunnen worden gekoppeld aan een PrestaShop Account.",
       "shopList": "De volgende winkels hebben geen toegewezen URL: "
     },
     "account": {
-      "title": "Koppel uw winkel aan een PrestaShop account | Koppel uw winkels aan een PrestaShop account",
-      "authorize": "U kunt uw winkel maar aan één account koppelen. Kies het goed!",
-      "authorized": "Uw winkel is gekoppeld aan de PrestaShop account: | Uw winkels is gekoppeld aan de PrestaShop account:",
-      "authorizedPartially": "Uw winkels zijn gedeeltelijk gekoppeld aan een PrestaShop account",
-      "authorizedSeveral": "Uw winkels zijn gekoppeld aan meerdere PrestaShop accounts",
+      "title": "Je winkel koppelen aan een PrestaShop Account | Je winkels koppelen aan een PrestaShop Account",
+      "authorize": "Je kunt je winkel slechts aan één account koppelen. | Je kunt je winkels slechts aan één account koppelen.",
+      "authorized": "Je winkel is gekoppeld aan het PrestaShop Account",
+      "authorizedPartially": "Je winkels zijn gedeeltelijk gekoppeld aan een PrestaShop Account",
+      "authorizedMultishop": "Al je winkels zijn gekoppeld aan een PrestaShop Account",
       "connectButton": "Koppelen",
-      "reonboardButton": "Opnieuw verbinden",
-      "disconnectButton": "Een ander account gebruiken",
       "moduleUpdateInformation": {
         "part1": "Nieuwe update: ",
-        "part2": "u kunt uw geassocieerde winkels beheren.",
-        "part3": "Gelieve u opnieuw aan te melden",
-        "part4": "met hetzelfde e-mailadres",
-        "part5": "om van deze update te kunnen profiteren.",
-        "part6": "Andere module-updates kunnen beschikbaar zijn in Module Manager, tabblad Updates."
+        "part2": "je kunt je gekoppelde winkels beheren.",
+        "part3": "Koppel je winkel opnieuw met",
+        "part4": "hetzelfde e-mailadres",
+        "part5": "om te profiteren van deze update.",
+        "part6": "Andere module-updates zijn mogelijk beschikbaar op het tabblad Updates van de modulebeheerder."
       },
       "emailNotVerified": {
         "title": "Er is een bevestigingsmail verzonden.",
         "description": "Controleer uw inbox en klik op de link om uw account te activeren."
       },
       "sendEmail": "Doorsturen",
-      "needToBeAdmin": "Om verder te gaan, moet u een administrator van de winkel zijn.",
+      "needToBeAdmin": "Om verder te gaan, moet je beheerder van de winkel zijn",
       "pleaseContact": "Neem alstublieft contact op met",
-      "manageAccountButton": "Bekijk mijn geassocieerde winkels",
-      "unlinkButton": "Loskoppelen"
+      "manageAccountButton": "Gekoppelde winkels beheren"
     }
   }
 }

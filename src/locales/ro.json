@@ -26,26 +26,24 @@
       }
     },
     "alertShopDomainShouldExists": {
-      "title": "URL-ul magazinului nu este completat!",
-      "message": "Doar magazinul cu un URL atribuit poate fi asociat unui cont PrestaShop.",
-      "shopList": "Următoarele magazine nu au un URL atribuit: "
+      "title": "Adresa URL a magazinului nu a fost completată!",
+      "message": "Numai un magazin cu o adresă URL atribuită poate fi conectat la un cont PrestaShop.",
+      "shopList": "Următoarele magazine nu au o adresă URL atribuită: "
     },
     "account": {
-      "title": "Asociază-ți magazinul cu un cont PrestaShop | Asociază-ți magazinele cu un cont PrestaShop",
-      "authorize": "Poți asocia magazinul doar cu un singur cont. Așa că ai grijă să il alegi pe cel potrivit!",
-      "authorized": "Magazinul tău este asociat cu contul tău din PrestaShop. | Magazinele tale sunt asociate cu contul tău din PrestaShop:",
-      "authorizedPartially": "Magazinele tale au fost parțial asociate cu contul tău PrestaShop Account",
-      "authorizedSeveral": "Magazinele tale sunt asociate cu mai multe conturi de PrestaShop",
-      "connectButton": "Asociază",
-      "reonboardButton": "Reasociază",
-      "disconnectButton": "Folosește un alt cont",
+      "title": "Conectează-ți magazinul la un cont PrestaShop | Conectează-ți magazinele la un cont PrestaShop",
+      "authorize": "Îți poți conecta magazinul la un singur cont. | Îți poți conecta magazinele la un singur cont.",
+      "authorized": "Magazinul tău este conectat la contul PrestaShop",
+      "authorizedPartially": "Magazinele tale sunt parțial conectate la un cont PrestaShop",
+      "authorizedMultishop": "Toate magazinele tale sunt conectate la un cont PrestaShop",
+      "connectButton": "Link",
       "moduleUpdateInformation": {
-        "part1": "Nouă actualizare: ",
-        "part2": "poți gestiona magazinele asociate.",
-        "part3": "Te rugăm să te reasociezi folosind",
+        "part1": "Actualizare nouă: ",
+        "part2": "poți gestiona magazinele conectate.",
+        "part3": "Conectează-ți din nou magazinul folosind",
         "part4": "aceeași adresă de e-mail",
         "part5": "pentru a beneficia de această actualizare.",
-        "part6": "Alte actualizări ale modulelor pot fi disponibile în fila Actualizări din managerul de module."
+        "part6": "Alte actualizări de module pot fi disponibile în fila Actualizări a managerului de module."
       },
       "emailNotVerified": {
         "title": "Un e-mail de confirmare a fost trimis la adresa.",
@@ -54,8 +52,7 @@
       "sendEmail": "Trimite din nou",
       "needToBeAdmin": "Pentru a continua, trebuie să fii administratorul magazinului",
       "pleaseContact": "Te rugăm să contactezi",
-      "manageAccountButton": "Vezi magazinele mele asociate",
-      "unlinkButton": "Disociază"
+      "manageAccountButton": "Gestionează magazinele conectate"
     }
   }
 }

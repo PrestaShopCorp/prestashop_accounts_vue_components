@@ -26,36 +26,33 @@
       }
     },
     "alertShopDomainShouldExists": {
-      "title": "Shop URL nicht ausgefüllt!",
-      "message": "Nur Shops mit einer zugewiesenen URL können mit einem PrestaShop-Konto verknüpft werden.",
-      "shopList": "Die folgenden Shops haben keine zugewiesene URL: "
+      "title": "Die URL des Geschäfts ist nicht ausgefüllt!",
+      "message": "Nur ein Geschäft mit einer zugewiesenen URL kann mit einem PrestaShop-Konto verknüpft werden.",
+      "shopList": "Den folgenden Geschäften wurde keine URL zugewiesen: "
     },
     "account": {
-      "title": "Verbinden Sie Ihren Shop mit einem PrestaShop-Konto | Verbinden Sie Ihre Shops mit einem PrestaShop-Konto",
-      "authorize": "Sie können Ihren Shop nur mit einem Konto verknüpfen. Wählen Sie das richtige Konto!",
-      "authorized": "Ihr Shop ist mit dem PrestaShop-Konto verbunden: | Ihr Shop ist mit dem PrestaShop-Konto verknüpft:",
-      "authorizedPartially": "Ihre Shops sind teilweise mit einem PrestaShop-Konto verbunden",
-      "authorizedSeveral": "Ihre Shops sind mit mehreren PrestaShop-Konten verbunden",
-      "connectButton": "Verknüpfen",
-      "reonboardButton": "Neu zuordnen",
-      "disconnectButton": "Benutze ein anderes Konto",
+      "title": "Verknüpfen Sie Ihr Geschäft mit einem PrestaShop-Konto | Verknüpfen Sie Ihre Geschäfte mit einem PrestaShop-Konto",
+      "authorize": "Sie können Ihr Geschäft nur mit einem Konto verknüpfen. | Sie können Ihre Geschäfte nur mit einem Konto verknüpfen.",
+      "authorized": "Ihr Geschäft ist mit dem PrestaShop-Konto verknüpft",
+      "authorizedPartially": "Ihre Geschäfte sind zum Teil mit einem PrestaShop-Konto verknüpft",
+      "authorizedMultishop": "All Ihre Geschäfte sind mit einem PrestaShop-Konto verknüpft",
+      "connectButton": "Link",
       "moduleUpdateInformation": {
         "part1": "Neues Update: ",
-        "part2": "Sie können Ihre zugeordneten Shops verwalten.",
-        "part3": "Bitte melden Sie sich mit",
-        "part4": "der gleichen E-Mail-Adresse erneut an,",
+        "part2": "Sie können Ihre verknüpften Geschäfte verwalten.",
+        "part3": "Bitte verknüpfen Sie Ihr Geschäft erneut mit",
+        "part4": "derselben E-Mail-Adresse,",
         "part5": "um von diesem Update zu profitieren.",
-        "part6": "Andere Modul-Updates sind möglicherweise auf der Registerkarte \"Updates\" des Modul-Managers verfügbar."
+        "part6": "Andere Modul-Updates sind möglicherweise auf der Registerkarte „Updates“ des Modul-Managers verfügbar."
       },
       "emailNotVerified": {
         "title": "Eine Bestätigungs-E-Mail wurde verschickt.",
         "description": "Prüfen Sie Ihren Posteingang und klicken Sie auf den Link, um Ihr Konto zu aktivieren."
       },
       "sendEmail": "Erneut senden",
-      "needToBeAdmin": "Um fortzufahren, müssen Sie Administrator des Geschäfts sein",
+      "needToBeAdmin": "Um fortfahren zu können, müssen Sie Administrator des Geschäfts sein",
       "pleaseContact": "Vielen Dank für den Kontakt",
-      "manageAccountButton": "Meine zugehörigen Shops anzeigen",
-      "unlinkButton": "Entkoppeln"
+      "manageAccountButton": "Verknüpfte Geschäfte verwalten"
     }
   }
 }

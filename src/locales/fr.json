@@ -27,25 +27,23 @@
     },
     "alertShopDomainShouldExists": {
       "title": "L'URL de la boutique n'est pas renseignée !",
-      "message": "Seule la boutique avec une URL assignée peut être associée à un compte PrestaShop.",
-      "shopList": "Les boutiques suivantes n'ont pas d'URL assignée: "
+      "message": "Seule une boutique possédant une URL peut être associée à un compte PrestaShop.",
+      "shopList": "Les boutiques suivantes n'ont pas d'URL attribuée : "
     },
     "account": {
-      "title": "Associer votre boutique à un compte PrestaShop | Associer vos boutiques à un compte PrestaShop",
-      "authorize": "Vous ne pouvez associer votre boutique qu'à un seul compte. Choisissez le bien !",
-      "authorized": "Votre boutique est associée au compte PrestaShop : | Votre boutique est associée au compte PrestaShop :",
+      "title": "Associez votre boutique à un compte PrestaShop | Associez vos boutiques à un compte PrestaShop",
+      "authorize": "Vous ne pouvez associer votre boutique qu'à un seul compte. | Vous ne pouvez associer vos boutiques qu'à un seul compte.",
+      "authorized": "Vous boutique est associée au compte PrestaShop",
       "authorizedPartially": "Vos boutiques sont partiellement associées à un compte PrestaShop",
-      "authorizedSeveral": "Vos boutiques sont associées à plusieurs comptes PrestaShop",
+      "authorizedMultishop": "Toutes vos boutiques sont associées à un compte PrestaShop",
       "connectButton": "Associer",
-      "reonboardButton": "Réassocier",
-      "disconnectButton": "Utiliser un autre compte",
       "moduleUpdateInformation": {
-        "part1": "Nouvelle mise à jour: ",
+        "part1": "Nouvelle mise à jour : ",
         "part2": "vous pouvez gérer vos boutiques associées.",
-        "part3": "Merci de vous réassocier en utilisant",
-        "part4": "la même adresse mail",
-        "part5": "pour profiter de cette mise à jour.",
-        "part6": "D'autres mises à jour de modules peuvent être disponibles dans Gestionnaire de modules onglet Mises à jour."
+        "part3": "Veuillez associer votre boutique à nouveau en utilisant",
+        "part4": "la même adresse e-mail",
+        "part5": "pour bénéficier de cette mise à jour.",
+        "part6": "D'autres mises à jour de modules peuvent être disponibles dans l'onglet Mises à jour du gestionnaire de modules."
       },
       "emailNotVerified": {
         "title": "Un courriel de confirmation a été envoyé.",
@@ -54,8 +52,7 @@
       "sendEmail": "Renvoyer",
       "needToBeAdmin": "Pour continuer, vous devez être administrateur de la boutique",
       "pleaseContact": "Merci de contacter",
-      "manageAccountButton": "Voir mes boutiques associées",
-      "unlinkButton": "Dissocier"
+      "manageAccountButton": "Gérer les boutiques associées"
     }
   }
 }
