@@ -36,6 +36,15 @@
         data-testid="account-user-not-super-admin"
       />
       <template v-if="!hasBlockingAlert">
+        <InvitationBanner
+          :app="context.psxName"
+          :accounts-ui-url="context.accountsUiUrl"
+          :admin-ajax-link="context.adminAjaxLink"
+          :shops="shopsToLink"
+          :shops-in-context="shopsInContext"
+          :shop-context="context.currentContext ? context.currentContext.type : 4"
+          data-testid="invitatiion-banner"
+        />
         <AccountPanel
           :accounts-ui-url="context.accountsUiUrl"
           :app="context.psxName"
@@ -76,21 +85,21 @@ import { Context, Shop, ShopContext } from '@/types/context';
 import { contextSchema } from '@/lib/ContextValidator';
 import '@/assets/css/index.css';
 import { hasSlotContent } from '@/lib/utils';
+/**
+ * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
+ * to ensure each functional case is covered for you. You can use the default slots
+ * that will be disabled if the user account is not well linked (you should put your
+ * module configuration panel here)
+ */
+interface PsAccountsProps {
   /**
-   * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
-   * to ensure each functional case is covered for you. You can use the default slots
-   * that will be disabled if the user account is not well linked (you should put your
-   * module configuration panel here)
-   */
-  interface PsAccountsProps {
-    /**
-    * The whole context object given
-    * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
-    * If left empty (by default), the context will be retrieved from JS global
-    * var window.contextPsAccounts automatically.
-    */
-    context?: Context;
-  }
+  * The whole context object given
+  * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
+  * If left empty (by default), the context will be retrieved from JS global
+  * var window.contextPsAccounts automatically.
+  */
+  context?: Context;
+}
 const props = withDefaults(defineProps<PsAccountsProps>(), {
   context: () => window.contextPsAccounts || {}
 });
