@@ -27,23 +27,23 @@
     },
     "alertShopDomainShouldExists": {
       "title": "Sin rellenar la URL de la tienda",
-      "message": "Only store with an assigned URL can be linked to a PrestaShop account.",
+      "message": "Solo las tiendas con una URL asignada se pueden vincular a una cuenta de PrestaShop.",
       "shopList": "Las tiendas siguientes no tienen una URL asignada: "
     },
     "account": {
       "title": "Vincula tu tienda a una cuenta de PrestaShop | Vincula tus tiendas a una cuenta de PrestaShop",
-      "authorize": "You can only link your store to one account. | You can only link your stores to one account.",
-      "authorized": "Your store is linked to the PrestaShop account",
-      "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
-      "authorizedMultishop": "All your stores are linked to a PrestaShop account",
+      "authorize": "Solo puedes vincular tu tienda a una cuenta. | Solo puedes vincular tus tiendas a una cuenta.",
+      "authorized": "Tu tienda está vinculada a la cuenta PrestaShop",
+      "authorizedPartially": "Tus tiendas están parcialmente vinculadas a una cuenta PrestaShop",
+      "authorizedMultishop": "Todas tus tiendas están vinculadas a una cuenta PrestaShop",
       "connectButton": "Enlace",
       "moduleUpdateInformation": {
         "part1": "Nueva actualización: ",
-        "part2": "you can manage your linked stores.",
+        "part2": "puedes gestionar tus tiendas vinculadas.",
         "part3": "Vuelva a vincular tu tienda utilizando",
         "part4": "la misma dirección de correo electrónico",
         "part5": "para beneficiarte de esta actualización.",
-        "part6": "Other module updates may be available in the Updates tab of the module manager."
+        "part6": "Otras actualizaciones de módulos pueden estar disponibles en la pestaña Actualizaciones del gestor de módulos."
       },
       "emailNotVerified": {
         "title": "Se ha enviado un correo electrónico de confirmación.",
