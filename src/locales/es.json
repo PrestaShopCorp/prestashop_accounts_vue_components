@@ -26,23 +26,23 @@
       }
     },
     "alertShopDomainShouldExists": {
-      "title": "Store URL not filled in!",
+      "title": "Sin rellenar la URL de la tienda",
       "message": "Only store with an assigned URL can be linked to a PrestaShop account.",
-      "shopList": "The following stores don't have an assigned URL: "
+      "shopList": "Las tiendas siguientes no tienen una URL asignada: "
     },
     "account": {
-      "title": "Link your store to a PrestaShop account | Link your stores to a PrestaShop account",
+      "title": "Vincula tu tienda a una cuenta de PrestaShop | Vincula tus tiendas a una cuenta de PrestaShop",
       "authorize": "You can only link your store to one account. | You can only link your stores to one account.",
       "authorized": "Your store is linked to the PrestaShop account",
       "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
       "authorizedMultishop": "All your stores are linked to a PrestaShop account",
-      "connectButton": "Link",
+      "connectButton": "Enlace",
       "moduleUpdateInformation": {
-        "part1": "New update: ",
+        "part1": "Nueva actualización: ",
         "part2": "you can manage your linked stores.",
-        "part3": "Please link your store again using",
-        "part4": "the same email address",
-        "part5": "to benefit from this update.",
+        "part3": "Vuelva a vincular tu tienda utilizando",
+        "part4": "la misma dirección de correo electrónico",
+        "part5": "para beneficiarte de esta actualización.",
         "part6": "Other module updates may be available in the Updates tab of the module manager."
       },
       "emailNotVerified": {
@@ -50,9 +50,9 @@
         "description": "Comprueba tu bandeja de entrada y haz clic en el enlace para activar tu cuenta."
       },
       "sendEmail": "Enviar de nuevo",
-      "needToBeAdmin": "In order to proceed you need to be administrator of the store",
+      "needToBeAdmin": "Para continuar, debes ser administrador de la tienda",
       "pleaseContact": "Ponte en contacto con",
-      "manageAccountButton": "Manage linked stores"
+      "manageAccountButton": "Gestionar tiendas vinculadas"
     }
   }
 }
