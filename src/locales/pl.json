@@ -26,12 +26,12 @@
       }
     },
     "alertShopDomainShouldExists": {
-      "title": "Store URL not filled in!",
-      "message": "Only store with an assigned URL can be linked to a PrestaShop account.",
-      "shopList": "The following stores don't have an assigned URL: "
+      "title": "Adres URL sklepu nie został wypełniony!",
+      "message": "Tylko sklep z przypisanym adresem URL może być powiązany z PrestaShop Account.",
+      "shopList": "Następujące sklepy nie mają przypisanego adresu URL: "
     },
     "account": {
-      "title": "Link your store to a PrestaShop account | Link your stores to a PrestaShop account",
+      "title": "Połącz Twój sklep z PrestaShop Account | Połącz Twoje sklepy z PrestaShop Account",
       "authorize": "You can only link your store to one account. | You can only link your stores to one account.",
       "authorized": "Your store is linked to the PrestaShop account",
       "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
@@ -46,10 +46,10 @@
         "part6": "Other module updates may be available in the Updates tab of the module manager."
       },
       "emailNotVerified": {
-        "title": "Została wysłana wiadomość e-mail z potwierdzeniem.",
+        "title": "E-mail z potwierdzeniem został wysłany.",
         "description": "Sprawdź swoją skrzynkę odbiorczą i kliknij link, aby aktywować konto."
       },
-      "sendEmail": "Wróć",
+      "sendEmail": "Wyślij ponownie",
       "needToBeAdmin": "In order to proceed you need to be administrator of the store",
       "pleaseContact": "Prosimy o kontakt",
       "manageAccountButton": "Manage linked stores"
