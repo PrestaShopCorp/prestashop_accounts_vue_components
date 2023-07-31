@@ -18,7 +18,7 @@
           "loading": "Aktywacja modułu PrestaShop Account w toku..."
         },
         "update": {
-          "title": "Zaktualizuj moduł Konta PrestaShop",
+          "title": "Zaktualizuj moduł PrestaShop Account",
           "message": "Dostępna jest nowa wersja Kont PrestaShop, zaktualizuj moduł, aby móc dalej korzystać z usług",
           "action": "Aktualizacja",
           "loading": "Moduł PrestaShop Account jest obecnie aktualizowany..."
@@ -36,9 +36,9 @@
       "authorized": "Your store is linked to the PrestaShop account",
       "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
       "authorizedMultishop": "All your stores are linked to a PrestaShop account",
-      "connectButton": "Link",
+      "connectButton": "Połącz",
       "moduleUpdateInformation": {
-        "part1": "New update: ",
+        "part1": "Nowa aktualizacja: ",
         "part2": "you can manage your linked stores.",
         "part3": "Please link your store again using",
         "part4": "the same email address",
