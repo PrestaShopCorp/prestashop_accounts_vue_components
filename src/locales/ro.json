@@ -37,6 +37,12 @@
       "authorizedPartially": "Magazinele tale sunt parțial conectate la un cont PrestaShop",
       "authorizedMultishop": "Toate magazinele tale sunt conectate la un cont PrestaShop",
       "connectButton": "Link",
+      "invitationBanner": {
+        "button": "View my invitation|View my invitations",
+        "messageStart": "An expert from",
+        "messageEnd": "is waiting for an answer to his invitation.",
+        "title": "You have {count} request awaiting|You have {count} requests awaiting"
+      },
       "moduleUpdateInformation": {
         "part1": "Actualizare nouă: ",
         "part2": "poți gestiona magazinele conectate.",
