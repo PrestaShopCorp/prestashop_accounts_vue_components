@@ -1,0 +1,46 @@
+import { Meta, Story, Description, ArgTypes } from "@storybook/blocks";
+import {
+  NotLinked,
+  PartiallyLinked,
+  Linked,
+  SlotTemplate,
+} from "./InvitationBanner.stories";
+
+import InvitationBanner from "./InvitationBanner.vue";
+
+<Meta title="Components/Panels/InvitationBanner" />
+
+# Invitation banner behavior
+
+The `InvitationBanner` component is here to show if the user have a pending invitation request.
+This component is only in charge of displaying a banner if a shop is linked and have a pending invitation for this shop.
+
+## If an association is pending a banner is displayed:
+
+<Story of={NotLinked} height="175px" />
+
+Otherwise, if there is no association, the banner is not displayed
+
+---
+
+# Integration
+
+This component is a sub-component of PS Accounts and is shown above the `AccountsPanel` sub-component.
+
+
+```html
+<InvitationBanner
+  :accounts-ui-url="validContext.accountsUiUrl"
+  :admin-ajax-link="validContext.adminAjaxLink"
+  :app="context.psxName"
+  :shop-context="validContext.currentContext.type"
+  :shops="shopsToLink"
+  :shops-in-context="shopsInContext"
+>
+</InvitationBanner>
+```
+
+# Technical details
+
+<Description of={InvitationBanner} />
+<ArgTypes of={InvitationBanner} />
