@@ -37,6 +37,12 @@
       "authorizedPartially": "Vos boutiques sont partiellement associées à un compte PrestaShop",
       "authorizedMultishop": "Toutes vos boutiques sont associées à un compte PrestaShop",
       "connectButton": "Associer",
+      "invitationBanner": {
+        "button": "View my invitation|View my invitations",
+        "messageStart": "An expert from",
+        "messageEnd": "is waiting for an answer to his invitation.",
+        "title": "You have {count} request awaiting|You have {count} requests awaiting"
+      },
       "moduleUpdateInformation": {
         "part1": "Nouvelle mise à jour : ",
         "part2": "vous pouvez gérer vos boutiques associées.",
