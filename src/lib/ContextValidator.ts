@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { ShopContext } from '@/types/context';
 
 export const backendUserSchema = Joi.object().keys({
   email: Joi.string().email({ tlds: false }).allow(null).default(null),
@@ -55,7 +56,7 @@ export const userSchema = Joi.object().keys({
 export const contextSchema = Joi.object().keys({
   accountsUiUrl: Joi.string().allow(null).default(null),
   backendUser: backendUserSchema.optional().allow({}).default({}),
-  currentContext: currentContextSchema.optional().allow({}).default({}),
+  currentContext: currentContextSchema.optional().default({ type: ShopContext.All }),
   // dependencies
   onboardingLink: Joi.string().uri().optional().allow(null)
     .allow('')
