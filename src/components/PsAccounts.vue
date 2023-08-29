@@ -101,7 +101,7 @@ interface PsAccountsProps {
   context?: Context;
 }
 const props = withDefaults(defineProps<PsAccountsProps>(), {
-  context: () => window.contextPsAccounts || {}
+  context: () => (window.contextPsAccounts ? contextSchema.validate(window.contextPsAccounts).value : {}) as Context
 });
 const errors = ref<string[]>([]);
 
