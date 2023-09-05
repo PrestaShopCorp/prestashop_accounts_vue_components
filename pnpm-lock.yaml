@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -94,6 +94,9 @@ devDependencies:
   postcss:
     specifier: ^8.4.25
     version: 8.4.25
+  postcss-prefix-selector:
+    specifier: ^1.16.0
+    version: 1.16.0(postcss@8.4.25)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -4261,7 +4264,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.3.4
-      vue-component-type-helpers: 1.8.4
+      vue-component-type-helpers: 1.8.5
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -9395,6 +9398,14 @@ packages:
       postcss-selector-parser: 6.0.13
     dev: true
 
+  /postcss-prefix-selector@1.16.0(postcss@8.4.25):
+    resolution: {integrity: sha512-rdVMIi7Q4B0XbXqNUEI+Z4E+pueiu/CS5E6vRCQommzdQ/sgsS4dK42U7GX8oJR+TJOtT+Qv3GkNo6iijUMp3Q==}
+    peerDependencies:
+      postcss: '>4 <9'
+    dependencies:
+      postcss: 8.4.25
+    dev: true
+
   /postcss-selector-parser@6.0.13:
     resolution: {integrity: sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==}
     engines: {node: '>=4'}
@@ -11219,8 +11230,8 @@ packages:
     resolution: {integrity: sha512-iGdlqtajmiqed8ptURKPJ/Olz0/mwripVZszg6tygfZSIL9kYFPJTNY6+Q6OjWGznl2L06vxG5HvNvAnWrnzbg==}
     dev: true
 
-  /vue-component-type-helpers@1.8.4:
-    resolution: {integrity: sha512-6bnLkn8O0JJyiFSIF0EfCogzeqNXpnjJ0vW/SZzNHfe6sPx30lTtTXlE5TFs2qhJlAtDFybStVNpL73cPe3OMQ==}
+  /vue-component-type-helpers@1.8.5:
+    resolution: {integrity: sha512-SBNsskF7L5x604V1BN4ZzdTtWgCqo5cfl//YuBXtc3LLyPdFRqUeJn2Q+FPNmCtl23LBT2tH79M/uv13fL0MgQ==}
     dev: true
 
   /vue-demi@0.14.5(vue@3.3.4):
