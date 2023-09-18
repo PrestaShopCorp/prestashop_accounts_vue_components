@@ -23,6 +23,9 @@
           "action": "Mettre à jour",
           "loading": "Le module Compte PrestaShop est actuellement en cours de mise à jour..."
         }
+      },
+      "unlinked": {
+        "message": "Votre compte PrestaShop a été dissociée de votre boutique car les tokens ont expirés. Veuillez l’associer de nouveau en utilisant le même compte."
       }
     },
     "alertShopDomainShouldExists": {

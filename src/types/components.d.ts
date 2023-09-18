@@ -13,6 +13,7 @@ declare module 'vue' {
     AlertContextValidator: typeof import('./../components/alert/AlertContextValidator.vue')['default']
     AlertModuleDependencies: typeof import('./../components/alert/AlertModuleDependencies.vue')['default']
     AlertModuleUpdateInformation: typeof import('./../components/alert/AlertModuleUpdateInformation.vue')['default']
+    AlertShopUnlinked: typeof import('./../components/alert/AlertShopUnlinked.vue')['default']
     AlertShopUrlShouldExists: typeof import('./../components/alert/AlertShopUrlShouldExists.vue')['default']
     AlertUserNotSuperAdmin: typeof import('./../components/alert/AlertUserNotSuperAdmin.vue')['default']
     BaseOverlay: typeof import('./../components/common/BaseOverlay.vue')['default']

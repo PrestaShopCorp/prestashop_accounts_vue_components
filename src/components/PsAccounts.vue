@@ -35,6 +35,12 @@
         :super-admin-email="context.superAdminEmail"
         data-testid="account-user-not-super-admin"
       />
+
+      <AlertShopUnlinked
+        v-if="context.currentContext.type === ShopContext.Shop && shopsInContext[0].unlinkedAuto"
+        class="acc-mb-4"
+      />
+
       <template v-if="!hasBlockingAlert">
         <AccountPanel
           :accounts-ui-url="context.accountsUiUrl"
@@ -71,12 +77,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { Context, Shop, ShopContext } from '@/types/context';
-import { contextSchema } from '@/lib/ContextValidator';
 import '@/assets/css/index.css';
+import AlertShopUnlinked from '@/components/alert/AlertShopUnlinked.vue';
+import { contextSchema } from '@/lib/ContextValidator';
 import { hasSlotContent } from '@/lib/utils';
-  /**
+import { Context, Shop, ShopContext } from '@/types/context';
+import { computed, ref } from 'vue';
+
+/**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
    * to ensure each functional case is covered for you. You can use the default slots
    * that will be disabled if the user account is not well linked (you should put your
