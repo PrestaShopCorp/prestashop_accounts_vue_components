@@ -42,6 +42,15 @@
       />
 
       <template v-if="!hasBlockingAlert">
+        <InvitationBanner
+          :app="context.psxName"
+          :accounts-ui-url="context.accountsUiUrl"
+          :admin-ajax-link="context.adminAjaxLink"
+          :shops="shopsToLink"
+          :shops-in-context="shopsInContext"
+          :shop-context="context.currentContext ? context.currentContext.type : 4"
+          data-testid="invitatiion-banner"
+        />
         <AccountPanel
           :accounts-ui-url="context.accountsUiUrl"
           :app="context.psxName"
@@ -100,7 +109,7 @@ import { computed, ref } from 'vue';
     context?: Context;
   }
 const props = withDefaults(defineProps<PsAccountsProps>(), {
-  context: () => window.contextPsAccounts || {}
+  context: () => (window.contextPsAccounts ? contextSchema.validate(window.contextPsAccounts).value : {}) as Context
 });
 const errors = ref<string[]>([]);
 

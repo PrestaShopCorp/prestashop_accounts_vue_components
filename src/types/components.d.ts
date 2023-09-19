@@ -17,6 +17,7 @@ declare module 'vue' {
     AlertShopUrlShouldExists: typeof import('./../components/alert/AlertShopUrlShouldExists.vue')['default']
     AlertUserNotSuperAdmin: typeof import('./../components/alert/AlertUserNotSuperAdmin.vue')['default']
     BaseOverlay: typeof import('./../components/common/BaseOverlay.vue')['default']
+    InvitationBanner: typeof import('./../components/invitation/InvitationBanner.vue')['default']
     PsAccounts: typeof import('./../components/PsAccounts.vue')['default']
     PuikAlert: typeof import('@prestashopcorp/puik/es')['PuikAlert']
     PuikButton: typeof import('@prestashopcorp/puik/es')['PuikButton']

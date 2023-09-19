@@ -1,6 +1,6 @@
 <template>
   <puik-card
-    class="acc-p-6"
+    class="!acc-p-6"
   >
     <div class="acc-flex acc-flex-row acc-items-center">
       <PuikIcon
