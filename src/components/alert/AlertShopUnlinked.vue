@@ -14,10 +14,5 @@
 
 <script setup lang="ts">
 import { useLocale } from '@/composables/useLocale';
-
-// interface AlertShopUnlinkedProps {}
-//
-// defineProps<AlertShopUnlinkedProps>();
-
 const { t } = useLocale();
 </script>
