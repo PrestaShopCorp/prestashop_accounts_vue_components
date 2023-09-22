@@ -1,6 +1,6 @@
 <template>
   <div
-    class="acc-flex acc-space-x-4"
+    class="acc-gap-2 acc-items-center acc-flex"
   >
     <puik-button
       v-if="shops.length"

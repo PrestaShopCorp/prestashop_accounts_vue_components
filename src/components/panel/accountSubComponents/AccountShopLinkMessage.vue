@@ -1,13 +1,13 @@
 <template>
   <div
-    class="acc-flex acc-flex-col acc-flex-grow acc-items-center md:acc-flex-row"
+    class="acc-flex"
   >
     <img
       :src="PsLogo"
-      class="acc-w-11 acc-h-11 md:acc-mr-3"
+      class="acc-w-11 acc-h-11 acc-mr-4"
     >
     <div
-      class="acc-mt-2 puik-body-default acc-text-center acc-align-middle md:acc-mt-0 md:acc-text-left"
+      class="acc-mt-2 puik-body-default"
       data-testid="account-shop-link-message"
     >
       <template v-if="linkedShops.length">

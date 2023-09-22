@@ -13,17 +13,14 @@
         {{ t('psaccounts.account.title', shopsInContext.length) }}
       </p>
     </div>
-    <div
-      class="acc-flex acc-flex-col acc-items-center md:acc-flex-row"
-    >
+    <div class="acc-gap-4 acc-flex acc-flex-wrap md:acc-justify-normal acc-justify-center md:acc-flex-row acc-flex-col">
       <AccountShopLinkMessage
-        class="md:acc-mr-2"
+        class="acc-flex-1 acc-min-w-[247px]"
         :shops-in-context="shopsInContext"
         :shop-context="shopContext"
       />
       <AccountLinkToUi
         v-if="!shopsWithoutUrl.length"
-        class="acc-mt-2 md:acc-mt-0"
         :accounts-ui-url="accountsUiUrl"
         :app="app"
         :is-super-admin="isSuperAdmin"
