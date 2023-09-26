@@ -23,6 +23,9 @@
           "action": "Aggiornare",
           "loading": "Il modulo PrestaShop Account è attualmente in fase di aggiornamento..."
         }
+      },
+      "unlinked": {
+        "message": "Your PrestaShop account has been unlink from your store because the tokens have expired. Please link it again using the same account."
       }
     },
     "alertShopDomainShouldExists": {
