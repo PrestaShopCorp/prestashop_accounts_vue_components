@@ -37,6 +37,12 @@
       "authorizedPartially": "Suas lojas estão parcialmente vinculadas a uma conta PrestaShop",
       "authorizedMultishop": "Todas as suas lojas estão vinculadas a uma conta PrestaShop",
       "connectButton": "Link",
+      "invitationBanner": {
+        "button": "View my invitation|View my invitations",
+        "messageStart": "An expert from",
+        "messageEnd": "is waiting for an answer to his invitation.",
+        "title": "You have {count} request awaiting|You have {count} requests awaiting"
+      },
       "moduleUpdateInformation": {
         "part1": "Nova atualização: ",
         "part2": "você pode gerenciar suas lojas vinculadas.",
