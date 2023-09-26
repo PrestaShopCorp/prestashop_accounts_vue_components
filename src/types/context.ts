@@ -64,6 +64,7 @@ export interface Shop {
   user?: Partial<User>
   uuid?: string | null
   virtualUri?: string | boolean | null
+  unlinkedAuto?: boolean
 }
 
 export interface ShopGroup {

@@ -35,6 +35,12 @@
         :super-admin-email="context.superAdminEmail"
         data-testid="account-user-not-super-admin"
       />
+
+      <AlertShopUnlinked
+        v-if="context.currentContext.type === ShopContext.Shop && shopsInContext[0].unlinkedAuto"
+        class="acc-mb-4"
+      />
+
       <template v-if="!hasBlockingAlert">
         <InvitationBanner
           :app="context.psxName"
@@ -80,26 +86,28 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { Context, Shop, ShopContext } from '@/types/context';
-import { contextSchema } from '@/lib/ContextValidator';
 import '@/assets/css/index.css';
+import AlertShopUnlinked from '@/components/alert/AlertShopUnlinked.vue';
+import { contextSchema } from '@/lib/ContextValidator';
 import { hasSlotContent } from '@/lib/utils';
+import { Context, Shop, ShopContext } from '@/types/context';
+import { computed, ref } from 'vue';
+
 /**
- * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
- * to ensure each functional case is covered for you. You can use the default slots
- * that will be disabled if the user account is not well linked (you should put your
- * module configuration panel here)
- */
-interface PsAccountsProps {
-  /**
-  * The whole context object given
-  * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
-  * If left empty (by default), the context will be retrieved from JS global
-  * var window.contextPsAccounts automatically.
-  */
-  context?: Context;
-}
+   * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
+   * to ensure each functional case is covered for you. You can use the default slots
+   * that will be disabled if the user account is not well linked (you should put your
+   * module configuration panel here)
+   */
+  interface PsAccountsProps {
+    /**
+    * The whole context object given
+    * [by ps\_accounts module presenter function](https://github.com/PrestaShopCorp/prestashop-accounts-installer#register-as-a-service-in-your-psx-container-recommended).
+    * If left empty (by default), the context will be retrieved from JS global
+    * var window.contextPsAccounts automatically.
+    */
+    context?: Context;
+  }
 const props = withDefaults(defineProps<PsAccountsProps>(), {
   context: () => (window.contextPsAccounts ? contextSchema.validate(window.contextPsAccounts).value : {}) as Context
 });
