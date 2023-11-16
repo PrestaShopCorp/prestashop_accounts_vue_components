@@ -5,8 +5,9 @@
     <div class="acc-flex acc-flex-row acc-items-center">
       <PuikIcon
         v-if="hasShopsLinked"
-        class="acc-text-white acc-bg-green-500 acc-rounded-full acc-p-1 acc-mr-2"
-        icon="check"
+        class="acc-text-green-500 acc-mr-2"
+        icon="check_circle"
+        font-size="1.50rem"
         data-testid="account-panel-linked-icon"
       />
       <p class="acc-m-0 puik-h5">
