@@ -25,7 +25,7 @@
         }
       },
       "unlinked": {
-        "message": "Due to an unexpected incident, your store has been unlinked. Please link it again to use the module."
+        "message": "Din cauza unui incident neașteptat, magazinul dvs. a fost deconectat. Vă rugăm să îl conectați din nou pentru a utiliza modulul."
       }
     },
     "alertShopDomainShouldExists": {
