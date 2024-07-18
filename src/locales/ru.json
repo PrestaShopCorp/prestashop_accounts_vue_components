@@ -14,13 +14,13 @@
         "install": {
           "title": "Install the PrestaShop Account module",
           "message": "You need the PrestaShop account module to continue setting up this module.",
-          "action": "Install",
+          "action": "Установить",
           "loading": "The PrestaShop Account module is currently being installed..."
         },
         "update": {
           "title": "Update PrestaShop Accounts module",
           "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
-          "action": "Update",
+          "action": "Обновление",
           "loading": "The PrestaShop Account module is currently being updated..."
         }
       },
