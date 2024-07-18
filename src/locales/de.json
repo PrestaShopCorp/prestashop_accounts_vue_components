@@ -25,7 +25,7 @@
         }
       },
       "unlinked": {
-        "message": "Due to an unexpected incident, your store has been unlinked. Please link it again to use the module."
+        "message": "Aufgrund eines unerwarteten Ereignisses wurde Ihr Shop nicht verlinkt. Bitte verlinken Sie ihn erneut, um das Modul zu nutzen."
       }
     },
     "alertShopDomainShouldExists": {
