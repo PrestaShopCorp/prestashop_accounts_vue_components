@@ -29,7 +29,6 @@ export const NotLinked: Story = {
       psAccountsUpdateLink: null,
       psAccountsIsInstalled: true,
       psAccountsIsEnabled: true,
-      psAccountsIsUptodate: true,
       psIs17: true,
       psxName: 'ps_accounts',
       shops: [
@@ -94,7 +93,6 @@ export const Linked: Story = {
       psAccountsUpdateLink: null,
       psAccountsIsInstalled: true,
       psAccountsIsEnabled: true,
-      psAccountsIsUptodate: true,
       psIs17: true,
       psxName: 'ps_accounts',
       shops: [
@@ -160,7 +158,6 @@ export const IncorrectContext: Story = {
       psAccountsUpdateLink: null,
       psAccountsIsInstalled: true,
       psAccountsIsEnabled: true,
-      psAccountsIsUptodate: true,
       psxName: 'ps_accounts',
       shops: [
         {
@@ -224,7 +221,6 @@ export const NotInstalled: Story = {
       psAccountsUpdateLink: null,
       psAccountsIsInstalled: false,
       psAccountsIsEnabled: false,
-      psAccountsIsUptodate: false,
       psIs17: true,
       psxName: 'ps_accounts',
       shops: [
@@ -289,7 +285,6 @@ export const NotEnabled: Story = {
       psAccountsUpdateLink: null,
       psAccountsIsInstalled: true,
       psAccountsIsEnabled: false,
-      psAccountsIsUptodate: false,
       psIs17: true,
       psxName: 'ps_accounts',
       shops: [
@@ -354,7 +349,6 @@ export const NeedsAnUpdate: Story = {
       psAccountsUpdateLink: null,
       psAccountsIsInstalled: true,
       psAccountsIsEnabled: true,
-      psAccountsIsUptodate: false,
       psIs17: true,
       psxName: 'ps_accounts',
       shops: [
@@ -419,7 +413,6 @@ export const NotSuperAdmin: Story = {
       psAccountsUpdateLink: null,
       psAccountsIsInstalled: true,
       psAccountsIsEnabled: true,
-      psAccountsIsUptodate: true,
       psIs17: true,
       psxName: 'ps_accounts',
       shops: [

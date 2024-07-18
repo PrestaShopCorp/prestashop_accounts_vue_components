@@ -34,8 +34,7 @@ describe('AlertModuleDependencies component tests', () => {
   it('should display nothing', () => {
     factory({
       psAccountsIsEnabled: true,
-      psAccountsIsInstalled: true,
-      psAccountsIsUptodate: true
+      psAccountsIsInstalled: true
     });
     expect(findDependencyAlert().exists()).toBeFalsy();
   });
@@ -52,8 +51,7 @@ describe('AlertModuleDependencies component tests', () => {
     }));
     factory({
       psAccountsIsEnabled: false,
-      psAccountsIsInstalled: false,
-      psAccountsIsUptodate: false
+      psAccountsIsInstalled: false
     });
     expect(findAlertTitle().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Install}.title`);
     expect(findAlertDescription().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Install}.message`);
@@ -76,8 +74,7 @@ describe('AlertModuleDependencies component tests', () => {
     }));
     factory({
       psAccountsIsEnabled: false,
-      psAccountsIsInstalled: true,
-      psAccountsIsUptodate: true
+      psAccountsIsInstalled: true
     });
     expect(findAlertTitle().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Enable}.title`);
     expect(findAlertDescription().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Enable}.message`);
@@ -100,8 +97,7 @@ describe('AlertModuleDependencies component tests', () => {
     }));
     factory({
       psAccountsIsEnabled: true,
-      psAccountsIsInstalled: true,
-      psAccountsIsUptodate: false
+      psAccountsIsInstalled: true
     });
     expect(findAlertTitle().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Update}.title`);
     expect(findAlertDescription().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Update}.message`);
@@ -118,8 +114,7 @@ describe('AlertModuleDependencies component tests', () => {
     }));
     factory({
       psAccountsIsEnabled: false,
-      psAccountsIsInstalled: false,
-      psAccountsIsUptodate: false
+      psAccountsIsInstalled: false
     });
     await findAlertButton().trigger('click');
     expect(findErrorAlert().exists()).toBeTruthy();
@@ -137,8 +132,7 @@ describe('AlertModuleDependencies component tests', () => {
     }));
     factory({
       psAccountsIsEnabled: false,
-      psAccountsIsInstalled: false,
-      psAccountsIsUptodate: false
+      psAccountsIsInstalled: false
     });
     await findAlertButton().trigger('click');
     await flushPromises();
@@ -152,8 +146,7 @@ describe('AlertModuleDependencies component tests', () => {
     }));
     factory({
       psAccountsIsEnabled: false,
-      psAccountsIsInstalled: false,
-      psAccountsIsUptodate: false
+      psAccountsIsInstalled: false
     });
     await findAlertButton().trigger('click');
     await flushPromises();

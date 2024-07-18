@@ -18,10 +18,9 @@
           "loading": "Aktywacja modułu PrestaShop Account w toku..."
         },
         "update": {
-          "title": "Zaktualizuj moduł Konta PrestaShop",
-          "message": "Dostępna jest nowa wersja Kont PrestaShop, zaktualizuj moduł, aby móc dalej korzystać z usług",
-          "action": "Aktualizacja",
-          "loading": "Moduł PrestaShop Account jest obecnie aktualizowany..."
+          "title": "Get the latest version of PrestaShop account",
+          "message": "This upgrade provides important bug fixes and is recommended for all users.",
+          "action": "Update module"
         }
       }
     },

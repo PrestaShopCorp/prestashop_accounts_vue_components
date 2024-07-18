@@ -29,7 +29,6 @@ interface AlertModuleDependenciesProps {
   psAccountsEnableLink: string | null;
   psAccountsIsInstalled: boolean;
   psAccountsInstallLink: string | null;
-  psAccountsIsUptodate: boolean;
   psAccountsUpdateLink: string | null;
   psIs17: boolean;
 }
@@ -55,14 +54,6 @@ const alert = computed(() => {
       module: Module.PsAccounts,
       action: Action.Enable,
       link: props.psAccountsEnableLink
-    };
-  }
-
-  if (!props.psAccountsIsUptodate) {
-    return {
-      module: Module.PsAccounts,
-      action: Action.Update,
-      link: props.psAccountsUpdateLink
     };
   }
 

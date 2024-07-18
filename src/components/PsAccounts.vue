@@ -6,12 +6,16 @@
       data-testid="account-context-validator-alert"
     />
     <template v-else>
+      <AlertUpdateToLatest
+        v-if="!context.psAccountsVersion || !satisfies(context.psAccountsVersion, '>=7.0.0')"
+        :update-link="context.psAccountsUpdateLink"
+        class="acc-mb-4"
+      />
       <AlertModuleDependencies
         :ps-accounts-is-enabled="context.psAccountsIsEnabled"
         :ps-accounts-enable-link="context.psAccountsEnableLink"
         :ps-accounts-is-installed="context.psAccountsIsInstalled"
         :ps-accounts-install-link="context.psAccountsInstallLink"
-        :ps-accounts-is-uptodate="context.psAccountsIsUptodate"
         :ps-accounts-update-link="context.psAccountsUpdateLink"
         :ps-is17="context.psIs17"
       />
@@ -92,7 +96,7 @@ import { contextSchema } from '@/lib/ContextValidator';
 import { hasSlotContent } from '@/lib/utils';
 import { Context, Shop, ShopContext } from '@/types/context';
 import { computed, ref } from 'vue';
-
+import { satisfies } from 'compare-versions';
 /**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
    * to ensure each functional case is covered for you. You can use the default slots
@@ -150,7 +154,7 @@ const shopsToLink = computed(() =>
 );
 
 const hasBlockingAlert = computed(() =>
-  !props.context.psAccountsIsInstalled || !props.context.psAccountsIsUptodate || !props.context.psAccountsIsEnabled
+  !props.context.psAccountsIsInstalled || !props.context.psAccountsIsEnabled
 );
 
 const isLinkedV4 = computed(() => shopsInContext.value.every((shop) => shop.isLinkedV4));
