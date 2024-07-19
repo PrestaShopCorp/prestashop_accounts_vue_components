@@ -1,27 +1,27 @@
 {
   "psaccounts": {
     "accountManager": {
-      "errorInstallEnable": "Something went wrong. Please try again."
+      "errorInstallEnable": "Что-то пошло не так. Пожалуйста, попробуйте еще раз."
     },
     "alert": {
       "ps_accounts": {
         "enable": {
-          "title": "Activate the PrestaShop Account module",
-          "message": "You need the PrestaShop account module to continue setting up this module.",
-          "action": "Activate",
-          "loading": "The PrestaShop Account module is currently being activated..."
+          "title": "Активируйте модуль Учетная запись PrestaShop",
+          "message": "Чтобы продолжить настройку этого модуля, вам нужен модуль учетной записи PrestaShop.",
+          "action": "Активируйте",
+          "loading": "Модуль PrestaShop Account находится в стадии активации..."
         },
         "install": {
-          "title": "Install the PrestaShop Account module",
-          "message": "You need the PrestaShop account module to continue setting up this module.",
+          "title": "Установите модуль PrestaShop Account",
+          "message": "Чтобы продолжить настройку этого модуля, вам нужен модуль учетной записи PrestaShop.",
           "action": "Установить",
-          "loading": "The PrestaShop Account module is currently being installed..."
+          "loading": "Модуль PrestaShop Account находится в стадии установки..."
         },
         "update": {
-          "title": "Update PrestaShop Accounts module",
-          "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
+          "title": "Обновление модуля Учетные записи PrestaShop",
+          "message": "Доступна новая версия PrestaShop Accounts, пожалуйста, обновите модуль, чтобы продолжить пользоваться услугами",
           "action": "Обновление",
-          "loading": "The PrestaShop Account module is currently being updated..."
+          "loading": "Модуль PrestaShop Account в настоящее время обновляется..."
         }
       },
       "unlinked": {
@@ -29,39 +29,39 @@
       }
     },
     "alertShopDomainShouldExists": {
-      "title": "Store URL not filled in!",
-      "message": "Only store with an assigned URL can be linked to a PrestaShop account.",
-      "shopList": "The following stores don't have an assigned URL: "
+      "title": "URL-адрес магазина не заполнен!",
+      "message": "Только магазин с назначенным URL может быть привязан к аккаунту PrestaShop.",
+      "shopList": "Следующие магазины не имеют назначенного URL-адреса: "
     },
     "account": {
-      "title": "Link your store to a PrestaShop account | Link your stores to a PrestaShop account",
-      "authorize": "You can only link your store to one account. | You can only link your stores to one account.",
-      "authorized": "Your store is linked to the PrestaShop account",
-      "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
-      "authorizedMultishop": "All your stores are linked to a PrestaShop account",
-      "connectButton": "Link",
+      "title": "Свяжите свой магазин с учетной записью PrestaShop | Свяжите свои магазины с учетной записью PrestaShop",
+      "authorize": "Вы можете связать свой магазин только с одной учетной записью. | Вы можете связать свои магазины только с одной учетной записью.",
+      "authorized": "Ваш магазин связан с учетной записью PrestaShop",
+      "authorizedPartially": "Ваши магазины частично связаны с учетной записью PrestaShop",
+      "authorizedMultishop": "Все ваши магазины связаны с учетной записью PrestaShop",
+      "connectButton": "Ссылка",
       "invitationBanner": {
-        "button": "View my invitation|View my invitations",
-        "messageStart": "An expert from",
-        "messageEnd": "is waiting for an answer to his invitation.",
-        "title": "You have {count} request awaiting|You have {count} requests awaiting"
+        "button": "Посмотреть мои приглашения|Просмотреть мои приглашения",
+        "messageStart": "Эксперт из",
+        "messageEnd": "ждет ответа на свое приглашение.",
+        "title": "У вас есть {count} ожидающих запросов|У вас есть {count} ожидающих запросов"
       },
       "moduleUpdateInformation": {
-        "part1": "New update: ",
-        "part2": "you can manage your linked stores.",
-        "part3": "Please link your store again using",
-        "part4": "the same email address",
-        "part5": "to benefit from this update.",
-        "part6": "Other module updates may be available in the Updates tab of the module manager."
+        "part1": "Новое обновление: ",
+        "part2": "вы можете управлять связанными магазинами.",
+        "part3": "Пожалуйста, снова соедините ваш магазин с помощью",
+        "part4": "один и тот же адрес электронной почты",
+        "part5": "чтобы воспользоваться преимуществами этого обновления.",
+        "part6": "Другие обновления модуля могут быть доступны на вкладке Обновления в менеджере модулей."
       },
       "emailNotVerified": {
-        "title": "A confirmation email has been sent.",
-        "description": "Check your inbox and click on the link to activate your account."
+        "title": "Подтверждение было отправлено по электронной почте.",
+        "description": "Проверьте свой почтовый ящик и нажмите на ссылку, чтобы активировать свой аккаунт."
       },
-      "sendEmail": "Send it again",
-      "needToBeAdmin": "In order to proceed you need to be administrator of the store",
-      "pleaseContact": "Please contact",
-      "manageAccountButton": "Manage linked stores"
+      "sendEmail": "Отправить еще раз",
+      "needToBeAdmin": "Чтобы продолжить, вам необходимо быть администратором магазина",
+      "pleaseContact": "Пожалуйста, свяжитесь с",
+      "manageAccountButton": "Управление связанными магазинами"
     }
   }
 }
