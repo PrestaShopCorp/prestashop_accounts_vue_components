@@ -19,7 +19,6 @@ describe('AlertModuleDependencies component tests', () => {
       props: {
         psAccountsEnableLink: '/enable',
         psAccountsInstallLink: '/install',
-        psAccountsUpdateLink: '/update',
         psIs17: true,
         ...props
       },
@@ -81,29 +80,6 @@ describe('AlertModuleDependencies component tests', () => {
     expect(findAlertButton().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Enable}.action`);
     await findAlertButton().trigger('click');
     expect(fetch).toHaveBeenCalledWith('/enable', {
-      method: 'POST'
-    });
-  });
-
-  it('should display the Ps Accounts is not uptodate alert', async () => {
-    vi.mocked<any>(global.fetch).mockImplementationOnce(async () => ({
-      status: 200,
-      ok: true,
-      json: async () => ({
-        [Module.PsAccounts]: {
-          status: true
-        }
-      })
-    }));
-    factory({
-      psAccountsIsEnabled: true,
-      psAccountsIsInstalled: true
-    });
-    expect(findAlertTitle().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Update}.title`);
-    expect(findAlertDescription().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Update}.message`);
-    expect(findAlertButton().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Update}.action`);
-    await findAlertButton().trigger('click');
-    expect(fetch).toHaveBeenCalledWith('/update', {
       method: 'POST'
     });
   });
