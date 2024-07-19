@@ -41,10 +41,10 @@
       "authorizedMultishop": "Todas tus tiendas están vinculadas a una cuenta PrestaShop",
       "connectButton": "Enlace",
       "invitationBanner": {
-        "button": "View my invitation|View my invitations",
-        "messageStart": "An expert from",
-        "messageEnd": "is waiting for an answer to his invitation.",
-        "title": "You have {count} request awaiting|You have {count} requests awaiting"
+        "button": "Ver mi invitación|Ver mis invitaciones",
+        "messageStart": "Un experto de",
+        "messageEnd": "espera una respuesta a su invitación.",
+        "title": "Tiene {count} solicitud en espera|Tiene {count} solicitudes en espera"
       },
       "moduleUpdateInformation": {
         "part1": "Nueva actualización: ",
