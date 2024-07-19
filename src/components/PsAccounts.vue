@@ -8,7 +8,7 @@
     <template v-else>
       <AlertUpdateToLatest
         v-if="!context.psAccountsVersion || !satisfies(context.psAccountsVersion, '>=7.0.0')"
-        :update-link="context.psAccountsUpdateLink"
+        :enable-link="context.psAccountsEnableLink"
         class="acc-mb-4"
       />
       <AlertModuleDependencies

@@ -14,7 +14,7 @@ import { useLocale } from '@/composables/useLocale';
 import { PuikSnackbar } from '@prestashopcorp/puik';
 
 interface AlertUpdateToLatestProps {
-  updateLink: string | null;
+  enableLink: string | null;
 }
 
 const props = defineProps<AlertUpdateToLatestProps>();
@@ -22,16 +22,16 @@ const props = defineProps<AlertUpdateToLatestProps>();
 const { t } = useLocale();
 
 const update = async () => {
-  if (props.updateLink) {
+  if (props.enableLink) {
     try {
-      // TODO:
-      const response = await fetch('', { method: 'POST' });
+      const link = props.enableLink?.replace('enable', 'upgrade');
+      const response = await fetch(link, { method: 'POST' });
       if (!response.ok) {
         throw new Error(`An error has occured: ${response.status}`);
       }
       const data = await response.json();
 
-      if (data.update.status === false) {
+      if (data.ps_accounts.status === false) {
         throw new Error('Cannot update ps_accounts module.');
       }
       window.location.reload();
