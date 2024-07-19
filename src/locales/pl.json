@@ -41,10 +41,10 @@
       "authorizedMultishop": "Wszystkie Twoje sklepy są powiązane z kontem PrestaShop",
       "connectButton": "Połącz",
       "invitationBanner": {
-        "button": "View my invitation|View my invitations",
-        "messageStart": "An expert from",
-        "messageEnd": "is waiting for an answer to his invitation.",
-        "title": "You have {count} request awaiting|You have {count} requests awaiting"
+        "button": "Zobacz moje zaproszenia|Zobacz moje zaproszenia",
+        "messageStart": "Ekspert z",
+        "messageEnd": "czeka na odpowiedź na swoje zaproszenie.",
+        "title": "Masz {count} żądań oczekujących|Masz {count} żądań oczekujących"
       },
       "moduleUpdateInformation": {
         "part1": "Nowa aktualizacja: ",
