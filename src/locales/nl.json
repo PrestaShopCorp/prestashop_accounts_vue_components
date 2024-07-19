@@ -41,10 +41,10 @@
       "authorizedMultishop": "Al je winkels zijn gekoppeld aan een PrestaShop Account",
       "connectButton": "Koppelen",
       "invitationBanner": {
-        "button": "View my invitation|View my invitations",
-        "messageStart": "An expert from",
-        "messageEnd": "is waiting for an answer to his invitation.",
-        "title": "You have {count} request awaiting|You have {count} requests awaiting"
+        "button": "Bekijk mijn uitnodiging|Bekijk mijn uitnodigingen",
+        "messageStart": "Een expert van",
+        "messageEnd": "wacht op een antwoord op zijn uitnodiging.",
+        "title": "Je hebt {count} aanvragen in afwachting|Je hebt {count} aanvragen in afwachting"
       },
       "moduleUpdateInformation": {
         "part1": "Nieuwe update: ",
