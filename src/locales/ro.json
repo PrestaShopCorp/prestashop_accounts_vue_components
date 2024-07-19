@@ -41,10 +41,10 @@
       "authorizedMultishop": "Toate magazinele tale sunt conectate la un cont PrestaShop",
       "connectButton": "Link",
       "invitationBanner": {
-        "button": "View my invitation|View my invitations",
-        "messageStart": "An expert from",
-        "messageEnd": "is waiting for an answer to his invitation.",
-        "title": "You have {count} request awaiting|You have {count} requests awaiting"
+        "button": "Vezi invitația mea|Vezi invitațiile mele",
+        "messageStart": "Un expert de la",
+        "messageEnd": "așteaptă un răspuns la invitația sa.",
+        "title": "Aveți {count} cereri în așteptare|Aveți {count} cereri în așteptare"
       },
       "moduleUpdateInformation": {
         "part1": "Actualizare nouă: ",
