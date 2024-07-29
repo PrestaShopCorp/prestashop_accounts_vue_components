@@ -20,7 +20,7 @@ describe('AlertShopUnlinked component tests', () => {
 
   it('should display an alert on warning variant and display the superAdminEmail', () => {
     factory({});
-    expect(findAlert().classes()).toContain('puik-alert--danger');
+    expect(findAlert().classes()).toContain('puik-alert--warning');
     expect(findAlertDescription().text()).toBeDefined();
   });
 });
