@@ -35,7 +35,22 @@
         :super-admin-email="context.superAdminEmail"
         data-testid="account-user-not-super-admin"
       />
+
+      <AlertShopUnlinked
+        v-if="context.currentContext.type === ShopContext.Shop && shopsInContext[0].unlinkedAuto"
+        class="acc-mb-4"
+      />
+
       <template v-if="!hasBlockingAlert">
+        <InvitationBanner
+          :app="context.psxName"
+          :accounts-ui-url="context.accountsUiUrl"
+          :admin-ajax-link="context.adminAjaxLink"
+          :shops="shopsToLink"
+          :shops-in-context="shopsInContext"
+          :shop-context="context.currentContext ? context.currentContext.type : 4"
+          data-testid="invitatiion-banner"
+        />
         <AccountPanel
           :accounts-ui-url="context.accountsUiUrl"
           :app="context.psxName"
@@ -71,12 +86,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { Context, Shop, ShopContext } from '@/types/context';
-import { contextSchema } from '@/lib/ContextValidator';
 import '@/assets/css/index.css';
+import AlertShopUnlinked from '@/components/alert/AlertShopUnlinked.vue';
+import { contextSchema } from '@/lib/ContextValidator';
 import { hasSlotContent } from '@/lib/utils';
-  /**
+import { Context, Shop, ShopContext } from '@/types/context';
+import { computed, ref } from 'vue';
+
+/**
    * `PsAccounts` will automate pre-requisites checks and will call sub-components directly
    * to ensure each functional case is covered for you. You can use the default slots
    * that will be disabled if the user account is not well linked (you should put your
@@ -92,7 +109,7 @@ import { hasSlotContent } from '@/lib/utils';
     context?: Context;
   }
 const props = withDefaults(defineProps<PsAccountsProps>(), {
-  context: () => window.contextPsAccounts || {}
+  context: () => (window.contextPsAccounts ? contextSchema.validate(window.contextPsAccounts).value : {}) as Context
 });
 const errors = ref<string[]>([]);
 

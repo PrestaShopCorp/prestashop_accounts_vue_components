@@ -23,6 +23,9 @@
           "action": "Update",
           "loading": "The PrestaShop Account module is currently being updated..."
         }
+      },
+      "unlinked": {
+        "message": "Due to an unexpected incident, your store has been unlinked. Please link it again to use the module."
       }
     },
     "alertShopDomainShouldExists": {
@@ -37,6 +40,12 @@
       "authorizedPartially": "Your stores are partially linked to a PrestaShop account",
       "authorizedMultishop": "All your stores are linked to a PrestaShop account",
       "connectButton": "Link",
+      "invitationBanner": {
+        "button": "View my invitation|View my invitations",
+        "messageStart": "An expert from",
+        "messageEnd": "is waiting for an answer to his invitation.",
+        "title": "You have {count} request awaiting|You have {count} requests awaiting"
+      },
       "moduleUpdateInformation": {
         "part1": "New update: ",
         "part2": "you can manage your linked stores.",

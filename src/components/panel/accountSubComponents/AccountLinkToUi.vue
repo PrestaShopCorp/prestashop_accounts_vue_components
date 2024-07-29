@@ -1,10 +1,11 @@
 <template>
   <div
-    class="acc-flex acc-space-x-4"
+    class="acc-gap-8 md:acc-gap-2 acc-items-center acc-flex"
   >
     <puik-button
       v-if="shops.length"
       id="associate-shop-button"
+      class="acc-w-1/2 md:acc-w-auto"
       :disabled="!isSuperAdmin"
       data-testid="account-link-to-ui-link-shop-button"
       @click="openLinkShopModal()"
@@ -15,6 +16,7 @@
     <puik-button
       v-if="hasShopsLinked"
       id="manage-shops-button"
+      class="acc-w-1/2 md:acc-w-auto"
       variant="secondary"
       data-testid="account-link-to-ui-manage-shops-button"
       :disabled="!isSuperAdmin"

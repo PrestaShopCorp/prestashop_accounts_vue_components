@@ -53,6 +53,7 @@
     "jsdom": "^22.1.0",
     "lint-staged": "^13.2.3",
     "postcss": "^8.4.25",
+    "postcss-prefix-selector": "^1.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.63.6",

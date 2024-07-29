@@ -11,6 +11,7 @@ export interface BackendUser {
 }
 
 export interface Context {
+  adminAjaxLink: string
   accountsUiUrl: string
   backendUser: BackendUser
   currentContext: CurrentContext
@@ -63,6 +64,7 @@ export interface Shop {
   user?: Partial<User>
   uuid?: string | null
   virtualUri?: string | boolean | null
+  unlinkedAuto?: boolean
 }
 
 export interface ShopGroup {
