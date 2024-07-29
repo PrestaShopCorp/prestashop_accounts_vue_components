@@ -1,6 +1,6 @@
 <template>
   <puik-alert
-    variant="danger"
+    variant="warning"
     data-testid="shop-unlinked-alert"
   >
     <p
