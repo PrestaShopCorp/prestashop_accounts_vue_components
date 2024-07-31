@@ -36,7 +36,7 @@
     "account": {
       "title": "Associez votre boutique à un compte PrestaShop | Associez vos boutiques à un compte PrestaShop",
       "authorize": "Vous ne pouvez associer votre boutique qu'à un seul compte. | Vous ne pouvez associer vos boutiques qu'à un seul compte.",
-      "authorized": "Votre boutique est associée au compte PrestaShop",
+      "authorized": "Vous boutique est associée au compte PrestaShop",
       "authorizedPartially": "Vos boutiques sont partiellement associées à un compte PrestaShop",
       "authorizedMultishop": "Toutes vos boutiques sont associées à un compte PrestaShop",
       "connectButton": "Associer",
