@@ -22,6 +22,9 @@
           "message": "This upgrade provides important bug fixes and is recommended for all users.",
           "action": "Update module"
         }
+      },
+      "unlinked": {
+        "message": "Aufgrund eines unerwarteten Ereignisses wurde Ihr Shop nicht verlinkt. Bitte verlinken Sie ihn erneut, um das Modul zu nutzen."
       }
     },
     "alertShopDomainShouldExists": {
@@ -36,6 +39,12 @@
       "authorizedPartially": "Ihre Geschäfte sind zum Teil mit einem PrestaShop-Konto verknüpft",
       "authorizedMultishop": "All Ihre Geschäfte sind mit einem PrestaShop-Konto verknüpft",
       "connectButton": "Link",
+      "invitationBanner": {
+        "button": "Meine Einladungen ansehen|Meine Einladungen ansehen",
+        "messageStart": "Ein Experte von",
+        "messageEnd": "wartet auf eine Antwort auf seine Einladung.",
+        "title": "Sie haben {count} wartende Anfragen|Sie haben {count} wartende Anfragen"
+      },
       "moduleUpdateInformation": {
         "part1": "Neues Update: ",
         "part2": "Sie können Ihre verknüpften Geschäfte verwalten.",

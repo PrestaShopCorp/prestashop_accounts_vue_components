@@ -22,6 +22,9 @@
           "message": "This upgrade provides important bug fixes and is recommended for all users.",
           "action": "Update module"
         }
+      },
+      "unlinked": {
+        "message": "Din cauza unui incident neașteptat, magazinul dvs. a fost deconectat. Vă rugăm să îl conectați din nou pentru a utiliza modulul."
       }
     },
     "alertShopDomainShouldExists": {
@@ -36,6 +39,12 @@
       "authorizedPartially": "Magazinele tale sunt parțial conectate la un cont PrestaShop",
       "authorizedMultishop": "Toate magazinele tale sunt conectate la un cont PrestaShop",
       "connectButton": "Link",
+      "invitationBanner": {
+        "button": "Vezi invitația mea|Vezi invitațiile mele",
+        "messageStart": "Un expert de la",
+        "messageEnd": "așteaptă un răspuns la invitația sa.",
+        "title": "Aveți {count} cereri în așteptare|Aveți {count} cereri în așteptare"
+      },
       "moduleUpdateInformation": {
         "part1": "Actualizare nouă: ",
         "part2": "poți gestiona magazinele conectate.",

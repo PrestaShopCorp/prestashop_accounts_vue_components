@@ -22,6 +22,9 @@
           "message": "This upgrade provides important bug fixes and is recommended for all users.",
           "action": "Update module"
         }
+      },
+      "unlinked": {
+        "message": "Devido a um inesperado incidente, sua loja foi desvinculada. Por favor, vincule-o novamente para usar o módulo."
       }
     },
     "alertShopDomainShouldExists": {
@@ -36,6 +39,12 @@
       "authorizedPartially": "Suas lojas estão parcialmente vinculadas a uma conta PrestaShop",
       "authorizedMultishop": "Todas as suas lojas estão vinculadas a uma conta PrestaShop",
       "connectButton": "Link",
+      "invitationBanner": {
+        "button": "Ver o meu convite|Ver os meus convites",
+        "messageStart": "Um perito da",
+        "messageEnd": "está à espera de uma resposta ao seu convite.",
+        "title": "Tem {count} pedidos em espera|Tem {count} pedidos em espera"
+      },
       "moduleUpdateInformation": {
         "part1": "Nova atualização: ",
         "part2": "você pode gerenciar suas lojas vinculadas.",

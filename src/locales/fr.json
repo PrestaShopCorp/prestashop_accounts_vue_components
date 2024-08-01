@@ -24,7 +24,7 @@
         }
       },
       "unlinked": {
-        "message": "Votre compte PrestaShop a été dissociée de votre boutique car les tokens ont expirés. Veuillez l’associer de nouveau en utilisant le même compte."
+        "message": "En raison d'un incident inattendu, votre boutique a été déconnectée. Veuillez la lier à nouveau pour utiliser le module."
       }
     },
     "alertShopDomainShouldExists": {
@@ -39,6 +39,12 @@
       "authorizedPartially": "Vos boutiques sont partiellement associées à un compte PrestaShop",
       "authorizedMultishop": "Toutes vos boutiques sont associées à un compte PrestaShop",
       "connectButton": "Associer",
+      "invitationBanner": {
+        "button": "Voir mon invitation|Voir mes invitations",
+        "messageStart": "Un expert de",
+        "messageEnd": "attend une réponse à son invitation.",
+        "title": "Vous avez {count} demandes en attente|Vous avez {count} demandes en attente"
+      },
       "moduleUpdateInformation": {
         "part1": "Nouvelle mise à jour : ",
         "part2": "vous pouvez gérer vos boutiques associées.",

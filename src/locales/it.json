@@ -22,39 +22,45 @@
           "message": "This upgrade provides important bug fixes and is recommended for all users.",
           "action": "Update module"
         }
+      },
+      "unlinked": {
+        "message": "A causa di un incidente imprevisto, il tuo negozio è stato scollegato. Per favore collegalo nuovamente per utilizzare il modulo."
       }
     },
     "alertShopDomainShouldExists": {
-      "title": "URL del negozio non compilato!",
-      "message": "Solo i negozi con un URL assegnato possono essere associati a un account PrestaShop.",
-      "shopList": "I seguenti negozi non hanno un URL assegnato: "
+      "title": "URL dello store non compilato!",
+      "message": "Solo gli store con un URL assegnato possono essere collegati a un account PrestaShop.",
+      "shopList": "I seguenti store non hanno un URL assegnato: "
     },
     "account": {
-      "title": "Associa il tuo negozio a un account PrestaShop | Associa i tuoi negozi a un account PrestaShop",
-      "authorize": "Puoi associare il tuo negozio a un solo account. Quindi assicurati di scegliere quello giusto!",
-      "authorized": "Il tuo negozio è associato all'account PrestaShop: | I tuoi negozi sono associati all'account PrestaShop:",
-      "authorizedPartially": "I tuoi negozi sono parzialmente associati a un account PrestaShop",
-      "authorizedSeveral": "I tuoi negozi sono associati a diversi account PrestaShop",
-      "connectButton": "Associa",
-      "reonboardButton": "Riassociare",
-      "disconnectButton": "Usa un altro account",
+      "title": "Associa il tuo store a un account PrestaShop | Associa i tuoi store a un account PrestaShop",
+      "authorize": "Puoi collegare il tuo store a un solo account. | Puoi collegare gli store a un solo account.",
+      "authorized": "Il tuo store è associato all'account PrestaShop",
+      "authorizedPartially": "I tuoi store sono parzialmente associati a un account PrestaShop",
+      "authorizedMultishop": "Tutti i tuoi store sono collegati a un account PrestaShop",
+      "connectButton": "Link",
+      "invitationBanner": {
+        "button": "Visualizza il mio invito|Vedi i miei inviti",
+        "messageStart": "Un esperto di",
+        "messageEnd": "è in attesa di una risposta al suo invito.",
+        "title": "Hai {count} richieste in attesa|Hai {count} richieste in attesa"
+      },
       "moduleUpdateInformation": {
         "part1": "Nuovo aggiornamento: ",
-        "part2": "da oggi, puoi gestire i tuoi negozi associati.",
-        "part3": "Ti preghiamo di riassociarli,",
-        "part4": "utilizzando lo stesso indirizzo e-mail",
-        "part5": "per usufruire di questo aggiornamento.",
-        "part6": "Altri aggiornamenti del modulo sono disponibili nella sezione \"Module Manager\", alla scheda \"Aggiornamenti\""
+        "part2": "puoi gestire i tuoi store collegati.",
+        "part3": "Collega nuovamente il tuo store usando",
+        "part4": "lo stesso indirizzo e-mail",
+        "part5": "per approfittare di questo aggiornamento.",
+        "part6": "Altri aggiornamenti del modulo possono essere disponibili nella scheda Aggiornamenti del gestore del modulo."
       },
       "emailNotVerified": {
         "title": "Una mail di conferma è stata inviata.",
         "description": "Controlla la tua casella di posta e clicca sul link per attivare il tuo account."
       },
       "sendEmail": "Invia di nuovo",
-      "needToBeAdmin": "Per continuare, devi essere l'amministratore del negozio",
+      "needToBeAdmin": "Per procedere è necessario essere amministratore dello store",
       "pleaseContact": "Ti preghiamo di contattare",
-      "manageAccountButton": "Vedi i miei negozi associati",
-      "unlinkButton": "Scollega"
+      "manageAccountButton": "Gestisci gli store collegati"
     }
   }
 }

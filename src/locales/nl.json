@@ -22,6 +22,9 @@
           "message": "This upgrade provides important bug fixes and is recommended for all users.",
           "action": "Update module"
         }
+      },
+      "unlinked": {
+        "message": "Als gevolg van een onverwachte gebeurtenis is uw winkel ontkoppeld. Koppel deze opnieuw om de module te gebruiken."
       }
     },
     "alertShopDomainShouldExists": {
@@ -36,6 +39,12 @@
       "authorizedPartially": "Je winkels zijn gedeeltelijk gekoppeld aan een PrestaShop Account",
       "authorizedMultishop": "Al je winkels zijn gekoppeld aan een PrestaShop Account",
       "connectButton": "Koppelen",
+      "invitationBanner": {
+        "button": "Bekijk mijn uitnodiging|Bekijk mijn uitnodigingen",
+        "messageStart": "Een expert van",
+        "messageEnd": "wacht op een antwoord op zijn uitnodiging.",
+        "title": "Je hebt {count} aanvragen in afwachting|Je hebt {count} aanvragen in afwachting"
+      },
       "moduleUpdateInformation": {
         "part1": "Nieuwe update: ",
         "part2": "je kunt je gekoppelde winkels beheren.",

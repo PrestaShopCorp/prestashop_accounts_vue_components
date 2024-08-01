@@ -7,54 +7,61 @@
       "ps_accounts": {
         "enable": {
           "title": "Aktywuj moduł PrestaShop Account",
-          "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
+          "message": "Moduł PrestaShop Account jest konieczny do dalszej konfiguracji tego modułu.",
           "action": "Aktywuj",
           "loading": "Aktywacja modułu PrestaShop Account w toku..."
         },
         "install": {
           "title": "Zainstaluj moduł PrestaShop Account",
-          "message": "Moduł PrestaShop konto jest konieczny w celu dalszej konfiguracji tego modułu.",
+          "message": "Moduł PrestaShop Account jest konieczny do dalszej konfiguracji tego modułu.",
           "action": "Zainstaluj",
-          "loading": "Aktywacja modułu PrestaShop Account w toku..."
+          "loading": "Instalacja modułu PrestaShop Account w toku..."
         },
         "update": {
-          "title": "Get the latest version of PrestaShop account",
-          "message": "This upgrade provides important bug fixes and is recommended for all users.",
-          "action": "Update module"
+          "title": "Zaktualizuj moduł PrestaShop Account",
+          "message": "Dostępna jest nowa wersja PrestaShop Account: zaktualizuj moduł, aby móc dalej korzystać z usług",
+          "action": "Aktualizacja",
+          "loading": "Moduł PrestaShop Account jest obecnie aktualizowany..."
         }
+      },
+      "unlinked": {
+        "message": "Ze względu na nieoczekiwany incydent Twój sklep został odłączony. Połącz go ponownie, aby użyć modułu."
       }
     },
     "alertShopDomainShouldExists": {
-      "title": "URL sklepu nie jest wypełniony!",
-      "message": "Tylko sklep z przypisanym adresem URL może być powiązany z kontem PrestaShop.",
+      "title": "Adres URL sklepu nie został wypełniony!",
+      "message": "Tylko sklep z przypisanym adresem URL może być powiązany z PrestaShop Account.",
       "shopList": "Następujące sklepy nie mają przypisanego adresu URL: "
     },
     "account": {
-      "title": "Połącz swój sklep z kontem PrestaShop | Połącz swoje sklepy z kontem PrestaShop",
-      "authorize": "Możesz powiązać swój sklep tylko z jednym kontem. Dokonaj dobrego wyboru!",
-      "authorized": "Twój sklep jest powiązany z kontem PrestaShop: | Twoje sklepy są powiązane z kontem PrestaShop:",
+      "title": "Połącz Twój sklep z PrestaShop Account | Połącz Twoje sklepy z PrestaShop Account",
+      "authorize": "Możesz powiązać Twój sklep tylko z jednym kontem. | Możesz powiązać Twoje sklepy tylko z jednym kontem.",
+      "authorized": "Twój sklep jest powiązany z kontem PrestaShop",
       "authorizedPartially": "Twoje sklepy są częściowo powiązane z kontem PrestaShop",
-      "authorizedSeveral": "Twoje sklepy są powiązane z kilkoma kontami PrestaShop",
+      "authorizedMultishop": "Wszystkie Twoje sklepy są powiązane z kontem PrestaShop",
       "connectButton": "Połącz",
-      "reonboardButton": "Ponownie skojarz",
-      "disconnectButton": "Użyj innego konta",
+      "invitationBanner": {
+        "button": "Zobacz moje zaproszenia|Zobacz moje zaproszenia",
+        "messageStart": "Ekspert z",
+        "messageEnd": "czeka na odpowiedź na swoje zaproszenie.",
+        "title": "Masz {count} żądań oczekujących|Masz {count} żądań oczekujących"
+      },
       "moduleUpdateInformation": {
         "part1": "Nowa aktualizacja: ",
-        "part2": "możesz zarządzać swoimi powiązanymi sklepami.",
-        "part3": "Prosimy o ponowne dołączenie przy użyciu,",
+        "part2": "możesz zarządzać powiązanymi sklepami.",
+        "part3": "Podłącz Twój sklep ponownie, używając",
         "part4": "tego samego adresu e-mail",
         "part5": "aby skorzystać z tej aktualizacji.",
-        "part6": "Inne aktualizacje modułu mogą być dostępne w Managerze modułów, w zakładce Aktualizacje."
+        "part6": "Inne aktualizacje modułów mogą być dostępne na karcie Aktualizacje w menedżerze modułów."
       },
       "emailNotVerified": {
-        "title": "Została wysłana wiadomość e-mail z potwierdzeniem.",
+        "title": "E-mail z potwierdzeniem został wysłany.",
         "description": "Sprawdź swoją skrzynkę odbiorczą i kliknij link, aby aktywować konto."
       },
-      "sendEmail": "Wróć",
-      "needToBeAdmin": "Aby kontynuować, musisz być administratorem sklepu.",
+      "sendEmail": "Wyślij ponownie",
+      "needToBeAdmin": "Aby kontynuować, musisz być administratorem sklepu",
       "pleaseContact": "Prosimy o kontakt",
-      "manageAccountButton": "Zobacz moje powiązane sklepy",
-      "unlinkButton": "Odłącz"
+      "manageAccountButton": "Zarządzaj powiązanymi sklepami"
     }
   }
 }
