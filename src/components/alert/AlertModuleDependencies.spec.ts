@@ -19,7 +19,6 @@ describe('AlertModuleDependencies component tests', () => {
       props: {
         psAccountsEnableLink: '/enable',
         psAccountsInstallLink: '/install',
-        psAccountsUpdateLink: '/update',
         psIs17: true,
         ...props
       },
@@ -34,8 +33,7 @@ describe('AlertModuleDependencies component tests', () => {
   it('should display nothing', () => {
     factory({
       psAccountsIsEnabled: true,
-      psAccountsIsInstalled: true,
-      psAccountsIsUptodate: true
+      psAccountsIsInstalled: true
     });
     expect(findDependencyAlert().exists()).toBeFalsy();
   });
@@ -52,8 +50,7 @@ describe('AlertModuleDependencies component tests', () => {
     }));
     factory({
       psAccountsIsEnabled: false,
-      psAccountsIsInstalled: false,
-      psAccountsIsUptodate: false
+      psAccountsIsInstalled: false
     });
     expect(findAlertTitle().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Install}.title`);
     expect(findAlertDescription().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Install}.message`);
@@ -76,8 +73,7 @@ describe('AlertModuleDependencies component tests', () => {
     }));
     factory({
       psAccountsIsEnabled: false,
-      psAccountsIsInstalled: true,
-      psAccountsIsUptodate: true
+      psAccountsIsInstalled: true
     });
     expect(findAlertTitle().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Enable}.title`);
     expect(findAlertDescription().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Enable}.message`);
@@ -88,38 +84,13 @@ describe('AlertModuleDependencies component tests', () => {
     });
   });
 
-  it('should display the Ps Accounts is not uptodate alert', async () => {
-    vi.mocked<any>(global.fetch).mockImplementationOnce(async () => ({
-      status: 200,
-      ok: true,
-      json: async () => ({
-        [Module.PsAccounts]: {
-          status: true
-        }
-      })
-    }));
-    factory({
-      psAccountsIsEnabled: true,
-      psAccountsIsInstalled: true,
-      psAccountsIsUptodate: false
-    });
-    expect(findAlertTitle().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Update}.title`);
-    expect(findAlertDescription().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Update}.message`);
-    expect(findAlertButton().text()).toBe(`psaccounts.alert.${Module.PsAccounts}.${Action.Update}.action`);
-    await findAlertButton().trigger('click');
-    expect(fetch).toHaveBeenCalledWith('/update', {
-      method: 'POST'
-    });
-  });
-
   it('should display an error message if alert action fails', async () => {
     vi.mocked<any>(global.fetch).mockImplementationOnce(() => ({
       status: 404
     }));
     factory({
       psAccountsIsEnabled: false,
-      psAccountsIsInstalled: false,
-      psAccountsIsUptodate: false
+      psAccountsIsInstalled: false
     });
     await findAlertButton().trigger('click');
     expect(findErrorAlert().exists()).toBeTruthy();
@@ -137,8 +108,7 @@ describe('AlertModuleDependencies component tests', () => {
     }));
     factory({
       psAccountsIsEnabled: false,
-      psAccountsIsInstalled: false,
-      psAccountsIsUptodate: false
+      psAccountsIsInstalled: false
     });
     await findAlertButton().trigger('click');
     await flushPromises();
@@ -152,8 +122,7 @@ describe('AlertModuleDependencies component tests', () => {
     }));
     factory({
       psAccountsIsEnabled: false,
-      psAccountsIsInstalled: false,
-      psAccountsIsUptodate: false
+      psAccountsIsInstalled: false
     });
     await findAlertButton().trigger('click');
     await flushPromises();

@@ -49,7 +49,6 @@ export const generateContext = (options: GenerateContextOptions): Context => {
     psAccountsInstallLink: faker.internet.url(),
     psAccountsIsEnabled: !options?.hasBlockingAlert ?? true,
     psAccountsIsInstalled: !options?.hasBlockingAlert ?? true,
-    psAccountsIsUptodate: !options?.hasBlockingAlert ?? true,
     psAccountsUpdateLink: faker.internet.url(),
     psIs17: true,
     psxName: faker.company.name(),

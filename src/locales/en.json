@@ -18,10 +18,9 @@
           "loading": "The PrestaShop Account module is currently being installed..."
         },
         "update": {
-          "title": "Update PrestaShop Accounts module",
-          "message": "A new version of PrestaShop Accounts is available, please update the module to continue using the services",
-          "action": "Update",
-          "loading": "The PrestaShop Account module is currently being updated..."
+          "title": "Get the latest version of PrestaShop account",
+          "message": "This upgrade provides important bug fixes and is recommended for all users.",
+          "action": "Update module"
         }
       },
       "unlinked": {

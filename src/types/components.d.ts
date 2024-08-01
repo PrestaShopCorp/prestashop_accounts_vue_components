@@ -15,6 +15,7 @@ declare module 'vue' {
     AlertModuleUpdateInformation: typeof import('./../components/alert/AlertModuleUpdateInformation.vue')['default']
     AlertShopUnlinked: typeof import('./../components/alert/AlertShopUnlinked.vue')['default']
     AlertShopUrlShouldExists: typeof import('./../components/alert/AlertShopUrlShouldExists.vue')['default']
+    AlertUpdateToLatest: typeof import('./../components/alert/AlertUpdateToLatest.vue')['default']
     AlertUserNotSuperAdmin: typeof import('./../components/alert/AlertUserNotSuperAdmin.vue')['default']
     BaseOverlay: typeof import('./../components/common/BaseOverlay.vue')['default']
     InvitationBanner: typeof import('./../components/invitation/InvitationBanner.vue')['default']
