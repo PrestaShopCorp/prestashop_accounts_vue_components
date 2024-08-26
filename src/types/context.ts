@@ -21,9 +21,9 @@ export interface Context {
   psAccountsInstallLink: string | null
   psAccountsIsEnabled: boolean
   psAccountsIsInstalled: boolean
-  psAccountsIsUptodate: boolean
   psAccountsUpdateLink: string | null
   psIs17: boolean
+  psAccountsVersion?: string
   psxName: string
   shops: ShopGroup[]
   ssoResendVerificationEmail: string
@@ -53,7 +53,7 @@ export interface Shop {
   employeeId?: string | null
   frontUrl?: string | null
   id: string
-  isLinkedV4?: boolean // ?
+  isLinkedV4?: boolean
   moduleName?: string
   multishop?: boolean
   name: string

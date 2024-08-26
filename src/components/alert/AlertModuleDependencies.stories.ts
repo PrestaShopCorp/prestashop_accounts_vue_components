@@ -12,23 +12,20 @@ type Story = StoryObj<typeof AlertModuleDependencies>;
 export const PsAccountsIsNotInstalled: Story = {
   args: {
     psAccountsIsInstalled: false,
-    psAccountsIsEnabled: false,
-    psAccountsIsUptodate: false
+    psAccountsIsEnabled: false
   }
 };
 
 export const PsAccountsIsNotEnabled: Story = {
   args: {
     psAccountsIsInstalled: true,
-    psAccountsIsEnabled: false,
-    psAccountsIsUptodate: false
+    psAccountsIsEnabled: false
   }
 };
 
 export const PsAccountsIsNotUpdated: Story = {
   args: {
     psAccountsIsInstalled: true,
-    psAccountsIsEnabled: true,
-    psAccountsIsUptodate: false
+    psAccountsIsEnabled: true
   }
 };
