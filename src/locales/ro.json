@@ -18,10 +18,9 @@
           "loading": "Modulul PrestaShop Account este în curs de instalare..."
         },
         "update": {
-          "title": "Actualizează modulul Prestashop Account",
-          "message": "O nouă versiune a PrestaShop Account este disponibilă, te rugăm să actualizezi modulul pentru a continua să utilizezi serviciile",
-          "action": "Actualizare",
-          "loading": "Modulul PrestaShop Account este în curs de actualizare..."
+          "title": "Obține cea mai recentă versiune de cont PrestaShop",
+          "message": "Această actualizare oferă remedieri importante ale erorilor și este recomandată pentru toți utilizatorii.",
+          "action": "Actualizeaza modul"
         }
       },
       "unlinked": {
