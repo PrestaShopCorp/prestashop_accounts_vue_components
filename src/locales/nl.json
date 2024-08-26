@@ -18,10 +18,9 @@
           "loading": "Installatie van de module PrestaShop Account aan de gang..."
         },
         "update": {
-          "title": "Update PrestaShop Accounts-module",
-          "message": "Er is een nieuwe versie van PrestaShop-accounts beschikbaar. Werk de module bij om de services te blijven gebruiken",
-          "action": "Bijwerken",
-          "loading": "De PrestaShop Account module wordt momenteel bijgewerkt..."
+          "title": "Maak gebruik van de nieuwste versie van het PrestaShop account",
+          "message": "Deze upgrade biedt belangrijke bugfixes en wordt aanbevolen voor alle gebruikers.",
+          "action": "Update Module"
         }
       },
       "unlinked": {
