@@ -18,10 +18,9 @@
           "loading": "Installation des Moduls PrestaShop Account in Arbeit..."
         },
         "update": {
-          "title": "PrestaShop-Kontenmodul aktualisieren",
-          "message": "Eine neue Version von PrestaShop-Konten ist verfügbar. Bitte aktualisieren Sie das Modul, um die Dienste weiterhin nutzen zu können",
-          "action": "Aktualisieren",
-          "loading": "Das PrestaShop Account-Modul wird derzeit aktualisiert..."
+          "title": "Holen Sie sich die neueste Version des PrestaShop-Kontos",
+          "message": "Dieses Upgrade bietet wichtige Fehlerbehebungen und wird für alle Benutzer empfohlen.",
+          "action": "Modul aktualisieren"
         }
       },
       "unlinked": {
