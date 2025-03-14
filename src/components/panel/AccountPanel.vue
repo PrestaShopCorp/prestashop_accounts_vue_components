@@ -16,8 +16,17 @@
     <div class="acc-gap-4 acc-flex acc-flex-wrap md:acc-justify-normal acc-justify-center md:acc-flex-row acc-flex-col">
       <AccountShopLinkMessage
         class="acc-flex-1 acc-min-w-[247px]"
+        :contact-email="contactEmail"
         :shops-in-context="shopsInContext"
         :shop-context="shopContext"
+      />
+      <AccountSetPointOfContact
+        :identify-url="identifyUrl"
+        :app="app"
+        :is-super-admin="isSuperAdmin"
+        :shops="shops"
+        :has-shops-linked="hasShopsLinked"
+        data-testid="account-link-buttons"
       />
       <AccountLinkToUi
         v-if="!shopsWithoutUrl.length"
@@ -57,6 +66,8 @@ import { useLocale } from '@/composables/useLocale';
     * should be https://accounts.distribution.prestashop.net/en
     */
     accountsUiUrl: string;
+    identifyUrl: string;
+    contactEmail: string;
     /**
     * Name of the module
     */

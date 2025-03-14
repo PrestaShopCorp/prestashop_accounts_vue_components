@@ -37,7 +37,8 @@
             class="acc-m-0 acc-text-font-500 acc-break-words"
             data-testid="account-shop-link-message-linked-email"
           >
-            {{ linkedUserEmail }}
+<!--            {{ linkedUserEmail }}-->
+            {{ contactEmail}}
           </p>
         </div>
       </template>
@@ -60,6 +61,7 @@ import { useLocale } from '@/composables/useLocale';
 interface AccountShopLinkMessageProps {
   shopsInContext?: Shop[];
   shopContext: number;
+  contactEmail: string;
 }
 
 const props = withDefaults(defineProps<AccountShopLinkMessageProps>(), {

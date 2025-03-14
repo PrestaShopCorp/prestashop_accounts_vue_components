@@ -12,6 +12,8 @@ export interface BackendUser {
 
 export interface Context {
   adminAjaxLink: string
+  identifyUrl: string
+  contactEmail: string
   accountsUiUrl: string
   backendUser: BackendUser
   currentContext: CurrentContext

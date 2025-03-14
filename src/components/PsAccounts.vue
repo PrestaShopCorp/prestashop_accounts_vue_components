@@ -56,6 +56,8 @@
           data-testid="invitatiion-banner"
         />
         <AccountPanel
+          :identify-url="context.identifyUrl"
+          :contact-email="context.contactEmail"
           :accounts-ui-url="context.accountsUiUrl"
           :app="context.psxName"
           :is-super-admin="context.backendUser.isSuperAdmin"

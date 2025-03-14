@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AccountLinkToUi: typeof import('./../components/panel/accountSubComponents/AccountLinkToUi.vue')['default']
     AccountPanel: typeof import('./../components/panel/AccountPanel.vue')['default']
+    AccountSetPointOfContact: typeof import('./../components/panel/accountSubComponents/AccountSetPointOfContact.vue')['default']
     AccountShopLinkMessage: typeof import('./../components/panel/accountSubComponents/AccountShopLinkMessage.vue')['default']
     AlertContextValidator: typeof import('./../components/alert/AlertContextValidator.vue')['default']
     AlertModuleDependencies: typeof import('./../components/alert/AlertModuleDependencies.vue')['default']
