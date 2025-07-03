@@ -29,9 +29,7 @@ const init = () => {
     return;
   }
 
-  if (!customElements.get('prestashop-accounts')) {
-    customElements.define('prestashop-accounts', PsAccountsWebComponent);
-  }
+  customElements.get('prestashop-accounts') ?? customElements.define('prestashop-accounts', PsAccountsWebComponent);
 };
 
 export default installGlobalComponents;
