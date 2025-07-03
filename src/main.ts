@@ -16,16 +16,13 @@ const init = () => {
   const mainVersion = version ? parseInt(version.split('.')[0]) : undefined;
 
   if (mainVersion && mainVersion >= 8) {
-    // Vérifie si le script est déjà présent
-    if (!document.querySelector('script[src="https://unpkg.com/@prestashopcorp/accounts-components@beta"]')) {
-      const script = document.createElement('script');
-      script.src = 'https://unpkg.com/@prestashopcorp/accounts-components@beta';
-      script.async = true;
-      script.onload = () => {
-        windowAny.psaccountsVue?.init?.({}, 'Settings');
-      };
-      document.head.appendChild(script);
-    }
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/@prestashopcorp/accounts-components@beta';
+    script.async = true;
+    script.onload = () => {
+      windowAny.psaccountsVue?.init?.({}, 'Settings');
+    };
+    document.head.appendChild(script);
     return;
   }
 
