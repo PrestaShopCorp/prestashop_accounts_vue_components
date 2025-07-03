@@ -11,7 +11,27 @@ const installGlobalComponents = {
 const PsAccountsWebComponent = defineCustomElement(PsAccounts);
 
 const init = () => {
-  customElements.get('prestashop-accounts') ?? customElements.define('prestashop-accounts', PsAccountsWebComponent);
+  const windowAny = window as any;
+  const version = windowAny.contextPsAccounts?.psAccountsVersion as string | undefined;
+  const mainVersion = version ? parseInt(version.split('.')[0]) : undefined;
+
+  if (mainVersion && mainVersion >= 8) {
+    // Vérifie si le script est déjà présent
+    if (!document.querySelector('script[src="https://unpkg.com/@prestashopcorp/accounts-components@beta"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/@prestashopcorp/accounts-components@beta';
+      script.async = true;
+      script.onload = () => {
+        windowAny.psaccountsVue?.init?.({}, 'Settings');
+      };
+      document.head.appendChild(script);
+    }
+    return;
+  }
+
+  if (!customElements.get('prestashop-accounts')) {
+    customElements.define('prestashop-accounts', PsAccountsWebComponent);
+  }
 };
 
 export default installGlobalComponents;
