@@ -20,7 +20,7 @@ const init = () => {
     script.src = 'https://unpkg.com/@prestashopcorp/accounts-components@beta';
     script.async = true;
     script.onload = () => {
-      windowAny.psaccountsVue?.init?.({}, 'Settings');
+      windowAny.psaccountsVue?.init?.();
     };
     document.head.appendChild(script);
     return;
