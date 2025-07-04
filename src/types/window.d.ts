@@ -7,5 +7,8 @@ declare global {
     contextPsAccounts: Context
     iso_user: string
     psAccountZoidExport: any
+    psaccountsVue: {
+      init?: () => void
+    }
   }
 }
