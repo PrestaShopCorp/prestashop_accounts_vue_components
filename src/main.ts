@@ -11,8 +11,7 @@ const installGlobalComponents = {
 const PsAccountsWebComponent = defineCustomElement(PsAccounts);
 
 const init = () => {
-  const windowAny = window as Window;
-  const version = windowAny.contextPsAccounts?.psAccountsVersion;
+  const version = window.contextPsAccounts?.psAccountsVersion;
   const mainVersion = version ? parseInt(version.split('.')[0]) : undefined;
 
   if (mainVersion && mainVersion >= 8) {
@@ -20,7 +19,7 @@ const init = () => {
     script.src = 'https://unpkg.com/@prestashopcorp/accounts-components@beta';
     script.async = true;
     script.onload = () => {
-      windowAny.psaccountsVue?.init?.();
+      window.psaccountsVue?.init?.();
     };
     document.head.appendChild(script);
     return;
