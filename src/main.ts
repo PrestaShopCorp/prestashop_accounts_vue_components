@@ -16,7 +16,7 @@ const init = () => {
 
   if (mainVersion && mainVersion >= 8) {
     const script = document.createElement('script');
-    script.src = 'https://unpkg.com/@prestashopcorp/accounts-components@beta';
+    script.src = 'https://unpkg.com/@prestashopcorp/accounts-components@beta'; // TODO: put new CDN URL with a non beta version and release it in 5.2 and 5.3 versions
     script.async = true;
     script.onload = () => {
       window.psaccountsVue?.init?.();
