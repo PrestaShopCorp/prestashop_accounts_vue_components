@@ -16,7 +16,7 @@ const init = () => {
 
   if (mainVersion && mainVersion >= 8) {
     const script = document.createElement('script');
-    script.src = 'https://unpkg.com/@prestashopcorp/accounts-components@beta';
+    script.src = 'https://assets.prestashop3.com/accounts-components/1/psaccountsVue.js';
     script.async = true;
     script.onload = () => {
       window.psaccountsVue?.init?.();
